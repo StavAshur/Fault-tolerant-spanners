@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsthm}
+\usepackage{amsmath} 
+\usepackage{bbm}
+\usepackage{amsfonts}
+\usepackage{graphicx,color}
+\usepackage[ruled, linesnumbered]{algorithm2e}
+\usepackage{algorithmic}
+% \usepackage[dvipsnames]{xcolor}
+
+
+\usepackage{thm-restate}
+\usepackage[colorlinks,linkcolor=blue,filecolor=blue,citecolor=blue,urlcolor=blue,pdfstartview=FitH,pagebackref]{hyperref}
+\usepackage[nameinlink]{cleveref}
+
+
+% \theoremstyle{plain}
+\newtheorem{theorem}{Theorem}%[section]
+%\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lem}[theorem]{Lemma}
+\crefname{lem}{Lemma}{Lemmas}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{observation}[theorem]{Observation}
+%\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{problem}{Problem}
+\newtheorem{fact}[theorem]{Fact}
+%\theoremstyle{remark}
+%\newtheorem*{note}{Note}
+
+
+% \newcommand{\Pr}{\mathbb{Pr}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\NN}{\mathcal{NN}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\DT}{\mathcal{DT}}
+
+\definecolor{purple}{RGB}{150, 1, 255}
+\definecolor{DarkGreen}{RGB}{70, 130, 30}
+
+\newcommand{\blue}{{\color{blue}blue}}
+\newcommand{\red}{{\color{red}red}}
+\newcommand{\purple}{{\color{purple}purple}}
+\newcommand{\comment}[1]{\CommentSty{{\color{DarkGreen}#1}}}
+
+
+\title{Fault tolerant spanners}
+
+\begin{document}
+	
+	
+	\maketitle
+	
+	\section{Introduction}
+	
+	Let $\FF$ be a family of regions in the plane, which we call the fault regions. For a fault region $F\in \FF$ and a geometric graph $G$ on a point set $P$ , we define $G\ominus F$ to be the part of $G$ that remains after the points from $P$ inside $F$ and all edges that intersect $F$ have been removed from the graph. For simplicity, we assume that a region fault F does not contain its boundary, i.e., only vertices and edges intersecting the interior of $F$ will be affected.
+	
+	Let $\LL$ be a family of regions in the plane, which we call the local regions. For a fault region $L\in \LL$ and a geometric graph $G$ on a point set $P$ , we define $G\mid_F$ to be the part of $G$ contained in the interior of $F$, meaning only the vertices and edges that are fully containd in the interior of $F$.
+	
+	\paragraph{The problem:} Given a set $P$ of points in $\R^2$, and a family $\FF$ of regions, compute a graph $G$ that is a $t$-spanner of $P$ under any fault $F\in\FF$.
+	
+	\section{Complement of disk faults / disk local spanners}
+	
+	Let $\LL$ be the set of disks, we can use the algorithm of Abam et al. \cite{bibid}, and replace the set of edges between every pair $(A_i,B_i)$ in the SSPD with the edges of the Delaunay triangulation $\DT(P)$ with one end in $A_i$ and the other in $B_i$. We only need to prove that for any disk $d\in \LL$, and for any set $P'$ of points we have that $\DT(P')\mid_d$ is connected, as that will imply that for every pair $(A_i,B_i)$ of the SSPD, if $A_i\cap d$ and $B_i\cap d$ are not empty, there exists an edge between them in the constructed graph $G$.
+	
+	\begin{claim}
+		For a set of points $P\subseteq \R^2$ and for any disk $d$, $\DT(P)\mid_d$ is connected.
+	\end{claim}
+
+	\begin{proof}
+		We prove a different claim that immediately implies the desired one. Let $d$ be a disk with two points $p,q\in P$ on its boundary. Then there is a path between $p$ and $q$ in $\DT(P)\mid_d$.
+		
+		We prove by induction over the number points in the interior of $d$.
+		
+		$|d\cap (P\setminus \partial d)| = 0$: Then by construction of the Delaunay triangulation the edge $\{p,q\}$ is in $\DT(P)$ and is contained in the interior of $D$.\\
+		
+		$|d\cap (P\setminus \partial d)| > 0$: Let $x\in P$ be a point in the interior of $d$. We move the center of $d$ in the direction of $p$, shrinking $d$ in the process, until we get a disk $d'\subseteq d$ such that $x$ is on the boundary of $d'$. By induction there is a path between $p$ and $x$ in $\DT\mid_{d'}$, and since $\DT\mid_{d'}\subseteq \DT\mid_{d}$ we have that the same path exists in $\DT\mid_{d}$. The same proof gives us a path between $x$ and $q$ and thus we are done.
+		
+	\end{proof}
+
+	\section{Complement of square faults / square local spanners}
+	
+	For the same reasons, if we can prove that for a square $s$ we have that $\DT_\infty\mid_s$, where $\DT_\infty$ is the $L_{\infty}$ norm Delaunay triangulation, is connected, we would be able to use the same algorithm almost verbatim. Fortunately, the same proof works just as well when replacing disks with squares.
+	
+	\section{$\eps$-shadow}
+	
+	
+	
+	
+\end{document}

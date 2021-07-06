@@ -91,9 +91,36 @@
 	
 	For the same reasons, if we can prove that for a square $s$ we have that $\DT_\infty\mid_s$, where $\DT_\infty$ is the $L_{\infty}$ norm Delaunay triangulation, is connected, we would be able to use the same algorithm almost verbatim. Fortunately, the same proof works just as well when replacing disks with squares.
 	
+	
+	\section{Complement of convex symmetric polygonal faults / convex symmetric polygonal local spanners}
+	
+	Since the Delanay triangulation is well defined for the \emph{polygonal convex distance} (L.P. Chew and R.L. Drysdale. Voronoi diagrams based on convex distance functions.InProc. 1st Sympos. Comput. Geom., pages 234–244, ACM Press, 1985), we can use the exact same proof (again replacing only the distance function and the disk) to get an algorithm for this entire family of problems.
+	
 	\section{$\eps$-shadow}
 	
+	In this section we consider a weaker form of fault tolerance. Given a family $\LL$ of shapes, we say that $G$ is a $(\LL,\eps)$-local spanner if for any $L\in\LL$ we have that $G\mid_{L_{\alpha}}$, where $L_{\alpha}$ is $L$ rescaled by $\alpha$, is a $t$-spanner of $P$. For the sake of clarity we will use $\alpha = 1-\eps$.
 	
+	\subsection{$\beta$-fat rectangles}
+	Let $\LL$ be the set of $\beta$-fat axis parallel rectangles. We repeatedly preform the algorithm for convex symmetric polygonal local spanners, where in the $i$-th iteration we use a rectangle with aspect ratio $\left(1+\eps\right)^i$, where $i\in\{0,...,\log_{1+\eps}(\beta)\}$. 
+	
+	Let $r$ be a $\beta$-fat rectangle, and let $(A_i,B_i)$ be a pair in an SSPD such that $A_i\cap r\neq \emptyset$, and $B_i\cap r\neq \emptyset$. We assume w.l.o.g that the height of $r$ is 1, and its width is $\beta'\in [1,\beta]$.
+
+	Let $i\in \{0,...,\log_{1+\eps}(\beta)\}$ be an index for which $\beta' \leq (1+\eps)^i \leq \frac{\beta}{1-\eps}$ if such an index exists, then let $r'$ be the rectangle with width $\beta'$ and aspect ratio $(1+\eps)^i$, whose horizontal bisector coincides with that of $r$. Since $(1+\eps)^i \leq \frac{\beta}{1-\eps}$, we have that $r\setminus r'$ is contained within the shadow of $r$, and therefore if $r'$ contains points of both $A_i$ and $B_i$, then due to the correctness of the convex symmetric polygonal fault spanner, we will have an edge between a point in $A_I\cap r'$ and $B_i\cap r'$.
+	
+	We are left with proving that there exists an index $i\in \{0,...,\log_{1+\eps}(\beta)\}$ for which $\beta' \leq (1+\eps)^i \leq \frac{\beta}{1-\eps}$.
+	
+	$$\beta' \leq (1+\eps)^i \leq \frac{\beta}{1-\eps}$$
+	
+	$$\log_{1+\eps}(\beta') \leq i \leq \log_{1+\eps}\left(\frac{\beta}{1-\eps}\right)$$
+	
+	$$\log_{1+\eps}(\beta') \leq i \leq \log_{1+\eps}(\beta) - \log_{1+\eps}(1-\eps)$$
+	
+	If $\log_{1+\eps}(1-\eps)<-1$, then there must be an integer $i$ with the required properties. We now notice that $(1+\eps)^{-1}=\frac{1}{1+\eps}>(1-\eps)$ [since $1>(1-\eps)(1+\eps)=(1-\eps^2)$], and so $i$ exists.
+	
+	The size of the spanner is $\log_{1+\eps}(\beta)$ times the number of edges in a convex symmetric polygonal local spanner, and since $\log_{1+\eps}(\beta)=O\frac{\log(\beta)}{\eps}$, we have a spanner of size ???
+	
+	
+	\subsection{Arbitrary rectangles}
 	
 	
 \end{document}

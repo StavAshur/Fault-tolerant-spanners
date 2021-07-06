@@ -122,5 +122,10 @@
 	
 	\subsection{Arbitrary rectangles}
 	
+	We first describe a subroutine for connecting two sets of points, $A$ and $B$, where $A$ is contained in the negative quadrant of the plane (i.e., have a negative value $x$-coordinate and a negative value $y$-coordinate), and $B$ is contained in the positive quadrant of the plane. Denote $A=\{a_i~|~ 1\leq i \leq |A|\}$, and Let
+	
+	$$A' = \{a_i\in A~|~ \text{the rectangle defined by the corners }(x_i,y_i)\text{ and } (0,0)\text{ contains no points of }A\}$$
+	
+	For every point $a_i\in A'$ we define $a_i^+=(|x_i|,|y_i|)$, and denote the rectangle defined by the corners $a_i^+$ and $(0,0)$ by $r_i$. The algorithm will connect $a_i$ to $O\left(\frac{1}{\eps^2}\right)$ points in the positive quadrant, such that each 
 	
 \end{document}

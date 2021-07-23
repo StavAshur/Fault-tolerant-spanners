@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.12.21)  6 JUL 2021 16:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.12.21)  22 JUL 2021 10:38
 entering extended mode
 **"./Fault tolerant spanners.tex"
 ("Fault tolerant spanners.tex"
@@ -716,20 +716,20 @@ e 7852.
 ("Fault tolerant spanners.aux")
 \openout1 = `"Fault tolerant spanners.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
 
 (C:\Users\stav\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -758,7 +758,7 @@ G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
 \AtBeginShipoutBox=\box37
-Package hyperref Info: Link coloring ON on input line 58.
+Package hyperref Info: Link coloring ON on input line 59.
 
 ("D:\programs\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -768,20 +768,20 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count128
 )
-LaTeX Info: Redefining \ref on input line 58.
-LaTeX Info: Redefining \pageref on input line 58.
-LaTeX Info: Redefining \nameref on input line 58.
+LaTeX Info: Redefining \ref on input line 59.
+LaTeX Info: Redefining \pageref on input line 59.
+LaTeX Info: Redefining \nameref on input line 59.
 
 ("Fault tolerant spanners.out") ("Fault tolerant spanners.out")
 \@outlinefile=\write3
 \openout3 = `"Fault tolerant spanners.out"'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 62.
+LaTeX Font Info:    Try loading font information for U+msa on input line 63.
 
 ("D:\programs\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 62.
+LaTeX Font Info:    Try loading font information for U+msb on input line 63.
 
 ("D:\programs\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -790,77 +790,68 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Warning: No \author given.
 
 
-LaTeX Warning: Citation `bibid' on page 1 undefined on input line 73.
-
-Package hyperref Info: bookmark level for unknown claim defaults to 0 on input 
-line 76.
-
-Underfull \hbox (badness 10000) in paragraph at lines 84--85
-
- []
+LaTeX Warning: Citation `AbamBFG09' on page 1 undefined on input line 88.
 
 [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Overfull \hbox (8.3196pt too wide) in paragraph at lines 95--95
-\OT1/cmr/bx/n/14.4 faults / con-vex sym-met-ric polyg-o-nal lo-cal span-
+Package hyperref Info: bookmark level for unknown claim defaults to 0 on input 
+line 95.
+
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
+
  []
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 99.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\varepsilon' on input line 99.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 99.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 103.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\beta' on input line 103.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 103.
 
 [2]
-Overfull \hbox (64.22546pt too wide) detected at line 127
-\OML/cmm/m/it/10 A[] \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 a[] \
-OMS/cmsy/m/n/10 2 \OML/cmm/m/it/10 A []\OMS/cmsy/m/n/10 j [][]\OT1/cmr/m/n/10 (
-\OML/cmm/m/it/10 x[]; y[]\OT1/cmr/m/n/10 )[](0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/1
-0 0)[]\OML/cmm/m/it/10 A\OMS/cmsy/m/n/10 g
- []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 131.
-[3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 131.
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 120.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\varepsilon' on input line 120.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 120.
+
+[3] [4] <grid_construction.pdf, id=77, page=3, 386.24298pt x 305.943pt>
+File: grid_construction.pdf Graphic file (type pdf)
+
+<use grid_construction.pdf, page 3>
+Package pdftex.def Info: grid_construction.pdf, page3 used on input line 194.
+(pdftex.def)             Requested size: 345.0pt x 273.28741pt.
+ [5] [6 <./grid_construction.pdf>]
+<triangle_shadow.pdf, id=116, 290.14098pt x 127.0637pt>
+File: triangle_shadow.pdf Graphic file (type pdf)
+
+<use triangle_shadow.pdf>
+Package pdftex.def Info: triangle_shadow.pdf used on input line 240.
+(pdftex.def)             Requested size: 207.0021pt x 90.6579pt.
+ ("Fault tolerant spanners.bbl")
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 245.
+ [7 <./triangle_shadow.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 245.
  ("Fault tolerant spanners.aux")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 131.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 131.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 245.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 245.
 Package rerunfilecheck Info: File `"Fault tolerant spanners".out' has not chang
 ed.
-(rerunfilecheck)             Checksum: 993FC5E314399981EC38BB465EC000E2;523.
+(rerunfilecheck)             Checksum: 5B45EDE4F935C740E3D038298CABCABE;563.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 131.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 245.
  ) 
 Here is how much of TeX's memory you used:
- 9666 strings out of 493323
- 156915 string characters out of 3141223
- 273112 words of memory out of 3000000
- 13046 multiletter control sequences out of 15000+200000
+ 9703 strings out of 493323
+ 157523 string characters out of 3141223
+ 276112 words of memory out of 3000000
+ 13066 multiletter control sequences out of 15000+200000
  13096 words of font info for 51 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 45i,6n,31p,655b,395s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 45i,6n,31p,851b,397s stack positions out of 5000i,500n,10000p,200000b,50000s
 <D:/programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/program
 s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/programs/MiKTeX 2.9/
 fonts/type1/public/amsfonts/cm/cmex10.pfb><D:/programs/MiKTeX 2.9/fonts/type1/p
@@ -870,14 +861,15 @@ b><D:/programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/programs
 /MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/programs/MiKTeX 2.9/fo
 nts/type1/public/amsfonts/cm/cmr12.pfb><D:/programs/MiKTeX 2.9/fonts/type1/publ
 ic/amsfonts/cm/cmr17.pfb><D:/programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmr7.pfb><D:/programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:
-/programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><D:/programs/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:/programs/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmti10.pfb><D:/programs/MiKTeX 2.9/fonts/type1/public/a
-msfonts/symbols/msbm10.pfb>
-Output written on "Fault tolerant spanners.pdf" (3 pages, 180001 bytes).
+/cmr5.pfb><D:/programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/p
+rograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/programs/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><D:/programs/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmsy7.pfb><D:/programs/MiKTeX 2.9/fonts/type1/public/ams
+fonts/cm/cmti10.pfb><D:/programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols
+/msbm10.pfb>
+Output written on "Fault tolerant spanners.pdf" (7 pages, 295751 bytes).
 PDF statistics:
- 118 PDF objects out of 1000 (max. 8388607)
- 14 named destinations out of 1000 (max. 500000)
- 57 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 213 PDF objects out of 1000 (max. 8388607)
+ 26 named destinations out of 1000 (max. 500000)
+ 75 words of extra memory for PDF output out of 10000 (max. 10000000)
 

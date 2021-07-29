@@ -245,12 +245,13 @@ We now prove a lemma that summarizes the properties of the resulted graph, and w
 
 
 \begin{claim}
-	\label{clm:long_jump}
+	\label{clm:span_properties}
 	For any two points $a,b\in P$ that are properly contained in an axis parallel rectangle $r$ ,and are not connected by an edge, there exists a point $b'\in r$ such that if w.l.o.g $||b-b'|| \leq ||a-c||$ then:
 	\begin{enumerate}
 		\item $||b-b'|| \leq 3\eps ||a-b||)$, and
 		\item there is an edge between $a$ and $b'$. 
 	\end{enumerate}
+	Additionally, the two closest points $p,q\in P$ are connected by an edge.
 	
 \end{claim}
 
@@ -264,7 +265,9 @@ We now prove a lemma that summarizes the properties of the resulted graph, and w
 	If w.l.o.g $a.x\leq b.x$, then since $||b||_{1} \leq ||a||_{1}$ we know that $b.y \leq a.y$ meaning that $b$ is contained in some cell $C_{H_{i,j}}$. Again, due to the dimensions of $C_{H_{i,j}}$ (which are $\eps\cdot a.y \time \eps\cdot(a.x+a.y)$) we have that $b'$, the leftmost point of $P$ in $C_{H_{i,j}}$, is contained in $r$, and also:
 	
 	$$||b-b'||\leq \sqrt{(\eps (a.x+a.y))^2+(\eps\cdot a.y)^2}\leq \sqrt{2(\eps (a.x+a.y))^2} $$
-	$$=\sqrt{2}\eps(a.x+a.y) \leq \sqrt{8}\eps||a-b||$$
+	$$=\sqrt{2}\eps(a.x+a.y) \leq \sqrt{8}\eps||a-b||$$.
+	
+	In order to prove the second property we only need to notice that if w.l.o.g $p\in Q^-$, $q\in Q^+$, and $||q||_1\leq ||p||_1$, we have that due to the dimensions of the cells we can see by similar calculations that for any $\eps\leq \frac{1}{\sqrt{8}}$ we have that $q$ is the only point in its cell of the construction, since otherwise we get a point $q'$ such that $||q-q'||\leq ||p-q||$.
 	
 \end{proof}
 
@@ -273,11 +276,25 @@ We are left with proving that for a suitable choice of parameters, this construc
 
 %TODO: this can probably be done faster than the naive way.
 \begin{claim}
-	It is possible to construct a $(\LL, eps')$ local $(1+\eps'')$-spanner of size $O\left(\frac{1}{\min\{\eps, \eps'\}}n\log^2n\right)$ in ??? time.
+	It is possible to construct a $(\LL, \eps')$ local $(1+\eps'')$-spanner of size $O\left(\frac{1}{\min\{\eps, \eps'\}}n\log^2n\right)$ in ??? time.
 \end{claim} 
 
 \begin{proof} 
-	Let $\eps = \alpha \min \{\eps',\eps''\}$ for some $\alpha \geq 3$. We build a spanner using $\eps$ as the parameter for the edge construction process. Due to the choice of $\eps$ we have that all of the properties proven in Claim~\ref{clm:long_jump} are true, and therefore we have that for 
+	Let $\eps = \alpha \min \{\eps',\eps''\}$ for some $\alpha \leq \frac{1}{12}$. We build a spanner using $\eps$ as the parameter for the edge construction process. Due to the choice of $\eps$ we have that all of the properties proven in Claim~\ref{clm:span_properties} are apply. Also, since we have reduced the parameter $\eps$ by a factor of $\frac{1}{2}$ on top of the $\frac{1}{3}$ required to get $||b-b'||\leq \eps ||b-a||$, we have that there exists a rectangle $r'\subseteq r$ such that $b,b'\in_{\eps}r'$. This means that we can recurse on pairs of points by their rank (in the set of pairs ordered by distance). In the base case we know from Claim~\ref{clm:span_properties} the points are connected by an edge, and for the recursion step we get that for two points $p,q\in P$ and a rectangle $r$ such that $p,q\in_{\eps} r$ we have a point $q'\in P$ such that:
+	\begin{enumerate}
+		\item $||q-q'||\leq \eps||p-q||$,
+		\item there is an edge between $p$ and $q'$, and
+		\item there exists a $1+\eps$ spanning path between $q$ and $q'$
+	\end{enumerate}
+
+	This gives us a path $p\rightarrow q' \rightarrow q$ of length at most
+	
+	$$||p-q'||+(1+\eps)||q-q'||\leq ||p-q||+(1+\eps)\eps||p-q||\leq (1+\eps'')||p-q||$$,
+	
+	where the last transition is due to another factor of $\frac{1}{2}$ that was incorporated in $\alpha$. 
+	
+	The number of edges is bounded by the size of the QSPD multiplied by $\frac{1}{\eps^2}$, since every occurrence of a point in the QSPD gives rise to $O\left(\frac{1}{\eps^2}\right)$ edges by construction.
+	
 \end{proof}
 
 

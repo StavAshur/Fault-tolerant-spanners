@@ -91,19 +91,13 @@ original construction of Abam \etal \cite{abfg-rftgs-09}.
 We then investigate various other constructions of local spanners,
 where one is allowed to slightly shrink the region.
 	
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Complement of disk faults / disk local spanners}
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	
-\section{Convex faults / disk local spanners}
+\section{Local spanner for disks}
 
 Let $\FF$ be the set of convex regions, and $\eps>0$. We use the
 construction of Abam \etal \cite{abfg-rftgs-09} in order to create a
@@ -186,6 +180,10 @@ $(1+\eps)-\LL$ local spanner of size $O(\eps^{-3}n\log n)$ in
 $O(\eps^{-2}n\log n)$ time.(
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{$\eps$-shadow}
 
 In this section we consider a weaker form of fault tolerance. Given a
@@ -223,50 +221,8 @@ appropriate choice of the parameter $s$ of the SSPD).
 
 We are left with proving that there exists an index
 $i\in \{0,...,\log_{1+\eps}(\alpha)\}$ for which
-$\alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\ESP}$.
-
-\section{$\eps$-shadow}
-
-In this section we consider a weaker form of fault tolerance. Given a
-family $\LL$ of shapes, we say that $G$ is a $(\LL,\eps)$-local
-spanner if for any $L\in\LL$ we have that $G\mid_{L_{\eps}}$, where
-$L_{\eps}$ is $L$ rescaled by $(1-\eps)$, is a $t$-spanner. We call
-$L\setminus L_{\eps}$ the \emph{shadow} of $L$, and we say that a
-point $p$ is \emph{truly contained} in $L$ w.r.t. $\eps$, and denote
-$p\in_{\eps} L$, if $p\in L_{\eps}$.
-
-\subsection{Bounded aspect ratio rectangles}
-Let $\LL$ be the set of axis parallel rectangles with aspect ratio at
-most $1<\alpha$. We repeatedly preform the algorithm for convex local
-spanners with rectangles of different aspect-ratio, where in the
-$i$-th iteration we use a rectangle with aspect ratio
-$\left(1+\eps\right)^i$, where $i\in\{0,...,\log_{1+\eps}(\alpha)\}$.
-
-Let $r$ be a rectangle with aspect ratio $\alpha$, and let $(A,B)$ be
-a pair in an SSPD such that $A\cap r\neq \emptyset$, and
-$B\cap r\neq \emptyset$. We assume w.l.o.g that the height of $r$ is
-1, and its width is $\alpha'\in [1,\alpha]$.
-
-Let $i\in \{0,...,\log_{1+\eps}(\alpha)\}$ be an index for which
-$\alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\eps}$ if such an index
-exists, then let $r'$ be the rectangle with width $\alpha'$ and aspect
-ratio $(1+\eps)^i$, whose horizontal bisector coincides with that of
-$r$. Since $(1+\eps)^i \leq \frac{\alpha}{1-\eps}$, we have that
-$r\setminus r'$ is contained within the shadow of $r$, and therefore
-$r'$ contains points of both $A$ and $B$, from the correctness of the
-convex local spanner, we will have an edge between a point in
-$A\cap r'$ and a point in $B\cap r'$. As before, this, together with
-the properties of the SSPD, is enough to guarantee that the
-constructed graph is indeed a $(\LL, \eps)$-$t$-spanner (for the
-appropriate choice of the parameter $s$ of the SSPD).
-
-We are left with proving that there exists an index
-$i\in \{0,...,\log_{1+\eps}(\alpha)\}$ for which
 $\alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\eps}$.
 
-\hrule
-
-End of duplicate text?  \hrule
 
 
 
@@ -568,7 +524,8 @@ The entire construction can be seen in \figref{grid_construction}.
 \begin{figure}
     \centering%
     \includegraphics[width=\linewidth,page=3]%
-    {figs/grid_construction} \figlab{grid_construction}
+    {figs/grid_construction}%
+    \figlab{grid_construction}%
     \caption{The construction of the grid for the arbitrary axis
        parallel rectangle local spanner.}
 \end{figure}
@@ -608,19 +565,12 @@ The entire construction can be seen in \figref{grid_construction}.
     to an arbitrary point of $P$ in every cell $C_{i,j}$, to the
     leftmost point of $P$ in every $C_{H_{i,j}}$, and to the
     bottom-most point of $P$ in every $C_{V_{i,j}}$.
+\end{proof}
 
-    We now prove a lemma that summarizes the properties of the
-    resulted graph, and which we will then use to prove that our
-    construction produces an $(\LL, eps)$- local $t$-spanner for the
-    family of arbitrary axis parallel rectangles.
-
-\begin{figure}
-    \centering \includegraphics[width=\linewidth,
-    page=3]{figs/grid_construction.pdf}
-    \label{fig:grid_construction}
-    \caption{The construction of the grid for the arbitrary axis
-       parallel rectangle local spanner.}
-\end{figure}
+We now prove a lemma that summarizes the properties of the resulted
+graph, and which we will then use to prove that our construction
+produces an $(\LL, eps)$- local $t$-spanner for the family of
+arbitrary axis parallel rectangles.
 
 
 \begin{claim}

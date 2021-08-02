@@ -1,5 +1,10 @@
 \begin{thebibliography}{AdBFG09}
 
+\bibitem[AB21]{ab-lgs-21}
+Mohammad~Ali Abam and Mohammad~Sadegh Borouny.
+\newblock Local geometric spanners.
+\newblock To appear in Algorithmica, 2021.
+
 \bibitem[AdBFG09]{abfg-rftgs-09}
 Mohammad~Ali Abam, Mark de~Berg, Mohammad Farshi, and Joachim Gudmundsson.
 \newblock Region-fault tolerant geometric spanners.

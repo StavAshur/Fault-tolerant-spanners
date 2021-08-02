@@ -102,57 +102,9 @@ where one is allowed to slightly shrink the region.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
-\section{Convex faults / disk local spanners}
-
-=======
-   \SarielThanks{Work on this paper was partially supported by a
-      NSF AF award CCF-1907400.  }%
-}%
-	
-\maketitle
-	
-\section{Introduction}
-	
-Let $\FF$ be a family of regions in the plane, which we call the fault
-regions. For a fault region $F\in \FF$ and a geometric graph $G$ on a
-point set $P$ , we define $G\ominus F$ to be the part of $G$ that
-remains after the points of $P$ that are contained in $F$, and all the
-edges of $G$ that intersect $F$ have been removed from the graph. For
-simplicity, we assume that a region fault $F$ does not contain its
-boundary, i.e., only vertices and edges intersecting the interior of
-$F$ will be affected.
-	
-	
-Let $\LL$ be a family of regions in the plane, which we call the local
-regions. For a local region $L\in \LL$ and a geometric graph $G$ on a
-point set $P$ , we define $G\mid_F$ to be the part of $G$ contained in
-the interior of $F$, meaning only the vertices and edges that are
-fully contained in the interior of $F$.
-	
-Formally, given $G=(P,E)$:
-	
-$$G\ominus F = (p\setminus F, \{e\in E~|~ e\cap F = \emptyset\})$$
-
-$$G\mid_F = (p \cap F, \{e\in E~|~ e\subseteq F\})$$
-	
-\paragraph{The problems:}
-
-\begin{enumerate}
-    \item Given a set $P$ of points in $\Re^2$, and a family $\FF$ of
-    regions, compute a graph $G$ such that $G\ominus F$ is a
-    $t$-spanner of $P$ for any fault $F\in\FF$
-    \item Given a set $P$ of points in $\Re^2$, and a family $\LL$ of
-    regions, compute a graph $G$ such that $G\mid_F$ is a $t$-spanner
-    for any local region $L\in\LL$
-\end{enumerate}
-.
-
-	
-\section{Complement of disk faults / disk local spanners}
-	
 	
 \section{Convex faults / disk local spanners}
->>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
+
 Let $\FF$ be the set of convex regions, and $\eps>0$. We use the
 construction of Abam \etal \cite{abfg-rftgs-09} in order to create a
 $(1+\eps)$-$\FF$ tolerant spanner. In their paper, Abam \etal build a
@@ -220,15 +172,9 @@ $\LL$ is the set of all scaled and translated copies, homothets, of a
 convex shape $\CC$. While the Delaunay triangulation is not well
 defined for all convex shapes, the operation of creating edges between
 two points $p,q\in P$ such that there exist a homothet of $\CC$ that
-<<<<<<< HEAD
 contains only $p$ and $q$ and no other point of $\PS$ is always well
 defined, and gives us a graph known as the $\CC$-Delaunay graph of
 $\PS$, and denoted $\DG_{\CC}(P)$. The above proof applies almost
-=======
-contains only $p$ and $q$ and no other point of $P$ is always well
-defined, and gives us a graph known as the $\CC$-Delaunay graph of
-$P$, and denoted $\DG_{\CC}(P)$. The above proof applies almost
->>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
 verbatim for any convex $\CC$, and proves the connectivity of
 $\DG_{\CC}(P)$ for any $L\in \LL$.
 
@@ -239,16 +185,6 @@ point in the same coordinate of the smaller curve. So, we get a
 $(1+\eps)-\LL$ local spanner of size $O(\eps^{-3}n\log n)$ in
 $O(\eps^{-2}n\log n)$ time.(
 
-%	TODO: this is actually not true unless we know how to build
-% \DG_{\C}(P)
-
-%	Since the Delaunay triangulation is well defined for the
-% \emph{polygonal convex distance} (L.P. Chew and
-<<<<<<< HEAD
-% R.L. Drydale. Voronoi diagrams based on convex distance functions.In
-% 1st SoCG, pages 234–244, ACM Press, 1985), we can use the exact same
-% proof (again replacing only the distance function and the disk) to
-% get an algorithm for this entire family of problems.
 
 \section{$\eps$-shadow}
 
@@ -287,16 +223,10 @@ appropriate choice of the parameter $s$ of the SSPD).
 
 We are left with proving that there exists an index
 $i\in \{0,...,\log_{1+\eps}(\alpha)\}$ for which
-$\alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\eps}$.
-=======
-% R.L. Drydale. Voronoi diagrams based on convex distance
-% functions.In 1st SoCG, pages 234–244, ACM
-% Press, 1985), we can use the exact same proof (again replacing only
-% the distance function and the disk) to get an algorithm for this
-% entire family of problems.
+$\alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\ESP}$.
 
-	\section{$\eps$-shadow}
-%TODO: shold we add all the definitions needed for the $\eps$-core? 
+\section{$\eps$-shadow}
+
 In this section we consider a weaker form of fault tolerance. Given a family $\LL$ of shapes, we say that $G$ is a $(\LL,\eps)$-local spanner if for any $L\in\LL$ we have that $G\mid_{L_{\eps}}$, where $L_{\eps}$ is $L$ rescaled by $(1-\eps)$, is a $t$-spanner. We call $L\setminus L_{\eps}$ the \emph{shadow} of $L$, and we say that a point $p$ is \emph{truly contained} in $L$ w.r.t. $\eps$, and denote $p\in_{\eps} L$, if $p\in L_{\eps}$. 
 
 \subsection{Bounded aspect ratio rectangles}
@@ -307,7 +237,13 @@ Let $r$ be a rectangle with aspect ratio $\alpha$, and let $(A,B)$ be a pair in 
 Let $i\in \{0,...,\log_{1+\eps}(\alpha)\}$ be an index for which $\alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\eps}$ if such an index exists, then let $r'$ be the rectangle with width $\alpha'$ and aspect ratio $(1+\eps)^i$, whose horizontal bisector coincides with that of $r$. Since $(1+\eps)^i \leq \frac{\alpha}{1-\eps}$, we have that $r\setminus r'$ is contained within the shadow of $r$, and therefore $r'$ contains points of both $A$ and $B$, from the correctness of the convex local spanner, we will have an edge between a point in $A\cap r'$ and a point in $B\cap r'$. As before, this, together with the properties of the SSPD, is enough to guarantee that the constructed graph is indeed a $(\LL, \eps)$-$t$-spanner (for the appropriate choice of the parameter $s$ of the SSPD).
 
 We are left with proving that there exists an index $i\in \{0,...,\log_{1+\eps}(\alpha)\}$ for which $\alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\eps}$.
->>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
+
+\hrule
+
+End of duplicate text?
+\hrule
+
+
 
 $$\alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\eps}$$
 
@@ -315,7 +251,8 @@ $$\log_{1+\eps}(\alpha') \leq i \leq \log_{1+\eps}\left(\frac{\alpha}{1-\eps}\ri
 
 $$\log_{1+\eps}(\alpha') \leq i \leq \log_{1+\eps}(\alpha) - \log_{1+\eps}(1-\eps)$$
 
-<<<<<<< HEAD
+\hrule
+
 If $\log_{1+\eps}(1-\eps)<-1$, then there must be an integer $i$ with
 the required properties. We now notice that
 $(1+\eps)^{-1}=\frac{1}{1+\eps}>(1-\eps)$ [since
@@ -453,7 +390,8 @@ Let $P\subseteq \Re^2$. We first describe a subroutine for connecting two sets o
 Our algorithm will connect every point in $A$ to $O\left(\frac{1}{\eps^2}\right)$ points in the positive quadrant, and after performing the same process for the points of the symmetrically defined $B'$, we will have that every rectangle that truly contains points from $A$ and $B$ will have an edge $(a,b)$ with $a\in A$ and $b\in B$.
 
 For every point $a = (x',y') \in A$ we define partition the positive quadrant into $O\left(\frac{1}{\eps^2}\right)$ sets. We consider the following $\frac{1}{\eps}$ horizontal stripes - $\forall j\in \{1,...,\frac{1}{\eps}\}$:
->>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
+
+\hrule
 
 $$H_{j}:=\{(x,y)~|~  0 \leq x \leq x'+y'  ,~ (j-1)\cdot \eps y' < y \leq j\cdot \eps y'\}$$
 
@@ -461,7 +399,8 @@ On top of these we add similarly built vertical stripes:
 
 $$V_{i}:=\{(x,y)~|~ (j-1)\cdot \eps x' < x \leq j\cdot \eps x',~ 0 \leq y \leq x'+y' \}$$
 
-<<<<<<< HEAD
+\hrule
+
 These stripes create a grid which partitions the rectangle $r$ whose
 opposite corners are $(0,0)$ and $(|x'|,|y'|)$ into $\frac{1}{\eps^2}$
 cells of width $\eps x$ and height $\eps y$. Formally:
@@ -480,13 +419,15 @@ These stripes create a grid which partitions the rectangle $r$ whose opposite co
 $$C_{i,j}:=\{(x',y')~|~  (i-1)\cdot \eps x < x' \leq i\cdot \eps x,~ (j-1)\cdot \eps y< y' \leq j\cdot \eps y\}$$
 
 We now divide the parts of the stripes that lie outside of the rectangle $r$. The horizontal stripes are divided into cells of width $\eps(x+y)$ and height $\eps y$, and the vertical stripes are divided into cells of width $\eps y$and height $\eps(x+y)$. The extremal cell in each stripe may be smaller if $x$ or $y$ are not divisible by $\eps(x+y)$. Formally:
->>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
+
+\hrule
 
 $$C_{H_{i,j}}:=\{(x',y')~|~  x' + (i-1)\cdot \eps (x+y) < x' \leq x' + i\cdot \eps (x+y),~ (j-1)\cdot \eps y< y' \leq j\cdot \eps y\}$$
 
 $$C_{V_{i,j}}:=\{(x',y')~|~  (i-1)\cdot \eps x < x' \leq i\cdot \eps x,~ y + (j-1)\cdot \eps (x+y)< y' \leq y + j\cdot \eps (x+y)\}$$
 
-<<<<<<< HEAD
+\hrule
+
 The entire construction can be seen in \figref{grid_construction}.
 
 \begin{figure}
@@ -588,8 +529,8 @@ We are left with proving that for a suitable choice of parameters, this construc
 	
 	The runtime of the algorithm is composed of constructing a $d$-dimensional orthogonal range tree in time $O(n\log^{d-1}n)$, and querying $O\left(\frac{1}{\eps^2}\right)$ $d$-dimensional boxes for every point in the QSPD, each in time $O(\log^{d-1}n)$. Since the points in the orthogonal range tree are sorted by dimension, getting the leftmost or bottom-most point for some queries does not affect the runtime.
 	
->>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
 \end{proof}
+\hrule
 
 
 \subsection{Bounded aspect ratio triangles}
@@ -617,8 +558,6 @@ $O\left(\frac{1}{\eps'^3\eps^3} n\log n\right)$.
 \end{figure}
 
 
-<<<<<<< HEAD
-=======
 \subsection{Fat convex regions}
 
 Let $C$ be a convex shape, let $d_+$ be the smallest disk containing $C$, and $d_-$ be the largest disk contained in $C$. We say that $C$ is $\alpha$-fat if the ratio $\frac{radius(d_+)}{radius(d_-)}$ is at most $\alpha$. Let $\LL$ be the set of all $\alpha$-fat convex shapes. In the following, we construct $(\LL, \eps)$-local $t$-spanners for $t>1$. 
@@ -634,7 +573,6 @@ We start by proving a structural lemma which will be later used in the correctne
 \end{proof}
 
 
->>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
 \bibliographystyle{alpha} 
 %\bibliography{shortcuts,geometry}
 \bibliography{ft_spanner}

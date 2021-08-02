@@ -5,11 +5,17 @@
 
 \begin{document}
 	
+<<<<<<< HEAD
 \title{Fault-Tolerant and Local Spanners Revisited} \author{%
+=======
+\title{Fault tolerant spanners}
+\author{%
+>>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
    Stav Ashur%
    \StavThanks{}%
    \and%
    Sariel Har-Peled%
+<<<<<<< HEAD
    \SarielThanks{Work on this paper was partially supported by a NSF
       AF award CCF-1907400.  }%
 }%
@@ -110,6 +116,55 @@ where one is allowed to slightly shrink the region.
 	
 \section{Convex faults / disk local spanners}
 
+=======
+   \SarielThanks{Work on this paper was partially supported by a
+      NSF AF award CCF-1907400.  }%
+}%
+	
+\maketitle
+	
+\section{Introduction}
+	
+Let $\FF$ be a family of regions in the plane, which we call the fault
+regions. For a fault region $F\in \FF$ and a geometric graph $G$ on a
+point set $P$ , we define $G\ominus F$ to be the part of $G$ that
+remains after the points of $P$ that are contained in $F$, and all the
+edges of $G$ that intersect $F$ have been removed from the graph. For
+simplicity, we assume that a region fault $F$ does not contain its
+boundary, i.e., only vertices and edges intersecting the interior of
+$F$ will be affected.
+	
+	
+Let $\LL$ be a family of regions in the plane, which we call the local
+regions. For a local region $L\in \LL$ and a geometric graph $G$ on a
+point set $P$ , we define $G\mid_F$ to be the part of $G$ contained in
+the interior of $F$, meaning only the vertices and edges that are
+fully contained in the interior of $F$.
+	
+Formally, given $G=(P,E)$:
+	
+$$G\ominus F = (p\setminus F, \{e\in E~|~ e\cap F = \emptyset\})$$
+
+$$G\mid_F = (p \cap F, \{e\in E~|~ e\subseteq F\})$$
+	
+\paragraph{The problems:}
+
+\begin{enumerate}
+    \item Given a set $P$ of points in $\Re^2$, and a family $\FF$ of
+    regions, compute a graph $G$ such that $G\ominus F$ is a
+    $t$-spanner of $P$ for any fault $F\in\FF$
+    \item Given a set $P$ of points in $\Re^2$, and a family $\LL$ of
+    regions, compute a graph $G$ such that $G\mid_F$ is a $t$-spanner
+    for any local region $L\in\LL$
+\end{enumerate}
+.
+
+	
+\section{Complement of disk faults / disk local spanners}
+	
+	
+\section{Convex faults / disk local spanners}
+>>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
 Let $\FF$ be the set of convex regions, and $\eps>0$. We use the
 construction of Abam \etal \cite{abfg-rftgs-09} in order to create a
 $(1+\eps)$-$\FF$ tolerant spanner. In their paper, Abam \etal build a
@@ -177,9 +232,15 @@ $\LL$ is the set of all scaled and translated copies, homothets, of a
 convex shape $\CC$. While the Delaunay triangulation is not well
 defined for all convex shapes, the operation of creating edges between
 two points $p,q\in P$ such that there exist a homothet of $\CC$ that
+<<<<<<< HEAD
 contains only $p$ and $q$ and no other point of $\PS$ is always well
 defined, and gives us a graph known as the $\CC$-Delaunay graph of
 $\PS$, and denoted $\DG_{\CC}(P)$. The above proof applies almost
+=======
+contains only $p$ and $q$ and no other point of $P$ is always well
+defined, and gives us a graph known as the $\CC$-Delaunay graph of
+$P$, and denoted $\DG_{\CC}(P)$. The above proof applies almost
+>>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
 verbatim for any convex $\CC$, and proves the connectivity of
 $\DG_{\CC}(P)$ for any $L\in \LL$.
 
@@ -195,6 +256,7 @@ $O(\eps^{-2}n\log n)$ time.(
 
 %	Since the Delaunay triangulation is well defined for the
 % \emph{polygonal convex distance} (L.P. Chew and
+<<<<<<< HEAD
 % R.L. Drydale. Voronoi diagrams based on convex distance functions.In
 % 1st SoCG, pages 234–244, ACM Press, 1985), we can use the exact same
 % proof (again replacing only the distance function and the disk) to
@@ -238,6 +300,26 @@ appropriate choice of the parameter $s$ of the SSPD).
 We are left with proving that there exists an index
 $i\in \{0,...,\log_{1+\eps}(\alpha)\}$ for which
 $\alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\eps}$.
+=======
+% R.L. Drydale. Voronoi diagrams based on convex distance
+% functions.In 1st SoCG, pages 234–244, ACM
+% Press, 1985), we can use the exact same proof (again replacing only
+% the distance function and the disk) to get an algorithm for this
+% entire family of problems.
+
+	\section{$\eps$-shadow}
+%TODO: shold we add all the definitions needed for the $\eps$-core? 
+In this section we consider a weaker form of fault tolerance. Given a family $\LL$ of shapes, we say that $G$ is a $(\LL,\eps)$-local spanner if for any $L\in\LL$ we have that $G\mid_{L_{\eps}}$, where $L_{\eps}$ is $L$ rescaled by $(1-\eps)$, is a $t$-spanner. We call $L\setminus L_{\eps}$ the \emph{shadow} of $L$, and we say that a point $p$ is \emph{truly contained} in $L$ w.r.t. $\eps$, and denote $p\in_{\eps} L$, if $p\in L_{\eps}$. 
+
+\subsection{Bounded aspect ratio rectangles}
+Let $\LL$ be the set of axis parallel rectangles with aspect ratio at most $1<\alpha$. We repeatedly preform the algorithm for convex local spanners with rectangles of different aspect-ratio, where in the $i$-th iteration we use a rectangle with aspect ratio $\left(1+\eps\right)^i$, where $i\in\{0,...,\log_{1+\eps}(\alpha)\}$. 
+
+Let $r$ be a rectangle with aspect ratio $\alpha$, and let $(A,B)$ be a pair in an SSPD such that $A\cap r\neq \emptyset$, and $B\cap r\neq \emptyset$. We assume w.l.o.g that the height of $r$ is 1, and its width is $\alpha'\in [1,\alpha]$.
+
+Let $i\in \{0,...,\log_{1+\eps}(\alpha)\}$ be an index for which $\alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\eps}$ if such an index exists, then let $r'$ be the rectangle with width $\alpha'$ and aspect ratio $(1+\eps)^i$, whose horizontal bisector coincides with that of $r$. Since $(1+\eps)^i \leq \frac{\alpha}{1-\eps}$, we have that $r\setminus r'$ is contained within the shadow of $r$, and therefore $r'$ contains points of both $A$ and $B$, from the correctness of the convex local spanner, we will have an edge between a point in $A\cap r'$ and a point in $B\cap r'$. As before, this, together with the properties of the SSPD, is enough to guarantee that the constructed graph is indeed a $(\LL, \eps)$-$t$-spanner (for the appropriate choice of the parameter $s$ of the SSPD).
+
+We are left with proving that there exists an index $i\in \{0,...,\log_{1+\eps}(\alpha)\}$ for which $\alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\eps}$.
+>>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
 
 $$\alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\eps}$$
 
@@ -245,6 +327,7 @@ $$\log_{1+\eps}(\alpha') \leq i \leq \log_{1+\eps}\left(\frac{\alpha}{1-\eps}\ri
 
 $$\log_{1+\eps}(\alpha') \leq i \leq \log_{1+\eps}(\alpha) - \log_{1+\eps}(1-\eps)$$
 
+<<<<<<< HEAD
 If $\log_{1+\eps}(1-\eps)<-1$, then there must be an integer $i$ with
 the required properties. We now notice that
 $(1+\eps)^{-1}=\frac{1}{1+\eps}>(1-\eps)$ [since
@@ -332,6 +415,57 @@ For every point $a = (x',y') \in A$ we define partition the positive
 quadrant into $O\left(\frac{1}{\eps^2}\right)$ sets. We consider the
 following $\frac{1}{\eps}$ horizontal stripes -
 $\forall j\in \{1,...,\frac{1}{\eps}\}$:
+=======
+If $\log_{1+\eps}(1-\eps)<-1$, then there must be an integer $i$ with the required properties. We now notice that $(1+\eps)^{-1}=\frac{1}{1+\eps}>(1-\eps)$ [since $1>(1-\eps)(1+\eps)=(1-\eps^2)$], and so $i$ exists.
+
+The size of the spanner is $\log_{1+\eps}(\alpha)$ times the number of edges in a convex local spanner, and since $\log_{1+\eps}(\alpha)=O\left(\frac{\log(\alpha)}{\eps}\right)$, we have a spanner of size $O\left(\frac{\log(\alpha)}{\eps (t-1)^{-3}}n\log n\right)$
+
+\subsection{QSPD}
+Implementing a motion planning algorithm that created a roadmap of both free space and obstacle space by simulating probe queries to near obstacles and using those to execute a space exploration algorithm.
+After a basic algorithm is implemented and tested, our goals will include extending the algorithm for the case of dynamic obstacles, and optimization of the data structure at the base of the algorithm.
+
+In order to construct local spanners for the family $\LL$ of axis parallel rectangles with $\eps$-shadow, we describe a decomposition of the the point set $P\subseteq \Re^d$ in to pairs of sets, a decomposition which we name a Quadrant Separated Pair Decomposition (QSPD). This decomposition gives us $O(n\log^{d-1}n)$ pairs $(A_i,B_i)$ of subsets of $P$, with overall size $O(n\log^{d}n)$, such that the sets can be separated by $d$ orthogonal axis parallel hyperplanes, and for every two points $p,q\in P$, there exists a single pair $(A_i,B_i)$ such that (w.l.o.g) $p\in A_i$, $q\in B_i$. For clarification, this separation in $\Re^d$ can be viewed as if one of the sets lies in the first quadrant of the plane (i.e. every point has positive $x$ and $y$ values), and the other is in the third quadrant (i.e. every point has negative $x$ and $y$ values), hence the name.
+
+The construction of the decomposition can be described as a recursive process in which a call to the function with $p\subseteq \Re^d$ of size $n$ invokes a single call to a lower dimensional case, and two calls to $d$-dimensional cases, each with half of the points. The function goes as follows.
+
+Given a set $P\subseteq \Re^d$ and a coloring $c:P\longrightarrow \{0,1\}^k$ for some $k$, the function $f(P,c)$ finds a median of $P$ w.r.t. the $d$-th dimension, and projects the points $P$ onto a hyperplane $h$ orthogonal to the same dimension passing through the median. Let the projected set of points be denoted $P'$, the $\frac{n}{2}$ points of $P$ the lie above $h$ be denoted $P^+$, $P\setminus P^+$ be denoted $P^-$, and let $c'$ be the coloring defined by  $c'(p)=c(p)\oplus b$ where $\oplus$ is the concatenation operator, and $b=1$ if $p\in P^+$, and $p=0$ otherwise.
+
+The function then calls $f(P', c')$, $f(P^+, c^+)$, and $f(P^-, c^-)$, where $c^+$ and $c^-$ are $c$ limited to the set $P^+$ and $P^-$ respectively.
+
+In the case where $d=1$, after finding the median w.r.t. the single dimension and defining $c'$, instead of invoking a lower dimensional call, the function creates $2^{d-1}$ pairs by taking all of the points with the same value $x\in\{0,1\}^d$ under $c'$, and pairing that set with the set all of the points with value $y\in\{0,1\}^d$ such that $\forall 1\leq i\leq d~:~ x^{(i)}\neq y^{(i)}$.
+
+
+\begin{claim}
+	The process described above creates a QSPD with size $O(n\log^dn)$ in $O_d(n\log^dn)$ time.
+\end{claim}
+
+\begin{proof}
+	By construction, each reported pair is separated by $d$ orthogonal axis parallel hyperplanes, and any two points appear in opposing quadrants exactly once, as every recursive call which assigns different bits of the coloring to two points, separates these points in the next recursive calls. 
+	
+	The size of the structure is given by the following recursion formula:
+	$$S(n,d) = S(n,d-1) + 2S\left(\frac{n}{2},d\right)$$
+	
+	In the base case where $d=1$, the formula is slightly different, as instead of recursing in a lower dimension it directly adds pairs. The formula is:
+	
+	$$S(n,1) = O(n) + 2S\left(\frac{n}{2},1\right)$$
+	
+	which solves to $O_d(n\log n)$. This means that the general case is 
+	
+	$$S(n,d) = O(n\log^{d-1}n) + 2S\left(\frac{n}{2},d\right)$$
+	
+	which solves to $O(n\log^d n)$.
+	
+	By using $d$ sorted arrays, one for each dimension, we get that the same recursion formulas hold for the runtime of the algorithm.
+\end{proof}
+
+\subsection{Arbitrary rectangles}
+
+Let $P\subseteq \Re^2$. We first describe a subroutine for connecting two sets of points, $A$ and $B$, where $A$ is contained in $Q^-$, the negative quadrant of the plane (i.e., have a negative value $x$-coordinate and a negative value $y$-coordinate), and $B$ is contained in $Q^+$, the positive quadrant of the plane. 
+
+Our algorithm will connect every point in $A$ to $O\left(\frac{1}{\eps^2}\right)$ points in the positive quadrant, and after performing the same process for the points of the symmetrically defined $B'$, we will have that every rectangle that truly contains points from $A$ and $B$ will have an edge $(a,b)$ with $a\in A$ and $b\in B$.
+
+For every point $a = (x',y') \in A$ we define partition the positive quadrant into $O\left(\frac{1}{\eps^2}\right)$ sets. We consider the following $\frac{1}{\eps}$ horizontal stripes - $\forall j\in \{1,...,\frac{1}{\eps}\}$:
+>>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
 
 $$H_{j}:=\{(x,y)~|~  0 \leq x \leq x'+y'  ,~ (j-1)\cdot \eps y' < y \leq j\cdot \eps y'\}$$
 
@@ -339,6 +473,7 @@ On top of these we add similarly built vertical stripes:
 
 $$V_{i}:=\{(x,y)~|~ (j-1)\cdot \eps x' < x \leq j\cdot \eps x',~ 0 \leq y \leq x'+y' \}$$
 
+<<<<<<< HEAD
 These stripes create a grid which partitions the rectangle $r$ whose
 opposite corners are $(0,0)$ and $(|x'|,|y'|)$ into $\frac{1}{\eps^2}$
 cells of width $\eps x$ and height $\eps y$. Formally:
@@ -351,11 +486,19 @@ $\eps(x+y)$ and height $\eps y$, and the vertical stripes are divided
 into cells of width $\eps y$and height $\eps(x+y)$. The extremal cell
 in each stripe may be smaller if $x$ or $y$ are not divisible by
 $\eps(x+y)$. Formally:
+=======
+These stripes create a grid which partitions the rectangle $r$ whose opposite corners are $(0,0)$ and $(|x'|,|y'|)$ into $\frac{1}{\eps^2}$ cells of width $\eps x$ and height $\eps y$. Formally:
+
+$$C_{i,j}:=\{(x',y')~|~  (i-1)\cdot \eps x < x' \leq i\cdot \eps x,~ (j-1)\cdot \eps y< y' \leq j\cdot \eps y\}$$
+
+We now divide the parts of the stripes that lie outside of the rectangle $r$. The horizontal stripes are divided into cells of width $\eps(x+y)$ and height $\eps y$, and the vertical stripes are divided into cells of width $\eps y$and height $\eps(x+y)$. The extremal cell in each stripe may be smaller if $x$ or $y$ are not divisible by $\eps(x+y)$. Formally:
+>>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
 
 $$C_{H_{i,j}}:=\{(x',y')~|~  x' + (i-1)\cdot \eps (x+y) < x' \leq x' + i\cdot \eps (x+y),~ (j-1)\cdot \eps y< y' \leq j\cdot \eps y\}$$
 
 $$C_{V_{i,j}}:=\{(x',y')~|~  (i-1)\cdot \eps x < x' \leq i\cdot \eps x,~ y + (j-1)\cdot \eps (x+y)< y' \leq y + j\cdot \eps (x+y)\}$$
 
+<<<<<<< HEAD
 The entire construction can be seen in \figref{grid_construction}.
 
 \begin{figure}
@@ -391,6 +534,73 @@ The entire construction can be seen in \figref{grid_construction}.
     height at least $p.y$, we get that the entire cell is inside $r$,
     and therefore there exists an edge as described in the claim.
     
+=======
+The entire construction can be seen in Figure~\ref{fig:grid_construction}. We can now describe the construction of our spanner. For $P\subseteq \Re^2$ we create a QSPD of $P$, and for every pair $(A,B)$ we add an edge between every point $a\in A$ (and later reverse the rolls inside the pair) to an arbitrary point of $P$ in every cell $C_{i,j}$, to the leftmost point of $P$ in every $C_{H_{i,j}}$, and to the bottom-most point of $P$ in every $C_{V_{i,j}}$.
+
+We now prove a lemma that summarizes the properties of the resulted graph, and which we will then use to prove that our construction produces an $(\LL, eps)$- local $t$-spanner for the family of arbitrary axis parallel rectangles. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth, page=3]{figs/grid_construction.pdf}
+	\label{fig:grid_construction}
+	\caption{The construction of the grid for the arbitrary axis parallel rectangle local spanner.}
+\end{figure}
+
+
+\begin{claim}
+	\label{clm:span_properties}
+	For any two points $a,b\in P$ that are properly contained in an axis parallel rectangle $r$ ,and are not connected by an edge, there exists a point $b'\in r$ such that if w.l.o.g $||b-b'|| \leq ||a-c||$ then:
+	\begin{enumerate}
+		\item $||b-b'|| \leq 3\eps ||a-b||)$, and
+		\item there is an edge between $a$ and $b'$. 
+	\end{enumerate}
+	Additionally, the two closest points $p,q\in P$ are connected by an edge.
+	
+\end{claim}
+
+\begin{proof}
+	Let $(A,B)$ be the unique pair of the QSPD such that w.l.o.g $a\in A$ and $b\in B$, $A\subseteq Q^-$, $B\subseteq Q^+$, and $||b||_{1} \leq ||a||_{1}$. We denote the absolute value of the coordinates of a point $p$ by $p.x$ and $p.y$ for the $x$ and $y$ coordinates respectively. If $b.x \leq a.x$ and $b.y \leq a.y$, then by the construction, $a$ is connected to a point $b'$ in the cell $C_{i,j}$ containing $b$. Since the cell's dimensions are $\eps\cdot a.x \times \eps a.y$, we have that $C_{i,j}\subseteq r$, and also:
+	
+	$$||b-b'||\leq \sqrt{(\eps\cdot a.x)^2+(\eps\cdot a.y)^2}=\eps\sqrt{a.x^2+a.y^2}\leq \eps(a.x+a.y) \leq 2\eps||a-b||$$
+	
+	regardless of the choice of $b'$, as $||a-b||\geq||a-(0,0)||\geq \frac{a.x+a.y}{2}$. 
+	
+	If w.l.o.g $a.x\leq b.x$, then since $||b||_{1} \leq ||a||_{1}$ we know that $b.y \leq a.y$ meaning that $b$ is contained in some cell $C_{H_{i,j}}$. Again, due to the dimensions of $C_{H_{i,j}}$ (which are $\eps\cdot a.y \time \eps\cdot(a.x+a.y)$) we have that $b'$, the leftmost point of $P$ in $C_{H_{i,j}}$, is contained in $r$, and also:
+	
+	$$||b-b'||\leq \sqrt{(\eps (a.x+a.y))^2+(\eps\cdot a.y)^2}\leq \sqrt{2(\eps (a.x+a.y))^2} $$
+	$$=\sqrt{2}\eps(a.x+a.y) \leq \sqrt{8}\eps||a-b||$$.
+	
+	In order to prove the second property we only need to notice that if w.l.o.g $p\in Q^-$, $q\in Q^+$, and $||q||_1\leq ||p||_1$, we have that due to the dimensions of the cells we can see by similar calculations that for any $\eps\leq \frac{1}{\sqrt{8}}$ we have that $q$ is the only point in its cell of the construction, since otherwise we get a point $q'$ such that $||q-q'||\leq ||p-q||$.
+	
+\end{proof}
+
+We are left with proving that for a suitable choice of parameters, this construction results in a $(\LL,\eps)$ local $t$-spanner.
+
+
+%TODO: this can probably be done faster than the naive way.
+\begin{claim}
+	It is possible to construct a $(\LL, \eps')$ local $(1+\eps'')$-spanner of size $O\left(\frac{1}{\min\{\eps, \eps'\}}n\log^2n\right)$ in $O_d\left(\frac{1}{\eps^2}n\log^{O(d)}n\right)$ time.
+\end{claim} 
+
+\begin{proof} 
+	Let $\eps = \alpha \min \{\eps',\eps''\}$ for some $\alpha \leq \frac{1}{12}$. We build a spanner using $\eps$ as the parameter for the edge construction process. Due to the choice of $\eps$ we have that all of the properties proven in Claim~\ref{clm:span_properties} are apply. Also, since we have reduced the parameter $\eps$ by a factor of $\frac{1}{2}$ on top of the $\frac{1}{3}$ required to get $||b-b'||\leq \eps ||b-a||$, we have that there exists a rectangle $r'\subseteq r$ such that $b,b'\in_{\eps}r'$. This means that we can recurse on pairs of points by their rank (in the set of pairs ordered by distance). In the base case we know from Claim~\ref{clm:span_properties} the points are connected by an edge, and for the recursion step we get that for two points $p,q\in P$ and a rectangle $r$ such that $p,q\in_{\eps} r$ we have a point $q'\in P$ such that:
+	\begin{enumerate}
+		\item $||q-q'||\leq \eps||p-q||$,
+		\item there is an edge between $p$ and $q'$, and
+		\item there exists a $1+\eps$ spanning path between $q$ and $q'$
+	\end{enumerate}
+
+	This gives us a path $p\rightarrow q' \rightarrow q$ of length at most
+	
+	$$||p-q'||+(1+\eps)||q-q'||\leq ||p-q||+(1+\eps)\eps||p-q||\leq (1+\eps'')||p-q||$$,
+	
+	where the last transition is due to another factor of $\frac{1}{2}$ that was incorporated in $\alpha$. 
+	
+	The number of edges is bounded by the size of the QSPD multiplied by $\frac{1}{\eps^2}$, since every occurrence of a point in the QSPD gives rise to $O\left(\frac{1}{\eps^2}\right)$ edges by construction.
+	
+	The runtime of the algorithm is composed of constructing a $d$-dimensional orthogonal range tree in time $O(n\log^{d-1}n)$, and querying $O\left(\frac{1}{\eps^2}\right)$ $d$-dimensional boxes for every point in the QSPD, each in time $O(\log^{d-1}n)$. Since the points in the orthogonal range tree are sorted by dimension, getting the leftmost or bottom-most point for some queries does not affect the runtime.
+	
+>>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
 \end{proof}
 
 
@@ -419,6 +629,24 @@ $O\left(\frac{1}{\eps'^3\eps^3} n\log n\right)$.
 \end{figure}
 
 
+<<<<<<< HEAD
+=======
+\subsection{Fat convex regions}
+
+Let $C$ be a convex shape, let $d_+$ be the smallest disk containing $C$, and $d_-$ be the largest disk contained in $C$. We say that $C$ is $\alpha$-fat if the ratio $\frac{radius(d_+)}{radius(d_-)}$ is at most $\alpha$. Let $\LL$ be the set of all $\alpha$-fat convex shapes. In the following, we construct $(\LL, \eps)$-local $t$-spanners for $t>1$. 
+
+We start by proving a structural lemma which will be later used in the correctness proof.
+
+\begin{claim}
+	Let $C$ be an $\alpha$-fat convex shape, and let $C_{1-\eps}$ be the $\epsilon$ core of $C$. The shortest segment $\overline{pq}$ such that $p,q\in\partial C$ and $\overline{pq}\cap C_{1-\eps}\neq \emptyset$ is of length at least %TODO.
+\end{claim}
+
+\begin{proof}
+	Let $d_-$ and $d_+$ be two disks, such that $d_-\subseteq C\subseteq d_+$, and $\frac{radius(d_+)}{radius(d_-)}=\alpha$, and let $\overline{pq}$ be the a shortest segment. We assume $\overline{pq} \cap C_{1-\eps}$ is a single point $s$.
+\end{proof}
+
+
+>>>>>>> 1eb5c890e1265a08cfd6d0936ebc605ac6255af5
 \bibliographystyle{alpha} 
 %\bibliography{shortcuts,geometry}
 \bibliography{ft_spanner}

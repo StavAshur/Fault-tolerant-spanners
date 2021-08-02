@@ -99,6 +99,78 @@ where one is allowed to slightly shrink the region.
 	
 \section{Local spanner for disks}
 
+Our purpose here is to build a local spanner for disks.
+
+\subsection{Preliminaries}
+
+For sets $B, C$, let
+$B \otimes C= \Set{\brc{x,y}}{ x\in B,\, y\in C, x \ne y }$ be the set
+of all the (unordered) pairs of points formed by the sets $B$ and $C$.
+
+\begin{defn}[Pair decomposition]
+    \deflab{pair:decomposition}%
+    %
+    For a point set $\PS$, a \emphic{pair
+       decomposition}{pair!decomposition} of $\PS$ is a set of pairs
+    \begin{equation*}        
+        \WSPDRep = \brc{\bigl. \brc{B_1,C_1},\ldots,\brc{B_s,C_s}},
+    \end{equation*}
+    such that
+    \begin{enumerate*}[label=(\Roman*)]
+        \item $B_i,C_i\subset \PS$ for every $i$,
+        %
+        \item $B_i \cap C_i = \emptyset$ for every $i$, and
+        %
+        \item $\bigcup_{i=1}^s B_i \otimes C_i = \PS \otimes \PS$.
+    \end{enumerate*}
+\end{defn}
+
+\begin{defn}
+    Given a pair decomposition
+    $\WSPDRep = \brc{\bigl. \brc{B_1,C_1},\ldots,\brc{B_s, C_s}}$ of a
+    point set $\PS$, its \emphi{weight} is
+    $\WeightX{\WSPDRep} = \sum_{i=1}^s \pth{ \cardin{B_i } +
+       \cardin{C_i}}$.
+\end{defn}
+
+\newcommand{\PSB}{\Mh{B}}%
+\newcommand{\PSC}{\Mh{C}}%
+
+\begin{defn}%
+    Two sets of points $\PSB$ and $\PSC$ are
+    \emphic{$(1/\eps)$-semi-separated}%
+    {separated!semi-separated@$(1+\eps)$-semi-separated} if
+    \begin{equation*}
+        \min \pth{ \diameterX{\PSB}, \diameterX{\PSC} } \leq \eps \cdot
+        \DistSetY{\PSB}{\PSC},%        
+    \end{equation*}
+    where
+    $\DistSetY{ \PSB}{\PSC} = \min_{\pb \in \PSB, \pc \in \PSC}
+    \dY{\pb}{\pc}$.
+
+    For a point set $\PS$, a \emphOnly{semi-separated pair
+       decomposition} (\emphOnly{\SSPD{}}) of $\PS$ with parameter
+    $1/\eps$, denoted by $\eps^{-1}$-\SSPD, is a pair decomposition of
+    $\PS$ formed by a set of pairs $\WSPDRep$ such that all the pairs
+    are $1/\eps$-semi-separated.
+\end{defn}
+
+\begin{theorem}[\cite{ah-ncsa-12,h-gaa-11}]
+    \thmlab{S:S:P:D:main}%
+    %
+    Let $\PS$ be a set of $n$ points in $\Re^d$, and let $\eps > 0$ be
+    a parameter. Then, one can compute a $1/\eps$-\SSPD for $\PS$ of
+    total weight $O\pth{n \eps^{-d} \log n}$. The number of pairs in
+    the \SSPD is $O\pth{n \eps^{-d}}$, and the computation time is
+    $O\pth{ n \eps^{-d} \log n }$.
+\end{theorem}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The construction}
+
+
 Let $\FF$ be the set of convex regions, and $\eps>0$. We use the
 construction of Abam \etal \cite{abfg-rftgs-09} in order to create a
 $(1+\eps)$-$\FF$ tolerant spanner. In their paper, Abam \etal build a

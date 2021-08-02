@@ -10,4 +10,15 @@ Mohammad~Ali Abam, Mark de~Berg, Mohammad Farshi, and Joachim Gudmundsson.
 \newblock Region-fault tolerant geometric spanners.
 \newblock {\em Discret. Comput. Geom.}, 41(4):556--582, 2009.
 
+\bibitem[AH12]{ah-ncsa-12}
+M.~A. Abam and S.~{Har{-}Peled}.
+\newblock New constructions of \textsf{SSPD}s and their applications.
+\newblock {\em Comput. Geom. Theory Appl.}, 45(5--6):200--214, 2012.
+
+\bibitem[{Har}11]{h-gaa-11}
+S.~{Har{-}Peled}.
+\newblock {\em Geometric Approximation Algorithms}, volume 173 of {\em Math.
+  Surveys \& Monographs}.
+\newblock Amer. Math. Soc., Boston, MA, USA, 2011.
+
 \end{thebibliography}

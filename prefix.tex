@@ -39,7 +39,7 @@
 \usepackage{xspace}%
 \usepackage{hyperref}%
 
-
+\usepackage{caption}%
 
 \newcommand{\hrefb}[3][black]{\href{#2}{\color{#1}{#3}}}%
 
@@ -131,6 +131,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5
 
 
+\numberwithin{figure}{section}%
+\numberwithin{table}{section}%
+\numberwithin{equation}{section}%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -166,7 +169,10 @@
 \newcommand{\defref}[1]{\HLink{Definition}{def:#1}}
 
 
-   \newcommand{\lemlab}[1]{\label{lemma:#1}}
+\newcommand{\clmlab}[1]{\label{claim:#1}}
+\newcommand{\clmref}[1]{\HLink{Claim}{claim:#1}}
+
+\newcommand{\lemlab}[1]{\label{lemma:#1}}
 \newcommand{\lemref}[1]{\HLink{Lemma}{lemma:#1}}%
 
 \providecommand{\eqlab}[1]{}%
@@ -260,7 +266,7 @@
 \newcommand{\CC}{\Mh{\mathcal{C}}}%
 \newcommand{\FF}{\Mh{\mathcal{F}}}%
 \newcommand{\LL}{\mathcal{L}}
-\newcommand{\DT}{\mathcal{DT}}
+\newcommand{\DT}{\Mh{\mathcal{D}}}%
 \newcommand{\DTX}[1]{\Mh{\mathcal{DT}}\pth{#1}}
 \newcommand{\DG}{\mathcal{DG}}
 
@@ -282,6 +288,9 @@
 \newcommand{\pc}{\Mh{u}}%
 \newcommand{\pd}{\Mh{v}}%
 
+\newcommand{\px}{\Mh{x}}%
+\newcommand{\py}{\Mh{y}}%
+
 \newcommand{\dGY}[2]{\Mh{\mathsf{d}}\pth{#1,#2}}%
 \newcommand{\dGZ}[3]{\Mh{\mathsf{d}_{#1}}\pth{#2,#3}}%
 \newcommand{\dY}[2]{\left\| #1 - #2 \right\|}%
@@ -298,16 +307,44 @@
 \newcommand{\interiorX}[1]{\mathrm{int}\pth{#1}}%
 \newcommand{\restrictY}[2]{#1 \cap {#2}}
 
-\newcommand{\WSPDRep}{\Mh{\mathcal{W}}}%
+\newcommand{\cpX}[1]{\Mh{\mathrm{c{}p}}\pth{#1}}%
+\newcommand{\diamX}[1]{\mathrm{diam}\pth{#1}}%
+
+\newcommand{\spread}{\Mh{\Phi}}
+\newcommand{\spreadX}[1]{\spread\pth{#1}}
+
+\newcommand{\WS}{\Mh{\mathcal{W}}}%
 \newcommand{\WeightX}[1]{\Mh{\omega} \pth{#1}}
 \newcommand{\diameterX}[1]{\mathrm{d{}i{}am}\pth{#1}}
 
 \newcommand{\SSPD}{\Term{SSPD}\xspace}%
 
-\newcommand{\PSB}{\Mh{X}}%
-\newcommand{\PSC}{\Mh{Y}}%
+\newcommand{\PSB}{\Mh{B}}%
+\newcommand{\PSC}{\Mh{C}}%
+
+\newcommand{\PSX}{\Mh{X}}%
+\newcommand{\PSY}{\Mh{Y}}%
 
 \newcommand{\WSPD}{\Term{WSPD}\xspace}%
+
+\newcommand{\coneY}[2]{\mathrm{cone}\pth{#1,#2}}%
+\newcommand{\IS}{\Mh{\mathcal{I}}}%
+\newcommand{\epsA}{\Mh{\vartheta}}%
+
+\newcommand{\GY}[2]{\Mh{\mathcal{G}}\pth{#1, #2}}%
+\newcommand{\cen}{\Mh{c}}%
+\newcommand{\Pair}{\Mh{\Xi}}%
+\newcommand{\GA}{\Mh{H}}%
+
+\newcommand{\XSays}[2]{{ {$\rule[-0.12cm]{0.2in}{0.5cm}$\fbox{\tt #1:}
+      } #2 \marginpar{\textcolor{red}{#1}}
+      {$\rule[0.1cm]{0.3in}{0.1cm}$\fbox{\tt
+            end}$\rule[0.1cm]{0.3in}{0.1cm}$} } }
+\newcommand{\sariel}[1]{{\XSays{Sariel}{#1}}}
+\newcommand{\Sariel}[1]{{\XSays{Sariel}{#1}}}
+
+\newcommand{\QSup}{\QS_{\uparrow}}
+\newcommand{\QSdown}{\QS_{\downarrow}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%BeginIpePreamble

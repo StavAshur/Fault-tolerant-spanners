@@ -108,11 +108,16 @@ Our purpose here is to build a local spanner for disks.
 \subsection{Preliminaries}
 
 %-----------------------------------------------------------------------
-\subsubsection{Semi-separated pairs decomposition}
+\subsubsection{Well separated pairs decomposition}
 
-For sets $B, C$, let
-$B \otimes C= \Set{\brc{x,y}}{ x\in B,\, y\in C, x \ne y }$ be the set
-of all the (unordered) pairs of points formed by the sets $B$ and $C$.
+For sets $\PSX, \PSY$, let
+\begin{math}
+    \PSX \otimes \PSY%
+    =%
+    \Set{\brc{\px,\py}}{ \px\in \PSX,\, \py\in \PSY, \px \ne \py }
+\end{math}
+be the set of all the (unordered) pairs of points
+formed by the sets $B$ and $C$.
 
 \begin{defn}[Pair decomposition]
     \deflab{pair:decomposition}%
@@ -120,26 +125,82 @@ of all the (unordered) pairs of points formed by the sets $B$ and $C$.
     For a point set $\PS$, a \emphic{pair
        decomposition}{pair!decomposition} of $\PS$ is a set of pairs
     \begin{equation*}        
-        \WSPDRep = \brc{\bigl. \brc{B_1,C_1},\ldots,\brc{B_s,C_s}},
+        \WS = \brc{\bigl. \brc{\PSX_1,\PSY_1},\ldots,\brc{\PSX_s,\PSY_s}},
     \end{equation*}
     such that
     \begin{enumerate*}[label=(\Roman*)]
-        \item $B_i,C_i\subset \PS$ for every $i$,
+        \item $\PSX_i,\PSY_i\subseteq \PS$ for every $i$,
         %
-        \item $B_i \cap C_i = \emptyset$ for every $i$, and
+        \item $\PSX_i \cap \PSY_i = \emptyset$ for every $i$, and
         %
-        \item $\bigcup_{i=1}^s B_i \otimes C_i = \PS \otimes \PS$.
+        \item $\bigcup_{i=1}^s \PSX_i \otimes \PSY_i = \PS \otimes \PS$.
     \end{enumerate*}
 \end{defn}
 
 \begin{defn}
     Given a pair decomposition
-    $\WSPDRep = \brc{\bigl. \brc{B_1,C_1},\ldots,\brc{B_s, C_s}}$ of a
-    point set $\PS$, its \emphi{weight} is
-    $\WeightX{\WSPDRep} = \sum_{i=1}^s \pth{ \cardin{B_i } +
-       \cardin{C_i}}$.
+    $\WS = \brc{\bigl. \brc{\PSX_1,\PSY_1},\ldots,\brc{\PSX_s,
+          \PSY_s}}$ of a point set $\PS$, its \emphi{weight} is
+    $\WeightX{\WS} = \sum_{i=1}^s \pth{ \cardin{\PSX_i } +
+       \cardin{\PSY_i}}$.
 \end{defn}
 
+
+\begin{defn}
+    \deflab{well:separated}%
+    %
+    The pair of sets $\PSX, \PSY \subseteq \Re^d$ is
+    \emphi{$(1/\eps)$-well-separated} if
+    \begin{equation*}
+        \max \pth{ \diameterX{\PSX}, \diameterX{\PSY} } \leq
+        \eps \cdot \DistSetY{\PSX}{\PSY},
+    \end{equation*}
+\end{defn}
+
+\begin{defn}
+    \deflab{WSPD}%
+    %
+    For a point set $\PS$, a \emphOnly{well-separated pair
+       decomposition} (\emphOnly{\WSPD{}}) of $\PS$ with parameter
+    $1/\eps$ is a pair decomposition of $\PS$ with a set of pairs
+    \begin{math}
+        \WS = \brc{\bigl.
+           \brc{\PSB_1,\PSC_1},\ldots,\brc{\PSB_s,\PSC_s}},
+    \end{math}
+    such that, for any $i$, the sets $\PSB_i$ and $\PSC_i$ are
+    $1/\eps$-separated.
+\end{defn}
+
+
+The \emphi{closest pair} distance of a set of points
+$\PS \subseteq \Re^d$, is
+\begin{math}
+    \cpX{\PS} = \min_{\pa, \pb \in \PS, \pa \neq \pb} \dY{\pa}{\pb}.
+\end{math}
+The \emphi{diameter} of $\PS$ is
+\begin{math}
+    \diamX{\PS} = \max_{\pa, \pb \in \PS} \dY{\pa}{\pb}.
+\end{math}
+The \emphi{spread} of $\PS$ is
+$\spreadX{\PS} = \diamX{\PS} / \cpX{\PS}$, which is the ratio between
+the diameter and closest pair distance.  While in general the weight
+of a \WSPD can be quadratic, if the spread is bounded, the weight is
+near linear.
+
+\begin{lemma}[\cite{ah-ncsa-12}]
+    \lemlab{s:s:p:d:spread}%
+    %
+    Let $\PS$ be a set of $n$ points in $\Re^d$, with spread
+    $\spread = \spreadX{\PS}$, and let $\eps > 0$ be a
+    parameter. Then, one can compute a $(1/\eps)$-\WSPD $\WS$ for
+    $\PS$ of total weight $O(n \eps^{-d} \log \spread)$. Furthermore,
+    any point of $\PS$ participates in at most
+    $O\pth{ \eps^{-d} \log \spread}$ pairs. Namely,
+    $\WeightX{\WS} = O( \eps^{-d} n \log \spread )$.
+\end{lemma}
+
+%------------------------------------------------------------------------
+\subsubsection{Semi separated pairs decomposition}
 
 \begin{defn}%
     Two sets of points $\PSB$ and $\PSC$ are
@@ -156,7 +217,7 @@ of all the (unordered) pairs of points formed by the sets $B$ and $C$.
     For a point set $\PS$, a \emphOnly{semi-separated pair
        decomposition} (\emphOnly{\SSPD{}}) of $\PS$ with parameter
     $1/\eps$, denoted by $\eps^{-1}$-\SSPD, is a pair decomposition of
-    $\PS$ formed by a set of pairs $\WSPDRep$ such that all the pairs
+    $\PS$ formed by a set of pairs $\WS$ such that all the pairs
     are $1/\eps$-semi-separated.
 \end{defn}
 
@@ -170,31 +231,6 @@ of all the (unordered) pairs of points formed by the sets $B$ and $C$.
     $O\pth{ n \eps^{-d} \log n }$.
 \end{theorem}
 
-\begin{defn}
-    \deflab{well:separated}%
-    %
-    The pair of sets $\PSB, \PSC \subseteq \Re^d$ is
-    \emphic{$(1/\eps)$-separated}{separated!separated@$(1+\eps)$-separated}
-    if
-    \begin{equation*}
-        \max \pth{ \diameterX{\PSB}, \diameterX{\PSC} } \leq
-        \eps \cdot \DistSetY{\PSB}{\PSC},
-    \end{equation*}
-\end{defn}
-
-\begin{defn}
-    \deflab{WSPD}%
-    %
-    For a point set $\PS$, a \emphOnly{well-separated pair
-       decomposition} (\emphOnly{\WSPD{}}) of $\PS$ with parameter
-    $1/\eps$ is a pair decomposition of $\PS$ with a set of pairs
-    \begin{math}
-        \WSPDRep = \brc{\bigl.
-           \brc{\PSB_1,\PSC_1},\ldots,\brc{\PSB_s,\PSC_s}},
-    \end{math}
-    such that, for any $i$, the sets $\PSB_i$ and $\PSC_i$ are
-    $1/\eps$-separated.
-\end{defn}
 
 
 %-----------------------------------------------------------------------
@@ -204,42 +240,53 @@ We need the following well known property of Delaunay triangulation,
 which would play a center role in our construction.
 
 \begin{claim}
+    \clmlab{d:t:connected}%
+    %
     For a set of points $\PS \subseteq \Re^2$ in general position, let
     $\DT = \DTX{\PS}$ denote its Delaunay triangulation.  Then, for
     any close disk $\disk$, we have $\restrictY{\DTX{\PS}}{\disk}$ is
     connected.
 \end{claim}
 
-\newcommand{\cen}{\Mh{c}}%
 
 \begin{proof}
     We first prove that for any (close) disk $\disk$ with two points
     $\pa,\pb\in \PS$ on its boundary, there is a path between $\pa$
     and $\pb$ in $\restrictY{\DT}{\disk}$.  The proof is by induction
-    over the number $m$ of points in the interior of $\disk$:
-
-    v v v
-    
-    \begin{itemize}
+    over the number $m$ of points of $\PS$ in the interior of $\disk$:
+    \begin{compactitem}
         \item{} $m=0$: The disk $\disk$ contains no points of $\PS$ in
         its interior, and thus $\pa \pb$ is an edge of the Delaunay
         triangulation, as $\disk$ testifies.
 
+        \begin{figure}[h]
+            \phantom{}\hfill%
+            \includegraphics[page=1]{figs/shrink}%
+            \hfill%
+            \includegraphics[page=2]{figs/shrink}%
+            \hfill%
+            \includegraphics[page=3]{figs/shrink}%
+            \hfill%
+            \phantom{}%
+            \caption{}
+            \figlab{shrink}
+        \end{figure}
         \item $m >0$: Let $\pc\in \PS$ be a point in the interior of
         $\disk$. We move the center $\cen$ of $\disk$ in the direction
         of $\pa$, shrinking $\disk$ in the process, so that the radius
         the disk is $\dY{\cen}{\pa}$, until we get a disk
         $\disk' \subseteq \disk$ such that $\pc$ is on the boundary of
-        $\disk'$. Observe that
+        $\disk'$, see \figref{shrink}. Observe that $\pa$ and $\pc$
+        are on the boundary of the new disk, and
         $|\interiorX{\disk'} \cap \PS| < |\interiorX{\disk} \cap
-        \PS|$, and by induction there is a path between $\pa$ and
-        $\pc$ in
+        \PS|$. Thus, by induction, there is a path $\gamma'$ between
+        $\pa$ and $\pc$ in
         $\restrictY{\DT}{\disk'} \subseteq
         \restrictY{\DT}{\disk}$. Similarly, there must be a path
-        between $\pc$ and $\pb$, and concatenating the two paths
-        results in a path between $\pa$ and $\pb$ in
+        $\gamma''$ between $\pc$ and $\pb$, and concatenating the two
+        paths results in a path between $\pa$ and $\pb$ in
         $\restrictY{\DT}{\disk}$.
-    \end{itemize}
+    \end{compactitem}
     \medskip%
     \noindent
     Back to the original claim.  For any two points
@@ -253,95 +300,226 @@ which would play a center role in our construction.
 \end{proof}
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The construction of local spanners for disks}
 
 \subsubsection{The construction}
 
 The input is a set $\PS$ of $n$ points in the plane (in general
-position), and a parameter $\eps \in (0,1)$.
+position) with $\spread = \spreadX{\PS}$, and a parameter
+$\eps \in (0,1)$.
 
-
-\newcommand{\coneY}[2]{\mathrm{cone}\pth{#1,#2}}%
-\newcommand{\IS}{\Mh{\mathcal{I}}}%
-\newcommand{\epsA}{\Mh{\vartheta}}%
-
-Let $\epsA = \eps/c$, for some constant $c$ to be determined shortly.
-Consider a minimum cardinality partition $\IS = \IS(\epsA)$ of the
-circle of directions into (circular) intervals of length at most
-$\epsA$.
-
-The algorithm computes a $(1/\epsA)$-\SSPD $\WSPDRep$ of
-$\PS$. The algorithm now scans the pairs  $\{ \PSB, \PSC \} \in
-\WSPDRep$.  Assume that
-$\diameterX{\PSB} < \epsA\DistSetY{\PSB}{\PSC}$, and let $\disk$ be
-the smallest enclosing disk of $\PSB$, centered at a point $\cen$.
-
-For each $I \in \IS(\eps)$, consider the cone $\coneY{\cen}{I}$ which
-is formed by all the points $\pd$ in the plane, such that the
-direction of $\pd - \cen$ is in $I$. The algorithm partitions $\PSC$
-into the subsets
-\begin{equation*}
-    \forall I \in \IS \qquad \PSC_I = \coneY{\cen}{I} \cap \PSC.
-\end{equation*}
-The algorithm now computes the Delaunay triangulation of
-$\PSB \cup \PSC_I$ and adds its edges to the computed graph $\G$.
+The algorithm computes a $1/\epsA$-\WSPD $\WS$ of $\PS$ using the
+algorithm of \lemref{s:s:p:d:spread}, where $\epsA = \eps/6$.  For
+each pair $\Pair = \{\PSX, \PSY \} \in \WS$, the algorithm computes
+the Delaunay triangulation $\DT_{\Pair} = \DTX{ \PSX \cup \PSY}$. The
+algorithm adds all the edges in $\DT_{\Pair} \cap (\PSX \otimes \PSY)$
+to the computed graph $\G$.
 
 \subsubsection{Analysis}
 
-\paragraph{Size.} For each pair $\{\PSB, \PSC\}$ in the \SSPD, we get
-$O(|\IS|) = O(1/\epsA)$ Delaunay triangulations, each one with $O(
-|\PSB| + |\PSC|)$ edges. As such, the resulting graph has
+\paragraph{Size.}
+
+For each pair $\Pair = \{\PSX, \PSY\}$ in the \WSPD, its Delaunay
+triangulation contains at most with $O( |\PSX| + |\PSY|)$ edges. As
+such, the number of edges in the resulting graph is bounded by
 \begin{equation*}
-    \sum_{\{\PSB, \PSC\} \in \WSPDRep} O\Bigl(
-    \frac{|\PSB| + |\PSC|}{\eps} \Bigr)
+    \sum_{\{\PSX, \PSY\} \in \WS} O\bigl( |\PSX| + |\PSY| \bigr)
     =%
-    O\pth{ \frac{\WeightX{\WSPDRep}}{\epsA} }%
+    O\pth{ \WeightX{\WS} }%
     =%
-    O\pth{ \frac{n\log n}{{\epsA}^{d+1}}}
+    O\pth{ \frac{n\log \spread}{{\epsA}^{2}}},
 \end{equation*}
-. 
+by \lemref{s:s:p:d:spread}.
 
 
+\paragraph{Construction time.}
+The construction time is bounded by
+\begin{equation*}
+    \sum_{\{\PSX, \PSY\} \in \WS} O\bigl( (|\PSX| + |\PSY|) \log
+    (|\PSX| + |\PSY|)  \bigr)
+    =%
+    O\pth{ \WeightX{\WS} \log n }%
+    =%
+    O\pth{ \frac{n\log \spread \log n}{{\epsA}^{2}}},    
+\end{equation*}
+
+\paragraph{Local spanner property.}
+
+\begin{lemma}
+    Let $\G$ be the graph constructed above for the point set
+    $\PS$. Then, for any (close) disk $\disk$, and any two points
+    $\px, \py \in \PS \cap \disk$, we have that
+    $\restrictY{\G}{\disk}$ has a $(1+\eps)$-path between $\px$ and
+    $\py$. That is, $\G$ is a $(1+\eps)$-local spanner for disks.
+\end{lemma}
+
+\begin{proof}
+    The proof is by induction on the distance between $\pa$ and $\pb$
+    (or more precisely, the rank of their distance among the
+    $\binom{n}{2}$ pairwise distances).  Consider the pair
+    $\Pair = \{ \PSX, \PSY \}$ such that $\px \in \PSX$ and
+    $\py \in \PSY$.
+
+    For the base case, consider the case that $\px$ is the
+    nearest-neighbor to $\py$ in $\PS$, and $\py$ is the
+    nearest-neighbor to $\px$ in $\PS$.  It must be, because of the
+    separation property of $\Pair$, that $\PSX$ and $\PSY$ are
+    singletons. Indeed, if $\PSX$ contains another point, then $\py$
+    would not be the nearest-neighbor to $\px$ (this is true for
+    $\epsA < 0.5$). As such, $\px \py \in \DT_\Pair$,
+    $\px, \py \in \disk$, and the edge $\px \py \in \EGX{\G}$,
+    implying the claim.
+
+    For the inductive step, observe that , the claim follows if
+    $\px \py \in \DT_\Pair$, so assume this is not the case. By the
+    connectivity of $\DT_\Pair \cap \disk$, see
+    \clmref{d:t:connected}, there must be points
+    $\px' \in \PSX \cap \disk$, $\py' \in \PSY \cap \disk$, such that
+    $\px'\py' \in \EGX{ \DT_\Pair}$. As such, by construction, we have
+    that $\px'\py' \in \EGX{\G}$. Furthermore, by the separation
+    property, we have that    
+    \begin{equation*}
+        \max \pth{ \diameterX{\PSX}, \diameterX{\PSY} }%
+        \leq%
+        \epsA \cdot \DistSetY{\PSX}{\PSY}%
+        \leq%
+        \epsA \ell, 
+    \end{equation*}
+    where $\ell = \dY{\px}{\py}$. In particular,
+    $\dY{\px'}{\px} \leq \epsA \ell$ and
+    $\dY{\py'}{\py} \leq \epsA \ell$. As such, by induction, we have
+    $\dGZ{\G}{\px}{\px'} \leq (1+\eps)\dY{\px}{\px'} \leq
+    (1+\eps)\epsA \ell$ and
+    $\dGZ{\G}{\py}{\py'} \leq (1+\eps)\dY{\py}{\py'} \leq
+    (1+\eps)\epsA \ell$.  Furthermore,
+    $\dY{\px'}{\py'} \leq (1+2\epsA)\ell$. As $\px'\py' \in \EGX{\G}$,
+    we have
+    \begin{align*}
+      \dGZ{\G}{\px}{\py}%
+      &\leq%
+        \dGZ{\G}{\px}{\px'}%
+        +\dY{\px'}{\py'}
+        +
+        \dGZ{\G}{\py'}{\py}%
+        \leq%
+        (1+\eps)\epsA \ell
+        +(1+2\epsA)\ell
+        + (1+\eps)\epsA \ell
+        \leq%
+        \pth{ 2\epsA +1+2\epsA + 2\epsA } \ell        
+      \\&%
+      =%
+      \pth{ 1+ 6\epsA  } \ell        
+      \leq%
+      \pth{ 1+ \eps  } \dY{\px}{\py},
+    \end{align*}
+    if $\epsA \leq \eps/6$.
+\end{proof}
+
+\paragraph{The result.}
+
+\begin{theorem}
+    \thmlab{main:1}%
+    %
+    Let $\PS$ be a set of $n$ points in the plane, and let
+    $\eps \in (0,1)$ be a parameter. The above algorithm constructs a
+    local $(1+\eps)$-spanner $\G$ for disks. The spanner has
+    $O\pth{ \eps^{-2} n\log \spread }$, with running time
+    $O\pth{ \eps^{-2} n\log \spread \log n }$.  Formally, for any disk
+    $\disk$ in the plane, and any two points
+    $\pa, \pb \in \PS \cap \disk$, we have a $(1+\eps)$-path in
+    $\restrictY{\G}{\disk}$.
+\end{theorem}
+
+% ------------------------------------------------------------------------
+\subsubsection{Applications and comments}
 
 
+\begin{defn}
+    Given a region $R$ in the plane and a point set $\PS$, consider
+    two points $\pa, \pb \in \PS$. The edge $\pa \pb$ is \emphw{safe}
+    in $R$, if there is a disk $\disk$ such that
+    $\pa,\pb \in \disk \subseteq R$. Let $\GY{\PS}{R}$ be the graph
+    formed by all the safe edges in $\PS$ for $R$. Note, that his
+    graph might have a quadratic number of edges in the worst case.
+\end{defn}
+
+Observe that $\GY{\Re^2}{\PS}$ is a clique.
+
+\begin{corollary}
+    Let $\PS$ be a set of $n$ points in the plane, and let
+    $\eps \in (0,1)$ be a parameter, and let $\G$ be a local
+    $(1+\eps)$-spanner for disks. Then, for $R$ be an region in the
+    plane, and consider the graph $\GA = \GY{\PS}{R}$. Then
+    $\restrictY{\G}{R}$ is a $(1+\eps)$-spanner for
+    $\restrictY{\GA}{R}$. Formally, for any two points
+    $\pa, \pb \in \PS \cap R$, we have that
+    $\dGZ{\GA}{\pa}{\pb} \leq (1+\eps)\dGZ{\G}{\pa}{\pb}$.
+
+    In particular, for any convex region $C$, the graph $\G \gminus C$
+    is a $(1+\eps)$-spanner for $\GY{\Re^2}{\PS} \gminus C$.
+\end{corollary}
+\begin{proof}
+    Consider the shortest path $\pi = u_1 u_2 \ldots u_k$ between
+    $\pa$ and $\pb$ in $\dGZ{\GA}{\pa}{\pb}$. Every edge
+    $e_i = u_i u_{i+1}$ has a disk $\disk_i$ such that
+    $u_i, u_{i+1} \in \disk_i \subseteq R$. As such, there is a
+    $(1+\eps)$-path between $u_i$ and $u_{i+1}$ in
+    $\restrictY{\G}{\disk_i} \subseteq
+    \restrictY{\G}{R}$. Concatenating these paths directly yields the
+    desired result.
+
+    The second claim follows by observing that the complement of $C$
+    is the union of halfspaces, and halfspaces can be considered to be
+    ``infinite'' radius disks. As such, the above argument applies
+    verbatim.
+\end{proof}
+
+\paragraph{But why not \SSPD?}
+
+The result of \thmref{main:1} is somewhat disappointing as it depends
+on the spread of the point set (logarithmically, but still). A natural
+way is to try and emulate the construction of Abam \etal
+\cite{abfg-rftgs-09} and use \SSPD instead of \WSPD. The total weight
+of the \SSPD is near linear (with no dependency on the
+spread). Furthermore, after some post processing, one can assume every
+pair $\Pair = \{ \PSX, \PSY \}$ is angularly $\eps$-separated -- that is,
+there is a double wedge with angle $\leq \eps$, such that $\PSX$ and
+$\PSY$ are of different sides of the double wedge. The problem is that
+for the local disk $\disk$, it might be
+the bridge edge between $\PSX$ and $\PSY$ that is in $\DT_\Pair \cap
+\disk$ is much longer than the two points of interest. This somewhat
+counter-intuitive situation is illustrated in \figref{bad}.
+
+\begin{figure}[h]
+    \phantom{}
+    \hfill%
+    \includegraphics[page=1]{figs/bad_example}
+    \hfill%
+    \includegraphics[page=2]{figs/bad_example}
+    \hfill%
+    \includegraphics[page=3]{figs/bad_example}
+    \hfill%
+    \phantom{}
+    \caption{A bridge too far -- the only surviving bridge between the
+       red and blue points is too far to be useful if the sets are
+       points are not well separated.}
+    \figlab{bad}
+\end{figure}
 
 
-
-Let $\FF$ be the set of convex regions, and $\eps>0$. We use the
-construction of Abam \etal \cite{abfg-rftgs-09} in order to create a
-$(1+\eps)$-$\FF$ tolerant spanner. In their paper, Abam \etal build a
-\emph{semi separated pair decomposition} (SSPD), and add a set of
-carefully chosen edges between every two sets $A,B\subseteq P$ that
-compose a pair in the SSPD. Given a pair $(A,B)$, the algorithm
-partitions the larger set, w.l.o.g it is $B$, by shooting rays at
-fixed angular intervals from a disk that contains $A$, and then adds a
-planar set of edges $E_i$ between the convex hulls of $A$ and every
-part $B$ of $B$, that has the following property:
-
-For any half-plane $H$ such that $A\cap H\neq \emptyset$ and
-$B\cap H\neq \emptyset$, there exists an edge $e\in E_i$ such that
-$e\subseteq H$. This property, together with the properties of the
-SSPD, makes the resulted graph an $\FF$-fault tolerant spanner.
-
-We notice, that a similar construction that chooses $E_i$ to be the
-edges of the Delaunay triangulation with one end in $A$ and the other
-in $B$ has the same property. We now prove that for any disk
-$d\subseteq \Re^2$, and for any set $P'$ of points we have that
-$\DT(P')\mid_d$ is connected. This is enough as half-planes can be
-simulated by complements of disks.
-
-
-Since the triangulation is planar, all of the arguments from the
-original paper regarding the size of the spanner hold, and we get a
-$(1+\eps)-\FF$ fault tolerant spanner of size $O(\eps^{-3}n\log n)$ in
-$O(\eps^{-2}n\log n)$ time.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Complement of convex faults / convex local spanners}
+\subsection{Result for other norms}
+
+\sariel{FILL IN *all* THE DETAILS -- this is way too hand wavy --
+   including refs, etc}
+
 Using the same argument, we can extend the result for the case where
 $\LL$ is the set of all scaled and translated copies, homothets, of a
 convex shape $\CC$. While the Delaunay triangulation is not well
@@ -365,15 +543,166 @@ $O(\eps^{-2}n\log n)$ time.(
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{$\eps$-shadow}
+\section{Axis parallel rectangles}
 
-In this section we consider a weaker form of fault tolerance. Given a
-family $\LL$ of shapes, we say that $\G$ is a $(\LL,\eps)$-local
-spanner if for any $L\in\LL$ we have that $G\mid_{L_{\eps}}$, where
-$L_{\eps}$ is $L$ rescaled by $(1-\eps)$, is a $t$-spanner. We call
-$L\setminus L_{\eps}$ the \emph{shadow} of $L$, and we say that a
-point $p$ is \emph{truly contained} in $L$ w.r.t. $\eps$, and denote
-$p\in_{\eps} L$, if $p\in L_{\eps}$.
+We would like to build local spanners (of subquadratic size) for
+axis-parallel rectangles, but as \figref{bad:rectangles} shows, there
+is no hope of achieving this. As such, we need to change the
+requirement somewhat.
+
+\begin{figure}
+    \centerline{\includegraphics{figs/local_rectangles}}
+    \caption{There are quadratic number of pairs of points that has to
+       be connected in any local spanner for axis parallel
+       rectangles. Indeed, for any point in the top diagonal and
+       bottom diagonal, there is an axis parallel rectangle that
+       cotnains only these two points. This holds even if we restrict
+       ourselves to fat rectangles of similar size.}
+    \figlab{bad:rectangles}
+\end{figure}
+
+\newcommand{\rect}{\Mh{R}}%
+
+\paragraph{A weaker connectivity requirement.}
+
+For a rectangle $\rect$, let $(1-\delta)\rect$ denote the rectangle
+resulting from scaling $\rect$ by a factor of $1-\delta$ around its
+center. For a point set $\PS$ in the plane, a graph $\G =(\PS,\EG)$ is
+a \emphi{$(1-\delta)$-local $(1+\eps)$-spanner} for $\PS$, if for any
+axis parallel rectangle $\rect$, we have that $\restrictY{\G}{\rect}$
+is an $\eps$-spanner for any two points in $(1-\delta)\rect \cap
+\PS$. Intuitively, the spanner does not need to work for points that
+are close to the boundary of $\rect$. We refer to
+$\rect \setminus (1-\delta)\rect$ as the \emphi{shadow} of $\rect$ --
+it is the area that is being damaged, and that the local spanner fails
+to work for.
+
+Before dwelling into the construction, we start with presenting a new
+pair decomposition that would be useful for our (nefarious) purposes.
+
+
+
+\subsection{Quadrant separated pairs decomposition}
+
+For points $\pa = (p_1, \ldots, p_d)$ and $\pb = (q_1, \ldots, q_d)$
+in $\Re^d$, let $\pa \prec \pb$ denotes that $\pb$ \emphi{dominates}
+$\pa$ coordinate-wise. That is $p_i < q_i$, for all $i$. More
+generally, let $\pa <_i \pb$ denote that $\pa_i < \pb_i$. For two
+point sets $\PSX, \PSY \subseteq \Re^d$, we use $\PSX <_i \PSY$ to
+denote that $\forall \px \in \PSX, \py \in \PSY \quad \px <_i \py$.
+In particular $\PSX$ and $\PSY$ are \emphw{$i$-coordinate separated}
+if $\PSX <_i \PSY$ or $\PSY <_i \PSX$. A pair $\{ \PSX, \PSY\}$ is
+\emphi{quadrant-separated}, if $\PSX$ and $\PSY$ are $i$-coordinate
+separated, for $i=1,\ldots, d$.
+
+A \emphi{quadrant-separated pairs decomposition} of a point set
+$\PS \subseteq \Re^d$, is a pairs decomposition (see
+\defref{pair:decomposition}
+$\WS = \bigl\{ \{ \PSX_1, \PSY_1 \}, \ldots, \{ \PSX_s, \PSY_s \}
+\bigr\}$ of $\PS$, such that $\{ \PSX_i, \PSY_i\}$ are
+quadrant-separated for all $i$.
+
+\newcommand{\QS}{\Mh{\mathcal{Q}}}%
+\newcommand{\liftX}[1]{\mathrm{lift}\pth{#1}}%
+
+\begin{lemma}
+    \lemlab{d:1}%
+    %
+    Given a set $\PS$ of $n$ points in $\Re$, one can compute, in
+    $O( n \log n)$ time, a \QSPD of $\PS$ with $O(n)$ pairs, and of
+    total weight $O( n \log n)$.
+\end{lemma}
+\begin{proof}
+    If $\PS$ is a singleton then there is nothing to do. If
+    $\PS = \{ \pa, \pb \}$, then the decomposition is the pair formed
+    by the two singleton points.
+
+    Otherwise, let $x$ be the median of $\PS$, such that
+    $\PS_{\leq x} = \Set{ \pa \in \PS }{\pa \leq x}$ contains exactly
+    $\ceil{n/2}$ points, and $\PS_{> x} = \PS \setminus \PS_{\leq x}$
+    contains $\floor{n/2}$ points. Construct the pair
+    $\Pair = \{ \PS_{\leq x}, \PS_{> x} \}$, and compute recursively a
+    \QSPD{}s $\QS_{\leq x}$ and $\QS_{> x}$ for $\PS_{\leq x}$ and
+    $\PS_{> x}$, respectively. The desired \QSPD is
+    \begin{math}
+        \QS_{\leq x} \cup \QS_{> x} \cup \{ \Pair \}.
+    \end{math}
+    The bounds on the size and weight of the desired \QSPD are
+    immediate.
+\end{proof}
+
+
+\begin{lemma}
+    Given a set $\PS$ of $n$ points in $\Re^d$, one can compute, in
+    $O( n \log^d n)$ time, a \QSPD of $\PS$ with $O(n \log^{d-1} n)$
+    pairs, and of total weight $O( n \log^d n)$.
+\end{lemma}
+\begin{proof}
+    The construction algorithm is recursive on the dimensions, using
+    the algorithm of \lemref{d:1} in one dimension.
+
+    The algorithm computes a value $\alpha_d$ that partition the
+    values of the points in $d$\th coordinate roughly equally (and is
+    distinct from all of them), and let $h$ be a hyperplane parallel
+    to the first $d-1$ coordinate axes, and having value $\alpha_d$ in
+    the $d$\th coordinate.
+
+    Let $\PS_{\uparrow}$ and $\PS_{\downarrow}$ be the subset of
+    points of $\PS$ that are above and below $h$, respectively.  The
+    algorithm computes recursively \QSPD{}s $\QS_\uparrow$ and
+    $\QSdown$ for $\PSup$ and $\PS_{\downarrow}$, respectively.  Next,
+    the algorithm projects the points of $\PS$ to $h$, and let $\PS'$
+    be the resulting $d-1$ dimensional point set (after we ignore the
+    $d$\th coordinate). Compute recursively a \QSPD $\QS'$ for $\PS'$.
+
+    
+    For a point set $\PSX' \subseteq \PS'$, let $\liftX{\PSX'}$ be the
+    subset of points of $\PS$ that its projection to $h$ is $\PSX'$.
+    The algorithm now computes the set of pairs
+    \begin{equation*}
+        \widehat{\QS}%
+        =%
+        \Set{\Bigl.
+           \{ \liftX{ \PSX'} \cap \PSup , \liftX{ \PSY' } \cap \PSdown
+           \}, \,\,
+           \{ \liftX{ \PSX'} \cap \PSdown , \liftX{ \PSY' } \cap \PSup
+           \}
+        }%
+        { \{ \PSX', \PSY' \} \in \QS'}     .
+    \end{equation*}
+    The desired \QSPD is $\widehat{\QS} \cup \QSup \cup \QSdown$.
+
+    To observe that this is indeed a \QSPD, observe that all the pairs
+    in $\QSup, \QSdown$ are quadrant separated by induction. As for
+    pairs in $\widehat{\QS}$, they are quadrant separated in the first
+    $d-1$ coordinates by induction on the dimension, and separated in
+    the $d$ coordinate since one side of the pair comes from $\PSup$,
+    and the other side from $\PSdown$.
+
+    As for coverage, consider any pair of points $\pa, \pb \in \PS$,
+    and observe that the claim holds by induction if they are both in
+    $\PSup$ or $\PSdown$. As such, assume that $\pa \in \PSup$ and
+    $\pb \ni \PSdown$. But then there is a pair
+    $\{\PSX', \PSY'\} \in \QS'$ that separates the two projected
+    points in $h$, and clearly one of the two lifted pairs that
+    corresponds to this pair quadrant-separates $\pa$ and $\pb$ as
+    desired.
+
+    The number pairs in the decomposition is
+    \begin{math}
+        N(n,d) = 2N(n,d-1) + 2N\pth{ n/2, d }
+    \end{math}
+    with $N(n,1) = O(n)$. The solution to this recurrence is
+    $N(n,d) = O( n \log^{d-1} n)$.
+    The total weight of the decomposition is
+    \begin{math}
+        W(n,d) = 2W(n,d-1) + 2W\pth{ n/2, d }
+    \end{math}
+    with $W(n,1) = O(n \log n)$. The solution to this recurrence is
+    $W(n,d) = O( n \log^{d} n)$. Clearly, this also bounds the
+    construction time.
+\end{proof}
+
 
 \subsection{Bounded aspect ratio rectangles}
 Let $\LL$ be the set of axis parallel rectangles with aspect ratio at

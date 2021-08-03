@@ -19,6 +19,10 @@
 \maketitle
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Introduction}
 
 \paragraph{Euclidean graph and spanners.}
@@ -55,8 +59,8 @@ $\region$. Similarly, let
 \begin{equation*}
     \restrictY{\G}{\region}%
     =%
-    \bigl( \PS \cap \interiorX{\region},
-    \Set{uv \in \EG}{ uv \subseteq \interiorX{\region} } \bigr).
+    \bigl( \PS \cap {\region},
+    \Set{uv \in \EG}{ uv \subseteq {\region} } \bigr).
 \end{equation*}
 be the residual graph after restricting $\G$ to the region $\region$.
 
@@ -103,6 +107,9 @@ Our purpose here is to build a local spanner for disks.
 
 \subsection{Preliminaries}
 
+%-----------------------------------------------------------------------
+\subsubsection{Semi-separated pairs decomposition}
+
 For sets $B, C$, let
 $B \otimes C= \Set{\brc{x,y}}{ x\in B,\, y\in C, x \ne y }$ be the set
 of all the (unordered) pairs of points formed by the sets $B$ and $C$.
@@ -133,8 +140,6 @@ of all the (unordered) pairs of points formed by the sets $B$ and $C$.
        \cardin{C_i}}$.
 \end{defn}
 
-\newcommand{\PSB}{\Mh{B}}%
-\newcommand{\PSC}{\Mh{C}}%
 
 \begin{defn}%
     Two sets of points $\PSB$ and $\PSC$ are
@@ -165,10 +170,142 @@ of all the (unordered) pairs of points formed by the sets $B$ and $C$.
     $O\pth{ n \eps^{-d} \log n }$.
 \end{theorem}
 
+\begin{defn}
+    \deflab{well:separated}%
+    %
+    The pair of sets $\PSB, \PSC \subseteq \Re^d$ is
+    \emphic{$(1/\eps)$-separated}{separated!separated@$(1+\eps)$-separated}
+    if
+    \begin{equation*}
+        \max \pth{ \diameterX{\PSB}, \diameterX{\PSC} } \leq
+        \eps \cdot \DistSetY{\PSB}{\PSC},
+    \end{equation*}
+\end{defn}
+
+\begin{defn}
+    \deflab{WSPD}%
+    %
+    For a point set $\PS$, a \emphOnly{well-separated pair
+       decomposition} (\emphOnly{\WSPD{}}) of $\PS$ with parameter
+    $1/\eps$ is a pair decomposition of $\PS$ with a set of pairs
+    \begin{math}
+        \WSPDRep = \brc{\bigl.
+           \brc{\PSB_1,\PSC_1},\ldots,\brc{\PSB_s,\PSC_s}},
+    \end{math}
+    such that, for any $i$, the sets $\PSB_i$ and $\PSC_i$ are
+    $1/\eps$-separated.
+\end{defn}
+
+
+%-----------------------------------------------------------------------
+\subsubsection{Delaunay triangulation}
+
+We need the following well known property of Delaunay triangulation,
+which would play a center role in our construction.
+
+\begin{claim}
+    For a set of points $\PS \subseteq \Re^2$ in general position, let
+    $\DT = \DTX{\PS}$ denote its Delaunay triangulation.  Then, for
+    any close disk $\disk$, we have $\restrictY{\DTX{\PS}}{\disk}$ is
+    connected.
+\end{claim}
+
+\newcommand{\cen}{\Mh{c}}%
+
+\begin{proof}
+    We first prove that for any (close) disk $\disk$ with two points
+    $\pa,\pb\in \PS$ on its boundary, there is a path between $\pa$
+    and $\pb$ in $\restrictY{\DT}{\disk}$.  The proof is by induction
+    over the number $m$ of points in the interior of $\disk$:
+
+    v v v
+    
+    \begin{itemize}
+        \item{} $m=0$: The disk $\disk$ contains no points of $\PS$ in
+        its interior, and thus $\pa \pb$ is an edge of the Delaunay
+        triangulation, as $\disk$ testifies.
+
+        \item $m >0$: Let $\pc\in \PS$ be a point in the interior of
+        $\disk$. We move the center $\cen$ of $\disk$ in the direction
+        of $\pa$, shrinking $\disk$ in the process, so that the radius
+        the disk is $\dY{\cen}{\pa}$, until we get a disk
+        $\disk' \subseteq \disk$ such that $\pc$ is on the boundary of
+        $\disk'$. Observe that
+        $|\interiorX{\disk'} \cap \PS| < |\interiorX{\disk} \cap
+        \PS|$, and by induction there is a path between $\pa$ and
+        $\pc$ in
+        $\restrictY{\DT}{\disk'} \subseteq
+        \restrictY{\DT}{\disk}$. Similarly, there must be a path
+        between $\pc$ and $\pb$, and concatenating the two paths
+        results in a path between $\pa$ and $\pb$ in
+        $\restrictY{\DT}{\disk}$.
+    \end{itemize}
+    \medskip%
+    \noindent
+    Back to the original claim.  For any two points
+    $\pa,\pb \in \disk \cap \PS$ one can get a disk
+    $\disk' \subseteq \disk$ that contains $\pa$ and $\pb$ on its
+    boundary.  Indeed, shrink the radius of $\disk$ till, say, $\pa$
+    is on the boundary, and them move the center of the disk towards
+    $\pa$ while shrinking the size of the disk to maintain $\pa$ on
+    the boundary, until $\pb$ is also on the boundary of the shrank
+    disk.
+\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The construction}
+\subsection{The construction of local spanners for disks}
+
+\subsubsection{The construction}
+
+The input is a set $\PS$ of $n$ points in the plane (in general
+position), and a parameter $\eps \in (0,1)$.
+
+
+\newcommand{\coneY}[2]{\mathrm{cone}\pth{#1,#2}}%
+\newcommand{\IS}{\Mh{\mathcal{I}}}%
+\newcommand{\epsA}{\Mh{\vartheta}}%
+
+Let $\epsA = \eps/c$, for some constant $c$ to be determined shortly.
+Consider a minimum cardinality partition $\IS = \IS(\epsA)$ of the
+circle of directions into (circular) intervals of length at most
+$\epsA$.
+
+The algorithm computes a $(1/\epsA)$-\SSPD $\WSPDRep$ of
+$\PS$. The algorithm now scans the pairs  $\{ \PSB, \PSC \} \in
+\WSPDRep$.  Assume that
+$\diameterX{\PSB} < \epsA\DistSetY{\PSB}{\PSC}$, and let $\disk$ be
+the smallest enclosing disk of $\PSB$, centered at a point $\cen$.
+
+For each $I \in \IS(\eps)$, consider the cone $\coneY{\cen}{I}$ which
+is formed by all the points $\pd$ in the plane, such that the
+direction of $\pd - \cen$ is in $I$. The algorithm partitions $\PSC$
+into the subsets
+\begin{equation*}
+    \forall I \in \IS \qquad \PSC_I = \coneY{\cen}{I} \cap \PSC.
+\end{equation*}
+The algorithm now computes the Delaunay triangulation of
+$\PSB \cup \PSC_I$ and adds its edges to the computed graph $\G$.
+
+\subsubsection{Analysis}
+
+\paragraph{Size.} For each pair $\{\PSB, \PSC\}$ in the \SSPD, we get
+$O(|\IS|) = O(1/\epsA)$ Delaunay triangulations, each one with $O(
+|\PSB| + |\PSC|)$ edges. As such, the resulting graph has
+\begin{equation*}
+    \sum_{\{\PSB, \PSC\} \in \WSPDRep} O\Bigl(
+    \frac{|\PSB| + |\PSC|}{\eps} \Bigr)
+    =%
+    O\pth{ \frac{\WeightX{\WSPDRep}}{\epsA} }%
+    =%
+    O\pth{ \frac{n\log n}{{\epsA}^{d+1}}}
+\end{equation*}
+. 
+
+
+
+
+
 
 
 Let $\FF$ be the set of convex regions, and $\eps>0$. We use the
@@ -194,43 +331,15 @@ $d\subseteq \Re^2$, and for any set $P'$ of points we have that
 $\DT(P')\mid_d$ is connected. This is enough as half-planes can be
 simulated by complements of disks.
 
-\begin{claim}
-    For a set of points $P\subseteq \Re^2$ and for any disk $d$,
-    $\DT(P)\mid_d$ is connected.
-\end{claim}
-
-\begin{proof}
-    We prove a different claim that immediately implies the desired
-    one. Let $d$ be a disk with two points $p,q\in P$ on its
-    boundary. Then there is a path between $p$ and $q$ in
-    $\DT(P)\mid_d$. This is enough as for every two points $p,q$ and a
-    disk $d$ containing them, we can get a disk $d'$ that contains $p$
-    and $q$ on it's boundary by moving the center of $d$ in an
-    arbitrary direction until either of them, say $p$ is on the
-    boundary, and them moving the center of the disk towards $p$ while
-    shrinking the size of the disk to maintain $p$ on the boundary,
-    until $q$ as well is on the boundary.
-    
-    We prove by induction over the number points in the interior of
-    $d$.
-    
-    $|d\cap (P\setminus \partial d)| = 0$: Then by construction of the Delaunay triangulation the edge $\{p,q\}$ is in $\DT(P)$ and is contained in the interior of $D$.\\
-    
-    $|d\cap (P\setminus \partial d)| > 0$: Let $x\in P$ be a point in
-    the interior of $d$. We move the center of $d$ in the direction of
-    $p$, shrinking $d$ in the process, until we get a disk
-    $d'\subseteq d$ such that $x$ is on the boundary of $d'$. By
-    induction there is a path between $p$ and $x$ in $\DT\mid_{d'}$,
-    and since $\DT\mid_{d'}\subseteq \DT\mid_{d}$ we have that the
-    same path exists in $\DT\mid_{d}$. The same proof gives us a path
-    between $x$ and $q$ and thus we are done.
-    
-\end{proof}
 
 Since the triangulation is planar, all of the arguments from the
 original paper regarding the size of the spanner hold, and we get a
 $(1+\eps)-\FF$ fault tolerant spanner of size $O(\eps^{-3}n\log n)$ in
 $O(\eps^{-2}n\log n)$ time.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Complement of convex faults / convex local spanners}
 Using the same argument, we can extend the result for the case where
@@ -712,14 +821,14 @@ arbitrary axis parallel rectangles.
 
     % TODO: this can probably be done faster than the naive way.
     \begin{claim}
-	It is possible to construct a $(\LL, \eps')$ local
-        $(1+\eps'')$-spanner of size
-        $O\left(\frac{1}{\min\{\eps, \eps'\}}n\log^2n\right)$ in
+	It is possible to construct a $(\LL, \epsA)$ local
+        $(1+\epsA')$-spanner of size
+        $O\left(\frac{1}{\min\{\eps, \epsA\}}n\log^2n\right)$ in
         $O_d\left(\frac{1}{\eps^2}n\log^{O(d)}n\right)$ time.
     \end{claim}
 
 \begin{proof} 
-    Let $\eps = \alpha \min \{\eps',\eps''\}$ for some
+    Let $\eps = \alpha \min \{\epsA,\epsA'\}$ for some
     $\alpha \leq \frac{1}{12}$. We build a spanner using $\eps$ as the
     parameter for the edge construction process. Due to the choice of
     $\eps$ we have that all of the properties proven in
@@ -745,7 +854,7 @@ arbitrary axis parallel rectangles.
 	
 	\begin{equation}
             ||p-q'||+(1+\eps)||q-q'||\leq
-            ||p-q||+(1+\eps)\eps||p-q||\leq (1+\eps'')||p-q||.
+            ||p-q||+(1+\eps)\eps||p-q||\leq (1+\epsA')||p-q||.
         \end{equation}
 	
 	where the last transition is due to another factor of
@@ -778,13 +887,13 @@ some $1 < \alpha$. We define a set of slopes, and for each subset of 3
 slopes we run the convex region algorithm with $\LL$ as homothets of a
 triangle with edges of the 3 chosen slopes. As long as the fixed
 angular interval is smaller than
-$\eps' = \arctan\left(\frac{\eps/2}{\alpha(1-\eps/2)}\right)$ (see
+$\epsA = \arctan\left(\frac{\eps/2}{\alpha(1-\eps/2)}\right)$ (see
 \figref{triangle_with_shadow}).
 
-This construction creates $\frac{1}{\eps'}$ different convex local
+This construction creates $\frac{1}{\epsA}$ different convex local
 spanners, and so we get a $(1+\eps)$-local spanner for triangles with
 bounded aspect ratio in
-$O\left(\frac{1}{\eps'^3\eps^3} n\log n\right)$.
+$O\left(\frac{1}{\epsA^3\eps^3} n\log n\right)$.
 
 
 \begin{figure}

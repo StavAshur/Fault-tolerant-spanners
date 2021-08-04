@@ -4,3 +4,6 @@ ft_spanner.synctex.gz
 *.log
 *.thm
 *..synctex.gz
+figs/bak/
+snapshot/
+*.aux

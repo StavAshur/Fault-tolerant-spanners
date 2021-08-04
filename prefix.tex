@@ -235,22 +235,6 @@
 \newcommand{\disk}{\Mh{\ocircle}}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \mathcalb - a different font that looks a bit like mathcal
-
-\DeclareFontFamily{U}{BOONDOX-calo}{\skewchar\font=45 }
-\DeclareFontShape{U}{BOONDOX-calo}{m}{n}{
-  <-> s*[1.05] BOONDOX-r-calo}{}
-\DeclareFontShape{U}{BOONDOX-calo}{b}{n}{
-  <-> s*[1.05] BOONDOX-b-calo}{}
-\DeclareMathAlphabet{\mathcalb}{U}{BOONDOX-calo}{m}{n}
-\SetMathAlphabet{\mathcalb}{bold}{U}{BOONDOX-calo}{b}{n}
-\DeclareMathAlphabet{\mathbcalb}{U}{BOONDOX-calo}{b}{n}
-
-% \mathcalb - end of file
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -359,15 +343,34 @@
 \newcommand{\QSup}{\QS_{\uparrow}}
 \newcommand{\QSdown}{\QS_{\downarrow}}
 
-\newcommand{\sqr}{\mathcalb{s}}%
-\newcommand{\sqrA}{\mathcalb{t}}%
-\newcommand{\sqrB}{\mathcalb{u}}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \mathcalb - a different font that looks a bit like mathcal
+
+\DeclareFontFamily{U}{BOONDOX-calo}{\skewchar\font=45 }
+\DeclareFontShape{U}{BOONDOX-calo}{m}{n}{<-> s*[1.05] BOONDOX-r-calo}{}
+\DeclareFontShape{U}{BOONDOX-calo}{b}{n}{<-> s*[1.05] BOONDOX-b-calo}{}
+\DeclareMathAlphabet{\mathcalb}{U}{BOONDOX-calo}{m}{n}
+\SetMathAlphabet{\mathcalb}{bold}{U}{BOONDOX-calo}{b}{n}
+\DeclareMathAlphabet{\mathbcalb}{U}{BOONDOX-calo}{b}{n}
+
+% \mathcalb - end of file
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%BeginIpePreamble
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\ifx\ipeMode\undefined%
+\usepackage{mathcalb}
+\fi
+
+\newcommand{\sqr}{\mathcalb{s}}%
+\newcommand{\sqrA}{\mathcalb{t}}%
+\newcommand{\sqrB}{\mathcalb{u}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%EndIpePreamble

@@ -107,7 +107,7 @@ Our purpose here is to build a local spanner for disks.
 
 \subsection{Preliminaries}
 
-%-----------------------------------------------------------------------
+% -----------------------------------------------------------------------
 \subsubsection{Well separated pairs decomposition}
 
 For sets $\PSX, \PSY$, let
@@ -116,15 +116,15 @@ For sets $\PSX, \PSY$, let
     =%
     \Set{\brc{\px,\py}}{ \px\in \PSX,\, \py\in \PSY, \px \ne \py }
 \end{math}
-be the set of all the (unordered) pairs of points
-formed by the sets $B$ and $C$.
+be the set of all the (unordered) pairs of points formed by the sets
+$B$ and $C$.
 
 \begin{defn}[Pair decomposition]
     \deflab{pair:decomposition}%
     %
     For a point set $\PS$, a \emphic{pair
        decomposition}{pair!decomposition} of $\PS$ is a set of pairs
-    \begin{equation*}        
+    \begin{equation*}
         \WS = \brc{\bigl. \brc{\PSX_1,\PSY_1},\ldots,\brc{\PSX_s,\PSY_s}},
     \end{equation*}
     such that
@@ -133,7 +133,8 @@ formed by the sets $B$ and $C$.
         %
         \item $\PSX_i \cap \PSY_i = \emptyset$ for every $i$, and
         %
-        \item $\bigcup_{i=1}^s \PSX_i \otimes \PSY_i = \PS \otimes \PS$.
+        \item
+        $\bigcup_{i=1}^s \PSX_i \otimes \PSY_i = \PS \otimes \PS$.
     \end{enumerate*}
 \end{defn}
 
@@ -199,7 +200,7 @@ near linear.
     $\WeightX{\WS} = O( \eps^{-d} n \log \spread )$.
 \end{lemma}
 
-%------------------------------------------------------------------------
+% ------------------------------------------------------------------------
 \subsubsection{Semi separated pairs decomposition}
 
 \begin{defn}%
@@ -217,8 +218,8 @@ near linear.
     For a point set $\PS$, a \emphOnly{semi-separated pair
        decomposition} (\emphOnly{\SSPD{}}) of $\PS$ with parameter
     $1/\eps$, denoted by $\eps^{-1}$-\SSPD, is a pair decomposition of
-    $\PS$ formed by a set of pairs $\WS$ such that all the pairs
-    are $1/\eps$-semi-separated.
+    $\PS$ formed by a set of pairs $\WS$ such that all the pairs are
+    $1/\eps$-semi-separated.
 \end{defn}
 
 \begin{theorem}[\cite{ah-ncsa-12,h-gaa-11}]
@@ -231,9 +232,75 @@ near linear.
     $O\pth{ n \eps^{-d} \log n }$.
 \end{theorem}
 
+A \emphw{$\delta$-double-wedge} is a region between two lines, where
+the angle between the two lines is at most $\epsA$.
+
+\newcommand{\DW}{\times}
+
+\begin{lemma}
+    \lemlab{chop:easy}%
+    %
+    Given a $\alpha$-\SSPD $\WS$ of a set $\PS$ of $n$ points in
+    $\Re^d$ and a parameter $\beta \geq 2$, one can refine it, into a
+    $\alpha\beta$-\SSPD $\WS'$, such that that
+    $|\WS'| = O(|\WS|/\beta^d)$ and
+    $\WeightX{\WS'} = O(\WeightX{\WS'}/\beta^d)$.
+\end{lemma}
+\begin{proof}
+    The algorithm scans the pairs of $\WS$. For each pair
+    $\Pair = \{ \PSX, \PSY \} \in \WS$, assume that
+    $\diameterX{\PSX} < \diameterX{\PSY}$. Let $\sqr$ be the smallest
+    axis-parallel cube containing $\PSX$, with sidelength $r$.  Let
+    $r' = r / \ceil{\sqrt{d} \beta }$.  Partition $\sqr$ into a grid
+    of cubes of sidelength $r'$, and let $T_\Pair$ be the resulting
+    set of squares. The algorithm now add the set pairs
+    \begin{equation*}
+        \Set{ \{ \PSX \cap \sqrA, \PSY \} }{ \sqrA \in T_\Pair }
+    \end{equation*}
+    to the output \SSPD. Clearly, the resulting set is now
+    $\alpha\beta$-semi separated, as we chopped the smaller part of
+    each pair into $\beta$ smaller portions.
+\end{proof}
+
+\begin{figure}[ht]
+    \centerline{\includegraphics{figs/partition}}
+    \caption{}
+    \figlab{partition}
+\end{figure}
 
 
-%-----------------------------------------------------------------------
+\begin{lemma}
+    \lemlab{refine:d:w}%
+    %
+    Given a $\eps^{-1}$-\SSPD $\WS$ of $n$ points in the plane, one
+    can refine it, into a $\eps^{-1}$-\SSPD $\WS'$, such that each
+    pair $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in a
+    $\eps$-double-wedge $\DW_\Pair$, such that $\PSX$ and $\PSY$ are
+    contained in the two different faces of the double wedge
+    $\DW_\Pair$. We have that $|\WS'| = O(|\WS|/\eps)$ and
+    $\WeightX{\WS'} = O(\WeightX{\WS'}/\eps)$. The construction time
+    is proportional to the weight of $\WS'$.
+\end{lemma}
+\newcommand{\ConeSet}{\Mh{\mathcal{C}}}%
+\begin{proof}
+    By using \lemref{chop:easy}, we can assume that $\WS$ is (say)
+    $(10/\eps)$-separated.  Now, the algorithm scans the pairs of
+    $\WS$. For each pair $\Pair = \{ \PSX, \PSY \} \in \WS$, assume
+    that $\diameterX{\PSX} < \diameterX{\PSY}$. Let $\disk$ be the
+    smallest axis-parallel square containing $\PSX$, centered at point
+    $\cen$.  Partition the plane around $\cen$, by drawing around it
+    $O(1/\eps)$ lines with the angle between any two consecutive lines
+    being at most (say) $\eps/4$, see \figref{partition}. This
+    partition the plane into a set of cones $\ConeSet$. For a cone
+    $C \in \ConeSet$, observe that there exists a $\eps$-double-wedge
+    that contains $\PSX$ on one side, and $\PSY \cap C$. To see that,
+    take the double-wedge formed by the cross tangents between
+    $\CHX{\PSX}$ and $\CHX{\PSY \cap C}$, where $\CHX{\PSX}$ denotes
+    the convex-hull of $\PSX$.
+\end{proof}
+
+
+% -----------------------------------------------------------------------
 \subsubsection{Delaunay triangulation}
 
 We need the following well known property of Delaunay triangulation,
@@ -379,7 +446,7 @@ The construction time is bounded by
     $\px' \in \PSX \cap \disk$, $\py' \in \PSY \cap \disk$, such that
     $\px'\py' \in \EGX{ \DT_\Pair}$. As such, by construction, we have
     that $\px'\py' \in \EGX{\G}$. Furthermore, by the separation
-    property, we have that    
+    property, we have that
     \begin{equation*}
         \max \pth{ \diameterX{\PSX}, \diameterX{\PSY} }%
         \leq%
@@ -485,23 +552,19 @@ way is to try and emulate the construction of Abam \etal
 \cite{abfg-rftgs-09} and use \SSPD instead of \WSPD. The total weight
 of the \SSPD is near linear (with no dependency on the
 spread). Furthermore, after some post processing, one can assume every
-pair $\Pair = \{ \PSX, \PSY \}$ is angularly $\eps$-separated -- that is,
-there is a double wedge with angle $\leq \eps$, such that $\PSX$ and
-$\PSY$ are of different sides of the double wedge. The problem is that
-for the local disk $\disk$, it might be
-the bridge edge between $\PSX$ and $\PSY$ that is in $\DT_\Pair \cap
-\disk$ is much longer than the two points of interest. This somewhat
-counter-intuitive situation is illustrated in \figref{bad}.
+pair $\Pair = \{ \PSX, \PSY \}$ is angularly $\eps$-separated -- that
+is, there is a double wedge with angle $\leq \eps$, such that $\PSX$
+and $\PSY$ are of different sides of the double wedge. The problem is
+that for the local disk $\disk$, it might be the bridge edge between
+$\PSX$ and $\PSY$ that is in $\DT_\Pair \cap \disk$ is much longer
+than the two points of interest. This somewhat counter-intuitive
+situation is illustrated in \figref{bad}.
 
 \begin{figure}[h]
-    \phantom{}
-    \hfill%
-    \includegraphics[page=1]{figs/bad_example}
-    \hfill%
-    \includegraphics[page=2]{figs/bad_example}
-    \hfill%
-    \includegraphics[page=3]{figs/bad_example}
-    \hfill%
+    \phantom{} \hfill%
+    \includegraphics[page=1]{figs/bad_example} \hfill%
+    \includegraphics[page=2]{figs/bad_example} \hfill%
+    \includegraphics[page=3]{figs/bad_example} \hfill%
     \phantom{}
     \caption{A bridge too far -- the only surviving bridge between the
        red and blue points is too far to be useful if the sets are
@@ -519,15 +582,58 @@ counter-intuitive situation is illustrated in \figref{bad}.
 \subsection{A local spanner for axis parallel squares}
 
 One can modify the above construction for axis-parallel squares, and
-get a local spanner without dependency on the spread.  In the
-following we assume that the point set $\PS$ is in general position --
-no two points share a coordinate value, or appear in opposing corners
-of an axis-parallel square -- this can be ensured by slightly
-perturbing the points if necessary.
+get a local spanner without dependency on the spread.
 
-We need the following simple lemma.
+\subsubsection{Construction}
+
+The input is a point set $\PS$ of $n$ points in the plane, and an
+approximation parameter $\eps \in (0,1/2)$.  We assume that the input
+point set $\PS$ is in general position. Specifically, no two points of
+$\PS$ share a coordinate value, or appear in opposing corners of an
+axis-parallel square -- this can be ensured by slightly perturbing the
+points if necessary.
+
+
+One can define the Delaunay triangulation when the unit ball is
+replaced by the unit square. Formally, in this triangulation two
+points are connected $\iff$ there is a square that contains these two
+points on its boundary and no points in its interior. Let
+$\DT_\square$ denote the resulting \emphw{$L_\infty$-Delaunay
+   triangulation}.
+
+Let $\epsA = \eps/20$.  Instead of constructing a \WSPD, the algorithm
+computes a $1/\epsA$-\SSPD $\WS$, using the algorithm of
+\thmref{S:S:P:D:main}. Increasing the weight and number of pairs by a
+factor of $O(1/\epsA)$, by using the algorithm of \lemref{refine:d:w},
+one can assume that every pair $\{ \PSX, \PSY \} \in \WS$ is not only
+semi-separated, but also there is an associated double wedge of angle
+$\leq \epsA$.  The algorithm now computes the ``square'' Delaunay
+triangulation for each such pair, and adds the edges of the
+triangulation to the resulting graph $\G$.
+
+
+
+\subsubsection{Analysis}
+
+\paragraph{Size and running time.}
+
+Computing the \SSPD takes $O\pth{n \epsA^{-2} \log n}$ time, and the
+refinement takes $O\pth{n \epsA^{-3} \log n}$ time (which is also the
+weighted of the resulting \SSPD). The number of edges of each
+$L_\infty$-Delaunay triangulation for a pair is proportion to its
+weight, which implies that the total number of edges in the resulting
+graph $\G$ is $O\pth{ \epsA^{-3} n\log n}$. Computing all these
+Delaunay triangulations takes $O\pth{ \epsA^{-3}n \log^2 n}$ time.
+
+
+\paragraph{Shrinking squares.}
+We need the following lemma about shrinking of axis-parallel squares.
+Observe that this property definitely does not hold for disks, as
+illustrated in \figref{bad}.
 
 \begin{lemma}
+    \lemlab{shrink:squars}%
+    %
     (A) Let $\sqr$ be an axis parallel square in the plane, and let
     $\pa, \pb$ be two arbitrary points in $\sqr$. Then, there is a
     square $\sqrA \subseteq \sqr$ that contains $\pa$ and $\pb$ on its
@@ -545,15 +651,29 @@ We need the following simple lemma.
 \end{lemma}
 \begin{proof}
     (A) Start shrinking $\sqr$ around its center till it contains one
-    of the points (say $\pa$ on its boundary. Next, move the center of
-    the square towards $\pa$ till the boundary of the continuously
-    shrinking square passes through $\py$. If $\px$ and $\py$ lies on
-    adjacent face, then continue the shrinking process by moving the
+    of the points (say $\pa$ is on its boundary. Next, move the center
+    of the square towards $\pa$ till the boundary of the continuously
+    shrinking square passes through $\pb$. If $\pa$ and $\pb$ lies on
+    adjacent edges, then continue the shrinking process by moving the
     center towards the common corner of the shared edges -- this
     process stops when one of the points is on the corner of the
     square.  Clearly, the resulting square $\sqrA$ is the desired
-    square.
+    square, see \figref{shrink:sq}.
 
+    \begin{figure}[h]
+        \phantom{}\hfill%
+        \includegraphics[page=1,width=0.2\linewidth]{figs/shrink_sq}
+        \hfill%
+        \includegraphics[page=2,width=0.2\linewidth]{figs/shrink_sq}%
+        \hfill%
+        \includegraphics[page=3,width=0.2\linewidth]{figs/shrink_sq}%
+        \hfill%
+        \includegraphics[page=4,width=0.2\linewidth]{figs/shrink_sq}
+        \hfill\phantom{}%
+
+        \caption{}
+        \figlab{shrink:sq}
+    \end{figure}
 
     (B) Let $r = \dsZ{\infty}{\PSX'}{\PSY'}$. By (A), there is a
     square $\sqrA \subseteq \sqr$ having $\px$ and $\py$ on apposing
@@ -564,68 +684,212 @@ We need the following simple lemma.
     $\dZ{\infty}{\px'}{\py} < r$, which is a contradiction to the
     choice of $\px$ and $\py$.
 \end{proof}
-XXX
 
-
-
+\paragraph{Local spanner property.}
 \begin{lemma}
     \lemlab{squares}%
     %
-    Let $\PS$ be a set of $n$ points in the plane, and let
-    $\eps \in (0,1)$ be a parameter. A variant of the above algorithm
-    constructs a local $(1+\eps)$-spanner $\G$ for axis-parallel
-    squares. The spanner has $O\pth{ \eps^{-3} n \log n }$ edges, and
-    the construction time is
-    $O\pth{ \eps^{-3} n\log \spread \log n }$.  Formally, for any axis
-    parallel square $\sqr$ in the plane, and any two points
-    $\pa, \pb \in \PS \cap \sqr$, we have a $(1+\eps)$-path in
+    For any axis parallel square $\sqr$ in the plane, and any two
+    points $\pa, \pb \in \PS \cap \sqr$, we have a $(1+\eps)$-path in
     $\restrictY{\G}{\sqr}$.
 \end{lemma}
 \begin{proof}
-    One can define the Delaunay triangulation when the unit ball is
-    replaced by the unit square. Formally, in this triangulation two
-    points are connected $\iff$ there is a square that contains these
-    two points on its boundary and no points in its interior. Let
-    $\DT_\square$ denote the resulting Delaunay triangulation. Instead
-    of constructing a \WSPD, the algorithm computes a $1/\epsA$-\SSPD
-    $\WS$. Increasing the weight and number of pairs by a factor of
-    $O(1/\epsA)$, one can assume that every pair
-    $\{ \PSX, \PSY \} \in \WS$ is not only semi-separated, but also
-    there is an associated double wedge of angle $\leq \epsA$, the
-    left pane in \figref{bad}. The algorithm now computes the
-    ``square'' Delaunay triangulation for each such pair, and add the
-    edges of the triangulation to the resulting graph $\G$.
+    Consider two points $\px, \py \in \PS \cap \sqr$, where $\sqr$ is
+    some arbitrary square. There exists a pair
+    $\Pair = \{ \PSX, \PSY \} \in \WS$ such that $\px \in \PSX$ and
+    $\py \in \PSY$, and this pair is $\epsA^{-1}$-semi separated and
+    is also separated by a double wedge of angle $\leq \epsA$.  See
+    \figref{infty:spanner}.  Furthermore, assume that
+    $\diameterX{\PSX} < \diameterX{\PSY}$.
+ 
+    \begin{figure}[h]
+        \hfill%
+        {\includegraphics{figs/spanner_sq}} \hfill%
+        \phantom{}%
+        % \includegraphics{figs/triangle}%
+        \caption{}
+        \figlab{infty:spanner}
+    \end{figure}
 
-    The proof that the spanner property holds in this case is somewhat
-    more involved, which we will mitigate by being more sketchy about
-    the details. As before, consider two points
-    $\px, \py \in \PS \cap \sqr$, where $\sqr$ is some arbitrary
-    square. Let $\sqrA$ be the smallest square containing these two
-    points. The points $\px$ and $\py$ are on opposing edges of
-    $\sqr'$ (potentially one of them is in a corner). Let
-    $\PSX' = \PSX \cap \sqr'$ and $\PSY' = \PSY \cap \sqr'$, and
+    Let $\PSX' = \PSX \cap \sqr$ and $\PSY' = \PSY \cap \sqr$, and
     consider the two points $\px' \in \PSX'$ and $\py' \in \PSY'$
-    realizing $\DistSetY{\PSX'}{\PSY'}$ (under the $L_\infty$
-    norm). The key observation is that there is a square $\sqrA$
-    containing the two points on its boundary, such that
-    $\sqrB \subseteq \sqrA$ and $\sqrA$ contains no other points
-    $\PSX \cup \PSY$ (this shrinking property does not hold in the
-    disk case). That is -- $\px' \py' \in \G$. Assume, that
-    $\diameterX{\PSX} < \diameterX{\PSY}$, which implies that
-    $\dY{\px}{\px'} \leq \diameterX{\PSX} \leq \epsA
-    \DistSetY{\PSX}{\PSY} \leq \epsA \dY{\px'}{\py'}$. A tedious but
-    straightforward calculation shows that
-    $\dY{\py'}{\py} < \dY{\px}{\py}$, One can now use induction to
-    argue that $\dGZ{\G}{\py'}{\py} \leq (1+\epsA)
-    \dY{\py'}{\py}$. One can now use that the two point sets are
-    inside the narrow double wedge to argue that
-    $\dGZ{\G}{\px}{\py} \leq \bigl(1+O(\epsA)\bigr)\dY{\px}{\py}$,
-    which implies the claim.
+    realizing $r = \dsZ{\infty}{\PSX'}{\PSY'}$. By
+    \lemref{shrink:squars} there exists a square $\sqrA$ containing
+    $\px', \py'$ on its boundary (on two apposing edges), such that
+    $\sqrA \subseteq \sqr$, and $\sqrA$ contains no other points
+    $\PSX \cup \PSY$. By construction, we have that $\px'\py'$ is the
+    $L_\infty$-Delaunay triangulation of $\Pair$, and thus
+    $\px' \py' \in \G$. Since $\dY{\px}{\px'} \ll \dY{\px}{\py}$, we
+    have by induction that
+    $\dGZ{\G}{\px}{\px'} \leq (1+\epsA)\dY{\px}{\px'}$.
 
-    \sariel{Too sketchy -- to add details... And a figure.}
+    % \newpage
 
-    ~
+    
+    Let $\ell = \dY{\px'}{\py'}$. By the semi-separation property and
+    since $\diameterX{\PSX} < \diameterX{\PSY}$.  we have that
+    \begin{equation*}
+        \dY{\px}{\px'}%
+        \leq%
+        \diameterX{\PSX}%
+        \leq%
+        \epsA \dGZ{2}{\PSX}{\PSY}%
+        =%
+        \epsA \sqrt{2} \dGZ{\infty}{\PSX}{\PSY}%
+        \leq 
+        2
+        \epsA \ell.
+    \end{equation*}
+    Since $\dY{\px}{\px'} \ll \dY{\px}{\py}$, and by induction we have
+    that
+    \begin{equation*}
+        \dGZ{\G}{\px}{\px'}%
+        \leq%
+        (1+\eps)\dY{\px}{\px'}
+        \leq%
+        (1+\eps) 2\epsA \ell
+        \leq%
+        4\epsA \ell.
+    \end{equation*}
+    By the triangle inequality, we have
+    \begin{equation*}
+        (1-2\epsA)\ell
+        \leq
+        \dY{\px'}{\py'} - \dY{\px}{\px'}
+        \leq%
+        \dY{\px}{\py'}%
+        \leq%
+        (1+2\epsA)\ell.
+    \end{equation*}
+
+
+    \begin{figure}[h]
+        \hfill%
+        \includegraphics{figs/triangle}%
+        \hfill%
+        \phantom{}%
+        \caption{}
+        \figlab{triangle}
+    \end{figure}
+
+    Consider the triangle $\triangle \px \py' \py$, and observe that
+    by the double-wedge property
+    $\alpha = \angle \py' \px \py \leq \epsA$.  Let $\pz$ be the
+    projection of $\py'$ to $\px \py$, and let
+    \begin{equation*}
+        h%
+        =%
+        \dY{\py'}{ \pz}%
+        =%
+        \dY{\px}{\py'} \sin \alpha
+        \leq
+        \dY{\px}{\py'} \sin \epsA
+        \leq%
+        \dY{\px}{\py'}  \epsA
+        \leq%
+        \epsA (1+2 \epsA)\ell
+        \leq 
+        2 \epsA \ell,
+    \end{equation*}
+    as $\epsA \in (0,1/10)$, the monotonicity of $\sin$ in this range,
+    and as $\sin \epsA \leq \epsA$.
+    
+    We have that
+    $\dY{\px}{\pz} \leq \dY{\px}{\py'} \leq
+    (1+2\epsA)\ell$. Similarly, we have
+    \begin{equation*}
+        \dY{\px}{\pz}%
+        =%
+        \dY{\px}{\py'} \cos \alpha
+        \geq%
+        (1-\alpha^2/2)\dY{\px}{\py'} 
+        \geq 
+        (1-\epsA^2/2)(1-2\epsA)\ell
+        \geq
+        (1-3\epsA)\ell.
+    \end{equation*}
+
+
+    By the triangle inequality, we have that
+    \begin{equation*}
+        \dY{\py'}{\py}
+        \geq%
+        \dY{\px}{\py}
+        -\dY{\py'}{\px}        
+        \geq%
+        \dY{\px}{\py}
+        - (1+2\epsA)\ell.
+    \end{equation*}
+    As for an upper bound, we have
+    \begin{align*}
+      \dY{\py'}{\py}
+      &\leq%
+        \dY{\pz}{\py} + h%
+        \leq%
+        \dY{\px}{\py} - \dY{\px}{\pz} +
+        2 \epsA \ell
+        \leq
+        \dY{\px}{\py} - (1-3\epsA)\ell 
+        +2 \epsA \ell
+      \\&
+      = 
+      \dY{\px}{\py} - (1-5\epsA)\ell 
+      <%
+      \dY{\px}{\py}.
+    \end{align*}
+    As such, by induction
+    $\dGZ{\G}{\py'}{\py} \leq (1+\eps) \dY{\py'}{\py}$.
+
+    We thus have that
+    \begin{align*}
+      \dGZ{\G}{\px}{\py}%
+      &\leq%
+        \dGZ{\G}{\px}{\px'} + \dY{\px'}{\py'}
+        +
+        \dGZ{\G}{\py'}{\py}%
+        \leq%
+        4\epsA \ell
+        +
+        \ell
+        +
+        (1+\eps) \dY{\py'}{\py}
+      \\&
+      \leq%
+      (1+4\epsA) \ell
+      +
+      (1+\eps) \pth{\bigl.
+      \dY{\px}{\py} - (1-5\epsA)\ell }
+      \\&
+      =%
+      \bigl[1+4\epsA
+      - (1+\eps)(1-5\epsA)\bigr]\ell 
+      +
+      (1+\eps)
+      \dY{\px}{\py}%
+      \\&
+      \leq%
+      (1+\eps)
+      \dY{\px}{\py},
+    \end{align*}
+    for $\epsA \leq \eps/20$, as
+    \begin{math}
+        1+4\epsA - (1+\eps)(1-5\epsA)%
+        \leq%
+        1+\eps/5 - (1+\eps)(1-\eps/4)%
+        =%
+        \eps/5 -(3/4)\eps + \eps^2/4 < 0,
+    \end{math}
+    as $\eps < 1$.
 \end{proof}
+
+\begin{theorem}
+    Let $\PS$ be a set of $n$ points in the plane, and let
+    $\eps \in (0,1)$ be an approximation parameter. The above
+    algorithm computes a local $(1+\eps)$-spanner $\G$ for axis
+    parallel squares.  The construction time is
+    $O\pth{\eps^{-3} n \log^2 n}$, and the spanner $\G$ has
+    $O\pth{\eps^{-3} n \log n}$ edges.
+\end{theorem}
 
 \subsection{Result for other norms}
 
@@ -657,7 +921,7 @@ $O(\eps^{-2}n\log n)$ time.(
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Axis parallel rectangles}
+\section{Weak local spanners for axis parallel rectangles}
 
 We would like to build local spanners (of subquadratic size) for
 axis-parallel rectangles, but as \figref{bad:rectangles} shows, there
@@ -691,8 +955,8 @@ it is the area that is being damaged, and that the local spanner fails
 to work for.
 
 Before dwelling into the construction, we start with presenting a new
-pair decomposition that would be useful for our (nefarious) purposes.
-
+pair decomposition that would be useful for our (nefarious) purposes,
+and is of independent interest.
 
 
 \subsection{Quadrant separated pairs decomposition}
@@ -804,8 +1068,8 @@ quadrant-separated for all $i$.
         N(n,d) = 2N(n,d-1) + 2N\pth{ n/2, d }
     \end{math}
     with $N(n,1) = O(n)$. The solution to this recurrence is
-    $N(n,d) = O( n \log^{d-1} n)$.
-    The total weight of the decomposition is
+    $N(n,d) = O( n \log^{d-1} n)$.  The total weight of the
+    decomposition is
     \begin{math}
         W(n,d) = 2W(n,d-1) + 2W\pth{ n/2, d }
     \end{math}
@@ -964,118 +1228,28 @@ $\log_{1+\eps}(\alpha)=O\left(\frac{\log(\alpha)}{\eps}\right)$, we
 have a spanner of size
 $O\left(\frac{\log(\alpha)}{\eps (t-1)^{-3}}n\log n\right)$
 
-\subsection{Q{}S{}PD}
-Implementing a motion planning algorithm that created a road-map of
-both free space and obstacle space by simulating probe queries to near
-obstacles and using those to execute a space exploration algorithm.
-After a basic algorithm is implemented and tested, our goals will
-include extending the algorithm for the case of dynamic obstacles, and
-optimization of the data structure at the base of the algorithm.
 
-In order to construct local spanners for the family $\LL$ of axis
-parallel rectangles with $\eps$-shadow, we describe a decomposition of
-the point set $P\subseteq \Re^d$ in to pairs of sets, a decomposition
-which we name a Quadrant Separated Pair Decomposition (\QSPD). This
-decomposition gives us $O(n\log^{d-1}n)$ pairs $(A_i,B_i)$ of subsets
-of $P$, with overall size $O(n\log^{d}n)$, such that the sets can be
-separated by $d$ orthogonal axis parallel hyperplanes, and for every
-two points $p,q\in P$, there exists a single pair $(A_i,B_i)$ such
-that (w.l.o.g) $p\in A_i$, $q\in B_i$. For clarification, this
-separation in $\Re^d$ can be viewed as if one of the sets lies in the
-first quadrant of the plane (i.e. every point has positive $x$ and $y$
-values), and the other is in the third quadrant (i.e. every point has
-negative $x$ and $y$ values), hence the name.
+\subsection{Arbitrary rectangles}
 
-The construction of the decomposition can be described as a recursive
-process in which a call to the function with $p\subseteq \Re^d$ of
-size $n$ invokes a single call to a lower dimensional case, and two
-calls to $d$-dimensional cases, each with half of the points. The
-function goes as follows.
+Let $P\subseteq \Re^2$. We first describe a subroutine for connecting
+two sets of points, $A$ and $B$, where $A$ is contained in $Q^-$, the
+negative quadrant of the plane (i.e., have a negative value
+$x$-coordinate and a negative value $y$-coordinate), and $B$ is
+contained in $Q^+$, the positive quadrant of the plane.
 
-Given a set $P\subseteq \Re^d$ and a coloring
-$c:P\longrightarrow \{0,1\}^k$ for some $k$, the function $f(P,c)$
-finds a median of $P$ w.r.t. the $d$\th dimension, and projects the
-points $P$ onto a hyperplane $h$ orthogonal to the same dimension
-passing through the median. Let the projected set of points be denoted
-$P'$, the $\frac{n}{2}$ points of $P$ the lie above $h$ be denoted
-$P^+$, $P\setminus P^+$ be denoted $P^-$, and let $c'$ be the coloring
-defined by $c'(p)=c(p)\oplus b$ where $\oplus$ is the concatenation
-operator, and $b=1$ if $p\in P^+$, and $p=0$ otherwise.
+Our algorithm will connect every point in $A$ to
+$O\left(\frac{1}{\eps^2}\right)$ points in the positive quadrant, and
+after performing the same process for the points of the symmetrically
+defined $B'$, we will have that every rectangle that truly contains
+points from $A$ and $B$ will have an edge $(a,b)$ with $a\in A$ and
+$b\in B$.
 
-The function then calls $f(P', c')$, $f(P^+, c^+)$, and $f(P^-, c^-)$,
-where $c^+$ and $c^-$ are $c$ limited to the set $P^+$ and $P^-$
-respectively.
+For every point $a = (x',y') \in A$ we define partition the positive
+quadrant into $O\left(\frac{1}{\eps^2}\right)$ sets. We consider the
+following $\frac{1}{\eps}$ horizontal stripes -
+$\forall j\in \{1,...,\frac{1}{\eps}\}$:
 
-In the case where $d=1$, after finding the median w.r.t. the single
-dimension and defining $c'$, instead of invoking a lower dimensional
-call, the function creates $2^{d-1}$ pairs by taking all of the points
-with the same value $x\in\{0,1\}^d$ under $c'$, and pairing that set
-with the set all of the points with value $y\in\{0,1\}^d$ such that
-$\forall 1\leq i\leq d~:~ x^{(i)}\neq y^{(i)}$.
-
-
-\begin{claim}
-    The process described above creates a \QSPD with size
-    $O(n\log^dn)$ in $O_d(n\log^dn)$ time.
-\end{claim}
-
-\begin{proof}
-    By construction, each reported pair is separated by $d$ orthogonal
-    axis parallel hyperplanes, and any two points appear in opposing
-    quadrants exactly once, as every recursive call which assigns
-    different bits of the coloring to two points, separates these
-    points in the next recursive calls.
-	
-    The size of the structure is given by the following recursion
-    formula:
-    \begin{equation}
-        S(n,d) = S(n,d-1) + 2S\left(\frac{n}{2},d\right)
-    \end{equation}
-	
-    In the base case where $d=1$, the formula is slightly different,
-    as instead of recursing in a lower dimension it directly adds
-    pairs. The formula is:
-	
-	\begin{equation}
-            S(n,1) = O(n) + 2S\left(\frac{n}{2},1\right)
-        \end{equation}
-	
-	which solves to $O_d(n\log n)$. This means that the general
-        case is
-	
-	\begin{equation}
-            S(n,d) = O(n\log^{d-1}n) + 2S\left(\frac{n}{2},d\right)
-        \end{equation}
-	
-	which solves to $O(n\log^d n)$.
-	
-	By using $d$ sorted arrays, one for each dimension, we get
-        that the same recursion formulas hold for the runtime of the
-        algorithm.
-    \end{proof}
-
-    \subsection{Arbitrary rectangles}
-
-    Let $P\subseteq \Re^2$. We first describe a subroutine for
-    connecting two sets of points, $A$ and $B$, where $A$ is contained
-    in $Q^-$, the negative quadrant of the plane (i.e., have a
-    negative value $x$-coordinate and a negative value
-    $y$-coordinate), and $B$ is contained in $Q^+$, the positive
-    quadrant of the plane.
-
-    Our algorithm will connect every point in $A$ to
-    $O\left(\frac{1}{\eps^2}\right)$ points in the positive quadrant,
-    and after performing the same process for the points of the
-    symmetrically defined $B'$, we will have that every rectangle that
-    truly contains points from $A$ and $B$ will have an edge $(a,b)$
-    with $a\in A$ and $b\in B$.
-
-    For every point $a = (x',y') \in A$ we define partition the
-    positive quadrant into $O\left(\frac{1}{\eps^2}\right)$ sets. We
-    consider the following $\frac{1}{\eps}$ horizontal stripes -
-    $\forall j\in \{1,...,\frac{1}{\eps}\}$:
-
-    \hrule
+\hrule
 
 \begin{equation}
     H_{j}:=\{(x,y)~|~  0 \leq x \leq x'+y'  ,~ (j-1)\cdot \eps y' < y

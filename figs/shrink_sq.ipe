@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.23">
-<info created="D:20210803133057" modified="D:20210804144621"/>
+<info created="D:20210804115734" modified="D:20210804135903"/>
 <preamble>\usepackage{mathcalb}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -178,6 +178,64 @@ h
 -1 0 m
 -2 0.333 l
 -2 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/mid-normal(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0.5 0 m
+-0.5 0.333 l
+-0.5 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/mid-fnormal(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0.5 0 m
+-0.5 0.333 l
+-0.5 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/mid-pointed(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0.5 0 m
+-0.5 0.333 l
+-0.3 0 l
+-0.5 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/mid-fpointed(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0.5 0 m
+-0.5 0.333 l
+-0.3 0 l
+-0.5 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/mid-double(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+1 0 m
+0 0.333 l
+0 -0.333 l
+h
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/mid-fdouble(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+1 0 m
+0 0.333 l
+0 -0.333 l
+h
+0 0 m
+-1 0.333 l
+-1 -0.333 l
 h
 </path>
 </symbol>
@@ -964,9 +1022,6 @@ h
 </preamble>
 <layout paper="144 144" origin="0 0" frame="144 144"/>
 </ipestyle>
-<ipestyle name="5in">
-<layout paper="360 360" origin="0 0" frame="360 360"/>
-</ipestyle>
 <ipestyle name="master-preamble">
 <preamble>
 
@@ -984,214 +1039,144 @@ h
 </preamble>
 </ipestyle>
 <page>
-<layer name="alpha"/>
-<layer name="red_points"/>
-<layer name="blue_points"/>
+<layer name="orig_square"/>
+<layer name="points"/>
+<layer name="x_and_y"/>
+<layer name="shrank_square"/>
+<layer name="arrow"/>
+<layer name="center_shrank_sq"/>
+<layer name="eta"/>
 <layer name="garbage"/>
-<layer name="disk"/>
-<layer name="triangulaion"/>
-<layer name="zeta"/>
+<layer name="shrank_sq_2"/>
+<layer name="alpha"/>
 <layer name="beta"/>
-<layer name="gamma"/>
-<layer name="VIEWBBOX"/>
-<layer name="delta"/>
-<view layers="red_points blue_points gamma VIEWBBOX delta" active="delta"/>
-<view layers="red_points blue_points gamma VIEWBBOX delta" active="delta"/>
-<view layers="red_points blue_points triangulaion VIEWBBOX" active="gamma"/>
-<view layers="red_points blue_points disk triangulaion beta VIEWBBOX" active="beta"/>
-<view layers="alpha red_points VIEWBBOX" active="red_points"/>
-<view layers="red_points blue_points VIEWBBOX" active="blue_points"/>
-<view layers="red_points blue_points garbage VIEWBBOX" active="garbage"/>
-<view layers="red_points blue_points garbage disk VIEWBBOX" active="disk"/>
-<view layers="beta VIEWBBOX" active="triangulaion"/>
-<view layers="alpha red_points blue_points garbage disk triangulaion zeta beta VIEWBBOX" active="disk"/>
-<path layer="delta" matrix="0.513282 0 0 0.513282 44.5693 48.9988" stroke="black" fill="green" opacity="10%" stroke-opacity="opaque">
-281.366 231.876 m
-281.366 22.4275 l
-71.9182 22.4275 l
-71.9182 231.876 l
+<view layers="orig_square points x_and_y" active="points"/>
+<view layers="orig_square points x_and_y shrank_square center_shrank_sq" active="shrank_square"/>
+<view layers="orig_square points x_and_y shrank_square arrow center_shrank_sq shrank_sq_2" active="shrank_sq_2"/>
+<view layers="orig_square points x_and_y shrank_square shrank_sq_2 alpha beta" active="alpha"/>
+<view layers="orig_square points" active="points"/>
+<view layers="orig_square points x_and_y" active="x_and_y"/>
+<view layers="orig_square points x_and_y shrank_square" active="shrank_square"/>
+<view layers="orig_square points x_and_y shrank_square arrow" active="arrow"/>
+<view layers="orig_square points x_and_y shrank_square arrow center_shrank_sq" active="arrow"/>
+<view layers="orig_square points x_and_y shrank_square arrow center_shrank_sq eta" active="eta"/>
+<view layers="orig_square points x_and_y shrank_square arrow center_shrank_sq eta garbage" active="garbage"/>
+<view layers="orig_square points x_and_y shrank_square arrow center_shrank_sq eta shrank_sq_2" active="shrank_sq_2"/>
+<path layer="orig_square" stroke="black" fill="lightgoldenrod" opacity="10%" stroke-opacity="opaque">
+2 142 m
+2 2 l
+142 2 l
+142 142 l
 h
 </path>
-<path layer="gamma" matrix="1.67734 1.08928 -1.08928 1.67734 25.5107 -248.627" fill="gold" opacity="50%" stroke-opacity="opaque">
-81.1433 137.638 m
-231.991 101.606 l
-231.563 132.447 l
-75.7394 111.14 l
+<path layer="shrank_square" matrix="0.781973 0 0 0.781973 15.6979 15.6979" stroke="blue" fill="blue" opacity="10%" stroke-opacity="opaque">
+2 142 m
+2 2 l
+142 2 l
+142 142 l
 h
 </path>
-<path matrix="1.84508 1.19821 -1.19821 1.84508 12.2792 -285.747" stroke="black">
-88 136 m
-225.135 103.244 l
-</path>
-<path layer="disk" matrix="0.5 0 0 0.5 64.1347 89.2438" fill="lightcyan">
-46.6754 48.6251 m
-46.6754 18 l
-356.626 18 l
-356.626 34.1136 l
-356.626 34.1136 l
+<path layer="shrank_sq_2" stroke="red" fill="red" opacity="10%" stroke-opacity="opaque">
+78.2242 86.9655 m
+78.2242 26.0377 l
+17.2964 26.0377 l
+17.2964 86.9655 l
 h
 </path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="blue" fill="lightcyan">
-356.626 34.1136 m
-601.409 0 0 601.409 174.476 -539.048 46.6754 48.6251 a
-</path>
-<path layer="triangulaion" matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-338 56 m
-278 52 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-322 28 m
-338 56 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-278 52 m
-322 28 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-322 28 m
-240 64 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-288 80 m
-338 56 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-47.7306 93.5124 m
-89.9348 74.5961 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-47.7306 93.5124 m
-288 80 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-89.9348 74.5961 m
-70.0654 50.1993 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-70.0654 50.1993 m
-240 64 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-278 52 m
-288 80 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-240 64 m
-278 52 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-89.9348 74.5961 m
-240 64 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-288 80 m
-89.9348 74.5961 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-240 64 m
-288 80 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-79.4638 69.2305 m
-89.9348 74.5961 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-89.9348 74.5961 m
-59.8631 75.5278 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-79.4638 69.2305 m
-59.8631 75.5278 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-322 28 m
-70.0654 50.1993 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-70.0654 50.1993 m
-47.7306 93.5124 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-70.0654 50.1993 m
-79.4638 69.2305 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-59.1117 72.5396 m
-70.0654 50.1993 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-79.4638 69.2305 m
-59.1117 72.5396 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-59.8631 75.5278 m
-47.7306 93.5124 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-59.1117 72.5396 m
-59.8631 75.5278 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkmagenta">
-47.7306 93.5124 m
-59.1117 72.5396 l
-</path>
-<path layer="garbage" matrix="1 0 0 1 -25.1034 50.7676" stroke="blue" fill="white">
-300.704 0 0 300.704 176.476 -231.048 e
-</path>
-<path layer="alpha" matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="black">
-32 0 0 32 64 80 e
-</path>
-<use layer="red_points" matrix="0.419335 0.27232 -0.27232 0.419335 56.4115 31.8706" name="mark/disk(sx)" pos="89.9348 74.5961" size="normal" stroke="red"/>
-<use matrix="0.419335 0.27232 -0.27232 0.419335 65.2995 32.873" name="mark/disk(sx)" pos="79.4638 69.2305" size="normal" stroke="red"/>
-<use matrix="0.419335 0.27232 -0.27232 0.419335 77.3684 21.6328" name="mark/disk(sx)" pos="47.7306 93.5124" size="normal" stroke="red"/>
-<use matrix="0.419335 0.27232 -0.27232 0.419335 63.1209 36.2277" name="mark/disk(sx)" pos="59.8631 75.5278" size="normal" stroke="red"/>
-<use layer="blue_points" matrix="0.838671 0.544639 -0.544639 0.838671 49.2939 -20.3603" name="mark/disk(sx)" pos="240 64" size="normal" stroke="blue"/>
-<use matrix="0.838671 0.544639 -0.544639 0.838671 -4.38105 -55.2172" name="mark/disk(sx)" pos="338 56" size="normal" stroke="blue"/>
-<path layer="beta" matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkorange" pen="ultrafat">
-278 52 m
-322 28 l
-</path>
-<path matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="darkorange" pen="ultrafat">
-322 28 m
-70.0654 50.1993 l
-</path>
-<use layer="blue_points" matrix="0.838671 0.544639 -0.544639 0.838671 35.8751 -29.0745" name="mark/disk(sx)" pos="278 52" size="normal" stroke="blue"/>
-<use matrix="0.838671 0.544639 -0.544639 0.838671 35.8751 -29.0745" name="mark/disk(sx)" pos="322 28" size="normal" stroke="blue"/>
-<path layer="gamma" matrix="2.3986 1.55767 -1.55767 2.3986 -28.2643 -408.44" stroke="black">
-99.1674 114.343 m
-208.135 129.244 l
-</path>
-<use layer="disk" matrix="1 0 0 1 -58.1676 58.8656" name="mark/disk(sx)" pos="338 56" size="normal" stroke="blue"/>
-<use matrix="1 0 0 1 -58.1676 58.8656" name="mark/disk(sx)" pos="338 56" size="normal" stroke="blue"/>
-<use matrix="1 0 0 1 -58.1676 74.8656" name="mark/disk(sx)" pos="338 56" size="normal" stroke="blue"/>
-<use matrix="1 0 0 1 -10.1676 58.8656" name="mark/disk(sx)" pos="240 64" size="normal" stroke="blue"/>
-<use layer="blue_points" matrix="0.838671 0.544639 -0.544639 0.838671 13.7422 -24.37" name="mark/disk(sx)" pos="338 56" size="normal" stroke="blue"/>
-<use matrix="0.838671 0.544639 -0.544639 0.838671 35.8751 -29.0745" name="mark/disk(sx)" pos="288 80" size="normal" stroke="blue"/>
-<use matrix="0.838671 0.544639 -0.544639 0.838671 41.4084 -30.2506" name="mark/disk(sx)" pos="240 64" size="normal" stroke="blue"/>
-<use matrix="0.838671 0.544639 -0.544639 0.838671 47.944 -40.3147" name="mark/disk(sx)" pos="240 64" size="normal" stroke="blue"/>
-<use matrix="0.838671 0.544639 -0.544639 0.838671 90.3788 -17.5267" name="mark/disk(sx)" pos="240 64" size="normal" stroke="blue"/>
-<text layer="delta" matrix="1 0 0 1 -1.93886 -1.72343" transformations="translations" pos="65.1446 76.4162" stroke="black" type="label" width="5.694" height="4.289" depth="0" valign="baseline" style="math">x</text>
-<text transformations="translations" pos="288.006 191.778" stroke="black" type="label" width="5.242" height="4.297" depth="1.93" valign="baseline" style="math">y</text>
-<path matrix="1.01 0 0 1.01 -1.76642 -1.27152" stroke="black">
-281.366 231.876 m
-281.366 22.4275 l
-71.9182 22.4275 l
-71.9182 231.876 l
+<path layer="alpha" stroke="darkgreen" fill="green" opacity="30%" stroke-opacity="opaque">
+56.7598 65.5011 m
+56.7598 26.0377 l
+17.2964 26.0377 l
+17.2964 65.5011 l
 h
 </path>
-<use layer="red_points" matrix="0.419335 0.27232 -0.27232 0.419335 65.903 32.2702" name="mark/fdisk(sfx)" pos="59.1117 72.5396" size="normal" stroke="black" fill="red"/>
-<use layer="blue_points" matrix="0.838671 0.544639 -0.544639 0.838671 29.1658 -33.4316" name="mark/fdisk(sfx)" pos="338 56" size="normal" stroke="black" fill="blue"/>
-<path layer="delta" matrix="0.513282 0 0 0.513282 44.5693 48.9988" stroke="darkgreen">
-281.366 231.876 m
-281.366 22.4275 l
-71.9182 22.4275 l
-71.9182 231.876 l
+<path layer="garbage" matrix="1 0 0 1 -26.9719 13.7694" stroke="black">
+64 32 m
+96 64 l
+</path>
+<path layer="arrow" stroke="blue" arrow="normal/normal">
+72 72 m
+17.2964 37.0236 l
+</path>
+<use layer="points" name="mark/disk(sx)" pos="115.339 121.33" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="121.332 18.9008" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -11.2882 22.7608" name="mark/disk(sx)" pos="41.2882 51.2392" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -10 56" name="mark/disk(sx)" pos="32.3049 38.0285" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="87.5247 24.5172" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="52.556 115.6" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -22 18" name="mark/disk(sx)" pos="47.2648 2.55619" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -108 104" name="mark/disk(sx)" pos="138.897 19.9407" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="138.195 24.0461" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 10 20" name="mark/disk(sx)" pos="121.235 52.2842" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -64 80" name="mark/disk(sx)" pos="80.3766 55.3502" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="12.0285 61.7764" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="66.5716 110.428" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -16 -4" name="mark/disk(sx)" pos="69.8495 82.0338" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="97.6792 86.2111" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="72.6934 83.0242" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="119.278 88.4262" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="124.428 29.6686" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="139.763 43.3963" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -62.2245 30.9875" name="mark/disk(sx)" pos="88.3529 18.4085" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="128.486 118.753" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="87.5283 104.71" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -64 80" name="mark/disk(sx)" pos="72.8392 34.9265" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="110.605 69.7083" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -4 24" name="mark/disk(sx)" pos="78.1331 23.3706" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="132.609 35.762" size="normal" stroke="black"/>
+<use name="mark/disk(sx)" pos="115.502 53.6309" size="normal" stroke="black"/>
+<use layer="center_shrank_sq" name="mark/fsquare(sfx)" pos="72 72" size="normal" stroke="blue" fill="yellow"/>
+<path layer="garbage" stroke="blue">
+37.0281 49.6396 m
+37.0281 49.6396 l
+37.0281 49.6396 l
+37.0281 49.6396 l
 h
 </path>
-<use layer="red_points" matrix="0.419335 0.27232 -0.27232 0.419335 65.773 32.0668" name="mark/fdisk(sfx)" pos="70.0654 50.1993" size="normal" stroke="darkred" fill="pink"/>
-<use layer="blue_points" matrix="0.838671 0.544639 -0.544639 0.838671 22.5654 -42.6832" name="mark/fdisk(sfx)" pos="240 64" size="normal" stroke="darkblue" fill="lightblue"/>
-<text layer="delta" transformations="translations" pos="193.397 143.471" stroke="darkblue" type="label" width="8.037" height="7.497" depth="1.93" valign="baseline" style="math">y&apos;</text>
-<text matrix="1 0 0 1 -3.06339 -1.34023" transformations="translations" pos="86.2553 74.6297" stroke="darkred" type="label" width="8.489" height="7.49" depth="0" valign="baseline" style="math">x&apos;</text>
-<text matrix="1 0 0 1 3.06741 -5.25842" transformations="translations" pos="112 176" stroke="darkgreen" type="label" width="8.149" height="9.917" depth="0.16" valign="baseline" size="Large" style="math">\sqrA</text>
+<path stroke="blue">
+56.7598 26.0377 m
+56.7598 37.0236 l
+17.2964 37.0236 l
+17.2964 26.0377 l
+h
+</path>
+<path matrix="0 1 -1 0 54.32 8.74131" stroke="blue">
+56.7598 26.0377 m
+56.7598 37.0236 l
+17.2964 37.0236 l
+17.2964 26.0377 l
+h
+</path>
+<path matrix="0 1 -1 0 82.7975 8.74131" stroke="blue">
+56.7598 26.0377 m
+56.7598 37.0236 l
+17.2964 37.0236 l
+17.2964 26.0377 l
+h
+</path>
+<path stroke="blue">
+17.2964 26.0377 m
+56.7598 65.5011 l
+</path>
+<path stroke="blue">
+17.2964 65.5011 m
+56.7598 26.0377 l
+</path>
+<use name="mark/fsquare(sfx)" pos="37.0281 45.7694" size="small" stroke="black" fill="yellow"/>
+<use layer="points" matrix="1 0 0 1 -6 0" name="mark/disk(sx)" pos="23.2964 37.0236" size="normal" stroke="black"/>
+<use layer="x_and_y" matrix="1 0 0 1 -6 0" name="mark/fdisk(sfx)" pos="23.2964 37.0236" size="large" stroke="black" fill="yellow"/>
+<use layer="points" matrix="1 0 0 1 -16.0542 6.31392" name="mark/disk(sx)" pos="72.814 19.7238" size="normal" stroke="black"/>
+<use matrix="1 0 0 1 -6 14" name="mark/disk(sx)" pos="62.307 2.17442" size="normal" stroke="black"/>
+<use layer="x_and_y" matrix="1 0 0 1 -16.0542 6.31392" name="mark/fdisk(sfx)" pos="72.814 19.7238" size="large" stroke="black" fill="yellow"/>
+<path layer="beta" stroke="darkgreen" rarrow="normal/normal">
+17.2964 26.0377 m
+47.7603 56.5016 l
+</path>
+<use layer="shrank_sq_2" name="mark/fsquare(sfx)" pos="47.7603 56.5016" size="normal" stroke="red" fill="violet"/>
+<use layer="beta" name="mark/fsquare(sfx)" pos="37.0281 45.7694" size="normal" stroke="darkgreen" fill="green"/>
+<text layer="orig_square" matrix="1 0 0 1 69.8624 2.3871" transformations="translations" pos="0 128" stroke="black" type="label" width="6.628" height="8.004" depth="0.16" valign="baseline" size="Large" style="math">\sqr</text>
+<text layer="points" matrix="1 0 0 1 -1.94783 0.486957" transformations="translations" pos="7.47826 32.5565" stroke="black" type="label" width="7.05" height="6.176" depth="2.79" valign="baseline" size="Large" style="math">p</text>
+<text matrix="1 0 0 1 -2.92174 -3.89565" transformations="translations" pos="67.3739 35.9652" stroke="black" type="label" width="6.743" height="6.176" depth="2.79" valign="baseline" size="Large" style="math">q</text>
+<text layer="alpha" transformations="translations" pos="38.1565 68.1043" stroke="darkgreen" type="label" width="8.149" height="9.917" depth="0.16" valign="baseline" size="Large" style="math">\sqrA</text>
 </page>
 </ipe>

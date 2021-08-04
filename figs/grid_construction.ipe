@@ -309,6 +309,22 @@ h
 <tiling name="falling" angle="-60" step="4" width="1"/>
 <tiling name="rising" angle="30" step="4" width="1"/>
 </ipestyle>
+<ipestyle name="master-preamble">
+<preamble>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifx\ipeMode\undefined%
+\usepackage{mathcalb}
+\fi
+
+\newcommand{\sqr}{\mathcalb{s}}%
+\newcommand{\sqrA}{\mathcalb{t}}%
+\newcommand{\sqrB}{\mathcalb{u}}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+</preamble>
+</ipestyle>
 <page>
 <layer name="alpha"/>
 <layer name="beta"/>
@@ -325,7 +341,7 @@ h
 320 256 l
 </path>
 <use name="mark/disk(sx)" pos="256 288" size="normal" stroke="black"/>
-<text matrix="1 0 0 1 4.01908 4.62194" transformations="translations" pos="240 272" stroke="black" type="label" width="7.374" height="6.177" depth="0" valign="baseline" size="15" style="math">a</text>
+<text matrix="1 0 0 1 4.01908 4.62194" transformations="translations" pos="240 272" stroke="black" type="label" valign="baseline" size="15" style="math">a</text>
 <path stroke="black" dash="dashed">
 256 384 m
 256 288 l
@@ -412,7 +428,7 @@ h
 287.539 270.51
 287.865 268.012 c
 </path>
-<text matrix="1 0 0 1 57.6274 -6.072" transformations="translations" pos="328.821 374.946" stroke="black" type="label" width="35.507" height="7.473" depth="2.49" valign="baseline" style="math">\varepsilon (x+y)</text>
+<text matrix="1 0 0 1 57.6274 -6.072" transformations="translations" pos="328.821 374.946" stroke="black" type="label" valign="baseline" style="math">\varepsilon (x+y)</text>
 <path layer="beta" matrix="0.23085 0 0 0.23085 277.908 318.236" stroke="black">
 255.936 279.85 m
 256.153 271.976
@@ -431,7 +447,7 @@ h
 287.539 270.51
 287.865 268.012 c
 </path>
-<text matrix="1 0 0 1 10.5859 -0.942058" transformations="translations" pos="328.821 374.946" stroke="black" type="label" width="10.34" height="4.289" depth="0" valign="baseline" style="math">\varepsilon x</text>
+<text matrix="1 0 0 1 10.5859 -0.942058" transformations="translations" pos="328.821 374.946" stroke="black" type="label" valign="baseline" style="math">\varepsilon x</text>
 <path matrix="0 -0.33 0.33 0 226.158 513.406" stroke="black">
 255.936 279.85 m
 256.153 271.976
@@ -450,7 +466,7 @@ h
 287.539 270.51
 287.865 268.012 c
 </path>
-<text matrix="1 0 0 1 -25.625 42.339" transformations="translations" pos="328.821 374.946" stroke="black" type="label" width="9.888" height="4.297" depth="1.93" valign="baseline" style="math">\varepsilon y</text>
+<text matrix="1 0 0 1 -25.625 42.339" transformations="translations" pos="328.821 374.946" stroke="black" type="label" valign="baseline" style="math">\varepsilon y</text>
 <path layer="gamma" stroke="black">
 336 480 m
 336 544 l
@@ -493,9 +509,9 @@ h
 287.539 270.51
 287.865 268.012 c
 </path>
-<text matrix="1 0 0 1 -58.3726 117.928" transformations="translations" pos="328.821 374.946" stroke="black" type="label" width="35.507" height="7.473" depth="2.49" valign="baseline" style="math">\varepsilon (x+y)</text>
-<text layer="alpha" matrix="1 0 0 1 -2.72124 -11.1297" transformations="translations" pos="288.747 280.814" stroke="black" type="label" width="5.694" height="4.289" depth="0" valign="baseline" style="math">x</text>
-<text matrix="1 0 0 1 -21.0684 -3.4506" transformations="translations" pos="245.9 338.665" stroke="black" type="label" width="5.242" height="4.297" depth="1.93" valign="baseline" style="math">y</text>
+<text matrix="1 0 0 1 -58.3726 117.928" transformations="translations" pos="328.821 374.946" stroke="black" type="label" valign="baseline" style="math">\varepsilon (x+y)</text>
+<text layer="alpha" matrix="1 0 0 1 -2.72124 -11.1297" transformations="translations" pos="288.747 280.814" stroke="black" type="label" valign="baseline" style="math">x</text>
+<text matrix="1 0 0 1 -21.0684 -3.4506" transformations="translations" pos="245.9 338.665" stroke="black" type="label" valign="baseline" style="math">y</text>
 <path matrix="0.9025 0 0 0.9025 28.3392 33.7652" stroke="black">
 255.936 279.85 m
 256.153 271.976
@@ -532,7 +548,7 @@ h
 287.539 270.51
 287.865 268.012 c
 </path>
-<text layer="beta" matrix="1.1 0 0 1.1 32.4305 53.0842" transformations="translations" pos="288.747 280.814" stroke="black" type="label" width="5.694" height="4.289" depth="0" valign="baseline" style="math">x</text>
+<text layer="beta" matrix="1.1 0 0 1.1 32.4305 53.0842" transformations="translations" pos="288.747 280.814" stroke="black" type="label" valign="baseline" style="math">x</text>
 <path matrix="0.99275 0 0 0.99275 66.597 102.469" stroke="black">
 255.936 279.85 m
 256.153 271.976
@@ -551,7 +567,7 @@ h
 287.539 270.51
 287.865 268.012 c
 </path>
-<text matrix="1.045 0 0 1.045 29.0708 78.0705" transformations="translations" pos="245.9 338.665" stroke="black" type="label" width="5.242" height="4.297" depth="1.93" valign="baseline" style="math">y</text>
+<text matrix="1.045 0 0 1.045 29.0708 78.0705" transformations="translations" pos="245.9 338.665" stroke="black" type="label" valign="baseline" style="math">y</text>
 <path matrix="0 -1.463 1.463 0 -97.099 853.613" stroke="black">
 255.936 279.85 m
 256.153 271.976
@@ -606,7 +622,7 @@ h
 287.539 270.51
 287.865 268.012 c
 </path>
-<text matrix="1 0 0 1 58.8331 -41.8416" transformations="translations" pos="328.821 374.946" stroke="black" type="label" width="23.112" height="5.819" depth="1.93" valign="baseline" style="math">x+y</text>
-<text matrix="1 0 0 1 -97.1075 87.1705" transformations="translations" pos="328.821 374.946" stroke="black" type="label" width="23.112" height="5.819" depth="1.93" valign="baseline" style="math">x+y</text>
+<text matrix="1 0 0 1 58.8331 -41.8416" transformations="translations" pos="328.821 374.946" stroke="black" type="label" valign="baseline" style="math">x+y</text>
+<text matrix="1 0 0 1 -97.1075 87.1705" transformations="translations" pos="328.821 374.946" stroke="black" type="label" valign="baseline" style="math">x+y</text>
 </page>
 </ipe>

@@ -309,6 +309,22 @@ h
 <tiling name="falling" angle="-60" step="4" width="1"/>
 <tiling name="rising" angle="30" step="4" width="1"/>
 </ipestyle>
+<ipestyle name="master-preamble">
+<preamble>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifx\ipeMode\undefined%
+\usepackage{mathcalb}
+\fi
+
+\newcommand{\sqr}{\mathcalb{s}}%
+\newcommand{\sqrA}{\mathcalb{t}}%
+\newcommand{\sqrB}{\mathcalb{u}}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+</preamble>
+</ipestyle>
 <page>
 <layer name="alpha"/>
 <layer name="beta"/>
@@ -330,8 +346,8 @@ h
 128 512 m
 387.077 524.636 l
 </path>
-<text matrix="1 0 0 1 194.79 -91.799" transformations="translations" pos="192 608" stroke="black" type="label" width="5.978" height="8.965" depth="2.99" valign="baseline" size="12" style="math">\}</text>
-<text matrix="1 0 0 1 -5.71511 -3.57194" transformations="translations" pos="399.207 520.392" stroke="black" type="label" width="6.362" height="6.931" depth="3.43" valign="baseline" size="10" style="math">\frac{\varepsilon}{2}</text>
+<text matrix="1 0 0 1 194.79 -91.799" transformations="translations" pos="192 608" stroke="black" type="label" valign="baseline" size="12" style="math">\}</text>
+<text matrix="1 0 0 1 -5.71511 -3.57194" transformations="translations" pos="399.207 520.392" stroke="black" type="label" valign="baseline" size="10" style="math">\frac{\varepsilon}{2}</text>
 <path matrix="1.02911 0 0 1.02911 -5.20739 -12.8935" stroke="black">
 129.287 506.937 m
 129.407 496.46
@@ -346,6 +362,6 @@ h
 253.71 500.032
 254.544 493.602 c
 </path>
-<text matrix="1 0 0 1 -12.1446 -0.952518" transformations="translations" pos="251.21 487.054" stroke="black" type="label" width="40.723" height="8.465" depth="3.49" valign="baseline" style="math">\alpha\left(1-\frac{\varepsilon}{2}\right)</text>
+<text matrix="1 0 0 1 -12.1446 -0.952518" transformations="translations" pos="251.21 487.054" stroke="black" type="label" valign="baseline" style="math">\alpha\left(1-\frac{\varepsilon}{2}\right)</text>
 </page>
 </ipe>

@@ -515,7 +515,121 @@ counter-intuitive situation is illustrated in \figref{bad}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\subsection{A local spanner for axis parallel squares}
+
+One can modify the above construction for axis-parallel squares, and
+get a local spanner without dependency on the spread.  In the
+following we assume that the point set $\PS$ is in general position --
+no two points share a coordinate value, or appear in opposing corners
+of an axis-parallel square -- this can be ensured by slightly
+perturbing the points if necessary.
+
+We need the following simple lemma.
+
+\begin{lemma}
+    (A) Let $\sqr$ be an axis parallel square in the plane, and let
+    $\pa, \pb$ be two arbitrary points in $\sqr$. Then, there is a
+    square $\sqrA \subseteq \sqr$ that contains $\pa$ and $\pb$ on its
+    boundary.
+
+    (B) Let $\PSX, \PSY$ be two point sets in the plane, such that
+    $\PSX' = \PSX \cap \sqr \neq \emptyset$ and
+    $\PSY' = \PSY \cap \sqr \neq \emptyset$. Let
+    $\px \in \PSX, \py \in \PSY$ be the two points realizing
+    $\dsZ{\infty}{\PSX'}{\PSY'} = \min_{\pa \in \PSX', \pb \in \PSY'}
+    \dZ{\infty}{\pa}{\pb}$. Then, there is a square
+    $\sqrA \subseteq \sqr$ that contains $\px$ and $\py$ on its
+    boundary, and $\sqrA$ does not contain any other point of
+    $\PSX \cup \PSY$.
+\end{lemma}
+\begin{proof}
+    (A) Start shrinking $\sqr$ around its center till it contains one
+    of the points (say $\pa$ on its boundary. Next, move the center of
+    the square towards $\pa$ till the boundary of the continuously
+    shrinking square passes through $\py$. If $\px$ and $\py$ lies on
+    adjacent face, then continue the shrinking process by moving the
+    center towards the common corner of the shared edges -- this
+    process stops when one of the points is on the corner of the
+    square.  Clearly, the resulting square $\sqrA$ is the desired
+    square.
+
+
+    (B) Let $r = \dsZ{\infty}{\PSX'}{\PSY'}$. By (A), there is a
+    square $\sqrA \subseteq \sqr$ having $\px$ and $\py$ on apposing
+    sides. As such, the sidelength of $\sqrA$ is $r$. Assume for
+    contradiction, that there is some other point
+    $\px' \in \PSX \cap \sqrA$. By our general position assumption,
+    $\px'$ is in the interior of $\sqrA$, and in particular,
+    $\dZ{\infty}{\px'}{\py} < r$, which is a contradiction to the
+    choice of $\px$ and $\py$.
+\end{proof}
+XXX
+
+
+
+\begin{lemma}
+    \lemlab{squares}%
+    %
+    Let $\PS$ be a set of $n$ points in the plane, and let
+    $\eps \in (0,1)$ be a parameter. A variant of the above algorithm
+    constructs a local $(1+\eps)$-spanner $\G$ for axis-parallel
+    squares. The spanner has $O\pth{ \eps^{-3} n \log n }$ edges, and
+    the construction time is
+    $O\pth{ \eps^{-3} n\log \spread \log n }$.  Formally, for any axis
+    parallel square $\sqr$ in the plane, and any two points
+    $\pa, \pb \in \PS \cap \sqr$, we have a $(1+\eps)$-path in
+    $\restrictY{\G}{\sqr}$.
+\end{lemma}
+\begin{proof}
+    One can define the Delaunay triangulation when the unit ball is
+    replaced by the unit square. Formally, in this triangulation two
+    points are connected $\iff$ there is a square that contains these
+    two points on its boundary and no points in its interior. Let
+    $\DT_\square$ denote the resulting Delaunay triangulation. Instead
+    of constructing a \WSPD, the algorithm computes a $1/\epsA$-\SSPD
+    $\WS$. Increasing the weight and number of pairs by a factor of
+    $O(1/\epsA)$, one can assume that every pair
+    $\{ \PSX, \PSY \} \in \WS$ is not only semi-separated, but also
+    there is an associated double wedge of angle $\leq \epsA$, the
+    left pane in \figref{bad}. The algorithm now computes the
+    ``square'' Delaunay triangulation for each such pair, and add the
+    edges of the triangulation to the resulting graph $\G$.
+
+    The proof that the spanner property holds in this case is somewhat
+    more involved, which we will mitigate by being more sketchy about
+    the details. As before, consider two points
+    $\px, \py \in \PS \cap \sqr$, where $\sqr$ is some arbitrary
+    square. Let $\sqrA$ be the smallest square containing these two
+    points. The points $\px$ and $\py$ are on opposing edges of
+    $\sqr'$ (potentially one of them is in a corner). Let
+    $\PSX' = \PSX \cap \sqr'$ and $\PSY' = \PSY \cap \sqr'$, and
+    consider the two points $\px' \in \PSX'$ and $\py' \in \PSY'$
+    realizing $\DistSetY{\PSX'}{\PSY'}$ (under the $L_\infty$
+    norm). The key observation is that there is a square $\sqrA$
+    containing the two points on its boundary, such that
+    $\sqrB \subseteq \sqrA$ and $\sqrA$ contains no other points
+    $\PSX \cup \PSY$ (this shrinking property does not hold in the
+    disk case). That is -- $\px' \py' \in \G$. Assume, that
+    $\diameterX{\PSX} < \diameterX{\PSY}$, which implies that
+    $\dY{\px}{\px'} \leq \diameterX{\PSX} \leq \epsA
+    \DistSetY{\PSX}{\PSY} \leq \epsA \dY{\px'}{\py'}$. A tedious but
+    straightforward calculation shows that
+    $\dY{\py'}{\py} < \dY{\px}{\py}$, One can now use induction to
+    argue that $\dGZ{\G}{\py'}{\py} \leq (1+\epsA)
+    \dY{\py'}{\py}$. One can now use that the two point sets are
+    inside the narrow double wedge to argue that
+    $\dGZ{\G}{\px}{\py} \leq \bigl(1+O(\epsA)\bigr)\dY{\px}{\py}$,
+    which implies the claim.
+
+    \sariel{Too sketchy -- to add details... And a figure.}
+
+    ~
+\end{proof}
+
 \subsection{Result for other norms}
+
+\subsubsection{The rest}
 
 \sariel{FILL IN *all* THE DETAILS -- this is way too hand wavy --
    including refs, etc}
@@ -556,12 +670,11 @@ requirement somewhat.
        be connected in any local spanner for axis parallel
        rectangles. Indeed, for any point in the top diagonal and
        bottom diagonal, there is an axis parallel rectangle that
-       cotnains only these two points. This holds even if we restrict
+       contains only these two points. This holds even if we restrict
        ourselves to fat rectangles of similar size.}
     \figlab{bad:rectangles}
 \end{figure}
 
-\newcommand{\rect}{\Mh{R}}%
 
 \paragraph{A weaker connectivity requirement.}
 
@@ -602,8 +715,6 @@ $\WS = \bigl\{ \{ \PSX_1, \PSY_1 \}, \ldots, \{ \PSX_s, \PSY_s \}
 \bigr\}$ of $\PS$, such that $\{ \PSX_i, \PSY_i\}$ are
 quadrant-separated for all $i$.
 
-\newcommand{\QS}{\Mh{\mathcal{Q}}}%
-\newcommand{\liftX}[1]{\mathrm{lift}\pth{#1}}%
 
 \begin{lemma}
     \lemlab{d:1}%
@@ -853,8 +964,8 @@ $\log_{1+\eps}(\alpha)=O\left(\frac{\log(\alpha)}{\eps}\right)$, we
 have a spanner of size
 $O\left(\frac{\log(\alpha)}{\eps (t-1)^{-3}}n\log n\right)$
 
-\subsection{QSPD}
-Implementing a motion planning algorithm that created a roadmap of
+\subsection{Q{}S{}PD}
+Implementing a motion planning algorithm that created a road-map of
 both free space and obstacle space by simulating probe queries to near
 obstacles and using those to execute a space exploration algorithm.
 After a basic algorithm is implemented and tested, our goals will
@@ -863,18 +974,17 @@ optimization of the data structure at the base of the algorithm.
 
 In order to construct local spanners for the family $\LL$ of axis
 parallel rectangles with $\eps$-shadow, we describe a decomposition of
-the the point set $P\subseteq \Re^d$ in to pairs of sets, a
-decomposition which we name a Quadrant Separated Pair Decomposition
-(QSPD). This decomposition gives us $O(n\log^{d-1}n)$ pairs
-$(A_i,B_i)$ of subsets of $P$, with overall size $O(n\log^{d}n)$, such
-that the sets can be separated by $d$ orthogonal axis parallel
-hyperplanes, and for every two points $p,q\in P$, there exists a
-single pair $(A_i,B_i)$ such that (w.l.o.g) $p\in A_i$, $q\in
-B_i$. For clarification, this separation in $\Re^d$ can be viewed as
-if one of the sets lies in the first quadrant of the plane (i.e. every
-point has positive $x$ and $y$ values), and the other is in the third
-quadrant (i.e. every point has negative $x$ and $y$ values), hence the
-name.
+the point set $P\subseteq \Re^d$ in to pairs of sets, a decomposition
+which we name a Quadrant Separated Pair Decomposition (\QSPD). This
+decomposition gives us $O(n\log^{d-1}n)$ pairs $(A_i,B_i)$ of subsets
+of $P$, with overall size $O(n\log^{d}n)$, such that the sets can be
+separated by $d$ orthogonal axis parallel hyperplanes, and for every
+two points $p,q\in P$, there exists a single pair $(A_i,B_i)$ such
+that (w.l.o.g) $p\in A_i$, $q\in B_i$. For clarification, this
+separation in $\Re^d$ can be viewed as if one of the sets lies in the
+first quadrant of the plane (i.e. every point has positive $x$ and $y$
+values), and the other is in the third quadrant (i.e. every point has
+negative $x$ and $y$ values), hence the name.
 
 The construction of the decomposition can be described as a recursive
 process in which a call to the function with $p\subseteq \Re^d$ of
@@ -884,7 +994,7 @@ function goes as follows.
 
 Given a set $P\subseteq \Re^d$ and a coloring
 $c:P\longrightarrow \{0,1\}^k$ for some $k$, the function $f(P,c)$
-finds a median of $P$ w.r.t. the $d$-th dimension, and projects the
+finds a median of $P$ w.r.t. the $d$\th dimension, and projects the
 points $P$ onto a hyperplane $h$ orthogonal to the same dimension
 passing through the median. Let the projected set of points be denoted
 $P'$, the $\frac{n}{2}$ points of $P$ the lie above $h$ be denoted
@@ -905,8 +1015,8 @@ $\forall 1\leq i\leq d~:~ x^{(i)}\neq y^{(i)}$.
 
 
 \begin{claim}
-    The process described above creates a QSPD with size $O(n\log^dn)$
-    in $O_d(n\log^dn)$ time.
+    The process described above creates a \QSPD with size
+    $O(n\log^dn)$ in $O_d(n\log^dn)$ time.
 \end{claim}
 
 \begin{proof}
@@ -1070,7 +1180,7 @@ The entire construction can be seen in \figref{grid_construction}.
     The entire construction can be seen in
     Figure~\ref{fig:grid_construction}. We can now describe the
     construction of our spanner. For $P\subseteq \Re^2$ we create a
-    QSPD of $P$, and for every pair $(A,B)$ we add an edge between
+    \QSPD of $P$, and for every pair $(A,B)$ we add an edge between
     every point $a\in A$ (and later reverse the rolls inside the pair)
     to an arbitrary point of $P$ in every cell $C_{i,j}$, to the
     leftmost point of $P$ in every $C_{H_{i,j}}$, and to the
@@ -1099,7 +1209,7 @@ arbitrary axis parallel rectangles.
 \end{claim}
 
 \begin{proof}
-    Let $(A,B)$ be the unique pair of the QSPD such that w.l.o.g
+    Let $(A,B)$ be the unique pair of the \QSPD such that w.l.o.g
     $a\in A$ and $b\in B$, $A\subseteq Q^-$, $B\subseteq Q^+$, and
     $||b||_{1} \leq ||a||_{1}$. We denote the absolute value of the
     coordinates of a point $p$ by $p.x$ and $p.y$ for the $x$ and $y$
@@ -1148,7 +1258,7 @@ arbitrary axis parallel rectangles.
     this construction results in a $(\LL,\eps)$ local $t$-spanner.
 
 
-    % TODO: this can probably be done faster than the naive way.
+    % TO DO: this can probably be done faster than the naive way.
     \begin{claim}
 	It is possible to construct a $(\LL, \epsA)$ local
         $(1+\epsA')$-spanner of size
@@ -1189,16 +1299,16 @@ arbitrary axis parallel rectangles.
 	where the last transition is due to another factor of
         $\frac{1}{2}$ that was incorporated in $\alpha$.
 	
-	The number of edges is bounded by the size of the QSPD
+	The number of edges is bounded by the size of the \QSPD
         multiplied by $\frac{1}{\eps^2}$, since every occurrence of a
-        point in the QSPD gives rise to
+        point in the \QSPD gives rise to
         $O\left(\frac{1}{\eps^2}\right)$ edges by construction.
 	
 	The runtime of the algorithm is composed of constructing a
         $d$-dimensional orthogonal range tree in time
         $O(n\log^{d-1}n)$, and querying
         $O\left(\frac{1}{\eps^2}\right)$ $d$-dimensional boxes for
-        every point in the QSPD, each in time $O(\log^{d-1}n)$. Since
+        every point in the \QSPD, each in time $O(\log^{d-1}n)$. Since
         the points in the orthogonal range tree are sorted by
         dimension, getting the leftmost or bottom-most point for some
         queries does not affect the runtime.
@@ -1249,7 +1359,7 @@ correctness proof.
     the $\epsilon$ core of $C$. The shortest segment $\overline{pq}$
     such that $p,q\in\partial C$ and
     $\overline{pq}\cap C_{1-\eps}\neq \emptyset$ is of length at
-    least %TODO.
+    least %TO DO.
 \end{claim}
 
 \begin{proof}

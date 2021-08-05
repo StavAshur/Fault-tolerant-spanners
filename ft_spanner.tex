@@ -154,7 +154,7 @@ $B$ and $C$.
     \emphi{$(1/\eps)$-well-separated} if
     \begin{equation*}
         \max \pth{ \diameterX{\PSX}, \diameterX{\PSY} } \leq
-        \eps \cdot \DistSetY{\PSX}{\PSY},
+        \eps \cdot \dsY{\PSX}{\PSY},
     \end{equation*}
 \end{defn}
 
@@ -209,10 +209,10 @@ near linear.
     {separated!semi-separated@$(1+\eps)$-semi-separated} if
     \begin{equation*}
         \min \pth{ \diameterX{\PSB}, \diameterX{\PSC} } \leq \eps \cdot
-        \DistSetY{\PSB}{\PSC},%        
+        \dsY{\PSB}{\PSC},%        
     \end{equation*}
     where
-    $\DistSetY{ \PSB}{\PSC} = \min_{\pb \in \PSB, \pc \in \PSC}
+    $\dsY{ \PSB}{\PSC} = \min_{\pb \in \PSB, \pc \in \PSC}
     \dY{\pb}{\pc}$.
 
     For a point set $\PS$, a \emphOnly{semi-separated pair
@@ -450,7 +450,7 @@ The construction time is bounded by
     \begin{equation*}
         \max \pth{ \diameterX{\PSX}, \diameterX{\PSY} }%
         \leq%
-        \epsA \cdot \DistSetY{\PSX}{\PSY}%
+        \epsA \cdot \dsY{\PSX}{\PSY}%
         \leq%
         \epsA \ell, 
     \end{equation*}
@@ -921,7 +921,8 @@ $O(\eps^{-2}n\log n)$ time.(
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Weak local spanners for axis parallel rectangles}
+\section{Weak local spanners for regions %
+   with bounded aspect ratio}
 
 We would like to build local spanners (of subquadratic size) for
 axis-parallel rectangles, but as \figref{bad:rectangles} shows, there
@@ -940,24 +941,130 @@ requirement somewhat.
 \end{figure}
 
 
-\paragraph{A weaker connectivity requirement.}
+%\subsection{Shrinking the area of service}
 
-For a rectangle $\rect$, let $(1-\delta)\rect$ denote the rectangle
-resulting from scaling $\rect$ by a factor of $1-\delta$ around its
-center. For a point set $\PS$ in the plane, a graph $\G =(\PS,\EG)$ is
-a \emphi{$(1-\delta)$-local $(1+\eps)$-spanner} for $\PS$, if for any
-axis parallel rectangle $\rect$, we have that $\restrictY{\G}{\rect}$
-is an $\eps$-spanner for any two points in $(1-\delta)\rect \cap
-\PS$. Intuitively, the spanner does not need to work for points that
-are close to the boundary of $\rect$. We refer to
-$\rect \setminus (1-\delta)\rect$ as the \emphi{shadow} of $\rect$ --
-it is the area that is being damaged, and that the local spanner fails
-to work for.
+%\subsubsection{Shrinking by the diameter}
 
-Before dwelling into the construction, we start with presenting a new
-pair decomposition that would be useful for our (nefarious) purposes,
-and is of independent interest.
+One way to shrink a region is as a function of its diameter.
 
+\newcommand{\shrinkDY}[2]{#1_{\boxminus #2}}
+\begin{defn}
+    Given a convex region $\body$, let
+    \begin{equation*}
+        \shrinkDY{\body}{\delta}%
+        =%
+        \Set{ \pa \in \body }{ \dsY{\pa}{ \Re^2 \setminus \body} \leq \delta
+           \diameterX{\body}}.        
+    \end{equation*}
+    Formally, $\shrinkDY{\body}{\delta}$ is the Minkowski difference of
+    $\body$ with a disk of radius $\delta \diameterX{\body}$.
+\end{defn}
+
+
+\begin{defn}
+    Consider a (bounded) set  $\body$ in the plane. Let $\rinX{\body}$
+    be the radius of the largest
+    disk contained inside $\body$.
+    Similarly, $\routX{\body}$ is the smallest radius of a disk
+    containing $\body$.
+
+    The \emphi{aspect ratio} of a region $\body$ in the plane is
+    $\arX{\body} = \routX{\body}/\rinX{\body}$. Given a family $\FF$
+    or regions in the plane, its \emphw{aspect ratio} is
+    $\arX{\FF} = \max_{\body \in \FF} \arX{\body}$.
+\end{defn}
+
+Note, that if a convex region $\body$ has bounded aspect ration, then
+$\shrinkDY{\body}{\delta}$ is similar to the result of scaling $\body$
+by a factor of $1-O(\delta)$. On the other hand, if $\body$ is long
+and skinny, say is has width smaller than
+$2 \delta \diameterX{\body}$, then $\shrinkDY{\body}{\delta}$ is
+empty.
+
+
+\begin{lemma}
+    Given a family $\FF$ of convex shapes in the plane with
+    $\alpha = \arX{\FF}$, a set $\PS$ of $n$ points in the plane, and
+    parameters $\delta, \eps \in (0,1)$, let
+    $\epsA = \min( \eps, \delta^2)$.  One can construct a graph $\G$
+    over $\PS$, in $O(n \epsA^{-1} \log n)$ time, and with
+    $O(n/\epsA)$ edges, such that for any $\body \in \FF$, we have
+    that for any two points
+    $\pa, \pb \in \PS \cap \shrinkDY{\body}{\delta}$ the graph
+    $\restrictY{ \body }{\PS}$ has $(1+\eps)$-path between $\pa$ and
+    $\pb$.
+\end{lemma}
+
+\begin{proof}
+    Let $\epsA = \min( \eps, \delta^2)$. Construct, in
+    $O(\epsA^{-1} n \log n)$ time, a standard $(1+\epsA)$-spanner $\G$
+    for $\PS$ using $O( \epsA^{-1} n)$ edges \cite{ams-dagss-99}.
+
+    So, consider any body $\body \in \FF$, and any two vertex
+    $\pa, \pb \in \PS \cap \body'$, where
+    $\body'=\shrinkDY{\body}{\delta}$. Let $\ell = \dY{\pa}{\pb}$. Let
+    $\pi$ be the shortest path between $\pa$ and $\pb$ in $\G$. Let
+    $\Elp$ be the loci of all points $pc$, such that
+    $\dY{\pa}{\pc} + \dY{\pc}{\pb} \leq (1+\epsA) \ell$. The region
+    $\Elp$ is an ellipse that contains $\pi$. The furthest point from
+    the segment $\pa\pb$ in this ellipse is realized by the co-vertex
+    of the ellipse. Formally, it is one of the two intersection points
+    of the boundary of the ellipse with the line orthogonal to
+    $\pa \pb$ that passes through the middle point $\cen$ of this
+    segment, see \figref{ellipse}. Let $\pz$ be one of these points.
+
+    \begin{figure}[h]
+        \centerline{\includegraphics{figs/ellipse}}
+        \caption{}
+        \figlab{ellipse}
+    \end{figure}
+
+    We have that
+    \begin{math}
+        \dY{\pa}{\pz} = (1+\epsA)\ell/2.
+    \end{math}
+    Setting $h = \dY{\pz}{\cen}$, we have that     
+    \begin{equation*}
+        h%
+        =%
+        \sqrt{\dY{\pa}{\pz}^2 - \dY{\pa}{\cen}^2 }
+        =%
+        \frac{\ell}{2} \sqrt{(1+\epsA)^2 - 1}
+        =%
+        \frac{\sqrt{\epsA (2+\epsA)}}{2} \ell%
+        \leq 
+        \sqrt{\epsA} \ell
+        \leq 
+        \sqrt{\epsA} \diameterX{\body}.
+    \end{equation*}
+    as    
+    $\ell \leq \diameterX{\body'} \leq \diameterX{\body}$.
+
+    For any point $\px \in \body'$, we have that
+    $\dsY{\px}{\Re^2 \setminus \body'} \leq \delta \diamX{\body}$.  As
+    such, to ensure that $\pi \subseteq \Elp \subseteq \body$, we need
+    that
+    \begin{math}
+        \delta \diamX{\body} \geq h,
+    \end{math}
+    which holds if
+    \begin{math}
+        \delta \diamX{\body} \geq \sqrt{\epsA} \diameterX{\body}.
+    \end{math}
+    This in turn holds if $\epsA \leq \delta^2$. Namely, we have the
+    desired properties if $\epsA = \min( \eps, \delta^2)$.
+\end{proof}
+
+
+%Before dwelling into the construction, we start with presenting a new
+%pair decomposition that would be useful for our (nefarious) purposes,
+%and is of independent interest.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Weak local spanners for axis-parallel rectangles}
 
 \subsection{Quadrant separated pairs decomposition}
 
@@ -1078,119 +1185,127 @@ quadrant-separated for all $i$.
     construction time.
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Bounded aspect ratio rectangles}
-Let $\LL$ be the set of axis parallel rectangles with aspect ratio at
-most $1<\alpha$. We repeatedly preform the algorithm for convex local
-spanners with rectangles of different aspect-ratio, where in the
-$i$\th iteration we use a rectangle with aspect ratio
-$\left(1+\eps\right)^i$, where $i\in\{0,...,\log_{1+\eps}(\alpha)\}$.
+\subsection{Weak local spanner for axis parallel rectangles}
 
-Let $r$ be a rectangle with aspect ratio $\alpha$, and let $(A,B)$ be
-a pair in an SSPD such that $A\cap r\neq \emptyset$, and
-$B\cap r\neq \emptyset$. We assume w.l.o.g that the height of $r$ is
-1, and its width is $\alpha'\in [1,\alpha]$.
+For a
+parameter $\delta \in (0,1)$, and an interval $I = [b,c]$, let
+$(1-\delta)I = [t - (1-\delta)r, t+ (1-\delta)r]$ be the shrinking of
+$I$ by a factor of $1-\delta$, where $t = (b+c)/2$, and $r = c-b$.
 
-Let $i\in \{0,...,\log_{1+\eps}(\alpha)\}$ be an index for which
-$\alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\eps}$ if such an index
-exists, then let $r'$ be the rectangle with width $\alpha'$ and aspect
-ratio $(1+\eps)^i$, whose horizontal bisector coincides with that of
-$r$. Since $(1+\eps)^i \leq \frac{\alpha}{1-\eps}$, we have that
-$r\setminus r'$ is contained within the shadow of $r$, and therefore
-$r'$ contains points of both $A$ and $B$, from the correctness of the
-convex local spanner, we will have an edge between a point in
-$A\cap r'$ and a point in $B\cap r'$. As before, this, together with
-the properties of the SSPD, is enough to guarantee that the
-constructed graph is indeed a $(\LL, \eps)$-$t$-spanner (for the
-appropriate choice of the parameter $s$ of the SSPD).
+\newcommand{\Rects}{\Mh{\mathcal{R}}}%
 
-We are left with proving that there exists an index
-$i\in \{0,...,\log_{1+\eps}(\alpha)\}$ for which
-$\alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\eps}$.
+Let $\Rects$ be the set of all axis parallel rectangles in the
+plane. For a rectangle $\rect \in \Rects$, with $\rect = I \times J$,
+let $(1-\delta)\rect = (1-\delta)I \times (1-\delta)J$ denote the
+rectangle resulting from shrinking $\rect$ by a factor of $1-\delta$.
+
+\begin{defn}
+    Given a set $\PS$ of $n$ points in the plane, and parameters
+    $\eps, \delta \in (0,1)$, a graph $\G$ is a
+    \emphw{$(1-\delta)$-local $(1+\eps)$-spanner} for rectangles, if
+    for any axis-parallel rectangle $\rect$, we have that
+    $\restrctY{\G}{\rect}$ is a $(1+\eps)$-spanner for all the points
+    in $(1-\delta)\rect \cap \PS$.
+\end{defn}
+
+Observe that rectangles in $\Rects$ might be quite ``skinny'', so the
+previous notion of shrinkage used before are not useful in this case.
+
+\subsubsection{Construction for a single quadrant separated pair}
+
+\begin{figure}
+    \centering%
+    \includegraphics{figs/grid_construction}%
+    \figlab{grid_construction}%
+    \caption{The construction of the grid for the arbitrary axis
+       parallel rectangle local spanner.}
+\end{figure}
+
+Consider a pair $\Pair = \{\PSX, \PSY \}$ in a \QSPD of
+$\PS$. The set  $\PSX$ is quadrant-separated from $\PSY$. That is,
+there is a point $\cen_\Pair$, such that $\PSX$ and $\PSY$ are
+contained in two opposing quadrants in the partition of the plane
+formed by the vertical and horizontal line through $\cen_\Pair$.
+
+For simplicity of exposition, assume that $\cen_\Pair = (0,0)$, and 
+ $\PSX \prec (0,0 ) \prec \PSY$. That is,
+the points of $\PSX$ are in the negative quadrant, and the points of
+$\PSY$ are in the positive quadrant.
+
+\newcommand{\clientsY}[2]{\Mh{\mathsf{C}}\pth{#1,#2}}
+Consider a point $\pa \in \PSX$. Its \emphw{set of clients} in $\PSY$,
+is
+\begin{equation*}
+    \clientsY{\pa}{\PSY}%
+    =%
+    \Set{ \pb \in \PSY }{ \dZ{1}{\pb}{\cen_\Pair}  \leq
+       \dZ{1}{\pa}{\cen_\Pair}}.
+\end{equation*}
+
+\newcommand{\rectA}{\Mh{B}}%
+
+We construct a non-uniform grid $\grid$ in the square $[0,x+y]^2$.
+To this end, we first partition it into four subrectangles
+\begin{equation*}
+    \begin{array}{l|l}
+      \rectA_\nwarrow = [0,x] \times [y,x+y]
+      &
+        \rectA_\nearrow = [x,x+y] \times [y,x+y]\Bigr.\\
+      \hline
+      \rectA_{\swarrow} = [0,x]\times [0,y]
+      &
+        \rectA_\searrow = [x,x+y] \times [0,y]\Bigr.\\
+    \end{array}
+\end{equation*}
+Let $\tau > 0$ be an integer number of specified shortly.  We
+subpartition each of the three rectangles
+$\rectA_\nwarrow, \rectA_\swarrow, \rectA_\searrow$ into a
+$\tau \times \tau$ grid, where each cell is a scaled $1/\tau$ copy of
+itself.  See \figref{grid_construction}. This grid has $O(\tau^2)$
+cells. For a cell $C$ in this grid, let $\PSY \cap C$ be the points of
+$\PSY$ contained in it. We connect $\pa$ to the left-most and
+bottom-most points in $\PSY \cap C$. This process generates two edges
+in the constructed graph for each grid cell, and $O( \tau^2)$ edges
+overall.
+
+The algorithm repeats this construction for all the points
+$\pa \in \PSX$. It does the symmetric construction for all the points
+of $\PSY$.
 
 
+\subsubsection{The construction algorithm}
 
+The algorithm computes a $1/\epsA$-\QSPD of $\PS$, for a parameter
+$\epsA$ to be specified shortly.
 
-\begin{equation}
-    \alpha' \leq (1+\eps)^i \leq \frac{\alpha}{1-\eps}
-\end{equation}
+, and point in
+ 
 
-\begin{equation}
-    \log_{1+\eps}(\alpha') \leq i \leq
-    \log_{1+\eps}\left(\frac{\alpha}{1-\eps}\right)
-\end{equation}
+as
+follows. Let $\pa = (x,y)$, partition the rectangle
+$\rectA_{\swarrow} = [0,x]\times [0,y]$ by tiling it by copies of the
+$\epsA$-scaled rectangle $\epsA \rectA_\swarrow $, where
+$\epsA = 1/\tau$ for some integer $\tau$ to be determined
+shortly. Similarly, we tile the rectangle
+\begin{math}
+    \rectA_\searrow = [x,x+y] \times [0,y],
+\end{math}
+by $\epsA$-scaled rectangle $\epsA \rectA_\searrow$.
+And symmetrically, we tile the rectangle 
+\begin{math}
+    \rectA_\nwarrow = [0,x] \times [x+y],
+\end{math}
 
-\begin{equation}
-    \log_{1+\eps}(\alpha') \leq i \leq \log_{1+\eps}(\alpha) -
-    \log_{1+\eps}(1-\eps)
-\end{equation}
-
-\hrule
-
-If $\log_{1+\eps}(1-\eps)<-1$, then there must be an integer $i$ with
-the required properties. We now notice that
-$(1+\eps)^{-1}=\frac{1}{1+\eps}>(1-\eps)$ [since
-$1>(1-\eps)(1+\eps)=(1-\eps^2)$], and so $i$ exists.
-
-The size of the spanner is $\log_{1+\eps}(\alpha)$ times the number of
-edges in a convex local spanner, and since
-$\log_{1+\eps}(\alpha)=O\left(\frac{\log(\alpha)}{\eps}\right)$, we
-have a spanner of size
-$O\left(\frac{\log(\alpha)}{\eps (t-1)^{-3}}n\log n\right)$
-
-
-\subsection{Arbitrary rectangles}
-
-In order to construct local spanners for the family $\LL$ of axis
-parallel rectangles with $\eps$-shadow, we describe a decomposition of
-the point set $P\subseteq \Re^2$ in to pairs of sets, a decomposition
-which we name a Quadrant Separated Pair Decomposition (\QSPD). This
-decomposition gives us $O(n\log^2n)$ pairs $(A_i,B_i)$ of subsets of
-$\PS$, such that the sets can be separated by a vertical line and also
-by a horizontal line, and for every two points $p,q\in P$, there
-exists a single pair $(A_i,B_i)$ such that (w.l.o.g) $p\in A_i$,
-$q\in B_i$. This separation can be viewed as if on of the sets lies in
-the first quadrant of the plane (i.e. every point has positive $x$ and
-$y$ values), and the other is in the third quadrant (i.e. every point
-has negative $x$ and $y$ values), hence the name.
-
-The construction of the decomposition can be described as the repeated
-recursive invocation of two fairly simple subroutines denoted $S_1$
-and $S_2$. The first subroutine $S_1$ goes as follows. Given a set of
-points $\PS$, and a horizontal line $l_y$, find the median of $\PS$
-w.r.t. the $x$-coordinates of the points, and create the vertical line
-$l_x$ passing through it. $l_x$ and $l_y$ now divide the plane into 4
-quadrants, add both pairs of diagonally opposing quadrants to the
-decomposition, and recurse twice, once on the points to the left of
-$l_x$, and once on the points to its right.
-
-The second operation is now even easier to describe. Find the median
-of $\PS$ w.r.t. the $y$-coordinates of the points, create the
-horizontal line $l_y$ passing through that point, call $S_1(P,l_y)$,
-and recurse twice, once on the points to below of $l_y$, and once on
-the points above it.
-
-\begin{claim}
-    The subroutine $S_2(P)$ creates a \QSPD with size $O(n\log^2n)$.
-\end{claim}
-
-\begin{proof}
-    By construction, each reported pair is separated w.r.t. to both
-    dimensions, and any two point appear in diagonally opposing
-    quadrants exactly once, as every recursive calls to both $S_1$ and
-    $S_2$ will include only one of the points.
+\begin{equation*}
     
-    Every call to $S_1$ creates two pairs, and generates two recursive
-    calls, each with exactly half of the points. The formula for the
-    size of the pairs created by $S_1$ is therefore
-    $T(n)=2T\left( \frac{n}{2}\right) + O(n)$, which solves to
-    $O(n)$. Very similarly, each call to $S_2$ calls $S_1$ once, and
-    generates two recursive calls, each with exactly half of the
-    points. The total number of pairs is therefore
-    $S(n)=2S\left( \frac{n}{2}\right) + O(n\log n)$, which solves to
-    $O(n\log^2n)$.
-    
-\end{proof}
+\end{equation*}
+
+
+
+
+\subsubsection{Construction}
 
 
 
@@ -1315,14 +1430,6 @@ $\eps(x+y)$. Formally:
 
 The entire construction can be seen in \figref{grid_construction}.
 
-\begin{figure}
-    \centering%
-    \includegraphics[width=\linewidth,page=3]%
-    {figs/grid_construction}%
-    \figlab{grid_construction}%
-    \caption{The construction of the grid for the arbitrary axis
-       parallel rectangle local spanner.}
-\end{figure}
 
 \begin{claim}
     For every rectangle $r\in \LL$ and a pair $(A,B)$ of the SSPD

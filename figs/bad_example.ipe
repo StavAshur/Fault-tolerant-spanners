@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.23">
-<info created="D:20210803133057" modified="D:20210803154710"/>
+<info created="D:20210803133057" modified="D:20210805112215"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -982,6 +982,9 @@ h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 </preamble>
 </ipestyle>
+<ipestyle name="8in page style">
+<layout paper="720 630" origin="0 0" frame="720 630"/>
+</ipestyle>
 <page>
 <layer name="alpha"/>
 <layer name="red_points"/>
@@ -993,6 +996,7 @@ h
 <layer name="beta"/>
 <layer name="gamma"/>
 <layer name="VIEWBBOX"/>
+<layer name="delta"/>
 <view layers="red_points blue_points gamma VIEWBBOX" active="disk"/>
 <view layers="red_points blue_points triangulaion VIEWBBOX" active="gamma"/>
 <view layers="red_points blue_points disk triangulaion beta VIEWBBOX" active="beta"/>
@@ -1001,7 +1005,110 @@ h
 <view layers="red_points blue_points garbage VIEWBBOX" active="garbage"/>
 <view layers="red_points blue_points garbage disk VIEWBBOX" active="disk"/>
 <view layers="beta VIEWBBOX" active="triangulaion"/>
-<view layers="alpha red_points blue_points garbage disk triangulaion zeta beta VIEWBBOX" active="disk"/>
+<view layers="red_points blue_points" active="disk"/>
+<view layers="red_points delta" active="delta"/>
+<group layer="delta">
+<path stroke="black">
+379.83 122.324 m
+347.83 108.324 l
+</path>
+<path stroke="black">
+347.83 108.324 m
+279.83 134.324 l
+</path>
+<path stroke="black">
+347.83 108.324 m
+263.032 121.857 l
+</path>
+<path stroke="black">
+184.844 122.551 m
+347.83 108.324 l
+</path>
+<path stroke="black">
+279.83 134.324 m
+184.844 122.551 l
+</path>
+<path stroke="black">
+263.032 121.857 m
+279.83 134.324 l
+</path>
+<path stroke="black">
+184.844 122.551 m
+263.032 121.857 l
+</path>
+<path stroke="black">
+279.83 134.324 m
+379.83 122.324 l
+</path>
+<path stroke="black">
+87.9457 137.465 m
+279.83 134.324 l
+</path>
+<path stroke="black">
+109.048 128.007 m
+99.1131 115.809 l
+</path>
+<path stroke="black">
+184.844 122.551 m
+99.1131 115.809 l
+</path>
+<path stroke="black">
+109.048 128.007 m
+184.844 122.551 l
+</path>
+<path stroke="black">
+87.9457 137.465 m
+109.048 128.007 l
+</path>
+<path stroke="black">
+184.844 122.551 m
+87.9457 137.465 l
+</path>
+<path stroke="black">
+103.812 125.324 m
+109.048 128.007 l
+</path>
+<path stroke="black">
+109.048 128.007 m
+94.012 128.473 l
+</path>
+<path stroke="black">
+103.812 125.324 m
+94.012 128.473 l
+</path>
+<path stroke="black">
+347.83 108.324 m
+99.1131 115.809 l
+</path>
+<path stroke="black">
+94.012 128.473 m
+87.9457 137.465 l
+</path>
+<path stroke="black">
+93.6363 126.979 m
+94.012 128.473 l
+</path>
+<path stroke="black">
+99.1131 115.809 m
+103.812 125.324 l
+</path>
+<path stroke="black">
+103.812 125.324 m
+93.6363 126.979 l
+</path>
+<path stroke="black">
+87.9457 137.465 m
+99.1131 115.809 l
+</path>
+<path stroke="black">
+93.6363 126.979 m
+87.9457 137.465 l
+</path>
+<path stroke="black">
+99.1131 115.809 m
+93.6363 126.979 l
+</path>
+</group>
 <path layer="gamma" fill="gold">
 81.1433 137.638 m
 231.991 101.606 l
@@ -1131,11 +1238,11 @@ h
 <path layer="alpha" matrix="0.5 0 0 0.5 64.1347 89.2438" stroke="black">
 32 0 0 32 64 80 e
 </path>
-<use layer="red_points" matrix="0.5 0 0 0.5 64.1347 89.2438" name="mark/disk(sx)" pos="89.9348 74.5961" size="normal" stroke="red"/>
-<use matrix="0.5 0 0 0.5 64.1347 89.2438" name="mark/disk(sx)" pos="79.4638 69.2305" size="normal" stroke="red"/>
-<use matrix="0.5 0 0 0.5 64.1347 89.2438" name="mark/disk(sx)" pos="47.7306 93.5124" size="normal" stroke="red"/>
-<use matrix="0.5 0 0 0.5 64.1347 89.2438" name="mark/disk(sx)" pos="59.1117 72.5396" size="normal" stroke="red"/>
-<use matrix="0.5 0 0 0.5 64.1347 89.2438" name="mark/disk(sx)" pos="59.8631 75.5278" size="normal" stroke="red"/>
+<use layer="red_points" matrix="0.5 0 0 0.5 64.0804 90.7091" name="mark/disk(sx)" pos="89.9348 74.5961" size="normal" stroke="red"/>
+<use matrix="0.5 0 0 0.5 64.0804 90.7091" name="mark/disk(sx)" pos="79.4638 69.2305" size="normal" stroke="red"/>
+<use matrix="0.5 0 0 0.5 64.0804 90.7091" name="mark/disk(sx)" pos="47.7306 93.5124" size="normal" stroke="red"/>
+<use matrix="0.5 0 0 0.5 64.0804 90.7091" name="mark/disk(sx)" pos="59.1117 72.5396" size="normal" stroke="red"/>
+<use matrix="0.5 0 0 0.5 64.0804 90.7091" name="mark/disk(sx)" pos="59.8631 75.5278" size="normal" stroke="red"/>
 <use layer="blue_points" matrix="0.5 0 0 0.5 64.1347 89.2438" name="mark/disk(sx)" pos="240 64" size="normal" stroke="blue"/>
 <use matrix="0.5 0 0 0.5 64.1347 89.2438" name="mark/disk(sx)" pos="288 80" size="normal" stroke="blue"/>
 <use matrix="0.5 0 0 0.5 64.1347 89.2438" name="mark/disk(sx)" pos="338 56" size="normal" stroke="blue"/>
@@ -1149,10 +1256,31 @@ h
 </path>
 <use layer="blue_points" matrix="0.5 0 0 0.5 64.1347 89.2438" name="mark/disk(sx)" pos="278 52" size="normal" stroke="blue"/>
 <use matrix="0.5 0 0 0.5 64.1347 89.2438" name="mark/disk(sx)" pos="322 28" size="normal" stroke="blue"/>
-<use layer="red_points" matrix="0.5 0 0 0.5 64.1347 89.2438" name="mark/disk(sx)" pos="70.0654 50.1993" size="normal" stroke="red"/>
+<use layer="red_points" matrix="0.5 0 0 0.5 64.0804 90.7091" name="mark/disk(sx)" pos="70.0654 50.1993" size="normal" stroke="red"/>
 <path layer="gamma" matrix="1.43 0 0 1.43 -66.07 -52.3713" stroke="black">
 99.1674 114.343 m
 208.135 129.244 l
+</path>
+<path layer="beta" stroke="black" pen="ultrafat">
+203.135 115.244 m
+99.1674 114.343 l
+</path>
+<use layer="delta" matrix="2 0 0 0.5 -295.156 90.5514" name="mark/disk(sx)" pos="240 64" size="normal" stroke="blue"/>
+<use matrix="2 0 0 0.5 -296.17 94.324" name="mark/disk(sx)" pos="288 80" size="normal" stroke="blue"/>
+<use matrix="2 0 0 0.5 -296.17 94.324" name="mark/disk(sx)" pos="338 56" size="normal" stroke="blue"/>
+<use matrix="2 0 0 0.5 -292.968 95.8567" name="mark/disk(sx)" pos="278 52" size="normal" stroke="blue"/>
+<use matrix="2 0 0 0.5 -296.17 94.324" name="mark/disk(sx)" pos="322 28" size="normal" stroke="blue"/>
+<path stroke="black">
+9.35054 0 0 9.35054 264.933 120.736 e
+</path>
+<path stroke="black">
+7.61711 0 0 7.61711 100.2 113.617 e
+</path>
+<path stroke="black">
+549.697 0 0 549.697 219.067 -426.08 e
+</path>
+<path matrix="1 0 0 1 -6.03242 8.79891" stroke="black">
+6.99019 0 0 6.99019 189.046 116.966 e
 </path>
 </page>
 </ipe>

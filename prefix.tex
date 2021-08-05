@@ -284,8 +284,12 @@
 \newcommand{\dsZ}[3]{\Mh{\mathsf{d}}_{#1}\pth{#2, #3}}%
 \newcommand{\dZ}[3]{\left\| #2 - #3 \right\|_{#1}}%
 
-\newcommand{\DistSetY}[2]{\mathrm{dist}\pth{#1,#2}}
+\newcommand{\dsY}[2]{\mathsf{d}\pth{#1,#2}}
+\newcommand{\DistSetY}[2]{\dsY{#1}{#2}}%
 
+\newcommand{\body}{\Mh{C}}%
+
+\newcommand{\grid}{\Mh{\mathsf{K}}}%
 \providecommand{\G}{\Mh{G}}%
 \renewcommand{\G}{\Mh{G}}%
 
@@ -361,6 +365,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\CHX}[1]{\mathsf{ch}\pth{#1}}%
+
+\newcommand{\rinX}[1]{\Mh{r}_{\mathrm{in}}\pth{#1}}%
+\newcommand{\routX}[1]{\Mh{R}_{\mathrm{out}}\pth{#1}}%
+\newcommand{\arX}[1]{\Mh{\mathsf{a{}r}}\pth{#1}}%
+\newcommand{\Elp}{\Mh{\mathcal{E}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%BeginIpePreamble

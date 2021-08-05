@@ -15,6 +15,12 @@ M.~A. Abam and S.~{Har{-}Peled}.
 \newblock New constructions of \textsf{SSPD}s and their applications.
 \newblock {\em Comput. Geom. Theory Appl.}, 45(5--6):200--214, 2012.
 
+\bibitem[AMS99]{ams-dagss-99}
+\hrefb{http://www.cs.ust.hk/faculty/arya/}{S. {Arya}}, \hrefb{http://www.cs.umd.edu/~mount/}{D.~M. {Mount}}, and M.~Smid.
+\newblock Dynamic algorithms for geometric spanners of small diameter:
+  Randomized solutions.
+\newblock {\em Comput. Geom. Theory Appl.}, 13(2):91--107, 1999.
+
 \bibitem[{Har}11]{h-gaa-11}
 S.~{Har{-}Peled}.
 \newblock {\em Geometric Approximation Algorithms}, volume 173 of {\em Math.

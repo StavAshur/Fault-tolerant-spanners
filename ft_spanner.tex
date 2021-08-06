@@ -235,7 +235,6 @@ near linear.
 A \emphw{$\delta$-double-wedge} is a region between two lines, where
 the angle between the two lines is at most $\epsA$.
 
-\newcommand{\DW}{\times}
 
 \begin{lemma}
     \lemlab{chop:easy}%
@@ -281,7 +280,6 @@ the angle between the two lines is at most $\epsA$.
     $\WeightX{\WS'} = O(\WeightX{\WS'}/\eps)$. The construction time
     is proportional to the weight of $\WS'$.
 \end{lemma}
-\newcommand{\ConeSet}{\Mh{\mathcal{C}}}%
 \begin{proof}
     By using \lemref{chop:easy}, we can assume that $\WS$ is (say)
     $(10/\eps)$-separated.  Now, the algorithm scans the pairs of
@@ -941,13 +939,12 @@ requirement somewhat.
 \end{figure}
 
 
-%\subsection{Shrinking the area of service}
+% \subsection{Shrinking the area of service}
 
-%\subsubsection{Shrinking by the diameter}
+% \subsubsection{Shrinking by the diameter}
 
 One way to shrink a region is as a function of its diameter.
 
-\newcommand{\shrinkDY}[2]{#1_{\boxminus #2}}
 \begin{defn}
     Given a convex region $\body$, let
     \begin{equation*}
@@ -956,15 +953,14 @@ One way to shrink a region is as a function of its diameter.
         \Set{ \pa \in \body }{ \dsY{\pa}{ \Re^2 \setminus \body} \leq \delta
            \diameterX{\body}}.        
     \end{equation*}
-    Formally, $\shrinkDY{\body}{\delta}$ is the Minkowski difference of
-    $\body$ with a disk of radius $\delta \diameterX{\body}$.
+    Formally, $\shrinkDY{\body}{\delta}$ is the Minkowski difference
+    of $\body$ with a disk of radius $\delta \diameterX{\body}$.
 \end{defn}
 
 
 \begin{defn}
-    Consider a (bounded) set  $\body$ in the plane. Let $\rinX{\body}$
-    be the radius of the largest
-    disk contained inside $\body$.
+    Consider a (bounded) set $\body$ in the plane. Let $\rinX{\body}$
+    be the radius of the largest disk contained inside $\body$.
     Similarly, $\routX{\body}$ is the smallest radius of a disk
     containing $\body$.
 
@@ -1023,7 +1019,7 @@ empty.
     \begin{math}
         \dY{\pa}{\pz} = (1+\epsA)\ell/2.
     \end{math}
-    Setting $h = \dY{\pz}{\cen}$, we have that     
+    Setting $h = \dY{\pz}{\cen}$, we have that
     \begin{equation*}
         h%
         =%
@@ -1037,8 +1033,7 @@ empty.
         \leq 
         \sqrt{\epsA} \diameterX{\body}.
     \end{equation*}
-    as    
-    $\ell \leq \diameterX{\body'} \leq \diameterX{\body}$.
+    as $\ell \leq \diameterX{\body'} \leq \diameterX{\body}$.
 
     For any point $\px \in \body'$, we have that
     $\dsY{\px}{\Re^2 \setminus \body'} \leq \delta \diamX{\body}$.  As
@@ -1056,9 +1051,9 @@ empty.
 \end{proof}
 
 
-%Before dwelling into the construction, we start with presenting a new
-%pair decomposition that would be useful for our (nefarious) purposes,
-%and is of independent interest.
+% Before dwelling into the construction, we start with presenting a
+% new pair decomposition that would be useful for our (nefarious)
+% purposes, and is of independent interest.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1189,12 +1184,10 @@ quadrant-separated for all $i$.
 
 \subsection{Weak local spanner for axis parallel rectangles}
 
-For a
-parameter $\delta \in (0,1)$, and an interval $I = [b,c]$, let
+For a parameter $\delta \in (0,1)$, and an interval $I = [b,c]$, let
 $(1-\delta)I = [t - (1-\delta)r, t+ (1-\delta)r]$ be the shrinking of
 $I$ by a factor of $1-\delta$, where $t = (b+c)/2$, and $r = c-b$.
 
-\newcommand{\Rects}{\Mh{\mathcal{R}}}%
 
 Let $\Rects$ be the set of all axis parallel rectangles in the
 plane. For a rectangle $\rect \in \Rects$, with $\rect = I \times J$,
@@ -1214,27 +1207,29 @@ Observe that rectangles in $\Rects$ might be quite ``skinny'', so the
 previous notion of shrinkage used before are not useful in this case.
 
 \subsubsection{Construction for a single quadrant separated pair}
+\seclab{pair:edges}
 
-\begin{figure}
+\begin{figure}[t]
     \centering%
     \includegraphics{figs/grid_construction}%
-    \figlab{grid_construction}%
-    \caption{The construction of the grid for the arbitrary axis
-       parallel rectangle local spanner.}
+    \caption{The construction of the grid $\grid(\pa,\Pair)$ for a
+       point $\pa=(x,y)$ and a pair $\Pair$. We are not showing the
+       subrectangles of $\rectA_\nearrow$ as they are not being used
+       in the construction.  }
+    \figlab{grid}%
 \end{figure}
 
-Consider a pair $\Pair = \{\PSX, \PSY \}$ in a \QSPD of
-$\PS$. The set  $\PSX$ is quadrant-separated from $\PSY$. That is,
-there is a point $\cen_\Pair$, such that $\PSX$ and $\PSY$ are
-contained in two opposing quadrants in the partition of the plane
-formed by the vertical and horizontal line through $\cen_\Pair$.
+Consider a pair $\Pair = \{\PSX, \PSY \}$ in a \QSPD of $\PS$. The set
+$\PSX$ is quadrant-separated from $\PSY$. That is, there is a point
+$\cen_\Pair$, such that $\PSX$ and $\PSY$ are contained in two
+opposing quadrants in the partition of the plane formed by the
+vertical and horizontal line through $\cen_\Pair$.
 
-For simplicity of exposition, assume that $\cen_\Pair = (0,0)$, and 
- $\PSX \prec (0,0 ) \prec \PSY$. That is,
-the points of $\PSX$ are in the negative quadrant, and the points of
-$\PSY$ are in the positive quadrant.
+For simplicity of exposition, assume that $\cen_\Pair = (0,0)$, and
+$\PSX \prec (0,0 ) \prec \PSY$. That is, the points of $\PSX$ are in
+the negative quadrant, and the points of $\PSY$ are in the positive
+quadrant.
 
-\newcommand{\clientsY}[2]{\Mh{\mathsf{C}}\pth{#1,#2}}
 Consider a point $\pa \in \PSX$. Its \emphw{set of clients} in $\PSY$,
 is
 \begin{equation*}
@@ -1244,10 +1239,9 @@ is
        \dZ{1}{\pa}{\cen_\Pair}}.
 \end{equation*}
 
-\newcommand{\rectA}{\Mh{B}}%
-
-We construct a non-uniform grid $\grid$ in the square $[0,x+y]^2$.
-To this end, we first partition it into four subrectangles
+We construct a non-uniform grid $\grid(\pa, \Pair)$ in the square
+$[0,x+y]^2$.  To this end, we first partition it into four
+subrectangles
 \begin{equation*}
     \begin{array}{l|l}
       \rectA_\nwarrow = [0,x] \times [y,x+y]
@@ -1256,19 +1250,17 @@ To this end, we first partition it into four subrectangles
       \hline
       \rectA_{\swarrow} = [0,x]\times [0,y]
       &
-        \rectA_\searrow = [x,x+y] \times [0,y]\Bigr.\\
+        \rectA_\searrow = [x,x+y] \times [0,y].\Bigr.\\
     \end{array}
 \end{equation*}
 Let $\tau > 0$ be an integer number of specified shortly.  We
-subpartition each of the three rectangles
-$\rectA_\nwarrow, \rectA_\swarrow, \rectA_\searrow$ into a
-$\tau \times \tau$ grid, where each cell is a scaled $1/\tau$ copy of
-itself.  See \figref{grid_construction}. This grid has $O(\tau^2)$
-cells. For a cell $C$ in this grid, let $\PSY \cap C$ be the points of
-$\PSY$ contained in it. We connect $\pa$ to the left-most and
-bottom-most points in $\PSY \cap C$. This process generates two edges
-in the constructed graph for each grid cell, and $O( \tau^2)$ edges
-overall.
+subpartition each of these rectangles into a $\tau \times \tau$ grid,
+where each cell is a scaled $1/\tau$ copy of itself.  See
+\figref{grid}. This grid has $O(\tau^2)$ cells. For a cell $\cell$ in
+this grid, let $\PSY \cap \cell$ be the points of $\PSY$ contained in
+it. We connect $\pa$ to the left-most and bottom-most points in
+$\PSY \cap \cell$. This process generates two edges in the constructed
+graph for each grid cell, and $O( \tau^2)$ edges overall.
 
 The algorithm repeats this construction for all the points
 $\pa \in \PSX$. It does the symmetric construction for all the points
@@ -1277,38 +1269,75 @@ of $\PSY$.
 
 \subsubsection{The construction algorithm}
 
-The algorithm computes a $1/\epsA$-\QSPD of $\PS$, for a parameter
-$\epsA$ to be specified shortly.
-
-, and point in
- 
-
-as
-follows. Let $\pa = (x,y)$, partition the rectangle
-$\rectA_{\swarrow} = [0,x]\times [0,y]$ by tiling it by copies of the
-$\epsA$-scaled rectangle $\epsA \rectA_\swarrow $, where
-$\epsA = 1/\tau$ for some integer $\tau$ to be determined
-shortly. Similarly, we tile the rectangle
-\begin{math}
-    \rectA_\searrow = [x,x+y] \times [0,y],
-\end{math}
-by $\epsA$-scaled rectangle $\epsA \rectA_\searrow$.
-And symmetrically, we tile the rectangle 
-\begin{math}
-    \rectA_\nwarrow = [0,x] \times [x+y],
-\end{math}
-
-\begin{equation*}
-    ???
-\end{equation*}
+The algorithm computes a $1/\epsA$-\QSPD $\WS$ of $\PS$, for a
+parameter $\epsA$ to be specified shortly. For each pair
+$\Pair \in \WS$, the algorithm generates edges for $\Pair$ using the
+algorithm of \secref{pair:edges} and adds them to the generated
+spanner $\G$.
 
 
 
 
-\subsubsection{Construction}
+
+\subsubsection{Correctness}
+
+\begin{figure}[h]
+    \includegraphics[page=2]{figs/grid_2}%
+    \hfill%
+    \includegraphics[page=3]{figs/grid_2}%
+    \hfill%
+    \includegraphics[page=4]{figs/grid_2}
+    \caption{}
+    \figlab{grid:2}
+\end{figure}
+\begin{lemma}
+    Consider a pair $\Pair = \{\PSX, \PSY \}$ in the above
+    construction, and a point $\pa =(x,y) \in \PSX$, and its
+    associated grid $\grid = \grid(\pa, \Pair)$, where $x \geq
+    y$. Consider any axis parallel rectangle $\rect$, such that
+    $\pa \in (1-\delta)\rect = I\times J$, and $(1-\delta)\rect$
+    intersects a cell $\cell \in \grid$. We have that:
+    \begin{compactenumI}
+        \item If $\cell \subseteq (1-\delta)\rect$ then
+        $(1-\delta)^{-1} \cell \subseteq \rect$.
+
+        \item If $x \geq y$ and
+        $\cell \subseteq \rect_\swarrow \cup \rect_\searrow$ then
+        $(1-\delta)^{-1} \cell \subseteq \rect$.
+
+        \item If $x \leq y$ and
+        $\cell \subseteq \rect_\swarrow \cup \rect_\nwarrow$ then
+        $(1-\delta)^{-1} \cell \subseteq \rect$.
+
+        \item If $x \geq y$ and $\cell \subseteq \rect_\nwarrow$, then
+        $(1-\delta)^{-1} \bigl(\cell \cap ([-\infty,+\infty]\times
+        J)\bigr) \subseteq \rect$.
 
 
 
+        \item $\diameterX{\cell} \leq \eps \dsY{\pa}{\cell}$.
+    \end{compactenumI}
+\end{lemma}
+\begin{proof}
+    Let $\pa = (\pa_x, \pa_y)$. By construction, the width of $\rect$
+    is at least $\pa_x$ and its height is at least $\pa_y$.  $\cell$
+\end{proof}
+
+XXXXXXXXXXXXXXXXXxx
+
+\begin{lemma}
+    For any axis-parallel rectangle $\rect$, and any two points
+    $\pa, \pb \in (1-\delta)\rect \cap \PS$, there exists a
+    $(1+\eps)$-path between $\pa$ and $\pb$ in $\G$.
+\end{lemma}
+\begin{proof}
+    ~
+\end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 

@@ -1253,14 +1253,17 @@ subrectangles
         \rectA_\searrow = [x,x+y] \times [0,y].\Bigr.\\
     \end{array}
 \end{equation*}
-Let $\tau > 0$ be an integer number of specified shortly.  We
-subpartition each of these rectangles into a $\tau \times \tau$ grid,
-where each cell is a scaled $1/\tau$ copy of itself.  See
-\figref{grid}. This grid has $O(\tau^2)$ cells. For a cell $\cell$ in
-this grid, let $\PSY \cap \cell$ be the points of $\PSY$ contained in
-it. We connect $\pa$ to the left-most and bottom-most points in
+
+\newcommand{\gConst}{\Mh{\tau}}%
+
+Let $\gConst > 0$ be an integer number of specified shortly.  We
+partition each of these rectangles into a $\gConst \times \gConst$
+grid, where each cell is a scaled $1/\gConst$ copy of itself.  See
+\figref{grid}. This grid has $O(\gConst^2)$ cells. For a cell $\cell$
+in this grid, let $\PSY \cap \cell$ be the points of $\PSY$ contained
+in it. We connect $\pa$ to the left-most and bottom-most points in
 $\PSY \cap \cell$. This process generates two edges in the constructed
-graph for each grid cell, and $O( \tau^2)$ edges overall.
+graph for each grid cell, and $O( \gConst^2)$ edges overall.
 
 The algorithm repeats this construction for all the points
 $\pa \in \PSX$. It does the symmetric construction for all the points
@@ -1278,8 +1281,30 @@ spanner $\G$.
 
 
 
+\begin{figure}
+    \phantom{}\hfill%
+    \includegraphics[page=1]{figs/expand}%
+    \hfill%
+    \includegraphics[page=2]{figs/expand}%
+    \hfill\phantom{}%
+    \caption{}
+    \figlab{x:expand}
+\end{figure}
 
+
+\newcommand{\xSlabX}[1]{\overleftrightarrow{#1}}
 \subsubsection{Correctness}
+
+% For a set $Z \subseteq \Re^2$, let
+% $Z_y = \Set{ y \in \Re}{ \exists (x,y) \in Z}$ be the projection of
+% $Z$ to the $y$ axis. The set $Z_x$ is defined symmetrically. For
+% rectangles $\rect, \rect'$, the set
+
+For a rectangle $\rect$, let
+$\xSlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x',y) \in \rect}$ be
+its expansion into a horizontal slab. Restricted to a rectangle
+$\rect'$, the resulting set is $\xSlabX{\rect} \cap \rect'$, depicted
+in \figref{x:expand}.
 
 \begin{figure}[h]
     \includegraphics[page=2]{figs/grid_2}%
@@ -1291,36 +1316,80 @@ spanner $\G$.
     \figlab{grid:2}
 \end{figure}
 \begin{lemma}
-    Consider a pair $\Pair = \{\PSX, \PSY \}$ in the above
-    construction, and a point $\pa =(x,y) \in \PSX$, and its
-    associated grid $\grid = \grid(\pa, \Pair)$, where $x \geq
-    y$. Consider any axis parallel rectangle $\rect$, such that
+    Assume that $\gConst \geq \ceil{20/\eps + 20/\delta}$.  Consider a
+    pair $\Pair = \{\PSX, \PSY \}$ in the above construction, and a
+    point $\pa =(x,y) \in \PSX$, and its associated grid
+    $\grid = \grid(\pa, \Pair)$, where $x \geq y$. Consider any axis
+    parallel rectangle $\rect$, such that
     $\pa \in (1-\delta)\rect = I\times J$, and $(1-\delta)\rect$
     intersects a cell $\cell \in \grid$. We have that:
     \begin{compactenumI}
-        \item If $\cell \subseteq (1-\delta)\rect$ then
+        \smallskip%
+        \item \itemlab{i:c} If $\cell \subseteq (1-\delta)\rect$ then
         $(1-\delta)^{-1} \cell \subseteq \rect$.
 
-        \item If $x \geq y$ and
+        \item \itemlab{small:diam}
+        $\diameterX{\cell} \leq (\eps/4) \dsY{\pa}{\cell}$.
+
+        % \smallskip%
+        \item    \itemlab{x:bigger} If $x \geq y$ and
         $\cell \subseteq \rect_\swarrow \cup \rect_\searrow$ then
         $(1-\delta)^{-1} \cell \subseteq \rect$.
 
-        \item If $x \leq y$ and
+        \item \itemlab{y:bigger} If $x \leq y$ and
         $\cell \subseteq \rect_\swarrow \cup \rect_\nwarrow$ then
         $(1-\delta)^{-1} \cell \subseteq \rect$.
 
-        \item If $x \geq y$ and $\cell \subseteq \rect_\nwarrow$, then
-        $(1-\delta)^{-1} \bigl(\cell \cap ([-\infty,+\infty]\times
-        J)\bigr) \subseteq \rect$.
+        \smallskip%
+        \item \itemlab{n:w} If $x \geq y$ and
+        $\cell \subseteq \rect_\nwarrow$, then
+        $(1-\delta)^{-1} \bigl(\xSlabX{ (1-\delta)\rect} \cap \cell
+        \bigr) \subseteq \rect$.
 
 
 
-        \item $\diameterX{\cell} \leq \eps \dsY{\pa}{\cell}$.
     \end{compactenumI}
 \end{lemma}
 \begin{proof}
-    Let $\pa = (\pa_x, \pa_y)$. By construction, the width of $\rect$
-    is at least $\pa_x$ and its height is at least $\pa_y$.  $\cell$
+    \itemref{i:c} is immediate, and \itemref{y:bigger} follows by
+    symmetry from \itemref{x:bigger}.
+
+    \smallskip%
+    \noindent%
+    \itemref{small:diam} We have that
+    \begin{math}
+        \diameterX{\cell}%
+        \leq%
+        (x+y) /\gConst%
+        \leq%
+        \|\pa\|_1 /\gConst \leq %
+        (\eps/4) \dsY{\pa}{\cell}.
+    \end{math}
+
+    \newcommand{\widthX}[1]{\Mh{\mathsf{wd}}\pth{#1}} \smallskip%
+    \smallskip%
+    \noindent%
+    \itemref{x:bigger} The width of $(1-\delta)\rect$ is at least $x$,
+    as it contains both $\pa$ and the origin. As such,
+    \begin{equation*}
+        \bigl( \widthX{\rect} - \widthX{(1-\delta)\rect} \bigr)/2 \geq
+        2(x /\tau) \geq 2 \widthX{\cell}.
+    \end{equation*}
+    That is, the width of the ``expanded'' rectangle $\rect$ is enough
+    to cover $\cell$, and a grid cell adjacent to it to the right.
+
+    A similar argument about the height shows that $\rect$ covers the
+    region immediately above $\cell$ -- in particular, the vertical
+    distance from $\cell$ to the top boundary of $\rect$ is at least
+    the height of $\cell$. This implies that the expanded cell
+    $(1-\delta)^{-1}\cell$ is contained in $\rect$, as claimed, as
+    $\delta < 1/2$.
+
+
+    \smallskip%
+    \noindent%
+    \itemref{n:w} We decompose the claim to the two dimensions of the
+    region. The claim about the 
 \end{proof}
 
 XXXXXXXXXXXXXXXXXxx

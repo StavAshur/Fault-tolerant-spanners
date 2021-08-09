@@ -1256,14 +1256,15 @@ subrectangles
 
 \newcommand{\gConst}{\Mh{\tau}}%
 
-Let $\gConst > 0$ be an integer number of specified shortly.  We
-partition each of these rectangles into a $\gConst \times \gConst$
-grid, where each cell is a scaled $1/\gConst$ copy of itself.  See
-\figref{grid}. This grid has $O(\gConst^2)$ cells. For a cell $\cell$
-in this grid, let $\PSY \cap \cell$ be the points of $\PSY$ contained
-in it. We connect $\pa$ to the left-most and bottom-most points in
-$\PSY \cap \cell$. This process generates two edges in the constructed
-graph for each grid cell, and $O( \gConst^2)$ edges overall.
+Let $\gConst = 4/\eps + 4/\delta > 0$ be an integer number of
+specified shortly.  We partition each of these rectangles into a
+$\gConst \times \gConst$ grid, where each cell is a scaled $1/\gConst$
+copy of itself.  See \figref{grid}. This grid has $O(\gConst^2)$
+cells. For a cell $\cell$ in this grid, let $\PSY \cap \cell$ be the
+points of $\PSY$ contained in it. We connect $\pa$ to the left-most
+and bottom-most points in $\PSY \cap \cell$. This process generates
+two edges in the constructed graph for each grid cell, and
+$O( \gConst^2)$ edges overall.
 
 The algorithm repeats this construction for all the points
 $\pa \in \PSX$. It does the symmetric construction for all the points
@@ -1272,8 +1273,7 @@ of $\PSY$.
 
 \subsubsection{The construction algorithm}
 
-The algorithm computes a $1/\epsA$-\QSPD $\WS$ of $\PS$, for a
-parameter $\epsA$ to be specified shortly. For each pair
+The algorithm computes a \QSPD $\WS$ of $\PS$. For each pair
 $\Pair \in \WS$, the algorithm generates edges for $\Pair$ using the
 algorithm of \secref{pair:edges} and adds them to the generated
 spanner $\G$.
@@ -1293,6 +1293,7 @@ spanner $\G$.
 
 
 \newcommand{\xSlabX}[1]{\overleftrightarrow{#1}}
+\newcommand{\ySlabX}[1]{\updownarrow\!{#1}}
 \subsubsection{Correctness}
 
 % For a set $Z \subseteq \Re^2$, let
@@ -1304,7 +1305,8 @@ For a rectangle $\rect$, let
 $\xSlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x',y) \in \rect}$ be
 its expansion into a horizontal slab. Restricted to a rectangle
 $\rect'$, the resulting set is $\xSlabX{\rect} \cap \rect'$, depicted
-in \figref{x:expand}.
+in \figref{x:expand}.  Let
+$\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$
 
 \begin{figure}[h]
     \includegraphics[page=2]{figs/grid_2}%
@@ -1316,6 +1318,8 @@ in \figref{x:expand}.
     \figlab{grid:2}
 \end{figure}
 \begin{lemma}
+    \lemlab{cases}%
+    %
     Assume that $\gConst \geq \ceil{20/\eps + 20/\delta}$.  Consider a
     pair $\Pair = \{\PSX, \PSY \}$ in the above construction, and a
     point $\pa =(x,y) \in \PSX$, and its associated grid
@@ -1332,7 +1336,7 @@ in \figref{x:expand}.
         $\diameterX{\cell} \leq (\eps/4) \dsY{\pa}{\cell}$.
 
         % \smallskip%
-        \item    \itemlab{x:bigger} If $x \geq y$ and
+        \item \itemlab{x:bigger} If $x \geq y$ and
         $\cell \subseteq \rect_\swarrow \cup \rect_\searrow$ then
         $(1-\delta)^{-1} \cell \subseteq \rect$.
 
@@ -1346,13 +1350,17 @@ in \figref{x:expand}.
         $(1-\delta)^{-1} \bigl(\xSlabX{ (1-\delta)\rect} \cap \cell
         \bigr) \subseteq \rect$.
 
-
-
+        \smallskip%
+        \item \itemlab{s:e} If $x \leq y$ and
+        $\cell \subseteq \rect_\searrow$, then
+        $(1-\delta)^{-1} \Bigl(\ySlabX{\bigl( (1-\delta)\rect \bigr)}
+        \cap \cell \Bigr) \subseteq \rect$.
     \end{compactenumI}
 \end{lemma}
 \begin{proof}
-    \itemref{i:c} is immediate, and \itemref{y:bigger} follows by
-    symmetry from \itemref{x:bigger}.
+    \itemref{i:c} is immediate, \itemref{y:bigger} and \itemref{s:e}
+    follows by symmetry from \itemref{x:bigger} and \itemref{n:w},
+    respectively.
 
     \smallskip%
     \noindent%
@@ -1389,365 +1397,100 @@ in \figref{x:expand}.
     \smallskip%
     \noindent%
     \itemref{n:w} We decompose the claim to the two dimensions of the
-    region. The claim about the 
+    region. Let
+    $\rectA = \bigl(\xSlabX{ (1-\delta)\rect} \cap \cell
+    \bigr)$. Observe that containment in the $x$-axis follows by
+    arguing as in \itemref{x:bigger}. As for the $y$-interval of $B$,
+    observe that is contained in the $y$-interval of
+    $(1-\delta)\rect$, which implies that when expanded by
+    $(1-\delta)^{-1}$, it would be contained in the $y$-interval of
+    $\rect$. Combining the two implies the result.
 \end{proof}
 
-XXXXXXXXXXXXXXXXXxx
-
 \begin{lemma}
+    \lemlab{local:spanner}%
+    %
     For any axis-parallel rectangle $\rect$, and any two points
     $\pa, \pb \in (1-\delta)\rect \cap \PS$, there exists a
     $(1+\eps)$-path between $\pa$ and $\pb$ in $\G$.
 \end{lemma}
 \begin{proof}
-    ~
+    The proof is the spirit of the ``standard'' recursive proof for
+    spanners. Let $\Pair = \{ \PSX, \PSY \} \in \WS$ be the pair in
+    the \QSPD that separates $\pa$ and $\pb$, let $\cen$ be the
+    separation point of the pair, and assume for the simplicity of
+    exposition that $\pa \in \PSX$, $\PSX \prec \cen \prec \PSY$, and
+    $\cen = (0,0)$. Furthermore, assume that
+    $\|\pa\|_1 \geq \|\pb\|_1$.
+
+    Let $\cell$ be the grid cell of $\grid(\pa, \Pair)$ that contains
+    $\pb$, and let $\pa = (x,y)$. If
+    $\cell \subseteq (1-\delta)\rect$, then
+    $(1-\delta)^{-1}\cell \subseteq \rect$ by \lemref{cases}
+    \itemref{i:c}. As such, let $\pc$ be the leftmost point in
+    $\cell \cap \PS \cap \rect$. Both
+    $\pb, \pc \in (1-\delta)^{-1}\cell$, and by induction, there is an
+    $(1+\eps)$-path $\pi$ between them in $\G$ (note, that the
+    induction applies to the two points, and the ``expanded''
+    rectangle $(1-\delta)^{-1}\cell$). Since $\pa \pc$ is an edge of
+    $\G$, prefixing $\pi$ by this edge results in an $(1+\eps)$-path,
+    as $\dY{\pb}{\pc} \leq (\eps/4) \dY{\pa}{\pb}$, by \lemref{cases}
+    \itemref{small:diam} (verifying this requires some standard
+    calculations which we omit).
+
+    Otherwise, one need to apply the same argument using the
+    appropriate case of \lemref{cases}.  So assume that $x \geq y$
+    (the case that $y \geq x$ is handled symmetrically). If
+    $\cell \subseteq \rect_\swarrow \cup \rect_\searrow$, then
+    \itemref{x:bigger} implies that
+    $(1-\delta)^{-1} \cell \subseteq \rect$. Which implies that
+    induction applies, and the claim holds.
+
+    The remaining case is that $x \geq y$ and
+    $\cell \subseteq \rect_\nwarrow$.  Let
+    $\rectB= \xSlabX{ (1-\delta)\rect} \cap \cell$.  By \itemref{n:w},
+    we have $(1-\delta)^{-1} \bigl(\rectB \bigr) \subseteq
+    \rect$. Namely,
+    $\pb \in (1-\delta)\rect \cap \cell \subseteq \rectB$, and let
+    $\pc$ be the lowest point in $\cell \cap \PS$. By construction
+    $\pa \pc \in \EGX{\G}$, $\pb, \pc \in \rectB$,
+    $(1-\delta)^{-1} \rectB \subseteq \rect$. As such, we can apply
+    induction to $\pb$, $\pc$, and $(1-\delta)^{-1} \rectB$, and
+    conclude that $\dGZ{\G}{\pb}{\pc} \leq (1+\eps) \dY{\pb}{\pc}$.
+    Plugging this into the regular machinery implies the claim.
+\end{proof}
+
+\begin{theorem}
+    Let $\PS$ be a set of $n$ points in the plane, and let
+    $\eps, \delta \in (0,1)$ be parameters. The above algorithm
+    constructs, in $O((1/\eps^2 + 1/\delta^2) n \log^2 n)$ time, a
+    graph $\G$ with $O((1/\eps^2 + 1/\delta^2) n \log^2 n)$ edges. The
+    graph $\G$ is a $(1-\delta)$-local $(1+\eps)$-spanner for axis
+    parallel rectangles. Formally, for any axis-parallel rectangle
+    $\rect$, we have that $\rect \cap \PS$ is an $(1+\eps)$-spanner
+    for all the points of $\bigl((1-\delta)\rect \bigr)\cap \PS$.
+\end{theorem}
+\begin{proof}
+    Computing the \QSPD $\WS$ takes $O(n \log^2 n)$ time. For each
+    pair $\{\PSX, \PSY\}$ in the decomposition with
+    $m = |\PSX| + |PSY|$ points, we need to compute the lowest and
+    leftmost points in $(\PSX \cup \PSY) \cap \cell$, for each cell in
+    the constructed grid. This can readily be done using orthogonal
+    range trees in $O( \log^2 n)$ time per query (a somewhat faster
+    query time should be possible by using that offline nature of the
+    queries, etc). This yields the construction time. The size of the
+    computed graph is
+    $O(\WeightX{\WS} \gConst^2) = O\bigl((1/\delta^2 + 1/\eps^2) n
+    \log^2 n\bigr)$.
+
+    The desired local spanner property is provided by
+    \lemref{local:spanner}.
 \end{proof}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-We first describe a subroutine for connecting two sets of points, $A$
-and $B$, where $A$ is contained in $Q^-$, the negative quadrant of the
-plane (i.e., have a negative value $x$-coordinate and a negative value
-$y$-coordinate), and $B$ is contained in $Q^+$, the positive quadrant
-of the plane.
-
-Our algorithm will connect every point in $A$ to
-$O\left(\frac{1}{\eps^2}\right)$ points in the positive quadrant, and
-after performing the same process for the points of the symmetrically
-defined $B'$, we will have that every rectangle that truly contains
-points from $A$ and $B$ will have an edge $(a,b)$ with $a\in A$ and
-$b\in B$.
-
-For every point $a = (x',y') \in A$ we define partition the positive
-quadrant into $O\left(\frac{1}{\eps^2}\right)$ sets. We consider the
-following $\frac{1}{\eps}$ horizontal stripes -
-$\forall j\in \{1,...,\frac{1}{\eps}\}$:
-
-\hrule
-
-If $\log_{1+\eps}(1-\eps)<-1$, then there must be an integer $i$ with
-the required properties. We now notice that
-$(1+\eps)^{-1}=\frac{1}{1+\eps}>(1-\eps)$ [since
-$1>(1-\eps)(1+\eps)=(1-\eps^2)$], and so $i$ exists.
-
-The size of the spanner is $\log_{1+\eps}(\alpha)$ times the number of
-edges in a convex local spanner, and since
-$\log_{1+\eps}(\alpha)=O\left(\frac{\log(\alpha)}{\eps}\right)$, we
-have a spanner of size
-$O\left(\frac{\log(\alpha)}{\eps (t-1)^{-3}}n\log n\right)$
-
-
-\subsection{Arbitrary rectangles}
-
-Let $P\subseteq \Re^2$. We first describe a subroutine for connecting
-two sets of points, $A$ and $B$, where $A$ is contained in $Q^-$, the
-negative quadrant of the plane (i.e., have a negative value
-$x$-coordinate and a negative value $y$-coordinate), and $B$ is
-contained in $Q^+$, the positive quadrant of the plane.
-
-Our algorithm will connect every point in $A$ to
-$O\left(\frac{1}{\eps^2}\right)$ points in the positive quadrant, and
-after performing the same process for the points of the symmetrically
-defined $B'$, we will have that every rectangle that truly contains
-points from $A$ and $B$ will have an edge $(a,b)$ with $a\in A$ and
-$b\in B$.
-
-For every point $a = (x',y') \in A$ we define partition the positive
-quadrant into $O\left(\frac{1}{\eps^2}\right)$ sets. We consider the
-following $\frac{1}{\eps}$ horizontal stripes -
-$\forall j\in \{1,...,\frac{1}{\eps}\}$:
-
-\hrule
-
-\begin{equation}
-    H_{j}:=\{(x,y)~|~  0 \leq x \leq x'+y'  ,~ (j-1)\cdot \eps y' < y
-    \leq j\cdot \eps y'\}
-\end{equation}
-
-On top of these we add similarly built vertical stripes:
-
-\begin{equation}
-    V_{i}:=\{(x,y)~|~ (j-1)\cdot \eps x' < x \leq j\cdot \eps x',~ 0
-    \leq y \leq x'+y' \}
-\end{equation}
-
-\hrule
-
-These stripes create a grid which partitions the rectangle $r$ whose
-opposite corners are $(0,0)$ and $(|x'|,|y'|)$ into $\frac{1}{\eps^2}$
-cells of width $\eps x$ and height $\eps y$. Formally:
-
-\begin{equation}
-    C_{i,j}:=\{(x',y')~|~  (i-1)\cdot \eps x < x' \leq i\cdot \eps x,~
-    (j-1)\cdot \eps y< y' \leq j\cdot \eps y\}
-\end{equation}
-
-We now divide the parts of the stripes that lie outside of the
-rectangle $r$. The horizontal stripes are divided into cells of width
-$\eps(x+y)$ and height $\eps y$, and the vertical stripes are divided
-into cells of width $\eps y$and height $\eps(x+y)$. The extremal cell
-in each stripe may be smaller if $x$ or $y$ are not divisible by
-$\eps(x+y)$. Formally:
-
-\hrule
-
-These stripes create a grid which partitions the rectangle $r$ whose
-opposite corners are $(0,0)$ and $(|x'|,|y'|)$ into $\frac{1}{\eps^2}$
-cells of width $\eps x$ and height $\eps y$. Formally:
-
-\begin{equation}
-    C_{i,j}:=\{(x',y')~|~  (i-1)\cdot \eps x < x' \leq i\cdot \eps x,~
-    (j-1)\cdot \eps y< y' \leq j\cdot \eps y\}
-\end{equation}
-
-We now divide the parts of the stripes that lie outside of the
-rectangle $r$. The horizontal stripes are divided into cells of width
-$\eps(x+y)$ and height $\eps y$, and the vertical stripes are divided
-into cells of width $\eps y$and height $\eps(x+y)$. The extremal cell
-in each stripe may be smaller if $x$ or $y$ are not divisible by
-$\eps(x+y)$. Formally:
-
-\hrule
-
-\begin{equation}
-    C_{H_{i,j}}:=\{(x',y')~|~  x' + (i-1)\cdot \eps (x+y) < x' \leq x'
-    + i\cdot \eps (x+y),~ (j-1)\cdot \eps y< y' \leq j\cdot \eps y\}
-\end{equation}
-
-\begin{equation}
-    C_{V_{i,j}}:=\{(x',y')~|~  (i-1)\cdot \eps x < x' \leq i\cdot \eps
-    x,~ y + (j-1)\cdot \eps (x+y)< y' \leq y + j\cdot \eps (x+y)\}
-\end{equation}
-
-\hrule
-
-The entire construction can be seen in \figref{grid_construction}.
-
-
-\begin{claim}
-    For every rectangle $r\in \LL$ and a pair $(A,B)$ of the SSPD
-    s.t. $r_{1-\eps}\cap A \neq \emptyset$ and
-    $r_{1-\eps}\cap B \neq \emptyset$, there are two points
-    $a\in A, b\in B$ connected by an edge.
-\end{claim}
-
-\begin{proof}
-    Let $A'=A\cap r_{1-\eps}, B'=B \cap r_{1-\eps}$, and let
-    $p= \underset{p'}{argmax}\{||p'||_{\infty}~:~ p'\in A\cup B\}$,
-    and assume w.l.o.g that $p\in A'$ and prove that there exist a
-    point $q\in B'$ connected to $p$ by an edge.
-    
-    We take a point $q'\in B'$. Due to the choice of $p$ we have that
-    one of the coordinates of $q'$ has a smaller absolute value than
-    the same respective coordinate of $p$, and assume w.l.o.g that it
-    is the $x$-coordinate. Now, since $\bigcup C_{i,j} \bigcup V_i$
-    cover the entire part of $Q^+$ with an absolute $x$ value lower
-    that that of $p$, we have that either there is an edge $\{p,q\}$
-    in the graph, or there is another point $q$ in the same cell as
-    $q'$. Regardless, since the cells are of width $\eps\cdot p.x$ and
-    height $\eps\cdot p.y$ ,and $r$ is of width at least $p.x$ and
-    height at least $p.y$, we get that the entire cell is inside $r$,
-    and therefore there exists an edge as described in the claim.
-    
-    \hrule
-
-    The entire construction can be seen in
-    Figure~\ref{fig:grid_construction}. We can now describe the
-    construction of our spanner. For $P\subseteq \Re^2$ we create a
-    \QSPD of $P$, and for every pair $(A,B)$ we add an edge between
-    every point $a\in A$ (and later reverse the rolls inside the pair)
-    to an arbitrary point of $P$ in every cell $C_{i,j}$, to the
-    leftmost point of $P$ in every $C_{H_{i,j}}$, and to the
-    bottom-most point of $P$ in every $C_{V_{i,j}}$.
-\end{proof}
-
-We now prove a lemma that summarizes the properties of the resulted
-graph, and which we will then use to prove that our construction
-produces an $(\LL, eps)$- local $t$-spanner for the family of
-arbitrary axis parallel rectangles.
-
-
-\begin{claim}
-    \label{clm:span_properties}
-    For any two points $a,b\in P$ that are properly contained in an
-    axis parallel rectangle $r$ ,and are not connected by an edge,
-    there exists a point $b'\in r$ such that if w.l.o.g
-    $||b-b'|| \leq ||a-c||$ then:
-    \begin{enumerate}
-        \item $||b-b'|| \leq 3\eps ||a-b||)$, and
-        \item there is an edge between $a$ and $b'$.
-    \end{enumerate}
-    Additionally, the two closest points $p,q\in P$ are connected by
-    an edge.
-	
-\end{claim}
-
-\begin{proof}
-    Let $(A,B)$ be the unique pair of the \QSPD such that w.l.o.g
-    $a\in A$ and $b\in B$, $A\subseteq Q^-$, $B\subseteq Q^+$, and
-    $||b||_{1} \leq ||a||_{1}$. We denote the absolute value of the
-    coordinates of a point $p$ by $p.x$ and $p.y$ for the $x$ and $y$
-    coordinates respectively. If $b.x \leq a.x$ and $b.y \leq a.y$,
-    then by the construction, $a$ is connected to a point $b'$ in the
-    cell $C_{i,j}$ containing $b$. Since the cell's dimensions are
-    $\eps\cdot a.x \times \eps a.y$, we have that
-    $C_{i,j}\subseteq r$, and also:
-	
-	\begin{equation}
-            ||b-b'||\leq \sqrt{(\eps\cdot a.x)^2+(\eps\cdot
-               a.y)^2}=\eps\sqrt{a.x^2+a.y^2}\leq \eps(a.x+a.y) \leq
-            2\eps||a-b||
-        \end{equation}
-	
-	regardless of the choice of $b'$, as
-        $||a-b||\geq||a-(0,0)||\geq \frac{a.x+a.y}{2}$.
-	
-	If w.l.o.g $a.x\leq b.x$, then since $||b||_{1} \leq
-        ||a||_{1}$ we know that $b.y \leq a.y$ meaning that $b$ is
-        contained in some cell $C_{H_{i,j}}$. Again, due to the
-        dimensions of $C_{H_{i,j}}$ (which are
-        $\eps\cdot a.y \time \eps\cdot(a.x+a.y)$) we have that $b'$,
-        the leftmost point of $P$ in $C_{H_{i,j}}$, is contained in
-        $r$, and also:
-	
-	\begin{equation}
-            ||b-b'||\leq \sqrt{(\eps (a.x+a.y))^2+(\eps\cdot
-               a.y)^2}\leq \sqrt{2(\eps (a.x+a.y))^2}
-        \end{equation}
-	\begin{equation}
-            =\sqrt{2}\eps(a.x+a.y) \leq \sqrt{8}\eps||a-b||.
-        \end{equation}
-	
-	In order to prove the second property we only need to notice
-        that if w.l.o.g $p\in Q^-$, $q\in Q^+$, and
-        $||q||_1\leq ||p||_1$, we have that due to the dimensions of
-        the cells we can see by similar calculations that for any
-        $\eps\leq \frac{1}{\sqrt{8}}$ we have that $q$ is the only
-        point in its cell of the construction, since otherwise we get
-        a point $q'$ such that $||q-q'||\leq ||p-q||$.
-	
-    \end{proof}
-
-    We are left with proving that for a suitable choice of parameters,
-    this construction results in a $(\LL,\eps)$ local $t$-spanner.
-
-
-    % TO DO: this can probably be done faster than the naive way.
-    \begin{claim}
-	It is possible to construct a $(\LL, \epsA)$ local
-        $(1+\epsA')$-spanner of size
-        $O\left(\frac{1}{\min\{\eps, \epsA\}}n\log^2n\right)$ in
-        $O_d\left(\frac{1}{\eps^2}n\log^{O(d)}n\right)$ time.
-    \end{claim}
-
-\begin{proof} 
-    Let $\eps = \alpha \min \{\epsA,\epsA'\}$ for some
-    $\alpha \leq \frac{1}{12}$. We build a spanner using $\eps$ as the
-    parameter for the edge construction process. Due to the choice of
-    $\eps$ we have that all of the properties proven in
-    Claim~\ref{clm:span_properties} are apply. Also, since we have
-    reduced the parameter $\eps$ by a factor of $\frac{1}{2}$ on top
-    of the $\frac{1}{3}$ required to get $||b-b'||\leq \eps ||b-a||$,
-    we have that there exists a rectangle $r'\subseteq r$ such that
-    $b,b'\in_{\eps}r'$. This means that we can recurse on pairs of
-    points by their rank (in the set of pairs ordered by distance). In
-    the base case we know from Claim~\ref{clm:span_properties} the
-    points are connected by an edge, and for the recursion step we get
-    that for two points $p,q\in P$ and a rectangle $r$ such that
-    $p,q\in_{\eps} r$ we have a point $q'\in P$ such that:
-    \begin{enumerate}
-        \item $||q-q'||\leq \eps||p-q||$,
-        \item there is an edge between $p$ and $q'$, and
-        \item there exists a $1+\eps$ spanning path between $q$ and
-        $q'$
-    \end{enumerate}
-
-    This gives us a path $p\rightarrow q' \rightarrow q$ of length at
-    most
-	
-	\begin{equation}
-            ||p-q'||+(1+\eps)||q-q'||\leq
-            ||p-q||+(1+\eps)\eps||p-q||\leq (1+\epsA')||p-q||.
-        \end{equation}
-	
-	where the last transition is due to another factor of
-        $\frac{1}{2}$ that was incorporated in $\alpha$.
-	
-	The number of edges is bounded by the size of the \QSPD
-        multiplied by $\frac{1}{\eps^2}$, since every occurrence of a
-        point in the \QSPD gives rise to
-        $O\left(\frac{1}{\eps^2}\right)$ edges by construction.
-	
-	The runtime of the algorithm is composed of constructing a
-        $d$-dimensional orthogonal range tree in time
-        $O(n\log^{d-1}n)$, and querying
-        $O\left(\frac{1}{\eps^2}\right)$ $d$-dimensional boxes for
-        every point in the \QSPD, each in time $O(\log^{d-1}n)$. Since
-        the points in the orthogonal range tree are sorted by
-        dimension, getting the leftmost or bottom-most point for some
-        queries does not affect the runtime.
-	
-\end{proof}
-\hrule
-
-
-\subsection{Bounded aspect ratio triangles}
-
-The aspect ratio of a triangle is defined as the length of its longest
-edge divided by its height as it is measured from that edge. Let $\LL$
-be the set of all triangles with aspect ratio at most $\alpha$ for
-some $1 < \alpha$. We define a set of slopes, and for each subset of 3
-slopes we run the convex region algorithm with $\LL$ as homothets of a
-triangle with edges of the 3 chosen slopes. As long as the fixed
-angular interval is smaller than
-$\epsA = \arctan\left(\frac{\eps/2}{\alpha(1-\eps/2)}\right)$ (see
-\figref{triangle_with_shadow}).
-
-This construction creates $\frac{1}{\epsA}$ different convex local
-spanners, and so we get a $(1+\eps)$-local spanner for triangles with
-bounded aspect ratio in
-$O\left(\frac{1}{\epsA^3\eps^3} n\log n\right)$.
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.6\linewidth]{figs/triangle_shadow}
-    \figlab{triangle_with_shadow}
-\end{figure}
-
-
-\subsection{Fat convex regions}
-
-Let $C$ be a convex shape, let $d_+$ be the smallest disk containing
-$C$, and $d_-$ be the largest disk contained in $C$. We say that $C$
-is $\alpha$-fat if the ratio $\frac{radius(d_+)}{radius(d_-)}$ is at
-most $\alpha$. Let $\LL$ be the set of all $\alpha$-fat convex
-shapes. In the following, we construct $(\LL, \eps)$-local
-$t$-spanners for $t>1$.
-
-We start by proving a structural lemma which will be later used in the
-correctness proof.
-
-\begin{claim}
-    Let $C$ be an $\alpha$-fat convex shape, and let $C_{1-\eps}$ be
-    the $\epsilon$ core of $C$. The shortest segment $\overline{pq}$
-    such that $p,q\in\partial C$ and
-    $\overline{pq}\cap C_{1-\eps}\neq \emptyset$ is of length at
-    least %TO DO.
-\end{claim}
-
-\begin{proof}
-    Let $d_-$ and $d_+$ be two disks, such that
-    $d_-\subseteq C\subseteq d_+$, and
-    $\frac{radius(d_+)}{radius(d_-)}=\alpha$, and let $\overline{pq}$
-    be the a shortest segment. We assume
-    $\overline{pq} \cap C_{1-\eps}$ is a single point $s$.
-\end{proof}
 
 
 \bibliographystyle{alpha}

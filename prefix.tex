@@ -239,15 +239,22 @@
    label=(\roman*)}%
 
 \newlist{compactitem}{itemize}{5}%
+\setlist[compactitem]{label=\ensuremath{\bullet}}%
 \setlist[compactitem]{topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex,%
-   label=\bullet}%
+   label=\ensuremath{\bullet}}%
 
+
+\usepackage{stmaryrd}%
+\providecommand{\IntRange}[1]{\mleft\llbracket #1 \mright\rrbracket}
+\newcommand{\IRX}[1]{\IntRange{#1}}%
+\newcommand{\IRY}[2]{\left\llbracket #1:#2 \right\rrbracket}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{wasysym}
 
 \newcommand{\disk}{\Mh{\ocircle}}
+\newcommand{\diskVY}[2]{\disk_{\downarrow}^{#1}\pth{#2}}%
 
 
 
@@ -388,6 +395,13 @@
 
 \newcommand{\cell}{\Mh{\mathsf{C}}}%
 
+\newcommand{\Of}{\Mh{\mathcal{O}}}%
+\newcommand{\Oeps}{\Mh{\mathcal{O}_\eps}}%
+\newcommand{\gConst}{\Mh{\tau}}%
+\newcommand{\xSlabX}[1]{\overleftrightarrow{#1}}
+\newcommand{\ySlabX}[1]{\updownarrow\!{#1}}
+\newcommand{\widthX}[1]{\Mh{\mathsf{wd}}\pth{#1}} \smallskip%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%BeginIpePreamble
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -395,6 +409,7 @@
 \newcommand{\sqr}{\mathcalb{s}}%
 \newcommand{\sqrA}{\mathcalb{t}}%
 \newcommand{\sqrB}{\mathcalb{u}}%
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%EndIpePreamble

@@ -7,3 +7,5 @@ ft_spanner.synctex.gz
 figs/bak/
 snapshot/
 *.aux
+old/
+figs/old/

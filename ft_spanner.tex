@@ -20,9 +20,50 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+%	For a set of points $\PS\in \Re^d$ let $G(P)$ denote the complete
+%	graph with $\PS$ as its vertex set, whose edges are weighted by the
+%	length of the segment to which they correspond in $\Re^d$. For a
+%	region $F\subseteq \Re^d$, the local graph of $P$ induced by $F$ is
+%	the subgraph of $G(P)$ that contains only the points and the edges
+%	that are contained in $F$
+	
+	A geometric local $t$-spanner of a set of points $\PS\in \Re^d $ with
+	respect to a family of regions $\FF$, is a subgraph of the complete
+	geometric graph over $P$, that is also a $t$-spanner of every
+	subgraph of $\PS$ that is induced by a region $F\in \FF$, i.e. the
+	subgraph that contains only the points and the edges that are
+	contained in $F$.
+	
+%	Local $t$-spanners can also be thought of
+%	fault-tolerant spanners, where the fault regions. or attacks, are
+%	from the family $\overline{\FF}$ containing all the complements of
+%	regions of $\FF$.
+	
+	A weak local spanner of $P$ with respect to $\FF$ is a graph that
+	for any $F\in\FF$, guarantees the existence of a $t$-path only for
+	pairs of points contained in a region $F'\subseteq F$ which is a
+	copy of $F$ shrunken by some factor $\delta$.
+	
+	In this paper we present algorithms for the construction of local
+	and weak local spanners of points in $\Re^2$ with respect to
+	several families of	convex regions, including an improvement of the
+	known construction for axis parallel squares, and a construction for
+	disks that does not require Steiner points, along side a closely
+	matching lower boumd. The last result settles an open problem raised
+	by Abam and Borouny. 
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Introduction}
+
+Given a set of points $\PS$ in $\Re^d$ and a parameter $t>0$, the problem of constructing graph in which shortest paths approximate the Euclidean distance between every pair of points within a factor of $t$, is a well known and well studied problem in computation geometry. Recently, Abam and Borouny \cite{ab-lgs-21} introduced the problem of designing such spanners, with the additional requirement that subgraphs of the spanner created by ``cropping'' it , i.e. only considering points and edges contained in some region taken from a pre-defined set $\FF$, maintain the distance approximation property. This property can also be thought of as fault-tolerance, where the faults, or attacks as they are sometimes called, are complements of members of $\FF$.
+
 
 \paragraph{Euclidean graph.}
 For a set $\PS$ of points in $\Re^d$, a \emphw{Euclidean graph}
@@ -39,7 +80,7 @@ parameter $t \geq 1$, a path between $\pa$ and $\pb$ in $\G'$ is a
 $t \cdot \dGY{\pa}{\pb}$, where $\dGY{\pa}{\pb}$ is the length
 of the shortest path between $\pa,\pb\in \PS$ in the graph $\G$.
 The graph $\G'$ is a \emphw{$t$-spanner} of
-$\G$ if there is a $t$-path between any pair of points$\pa,\pb\in \PS$.
+$\G$ if there is a $t$-path between any pair of points $\pa,\pb\in \PS$.
 For $\PS\subseteq \Re^d$ we say that a graph $\G$ is a $t$-spanner of $\PS$ if it is a $t$-spanner of $\G_\PS$. Throughout the paper, $n$ denotes the cardinality of the point set $\PS$, unless stated otherwise. 
 
 
@@ -85,117 +126,174 @@ construct such spanners for disks, if one is allowed to add Steiner
 points. Abam and Borouny left the question of how to construct local
 spanners for disks as an open problem.
 
+\subsection*{Relted work}
+
+Geometric spanners have been widely studied, see \cite{ns-gsn-07}. Fault-tolerant spanners were first studied with vertex and edge faults, meaning that some set of maximum size $k$ of vertices and edges has failed. Levcopoulos \etal \cite{lns-iacfts-02} showed the existence of $k$-vertex/edges fault tolerant spanners for a set of points $\PS$ in some metric space, with weight bounded by $f(k)\cdot wt(MST(\PS))$ for some function $f$, and $O(kn\log n)$ edges. Lukovszki \cite{l-nrftgs-99} later achieved a similar construction, improving the number of edges to $O(kn)$ and proving the tightness of this result.
+
+Abam \etal\cite{abfg-rftgs-09} introduced region-fault tolerant spanners, where the faults were not arbitrary sets of vertices and/or edges, but instead all of the points and geometric edges (segments between points) intersecting some region. They showed several results, including a construction of convex regions fault tolerant $t$-spanners of size $O(n\log n)$. Later Abam and Borouny \cite{ab-lgs-21} introduced the concept of local spanners, and showed constructions for $t$-spanners of size $O(n\cdot polylog(n))$ for axis-parallel square, and vertical slab local spanners, and also showed that constructions using $O(n)$ Steiner points for the same cases and as well as for the case of disk local spanners.
+%As one of the most relevant works, Abam et al. [1] presented
+%a region-fault tolerant (1 + ")-spanner G of size O(n log n) for a point set P
+%w.r.t. convex regions, i.e. for any convex region R the graph G􀀀R is a (1+")-
+%spanner for K(P) 􀀀 R. Here, for points p and q the edge fp; qg may not exist
+%in K(P)􀀀R, and indeed the length of the shortest path from p to q in G􀀀R
+%is guaranteed to be at most (1 + ") times the length of the shortest path
+%from p to q in K(P)􀀀R . When convex regions are half planes, K(P)􀀀R is a
+%complete graph on the remaining points. Therefore, this problem is the inverse
+%of the local spanner problem, and we already have (1+")-local spanner of size
+%O(n log n) for the familly of halfplanes.
+
 \subsection*{Our results}
 
-We present a new construction of spanners, which surprisingly, is not
+\paragraph{Disks}
+
+In \secref{disks} we present a construction of spanners, which surprisingly, is not
 only fault-tolerant for convex regions, but it also a local spanner
 for disks. This resolves the aforementioned open problem from Abam and
 Borouny \cite{ab-lgs-21}. Our construction is a variant of the
-original construction of Abam \etal \cite{abfg-rftgs-09}.
+original construction of Abam \etal \cite{abfg-rftgs-09}. For a parameter $\eps>0$ the construction of a $(1+\eps)$-local spanner for disks takes $\Of\pth{ \eps^{-2} n\log \spread \log n }$ time, and the resulted spanner is of size $\Of\pth{ \eps^{-2} n\log \spread }$, where $\spread$ is the spread of the point set. We also provide a lower bound showing that this logarithmic dependency on $\spread$ cannot be avoided.
+ 
+In Subsection \ref{subsection:homothets} we extend this construction to scaled and translated copies (\emph{homothets}) of a convex shape $\CC$.
 
-We then investigate various other constructions of local spanners,
-where one is allowed to slightly shrink the region.
+\paragraph{Squares}
+
+In \secref{squares} we show a construction similar to that of \secref{disks}, but prove that for the case of local square spanners we are able to produce a spanner of size $\Of\pth{\eps^{-3} n \log n}$, that is, independent of the spread of the point set. 
+
+\paragraph{Rectangles}
+
+In \secref{rectangles} we describe a new pair decomposition data structure, the \emph{Quadrant Separated Pair Decomposition} (QSPD), and use it to construct a weak local spanner for axis parallel rectangles, meaning that we guarantee short paths between points in a shrunken copy of the local region. For parameters $\eps>0, \delta\in (0,1)$ we get a $(1+\eps)$-$\delta$ weak local spanner for the axis parallel rectangles, with size $\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$, in $\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$ time.
+
+\paragraph{Triangles}
+
 	
 \begin{figure}
     \centering
     \begin{tabular}{|c|c|c||c|c|}
-      Halfplanes
-      &
-        $\Of( \eps^{-2} n \log n )\bigr.$
-      &
-        \cite{abfg-rftgs-09}
-      &
-      &
-      \\
-      \hline
-      % ------------------------------------------------------------
-      Axis-parallel squares
-      &
-        $\Oeps (n \log^6 n) \Bigr.$
-      &
-        \cite{ab-lgs-21}
-      &
-        $\Of\pth{\eps^{-3} n \log n}$
-      &
-        \thmref{l:s:squares}%
-      \\
-      \hline
-      % ------------------------------------------------------------
-      Vertical slabs
-      &
-        $\Of (\eps^{-2} n \log n) \Bigr.$
-      &
-        \cite{ab-lgs-21}
-      &
-      &
-      \\
-      \hline
-      % ------------------------------------------------------------
-      Disks with Steiner points
-      &
-        $\Oeps (n ) \Bigr.$
-      &
-        \cite{ab-lgs-21}
-      &
-      &
-      \\
-      \hline
-      % ------------------------------------------------------------
-      Disks
-      &
-      &
-      &
-        $\Of\pth{ \eps^{-2} n\log \spread  }\Bigr.$
-      &
-        \thmref{main:1}%
-      \\
-
-      \cline{4-5}
-      % ---------------------------------------------------------
-      &
-      &
-      &
-        $\Omega(n \log \spread)\Bigr.$
-      &
-        \lemref{l:s:lower:bound}%
-      \\
-      \hline
-      % ---------------------------------------------------------
-      % ---------------------------------------------------------
-      \multicolumn{5}{c}{$\delta$-weak local $(1+\eps)$-spanners$\Bigr.$}
-      \\
-      \hline
-      % ---------------------------------------------------------
-      Any bounded convex shape
-      &
-      &
-      &
-        $\Of\bigl( (\eps^{-1} + \delta^{-2}) n \bigr)\Bigr. $
-      &
-        \lemref{w:l:s:regions}%
-      \\
-      \hline
-      % ---------------------------------------------------------
-      % ---------------------------------------------------------
-      \multicolumn{5}{c}{$(1-\delta)$-local $(1+\eps)$-spanners$\Bigr.$}
-      \\
-      \hline%
-      Axis-parallel rectangles
-      &
-      &
-      &
-        $\Of\bigl((\eps^{-2} + \delta^{-2}) n \log^2 n \bigr)\Bigr.$ 
-      &
-        \thmref{a:l:s:rectangles}%
-      \\
-      \hline
+    	
+    	
+    	\hline
+		% ------------------------------------------------------------
+		Region
+		&
+		Known \# edges
+		&
+		Paper
+		&
+		New \# edges
+		&
+		Location in paper
+		\\
+		\hline
+		\multicolumn{5}{c}{ Local $(1+\eps)$-spanners$\Bigr.$}
+		\\
+		\hline
+		% ------------------------------------------------------------
+		Halfplanes
+		&
+		$\Of( \eps^{-2} n \log n )\bigr.$
+		&
+		\cite{abfg-rftgs-09}
+		&
+		&
+		\\
+		\hline
+		% ------------------------------------------------------------
+		Axis-parallel squares
+		&
+		$\Oeps (n \log^6 n) \Bigr.$
+		&
+		\cite{ab-lgs-21}
+		&
+		$\Of\pth{\eps^{-3} n \log n}$
+		&
+		\thmref{l:s:squares}%
+		\\
+		\hline
+		% ------------------------------------------------------------
+		Vertical slabs
+		&
+		$\Of (\eps^{-2} n \log n) \Bigr.$
+		&
+		\cite{ab-lgs-21}
+		&
+		&
+		\\
+		\hline
+		% ------------------------------------------------------------
+		Disks with Steiner points
+		&
+		$\Oeps (n ) \Bigr.$
+		&
+		\cite{ab-lgs-21}
+		&
+		&
+		\\
+		\hline
+		% ------------------------------------------------------------
+		Disks
+		&
+		&
+		&
+		$\Of\pth{ \eps^{-2} n\log \spread  }\Bigr.$
+		&
+		\thmref{main:1}%
+		\\
+		
+		\cline{4-5}
+		% ---------------------------------------------------------
+		
+		&
+		&
+		&
+		$\Omega(n \log \spread)\Bigr.$
+		&
+		\lemref{l:s:lower:bound}%
+		\\
+		\hline
+		% ------------------------------------------------------------
+		Homothets of a convex shape
+		&
+		&
+		&
+		$\Of\pth{ \eps^{-2} n\log \spread  }\Bigr.$
+		&
+		\thmref{l:s:homothets}%
+		\\
+		\hline
+		% ---------------------------------------------------------
+		% ---------------------------------------------------------
+		\multicolumn{5}{c}{$\delta$-weak local $(1+\eps)$-spanners$\Bigr.$}
+		\\
+		\hline
+		% ---------------------------------------------------------
+		Any bounded convex shape
+		&
+		&
+		&
+		$\Of\bigl( (\eps^{-1} + \delta^{-2}) n \bigr)\Bigr. $
+		&
+		\lemref{w:l:s:regions}%
+		\\
+		\hline
+		% ---------------------------------------------------------
+		% ---------------------------------------------------------
+		\multicolumn{5}{c}{$(1-\delta)$-local $(1+\eps)$-spanners$\Bigr.$}
+		\\
+		\hline%
+		Axis-parallel rectangles
+		&
+		&
+		&
+		$\Of\bigl((\eps^{-2} + \delta^{-2}) n \log^2 n \bigr)\Bigr.$ 
+		&
+		\thmref{a:l:s:rectangles}%
+		\\
+		\hline
     \end{tabular}
     \caption{Known and new results. The notation $\Oeps$ hides
        polynomial dependency on $\eps$ which is not specified in the
        original work.}
 \end{figure}
 
- XXXX
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -203,7 +301,7 @@ where one is allowed to slightly shrink the region.
 	
 	
 \section{Local spanner for disks}
-
+\seclab{disks}
 Our purpose here is to build a local spanner for disks.
 
 \subsection{Preliminaries}
@@ -496,6 +594,7 @@ which would play a center role in our construction.
 \subsection{The construction of local spanners for disks}
 
 \subsubsection{The construction}
+\label{subsec:disk_construction}
 
 The input is a set $\PS$ of $n$ points in the plane (in general
 position) with $\spread = \spreadX{\PS}$, and a parameter
@@ -801,11 +900,8 @@ situation is illustrated in \figref{bad}.
 
 
 
-\subsection{Result for other norms}
-
-\subsubsection{The rest}
-
-
+\subsection{Homothets of a convex region}
+\label{subsection:homothets}
 
 Using the similar arguments used for disk local spanners, we now extend the results for the case where
 $\LL$ is the set of all scaled and translated copies of a
@@ -834,11 +930,57 @@ Note that in these settings, the meaning of general position is that no 3 points
 
 
 \begin{proof}
-	This proof very closely resembles that of \clmref{d:t:connected}. The second part of both claims is actually identical, and we therefore only prove that  for any (closed) convex region $\CC$ with two points $\pa,\pb\in \PS$ on its boundary, there is a path between $\pa$ and $\pb$ in $\restrictY{\DG}{C}$. The proof is again by induction over the number of points of $\PS$ in the interior of $C$, and is very similar to its counterpart in \clmref{d:t:connected}. The only difference here is that shrinking an arbitrary convex region towards a point on the boundary is not well defined.
+	This proof very closely resembles that of \clmref{d:t:connected}. The second part of both claims is actually identical, and we therefore only prove that  for any (closed) convex region $\CC$ with two points $\pa,\pb\in \PS$ on its boundary, there is a path between $\pa$ and $\pb$ in $\restrictY{\DG}{C}$.
+	The proof is again by induction over the number of points of $\PS$ in the interior of $C$, and is very similar to its counterpart in \clmref{d:t:connected}. The only difference here is that shrinking an arbitrary convex region towards a point on the boundary is not well defined.
 	Luckily, it is not hard to prove that such a procedure is possible, and after proving this, the rest of the proof is exactly as that of \clmref{d:t:connected}.
 	So, let  $C$ be a homothet of $\CC$ such that $\pa\in\PS\cap\partial C$. We define shrinking $C$ by a factor of $\lambda$ towards $x$ as a homothetical translation of $C$ with respect to $p$. Since $C$ is convex we have that the resulted region $C'$ is contained in $C$, and by the definition of a homothet we have that $C'$ is a homothet of $C$.
 	This finishes the proof since we can now follow the proof of \clmref{d:t:connected}.
 
+\end{proof}
+
+Notice that for any convex region $\CC\subseteq \Re^2$ and two points $\pa,\pb \in C$, there exists a homothet $C$ of $\CC$ with $\pa$ and $\pb$ on its boundary, and such that $C\subseteq \CC$. This can be seen in much the same way that a similar claim is proven for disks, as we can shrink $\CC$ towards the center of the segment $\overline{\pa\pb}$ until one of the points lie on the boundary of the shape, and then shrink it further toward that point until the second point is on the boundary as well. Since the center of the shrinking process are always contained in the shrinking convex shape, we get that at it is always inside the its former version.
+
+\begin{claim}
+	\clmlab{c:t:planar}%
+	%
+	Given a set of points $\PS \subseteq \Re^2$ in general position, and a convex shape $\CC$. $\DG_{\CC}(\PS)$, the $\CC$-Delaunay graph of $\PS$, is planar.
+	
+\end{claim}
+
+
+\begin{proof}
+	Let $e=\overline{\pa\pb}, e'=\overline{\pa'\pb'}$ be two edges of $\DG_{\CC}(\PS)$, and assume for a contradiction that $e$ intersects $e'$. W.l.o.g, we assume that $e$ is horizontal, $\pa'$ is above the line $l$ containing $e$, and $\pb'$ is below it.
+	
+	Let $C$ be a homothet of $\CC$ containing $\pa$ and $\pb$ on its boundary, and that contains no other point of $\PS$. Such a homothet exists since $\CC$ is convex, and $e\in \DG_{\CC}(\PS)$.  Let $\phi : [0,1] \longrightarrow C$ be a parameterization of $C$ such that $\phi(x_\pa)=\pa$, and $\phi(x_\pb)=\pb$. Similarly, let $C'$ be a homothet of $\CC$ containing $\pa'$ and $\pb'$ on its boundary, and that contains no other point of $\PS$ and let $\psi(x):= c + \alpha x$ be the translation and scaling such that $\psi(C) = C'$.
+	
+	We denote the segment $\overline{\psi(\phi(x_\pb))\psi(\phi'(x_\pb))}$ by $s$. This is a segment contained in $C'$ that corresponds to $e$ in $C$, meaning that it is horizontal, and has both endpoints on the boundary of $C'$. W.l.o.g, we assume that $s$ lies above $l$. The convex hull of $s\cup \pb$ is triangle $\Delta'$ that is contained in $C'$. We claim that $\psi^{-1}(\Delta')=\Delta$ is contained in $C$, and contains $\pb$, thus contradicting the choice of $e$. First, $\Delta\subseteq C$ by the definition of $\psi$. We now notice that the two non-horizontal edges of $\Delta'$ intersect $e$, since otherwise we would have that either $\pa$ or $\pb$ are contained in $C'$, contradicting the choice of $e'$. Now, since $\Delta \approx \Delta'$ we have that the part of $\Delta'$ below $l$ is contained in $\Delta$, and we are thus done. See \figref{planar_DG} for an illustration.
+	
+\end{proof}
+
+\begin{figure}[h]
+	\centering%
+	\includegraphics[]{figs/planar_DG}%
+	\caption{An illustration of the proof of the planarity of the $\CC$-Delauny graph }
+	\figlab{planar_DG}
+\end{figure}
+
+\paragraph{The result}
+\begin{theorem}
+	\thmlab{l:s:homothets}
+	%
+	Let $\PS$ be a set of $n$ points in the plane, and let
+	$\eps \in (0,1)$ be a parameter. We can constructs a
+	local $(1+\eps)$-spanner $\G$ for homothets of a convex region $\CC$. The spanner has $\Of\pth{ \eps^{-2} n\log \spread }$ edges, and the construction time
+	is ???.  Formally, for any homothet $C$ of the convex region
+	$\CC\subseteq \Re^2$, and any two points
+	$\pa, \pb \in \PS \cap \disk$, we have a $(1+\eps)$-path in
+	$\restrictY{\G}{C}$.
+\end{theorem}
+
+\begin{proof}
+	Since \clmref{c:t:connected} holds, we can use the algorithm in subsection \ref{subsec:disk_construction} verbatim, switching only the conventional Delaunay triangulation with the $\CC$-Delaunay graph. Since the $\CC$-Delaunay graph is planar for every convex shape $\CC$ the size of the spanner can be bounded using the same asymptotical bounds as the disk local spanner. The correctness proof of \thmref{main:1} uses only the connectivity of the Delaunay triangulation, and thus the same proof suffices.
+	
+	%TODO: running time? can we build this?
 \end{proof}
 
 
@@ -849,8 +991,8 @@ Note that in these settings, the meaning of general position is that no 3 points
 
 
 
-\subsection{A local spanner for axis parallel squares}
-
+\section{A local spanner for axis parallel squares}
+\seclab{squares}
 One can modify the above construction for axis-parallel squares, and
 get a local spanner without dependency on the spread.
 
@@ -1167,8 +1309,9 @@ illustrated in \figref{bad}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Weak local spanners for regions %
+\section{Weak local spanners for convex regions %
    with bounded aspect ratio}
+\seclab{convex regions}
 
 We would like to build local spanners (of subquadratic size) for
 axis-parallel rectangles, but as \figref{bad:rectangles} shows, there
@@ -1309,7 +1452,7 @@ empty.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Weak local spanners for axis-parallel rectangles}
-
+\seclab{rectangles}
 \subsection{Quadrant separated pair decomposition}
 
 For points $\pa = (p_1, \ldots, p_d)$ and $\pb = (q_1, \ldots, q_d)$

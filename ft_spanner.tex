@@ -1309,6 +1309,112 @@ illustrated in \figref{bad}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\section{Local spanners for fat(?) triangles}
+
+\seclab{triangles}
+While local spanners for homothets of an arbitrary convex shape are costly,
+if we are given a triangle $\triangle$ with the single constraint that $\triangle$
+isn't too ``thin'', one can construct a $\triangle$-local spanner with a number of
+edges that does not depend on the spread of the points.
+
+\begin{defn}
+	We say that a triangle $\triangle$ is $\alpha$-fat if the smallest angle in $\triangle$ is of size at least $\alpha$.
+\end{defn}
+
+\subsubsection{Construction}
+
+The input is a point set $\PS$ of $n$ points in the plane, and an
+approximation parameter $\eps \in (0,1)$.
+
+Let $\eps = ???$.  The algorithm computes a modified version of the $\theta$-graph (see \cite{c-aaspmp-87}). Let $\triangle$ be a triangle, and let $h_1,h_2$ and $h_3$ be the three half planes such that $h_1\cap h_2\cap h_3 = \triangle$, and let $c_{ij}$ be the cone created by taking the intersection of th halfplanes $h_i$ and $h_j$, and translating the apex of that intersection to the origin. We now divide each of the three cones into sub cones of angle at most $\eps$. Let $C$ be the resulted set of cones.
+
+The rest of the construction follows that of the $\theta$-graph with the set of cones $C$. For every $\pa\in\PS$ we create $C_p = \{c+\pa ~|~ c\in C\}$, and for every $c\in C_p$ we connect $\pa$ to the point $c$ whose projection on the bisector of $c$ is closest to $\pa$. 
+\subsubsection{Analysis}
+
+\paragraph{Size and running time.}
+The $\theta$-graph can be constructed in $O(\eps^{-1}n\log n)$ time (\cite{ns-gsn-07}), and has $O(\eps^{-1}n)$ edges. 
+
+\paragraph{Shrinking triangles.}
+Following a similar scheme We need the following lemma about the shrinking of triangles.
+
+\begin{lemma}
+	\lemlab{shrink:triangles}%
+	%
+	Let $\triangle$ be a triangle in the plane, and let
+	$\pa, \pb$ be two arbitrary points in $\triangle$. Then, there is a
+	triangle $\triangle' \subseteq \triangle$ that contains one of $\pa$ and $\pb$ on a vertex, and the other on the edge opposite to that vertex (possibly on a different vertex)
+
+\end{lemma}
+
+\begin{proof}
+	Choose one of the edges of $\triangle$ and start ``sliding'' it, i.e. incrementally translating it while keeping its slope, shrinking $\triangle$ in the process. We do so until one of $\pa$ or $\pb$ is on the edge. We do the same for the other two edges, choosing the order arbitrarily. The triangle remaining at the end of the process is $\triangle'$, and since we have kept the slopes of all edges we have that $\triangle \sim \triangle'$. We must have that two of the edges were stopped by the same point, which therefore lies on a vertex $v$ of the new triangle. The other point must lie on the edge opposite to $v$, since otherwise one of the edges can still be moved to shrink $\triangle'$. See \figref{shrink_tri}
+
+\end{proof}
+
+\begin{figure}[h]
+   	\centering
+	\includegraphics{figs/shrink_tri}
+	\caption{The edges are moved in the order $a,b,c$, resulting in the required similar triangle.}
+	\figlab{shrink_tri}
+\end{figure}
+
+
+
+\paragraph{Local spanner property.}
+\begin{lemma}
+	\lemlab{triangles}%
+	%
+	For any triangle $\triangle$ in the plane, and any two
+	points $\pa, \pb \in \PS \cap \triangle$, we have a $(1+\eps)$-path in
+	$\restrictY{\G}{\triangle}$.
+\end{lemma}
+\begin{proof}
+
+\end{proof}
+
+We will need the following lemma.
+
+\begin{lemma}[4.1.4 \cite{ns-gsn-07}]
+	\lemlab{theta_graph}%
+	Let $\theta\leq \frac{2\pi}{8}$, let $\pa$ and $\pb$ be two distinct points in the plane, and let $c$ be the cone of $C_\pa$ such that $\pb\in c$. Let $\pc$ be a point in $c$ such that the orthogonal projection of $\pc$ onto the angular bisector of $c$ is at least as close to $\pa$ as the orthogonal projection of $\pb$ onto the bisector Then,
+	
+	\begin{enumerate}
+		\item $|\pa\pc| \leq |\pa\pb|/ \cos \theta$, and
+		\item $|\pc\pb| \leq |\pa\pb| − (\cos \theta - \sin \theta)|\pa\pc|$.
+	\end{enumerate}
+\end{lemma}
+
+
+
+
+\begin{theorem}
+	\thmlab{l:s:triangle}%
+	%
+	Let $\PS$ be a set of $n$ points in the plane, and let
+	$\eps \in (0,1/3)$ be an approximation parameter. The above
+	algorithm computes a local $(1+\eps)$-spanner $\G$ triangles.
+	The construction time is
+	$???$, and the spanner $\G$ has
+	$???$ edges.
+\end{theorem}
+
+\begin{proof}
+	Let $\triangle\subseteq\Re^2$ be a triangle $\pa,\pb\in \PS\cap \triangle$ be two points, and let $\triangle'$ be a copy of $\triangle$ containing, say, $\pa$ on one of its vertices, and $\pb$ on the edge opposite to that vertex (as in \lemref{shrink:triangles}). We prove using induction on the rank of $|\overline{\pa\pb}|$.
+	
+	If $\pa$ and $\pb$ are the closest pair, then $\overline{\pa\pb}$ must be an edge in the resulted graph. This is because $\pb$ is contained in one of the cones in $C_\pa$ by construction, and if there exists a point $\pc\in C_\pa$ that was connected to $\pa$, then by \lemref{theta_graph} we get that $|\overline{\pa\pb}|\geq |\overline{\pc\pb}|$.
+	
+	Otherwise, by \lemref{theta_graph} we have that $\pa$ is connected by an edge to a point $\pc\in \triangle$
+\end{proof}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Weak local spanners for convex regions %
    with bounded aspect ratio}
 \seclab{convex regions}
@@ -1875,6 +1981,9 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
     The desired local spanner property is provided by
     \lemref{local:spanner}.
 \end{proof}
+
+
+
 
 
 

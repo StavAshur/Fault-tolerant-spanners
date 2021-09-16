@@ -30,12 +30,13 @@
 %	the subgraph of $G(P)$ that contains only the points and the edges
 %	that are contained in $F$
 	
-	A geometric local $t$-spanner of a set of points $\PS\in \Re^d $ with
-	respect to a family of regions $\FF$, is a subgraph of the complete
-	geometric graph over $P$, that is also a $t$-spanner of every
-	subgraph of $\PS$ that is induced by a region $F\in \FF$, i.e. the
-	subgraph that contains only the points and the edges that are
-	contained in $F$.
+	Given a set of points $\PS\in \Re^d $, and a family of regions $\FF$,
+	a geometric local $t$-spanner of $\PS$ with respect to $\FF$, is a
+	subgraph of $G(\PS)$, the complete geometric graph over $P$, that is
+	also a $t$-spanner of every subgraph of $\PS$ that is induced by a
+	region $F\in \FF$, where the subgraph induced by $F$ is the subgraph
+	that contains only the points and the edges of $G\PS)$ that are
+	`contained in $F$.
 	
 %	Local $t$-spanners can also be thought of
 %	fault-tolerant spanners, where the fault regions. or attacks, are
@@ -940,29 +941,42 @@ Note that in these settings, the meaning of general position is that no 3 points
 
 Notice that for any convex region $\CC\subseteq \Re^2$ and two points $\pa,\pb \in C$, there exists a homothet $C$ of $\CC$ with $\pa$ and $\pb$ on its boundary, and such that $C\subseteq \CC$. This can be seen in much the same way that a similar claim is proven for disks, as we can shrink $\CC$ towards the center of the segment $\overline{\pa\pb}$ until one of the points lie on the boundary of the shape, and then shrink it further toward that point until the second point is on the boundary as well. Since the center of the shrinking process are always contained in the shrinking convex shape, we get that at it is always inside the its former version.
 
-\begin{claim}
-	\clmlab{c:t:planar}%
-	%
-	Given a set of points $\PS \subseteq \Re^2$ in general position, and a convex shape $\CC$. $\DG_{\CC}(\PS)$, the $\CC$-Delaunay graph of $\PS$, is planar.
-	
-\end{claim}
+%\begin{claim}
+%	\clmlab{c:t:planar}%
+%	%
+%	Given a set of points $\PS \subseteq \Re^2$ in general position, and a convex shape $\CC$. $\DG_{\CC}(\PS)$, the $\CC$-Delaunay graph of $\PS$, is planar.
+%	
+%\end{claim}
+%
+%
+%\begin{proof}
+%	Let $e=\overline{\pa\pb}, e'=\overline{\pa'\pb'}$ be two edges of $\DG_{\CC}(\PS)$, and assume for a contradiction that $e$ intersects $e'$. W.l.o.g, we assume that $e$ is horizontal, $\pa'$ is above the line $l$ containing $e$, and $\pb'$ is below it.
+%	
+%	Let $C$ be a homothet of $\CC$ containing $\pa$ and $\pb$ on its boundary, and that contains no other point of $\PS$. Such a homothet exists since $\CC$ is convex, and $e\in \DG_{\CC}(\PS)$.  Let $\phi : [0,1] \longrightarrow C$ be a parameterization of $C$ such that $\phi(x_\pa)=\pa$, and $\phi(x_\pb)=\pb$. Similarly, let $C'$ be a homothet of $\CC$ containing $\pa'$ and $\pb'$ on its boundary, and that contains no other point of $\PS$ and let $\psi(x):= c + \alpha x$ be the translation and scaling such that $\psi(C) = C'$.
+%	
+%	We denote the segment $\overline{\psi(\phi(x_\pb))\psi(\phi'(x_\pb))}$ by $s$. This is a segment contained in $C'$ that corresponds to $e$ in $C$, meaning that it is horizontal, and has both endpoints on the boundary of $C'$. W.l.o.g, we assume that $s$ lies above $l$. The convex hull of $s\cup \pb$ is triangle $\Delta'$ that is contained in $C'$. We claim that $\psi^{-1}(\Delta')=\Delta$ is contained in $C$, and contains $\pb$, thus contradicting the choice of $e$. First, $\Delta\subseteq C$ by the definition of $\psi$. We now notice that the two non-horizontal edges of $\Delta'$ intersect $e$, since otherwise we would have that either $\pa$ or $\pb$ are contained in $C'$, contradicting the choice of $e'$. Now, since $\Delta \approx \Delta'$ we have that the part of $\Delta'$ below $l$ is contained in $\Delta$, and we are thus done. See \figref{planar_DG} for an illustration.
+%	
+%\end{proof}
+%
+%\begin{figure}[h]
+%	\centering%
+%	\includegraphics[]{figs/planar_DG}%
+%	\caption{An illustration of the proof of the planarity of the $\CC$-Delauny graph }
+%	\figlab{planar_DG}
+%\end{figure}
 
+We will need the following from the paper of Chew and Drysdale~\cite{cd-vdbcdf-85} in order to construct the spanner, and bound its size similarly to the local disk spanner.  
 
-\begin{proof}
-	Let $e=\overline{\pa\pb}, e'=\overline{\pa'\pb'}$ be two edges of $\DG_{\CC}(\PS)$, and assume for a contradiction that $e$ intersects $e'$. W.l.o.g, we assume that $e$ is horizontal, $\pa'$ is above the line $l$ containing $e$, and $\pb'$ is below it.
-	
-	Let $C$ be a homothet of $\CC$ containing $\pa$ and $\pb$ on its boundary, and that contains no other point of $\PS$. Such a homothet exists since $\CC$ is convex, and $e\in \DG_{\CC}(\PS)$.  Let $\phi : [0,1] \longrightarrow C$ be a parameterization of $C$ such that $\phi(x_\pa)=\pa$, and $\phi(x_\pb)=\pb$. Similarly, let $C'$ be a homothet of $\CC$ containing $\pa'$ and $\pb'$ on its boundary, and that contains no other point of $\PS$ and let $\psi(x):= c + \alpha x$ be the translation and scaling such that $\psi(C) = C'$.
-	
-	We denote the segment $\overline{\psi(\phi(x_\pb))\psi(\phi'(x_\pb))}$ by $s$. This is a segment contained in $C'$ that corresponds to $e$ in $C$, meaning that it is horizontal, and has both endpoints on the boundary of $C'$. W.l.o.g, we assume that $s$ lies above $l$. The convex hull of $s\cup \pb$ is triangle $\Delta'$ that is contained in $C'$. We claim that $\psi^{-1}(\Delta')=\Delta$ is contained in $C$, and contains $\pb$, thus contradicting the choice of $e$. First, $\Delta\subseteq C$ by the definition of $\psi$. We now notice that the two non-horizontal edges of $\Delta'$ intersect $e$, since otherwise we would have that either $\pa$ or $\pb$ are contained in $C'$, contradicting the choice of $e'$. Now, since $\Delta \approx \Delta'$ we have that the part of $\Delta'$ below $l$ is contained in $\Delta$, and we are thus done. See \figref{planar_DG} for an illustration.
-	
-\end{proof}
+\begin{theorem}[\cite{cd-vdbcdf-85}]
+	\thmlab{c:t:construct_delaunay_graph}%
+	For any convex shape $\CC$ and a set of points $\PS$, $\DG_{\CC}(\PS)$ can be computed in $O(n \log n$ time.
+\end{theorem}
 
-\begin{figure}[h]
-	\centering%
-	\includegraphics[]{figs/planar_DG}%
-	\caption{An illustration of the proof of the planarity of the $\CC$-Delauny graph }
-	\figlab{planar_DG}
-\end{figure}
+\begin{lemma}[\cite{cd-vdbcdf-85}]
+	\lemlab{c:t:linear_size}%
+	For any convex shape $\CC$ and a set of points $\PS$, $\DG_{\CC}(\PS)$ has $O(n)$ edges, vertices, and faces.
+\end{lemma}
+
 
 \paragraph{The result}
 \begin{theorem}
@@ -971,16 +985,16 @@ Notice that for any convex region $\CC\subseteq \Re^2$ and two points $\pa,\pb \
 	Let $\PS$ be a set of $n$ points in the plane, and let
 	$\eps \in (0,1)$ be a parameter. We can constructs a
 	local $(1+\eps)$-spanner $\G$ for homothets of a convex region $\CC$. The spanner has $\Of\pth{ \eps^{-2} n\log \spread }$ edges, and the construction time
-	is ???.  Formally, for any homothet $C$ of the convex region
+	is $\Of\pth{ \eps^{-2} n\log \spread \log n }$.  Formally, for any homothet $C$ of the convex region
 	$\CC\subseteq \Re^2$, and any two points
 	$\pa, \pb \in \PS \cap \disk$, we have a $(1+\eps)$-path in
 	$\restrictY{\G}{C}$.
 \end{theorem}
 
 \begin{proof}
-	Since \clmref{c:t:connected} holds, we can use the algorithm in subsection \ref{subsec:disk_construction} verbatim, switching only the conventional Delaunay triangulation with the $\CC$-Delaunay graph. Since the $\CC$-Delaunay graph is planar for every convex shape $\CC$ the size of the spanner can be bounded using the same asymptotical bounds as the disk local spanner. The correctness proof of \thmref{main:1} uses only the connectivity of the Delaunay triangulation, and thus the same proof suffices.
+	Due to \thmref{c:t:construct_delaunay_graph}, \clmref{c:t:linear_size}, and \clmref{c:t:connected}, we can use the algorithm in subsection \ref{subsec:disk_construction} verbatim, switching only the conventional Delaunay triangulation with the $\CC$-Delaunay graph. Since the $\CC$-Delaunay graph has linear complexity for every convex shape $\CC$ the size of the spanner can be bounded using the same asymptotical bounds as the disk local spanner, and since the $\CC$-Delaunay graph has linear size, the bounds on the number of edges hold as well. The correctness proof of \thmref{main:1} uses only the connectivity of the Delaunay triangulation, and thus the same proof suffices.
 	
-	%TODO: running time? can we build this?
+
 \end{proof}
 
 
@@ -1313,6 +1327,16 @@ illustrated in \figref{bad}.
 \section{Local spanners for fat(?) triangles}
 
 \seclab{triangles}
+
+Sariel's construction:
+1. Take the original triangle (with center (0,0)?) denoted $(a,b,c)$, and for every point $p$ compute the 3d point $(<p,a>, <p,b>, <p,c>)$.
+2. Compute a QSPD for the 3d point set $P'$ from first step
+3. Refine the QSPD to get an SSPD
+4. For every pair $(A,B)$ divide $B$ into $O(\eps^{-2})$ parallelogram cells and connect all points of $A$ to the skewed-lowest point of each cell.  
+
+ 
+
+
 While local spanners for homothets of an arbitrary convex shape are costly,
 if we are given a triangle $\triangle$ with the single constraint that $\triangle$
 isn't too ``thin'', one can construct a $\triangle$-local spanner with a number of

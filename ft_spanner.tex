@@ -1324,23 +1324,23 @@ illustrated in \figref{bad}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Local spanners for fat(?) triangles}
+\section{Local spanners for fat triangles}
 
 \seclab{triangles}
-
-Sariel's construction:
-1. Take the original triangle (with center (0,0)?) denoted $(a,b,c)$, and for every point $p$ compute the 3d point $(<p,a>, <p,b>, <p,c>)$.
-2. Compute a QSPD for the 3d point set $P'$ from first step
-3. Refine the QSPD to get an SSPD
-4. For every pair $(A,B)$ divide $B$ into $O(\eps^{-2})$ parallelogram cells and connect all points of $A$ to the skewed-lowest point of each cell.  
-
- 
 
 
 While local spanners for homothets of an arbitrary convex shape are costly,
 if we are given a triangle $\triangle$ with the single constraint that $\triangle$
 isn't too ``thin'', one can construct a $\triangle$-local spanner with a number of
-edges that does not depend on the spread of the points.
+edges that does not depend on the spread of the points. See \figref{tri_low_bd} for an illustration of a construction showing that dependency if "thin" triangles are allowed.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics{figs/triangle_lower_bound}
+	\caption{For any fixed $t>1$ we can take a "thin" right angle triangle $\triangle$, and create a point set as shown in the figure, such that every point in the set on the lower left side of the figure must be connected by an edge to each of the points in the upper part of the figure (which are of exponentially increasing $x$-coordinate) in order to create a $\triangle$-local $t$-spanner.}
+	\figlab{tri_low_bd}
+\end{figure}
+
 
 \begin{defn}
 	We say that a triangle $\triangle$ is $\alpha$-fat if the smallest angle in $\triangle$ is of size at least $\alpha$.
@@ -1348,13 +1348,24 @@ edges that does not depend on the spread of the points.
 
 \subsubsection{Construction}
 
-The input is a point set $\PS$ of $n$ points in the plane, and an
-approximation parameter $\eps \in (0,1)$.
+The input is a point set $\PS$ of $n$ points in the plane, a triangle $triangle$, and an
+approximation parameter $\eps \in (0,1)$. Let $c_1,c_2$ and $c_3$ be the 3 cones with an apex at the origin that coincide each with one of the angles of $\triangle$  
 
+
+ For each vertex $v$ $\triangle$, we translating $\triangle$ such that one of its vertices lies on the origin,    
+
+For each point we build 
 Let $\eps = ???$.  The algorithm computes a modified version of the $\theta$-graph (see \cite{c-aaspmp-87}). Let $\triangle$ be a triangle, and let $h_1,h_2$ and $h_3$ be the three half planes such that $h_1\cap h_2\cap h_3 = \triangle$, and let $c_{ij}$ be the cone created by taking the intersection of th halfplanes $h_i$ and $h_j$, and translating the apex of that intersection to the origin. We now divide each of the three cones into sub cones of angle at most $\eps$. Let $C$ be the resulted set of cones.
 
 The rest of the construction follows that of the $\theta$-graph with the set of cones $C$. For every $\pa\in\PS$ we create $C_p = \{c+\pa ~|~ c\in C\}$, and for every $c\in C_p$ we connect $\pa$ to the point $c$ whose projection on the bisector of $c$ is closest to $\pa$. 
 \subsubsection{Analysis}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics{figs/triangle_cones}
+	\caption{For the triangle $\triangle$ with angles $\alpha_1,\alpha_2$, and $\alpha_3$ we create the cones $c_1,c_2$, and $c_3$.}
+	\figlab{tri_cones}
+\end{figure}
 
 \paragraph{Size and running time.}
 The $\theta$-graph can be constructed in $O(\eps^{-1}n\log n)$ time (\cite{ns-gsn-07}), and has $O(\eps^{-1}n)$ edges. 

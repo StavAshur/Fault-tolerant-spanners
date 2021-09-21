@@ -16,15 +16,47 @@ M.~A. Abam and S.~{Har{-}Peled}.
 \newblock {\em Comput. Geom. Theory Appl.}, 45(5--6):200--214, 2012.
 
 \bibitem[AMS99]{ams-dagss-99}
-\hrefb{http://www.cs.ust.hk/faculty/arya/}{S. {Arya}}, \hrefb{http://www.cs.umd.edu/~mount/}{D.~M. {Mount}}, and M.~Smid.
+S.~Arya, D.~M. Mount, and M.~Smid.
 \newblock Dynamic algorithms for geometric spanners of small diameter:
   Randomized solutions.
 \newblock {\em Comput. Geom. Theory Appl.}, 13(2):91--107, 1999.
+
+\bibitem[CDI85]{cd-vdbcdf-85}
+L~Paul Chew and Robert~L Dyrsdale~III.
+\newblock Voronoi diagrams based on convex distance functions.
+\newblock pages 235--244, 1985.
+
+\bibitem[Cla87]{c-aaspmp-87}
+Kenneth~L. Clarkson.
+\newblock Approximation algorithms for shortest path motion planning (extended
+  abstract).
+\newblock In Alfred~V. Aho, editor, {\em Proceedings of the 19th Annual {ACM}
+  Symposium on Theory of Computing, 1987, New York, New York, {USA}}, pages
+  56--65. {ACM}, 1987.
 
 \bibitem[{Har}11]{h-gaa-11}
 S.~{Har{-}Peled}.
 \newblock {\em Geometric Approximation Algorithms}, volume 173 of {\em Math.
   Surveys \& Monographs}.
 \newblock Amer. Math. Soc., Boston, MA, USA, 2011.
+
+\bibitem[LNS02]{lns-iacfts-02}
+Christos Levcopoulos, Giri Narasimhan, and Michiel H.~M. Smid.
+\newblock Improved algorithms for constructing fault-tolerant spanners.
+\newblock {\em Algorithmica}, 32(1):144--156, 2002.
+
+\bibitem[Luk99]{l-nrftgs-99}
+Tam{\'{a}}s Lukovszki.
+\newblock New results of fault tolerant geometric spanners.
+\newblock In Frank K. H.~A. Dehne, Arvind Gupta, J{\"{o}}rg{-}R{\"{u}}diger
+  Sack, and Roberto Tamassia, editors, {\em Algorithms and Data Structures, 6th
+  International Workshop, {WADS} '99, Vancouver, British Columbia, Canada,
+  August 11-14, 1999, Proceedings}, volume 1663 of {\em Lecture Notes in
+  Computer Science}, pages 193--204. Springer, 1999.
+
+\bibitem[NS07]{ns-gsn-07}
+Giri Narasimhan and Michiel H.~M. Smid.
+\newblock {\em Geometric spanner networks}.
+\newblock Cambridge University Press, 2007.
 
 \end{thebibliography}

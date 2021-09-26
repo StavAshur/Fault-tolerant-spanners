@@ -1347,18 +1347,18 @@ edges that does not depend on the spread of the points. See \figref{tri_low_bd} 
 \end{defn}
 
 \subsubsection{Construction}
-
+\label{tri_construction}
 The input is a point set $\PS$ of $n$ points in the plane, a triangle $triangle$, and an
-approximation parameter $\eps \in (0,1)$. Let $c_1,c_2$ and $c_3$ be the 3 cones with an apex at the origin that coincide each with one of the angles of $\triangle$  
+approximation parameter $\eps \in (0,1)$. Let $c_1,c_2$ and $c_3$ be the 3 cones with an apex at the origin that coincide each with one of the angles of $\triangle$ when translating its respective vertex to the origin. We also denote the orthogonal direction to the edge opposite of $\alpha_i$ by $v_i$. See \figref{tri_cones} for an illustration. Let $C_1,C_2$, and $C_3$ be partitions of each of these cones into cones of angle at most $O(\eps)\cdot \alpha_i$ (for the appropriate $i$).
 
+For each point $\pa\in\PS$ we create the set of cones $C_\pa$, which is the set of cones $C_1\cup C_2\cup C_3$ translated by $\pa$, and for each $c\in C_\pa$ we connect $\pa$ to the point $\pb\in c$ closest to $\pa$ in an ordering by $v_i$ (where $i$ corresponds to the set $C_i$ that contains the un-translated copy of $c$).
+  
+%
+%For each point we build 
+%Let $\eps = ???$.  The algorithm computes a modified version of the $\theta$-graph (see \cite{c-aaspmp-87}). Let $\triangle$ be a triangle, and let $h_1,h_2$ and $h_3$ be the three half planes such that $h_1\cap h_2\cap h_3 = \triangle$, and let $c_{ij}$ be the cone created by taking the intersection of th halfplanes $h_i$ and $h_j$, and translating the apex of that intersection to the origin. We now divide each of the three cones into sub cones of angle at most $\eps$. Let $C$ be the resulted set of cones.
+%
+%The rest of the construction follows that of the $\theta$-graph with the set of cones $C$. For every $\pa\in\PS$ we create $C_p = \{c+\pa ~|~ c\in C\}$, and for every $c\in C_p$ we connect $\pa$ to the point $c$ whose projection on the bisector of $c$ is closest to $\pa$.
 
- For each vertex $v$ $\triangle$, we translating $\triangle$ such that one of its vertices lies on the origin,    
-
-For each point we build 
-Let $\eps = ???$.  The algorithm computes a modified version of the $\theta$-graph (see \cite{c-aaspmp-87}). Let $\triangle$ be a triangle, and let $h_1,h_2$ and $h_3$ be the three half planes such that $h_1\cap h_2\cap h_3 = \triangle$, and let $c_{ij}$ be the cone created by taking the intersection of th halfplanes $h_i$ and $h_j$, and translating the apex of that intersection to the origin. We now divide each of the three cones into sub cones of angle at most $\eps$. Let $C$ be the resulted set of cones.
-
-The rest of the construction follows that of the $\theta$-graph with the set of cones $C$. For every $\pa\in\PS$ we create $C_p = \{c+\pa ~|~ c\in C\}$, and for every $c\in C_p$ we connect $\pa$ to the point $c$ whose projection on the bisector of $c$ is closest to $\pa$. 
-\subsubsection{Analysis}
 
 \begin{figure}[h]
 	\centering
@@ -1366,12 +1366,211 @@ The rest of the construction follows that of the $\theta$-graph with the set of 
 	\caption{For the triangle $\triangle$ with angles $\alpha_1,\alpha_2$, and $\alpha_3$ we create the cones $c_1,c_2$, and $c_3$.}
 	\figlab{tri_cones}
 \end{figure}
+\subsubsection{Analysis}
 
-\paragraph{Size and running time.}
-The $\theta$-graph can be constructed in $O(\eps^{-1}n\log n)$ time (\cite{ns-gsn-07}), and has $O(\eps^{-1}n)$ edges. 
 
 \paragraph{Shrinking triangles.}
-Following a similar scheme We need the following lemma about the shrinking of triangles.
+We will need the following lemmas in order to prove the local spanning property of $G$. The first lemma concerns distances between points in the construction above (Subsection \ref{tri_construction}), and the second deals with triangle shrinking.
+
+
+\begin{lemma}
+	\lemlab{cone_edge:triangles}%
+	%
+	Let $\pa,\pb,\pc\in \PS$ such that the edge $\{\pa, \pc\}$ was added to the graph for the cone $c$ with apex at $\pa$, and such that $\pc\in c$ (as well as $\pa$ and $\pb$).
+	
+	We get that
+	\begin{enumerate}
+		\item {
+			$
+			|\overline{\pa\pc}|%
+			+%
+			(1+\eps)|\overline{\pb\pc}|%
+			\leq%
+			(1+\eps)|\overline{\pa\pb}|%
+			$
+			,and
+		}
+		\item {
+			$
+			|\overline{\pa\pc}|%
+			\leq%
+			|\overline{\pa\pb}|%
+			$.
+		}
+	\end{enumerate}
+
+
+
+\end{lemma}
+
+\begin{proof}
+	We denote the smallest angle of the triangle $\triangle$ by $\alpha$.
+	Consider the triangle $\Delta\pa\pb\pc$ and denote the angles at $\pa,\pb,$ and $\pc$ by $\theta_\pa,\theta_\pb,$ and $\theta_\pc$ respectively.
+	
+	We now consider two possible cases, either $|\overline{\pa\pb}|\leq |\overline{\pa\pc}|$ or $|\overline{\pa\pb}|> |\overline{\pa\pc}|$. Notice that  since the angle of the cone $c$, and therefore $\theta_\pa$ as well, is smaller   than the smallest angle of $\triangle$, we have that $|\overline{\pb\pc}|\leq    \max \{|\overline{\pa\pc}|,|\overline{\pa\pb}|\}$.
+	
+	$|\overline{\pa\pb}|\leq |\overline{\pa\pc}|$:
+	Denote by $\pb'$ the projection of $\pb$ on $\overline{\pa\pc}$. We have that 
+	
+	$$
+	|\overline{\pb\pb'}|%
+	=%
+	\sin\theta_\pa |\overline{\pa\pb}|%
+	=%
+	\sin\theta_\pc |\overline{\pb\pc}|%
+	\implies%
+	|\overline{\pb\pc}|%
+	=
+	\frac{\sin\theta_\pa}{\sin\theta_\pc}|\overline{\pa\pb}|%
+	$$
+	
+	$$ |\overline{\pa\pc}|%
+	=%
+	|\overline{\pa\pb'}|%
+	+%
+	|\overline{\pb'\pc}|%
+	=%
+	\cos\theta_\pa |\overline{\pa\pb}|%
+	+%
+	\cos\theta_\pc |\overline{\pb\pc}|%
+	=%
+	\cos\theta_\pa |\overline{\pa\pb}|%
+	+%
+	\frac{\sin\theta_\pa}{\sin\theta_\pc}|\overline{\pa\pb}|%
+	=%
+	(\cos\theta_\pa + \frac{\sin\theta_\pa}{\sin\theta_\pc})|\overline{\pa\pb}|
+	$$
+	
+	We use these equalities and get that:
+	
+	$$
+	|\overline{\pa\pc}|%
+	+%
+	(1+\eps)|\overline{\pb\pc}|%
+	\leq%
+	(1+\eps)|\overline{\pa\pb}|%
+	$$
+	
+	$$
+	\iff%
+	|\overline{\pa\pb}|(\cos\theta_\pa + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
+	+%
+	(1+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}|\overline{\pa\pb}|%
+	\leq%
+	(1+\eps)|\overline{\pa\pb}|%
+	$$
+	
+	$$
+	\iff%
+	(\cos\theta_\pa + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
+	+%
+	(1+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}%
+	\leq%
+	(1+\eps)%
+	$$
+	
+	$$
+	\impliedby%
+	(1 + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
+	+%
+	(1+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}%
+	\leq%
+	(1+\eps)%
+	$$
+	
+	$$
+	\iff%
+	(2+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}%
+	\leq%
+	\eps%
+	\iff%
+	\frac{\sin\theta_\pa}{\sin\theta_\pc}%
+	\leq%
+	\frac{\eps}{2+\eps}%
+	=%
+	O(\eps)%
+	$$
+	
+	The last piece of this part is the fact that point $\pc$ was chosen by being the first point in the cone $c$ encountered by a line parallel to the edge opposite of $\pa$. See the red line and direction in \figref{tri_cone_edge}. This implies that the angle $\theta_\pc$ is at least $\alpha$, where $\alpha = \min \{\alpha_1,\alpha_2\alpha_3\}$, the result then follows.
+
+	$|\overline{\pa\pb}|< |\overline{\pa\pc}|$:
+	Denote by $\pc'$ the projection of $\pc$ on $\overline{\pa\pb}$. We have that 
+	
+	$$
+	|\overline{\pc\pb}|%
+	\leq%
+	|\overline{\pc\pc'}|%
+	+%
+	|\overline{\pb\pc'}|%
+	=%
+	\sin\theta_\pa|\overline{\pa\pc}|%
+	+%
+	(|\overline{\pa\pb}|-|\overline{\pb\pc'}|)%
+	$$
+	
+	$$
+	\implies%
+	|\overline{\pc\pb}|%
+	\leq%
+	\sin\theta_\pa|\overline{\pa\pc}|%
+	+%
+	(|\overline{\pa\pb}|-\cos\theta_\pa|\overline{\pa\pc}|)%
+	$$
+	
+	$$
+	\implies%
+	\overline{\pa\pc}|
+	+%
+	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}|\overline{\pc\pb}|%
+	\leq%
+	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}|\overline{\pa\pb}|
+	$$
+	
+	Which means that
+
+	$$
+	|\overline{\pa\pc}|%
+	+%
+	(1+\eps)|\overline{\pb\pc}|%
+	\leq%
+	(1+\eps)|\overline{\pa\pb}|%
+	\iff%
+	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}%
+	\leq%
+	1+\eps%
+	$$	
+	
+	
+	Since $\theta_\pa = O(\eps\alpha)$ we get that for a sufficiently large constant the condition $\frac{1}{\cos\theta_\pa-\sin\theta_\pa} \leq 1+\eps$ holds.
+	
+ 	The second part of the lemma is derived from the first:
+	
+	$$
+	|\overline{\pa\pc}|%
+	+%
+	(1+\eps)|\overline{\pb\pc}|%
+	\leq%
+	(1+\eps)|\overline{\pa\pb}|%
+	\iff%
+	|\overline{\pb\pc}|%
+	\leq%
+	|\overline{\pa\pb}|%
+	-%
+	\frac{|\overline{\pa\pc}|}{(1+\eps)}%
+	\leq%
+	|\overline{\pa\pb}|%
+	$$
+	
+	
+\end{proof}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics{figs/triangle_cone_edge}
+	\caption{The two cases of \lemref{cone_edge:triangles}. The vector used to determine the edge in the cone is shown in red, and marked $\vec{v}$}
+	\figlab{tri_cone_edge}
+\end{figure}
+\subsubsection{Analysis}
 
 \begin{lemma}
 	\lemlab{shrink:triangles}%
@@ -1379,16 +1578,16 @@ Following a similar scheme We need the following lemma about the shrinking of tr
 	Let $\triangle$ be a triangle in the plane, and let
 	$\pa, \pb$ be two arbitrary points in $\triangle$. Then, there is a
 	triangle $\triangle' \subseteq \triangle$ that contains one of $\pa$ and $\pb$ on a vertex, and the other on the edge opposite to that vertex (possibly on a different vertex)
-
+	
 \end{lemma}
 
 \begin{proof}
-	Choose one of the edges of $\triangle$ and start ``sliding'' it, i.e. incrementally translating it while keeping its slope, shrinking $\triangle$ in the process. We do so until one of $\pa$ or $\pb$ is on the edge. We do the same for the other two edges, choosing the order arbitrarily. The triangle remaining at the end of the process is $\triangle'$, and since we have kept the slopes of all edges we have that $\triangle \sim \triangle'$. We must have that two of the edges were stopped by the same point, which therefore lies on a vertex $v$ of the new triangle. The other point must lie on the edge opposite to $v$, since otherwise one of the edges can still be moved to shrink $\triangle'$. See \figref{shrink_tri}
-
+	Choose one of the edges of $\triangle$ and start ``sliding'' it, i.e. incrementally translating it while keeping its slope, shrinking $\triangle$ in the process. We do so until one of $\pa$ or $\pb$ is on the edge. We do the same for the other two edges, choosing the order arbitrarily. The triangle remaining at the end of the process is $\triangle'$, and since we have kept the slopes of all edges we have that $\triangle \sim \triangle'$. We must have that two of the edges were stopped by the same point, which therefore lies on a vertex $v$ of the new triangle. The other point must lie on the edge opposite to $v$, since otherwise one of the edges can still be moved to shrink $\triangle'$. See \figref{shrink_tri}.
+	
 \end{proof}
 
 \begin{figure}[h]
-   	\centering
+	\centering
 	\includegraphics{figs/shrink_tri}
 	\caption{The edges are moved in the order $a,b,c$, resulting in the required similar triangle.}
 	\figlab{shrink_tri}
@@ -1400,25 +1599,37 @@ Following a similar scheme We need the following lemma about the shrinking of tr
 \begin{lemma}
 	\lemlab{triangles}%
 	%
-	For any triangle $\triangle$ in the plane, and any two
-	points $\pa, \pb \in \PS \cap \triangle$, we have a $(1+\eps)$-path in
+	For a triangle $\triangle$, denote the graph constructed by the process above (Subsection \ref{tri_construction}) by $G$. for any homothet of $\triangle$, and any two points $\pa, \pb \in \PS$ in the homothet, we have a $(1+\eps)$-path in
 	$\restrictY{\G}{\triangle}$.
 \end{lemma}
-\begin{proof}
 
+
+
+\begin{proof}
+	We slightly abuse notation and denote the homothet by $\triangle$. We prove the existence of the $(1+\eps)$-path by induction over the rank of the distance $|\overline{\pa\pb}|$. The closest pair $\pa',\pb'$ must be connected in $G$, as otherwise we have that $|\overline{\pa'\pc'}|+|\overline{\pb'\pc'}|\geq 2 |\overline{\pa'\pb'}|$ regardless of the angle of the cone, a contradiction to  \lemref{cone_edge:triangles}.
+	
+	For any other pair $\pa,\pb\in PS\cap \triangle$ we have from \lemref{shrink:triangles} that there exists a homothet $\triangle'\subseteq \triangle$ with one of the two points, say $\pa$, at a vertex, and the other on the opposite edge. We therefore have a cone $c$ with apex at $\pa$ such that $\pb\in c\cap \triangle'$. If $\{ \pa, \pb\}$ is an edge in $G$ then we are done. Otherwise, we have a vertex $\pc\in c$ such that $\{ \pa, \pb\}$ is an edge in $G$, and we therefore get from \lemref{cone_edge:triangles} that $|\overline{\pb\pc}|\leq |\overline{\pa\pb}|$ and therefore, by the induction hypothesis, we have that there exists a $(1+\eps)$ path between $\pc$ and $\pb$ in $G$. From the same lemma it also follows that $|\overline{\pa\pc}|+(1+\eps)|\overline{\pb\pc}|\leq(1+\eps)|\overline{\pa\pb}|$, and thus we get the existence of a $(1+\eps)$ path between $\pa$ and $\pb$ as well.
+	
 \end{proof}
 
-We will need the following lemma.
 
-\begin{lemma}[4.1.4 \cite{ns-gsn-07}]
-	\lemlab{theta_graph}%
-	Let $\theta\leq \frac{2\pi}{8}$, let $\pa$ and $\pb$ be two distinct points in the plane, and let $c$ be the cone of $C_\pa$ such that $\pb\in c$. Let $\pc$ be a point in $c$ such that the orthogonal projection of $\pc$ onto the angular bisector of $c$ is at least as close to $\pa$ as the orthogonal projection of $\pb$ onto the bisector Then,
-	
-	\begin{enumerate}
-		\item $|\pa\pc| \leq |\pa\pb|/ \cos \theta$, and
-		\item $|\pc\pb| \leq |\pa\pb| − (\cos \theta - \sin \theta)|\pa\pc|$.
-	\end{enumerate}
-\end{lemma}
+\paragraph{Size and running time.}
+Let $G$ be the graph constructed by the procedure described above.
+
+
+
+%The $\theta$-graph can be constructed in $O(\eps^{-1}n\log n)$ time (\cite{ns-gsn-07}), and has $O(\eps^{-1}n)$ edges. 
+%We will need the following lemma.
+%
+%\begin{lemma}[4.1.4 \cite{ns-gsn-07}]
+%	\lemlab{theta_graph}%
+%	Let $\theta\leq \frac{2\pi}{8}$, let $\pa$ and $\pb$ be two distinct points in the plane, and let $c$ be the cone of $C_\pa$ such that $\pb\in c$. Let $\pc$ be a point in $c$ such that the orthogonal projection of $\pc$ onto the angular bisector of $c$ is at least as close to $\pa$ as the orthogonal projection of $\pb$ onto the bisector Then,
+%	
+%	\begin{enumerate}
+%		\item $|\pa\pc| \leq |\pa\pb|/ \cos \theta$, and
+%		\item $|\pc\pb| \leq |\pa\pb| - (\cos \theta - \sin \theta)|\pa\pc|$.
+%	\end{enumerate}
+%\end{lemma}
 
 
 

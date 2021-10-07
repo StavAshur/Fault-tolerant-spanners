@@ -31,29 +31,28 @@
 %	that are contained in $F$
 	
 	Given a set of points $\PS\in \Re^d $, and a family of regions $\FF$,
-	a geometric local $t$-spanner of $\PS$ with respect to $\FF$, is a
-	subgraph of $G(\PS)$, the complete geometric graph over $P$, that is
-	also a $t$-spanner of every subgraph of $\PS$ that is induced by a
+	a geometric $\FF$-local $t$-spanner of $\PS$, is a
+	subgraph of $\G_\PS$, the complete Euclidean graph over $P$, that is
+	also a $t$-spanner of every subgraph of $\G_\PS$ that is induced by a
 	region $F\in \FF$, where the subgraph induced by $F$ is the subgraph
-	that contains only the points and the edges of $G\PS)$ that are
-	`contained in $F$.
+	that contains only the points and the edges of $\G_\PS$ that are
+	contained in $F$.
 	
 %	Local $t$-spanners can also be thought of
 %	fault-tolerant spanners, where the fault regions. or attacks, are
 %	from the family $\overline{\FF}$ containing all the complements of
 %	regions of $\FF$.
 	
-	A weak local spanner of $P$ with respect to $\FF$ is a graph that
-	for any $F\in\FF$, guarantees the existence of a $t$-path only for
-	pairs of points contained in a region $F'\subseteq F$ which is a
-	copy of $F$ shrunken by some factor $\delta$.
+	A weak $\FF$-local spanner of $P$ is a graph that
+	for any $\region\in\FF$, guarantees the existence of a $t$-path only for
+	pairs of points contained in some region $\region'\subset \region$. Different definitions of the subregion $F'$ are possible, and can imply different results.  
 	
 	In this paper we present algorithms for the construction of local
 	and weak local spanners of points in $\Re^2$ with respect to
 	several families of	convex regions, including an improvement of the
 	known construction for axis parallel squares, and a construction for
 	disks that does not require Steiner points, along side a closely
-	matching lower boumd. The last result settles an open problem raised
+	matching lower bound. The last result settles an open problem raised
 	by Abam and Borouny. 
 \end{abstract}
 
@@ -63,19 +62,19 @@
 
 \section{Introduction}
 
-Given a set of points $\PS$ in $\Re^d$ and a parameter $t>0$, the problem of constructing graph in which shortest paths approximate the Euclidean distance between every pair of points within a factor of $t$, is a well known and well studied problem in computation geometry. Recently, Abam and Borouny \cite{ab-lgs-21} introduced the problem of designing such spanners, with the additional requirement that subgraphs of the spanner created by ``cropping'' it , i.e. only considering points and edges contained in some region taken from a pre-defined set $\FF$, maintain the distance approximation property. This property can also be thought of as fault-tolerance, where the faults, or attacks as they are sometimes called, are complements of members of $\FF$.
+Given a set of points $\PS$ in $\Re^d$ and a parameter $t>1$, the problem of constructing graph in which shortest paths approximate the Euclidean distance between every pair of points within a factor of $t$, is a well known and well studied problem in computation geometry. Recently, Abam and Borouny \cite{ab-lgs-21} introduced the problem of designing such spanners, with the additional requirement that subgraphs of the spanner created by ``cropping'' it , i.e. only considering points and edges contained in some region taken from a pre-defined set $\FF$, maintain the distance approximation property. This property can also be thought of as fault-tolerance, where the faults, or attacks as they are sometimes called, are complements of members of $\FF$.
 
 
 \paragraph{Euclidean graph.}
 For a set $\PS$ of points in $\Re^d$, a \emphw{Euclidean graph}
 $\G_\PS = (\PS, \EG)$ is an undirected graph with $\PS$ as the set of
 vertices. An edge $\pa \pb \in \EG$ is naturally associated with the
-segment $\pa\pb$, and weight of the edge is the (Euclidean) length of
+segment $\overline{\pa\pb}$, and weight of the edge is the (Euclidean) length of
 the segment.
 
 
 \paragraph{t-spanners.}
-Let $\G=(\PS,\EG)$ an $\G'=(\PS,\EG')$ be two graphs over the same set of vertices. Consider a pair of vertices $\pa,\pb \in \PS$. For a
+Let $\G=(\PS,\EG)$ and $\G'=(\PS,\EG')$ be two graphs over the same set of vertices. Consider a pair of vertices $\pa,\pb \in \PS$. For a
 parameter $t \geq 1$, a path between $\pa$ and $\pb$ in $\G'$ is a
 \emphw{$t$-path} w.r.t. $\G$, if the length of the path is at most
 $t \cdot \dGY{\pa}{\pb}$, where $\dGY{\pa}{\pb}$ is the length
@@ -90,7 +89,7 @@ For $\PS\subseteq \Re^d$ we say that a graph $\G$ is a $t$-spanner of $\PS$ if i
 Let $\FF$ be a family of regions in the plane. For a fault region
 $\region \in \FF$ and a geometric graph $\G$ on a point set $\PS$, let
 $\G \gminus \region$ be the residual graph after removing from it all
-the points of $\PS$ in $\region$. and all the edges that intersects
+the points of $\PS$ in $\region$. and all the edges that intersect
 $\region$.  Formally, let
 \begin{equation*}
     \G \gminus \region%
@@ -110,18 +109,18 @@ be the residual graph after restricting $\G$ to the region $\region$.
 
 \paragraph{Fault-tolerant and local spanners.}
 
-A \emphw{fault-tolerant spanner} for $\FF$ and $\PS\subseteq \Re^d$, is a graph $\G=(\PS, \EG)$, such that
+An \emphw{ $\FF$-fault-tolerant spanner} for $\PS\subseteq \Re^d$, is a graph $\G=(\PS, \EG)$, such that
 for any region $\region$ (i.e., the ``attack''), the graph
 $\G \gminus \region$ is a $t$-spanner of $\G_\PS - \region$. Surprisingly, as shown by Abam \etal \cite{abfg-rftgs-09},
 such fault-tolerant spanners can be constructed where the  attack
-region is any convex set. Furthermore, these spanners have near linear
+region is any convex set. Furthermore, these spanners have a near linear
 number of edges.
 
-In the same spirit, a graph $\G=(\PS, \EG)$ is a \emphw{local spanner} for $\FF$ and $\PS$
+In the same spirit, a graph $\G=(\PS, \EG)$ is an \emphw{$\FF$-local spanner} for $\PS$
 if for any region $\region \in \FF$, we have that
 $\restrictY{\G}{\region}$ is a $t$-spanner of $\G_\PS \cap \region$.  The
-notion of local-spanner was defined by Abam and Borouny
-\cite{ab-lgs-21}. They showed how to construct such spanners for
+notion of local-spanners was defined by Abam and Borouny
+\cite{ab-lgs-21} who showed how to construct such spanners for
 axis-parallel squares and vertical slabs. They also showed how to
 construct such spanners for disks, if one is allowed to add Steiner
 points. Abam and Borouny left the question of how to construct local
@@ -129,24 +128,13 @@ spanners for disks as an open problem.
 
 \subsection*{Relted work}
 
-Geometric spanners have been widely studied, see \cite{ns-gsn-07}. Fault-tolerant spanners were first studied with vertex and edge faults, meaning that some set of maximum size $k$ of vertices and edges has failed. Levcopoulos \etal \cite{lns-iacfts-02} showed the existence of $k$-vertex/edges fault tolerant spanners for a set of points $\PS$ in some metric space, with weight bounded by $f(k)\cdot wt(MST(\PS))$ for some function $f$, and $O(kn\log n)$ edges. Lukovszki \cite{l-nrftgs-99} later achieved a similar construction, improving the number of edges to $O(kn)$ and proving the tightness of this result.
+Geometric spanners have been widely studied, see \cite{ns-gsn-07}. Fault-tolerant spanners were first studied with vertex and edge faults, meaning that some arbitrary set of maximum size $k$ of vertices and edges has failed. Levcopoulos \etal \cite{lns-iacfts-02} showed the existence of $k$-vertex/edges fault tolerant spanners for a set of points $\PS$ in some metric space. Their spanner had $O(kn\log n)$ edges, and weight, i.e. sum of edge weights, bounded by $f(k)\cdot wt(MST(\PS))$ for some function $f$. Lukovszki \cite{l-nrftgs-99} later achieved a similar construction, improving the number of edges to $O(kn)$ and was able to prove that the result is asymptotically tight.
 
-Abam \etal\cite{abfg-rftgs-09} introduced region-fault tolerant spanners, where the faults were not arbitrary sets of vertices and/or edges, but instead all of the points and geometric edges (segments between points) intersecting some region. They showed several results, including a construction of convex regions fault tolerant $t$-spanners of size $O(n\log n)$. Later Abam and Borouny \cite{ab-lgs-21} introduced the concept of local spanners, and showed constructions for $t$-spanners of size $O(n\cdot polylog(n))$ for axis-parallel square, and vertical slab local spanners, and also showed that constructions using $O(n)$ Steiner points for the same cases and as well as for the case of disk local spanners.
-%As one of the most relevant works, Abam et al. [1] presented
-%a region-fault tolerant (1 + ")-spanner G of size O(n log n) for a point set P
-%w.r.t. convex regions, i.e. for any convex region R the graph G􀀀R is a (1+")-
-%spanner for K(P) 􀀀 R. Here, for points p and q the edge fp; qg may not exist
-%in K(P)􀀀R, and indeed the length of the shortest path from p to q in G􀀀R
-%is guaranteed to be at most (1 + ") times the length of the shortest path
-%from p to q in K(P)􀀀R . When convex regions are half planes, K(P)􀀀R is a
-%complete graph on the remaining points. Therefore, this problem is the inverse
-%of the local spanner problem, and we already have (1+")-local spanner of size
-%O(n log n) for the familly of halfplanes.
+Abam \etal\cite{abfg-rftgs-09} introduced region-fault tolerant spanners, where the faults were not arbitrary sets of vertices and/or edges, but instead all of the points and geometric edges (segments between points) intersecting some region. They showed several results, including a construction of convex regions fault tolerant $t$-spanners of size $O(n\log n)$. Later Abam and Borouny \cite{ab-lgs-21} introduced the concept of local spanners, and showed constructions of local $t$-spanners of size $O(n\cdot polylog(n))$ for axis-parallel squares and vertical slabs, and also showed that constructions using $O(n)$ Steiner points for the same cases as well as for the case of disk local spanners.
 
 \subsection*{Our results}
 
 \paragraph{Disks}
-
 In \secref{disks} we present a construction of spanners, which surprisingly, is not
 only fault-tolerant for convex regions, but it also a local spanner
 for disks. This resolves the aforementioned open problem from Abam and
@@ -156,18 +144,27 @@ original construction of Abam \etal \cite{abfg-rftgs-09}. For a parameter $\eps>
 In Subsection \ref{subsection:homothets} we extend this construction to scaled and translated copies (\emph{homothets}) of a convex shape $\CC$.
 
 \paragraph{Squares}
-
-In \secref{squares} we show a construction similar to that of \secref{disks}, but prove that for the case of local square spanners we are able to produce a spanner of size $\Of\pth{\eps^{-3} n \log n}$, that is, independent of the spread of the point set. 
-
-\paragraph{Rectangles}
-
-In \secref{rectangles} we describe a new pair decomposition data structure, the \emph{Quadrant Separated Pair Decomposition} (QSPD), and use it to construct a weak local spanner for axis parallel rectangles, meaning that we guarantee short paths between points in a shrunken copy of the local region. For parameters $\eps>0, \delta\in (0,1)$ we get a $(1+\eps)$-$\delta$ weak local spanner for the axis parallel rectangles, with size $\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$, in $\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$ time.
+In \secref{squares} we show a construction similar to that of \secref{disks}, but prove that for the case of axis parallel square local spanners we are able to produce a spanner of size $\Of\pth{\eps^{-3} n \log n}$, that is, independent of the spread of the point set. 
 
 \paragraph{Triangles}
+In \secref{triangles} we give a construction of local spanners for the family $\FF$ of homothets of a given triangle $\triangle$, and get a spanner of size $O\left((\alpha\eps)^{-1}n\right)$ in $O\left((\alpha\eps)^{-1}n\right)\log n$ time, where $\alpha$ is the smallest angle in $\triangle$. We also show that if we allow $\alpha$ to be arbitrarily small there exists a set of points that requires $O(n^2)$ edges for some triangles.
 
-	
+\paragraph{}
+For the following families of regions, it is possible to show that even after constraining parameter such as fatness/aspect ratio, a local spanner with respect to the set of regions might require a quadratic number of edges. We therefore present constructions of weak spanners for those families, where the mathematical definition of ``weak'' changes between the two section, even though the two definitions are very closely related. In both cases, the size of the spanner and the construction time both depend on the ``weakness'' of the requested spanner, parameterized by $\delta\in (0,1)$.
+
+\paragraph{Convex regions}
+In \secref{convex regions} we construct weak local spanners for homothets of a given convex region $\CC$ with a bounded aspect ratio. We are able to show an algorithm for constructing a $\delta$-weak $\CC$-local $(1+\eps)$-spanner of size $\Of\bigl( (\eps^{-1} + \delta^{-2}) n \bigr) $ in $\Of( (\eps^{-1} + \delta^{-2}) n \log n)$ time. 
+
+
+\paragraph{Rectangles}
+In \secref{rectangles} we describe a new pair decomposition data structure, the \emph{Quadrant Separated Pair Decomposition} (QSPD), and use it to construct a weak local spanner for axis parallel rectangles.We get a $\delta$-weak local $(1+\eps)$-spanner for the axis parallel rectangles, with size $\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$, in $\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$ time.
+
+See \figref{results_summary} for a summary of known results and comparisons to the results of this paper.
+
+
 \begin{figure}
     \centering
+    
     \begin{tabular}{|c|c|c||c|c|}
     	
     	
@@ -260,6 +257,16 @@ In \secref{rectangles} we describe a new pair decomposition data structure, the 
 		\thmref{l:s:homothets}%
 		\\
 		\hline
+				% ------------------------------------------------------------
+		$\alpha$-fat triangles
+		&
+		&
+		&
+		$\Of\pth{ (\alpha\eps)^{-1} n}\Bigr.$
+		&
+		\thmref{l:s:triangle}%
+		\\
+		\hline
 		% ---------------------------------------------------------
 		% ---------------------------------------------------------
 		\multicolumn{5}{c}{$\delta$-weak local $(1+\eps)$-spanners$\Bigr.$}
@@ -293,6 +300,7 @@ In \secref{rectangles} we describe a new pair decomposition data structure, the 
     \caption{Known and new results. The notation $\Oeps$ hides
        polynomial dependency on $\eps$ which is not specified in the
        original work.}
+   \figlab{results_summary}
 \end{figure}
 
 

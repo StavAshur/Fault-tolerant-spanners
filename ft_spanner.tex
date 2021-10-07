@@ -1346,6 +1346,33 @@ edges that does not depend on the spread of the points. See \figref{tri_low_bd} 
 	We say that a triangle $\triangle$ is $\alpha$-fat if the smallest angle in $\triangle$ is of size at least $\alpha$.
 \end{defn}
 
+\begin{claim}
+	For any fixed $\eps \in (0,1)$, there exists a set $\PS$ of $n$ points and a triangle $\triangle$, such that the $\triangle$-local $(1+\eps)$-spanner of $\PS$ requires $O(n^2)$ edges. 
+\end{claim}
+
+\begin{proof}
+	We first take $\triangle$ to be the right angle triangle $\left((0,1), (0,2^n+1), (1,n) \right)$. Next, we describe two sets of points $A$ and $B$ of size $n$ each (with some abuse of notation), such that every point in $A$ must be connected to $O(n)$ points of $B$ in any $\triangle$-local $(1+\eps)$-spanner. 
+	Let $A = \{a_i:=(-i, i/n) ~|~ 0\leq i \leq n \}$, and let $B = \{b_i:=(n-i, 1+2^i) ~|~ 1\leq i \leq n \}$. Notice that for every point $a\in A$ and index $i\in \{0,..,n\}$, There exist a homothet $\triangle'$ of $\triangle$ such that $B\cap \triangle'=\{b_i,...,b_n\}$. See \figref{tri_low_bd} for some intuition.
+	
+	We now show that $|\overline{ab_{i+1}}| + |\overline{b_{i}b_{i+1}}| \geq (1+\eps)|\overline{ab_{i}}|$ for $O(n)$ indices. First we make a couple of simple observations:
+	
+	\begin{enumerate}
+		\item $1+\eps \leq 2$,
+		\item $|\overline{ab_{i+1}}|\geq 2^{i+1}$,
+		\item $|\overline{b_{i}b_{i+1}}| \geq 2^i$,
+		\item and $|\overline{ab_{i}}| \leq $.
+	\end{enumerate}
+
+	So it is enough to show that for $O(n)$ points in $B$ we have that
+	
+	$$2^{i+1} + 2^{i} \geq 2(2n + 2^i)$$.
+	
+	Simplifying a bit we get that the above inequality is true when $i \geq \log(4n)$, and we therefore have that for sufficiently many points of $B$ there must be an edge to every point in $A$. 
+	
+
+	
+	
+\end{proof}
 \subsubsection{Construction}
 \label{tri_construction}
 The input is a point set $\PS$ of $n$ points in the plane, a triangle $triangle$, and an
@@ -1597,7 +1624,7 @@ We will need the following lemmas in order to prove the local spanning property 
 
 \paragraph{Local spanner property.}
 \begin{lemma}
-	\lemlab{triangles}%
+	\lemlab{local_span:triangles}%
 	%
 	For a triangle $\triangle$, denote the graph constructed by the process above (Subsection \ref{tri_construction}) by $G$. for any homothet of $\triangle$, and any two points $\pa, \pb \in \PS$ in the homothet, we have a $(1+\eps)$-path in
 	$\restrictY{\G}{\triangle}$.
@@ -1617,40 +1644,20 @@ We will need the following lemmas in order to prove the local spanning property 
 Let $G$ be the graph constructed by the procedure described above.
 
 
-
-%The $\theta$-graph can be constructed in $O(\eps^{-1}n\log n)$ time (\cite{ns-gsn-07}), and has $O(\eps^{-1}n)$ edges. 
-%We will need the following lemma.
-%
-%\begin{lemma}[4.1.4 \cite{ns-gsn-07}]
-%	\lemlab{theta_graph}%
-%	Let $\theta\leq \frac{2\pi}{8}$, let $\pa$ and $\pb$ be two distinct points in the plane, and let $c$ be the cone of $C_\pa$ such that $\pb\in c$. Let $\pc$ be a point in $c$ such that the orthogonal projection of $\pc$ onto the angular bisector of $c$ is at least as close to $\pa$ as the orthogonal projection of $\pb$ onto the bisector Then,
-%	
-%	\begin{enumerate}
-%		\item $|\pa\pc| \leq |\pa\pb|/ \cos \theta$, and
-%		\item $|\pc\pb| \leq |\pa\pb| - (\cos \theta - \sin \theta)|\pa\pc|$.
-%	\end{enumerate}
-%\end{lemma}
-
-
-
-
 \begin{theorem}
 	\thmlab{l:s:triangle}%
 	%
 	Let $\PS$ be a set of $n$ points in the plane, and let
-	$\eps \in (0,1/3)$ be an approximation parameter. The above
-	algorithm computes a local $(1+\eps)$-spanner $\G$ triangles.
+	$\eps \in (0,1)$ be an approximation parameter. The above
+	algorithm computes a local $(1+\eps)$-spanner $\G$ for homothets of an $\alpha$-fat triangle $\triangle$.
 	The construction time is
-	$???$, and the spanner $\G$ has
-	$???$ edges.
+	$O\left(\frac{1}{\alpha\eps}n\log n\right)$, and the spanner $\G$ has
+	$O\left(\frac{1}{\alpha\eps}n\right)$ edges.
 \end{theorem}
 
 \begin{proof}
-	Let $\triangle\subseteq\Re^2$ be a triangle $\pa,\pb\in \PS\cap \triangle$ be two points, and let $\triangle'$ be a copy of $\triangle$ containing, say, $\pa$ on one of its vertices, and $\pb$ on the edge opposite to that vertex (as in \lemref{shrink:triangles}). We prove using induction on the rank of $|\overline{\pa\pb}|$.
-	
-	If $\pa$ and $\pb$ are the closest pair, then $\overline{\pa\pb}$ must be an edge in the resulted graph. This is because $\pb$ is contained in one of the cones in $C_\pa$ by construction, and if there exists a point $\pc\in C_\pa$ that was connected to $\pa$, then by \lemref{theta_graph} we get that $|\overline{\pa\pb}|\geq |\overline{\pc\pb}|$.
-	
-	Otherwise, by \lemref{theta_graph} we have that $\pa$ is connected by an edge to a point $\pc\in \triangle$
+	The local-spanning property is proven in \lemref{local_span:triangles}, and we are only left with bounding the size nd the running time of the algorithm. The bound on the size is immediate from the construction, as every point $\pa$ is the apex of $O\left( \frac{2\pi}{\eps\alpha} \right)$ cones, each giving rise to a single edge incident to $\pa$.
+	The construction time is bounded by the construction time for a $\theta$-graph with cone size $\alpha\eps$, which is $O\left(\frac{1}{\alpha\eps}n\log n\right)$ (\cite{c-aaspmp-87})
 \end{proof}
 
 

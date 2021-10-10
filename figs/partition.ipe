@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.23">
-<info created="D:20210804141159" modified="D:20210804142254"/>
+<info created="D:20210804141159" modified="D:20211010133110"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -1034,7 +1034,7 @@ h
 <layer name="zeta"/>
 <layer name="eta"/>
 <layer name="theta"/>
-<view layers="complement_of_a_circle zeta eta theta" active="alpha"/>
+<view layers="alpha complement_of_a_circle zeta eta theta" active="alpha"/>
 <view layers="complement_of_a_circle zeta eta theta" active="theta"/>
 <view layers="complement_of_a_circle zeta" active="gamma"/>
 <view layers="complement_of_a_circle zeta eta" active="eta"/>
@@ -1043,6 +1043,13 @@ h
 <view layers="alpha" active="beta"/>
 <view layers="complement_of_a_circle" active="complement_of_a_circle"/>
 <view layers="zeta" active="zeta"/>
+<path layer="alpha" matrix="1 0 0 1 -0.001 -0.00046786" stroke="black" fill="green" opacity="30%" stroke-opacity="opaque">
+106.132 133.867 m
+106.132 122.132 l
+117.868 122.132 l
+117.868 133.867 l
+h
+</path>
 <path layer="delta" stroke="blue" pen="fat">
 132.647 152.448 m
 132.465 152.601 l
@@ -1276,9 +1283,6 @@ h
 161.518 213.767 m
 62.4823 42.2329 l
 </path>
-<path layer="complement_of_a_circle" stroke="black" fill="green" opacity="30%" stroke-opacity="opaque">
-8 0 0 8 112 128 e
-</path>
 <path layer="eta" stroke="red" fill="yellow" opacity="20%" stroke-opacity="opaque">
 144 128 m
 143.901 130.511 l
@@ -1289,9 +1293,9 @@ h
 176 128 l
 144 128 l
 </path>
-<path layer="theta" matrix="5.2 0 0 5.2 -542.479 -553.676" stroke="purple" fill="yellow" pen="fat">
-144 128 m
-114.323 135.655 l
+<path layer="theta" stroke="purple" fill="yellow" pen="fat">
+207.967 112.038 m
+50.3418 150.689 l
 </path>
 <path matrix="5.85 0 0 5.85 -627.411 -623.848" stroke="purple" fill="yellow" pen="fat">
 142.888 136.277 m

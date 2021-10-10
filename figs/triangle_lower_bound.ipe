@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.23">
-<info created="D:20210921193339" modified="D:20210922004920"/>
+<info created="D:20210921193339" modified="D:20211010161238"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -347,16 +347,10 @@ h
 144 679.2 m
 345.6 640 l
 </path>
-<use matrix="1 0 0 1 5.6404 -1.23202" name="mark/disk(sx)" pos="146.329 693.119" size="small" stroke="black"/>
-<use matrix="1 0 0 1 6.40331 -2.18037" name="mark/disk(sx)" pos="153.73 685.968" size="small" stroke="black"/>
-<use matrix="1 0 0 1 6.00176 -1.43986" name="mark/disk(sx)" pos="169.885 676.868" size="small" stroke="black"/>
-<use matrix="1 0 0 1 5.76214 -1.47064" name="mark/disk(sx)" pos="202.336 665.51" size="small" stroke="black"/>
-<use matrix="1 0 0 1 9.87392 -2.13618" name="mark/disk(sx)" pos="262.083 647.604" size="small" stroke="black"/>
-<use matrix="1 0 0 1 -1.64415 -1.56314" name="mark/disk(sx)" pos="145.644 641.563" size="small" stroke="black"/>
-<use name="mark/disk(sx)" pos="145.018 635.927" size="small" stroke="black"/>
-<use name="mark/disk(sx)" pos="146 632" size="small" stroke="black"/>
-<use name="mark/disk(sx)" pos="147.008 627.967" size="small" stroke="black"/>
-<use name="mark/disk(sx)" pos="148 624" size="small" stroke="black"/>
+<use name="mark/disk(sx)" pos="145.018 635.927" size="small" stroke="blue"/>
+<use name="mark/disk(sx)" pos="146 632" size="small" stroke="blue"/>
+<use name="mark/disk(sx)" pos="147.008 627.967" size="small" stroke="blue"/>
+<use name="mark/disk(sx)" pos="148 624" size="small" stroke="blue"/>
 <path layer="beta" matrix="1 0 0 1 0 -0.0005" stroke="black" fill="seagreen" opacity="10%" stroke-opacity="opaque">
 144 696 m
 144 640 l
@@ -398,5 +392,13 @@ h
 432 640 l
 h
 </path>
+<use layer="alpha" matrix="1 0 0 1 5.6404 -1.23202" name="mark/disk(sx)" pos="146.329 693.119" size="small" stroke="red"/>
+<use matrix="1 0 0 1 6.40331 -2.18037" name="mark/disk(sx)" pos="153.73 685.968" size="small" stroke="red"/>
+<use matrix="1 0 0 1 6.00176 -1.43986" name="mark/disk(sx)" pos="169.885 676.868" size="small" stroke="red"/>
+<use matrix="1 0 0 1 5.76214 -1.47064" name="mark/disk(sx)" pos="202.336 665.51" size="small" stroke="red"/>
+<use matrix="1 0 0 1 9.87392 -2.13618" name="mark/disk(sx)" pos="262.083 647.604" size="small" stroke="red"/>
+<text matrix="1 0 0 1 -7.14389 -1.42878" transformations="translations" pos="144 640" stroke="black" type="label" width="5.012" height="4.297" depth="1.93" valign="baseline">$p$</text>
+<text matrix="1 0 0 1 -5.00072 -0.833454" transformations="translations" pos="142.766 696.721" stroke="black" type="label" width="4.805" height="4.297" depth="1.93" valign="baseline">$q$</text>
+<text matrix="1 0 0 1 -1.07158 -2.26223" transformations="translations" pos="436.142 640.403" stroke="black" type="label" width="5.703" height="4.289" depth="0" valign="baseline">$u$</text>
 </page>
 </ipe>

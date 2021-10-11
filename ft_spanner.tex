@@ -5,7 +5,7 @@
 \begin{document}
 
 \title{Fault-Tolerant and Local Spanners Revisited}
-	
+
 \author{%
    Stav Ashur%
    \StavThanks{}%
@@ -14,41 +14,29 @@
    \SarielThanks{Work on this paper was partially supported by a NSF
       AF award CCF-1907400.  }%
 }%
-	
+
 \maketitle
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{abstract}
-    %	For a set of points $\PS\in \Re^d$ let $G(P)$ denote the
-    % complete graph with $\PS$ as its vertex set, whose edges are
-    % weighted by the length of the segment to which they correspond
-    % in $\Re^d$. For a region $F\subseteq \Re^d$, the local graph of
-    % $P$ induced by $F$ is the subgraph of $G(P)$ that contains only
-    % the points and the edges that are contained in $F$
-	
-    Given a set of points $\PS\in \Re^d $, and a family of regions
+    Given a set of points $\PS\in \Re^d$, and a family of regions
     $\FF$, a geometric $\FF$-local $t$-spanner of $\PS$, is a subgraph
-    of $\G_\PS$, the complete Euclidean graph over $P$, that is also a
+    of $\G_\PS$, the complete Euclidean graph over $\PS$, that is also a
     $t$-spanner of every subgraph of $\G_\PS$ that is induced by a
     region $F\in \FF$, where the subgraph induced by $F$ is the
     subgraph that contains only the points and the edges of $\G_\PS$
     that are contained in $F$.
-	
-    %	Local $t$-spanners can also be thought of fault-tolerant
-    % spanners, where the fault regions. or attacks, are from the
-    % family $\overline{\FF}$ containing all the complements of
-    % regions of $\FF$.
-	
-    A weak $\FF$-local spanner of $P$ is a graph that for any
+
+    A weak $\FF$-local spanner of $\PS$ is a graph that for any
     $\region\in\FF$, guarantees the existence of a $t$-path only for
     pairs of points contained in some region
     $\region'\subset \region$. Different definitions of the subregion
     $F'$ are possible, and can imply different results.
-	
+
     In this paper we present algorithms for the construction of local
     and weak local spanners of points in $\Re^2$ with respect to
     several families of convex regions, including an improvement of
@@ -184,7 +172,7 @@ spanner is of size $\Of\pth{ \eps^{-2} n\log \spread }$, where
 $\spread$ is the spread of the point set. We also provide a lower
 bound showing that this logarithmic dependency on $\spread$ cannot be
 avoided.
- 
+
 In \secref{homothets} we extend this construction to scaled and
 translated copies (\emph{homothets}) of a convex shape $\CC$.
 
@@ -239,10 +227,10 @@ comparisons to the results of this paper.
 
 \begin{figure}
     \centering
-    
+
     \begin{tabular}{|c|c|c||c|c|}
-    	
-    	
+
+
       \hline
       % ------------------------------------------------------------
       Region
@@ -310,10 +298,10 @@ comparisons to the results of this paper.
       &
         \thmref{main:1}%
       \\
-		
+
       \cline{4-5}
       % ---------------------------------------------------------
-		
+
       &
       &
       &
@@ -366,7 +354,7 @@ comparisons to the results of this paper.
       &
       &
       &
-        $\Of\bigl((\eps^{-2} + \delta^{-2}) n \log^2 n \bigr)\Bigr.$ 
+        $\Of\bigl((\eps^{-2} + \delta^{-2}) n \log^2 n \bigr)\Bigr.$
       &
         \thmref{a:l:s:rectangles}%
       \\
@@ -382,10 +370,12 @@ comparisons to the results of this paper.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	
+
+
 \section{Local spanner for disks}
-\seclab{disks} Our purpose here is to build a local spanner for disks.
+\seclab{disks}
+
+Our purpose here is to build a local spanner for disks.
 
 \subsection{Preliminaries}
 
@@ -453,7 +443,7 @@ near linear.
         \max \pth{ \diameterX{\PSX}, \diameterX{\PSY} } \leq
         \eps \cdot \dsY{\PSX}{\PSY},
     \end{equation*}
-    
+
     where
     $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
     \dY{\pa}{\pb}$.
@@ -495,7 +485,7 @@ near linear.
     {separated!semi-separated@$(1+\eps)$-semi-separated} if
     \begin{equation*}
         \min \pth{ \diameterX{\PSB}, \diameterX{\PSC} } \leq \eps \cdot
-        \dsY{\PSB}{\PSC},%        
+        \dsY{\PSB}{\PSC},%
     \end{equation*}
 
     For a point set $\PS$, a \emphOnly{semi-separated pair
@@ -582,7 +572,7 @@ near linear.
     partitions the plane into a set of cones $\ConeSet$. For a cone
     $C \in \ConeSet$, we show that there exists an $\eps$-double-wedge
     that contains $\PSX$ in one side, and $\PSY \cap C$ in the other.
-    
+
     To see that, take the double-wedge formed by the cross tangents
     between $\CHX{\PSX}$ and $\CHX{\PSY \cap C}$, where $\CHX{\PSX}$
     denotes the convex-hull of $\PSX$. Assume w.l.o.g that $\square$
@@ -590,7 +580,7 @@ near linear.
     apex $o$, whose angular bisector is a horizontal ray in the
     positive direction of the $x$ axis. See figure
     \figref{double-wedge} for an illustration.
-    
+
     We would like to find a vertical segment $s$ such that all points
     of $Y$ lie to its right, with one endpoint on the upper line of
     $c$, and the other on the lower line of $c$. Using the segments'
@@ -616,7 +606,7 @@ near linear.
     $x$-axis at a distance of $5/\eps+\frac{1}{2}$ away from $o$. The
     angle of the $x$-axis and the segment between the lower end of the
     right side of $\square$ and the upper end of $s$ is now given by:
-    
+
     \begin{equation*}
     	\arctan\left(\frac{\frac{6}{\eps}\tan\frac{\eps}{8}+\frac{1}{2}}{\frac{5}{\eps}}\right)%
     	=%
@@ -625,7 +615,7 @@ near linear.
     	\Theta(\eps)%
     \end{equation*}
 
- 
+
 \end{proof}
 
 \begin{figure}[h]
@@ -750,7 +740,7 @@ The construction time is bounded by
     =%
     O\pth{ \WeightX{\WS} \log n }%
     =%
-    O\pth{ \frac{n\log \spread \log n}{{\epsA}^{2}}},    
+    O\pth{ \frac{n\log \spread \log n}{{\epsA}^{2}}},
 \end{equation*}
 
 \paragraph{Local spanner property.}
@@ -793,7 +783,7 @@ The construction time is bounded by
         \leq%
         \epsA \cdot \dsY{\PSX}{\PSY}%
         \leq%
-        \epsA \ell, 
+        \epsA \ell,
     \end{equation*}
     where $\ell = \dY{\px}{\py}$. In particular,
     $\dY{\px'}{\px} \leq \epsA \ell$ and
@@ -816,10 +806,10 @@ The construction time is bounded by
         +(1+2\epsA)\ell
         + (1+\eps)\epsA \ell
         \leq%
-        \pth{ 2\epsA +1+2\epsA + 2\epsA } \ell        
+        \pth{ 2\epsA +1+2\epsA + 2\epsA } \ell
       \\&%
       =%
-      \pth{ 1+ 6\epsA  } \ell        
+      \pth{ 1+ 6\epsA  } \ell
       \leq%
       \pth{ 1+ \eps  } \dY{\px}{\py},
     \end{align*}
@@ -944,7 +934,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     and to the right of $\pa$, let $\diskVY{\pa}{\pb}$ be the disk
     whose boundary passes through $\pa$ and $\pb$, and its center has
     the same $x$-coordinate as $\pa$.
-    
+
     In the $j$\th iteration, for $j=2,\ldots, M-1$, Let
     $x_j = n2^{M-j+1} = x(\pb_{j-1})/2$, and let $y_j < 0$ be the
     maximum $y$-coordinate of a point that lies on the intersection of
@@ -955,7 +945,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
         D_j = \Set{ \diskVY{\pa_i}{\pb_{j-1}} }{i=1,\ldots, n},
     \end{equation*}
     see \figref{flower}.
-    
+
     Clearly, the point $\pb_j$ lies outside all the disks of
     $D_1 \cup \ldots \cup D_j$. The construction now continues to the
     next value of $j$. Let
@@ -1012,7 +1002,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1100,7 +1090,7 @@ unshrinked version.
 %     Given a set of points $\PS \subseteq \Re^2$ in general position,
 %     and a convex shape $\CC$. $\DG_{\CC}(\PS)$, the $\CC$-Delaunay
 %     graph of $\PS$, is planar.
-%	
+%
 % \end{claim}
 %
 %
@@ -1110,7 +1100,7 @@ unshrinked version.
 %    intersects $e'$. W.l.o.g, we assume that $e$ is horizontal,
 %    $\pa'$ is above the line $l$ containing $e$, and $\pb'$ is below
 %    it.
-%	
+%
 %    Let $C$ be a homothet of $\CC$ containing $\pa$ and $\pb$ on its
 %    boundary, and that contains no other point of $\PS$. Such a
 %    homothet exists since $\CC$ is convex, and $e\in \DG_{\CC}(\PS)$.
@@ -1120,7 +1110,7 @@ unshrinked version.
 %    its boundary, and that contains no other point of $\PS$ and let
 %    $\psi(x):= c + \alpha x$ be the translation and scaling such that
 %    $\psi(C) = C'$.
-%	
+%
 %    We denote the segment
 %    $\overline{\psi(\phi(x_\pb))\psi(\phi'(x_\pb))}$ by $s$. This is
 %    a segment contained in $C'$ that corresponds to $e$ in $C$,
@@ -1136,7 +1126,7 @@ unshrinked version.
 %    choice of $e'$. Now, since $\Delta \approx \Delta'$ we have that
 %    the part of $\Delta'$ below $l$ is contained in $\Delta$, and we
 %    are thus done. See \figref{planar_DG} for an illustration.
-%	
+%
 %\end{proof}
 %
 %\begin{figure}[h]
@@ -1191,13 +1181,13 @@ bound its size similarly to the local disk spanner.
     $O(n\log n)$ time, the time complexity bounds hold as well. The
     correctness proof of \thmref{main:1} uses only the connectivity of
     the Delaunay triangulation, and thus the same proof suffices.
-	
+
 
 \end{proof}
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1331,7 +1321,7 @@ disks, as illustrated in \figref{bad}.
     is also separated by a double wedge of angle $\leq \epsA$.  See
     \figref{infty:spanner}.  Furthermore, assume that
     $\diameterX{\PSX} < \diameterX{\PSY}$.
- 
+
     \begin{figure}[h]
         \hfill%
         {\includegraphics{figs/spanner_sq}} \hfill%
@@ -1359,10 +1349,10 @@ disks, as illustrated in \figref{bad}.
 
     % \newpage
 
-    
+
     Let $\ell = \dY{\px'}{\py'}$. Due to the semi-separation property
     and since $\diameterX{\PSX} < \diameterX{\PSY}$,
-    
+
     \begin{equation*}
         \dY{\px}{\px'}%
         \leq%
@@ -1371,11 +1361,11 @@ disks, as illustrated in \figref{bad}.
         \epsA \dY{\PSX}{\PSY}%
         \leq%
         \epsA \sqrt{2} \cdot \dGZ{\infty}{\PSX}{\PSY}%
-        \leq 
+        \leq
         2
         \epsA \ell.
     \end{equation*}
-    
+
     Thus, we have that
     \begin{equation*}
         \dGZ{\G}{\px}{\px'}%
@@ -1426,12 +1416,12 @@ disks, as illustrated in \figref{bad}.
         \dY{\px}{\py'}  \epsA
         \leq%
         \epsA (1+2 \epsA)\ell
-        \leq 
+        \leq
         2 \epsA \ell,
     \end{equation*}
     as $\epsA \in (0,1/10)$, the monotonicity of $\sin$ in this range,
     and as $\sin \epsA \leq \epsA$.
-    
+
     We have that
     $\dY{\px}{\pz} \leq \dY{\px}{\py'} \leq
     (1+2\epsA)\ell$. Similarly, we have
@@ -1440,8 +1430,8 @@ disks, as illustrated in \figref{bad}.
         =%
         \dY{\px}{\py'} \cos \alpha
         \geq%
-        (1-\alpha^2/2)\dY{\px}{\py'} 
-        \geq 
+        (1-\alpha^2/2)\dY{\px}{\py'}
+        \geq
         (1-\epsA^2/2)(1-2\epsA)\ell
         \geq
         (1-3\epsA)\ell.
@@ -1453,7 +1443,7 @@ disks, as illustrated in \figref{bad}.
         \dY{\py'}{\py}
         \geq%
         \dY{\px}{\py}
-        -\dY{\py'}{\px}        
+        -\dY{\py'}{\px}
         \geq%
         \dY{\px}{\py}
         - (1+2\epsA)\ell.
@@ -1467,11 +1457,11 @@ disks, as illustrated in \figref{bad}.
         \dY{\px}{\py} - \dY{\px}{\pz} +
         2 \epsA \ell
         \leq
-        \dY{\px}{\py} - (1-3\epsA)\ell 
+        \dY{\px}{\py} - (1-3\epsA)\ell
         +2 \epsA \ell
       \\&
-      = 
-      \dY{\px}{\py} - (1-5\epsA)\ell 
+      =
+      \dY{\px}{\py} - (1-5\epsA)\ell
       <%
       \dY{\px}{\py}.
     \end{align*}
@@ -1500,7 +1490,7 @@ disks, as illustrated in \figref{bad}.
       \\&
       =%
       \bigl[1+4\epsA
-      - (1+\eps)(1-5\epsA)\bigr]\ell 
+      - (1+\eps)(1-5\epsA)\bigr]\ell
       +
       (1+\eps)
       \dY{\px}{\py}%
@@ -1582,7 +1572,7 @@ triangles are allowed.
     Let $A = \{a_i:=(-i, i/n) ~|~ 0\leq i \leq n \}$, and let
     $B = \{b_i:=(n-i, 1+2^i) ~|~ 1\leq i \leq \log\Phi \}$. It is not
     hard to see that the spread of $A \cup B$ is indeed $O(\Phi)$.
-	
+
     We now take $\triangle$ to be the right angle triangle with
     vertices $\pa :=(1,0), \pb :=(1,1)$, and $\pc:=(x,0)$, where $x$
     is sufficiently large so that for every $i\in \{1,...,n\}$ there
@@ -1592,12 +1582,12 @@ triangles are allowed.
     intuition.  Notice that for every point $a\in A$ and index
     $i\in \{0,..,\log\phi\}$, there exist a homothet $\triangle'$ of
     $\triangle$ such that $B\cap \triangle'=\{b_i,...,b_n\}$.
-	
+
     We now show that
     $\dY{a}{b_{i+1}} + \dY{b_{i}}{b_{i+1}} \geq (1+\eps)
     \dY{a}{b_{i}}$ for $O(n)$ indices. First we make a couple of
     simple observations:
-	
+
     \begin{enumerate}
         \item $1+\eps \leq 2$,
         \item $\dY{a}{b_{i+1}}\geq 2^{i+1}$,
@@ -1607,10 +1597,10 @@ triangles are allowed.
 
     So it is enough to show that for $O(n)$ points in $B$ we have that
     \begin{equation*}
-        2^{i+1} + 2^{i} \geq 2(2n + 2^i).            
+        2^{i+1} + 2^{i} \geq 2(2n + 2^i).
     \end{equation*}
-	
-	
+
+
     Simplifying a bit we get that the above inequality is true when
     $i \geq \log(4n)$, and we therefore have that for sufficiently
     many points of $B$ there must be an edge to every point in $A$.
@@ -1636,7 +1626,7 @@ is the set of cones $C_1\cup C_2\cup C_3$ translated by $\pa$, and for
 each $c\in C_\pa$ we connect $\pa$ to the point $\pb\in c$ closest to
 $\pa$ in an ordering by $v_i$ (where $i$ corresponds to the set $C_i$
 that contains the un-translated copy of $c$).
-  
+
 %
 % For each point we build Let $\eps = ???$.  The algorithm computes a
 % modified version of the $\theta$-graph (see \cite{c-aaspmp-87}). Let
@@ -1678,7 +1668,7 @@ deals with triangle shrinking.
     Let $\pa,\pb,\pc\in \PS$ such that the edge $\{\pa, \pc\}$ was
     added to the graph for the cone $c$ with apex at $\pa$, and such
     that $\pc\in c$ (as well as $\pa$ and $\pb$).
-	
+
     We get that
     \begin{enumerate}
         \item { $ \dY{\pa}{\pc}%
@@ -1702,17 +1692,17 @@ deals with triangle shrinking.
     $\alpha$.  Consider the triangle $\Delta\pa\pb\pc$ and denote the
     angles at $\pa,\pb,$ and $\pc$ by $\theta_\pa,\theta_\pb,$ and
     $\theta_\pc$ respectively.
-	
+
     We now consider two possible cases, either
     $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$ or
     $\dY{\pa}{\pb}> \dY{\pa}{\pc}$. Notice that since the angle of the
     cone $c$, and therefore $\theta_\pa$ as well, is smaller than the
     smallest angle of $\triangle$, we have that
     $\dY{\pb}{\pc}\leq \max \{\dY{\pa}{\pc},\dY{\pa}{\pb}\}$.
-	
+
     $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$: Denote by $\pb'$ the projection
     of $\pb$ on $\overline{\pa\pc}$. We have that
-	
+
 	$$
 	\dY{\pb}{\pb'}%
 	=%
@@ -1723,7 +1713,7 @@ deals with triangle shrinking.
 	\dY{\pb}{\pc}%
 	= \frac{\sin\theta_\pa}{\sin\theta_\pc}\dY{\pa}{\pb}%
 	$$
-	
+
 	$$ \dY{\pa}{\pc}%
 	=%
 	\dY{\pa}{\pb'}%
@@ -1741,9 +1731,9 @@ deals with triangle shrinking.
 	(\cos\theta_\pa +
         \frac{\sin\theta_\pa}{\sin\theta_\pc})\dY{\pa}{\pb}
 	$$
-	
+
 	We use these equalities and get that:
-	
+
 	$$
 	\dY{\pa}{\pc}%
 	+%
@@ -1751,7 +1741,7 @@ deals with triangle shrinking.
 	\leq%
 	(1+\eps)\dY{\pa}{\pb}%
 	$$
-	
+
 	$$
 	\iff%
 	\dY{\pa}{\pb}(\cos\theta_\pa +
@@ -1761,7 +1751,7 @@ deals with triangle shrinking.
 	\leq%
 	(1+\eps)\dY{\pa}{\pb}%
 	$$
-	
+
 	$$
 	\iff%
 	(\cos\theta_\pa + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
@@ -1770,7 +1760,7 @@ deals with triangle shrinking.
 	\leq%
 	(1+\eps)%
 	$$
-	
+
 	$$
 	\impliedby%
 	(1 + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
@@ -1779,7 +1769,7 @@ deals with triangle shrinking.
 	\leq%
 	(1+\eps)%
 	$$
-	
+
 	$$
 	\iff%
 	(2+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}%
@@ -1792,7 +1782,7 @@ deals with triangle shrinking.
 	=%
 	O(\eps)%
 	$$
-	
+
 	The last piece of this part is the fact that point $\pc$ was
         chosen by being the first point in the cone $c$ encountered by
         a line parallel to the edge opposite of $\pa$. See the red
@@ -1802,7 +1792,7 @@ deals with triangle shrinking.
 
 	$\dY{\pa}{\pb}< \dY{\pa}{\pc}$: Denote by $\pc'$ the
         projection of $\pc$ on $\overline{\pa\pb}$. We have that
-	
+
 	$$
 	\dY{\pb}{\pc}%
 	\leq%
@@ -1814,7 +1804,7 @@ deals with triangle shrinking.
 	+%
 	(\dY{\pa}{\pb}-\dY{\pb}{\pc'})%
 	$$
-	
+
 	$$
 	\implies%
 	\dY{\pb}{\pc}%
@@ -1823,7 +1813,7 @@ deals with triangle shrinking.
 	+%
 	(\dY{\pa}{\pb}-\cos\theta_\pa\dY{\pa}{\pc})%
 	$$
-	
+
 	$$
 	\implies%
 	\dY{\pa}{\pc} +%
@@ -1831,7 +1821,7 @@ deals with triangle shrinking.
 	\leq%
 	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}\dY{\pa}{\pb}
 	$$
-	
+
 	Which means that
 
 	$$
@@ -1844,15 +1834,15 @@ deals with triangle shrinking.
 	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}%
 	\leq%
 	1+\eps%
-	$$	
-	
-	
+	$$
+
+
 	Since $\theta_\pa = O(\eps\alpha)$ we get that for a
         sufficiently large constant the condition
         $\frac{1}{\cos\theta_\pa-\sin\theta_\pa} \leq 1+\eps$ holds.
-	
+
  	The second part of the lemma is derived from the first:
-	
+
 	$$
 	\dY{\pa}{\pc}%
 	+%
@@ -1868,8 +1858,8 @@ deals with triangle shrinking.
 	\leq%
 	\dY{\pa}{\pb}%
 	$$
-	
-	
+
+
     \end{proof}
 
 \begin{figure}[h]
@@ -1892,7 +1882,7 @@ We first prove a ``shrinking lemma'' similar to those in
     $\triangle' \subseteq \triangle$ that contains one of $\pa$ and
     $\pb$ on a vertex, and the other on the edge opposite to that
     vertex (possibly on a different vertex)
-	
+
 \end{lemma}
 
 \begin{proof}
@@ -1908,7 +1898,7 @@ We first prove a ``shrinking lemma'' similar to those in
     point must lie on the edge opposite to $v$, since otherwise one of
     the edges can still be moved to shrink $\triangle'$. See
     \figref{shrink_tri}.
-	
+
 \end{proof}
 
 \begin{figure}[h]
@@ -1941,7 +1931,7 @@ We first prove a ``shrinking lemma'' similar to those in
     have that $\dY{\pa'}{\pc'}+\dY{\pb'}{\pc'}\geq 2 \dY{\pa'}{\pb'}$
     regardless of the angle of the cone, a contradiction to
     \lemref{cone_edge:triangles}.
-	
+
     For any other pair $\pa,\pb\in PS\cap \triangle$ we have from
     \lemref{shrink:triangles} that there exists a homothet
     $\triangle'\subseteq \triangle$ with one of the two points, say
@@ -1957,7 +1947,7 @@ We first prove a ``shrinking lemma'' similar to those in
     $\dY{\pa}{\pc}+(1+\eps)\dY{\pb}{\pc}\leq(1+\eps)\dY{\pa}{\pb}$,
     and thus we get the existence of a $(1+\eps)$ path between $\pa$
     and $\pb$ as well.
-	
+
 \end{proof}
 
 
@@ -2029,7 +2019,7 @@ $\delta$ is given below.
         \shrinkDY{\body}{\delta}%
         =%
         \Set{ \pa \in \body }{ \dsY{\pa}{ \Re^2 \setminus \body} \geq \delta \cdot
-           \diameterX{\body}}.        
+           \diameterX{\body}}.
     \end{equation*}
     Formally, $\shrinkDY{\body}{\delta}$ is the Minkowski difference
     of $\body$ with a disk of radius $\delta \cdot \diameterX{\body}$.
@@ -2109,9 +2099,9 @@ empty.
         \frac{\ell}{2} \sqrt{(1+\epsA)^2 - 1}
         =%
         \frac{\sqrt{\epsA (2+\epsA)}}{2} \ell%
-        \leq 
+        \leq
         \sqrt{\epsA} \ell
-        \leq 
+        \leq
         \sqrt{\epsA}\cdot \diameterX{\body}.
     \end{equation*}
     as $\ell \leq \diameterX{\body'} \leq \diameterX{\body}$.
@@ -2216,7 +2206,7 @@ quadrant-separated for all $i$.
     $d$\th coordinate), and recursively computes a \QSPD $\QS'$ for
     $\PS'$.
 
-    
+
     For a point set $\PSX' \subseteq \PS'$, let $\liftX{\PSX'}$ be the
     subset of points of $\PS$ whose projection on $h$ is $\PSX'$.  The
     algorithm now computes the set of pairs
@@ -2300,7 +2290,7 @@ previous notion of shrinkage used before are not useful in this case.
        point $\pa=(-x,-y)$ and a pair $\Pair$.
        %We are not showing the
        %subrectangles of $\rectA_\nearrow$ as they are not being used
-       %in the construction. 
+       %in the construction.
     }
     \figlab{grid}%
 \end{figure}

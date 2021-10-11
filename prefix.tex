@@ -115,17 +115,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5
 % Color emph
 \providecommand{\emphind}[1]{\emph{#1}\index{#1}}
-\definecolor{blue25emph}{rgb}{0, 0, 11}
+\definecolor{nalmostblack}{rgb}{0, 0, 0.7}
 \providecommand{\emphic}[2]{%
-   \textcolor{blue25emph}{%
+   \textcolor{nalmostblack}{%
       \textbf{\emph{#1}}}%
    \index{#2}}
 
 
 \providecommand{\emphi}[1]{\emphic{#1}{#1}}
 
-\definecolor{almostblack}{rgb}{0, 0, 0.3}
-\providecommand{\emphw}[1]{{\textcolor{almostblack}{\emph{#1}}}}%
+\definecolor{almostblack}{rgb}{0, 0, 0.5}
+\providecommand{\emphw}[1]{{\emph{{\textcolor{almostblack}{#1}}}}}%
 
 \providecommand{\emphOnly}[1]{\emph{\textcolor{blue25emph}{\textbf{#1}}}}
 % Color emph - end 

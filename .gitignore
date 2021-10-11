@@ -9,3 +9,6 @@ snapshot/
 *.aux
 old/
 figs/old/
+*.synctex.gz
+.config_latex
+.latex_color

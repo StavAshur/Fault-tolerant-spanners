@@ -23,28 +23,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{abstract}
-    Given a set of points $\PS\in \Re^d$, and a family of regions
-    $\FF$, a geometric $\FF$-local $t$-spanner of $\PS$, is a subgraph
-    of $\G_\PS$, the complete Euclidean graph over $\PS$, that is also a
-    $t$-spanner of every subgraph of $\G_\PS$ that is induced by a
-    region $F\in \FF$, where the subgraph induced by $F$ is the
-    subgraph that contains only the points and the edges of $\G_\PS$
-    that are contained in $F$.
+    For a set of points $\PS\in \Re^d$, and a family of regions $\FF$,
+    a geometric local $t$-spanner of $\PS$, is a sparse graph $\G$
+    over $\PS$, that remains a $t$-spanner even when restricted to a
+    region $\region \in \FF$. That is, for any region
+    $\region \in \FF$, the subgraph restricted to $\region$, denoted
+    by $\restrictY{\G}{\region}$, is still a $t$-spanner. Here
+    $\restrictY{\G}{\region}$ is the subgraph of $\G$ induced on
+    $\PS \cap \region$.  A weak $\FF$-local spanner of $\PS$
+    provides the same guarantee for some smaller subregion of
+    $\region$.
 
-    A weak $\FF$-local spanner of $\PS$ is a graph that for any
-    $\region\in\FF$, guarantees the existence of a $t$-path only for
-    pairs of points contained in some region
-    $\region'\subset \region$. Different definitions of the subregion
-    $F'$ are possible, and can imply different results.
-
-    In this paper we present algorithms for the construction of local
-    and weak local spanners of points in $\Re^2$ with respect to
-    several families of convex regions, including an improvement of
-    the known construction for axis parallel squares, and a
-    construction for disks that does not require Steiner points, along
-    side a closely matching lower bound. The last result settles an
-    open problem raised by Abam and Borouny.
+    In this paper, we present algorithms for the construction of local
+    of points in $\Re^2$ with respect to several families of convex
+    regions. This includes an improvement of the known construction
+    for axis parallel squares, and a construction for disks that does
+    not require Steiner points, along with a matching lower bound. The
+    last result settles an open problem raised by Abam and Borouny.
 \end{abstract}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -53,7 +50,10 @@
 \section{Introduction}
 
 Given a set of points $\PS$ in $\Re^d$ and a parameter $t>1$, the
-problem of constructing graph in which shortest paths approximate the
+problem of constructing $t$-spanners for $\PS$ is well studied
+\cite{ns-gsn-07}.
+
+graph in which shortest paths approximate the
 Euclidean distance between every pair of points within a factor of
 $t$, is a well known and well studied problem in computation
 geometry. Recently, Abam and Borouny \cite{ab-lgs-21} introduced the

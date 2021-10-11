@@ -1363,13 +1363,13 @@ edges that does not depend on the spread of the points. See \figref{tri_low_bd} 
 	We now take $\triangle$ to be the right angle triangle with vertices $\pa :=(1,0), \pb :=(1,1)$, and $\pc:=(x,0)$, where $x$ is sufficiently large so that for every $i\in \{1,...,n\}$ there exist a segment parallel to $\overline{\pb\pc}$ with one endpoint on $\overline{\pa\pb}$, and the other on $\overline{\pa\pc}$, that separates $b_i$ and $b_{i-1}$. See \figref{tri_low_bd} for some intuition.
 	Notice that for every point $a\in A$ and index $i\in \{0,..,\log\phi\}$, there exist a homothet $\triangle'$ of $\triangle$ such that $B\cap \triangle'=\{b_i,...,b_n\}$. 
 	
-	We now show that $|\overline{ab_{i+1}}| + |\overline{b_{i}b_{i+1}}| \geq (1+\eps)|\overline{ab_{i}}|$ for $O(n)$ indices. First we make a couple of simple observations:
+	We now show that $\dY{a}{b_{i+1}} + \dY{b_{i}}{b_{i+1}} \geq (1+\eps) \dY{a}{b_{i}}$ for $O(n)$ indices. First we make a couple of simple observations:
 	
 	\begin{enumerate}
 		\item $1+\eps \leq 2$,
-		\item $|\overline{ab_{i+1}}|\geq 2^{i+1}$,
-		\item $|\overline{b_{i}b_{i+1}}| \geq 2^i$,
-		\item and $|\overline{ab_{i}}| \leq 2n + 2^i $.
+		\item $\dY{a}{b_{i+1}}\geq 2^{i+1}$,
+		\item $\dY{b_{i}}{b_{i+1}} \geq 2^i$,
+		\item and $ \dY{a}{b_{i}} \leq 2n + 2^i $.
 	\end{enumerate}
 
 	So it is enough to show that for $O(n)$ points in $B$ we have that
@@ -1418,19 +1418,19 @@ We will need the following lemmas in order to prove the local spanning property 
 	\begin{enumerate}
 		\item {
 			$
-			|\overline{\pa\pc}|%
+			\dY{\pa}{\pc}%
 			+%
-			(1+\eps)|\overline{\pb\pc}|%
+			(1+\eps)\dY{\pb}{\pc}%
 			\leq%
-			(1+\eps)|\overline{\pa\pb}|%
+			(1+\eps)\dY{\pa}{\pb}%
 			$
 			,and
 		}
 		\item {
 			$
-			|\overline{\pa\pc}|%
+			\dY{\pa}{\pc}%
 			\leq%
-			|\overline{\pa\pb}|%
+			\dY{\pa}{\pb}%
 			$.
 		}
 	\end{enumerate}
@@ -1443,57 +1443,57 @@ We will need the following lemmas in order to prove the local spanning property 
 	We denote the smallest angle of the triangle $\triangle$ by $\alpha$.
 	Consider the triangle $\Delta\pa\pb\pc$ and denote the angles at $\pa,\pb,$ and $\pc$ by $\theta_\pa,\theta_\pb,$ and $\theta_\pc$ respectively.
 	
-	We now consider two possible cases, either $|\overline{\pa\pb}|\leq |\overline{\pa\pc}|$ or $|\overline{\pa\pb}|> |\overline{\pa\pc}|$. Notice that  since the angle of the cone $c$, and therefore $\theta_\pa$ as well, is smaller   than the smallest angle of $\triangle$, we have that $|\overline{\pb\pc}|\leq    \max \{|\overline{\pa\pc}|,|\overline{\pa\pb}|\}$.
+	We now consider two possible cases, either $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$ or $\dY{\pa}{\pb}> \dY{\pa}{\pc}$. Notice that  since the angle of the cone $c$, and therefore $\theta_\pa$ as well, is smaller   than the smallest angle of $\triangle$, we have that $\dY{\pb}{\pc}\leq    \max \{\dY{\pa}{\pc},\dY{\pa}{\pb}\}$.
 	
-	$|\overline{\pa\pb}|\leq |\overline{\pa\pc}|$:
+	$\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$:
 	Denote by $\pb'$ the projection of $\pb$ on $\overline{\pa\pc}$. We have that 
 	
 	$$
-	|\overline{\pb\pb'}|%
+	\dY{\pb}{\pb'}%
 	=%
-	\sin\theta_\pa |\overline{\pa\pb}|%
+	\sin\theta_\pa \dY{\pa}{\pb}%
 	=%
-	\sin\theta_\pc |\overline{\pb\pc}|%
+	\sin\theta_\pc \dY{\pb}{\pc}%
 	\implies%
-	|\overline{\pb\pc}|%
+	\dY{\pb}{\pc}%
 	=
-	\frac{\sin\theta_\pa}{\sin\theta_\pc}|\overline{\pa\pb}|%
+	\frac{\sin\theta_\pa}{\sin\theta_\pc}\dY{\pa}{\pb}%
 	$$
 	
-	$$ |\overline{\pa\pc}|%
+	$$ \dY{\pa}{\pc}%
 	=%
-	|\overline{\pa\pb'}|%
+	\dY{\pa}{\pb'}%
 	+%
-	|\overline{\pb'\pc}|%
+	\dY{\pb'}{\pc}%
 	=%
-	\cos\theta_\pa |\overline{\pa\pb}|%
+	\cos\theta_\pa \dY{\pa}{\pb}%
 	+%
-	\cos\theta_\pc |\overline{\pb\pc}|%
+	\cos\theta_\pc \dY{\pb}{\pc}%
 	=%
-	\cos\theta_\pa |\overline{\pa\pb}|%
+	\cos\theta_\pa \dY{\pa}{\pb}%
 	+%
-	\frac{\sin\theta_\pa}{\sin\theta_\pc}|\overline{\pa\pb}|%
+	\frac{\sin\theta_\pa}{\sin\theta_\pc}\dY{\pa}{\pb}%
 	=%
-	(\cos\theta_\pa + \frac{\sin\theta_\pa}{\sin\theta_\pc})|\overline{\pa\pb}|
+	(\cos\theta_\pa + \frac{\sin\theta_\pa}{\sin\theta_\pc})\dY{\pa}{\pb}
 	$$
 	
 	We use these equalities and get that:
 	
 	$$
-	|\overline{\pa\pc}|%
+	\dY{\pa}{\pc}%
 	+%
-	(1+\eps)|\overline{\pb\pc}|%
+	(1+\eps)\dY{\pb}{\pc}%
 	\leq%
-	(1+\eps)|\overline{\pa\pb}|%
+	(1+\eps)\dY{\pa}{\pb}%
 	$$
 	
 	$$
 	\iff%
-	|\overline{\pa\pb}|(\cos\theta_\pa + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
+	\dY{\pa}{\pb}(\cos\theta_\pa + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
 	+%
-	(1+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}|\overline{\pa\pb}|%
+	(1+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}\dY{\pa}{\pb}%
 	\leq%
-	(1+\eps)|\overline{\pa\pb}|%
+	(1+\eps)\dY{\pa}{\pb}%
 	$$
 	
 	$$
@@ -1529,47 +1529,47 @@ We will need the following lemmas in order to prove the local spanning property 
 	
 	The last piece of this part is the fact that point $\pc$ was chosen by being the first point in the cone $c$ encountered by a line parallel to the edge opposite of $\pa$. See the red line and direction in \figref{tri_cone_edge}. This implies that the angle $\theta_\pc$ is at least $\alpha$, and the result then follows.
 
-	$|\overline{\pa\pb}|< |\overline{\pa\pc}|$:
+	$\dY{\pa}{\pb}< \dY{\pa}{\pc}$:
 	Denote by $\pc'$ the projection of $\pc$ on $\overline{\pa\pb}$. We have that 
 	
 	$$
-	|\overline{\pc\pb}|%
+	\dY{\pb}{\pc}%
 	\leq%
-	|\overline{\pc\pc'}|%
+	\dY{\pc}{\pc'}%
 	+%
-	|\overline{\pb\pc'}|%
+	\dY{\pb}{\pc'}%
 	=%
-	\sin\theta_\pa|\overline{\pa\pc}|%
+	\sin\theta_\pa\dY{\pa}{\pc}%
 	+%
-	(|\overline{\pa\pb}|-|\overline{\pb\pc'}|)%
+	(\dY{\pa}{\pb}-\dY{\pb}{\pc'})%
 	$$
 	
 	$$
 	\implies%
-	|\overline{\pc\pb}|%
+	\dY{\pb}{\pc}%
 	\leq%
-	\sin\theta_\pa|\overline{\pa\pc}|%
+	\sin\theta_\pa\dY{\pa}{\pc}%
 	+%
-	(|\overline{\pa\pb}|-\cos\theta_\pa|\overline{\pa\pc}|)%
+	(\dY{\pa}{\pb}-\cos\theta_\pa\dY{\pa}{\pc})%
 	$$
 	
 	$$
 	\implies%
-	\overline{\pa\pc}|
+	\dY{\pa}{\pc}
 	+%
-	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}|\overline{\pc\pb}|%
+	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}\dY{\pb}{\pc}%
 	\leq%
-	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}|\overline{\pa\pb}|
+	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}\dY{\pa}{\pb}
 	$$
 	
 	Which means that
 
 	$$
-	|\overline{\pa\pc}|%
+	\dY{\pa}{\pc}%
 	+%
-	(1+\eps)|\overline{\pb\pc}|%
+	(1+\eps)\dY{\pb}{\pc}%
 	\leq%
-	(1+\eps)|\overline{\pa\pb}|%
+	(1+\eps)\dY{\pa}{\pb}%
 	\iff%
 	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}%
 	\leq%
@@ -1582,19 +1582,19 @@ We will need the following lemmas in order to prove the local spanning property 
  	The second part of the lemma is derived from the first:
 	
 	$$
-	|\overline{\pa\pc}|%
+	\dY{\pa}{\pc}%
 	+%
-	(1+\eps)|\overline{\pb\pc}|%
+	(1+\eps)\dY{\pb}{\pc}%
 	\leq%
-	(1+\eps)|\overline{\pa\pb}|%
+	(1+\eps)\dY{\pa}{\pb}%
 	\iff%
-	|\overline{\pb\pc}|%
+	\dY{\pb}{\pc}%
 	\leq%
-	|\overline{\pa\pb}|%
+	\dY{\pa}{\pb}%
 	-%
-	\frac{|\overline{\pa\pc}|}{(1+\eps)}%
+	\frac{\dY{\pa}{\pc}}{(1+\eps)}%
 	\leq%
-	|\overline{\pa\pb}|%
+	\dY{\pa}{\pb}%
 	$$
 	
 	
@@ -1644,9 +1644,9 @@ We first prove a ``shrinking lemma'' similar to those in \secref{disks} and \sec
 
 
 \begin{proof}
-	We slightly abuse notation and denote the homothet by $\triangle$. We prove the existence of the $(1+\eps)$-path by induction over the rank of the distance $|\overline{\pa\pb}|$. The closest pair $\pa',\pb'$ must be connected in $G$, as otherwise we have that $|\overline{\pa'\pc'}|+|\overline{\pb'\pc'}|\geq 2 |\overline{\pa'\pb'}|$ regardless of the angle of the cone, a contradiction to  \lemref{cone_edge:triangles}.
+	We slightly abuse notation and denote the homothet by $\triangle$. We prove the existence of the $(1+\eps)$-path by induction over the rank of the distance $\dY{\pa}{\pb}$. The closest pair $\pa',\pb'$ must be connected in $G$, as otherwise we have that $\dY{\pa'}{\pc'}+\dY{\pb'}{\pc'}\geq 2 \dY{\pa'}{\pb'}$ regardless of the angle of the cone, a contradiction to  \lemref{cone_edge:triangles}.
 	
-	For any other pair $\pa,\pb\in PS\cap \triangle$ we have from \lemref{shrink:triangles} that there exists a homothet $\triangle'\subseteq \triangle$ with one of the two points, say $\pa$, at a vertex, and the other on the opposite edge. We therefore have a cone $c$ with apex at $\pa$ such that $\pb\in c\cap \triangle'$. If $\pa\pb$ is an edge in $G$ then we are done. Otherwise, we have a vertex $\pc\in c$ such that $\pa\pb$ is an edge in $G$, and we therefore get from \lemref{cone_edge:triangles} that $|\overline{\pb\pc}|\leq |\overline{\pa\pb}|$ and therefore, by the induction hypothesis, we have that there exists a $(1+\eps)$ path between $\pc$ and $\pb$ in $G$. From the same lemma it also follows that $|\overline{\pa\pc}|+(1+\eps)|\overline{\pb\pc}|\leq(1+\eps)|\overline{\pa\pb}|$, and thus we get the existence of a $(1+\eps)$ path between $\pa$ and $\pb$ as well.
+	For any other pair $\pa,\pb\in PS\cap \triangle$ we have from \lemref{shrink:triangles} that there exists a homothet $\triangle'\subseteq \triangle$ with one of the two points, say $\pa$, at a vertex, and the other on the opposite edge. We therefore have a cone $c$ with apex at $\pa$ such that $\pb\in c\cap \triangle'$. If $\pa\pb$ is an edge in $G$ then we are done. Otherwise, we have a vertex $\pc\in c$ such that $\pa\pb$ is an edge in $G$, and we therefore get from \lemref{cone_edge:triangles} that $\dY{\pb}{\pc}\leq \dY{\pa}{\pb}$ and therefore, by the induction hypothesis, we have that there exists a $(1+\eps)$ path between $\pc$ and $\pb$ in $G$. From the same lemma it also follows that $\dY{\pa}{\pc}+(1+\eps)\dY{\pb}{\pc}\leq(1+\eps)\dY{\pa}{\pb}$, and thus we get the existence of a $(1+\eps)$ path between $\pa$ and $\pb$ as well.
 	
 \end{proof}
 

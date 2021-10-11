@@ -127,7 +127,7 @@
 \definecolor{almostblack}{rgb}{0, 0, 0.5}
 \providecommand{\emphw}[1]{{\emph{{\textcolor{almostblack}{#1}}}}}%
 
-\providecommand{\emphOnly}[1]{\emph{\textcolor{blue25emph}{\textbf{#1}}}}
+\providecommand{\emphOnly}[1]{\emph{\textcolor{almostblack}{\textbf{#1}}}}
 % Color emph - end 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5
 
@@ -172,6 +172,9 @@
 
 \newcommand{\clmlab}[1]{\label{claim:#1}}
 \newcommand{\clmref}[1]{\HLink{Claim}{claim:#1}}
+
+\newcommand{\apndlab}[1]{\label{apnd:#1}}
+\newcommand{\apndref}[1]{\HLink{Appendix}{apnd:#1}}
 
 \newcommand{\seclab}[1]{\label{sec:#1}}
 \newcommand{\secref}[1]{\HLink{Section}{sec:#1}}
@@ -375,6 +378,40 @@
 \newcommand{\QSdown}{\QS_{\downarrow}}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Restating lemmas/theorems...
+%
+% Example
+%---------------------------------------------------------------------
+% \SaveContent{\LemmaNumVerticesDepthBody}{ BLA BLA }
+% 
+% \begin{lemma}[{{\normalfont Proof in \apndref{num:v:depth}}}]
+%       \lemlab{num:vertices:depth}%
+%       \LemmaNumVerticesDepthBody{}
+% \end{lemma}
+%...
+% \bigskip%
+% \RestatementOf{\lemref{num:vertices:depth}}{\LemmaNumVerticesDepthBody}
+%---------------------------------------------------------------------
+
+\newcommand{\SaveContent}[2]{%
+   \expandafter\newcommand{#1}{#2}%
+}
+
+\newcommand{\RestatementOf}[2]{
+   \noindent%
+   \textbf{Restatement of #1.}
+   % 
+   {\em #2{}}%
+}
+
+%%% End
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \mathcalb - a different font that looks a bit like mathcal
@@ -414,6 +451,7 @@
 \newcommand{\sqrA}{\mathcalb{t}}%
 \newcommand{\sqrB}{\mathcalb{u}}%
 
+\newcommand{\polylog}{\mathop{\mathrm{polylog}}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%EndIpePreamble

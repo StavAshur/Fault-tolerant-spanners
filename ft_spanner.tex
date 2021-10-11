@@ -74,8 +74,7 @@ $\G_\PS$.
 \paragraph{Local spanners.}
 Given a set of points $\PS$ in $\Re^d$ and a parameter $t>1$, the
 problem of constructing \emph{$t$-spanners} for $\PS$ is well studied
-\cite{ns-gsn-07} -- that is, constructing Euclidean graphs that
-$t$-preserve distances.  Recently, Abam and Borouny \cite{ab-lgs-21}
+\cite{ns-gsn-07}.  Recently, Abam and Borouny \cite{ab-lgs-21}
 introduced the problem of designing such spanners, that remains
 spanner when cropped to regions from a prespecified set
 $\FF$. Formally, such a graph $\G = (\PS,\EG)$ has weights on the
@@ -94,28 +93,6 @@ regions of $\FF$.
 
 
 
-\paragraph{Residual graphs.}
-
-Let $\FF$ be a family of regions in the plane. For a fault region
-$\region \in \FF$ and a geometric graph $\G$ on a point set $\PS$, let
-$\G \gminus \region$ be the residual graph after removing from it all
-the points of $\PS$ in $\region$. and all the edges that intersect
-$\region$.  Formally, let
-\begin{equation*}
-    \G \gminus \region%
-    =%
-    \bigl( \PS \setminus \region, \Set{ uv \in \EG }{ uv \cap
-       \interiorX{\region} = \emptyset} \bigr),
-\end{equation*}
-where $\interiorX{\region}$ denotes the interior of
-$\region$. Similarly, let
-\begin{equation*}
-    \restrictY{\G}{\region}%
-    =%
-    \bigl( \PS \cap {\region},
-    \Set{uv \in \EG}{ uv \subseteq {\region} } \bigr).
-\end{equation*}
-be the residual graph after restricting $\G$ to the region $\region$.
 
 \paragraph{Fault-tolerant and local spanners.}
 
@@ -137,7 +114,7 @@ showed how to construct such spanners for disks, if one is allowed to
 add Steiner points. Abam and Borouny left the question of how to
 construct local spanners for disks as an open problem.
 
-\subsection*{Relted work}
+\subsection*{Related work}
 
 Geometric spanners have been widely studied, see
 \cite{ns-gsn-07}. Fault-tolerant spanners were first studied with
@@ -156,16 +133,16 @@ spanners, where the faults were not arbitrary sets of vertices and/or
 edges, but instead all of the points and geometric edges (segments
 between points) intersecting some region. They showed several results,
 including a construction of convex regions fault tolerant $t$-spanners
-of size $O(n\log n)$. Later Abam and Borouny \cite{ab-lgs-21}
-introduced the concept of local spanners, and showed constructions of
-local $t$-spanners of size $O(n\cdot polylog(n))$ for axis-parallel
-squares and vertical slabs, and also showed that constructions using
-$O(n)$ Steiner points for the same cases as well as for the case of
-disk local spanners.
+of size $\Oeps(n\log n)$. More recently, Abam and Borouny
+\cite{ab-lgs-21} introduced the concept of local spanners, and showed
+constructions of local $t$-spanners of size $\Oeps(n \polylog n)$ for
+axis-parallel squares and vertical slabs, and also showed that
+constructions using $O(n)$ Steiner points for the same cases as well
+as for the case of disk local spanners.
 
 \subsection*{Our results}
 
-\paragraph{Disks}
+\paragraph{Disks.}
 In \secref{disks} we present a construction of spanners, which
 surprisingly, is not only fault-tolerant for convex regions, but it
 also a local spanner for disks. This resolves the aforementioned open
@@ -385,6 +362,29 @@ Our purpose here is to build a local spanner for disks.
 
 \subsection{Preliminaries}
 
+
+\paragraph{Residual graphs.}
+
+Let $\FF$ be a family of regions in the plane. For a fault region
+$\region \in \FF$ and a geometric graph $\G$ on a point set $\PS$, let
+$\G \gminus \region$ be the residual graph after removing from it all
+the points of $\PS$ in $\region$. Similarly, let
+$\restrictY{\G}{\region}$ denote the graph restricted to $\region$.
+Formally, let
+\begin{equation*}
+    \G \gminus \region%
+    =%
+    \bigl( \PS \setminus \region, \Set{ uv \in \EG }{ uv \cap
+       \interiorX{\region} = \emptyset} \bigr)
+    \qquad\text{and}\qquad%
+    \restrictY{\G}{\region}%
+    =%
+    \bigl( \PS \cap {\region},
+    \Set{uv \in \EG}{ uv \subseteq {\region} } \bigr).
+\end{equation*}
+where $\interiorX{\region}$ denotes the interior of $\region$.
+
+
 % -----------------------------------------------------------------------
 \subsubsection{Well separated pair decomposition}
 
@@ -414,12 +414,7 @@ $\PSX$ and $\PSY$.
         \item
         $\bigcup_{i=1}^s \PSX_i \otimes \PSY_i = \PS \otimes \PS$.
     \end{enumerate*}
-\end{defn}
-
-\begin{defn}
-    Given a pair decomposition
-    $\WS = \brc{\bigl. \brc{\PSX_1,\PSY_1},\ldots,\brc{\PSX_s,
-          \PSY_s}}$ of a point set $\PS$, its \emphi{weight} is
+    Its \emphi{weight} is
     $\WeightX{\WS} = \sum_{i=1}^s \pth{ \cardin{\PSX_i } +
        \cardin{\PSY_i}}$.
 \end{defn}
@@ -442,6 +437,7 @@ near linear.
 
 \begin{defn}
     \deflab{well:separated}%
+    \deflab{WSPD}%
     %
     The pair of sets $\PSX, \PSY \subseteq \Re^d$ is
     \emphi{$(1/\eps)$-well-separated} if
@@ -449,18 +445,12 @@ near linear.
         \max \pth{ \diameterX{\PSX}, \diameterX{\PSY} } \leq
         \eps \cdot \dsY{\PSX}{\PSY},
     \end{equation*}
-
     where
     $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
-    \dY{\pa}{\pb}$.
-\end{defn}
-
-\begin{defn}
-    \deflab{WSPD}%
-    %
-    For a point set $\PS$, a \emphOnly{well-separated pair
-       decomposition} (\emphOnly{\WSPD{}}) of $\PS$ with parameter
-    $1/\eps$ is a pair decomposition of $\PS$ with a set of pairs
+    \dY{\pa}{\pb}$.  For a point set $\PS$, a \emphOnly{well-separated
+       pair decomposition} (\emphOnly{\WSPD{}}) of $\PS$ with
+    parameter $1/\eps$ is a pair decomposition of $\PS$ with a set of
+    pairs
     \begin{math}
         \WS = \brc{\bigl.
            \brc{\PSB_1,\PSC_1},\ldots,\brc{\PSB_s,\PSC_s}},
@@ -476,24 +466,23 @@ near linear.
     Let $\PS$ be a set of $n$ points in $\Re^d$, with spread
     $\spread = \spreadX{\PS}$, and let $\eps > 0$ be a
     parameter. Then, one can compute a $(1/\eps)$-\WSPD $\WS$ for
-    $\PS$ of total weight $\Of(n \eps^{-d} \log
-    \spread)$. Furthermore, any point of $\PS$ participates in at most
-    $\Of\pth{ \eps^{-d} \log \spread}$ pairs. Namely,
-    $\WeightX{\WS} = O( \eps^{-d} n \log \spread )$.
+    $\PS$ of total weight
+    $\WeightX{\WS} = \Of(n \eps^{-d} \log \spread)$. Furthermore, any
+    point of $\PS$ participates in at most
+    $\Of\pth{ \eps^{-d} \log \spread}$ pairs.
 \end{lemma}
 
 % ------------------------------------------------------------------------
 \subsubsection{Semi separated pair decomposition}
 
 \begin{defn}%
-    Two sets of points $\PSB$ and $\PSC$ are
+    Two sets of points $\PSX$ and $\PSY$ are
     \emphic{$(1/\eps)$-semi-separated}%
     {separated!semi-separated@$(1+\eps)$-semi-separated} if
     \begin{equation*}
-        \min \pth{ \diameterX{\PSB}, \diameterX{\PSC} } \leq \eps \cdot
-        \dsY{\PSB}{\PSC},%
+        \min \pth{ \diameterX{\PSX}, \diameterX{\PSY} } \leq \eps \cdot
+        \dsY{\PSX}{\PSY},%
     \end{equation*}
-
     For a point set $\PS$, a \emphOnly{semi-separated pair
        decomposition} (\emphOnly{\SSPD{}}) of $\PS$ with parameter
     $1/\eps$, denoted $(1/\eps)$-\SSPD, is a pair decomposition of
@@ -541,22 +530,9 @@ near linear.
     each pair into $\beta$ smaller portions.
 \end{proof}
 
-\begin{figure}[ht]
-    \centerline{\includegraphics{figs/partition}}
-    \caption{An illustration of refining the pairs in a \SSPD into
-       pairs in opposite parts of an $\eps$-double-wedge. $\PSX$ is
-       contained in the green square $\square$, while $\PSY$ is
-       contained in the red square, and the white gap between them is
-       a result of the separation property. The set of cones with the
-       apex at the center of $\square$ give us the desired partition
-       as demonstrated by the purple double-wedge. }
-    \figlab{partition}
-\end{figure}
 
-
-\begin{lemma}
-    \lemlab{refine:d:w}%
-    %
+\SaveContent{\LemmaRefineDWBody}%
+{%
     Given aמ $\eps^{-1}$-\SSPD $\WS$ of $n$ points in the plane, one
     can refine it, into aמ $\eps^{-1}$-\SSPD $\WS'$, such that each
     pair $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in a
@@ -565,64 +541,15 @@ near linear.
     $\DW_\Pair$. We have that $|\WS'| = O(|\WS|/\eps)$ and
     $\WeightX{\WS'} = O(\WeightX{\WS'}/\eps)$. The construction time
     is proportional to the weight of $\WS'$.
+}
+
+The proof of the following lemma is straightforward, and we delegate
+the proof to the appendix.
+\begin{lemma}[Proof in \apndref{refine:d:w}]
+    \lemlab{refine:d:w}%
+    %
+    \LemmaRefineDWBody{}
 \end{lemma}
-\begin{proof}
-    By using \lemref{chop:easy}, we can assume that $\WS$ is (say)
-    $(10/\eps)$-separated.  Now, the algorithm scans the pairs of
-    $\WS$. For each pair $\Pair = \{ \PSX, \PSY \} \in \WS$, assume
-    that $\diameterX{\PSX} < \diameterX{\PSY}$. Let $\square$ be the
-    smallest axis-parallel square containing $\PSX$, centered at point
-    $o$.  Partition the plane around $o$, by drawing around it
-    $\Of(1/\eps)$ lines with the angle between any two consecutive
-    lines being at most (say) $\eps/4$, see \figref{partition}. This
-    partitions the plane into a set of cones $\ConeSet$. For a cone
-    $C \in \ConeSet$, we show that there exists an $\eps$-double-wedge
-    that contains $\PSX$ in one side, and $\PSY \cap C$ in the other.
-
-    To see that, take the double-wedge formed by the cross tangents
-    between $\CHX{\PSX}$ and $\CHX{\PSY \cap C}$, where $\CHX{\PSX}$
-    denotes the convex-hull of $\PSX$. Assume w.l.o.g that $\square$
-    has side length 1, and let $c$ be a cone of angle $\eps / 4$ with
-    apex $o$, whose angular bisector is a horizontal ray in the
-    positive direction of the $x$ axis. See figure
-    \figref{double-wedge} for an illustration.
-
-    We would like to find a vertical segment $s$ such that all points
-    of $Y$ lie to its right, with one endpoint on the upper line of
-    $c$, and the other on the lower line of $c$. Using the segments'
-    height and distance from the right side of $\square$ we will be
-    able to get a bound on the angle of the cross tangents. We first
-    find a segment $s$ with all points of $Y$ to its right. A trivial
-    bound on that distance is given by the segment from, say, the
-    lower left corner of $\square$, denoted $p$, of length $10/\eps$
-    with its right endpoint on the upper line of $c$, denote this
-    point by $q$. This is due to the $10/\eps$ separation property of
-    the SSPD. We know that this segment creates an angle of less than
-    $\pi/4$ with the $x$-axis, since $o$ is the center of $\square$,
-    and lies on the ray with apex $p$ that creates a $\pi/4$ angle
-    with the $x$-axis. We therefore get that the $x$-coordinate
-    difference between $\square$ and $q$ is at most
-    $10/\eps\cdot \cos\frac{\pi}{4}-1\leq 7/\eps-1\leq 6/\eps$. So let
-    $s'$ be a vertical segment between the upper and lower rays of
-    $c$, with $x$-coordinate distance of $6/\eps-\frac{1}{2}$ from
-    $\square$ (in order to make calculations easier). We get that $s'$
-    is of length $2\cdot \frac{6}{\eps}\tan \frac{\eps}{8}$. Finally,
-    we take $s$ to be a vertical segment of length
-    $\frac{12}{\eps}\tan \frac{\eps}{8}$, with its center on the
-    $x$-axis at a distance of $5/\eps+\frac{1}{2}$ away from $o$. The
-    angle of the $x$-axis and the segment between the lower end of the
-    right side of $\square$ and the upper end of $s$ is now given by:
-
-    \begin{equation*}
-    	\arctan\left(\frac{\frac{6}{\eps}\tan\frac{\eps}{8}+\frac{1}{2}}{\frac{5}{\eps}}\right)%
-    	=%
-    	\arctan \left( \frac{6}{5}\tan\frac{\eps}{8}+\frac{\eps}{10} \right)%
-    	=%
-    	\Theta(\eps)%
-    \end{equation*}
-
-
-\end{proof}
 
 \begin{figure}[h]
     \phantom{}\hfill%
@@ -1090,58 +1017,6 @@ the center of the shrinking process are always contained in the
 shrinking convex shape, we get that at it is always inside the its
 unshrinked version.
 
-% \begin{claim}
-%     \clmlab{c:t:planar}%
-%	%
-%     Given a set of points $\PS \subseteq \Re^2$ in general position,
-%     and a convex shape $\CC$. $\DG_{\CC}(\PS)$, the $\CC$-Delaunay
-%     graph of $\PS$, is planar.
-%
-% \end{claim}
-%
-%
-%\begin{proof}
-%    Let $e=\overline{\pa\pb}, e'=\overline{\pa'\pb'}$ be two edges of
-%    $\DG_{\CC}(\PS)$, and assume for a contradiction that $e$
-%    intersects $e'$. W.l.o.g, we assume that $e$ is horizontal,
-%    $\pa'$ is above the line $l$ containing $e$, and $\pb'$ is below
-%    it.
-%
-%    Let $C$ be a homothet of $\CC$ containing $\pa$ and $\pb$ on its
-%    boundary, and that contains no other point of $\PS$. Such a
-%    homothet exists since $\CC$ is convex, and $e\in \DG_{\CC}(\PS)$.
-%    Let $\phi : [0,1] \longrightarrow C$ be a parameterization of $C$
-%    such that $\phi(x_\pa)=\pa$, and $\phi(x_\pb)=\pb$. Similarly,
-%    let $C'$ be a homothet of $\CC$ containing $\pa'$ and $\pb'$ on
-%    its boundary, and that contains no other point of $\PS$ and let
-%    $\psi(x):= c + \alpha x$ be the translation and scaling such that
-%    $\psi(C) = C'$.
-%
-%    We denote the segment
-%    $\overline{\psi(\phi(x_\pb))\psi(\phi'(x_\pb))}$ by $s$. This is
-%    a segment contained in $C'$ that corresponds to $e$ in $C$,
-%    meaning that it is horizontal, and has both endpoints on the
-%    boundary of $C'$. W.l.o.g, we assume that $s$ lies above $l$. The
-%    convex hull of $s\cup \pb$ is triangle $\Delta'$ that is
-%    contained in $C'$. We claim that $\psi^{-1}(\Delta')=\Delta$ is
-%    contained in $C$, and contains $\pb$, thus contradicting the
-%    choice of $e$. First, $\Delta\subseteq C$ by the definition of
-%    $\psi$. We now notice that the two non-horizontal edges of
-%    $\Delta'$ intersect $e$, since otherwise we would have that
-%    either $\pa$ or $\pb$ are contained in $C'$, contradicting the
-%    choice of $e'$. Now, since $\Delta \approx \Delta'$ we have that
-%    the part of $\Delta'$ below $l$ is contained in $\Delta$, and we
-%    are thus done. See \figref{planar_DG} for an illustration.
-%
-%\end{proof}
-%
-%\begin{figure}[h]
-%    \centering%
-%    \includegraphics[]{figs/planar_DG}%
-%    \caption{An illustration of the proof of the planarity of the
-%    $\CC$-Delauny graph }
-%    \figlab{planar_DG}
-%\end{figure}
 
 We will need the following from the paper of Chew and
 Drysdale~\cite{cd-vdbcdf-85} in order to construct the spanner, and
@@ -2581,6 +2456,85 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
 \bibliographystyle{alpha}
 % \bibliography{shortcuts,geometry}
 \bibliography{ft_spanner}
+
+\appendix
+\section{Proof of \lemref{refine:d:w}}
+\apndlab{refine:d:w}
+
+\RestatementOf{\lemref{refine:d:w}}%
+{%
+   \LemmaRefineDWBody{}%
+}
+   
+\begin{figure}[ht]
+    \centerline{\includegraphics{figs/partition}}
+    \caption{An illustration of refining the pairs in a \SSPD into
+       pairs in opposite parts of an $\eps$-double-wedge. $\PSX$ is
+       contained in the green square $\square$, while $\PSY$ is
+       contained in the red square, and the white gap between them is
+       a result of the separation property. The set of cones with the
+       apex at the center of $\square$ give us the desired partition
+       as demonstrated by the purple double-wedge. }
+    \figlab{partition}
+\end{figure}
+
+\begin{proof}
+    By using \lemref{chop:easy}, we can assume that $\WS$ is (say)
+    $(10/\eps)$-separated.  Now, the algorithm scans the pairs of
+    $\WS$. For each pair $\Pair = \{ \PSX, \PSY \} \in \WS$, assume
+    that $\diameterX{\PSX} < \diameterX{\PSY}$. Let $\square$ be the
+    smallest axis-parallel square containing $\PSX$, centered at point
+    $o$.  Partition the plane around $o$, by drawing around it
+    $\Of(1/\eps)$ lines with the angle between any two consecutive
+    lines being at most (say) $\eps/4$, see \figref{partition}. This
+    partitions the plane into a set of cones $\ConeSet$. For a cone
+    $C \in \ConeSet$, we show that there exists an $\eps$-double-wedge
+    that contains $\PSX$ in one side, and $\PSY \cap C$ in the other.
+
+    To see that, take the double-wedge formed by the cross tangents
+    between $\CHX{\PSX}$ and $\CHX{\PSY \cap C}$, where $\CHX{\PSX}$
+    denotes the convex-hull of $\PSX$. Assume w.l.o.g that $\square$
+    has side length 1, and let $c$ be a cone of angle $\eps / 4$ with
+    apex $o$, whose angular bisector is a horizontal ray in the
+    positive direction of the $x$ axis. See figure
+    \figref{double-wedge} for an illustration.
+
+    We would like to find a vertical segment $s$ such that all points
+    of $Y$ lie to its right, with one endpoint on the upper line of
+    $c$, and the other on the lower line of $c$. Using the segments'
+    height and distance from the right side of $\square$ we will be
+    able to get a bound on the angle of the cross tangents. We first
+    find a segment $s$ with all points of $Y$ to its right. A trivial
+    bound on that distance is given by the segment from, say, the
+    lower left corner of $\square$, denoted $p$, of length $10/\eps$
+    with its right endpoint on the upper line of $c$, denote this
+    point by $q$. This is due to the $10/\eps$ separation property of
+    the SSPD. We know that this segment creates an angle of less than
+    $\pi/4$ with the $x$-axis, since $o$ is the center of $\square$,
+    and lies on the ray with apex $p$ that creates a $\pi/4$ angle
+    with the $x$-axis. We therefore get that the $x$-coordinate
+    difference between $\square$ and $q$ is at most
+    $10/\eps\cdot \cos\frac{\pi}{4}-1\leq 7/\eps-1\leq 6/\eps$. So let
+    $s'$ be a vertical segment between the upper and lower rays of
+    $c$, with $x$-coordinate distance of $6/\eps-\frac{1}{2}$ from
+    $\square$ (in order to make calculations easier). We get that $s'$
+    is of length $2\cdot \frac{6}{\eps}\tan \frac{\eps}{8}$. Finally,
+    we take $s$ to be a vertical segment of length
+    $\frac{12}{\eps}\tan \frac{\eps}{8}$, with its center on the
+    $x$-axis at a distance of $5/\eps+\frac{1}{2}$ away from $o$. The
+    angle of the $x$-axis and the segment between the lower end of the
+    right side of $\square$ and the upper end of $s$ is now given by:
+
+    \begin{equation*}
+    	\arctan\left(\frac{\frac{6}{\eps}\tan\frac{\eps}{8}+\frac{1}{2}}{\frac{5}{\eps}}\right)%
+    	=%
+    	\arctan \left( \frac{6}{5}\tan\frac{\eps}{8}+\frac{\eps}{10} \right)%
+    	=%
+    	\Theta(\eps)%
+    \end{equation*}
+
+
+\end{proof}
 
 
 \end{document}

@@ -49,43 +49,48 @@
 
 \section{Introduction}
 
-Given a set of points $\PS$ in $\Re^d$ and a parameter $t>1$, the
-problem of constructing $t$-spanners for $\PS$ is well studied
-\cite{ns-gsn-07}.
-
-graph in which shortest paths approximate the
-Euclidean distance between every pair of points within a factor of
-$t$, is a well known and well studied problem in computation
-geometry. Recently, Abam and Borouny \cite{ab-lgs-21} introduced the
-problem of designing such spanners, with the additional requirement
-that subgraphs of the spanner created by ``cropping'' it , i.e. only
-considering points and edges contained in some region taken from a
-pre-defined set $\FF$, maintain the distance approximation
-property. This property can also be thought of as fault-tolerance,
-where the faults, or attacks as they are sometimes called, are
-complements of members of $\FF$.
-
-
 \paragraph{Euclidean graph.}
-For a set $\PS$ of points in $\Re^d$, a \emphw{Euclidean graph}
-$\G_\PS = (\PS, \EG)$ is an undirected graph with $\PS$ as the set of
-vertices. An edge $\pa \pb \in \EG$ is naturally associated with the
-segment $\overline{\pa\pb}$, and weight of the edge is the (Euclidean)
-length of the segment.
+For a set $\PS$ of points in $\Re^d$, the \emphw{Euclidean graph}
+$\G_\PS = \bigl(\PS, \binom{\PS}{2}\bigr)$ of $\PS$ is an undirected
+graph.  Here, an edge $\pa \pb \in \EG$ is associated with the segment
+$\pa\pb$, and its weight is the (Euclidean) length of the segment.
 
 
 \paragraph{t-spanners.}
-Let $\G=(\PS,\EG)$ and $\G'=(\PS,\EG')$ be two graphs over the same
-set of vertices. Consider a pair of vertices $\pa,\pb \in \PS$. For a
-parameter $t \geq 1$, a path between $\pa$ and $\pb$ in $\G'$ is a
-\emphw{$t$-path} w.r.t. $\G$, if the length of the path is at most
-$t \cdot \dGY{\pa}{\pb}$, where $\dGY{\pa}{\pb}$ is the length of the
-shortest path between $\pa,\pb\in \PS$ in the graph $\G$.  The graph
-$\G'$ is a \emphw{$t$-spanner} of $\G$ if there is a $t$-path between
-any pair of points $\pa,\pb\in \PS$.  For $\PS\subseteq \Re^d$ we say
-that a graph $\G$ is a $t$-spanner of $\PS$ if it is a $t$-spanner of
-$\G_\PS$. Throughout the paper, $n$ denotes the cardinality of the
-point set $\PS$, unless stated otherwise.
+Let $\G=(\PS,\EG)$ and $\GB=(\PS,\EG')$ be two graphs over the same
+set of vertices (usually $\GB$ is a subgraph of $\G$). Consider two
+vertices $\pa,\pb \in \PS$, and parameter $t \geq 1$.  A path $\pi$
+between $\pa$ and $\pb$ in $\GB$, is a \emphw{$t$-path}, if the length
+of $\pi$ in $\GB$ is at most $t\,\dGZ{\G}{\pa}{\pb}$, where
+$\dGZ{\G}{\pa}{\pb}$ is the length of the shortest path between $\pa$
+and $\pb$ in $\G$.  The graph $\GB$ is a \emphw{$t$-spanner} of $\G$
+if there is a $t$-path in $\GB$, for any $\pa,\pb\in \PS$.
+
+Thus, for $\PS\subseteq \Re^d$, the grap h $\G$ is a
+\emphw{$t$-spanner} of $\PS$ if it is a $t$-spanner of $\G_\PS$.
+
+
+\paragraph{Local spanners.}
+Given a set of points $\PS$ in $\Re^d$ and a parameter $t>1$, the
+problem of constructing \emph{$t$-spanners} for $\PS$ is well studied
+\cite{ns-gsn-07} -- that is, constructing Euclidean graphs that
+$t$-preserve distances.  Recently, Abam and Borouny \cite{ab-lgs-21}
+introduced the problem of designing such spanners, that remains
+spanner when cropped to regions from a prespecified set
+$\FF$. Formally, such a graph $\G = (\PS,\EG)$ has weights on the
+edges that are their euclidean length. Informally, cropping (or
+restricting) $\G$ to a region $\region \in \FF$, is the subgraph
+induced on $\PS \cap \region$. We require that this graph
+$\GB = \restrictY{\G}{\region}$ is a $t$-spanner for all
+$\pa,\pb \in \PS \cap \region$ -- that is,
+$\dGZ{\GB}{\pa}{\pb} \leq t \dY{\pa}{\pb}$, where
+$\dGZ{\GB}{\pa}{\pb}$ denotes the shortest path length in $\GB$
+between $\pa$ and $\pb$.  This property can be interpreted as
+fault-tolerance, where the faults (or attacks) are complements of the
+regions of $\FF$.
+
+
+
 
 
 \paragraph{Residual graphs.}

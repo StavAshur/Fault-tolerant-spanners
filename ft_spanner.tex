@@ -557,67 +557,25 @@ the proof to the appendix.
 \subsubsection{Delaunay triangulation}
 
 We need the following well known property of Delaunay triangulation,
-which would play a center role in our construction.
+which would play a center role in our construction. For the sake of
+completeness, we provide a proof in the appendix.
 
-\begin{claim}
-    \clmlab{d:t:connected}%
-    %
+
+\SaveContent{\ClaimDelConnected}%
+{%
     For a set of points $\PS \subseteq \Re^2$ in general position, let
     $\DT = \DTX{\PS}$ denote its Delaunay triangulation.  Then, for
     any closed disk $\disk$, we have $\restrictY{\DTX{\PS}}{\disk}$ is
-    connected.
+    connected.%
+}   
+
+\medskip%
+\begin{claim}[Proof in \apndref{d:t:c:proof}]
+    \clmlab{d:t:connected}%
+    %
+    \ClaimDelConnected{}
 \end{claim}
 
-
-\begin{proof}
-    We first prove that for any (closed) disk $\disk$ with two points
-    $\pa,\pb\in \PS$ on its boundary, there is a path between $\pa$
-    and $\pb$ in $\restrictY{\DT}{\disk}$.  The proof is by induction
-    over the number $m$ of points of $\PS$ in the interior of $\disk$:
-    \begin{compactitem}
-        \item $m=0$: The disk $\disk$ contains no points of $\PS$ in
-        its interior, and thus $\pa \pb$ is an edge of the Delaunay
-        triangulation, as $\disk$ testifies.
-
-        \begin{figure}[h]
-            \phantom{}\hfill%
-            \includegraphics[page=1]{figs/shrink}%
-            \hfill%
-            \includegraphics[page=2]{figs/shrink}%
-            \hfill%
-            \includegraphics[page=3]{figs/shrink}%
-            \hfill%
-            \phantom{}%
-            \caption{}
-            \figlab{shrink}
-        \end{figure}
-        \item $m >0$: Let $\pc\in \PS$ be a point in the interior of
-        $\disk$. We move the center $\cen$ of $\disk$ in the direction
-        of $\pa$, shrinking $\disk$ in the process, so that the radius
-        the disk is $\dY{\cen}{\pa}$, until we get a disk
-        $\disk' \subseteq \disk$ such that $\pc$ is on the boundary of
-        $\disk'$, see \figref{shrink}. Observe that $\pa$ and $\pc$
-        are on the boundary of the new disk, and
-        $|\interiorX{\disk'} \cap \PS| < |\interiorX{\disk} \cap
-        \PS|$. Thus, by induction, there is a path $\gamma'$ between
-        $\pa$ and $\pc$ in
-        $\restrictY{\DT}{\disk'} \subseteq
-        \restrictY{\DT}{\disk}$. Similarly, there must be a path
-        $\gamma''$ between $\pc$ and $\pb$, and concatenating the two
-        paths results in a path between $\pa$ and $\pb$ in
-        $\restrictY{\DT}{\disk}$.
-    \end{compactitem}
-    \medskip%
-    \noindent
-    Back to the original claim.  For any two points
-    $\pa,\pb \in \disk \cap \PS$ one can get a disk
-    $\disk' \subseteq \disk$ that contains $\pa$ and $\pb$ on its
-    boundary.  Indeed, shrink the radius of $\disk$ till, say, $\pa$
-    is on the boundary, and then move the center of the disk towards
-    $\pa$ while shrinking the size of the disk to maintain $\pa$ on
-    the boundary, until $\pb$ is also on the boundary of the shrunken
-    disk.
-\end{proof}
 
 
 
@@ -757,34 +715,39 @@ The construction time is bounded by
 % ------------------------------------------------------------------------
 \subsubsection{Applications and comments}
 
-
+The following definition defines a ``visibility'' graph restricted to
+a region $R$, where two points are visible if there is a witness disk
+contained in $R$ having both points on its boundary.
 \begin{defn}
     Given a region $R$ in the plane and a point set $\PS$, consider
     two points $\pa, \pb \in \PS$. The edge $\pa \pb$ is \emphw{safe}
     in $R$, if there is a disk $\disk$ such that
-    $\pa,\pb \in \disk \subseteq R$. Let $\GY{\PS}{R}$ be the graph
-    formed by all the safe edges in $\PS$ for $R$. Note, that this
-    graph might have a quadratic number of edges in the worst case.
+    $\pa,\pb \in \disk \subseteq R$. The \emphi{safe graph} for $\PS$
+    and $R$, denoted by $\GY{\PS}{R}$, is the graph formed by all the
+    safe edges in $\PS$ for $R$. Note, that this graph might have a
+    quadratic number of edges in the worst case.
 \end{defn}
 
-Observe that $\GY{\Re^2}{\PS}$ is a clique.
+Observe that $\GY{\PS}{\Re^2}$ is a clique. Surprisingly, the spanner
+graph when restricted to region $R$, is a spanner for 
 
 \begin{corollary}
     Let $\PS$ be a set of $n$ points in the plane, and let
     $\eps \in (0,1)$ be a parameter, and let $\G$ be a local
-    $(1+\eps)$-spanner of $\PS$ for disks. Then, for a region $R$ in
-    the plane, if we denote the graph $\GA = \GY{\PS}{R}$, we have
+    $(1+\eps)$-spanner of $\PS$ for disks. Consider a region $R$ in
+    the plane, and the associated graph $\GA = \GY{\PS}{R}$, we have
     that $\restrictY{\G}{R}$ is a $(1+\eps)$-spanner for
-    $\restrictY{\GA}{R}$. Formally, for any two points
-    $\pa, \pb \in \PS \cap R$, we have that
-    $\dGZ{\GA}{\pa}{\pb} \leq (1+\eps)\dGZ{\G}{\pa}{\pb}$.
+    $\GA$. Formally, for any two points $\pa, \pb \in \PS \cap R$, we
+    have that
+    $\dGZ{\GA}{\pa}{\pb} \leq
+    (1+\eps)\dGZ{\restrictY{\G}{R}}{\pa}{\pb}$.
 
     In particular, for any convex region $C$, the graph $\G \gminus C$
-    is a $(1+\eps)$-spanner for $\GY{\Re^2}{\PS} \gminus C$.
+    is a $(1+\eps)$-spanner for $\GY{\PS}{\Re^2} \gminus C$.
 \end{corollary}
 \begin{proof}
     Consider the shortest path $\pi = u_1 u_2 \ldots u_k$ between
-    $\pa$ and $\pb$ in $\dGZ{\GA}{\pa}{\pb}$. Every edge
+    $\pa$ and $\pb$ realizing $\dGZ{\GA}{\pa}{\pb}$. Every edge
     $e_i = u_i u_{i+1}$ has a disk $\disk_i$ such that
     $u_i, u_{i+1} \in \disk_i \subseteq R$. As such, there is a
     $(1+\eps)$-path between $u_i$ and $u_{i+1}$ in
@@ -798,11 +761,22 @@ Observe that $\GY{\Re^2}{\PS}$ is a clique.
     verbatim.
 \end{proof}
 
-\paragraph{But why not \SSPD?}
+%\paragraph{But why not \SSPD?}
+
+
+% ~\newpage ~\newpage ~\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{A lower bound for local spanner for disks}
+
 
 The result of \thmref{main:1} is somewhat disappointing as it depends
-on the spread of the point set (logarithmically, but still). A natural
-way is to try and emulate the construction of Abam \etal
+on the spread of the point set (logarithmically, but still).
+We next show a lower bound proving that this dependency is
+unavoidable. 
+
+\paragraph{Some intuition.}
+A natural way is to try and emulate the construction of Abam \etal
 \cite{abfg-rftgs-09} and use a \SSPD instead of a \WSPD. The total
 weight of the \SSPD is near linear (with no dependency on the
 spread). Furthermore, after some post processing, one can assume every
@@ -825,12 +799,6 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
        points are not well separated.}
     \figlab{bad}
 \end{figure}
-
-
-% ~\newpage ~\newpage ~\newpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{A lower bound for local spanner for disks}
 
 \begin{figure}[h]
     \centering%
@@ -934,30 +902,27 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 \subsection{Homothets of a convex region}
 \seclab{homothets}
 
-Using arguments similar to those used for disk local spanners, we now
-extend the results for the case where $\FF$ is the set of all scaled
-and translated copies of a convex shape $\CC$. This family of regions
-is also known as homothets of $\CC$. Formally, the homothet of the
-shape $\CC$ with center $o$ and scaling $\lambda$ is the set
-$\{o + \lambda o \pa : \pa \in \CC\}$. See \figref{homothet}. While
-the Delaunay triangulation is not well defined for all convex shapes,
-the operation of creating edges between every two points
-$\pa,\pb\in \PS$ such that there exist a homothet of $\CC$ that
-contains only $\pa$ and $\pb$ and no other point of $\PS$, is well
-defined for a point set in general position, and gives us a graph
-known as the $\CC$-Delaunay graph of $\PS$. We denote the
-$\CC$-Delaunay graph of $\PS$ by $\DG_{\CC}(\PS)$.  Note that in these
-settings, the meaning of general position is that no 3 points of $\PS$
-lie on the boundary of a homothet of $\CC$.
+\HERE
+
+The \emphi{homothet} of a convex shape $\CC$ is a scaled and
+translated copy of $\CC$.  While the Delaunay triangulation is not
+well defined for all convex shapes, the operation of creating edges
+between every two points $\pa,\pb\in \PS$ such that there exist a
+homothet of $\CC$ that contains only $\pa$ and $\pb$ and no other
+point of $\PS$, is well defined for a point set in general position,
+and gives us a graph known as the $\CC$-Delaunay graph of $\PS$. We
+denote the $\CC$-Delaunay graph of $\PS$ by $\DG_{\CC}(\PS)$.  Note
+that in these settings, the meaning of general position is that no 3
+points of $\PS$ lie on the boundary of a homothet of $\CC$.
 
 
-\begin{figure}[h]
-    \centering%
-    \includegraphics{figs/homothet}%
-    \caption{$C'$ is a homothet of $C$ of center $o$ and scaling
-       $\lambda$.}
-    \figlab{homothet}
-\end{figure}
+%\begin{figure}[h]
+%    \centering%
+%    \includegraphics{figs/homothet}%
+%    \caption{$C'$ is a homothet of $C$ of center $o$ and scaling
+%       $\lambda$.}
+%    \figlab{homothet}
+%\end{figure}
 
 
 \begin{claim}
@@ -2448,7 +2413,9 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
 \bibliography{ft_spanner}
 
 \appendix
-\section{Proof of \lemref{refine:d:w}}
+\section{Some missing proofs}
+
+\subsection{Proof of \lemref{refine:d:w}}
 \apndlab{refine:d:w}
 
 \RestatementOf{\lemref{refine:d:w}}%
@@ -2536,5 +2503,61 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
     \caption{An illustration of the proof for \lemref{refine:d:w}}
     \figlab{double-wedge}
 \end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Proof of \clmref{d:t:connected}}
+\apndlab{d:t:c:proof}
+
+\RestatementOf{\clmlab{d:t:connected}}%
+{%
+   \ClaimDelConnected{}
+}
+
+\begin{proof}
+    We first prove that for any (closed) disk $\disk$ with two points
+    $\pa,\pb\in \PS$ on its boundary, there is a path between $\pa$
+    and $\pb$ in $\restrictY{\DT}{\disk}$.  The proof is by induction
+    over the number $m$ of points of $\PS$ in the interior of $\disk$.
+    If $m=0$ then the disk $\disk$ contains no points of $\PS$ in its
+    interior, and thus $\pa \pb$ is an edge of the Delaunay
+    triangulation, as $\disk$ testifies.
+
+    \begin{figure}[h]
+        \phantom{}\hfill%
+        \includegraphics[page=1]{figs/shrink}%
+        \hfill%
+        \includegraphics[page=2]{figs/shrink}%
+        \hfill%
+        \includegraphics[page=3]{figs/shrink}%
+        \hfill%
+        \phantom{}%
+        \caption{}
+        \figlab{shrink}
+    \end{figure}
+    Otherwise, let $\pc\in \PS$ be a point in the interior of
+    $\disk$. We move the center $\cen$ of $\disk$ in the direction of
+    $\pa$, shrinking $\disk$ in the process, so that the radius the
+    disk is $\dY{\cen}{\pa}$, until we get a disk
+    $\disk' \subseteq \disk$ such that $\pc$ is on the boundary of
+    $\disk'$, see \figref{shrink}. Observe that $\pa$ and $\pc$ are on
+    the boundary of the new disk, and
+    $|\interiorX{\disk'} \cap \PS| < |\interiorX{\disk} \cap
+    \PS|$. Thus, by induction, there is a path $\gamma'$ between $\pa$
+    and $\pc$ in
+    $\restrictY{\DT}{\disk'} \subseteq
+    \restrictY{\DT}{\disk}$. Similarly, there must be a path
+    $\gamma''$ between $\pc$ and $\pb$, and concatenating the two
+    paths results in a path between $\pa$ and $\pb$ in
+    $\restrictY{\DT}{\disk}$.
+
+    Back to the original claim.  For any two points
+    $\pa,\pb \in \disk \cap \PS$ one can get a disk
+    $\disk' \subseteq \disk$ that contains $\pa$ and $\pb$ on its
+    boundary.  Indeed, shrink the radius of $\disk$ till, say, $\pa$
+    is on the boundary, and then move the center of the disk towards
+    $\pa$ while shrinking the size of the disk to maintain $\pa$ on
+    the boundary, until $\pb$ is also on the boundary of the shrunken
+    disk.
+\end{proof}
 
 \end{document}

@@ -386,7 +386,7 @@ where $\interiorX{\region}$ denotes the interior of $\region$.
 
 
 % -----------------------------------------------------------------------
-\subsubsection{Well separated pair decomposition}
+\subsubsection{On various pair decompositions}
 
 For sets $\PSX, \PSY$, let
 \begin{math}
@@ -433,30 +433,41 @@ The \emphi{spread} of $\PS$ is
 $\spreadX{\PS} = \diamX{\PS} / \cpX{\PS}$, which is the ratio between
 the diameter and closest pair distance.  While in general the weight
 of a \WSPD can be quadratic, if the spread is bounded, the weight is
-near linear.
+near linear.  For $\PSX, \PSY \subseteq \Re^d$, let
+$\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
+\dY{\pa}{\pb}$ be the \emphi{distance} between the two sets.
+
 
 \begin{defn}
     \deflab{well:separated}%
     \deflab{WSPD}%
     %
-    The pair of sets $\PSX, \PSY \subseteq \Re^d$ is
-    \emphi{$(1/\eps)$-well-separated} if
-    \begin{equation*}
+    Two sets $\PSX, \PSY \subseteq \Re^d$ are 
+    \begin{align*}
+      \text{\emphi{$1/\eps$-well-separated}}
+      \qquad
+      &\text{if}\qquad
         \max \pth{ \diameterX{\PSX}, \diameterX{\PSY} } \leq
-        \eps \cdot \dsY{\PSX}{\PSY},
-    \end{equation*}
-    where
-    $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
-    \dY{\pa}{\pb}$.  For a point set $\PS$, a \emphOnly{well-separated
-       pair decomposition} (\emphOnly{\WSPD{}}) of $\PS$ with
-    parameter $1/\eps$ is a pair decomposition of $\PS$ with a set of
-    pairs
+        \eps \, \dsY{\PSX}{\PSY},
+      \\
+      \text{and} \qquad \text{\emphi{$1/\eps$-semi-separated}}
+      \qquad
+      &\text{if}\qquad
+        \mathbf{min} \pth{ \diameterX{\PSX}, \diameterX{\PSY} }
+        \leq
+        \eps \, \dsY{\PSX}{\PSY}.
+    \end{align*}
+    For a point set $\PS$, a \emphOnly{well-separated pair
+       decomposition} (\emphOnly{\WSPD{}}) of $\PS$ with parameter
+    $1/\eps$ is a pair decomposition of $\PS$ with a set of pairs
     \begin{math}
         \WS = \brc{\bigl.
            \brc{\PSB_1,\PSC_1},\ldots,\brc{\PSB_s,\PSC_s}},
     \end{math}
     such that, for all $i$, the sets $\PSB_i$ and $\PSC_i$ are
-    $(1/\eps)$-separated.
+    $(1/\eps)$-separated. The notion of $1/\eps$-\SSPD (aka
+    \emphi{semi-separated pairs decomposition}) is defined
+    analogously.
 \end{defn}
 
 
@@ -473,22 +484,7 @@ near linear.
 \end{lemma}
 
 % ------------------------------------------------------------------------
-\subsubsection{Semi separated pair decomposition}
-
-\begin{defn}%
-    Two sets of points $\PSX$ and $\PSY$ are
-    \emphic{$(1/\eps)$-semi-separated}%
-    {separated!semi-separated@$(1+\eps)$-semi-separated} if
-    \begin{equation*}
-        \min \pth{ \diameterX{\PSX}, \diameterX{\PSY} } \leq \eps \cdot
-        \dsY{\PSX}{\PSY},%
-    \end{equation*}
-    For a point set $\PS$, a \emphOnly{semi-separated pair
-       decomposition} (\emphOnly{\SSPD{}}) of $\PS$ with parameter
-    $1/\eps$, denoted $(1/\eps)$-\SSPD, is a pair decomposition of
-    $\PS$ formed by a set of pairs $\WS$ such that all the pairs are
-    $1/\eps$-semi-separated.
-\end{defn}
+% \subsubsection{Semi separated pair decomposition}
 
 \begin{theorem}[\cite{ah-ncsa-12,h-gaa-11}]
     \thmlab{S:S:P:D:main}%

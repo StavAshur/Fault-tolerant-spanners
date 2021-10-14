@@ -24,7 +24,8 @@ M.~A. Abam and S.~{Har{-}Peled}.
 \bibitem[CDI85]{cd-vdbcdf-85}
 L~Paul Chew and Robert~L Dyrsdale~III.
 \newblock Voronoi diagrams based on convex distance functions.
-\newblock pages 235--244, 1985.
+\newblock In {\em Proc. 1st Annu. Sympos. Comput. Geom. {\em(SoCG)}}, pages
+  235--244, 1985.
 
 \bibitem[Cla87]{c-aaspmp-87}
 Kenneth~L. Clarkson.

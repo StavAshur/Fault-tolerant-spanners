@@ -132,19 +132,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5
 % Color emph
 \providecommand{\emphind}[1]{\emph{#1}\index{#1}}
-\definecolor{blue25emph}{rgb}{0, 0, 11}
+\definecolor{nalmostblack}{rgb}{0, 0, 0.7}
 \providecommand{\emphic}[2]{%
-   \textcolor{blue25emph}{%
+   \textcolor{nalmostblack}{%
       \textbf{\emph{#1}}}%
    \index{#2}}
 
 
 \providecommand{\emphi}[1]{\emphic{#1}{#1}}
 
-\definecolor{almostblack}{rgb}{0, 0, 0.3}
-\providecommand{\emphw}[1]{{\textcolor{almostblack}{\emph{#1}}}}%
+\definecolor{almostblack}{rgb}{0, 0, 0.5}
+\providecommand{\emphw}[1]{{\emph{{\textcolor{almostblack}{#1}}}}}%
 
-\providecommand{\emphOnly}[1]{\emph{\textcolor{blue25emph}{\textbf{#1}}}}
+\providecommand{\emphOnly}[1]{\emph{\textcolor{almostblack}{\textbf{#1}}}}
 % Color emph - end 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5
 
@@ -189,6 +189,9 @@
 
 \newcommand{\clmlab}[1]{\label{claim:#1}}
 \newcommand{\clmref}[1]{\HLink{Claim}{claim:#1}}
+
+\newcommand{\apndlab}[1]{\label{apnd:#1}}
+\newcommand{\apndref}[1]{\HLink{Appendix}{apnd:#1}}
 
 \newcommand{\seclab}[1]{\label{sec:#1}}
 \newcommand{\secref}[1]{\HLink{Section}{sec:#1}}
@@ -333,8 +336,15 @@
 \newcommand{\body}{\Mh{C}}%
 
 \newcommand{\grid}{\Mh{\mathsf{K}}}%
+
 \providecommand{\G}{\Mh{G}}%
 \renewcommand{\G}{\Mh{G}}%
+
+\newcommand{\GA}{\Mh{H}}%
+
+\providecommand{\GB}{\Mh{I}}%
+\renewcommand{\GB}{\Mh{I}}%
+
 
 \newcommand{\PS}{\Mh{P}}%
 \newcommand{\PSup}{\Mh{P}_\uparrow}%
@@ -379,8 +389,11 @@
 \newcommand{\GY}[2]{\Mh{\mathcal{G}}\pth{#1, #2}}%
 \newcommand{\cen}{\Mh{c}}%
 \newcommand{\Pair}{\Mh{\Xi}}%
+<<<<<<< HEAD
 \newcommand{\GA}{\Mh{H}}%
 \newcommand{\GB}{\Mh{I}}%
+=======
+>>>>>>> 48bfeb7bc92827134bfa98a65e61c1ac58819645
 
 \newcommand{\polylog}{\mathop{\mathrm{polylog}}}%
 \newcommand{\XSays}[2]{{ {$\rule[-0.12cm]{0.2in}{0.5cm}$\fbox{\tt #1:}
@@ -393,37 +406,6 @@
 \newcommand{\QSup}{\QS_{\uparrow}}
 \newcommand{\QSdown}{\QS_{\downarrow}}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \mathcalb - a different font that looks a bit like mathcal
-
-\DeclareFontFamily{U}{BOONDOX-calo}{\skewchar\font=45 }
-\DeclareFontShape{U}{BOONDOX-calo}{m}{n}{<-> s*[1.05] BOONDOX-r-calo}{}
-\DeclareFontShape{U}{BOONDOX-calo}{b}{n}{<-> s*[1.05] BOONDOX-b-calo}{}
-\DeclareMathAlphabet{\mathcalb}{U}{BOONDOX-calo}{m}{n}
-\SetMathAlphabet{\mathcalb}{bold}{U}{BOONDOX-calo}{b}{n}
-\DeclareMathAlphabet{\mathbcalb}{U}{BOONDOX-calo}{b}{n}
-
-% \mathcalb - end of file
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\CHX}[1]{\mathsf{ch}\pth{#1}}%
-
-\newcommand{\rinX}[1]{\Mh{r}_{\mathrm{in}}\pth{#1}}%
-\newcommand{\routX}[1]{\Mh{R}_{\mathrm{out}}\pth{#1}}%
-\newcommand{\arX}[1]{\Mh{\mathsf{a{}r}}\pth{#1}}%
-\newcommand{\Elp}{\Mh{\mathcal{E}}}
-
-\newcommand{\cell}{\Mh{\mathsf{C}}}%
-
-\newcommand{\Of}{\Mh{\mathcal{O}}}%
-\newcommand{\Oeps}{\Mh{\mathcal{O}_\eps}}%
-\newcommand{\gConst}{\Mh{\tau}}%
-\newcommand{\xSlabX}[1]{\overleftrightarrow{#1}}
-\newcommand{\ySlabX}[1]{\updownarrow\!{#1}}
-\newcommand{\widthX}[1]{\Mh{\mathsf{wd}}\pth{#1}} \smallskip%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -458,6 +440,74 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \mathcalb - a different font that looks a bit like mathcal
+
+\DeclareFontFamily{U}{BOONDOX-calo}{\skewchar\font=45 }
+\DeclareFontShape{U}{BOONDOX-calo}{m}{n}{<-> s*[1.05] BOONDOX-r-calo}{}
+\DeclareFontShape{U}{BOONDOX-calo}{b}{n}{<-> s*[1.05] BOONDOX-b-calo}{}
+\DeclareMathAlphabet{\mathcalb}{U}{BOONDOX-calo}{m}{n}
+\SetMathAlphabet{\mathcalb}{bold}{U}{BOONDOX-calo}{b}{n}
+\DeclareMathAlphabet{\mathbcalb}{U}{BOONDOX-calo}{b}{n}
+
+% \mathcalb - end of file
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\CHX}[1]{\mathsf{ch}\pth{#1}}%
+
+\newcommand{\rinX}[1]{\Mh{r}_{\mathrm{in}}\pth{#1}}%
+\newcommand{\routX}[1]{\Mh{R}_{\mathrm{out}}\pth{#1}}%
+\newcommand{\arX}[1]{\Mh{\mathsf{a{}r}}\pth{#1}}%
+\newcommand{\Elp}{\Mh{\mathcal{E}}}
+
+\newcommand{\cell}{\Mh{\mathsf{C}}}%
+
+\newcommand{\Of}{\Mh{\mathcal{O}}}%
+\newcommand{\Oeps}{\Mh{\mathcal{O}_\eps}}%
+\newcommand{\gConst}{\Mh{\tau}}%
+\newcommand{\xSlabX}[1]{\overleftrightarrow{#1}}
+\newcommand{\ySlabX}[1]{\updownarrow\!{#1}}
+\newcommand{\widthX}[1]{\Mh{\mathsf{wd}}\pth{#1}} \smallskip%
+
+<<<<<<< HEAD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Restating lemmas/theorems...
+%
+% Example
+%---------------------------------------------------------------------
+% \SaveContent{\LemmaNumVerticesDepthBody}{ BLA BLA }
+% 
+% \begin{lemma}[{{\normalfont Proof in \apndref{num:v:depth}}}]
+%       \lemlab{num:vertices:depth}%
+%       \LemmaNumVerticesDepthBody{}
+% \end{lemma}
+%...
+% \bigskip%
+% \RestatementOf{\lemref{num:vertices:depth}}{\LemmaNumVerticesDepthBody}
+%---------------------------------------------------------------------
+
+\newcommand{\SaveContent}[2]{%
+   \expandafter\newcommand{#1}{#2}%
+}
+
+\newcommand{\RestatementOf}[2]{
+   \noindent%
+   \textbf{Restatement of #1.}
+   % 
+   {\em #2{}}%
+}
+
+%%% End
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+=======
+>>>>>>> 48bfeb7bc92827134bfa98a65e61c1ac58819645
 \newcommand{\HERE}{%
    {\noindent\hspace{-1cm}\rule{1.2\linewidth}{4cm}}   
    % \rule{4cm}{4cm}
@@ -471,6 +521,7 @@
 \newcommand{\sqrA}{\mathcalb{t}}%
 \newcommand{\sqrB}{\mathcalb{u}}%
 
+\newcommand{\polylog}{\mathop{\mathrm{polylog}}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%EndIpePreamble

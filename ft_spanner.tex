@@ -49,14 +49,22 @@
 
 \section{Introduction}
 
+<<<<<<< HEAD
 \paragraph{Euclidean graph}
+=======
+\paragraph{Euclidean graph.}
+>>>>>>> 48bfeb7bc92827134bfa98a65e61c1ac58819645
 For a set $\PS$ of points in $\Re^d$, the \emphw{Euclidean graph}
 $\G_\PS = \bigl(\PS, \binom{\PS}{2}\bigr)$ of $\PS$ is an undirected
 graph.  Here, an edge $\pa \pb \in \EG$ is associated with the segment
 $\pa\pb$, and its weight is the (Euclidean) length of the segment.
 
 
+<<<<<<< HEAD
 \paragraph{t-spanners}
+=======
+\paragraph{t-spanners.}
+>>>>>>> 48bfeb7bc92827134bfa98a65e61c1ac58819645
 Let $\G=(\PS,\EG)$ and $\GB=(\PS,\EG')$ be two graphs over the same
 set of vertices (usually $\GB$ is a subgraph of $\G$). Consider two
 vertices $\pa,\pb \in \PS$, and parameter $t \geq 1$.  A path $\pi$
@@ -71,7 +79,11 @@ Thus, for $\PS\subseteq \Re^d$, a graph $\G$ over $\PS$ is a
 $\G_\PS$.
 
 
+<<<<<<< HEAD
 \paragraph{Local spanners}
+=======
+\paragraph{Local spanners.}
+>>>>>>> 48bfeb7bc92827134bfa98a65e61c1ac58819645
 Given a set of points $\PS$ in $\Re^d$ and a parameter $t>1$, the
 problem of constructing \emph{$t$-spanners} for $\PS$ is well studied
 \cite{ns-gsn-07}.  Recently, Abam and Borouny \cite{ab-lgs-21}
@@ -90,6 +102,11 @@ fault-tolerance, where the faults (or attacks) are complements of the
 regions of $\FF$.
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 48bfeb7bc92827134bfa98a65e61c1ac58819645
 
 
 
@@ -142,7 +159,7 @@ as for the case of disk local spanners.
 
 \subsection*{Our results}
 
-\paragraph{Disks}
+\paragraph{Disks.}
 In \secref{disks} we present a construction of spanners, which
 surprisingly, is not only fault-tolerant for convex regions, but it
 also a local spanner for disks. This resolves the aforementioned open
@@ -363,7 +380,11 @@ Our purpose here is to build a local spanner for disks.
 \subsection{Preliminaries}
 
 
+<<<<<<< HEAD
 \paragraph{Residual graphs}
+=======
+\paragraph{Residual graphs.}
+>>>>>>> 48bfeb7bc92827134bfa98a65e61c1ac58819645
 
 Let $\FF$ be a family of regions in the plane. For a fault region
 $\region \in \FF$ and a geometric graph $\G$ on a point set $\PS$, let
@@ -530,6 +551,7 @@ near linear.
     each pair into $\beta$ smaller portions.
 \end{proof}
 
+<<<<<<< HEAD
 \SaveContent{\LemmaRefineDWBody}%
 {%
    Given aמ $\eps^{-1}$-\SSPD $\WS$ of $n$ points in the plane, one
@@ -549,6 +571,29 @@ the proof to the appendix.
     \LemmaRefineDWBody{}
 \end{lemma}
 
+=======
+
+\SaveContent{\LemmaRefineDWBody}%
+{%
+    Given aמ $\eps^{-1}$-\SSPD $\WS$ of $n$ points in the plane, one
+    can refine it, into aמ $\eps^{-1}$-\SSPD $\WS'$, such that each
+    pair $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in a
+    $\eps$-double-wedge $\DW_\Pair$, such that $\PSX$ and $\PSY$ are
+    contained in the two different faces of the double wedge
+    $\DW_\Pair$. We have that $|\WS'| = O(|\WS|/\eps)$ and
+    $\WeightX{\WS'} = O(\WeightX{\WS'}/\eps)$. The construction time
+    is proportional to the weight of $\WS'$.
+}
+
+The proof of the following lemma is straightforward, and we delegate
+the proof to the appendix.
+\begin{lemma}[Proof in \apndref{refine:d:w}]
+    \lemlab{refine:d:w}%
+    %
+    \LemmaRefineDWBody{}
+\end{lemma}
+
+>>>>>>> 48bfeb7bc92827134bfa98a65e61c1ac58819645
 
 
 % -----------------------------------------------------------------------
@@ -773,7 +818,11 @@ on the spread of the point set (logarithmically, but still).
 We next show a lower bound proving that this dependency is
 unavoidable. 
 
+<<<<<<< HEAD
 \paragraph{Some intuition}
+=======
+\paragraph{Some intuition.}
+>>>>>>> 48bfeb7bc92827134bfa98a65e61c1ac58819645
 A natural way is to try and emulate the construction of Abam \etal
 \cite{abfg-rftgs-09} and use a \SSPD instead of a \WSPD. The total
 weight of the \SSPD is near linear (with no dependency on the

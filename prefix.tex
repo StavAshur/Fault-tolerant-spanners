@@ -190,8 +190,8 @@
 \newcommand{\clmlab}[1]{\label{claim:#1}}
 \newcommand{\clmref}[1]{\HLink{Claim}{claim:#1}}
 
-\newcommand{\apndlab}[1]{\label{apnd:#1}}
-\newcommand{\apndref}[1]{\HLink{Appendix}{apnd:#1}}
+%\newcommand{\apndlab}[1]{\label{apnd:#1}}
+%\newcommand{\apndref}[1]{\HLink{Appendix}{apnd:#1}}
 
 \newcommand{\seclab}[1]{\label{sec:#1}}
 \newcommand{\secref}[1]{\HLink{Section}{sec:#1}}
@@ -339,8 +339,9 @@
 
 \providecommand{\G}{\Mh{G}}%
 \renewcommand{\G}{\Mh{G}}%
-
 \newcommand{\GA}{\Mh{H}}%
+%\newcommand{\GA}{\Mh{H}}%
+\newcommand{\GB}{\Mh{I}}%
 
 \providecommand{\GB}{\Mh{I}}%
 \renewcommand{\GB}{\Mh{I}}%
@@ -389,13 +390,8 @@
 \newcommand{\GY}[2]{\Mh{\mathcal{G}}\pth{#1, #2}}%
 \newcommand{\cen}{\Mh{c}}%
 \newcommand{\Pair}{\Mh{\Xi}}%
-<<<<<<< HEAD
-\newcommand{\GA}{\Mh{H}}%
-\newcommand{\GB}{\Mh{I}}%
-=======
->>>>>>> 48bfeb7bc92827134bfa98a65e61c1ac58819645
 
-\newcommand{\polylog}{\mathop{\mathrm{polylog}}}%
+%\newcommand{\polylog}{\mathop{\mathrm{polylog}}}%
 \newcommand{\XSays}[2]{{ {$\rule[-0.12cm]{0.2in}{0.5cm}$\fbox{\tt #1:}
       } #2 \marginpar{\textcolor{red}{#1}}
       {$\rule[0.1cm]{0.3in}{0.1cm}$\fbox{\tt
@@ -472,42 +468,7 @@
 \newcommand{\ySlabX}[1]{\updownarrow\!{#1}}
 \newcommand{\widthX}[1]{\Mh{\mathsf{wd}}\pth{#1}} \smallskip%
 
-<<<<<<< HEAD
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Restating lemmas/theorems...
-%
-% Example
-%---------------------------------------------------------------------
-% \SaveContent{\LemmaNumVerticesDepthBody}{ BLA BLA }
-% 
-% \begin{lemma}[{{\normalfont Proof in \apndref{num:v:depth}}}]
-%       \lemlab{num:vertices:depth}%
-%       \LemmaNumVerticesDepthBody{}
-% \end{lemma}
-%...
-% \bigskip%
-% \RestatementOf{\lemref{num:vertices:depth}}{\LemmaNumVerticesDepthBody}
-%---------------------------------------------------------------------
 
-\newcommand{\SaveContent}[2]{%
-   \expandafter\newcommand{#1}{#2}%
-}
-
-\newcommand{\RestatementOf}[2]{
-   \noindent%
-   \textbf{Restatement of #1.}
-   % 
-   {\em #2{}}%
-}
-
-%%% End
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-=======
->>>>>>> 48bfeb7bc92827134bfa98a65e61c1ac58819645
 \newcommand{\HERE}{%
    {\noindent\hspace{-1cm}\rule{1.2\linewidth}{4cm}}   
    % \rule{4cm}{4cm}

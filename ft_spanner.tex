@@ -355,12 +355,9 @@ comparisons to the results of this paper.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Local spanner for disks}
-\seclab{disks}
 
-Our purpose here is to build a local spanner for disks.
 
-\subsection{Preliminaries}
+\section{Preliminaries}
 
 
 \paragraph{Residual graphs}
@@ -386,7 +383,7 @@ where $\interiorX{\region}$ denotes the interior of $\region$.
 
 
 % -----------------------------------------------------------------------
-\subsubsection{On various pair decompositions}
+\subsection{On various pair decompositions}
 
 For sets $\PSX, \PSY$, let
 \begin{math}
@@ -496,35 +493,28 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
     $\Of\pth{ n \eps^{-d} \log n }$.
 \end{theorem}
 
-\begin{defn}%
-    An \emphi{$\eps$-double-wedge} is a region between two lines,
-    where the angle between the two lines is at most $\eps$.
-\end{defn}
+The proof of the following two lemmas is straightforward, and are
+delegated to the appendix.
 
-\begin{lemma}
-    \lemlab{chop:easy}%
-    %
+\SaveContent{\LemmaChopEasyBody}%
+{%
     Given an $\alpha$-\SSPD $\WS$ of a set $\PS$ of $n$ points in
     $\Re^d$ and a parameter $\beta \geq 2$, one can refine $\WS$ into
     an $\alpha\beta$-\SSPD $\WS'$, such that that
     $|\WS'| = O(|\WS|/\beta^d)$ and
     $\WeightX{\WS'} = O(\WeightX{\WS'}/\beta^d)$.
+ }
+ 
+\begin{lemma}[Proof in \apndref{chop:easy}]
+    \lemlab{chop:easy}%
+    %
+    \LemmaChopEasyBody{}
 \end{lemma}
-\begin{proof}
-    The algorithm scans the pairs of $\WS$. For each pair
-    $\Pair = \{ \PSX, \PSY \} \in \WS$, assume that
-    $\diameterX{\PSX} < \diameterX{\PSY}$. Let $\sqr$ be the smallest
-    axis-parallel cube containing $\PSX$, and denote its sidelength by
-    $r$.  Let $r' = r / \ceil{\sqrt{d} \beta }$.  Partition $\sqr$
-    into a grid of cubes of sidelength $r'$, and let $T_\Pair$ be the
-    resulting set of squares. The algorithm now add the set pairs
-    \begin{equation*}
-        \Set{ \{ \PSX \cap \sqrA, \PSY \} }{ \sqrA \in T_\Pair }
-    \end{equation*}
-    to the output \SSPD. Clearly, the resulting set is now
-    $\alpha\beta$-semi separated, as we chopped the smaller part of
-    each pair into $\beta$ smaller portions.
-\end{proof}
+
+\begin{defn}%
+    An \emphi{$\eps$-double-wedge} is a region between two lines,
+    where the angle between the two lines is at most $\eps$.
+\end{defn}
 
 \SaveContent{\LemmaRefineDWBody}%
 {%
@@ -537,18 +527,21 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
    $\WeightX{\WS'} = O(\WeightX{\WS'}/\eps)$. The construction time is
    proportional to the weight of $\WS'$.  }
 
-The proof of the following lemma is straightforward, and we delegate
-the proof to the appendix.
 \begin{lemma}[Proof in \apndref{refine:d:w}]
     \lemlab{refine:d:w}%
     %
     \LemmaRefineDWBody{}
 \end{lemma}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Local spanners of homothets of convex region}
+\seclab{disks}
 
 % -----------------------------------------------------------------------
-\subsubsection{Delaunay triangulation}
+\subsection{Delaunay triangulation}
 
 We need the following well known property of Delaunay triangulation,
 which would play a center role in our construction. For the sake of
@@ -570,93 +563,134 @@ completeness, we provide a proof in the appendix.
     \ClaimDelConnected{}
 \end{claim}
 
+% \subsubsection{Delaunay triangulation induced by a convex body}
 
+Let $\CC$ be a bounded convex and closed region in the plane (e.g., a
+disk).  The \emphi{homothet} of a convex shape $\CC$ is a scaled and
+translated copy of $\CC$.  A point set $\PS$ is \emphi{general
+   position} for $\CC$, if is four points of $\PS$ lie on the boundary
+of a homothet of $\CC$.  The Delaunay triangulation is well defined if
+the point set is in general position -- edges are inserted between any
+two points $\pa,\pb\in \PS$ such that there exist a homothet of $\CC$
+that contains only $\pa$ and $\pb$ and no other point of $\PS$.  This
+results in the \emphi{$\CC$-Delaunay} graph of $\PS$
+\cite{cd-vdbcdf-85}.
+
+\begin{theorem}[\cite{cd-vdbcdf-85}]
+    \thmlab{c:t:construct_delaunay_graph}%
+    %
+    For any convex shape $\CC$ and a set of points $\PS$,
+    $\DG_{\CC}(\PS)$ can be computed in $O(n \log n)$ time.
+    Furthermore, the triangulation $\DG_{\CC}(\PS)$ has $O(n)$ edges,
+    vertices, and faces.
+\end{theorem}
+
+
+Observe that for any homothet $C$ (of $\CC$) and two points
+$\pa,\pb \in C$, there exists a homothet $C'$ of $\CC$ with $\pa$ and
+$\pb$ on its boundary, such that $C'\subseteq C$. Thus, a
+straightforward modification of the proof of \clmref{d:t:connected}
+implies the following.
+
+\begin{claim}
+    \clmlab{c:t:connected}%
+    % 
+    Given a set of points $\PS \subseteq \Re^2$ in general position,
+    and a convex shape $\CC$, let $\DG = \DG_{\CC}(\PS)$ denote the
+    $\CC$-Delaunay graph of $\PS$. For any homothet $C$ of $\CC$, we
+    have $\restrictY{\DG}{C}$ is connected.
+\end{claim}
+
+
+ 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The construction of local spanners for disks}
 
-\subsubsection{The construction}
+\subsection{The construction}
 \seclab{disk_construction}
 
 The input is a set $\PS$ of $n$ points in the plane (in general
-position) with $\spread = \spreadX{\PS}$, and a parameter
-$\eps \in (0,1)$.
+position) with spread $\spread = \spreadX{\PS}$, and a parameter
+$\eps \in (0,1)$. We have a convex body $\CC$ that defines the
+``unit'' ball. The task is to construct a local spanner for any
+homothet of $\CC$.
 
 The algorithm computes a $1/\epsA$-\WSPD $\WS$ of $\PS$ using the
 algorithm of \lemref{s:s:p:d:spread}, where $\epsA = \eps/6$.  For
 each pair $\Pair = \{\PSX, \PSY \} \in \WS$, the algorithm computes
-the Delaunay triangulation $\DT_{\Pair} = \DTX{ \PSX \cup \PSY}$. The
-algorithm adds all the edges in $\DT_{\Pair} \cap (\PSX \otimes \PSY)$
-to the computed graph $\G$.
+the $\CC$-Delaunay triangulation
+$\DT_{\Pair} = \DTX{ \PSX \cup \PSY}$. The algorithm adds all the
+edges in $\DT_{\Pair} \cap (\PSX \otimes \PSY)$ to the computed graph
+$\G$.
 
 \subsubsection{Analysis}
 
 \paragraph{Size}
 
-For each pair $\Pair = \{\PSX, \PSY\}$ in the \WSPD, its Delaunay
-triangulation contains at most $\Of( |\PSX| + |\PSY|)$ edges. As such,
-the number of edges in the resulting graph is bounded by
-\begin{equation*}
-    \sum_{\{\PSX, \PSY\} \in \WS} O\bigl( |\PSX| + |\PSY| \bigr)
-    =%
+For each pair $\Pair = \{\PSX, \PSY\}$ in the \WSPD, its
+$\CC$-Delaunay triangulation contains at most $\Of( |\PSX| + |\PSY|)$
+edges. As such, the number of edges in the resulting graph is bounded
+by
+\begin{math}
+    \sum_{\{\PSX, \PSY\} \in \WS} O\bigl( |\PSX| + |\PSY| \bigr) =%
     O\pth{ \WeightX{\WS} }%
     =%
     O\pth{ \frac{n\log \spread}{{\epsA}^{2}}},
-\end{equation*}
+\end{math}
 by \lemref{s:s:p:d:spread}.
 
 
 \paragraph{Construction time}
 The construction time is bounded by
-\begin{equation*}
+\begin{math}
     \sum_{\{\PSX, \PSY\} \in \WS} O\bigl( (|\PSX| + |\PSY|) \log
     (|\PSX| + |\PSY|)  \bigr)
     =%
     O\pth{ \WeightX{\WS} \log n }%
     =%
-    O\pth{ \frac{n\log \spread \log n}{{\epsA}^{2}}},
-\end{equation*}
+    O\pth{ \frac{n\log \spread \log n}{{\epsA}^{2}}},    
+\end{math}
 
-\paragraph{Local spanner property}
-
-\begin{lemma}
-    Let $\G$ be the graph constructed above for the point set
-    $\PS$. Then, for any (closed) disk $\disk$, and any two points
-    $\px, \py \in \PS \cap \disk$, we have that
-    $\restrictY{\G}{\disk}$ has a $(1+\eps)$-path between $\px$ and
-    $\py$. That is, $\G$ is a $(1+\eps)$-local spanner for disks.
+\begin{lemma}[Local spanner property]
+    For $\PS, \CC, \eps$ as above, let $\G$ be the graph constructed
+    above for the point set $\PS$. Then, for any homothet $C$ of $\CC$
+    and any two points $\px, \py \in \PS \cap C$, we have that
+    $\restrictY{\G}{C}$ has a $(1+\eps)$-path between $\px$ and
+    $\py$. That is, $\G$ is a $(1+\eps)$-local spanner for homothets
+    of $\CC$.
 \end{lemma}
 
 \begin{proof}
-    The proof is by induction on the distance between $\pa$ and $\pb$
-    (or more precisely, the rank of their distance among the
-    $\binom{n}{2}$ pairwise distances).  Consider the pair
-    $\Pair = \{ \PSX, \PSY \}$ such that $\px \in \PSX$ and
-    $\py \in \PSY$.
+    Fix a homothet $C$ of $\CC$, and consider two points
+    $\pa, \pb \in \PS \cap C$.  The proof is by induction on the
+    distance between $\pa$ and $\pb$ (or more precisely, the rank of
+    their distance among the $\binom{n}{2}$ pairwise distances).
+    Consider the pair $\Pair = \{ \PSX, \PSY \}$ such that
+    $\px \in \PSX$ and $\py \in \PSY$.
 
-    For the base case, consider the case that $\px$ is the
-    nearest-neighbor to $\py$ in $\PS$, and $\py$ is the
-    nearest-neighbor to $\px$ in $\PS$.  It must be, because of the
-    separation property of $\Pair$, that $\PSX$ and $\PSY$ are
-    singletons. Indeed, if $\PSX$ contains another point, then $\py$
-    would not be the nearest-neighbor to $\px$ (this is true for
-    $\epsA < 0.5$). As such, $\px \py \in \DT_\Pair$,
-    $\px, \py \in \disk$, and the edge $\px \py \in \EGX{\G}$,
-    implying the claim.
-
-    For the inductive step, observe that the claim follows if
-    $\px \py \in \DT_\Pair$, so assume this is not the case. By the
-    connectivity of $\DT_\Pair \cap \disk$, see
-    \clmref{d:t:connected}, there must be points
-    $\px' \in \PSX \cap \disk$, $\py' \in \PSY \cap \disk$, such that
+    \remove{%
+       For the base case, consider the case that $\px$ is the
+       nearest-neighbor to $\py$ in $\PS$, and $\py$ is the
+       nearest-neighbor to $\px$ in $\PS$.  It must be, because of the
+       separation property of $\Pair$, that $\PSX$ and $\PSY$ are
+       singletons. Indeed, if $\PSX$ contains another point, then
+       $\py$ would not be the nearest-neighbor to $\px$ (this is true
+       for $\epsA < 1/2$). As such, $\px \py \in \DT_\Pair$,
+       $\px, \py \in C$, and the edge $\px \py \in \EGX{\G}$, implying
+       the claim.  }%
+    
+    If $\px \py \in \DT_\Pair$ then the claim holds. So assume this is
+    not the case. By the connectivity of $\DT_\Pair \cap C$, see
+    \clmref{c:t:connected}, there must be points
+    $\px' \in \PSX \cap C$, $\py' \in \PSY \cap C$, such that
     $\px'\py' \in \EGX{ \DT_\Pair}$. As such, by construction, we have
     that $\px'\py' \in \EGX{\G}$. Furthermore, by the separation
     property, we have that
     \begin{equation*}
         \max \pth{ \diameterX{\PSX}, \diameterX{\PSY} }%
         \leq%
-        \epsA \cdot \dsY{\PSX}{\PSY}%
+        \epsA \, \dsY{\PSX}{\PSY}%
         \leq%
         \epsA \ell,
     \end{equation*}
@@ -696,78 +730,83 @@ The construction time is bounded by
 \begin{theorem}
     \thmlab{main:1}%
     %
-    Let $\PS$ be a set of $n$ points in the plane, and let
-    $\eps \in (0,1)$ be a parameter. The above algorithm constructs a
-    local $(1+\eps)$-spanner $\G$ for disks. The spanner has
-    $\Of\pth{ \eps^{-2} n\log \spread }$ edges, and the construction
-    time is $\Of\pth{ \eps^{-2} n\log \spread \log n }$.  Formally,
-    for any disk $\disk$ in the plane, and any two points
-    $\pa, \pb \in \PS \cap \disk$, we have a $(1+\eps)$-path in
-    $\restrictY{\G}{\disk}$.
+    Let $\CC$ be a bounded convex shape in the plane, let $\PS$ be a
+    given set of $n$ points in the plane (in general position), and
+    let $\eps \in (0,1/2)$ be a parameter. The above algorithm
+    constructs a local $(1+\eps)$-spanner $\G$ for homothets of
+    $\CC$. The spanner has $\Of\pth{ \eps^{-2} n\log \spread }$ edges,
+    and the construction time is
+    $\Of\pth{ \eps^{-2} n\log \spread \log n }$.  Formally, for any
+    homothet $C$ of $\CC$, and any two points
+    $\pa, \pb \in \PS \cap C$, we have a $(1+\eps)$-path in
+    $\restrictY{\G}{C}$.
 \end{theorem}
 
 % ------------------------------------------------------------------------
 \subsubsection{Applications and comments}
 
-The following definition defines a ``visibility'' graph restricted to
-a region $R$, where two points are visible if there is a witness disk
-contained in $R$ having both points on its boundary.
+The following defines a ``visibility'' graph when we are restricted to
+a region $R$, where two points are visible if there is a witness
+homothet contained in $R$ having both points on its boundary.
 \begin{defn}
-    Given a region $R$ in the plane and a point set $\PS$, consider
-    two points $\pa, \pb \in \PS$. The edge $\pa \pb$ is \emphw{safe}
-    in $R$, if there is a disk $\disk$ such that
-    $\pa,\pb \in \disk \subseteq R$. The \emphi{safe graph} for $\PS$
-    and $R$, denoted by $\GY{\PS}{R}$, is the graph formed by all the
-    safe edges in $\PS$ for $R$. Note, that this graph might have a
+    Let $\CC$ be a bounded convex shape in the plane.  Given a region
+    $R$ in the plane and a point set $\PS$, consider two points
+    $\pa, \pb \in \PS$. The edge $\pa \pb$ is \emphw{safe} in $R$, if
+    there is a homothet $C$ of $\CC$, such that
+    $\pa,\pb \in C \subseteq R$. The \emphi{safe graph} for $\PS$ and
+    $R$, denoted by $\GY{\PS}{R}$, is the graph formed by all the safe
+    edges in $\PS$ for $R$. Note, that this graph might have a
     quadratic number of edges in the worst case.
 \end{defn}
 
 Observe that $\GY{\PS}{\Re^2}$ is a clique. Surprisingly, the spanner
-graph when restricted to region $R$, is a spanner for 
+graph when restricted to region $R$, is a spanner for
 
 \begin{corollary}
-    Let $\PS$ be a set of $n$ points in the plane, and let
-    $\eps \in (0,1)$ be a parameter, and let $\G$ be a local
-    $(1+\eps)$-spanner of $\PS$ for disks. Consider a region $R$ in
-    the plane, and the associated graph $\GA = \GY{\PS}{R}$, we have
-    that $\restrictY{\G}{R}$ is a $(1+\eps)$-spanner for
-    $\GA$. Formally, for any two points $\pa, \pb \in \PS \cap R$, we
-    have that
-    $\dGZ{\GA}{\pa}{\pb} \leq
-    (1+\eps)\dGZ{\restrictY{\G}{R}}{\pa}{\pb}$.
+    Let $\CC$ be a bounded convex body, $\PS$ be a set of $n$ points
+    in the plane, $\eps \in (0,1)$ be a parameter, and let $\G$ be a
+    local $(1+\eps)$-spanner of $\PS$ for homothets of $\CC$. Let $\G$
+    be the above spanner constructed for $\PS$ and $\CC$.
 
-    In particular, for any convex region $C$, the graph $\G \gminus C$
-    is a $(1+\eps)$-spanner for $\GY{\PS}{\Re^2} \gminus C$.
+    Consider a region $R$ in the plane, and the associated graph
+    $\GA = \GY{\PS}{R}$, we have that $\restrictY{\G}{R}$ is a
+    $(1+\eps)$-spanner for $\GA$. Formally, for any two points
+    $\pa, \pb \in \PS \cap R$, we have that
+    $\dGZ{\restrictY{\G}{R}}{\pa}{\pb}\leq (1+\eps)\dGZ{\GA}{\pa}{\pb}
+    $.
+
+    In particular, for any convex region $D$, the graph
+    $\G \gminus C$ is a $(1+\eps)$-spanner for
+    $\GY{\PS}{\Re^2} \gminus D$.
 \end{corollary}
 \begin{proof}
     Consider the shortest path $\pi = u_1 u_2 \ldots u_k$ between
     $\pa$ and $\pb$ realizing $\dGZ{\GA}{\pa}{\pb}$. Every edge
-    $e_i = u_i u_{i+1}$ has a disk $\disk_i$ such that
-    $u_i, u_{i+1} \in \disk_i \subseteq R$. As such, there is a
+    $e_i = u_i u_{i+1}$ has a homothet $C_i$ such that
+    $u_i, u_{i+1} \in C_i \subseteq R$. As such, there is a
     $(1+\eps)$-path between $u_i$ and $u_{i+1}$ in
-    $\restrictY{\G}{\disk_i} \subseteq
-    \restrictY{\G}{R}$. Concatenating these paths directly yields the
-    desired result.
+    $\restrictY{\G}{C_i} \subseteq \restrictY{\G}{R}$. Concatenating
+    these paths directly yields the desired result.
 
-    The second claim follows by observing that the complement of $C$
+    The second claim follows by observing that the complement of $D$
     is the union of halfspaces, and halfspaces can be considered to be
-    ``infinite'' radius disks. As such, the above argument applies
-    verbatim.
+    ``infinite'' homothets of $\CC$. As such, the above argument
+    applies verbatim.
 \end{proof}
 
-%\paragraph{But why not \SSPD?}
+\begin{remark}
+    The above implies that local spanners for homothets are also
+    robust to convex region faults.
+\end{remark}
 
-
-% ~\newpage ~\newpage ~\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{A lower bound for local spanner for disks}
 
-
 The result of \thmref{main:1} is somewhat disappointing as it depends
-on the spread of the point set (logarithmically, but still).
-We next show a lower bound proving that this dependency is
-unavoidable. 
+on the spread of the point set (logarithmically, but still).  We next
+show a lower bound proving that this dependency is unavoidable, even
+in the case of disks.
 
 \paragraph{Some intuition}
 A natural way is to try and emulate the construction of Abam \etal
@@ -892,90 +931,11 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-\subsection{Homothets of a convex region}
-\seclab{homothets}
-
 \HERE
 
-The \emphi{homothet} of a convex shape $\CC$ is a scaled and
-translated copy of $\CC$.  While the Delaunay triangulation is not
-well defined for all convex shapes, the operation of creating edges
-between every two points $\pa,\pb\in \PS$ such that there exist a
-homothet of $\CC$ that contains only $\pa$ and $\pb$ and no other
-point of $\PS$, is well defined for a point set in general position,
-and results in the \emphi{$\CC$-Delaunay} graph of $\PS$
-\cite{cd-vdbcdf-85}, denoted by $\DG_{\CC}(\PS)$.  Note that in these
-settings, the meaning of general position is that no four points of
-$\PS$ lie on the boundary of a homothet of $\CC$.
-
-Observe that for any convex region $\CC\subseteq \Re^2$ and two points
-$\pa,\pb \in C$, there exists a homothet $\CC'$ of $\CC$ with $\pa$
-and $\pb$ on its boundary, such that $\CC'\subseteq \CC$. Thus, a
-straightforward modification of the proof of \clmref{d:t:connected}
-implies the following.
-
-\Sariel{Please add relevant citations to this modified Delaunay
-   triangulations, since this is all well known.}
-
-\begin{claim}
-    \clmlab{c:t:connected}%
-    % 
-    Given a set of points $\PS \subseteq \Re^2$ in general position,
-    and a convex shape $\CC$, let $\DG = \DG_{\CC}(\PS)$ denote the
-    $\CC$-Delaunay graph of $\PS$. For any homothet $C$ of $\CC$, we
-    have $\restrictY{\DG}{C}$ is connected.
-\end{claim}
 
 
 
-
-We will need the following from the paper of Chew and
-Drysdale~\cite{cd-vdbcdf-85} in order to construct the spanner, and
-bound its size similarly to the local disk spanner.
-
-\begin{theorem}[\cite{cd-vdbcdf-85}]
-    \thmlab{c:t:construct_delaunay_graph}%
-    For any convex shape $\CC$ and a set of points $\PS$,
-    $\DG_{\CC}(\PS)$ can be computed in $O(n \log n)$ time.
-\end{theorem}
-
-\begin{lemma}[\cite{cd-vdbcdf-85}]
-    \lemlab{c:t:linear_size}%
-    For any convex shape $\CC$ and a set of points $\PS$,
-    $\DG_{\CC}(\PS)$ has $O(n)$ edges, vertices, and faces.
-\end{lemma}
-
-
-We thus get the following.
-
-\begin{theorem}
-    \thmlab{l:s:homothets}
-	%
-    Let $\PS$ be a set of $n$ points in the plane, and let
-    $\eps \in (0,1)$ be a parameter. We can constructs a local
-    $(1+\eps)$-spanner $\G$ for homothets of a convex region
-    $\CC$. The spanner has $\Of\pth{ \eps^{-2} n\log \spread }$ edges,
-    and the construction time is
-    $\Of\pth{ \eps^{-2} n\log \spread \log n }$.  Formally, for any
-    homothet $C$ of the convex region $\CC\subseteq \Re^2$, and any
-    two points $\pa, \pb \in \PS \cap \disk$, we have a
-    $(1+\eps)$-path in $\restrictY{\G}{C}$.
-\end{theorem}
-
-\begin{proof}
-    Due to \thmref{c:t:construct_delaunay_graph},
-    \lemref{c:t:linear_size}, and \clmref{c:t:connected}, we can use
-    the algorithm in \secref{disk_construction} verbatim, switching
-    only the conventional Delaunay triangulation with the
-    $\CC$-Delaunay graph. Since the $\CC$-Delaunay graph has linear
-    complexity for any convex shape $\CC$ the size of the spanner can
-    be bounded using the same asymptotic bounds as the disk local
-    spanner, and since the $\CC$-Delaunay graph can be constructed in
-    $O(n\log n)$ time, the time complexity bounds hold as well. The
-    correctness proof of \thmref{main:1} uses only the connectivity of
-    the Delaunay triangulation, and thus the same proof works.
-\end{proof}
 
 
 
@@ -2370,6 +2330,31 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
 \appendix
 \section{Some missing proofs}
 
+\subsection{Proof of \lemref{chop:easy}}
+\apndlab{chop:easy}
+
+\RestatementOf{\lemref{chop:easy}}%
+{%
+    \LemmaChopEasyBody{}
+}
+
+\begin{proof}
+    The algorithm scans the pairs of $\WS$. For each pair
+    $\Pair = \{ \PSX, \PSY \} \in \WS$, assume that
+    $\diameterX{\PSX} < \diameterX{\PSY}$. Let $\sqr$ be the smallest
+    axis-parallel cube containing $\PSX$, and denote its sidelength by
+    $r$.  Let $r' = r / \ceil{\sqrt{d} \beta }$.  Partition $\sqr$
+    into a grid of cubes of sidelength $r'$, and let $T_\Pair$ be the
+    resulting set of squares. The algorithm now add the set pairs
+    \begin{equation*}
+        \Set{ \{ \PSX \cap \sqrA, \PSY \} }{ \sqrA \in T_\Pair }
+    \end{equation*}
+    to the output \SSPD. Clearly, the resulting set is now
+    $\alpha\beta$-semi separated, as we chopped the smaller part of
+    each pair into $\beta$ smaller portions.
+\end{proof}
+
+
 \subsection{Proof of \lemref{refine:d:w}}
 \apndlab{refine:d:w}
 
@@ -2463,10 +2448,9 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
 \subsection{Proof of \clmref{d:t:connected}}
 \apndlab{d:t:c:proof}
 
-\RestatementOf{\clmlab{d:t:connected}}%
+\RestatementOf{\clmref{d:t:connected}}%
 {%
-   \ClaimDelConnected{}
-}
+   \ClaimDelConnected{} }
 
 \begin{proof}
     We first prove that for any (closed) disk $\disk$ with two points

@@ -910,67 +910,30 @@ well defined for all convex shapes, the operation of creating edges
 between every two points $\pa,\pb\in \PS$ such that there exist a
 homothet of $\CC$ that contains only $\pa$ and $\pb$ and no other
 point of $\PS$, is well defined for a point set in general position,
-and gives us a graph known as the $\CC$-Delaunay graph of $\PS$. We
-denote the $\CC$-Delaunay graph of $\PS$ by $\DG_{\CC}(\PS)$.  Note
-that in these settings, the meaning of general position is that no 3
-points of $\PS$ lie on the boundary of a homothet of $\CC$.
+and results in the \emphi{$\CC$-Delaunay} graph of $\PS$
+\cite{cd-vdbcdf-85}, denoted by $\DG_{\CC}(\PS)$.  Note that in these
+settings, the meaning of general position is that no four points of
+$\PS$ lie on the boundary of a homothet of $\CC$.
 
+Observe that for any convex region $\CC\subseteq \Re^2$ and two points
+$\pa,\pb \in C$, there exists a homothet $\CC'$ of $\CC$ with $\pa$
+and $\pb$ on its boundary, such that $\CC'\subseteq \CC$. Thus, a
+straightforward modification of the proof of \clmref{d:t:connected}
+implies the following.
 
-%\begin{figure}[h]
-%    \centering%
-%    \includegraphics{figs/homothet}%
-%    \caption{$C'$ is a homothet of $C$ of center $o$ and scaling
-%       $\lambda$.}
-%    \figlab{homothet}
-%\end{figure}
-
+\Sariel{Please add relevant citations to this modified Delaunay
+   triangulations, since this is all well known.}
 
 \begin{claim}
     \clmlab{c:t:connected}%
-	%
+    % 
     Given a set of points $\PS \subseteq \Re^2$ in general position,
     and a convex shape $\CC$, let $\DG = \DG_{\CC}(\PS)$ denote the
     $\CC$-Delaunay graph of $\PS$. For any homothet $C$ of $\CC$, we
     have $\restrictY{\DG}{C}$ is connected.
-
 \end{claim}
 
 
-\begin{proof}
-    This proof very closely resembles that of
-    \clmref{d:t:connected}. The second part of both claims is actually
-    identical, and we therefore only prove that for any (closed)
-    convex region $\CC$ with two points $\pa,\pb\in \PS$ on its
-    boundary, there is a path between $\pa$ and $\pb$ in
-    $\restrictY{\DG}{C}$.  The proof is again by induction over the
-    number of points of $\PS$ in the interior of $C$, and is very
-    similar to its counterpart in \clmref{d:t:connected}. The only
-    difference here is that shrinking an arbitrary convex region
-    towards a point on the boundary is not well defined.  Luckily, it
-    is not hard to prove that such a procedure is possible, and after
-    proving this, the rest of the proof is exactly as that of
-    \clmref{d:t:connected}.  So, let $C$ be a homothet of $\CC$ such
-    that $\pa\in\PS\cap\partial C$. We define shrinking $C$ by a
-    factor of $\lambda$ towards $\pa$ as a homothetical translation of
-    $C$ with center $\pa$ and scaling factor $\lambda$. Since $C$ is
-    convex we have that the resulted region $C'$ is contained in $C$,
-    and by the definition of a homothet we have that $C'$ is a
-    homothet of $C$.  This finishes the proof since we can now follow
-    the proof of \clmref{d:t:connected}.
-
-\end{proof}
-
-Notice that for any convex region $\CC\subseteq \Re^2$ and two points
-$\pa,\pb \in C$, there exists a homothet $C$ of $\CC$ with $\pa$ and
-$\pb$ on its boundary, and such that $C\subseteq \CC$. This can be
-seen in much the same way that a similar claim is proven for disks, as
-we can shrink $\CC$ towards the center of the segment
-$\overline{\pa\pb}$ until one of the points lie on the boundary of the
-shape, and then shrink it further toward that point, which now lies on
-the boundary, until the second point is on the boundary as well. Since
-the center of the shrinking process are always contained in the
-shrinking convex shape, we get that at it is always inside the its
-unshrinked version.
 
 
 We will need the following from the paper of Chew and
@@ -990,7 +953,8 @@ bound its size similarly to the local disk spanner.
 \end{lemma}
 
 
-\paragraph{The result}
+We thus get the following.
+
 \begin{theorem}
     \thmlab{l:s:homothets}
 	%
@@ -1016,9 +980,7 @@ bound its size similarly to the local disk spanner.
     spanner, and since the $\CC$-Delaunay graph can be constructed in
     $O(n\log n)$ time, the time complexity bounds hold as well. The
     correctness proof of \thmref{main:1} uses only the connectivity of
-    the Delaunay triangulation, and thus the same proof suffices.
-
-
+    the Delaunay triangulation, and thus the same proof works.
 \end{proof}
 
 
@@ -1051,16 +1013,16 @@ points on its boundary and no points in its interior. Let
 $\DT_\square$ denote the resulting \emphw{$L_\infty$-Delaunay
    triangulation}.
 
-Let $\epsA = \eps/20$.  Instead of constructing a \WSPD, the algorithm
-computes a $1/\epsA$-\SSPD $\WS$, using the algorithm of
-\thmref{S:S:P:D:main}. By using the algorithm of \lemref{refine:d:w},
-and increasing the weight and number of pairs by a factor of
-$\Of(1/\epsA)$, one can assume that every pair
+Let $\epsA = \eps/20$.  The algorithm computes a $1/\epsA$-\SSPD
+$\WS$, using the algorithm of \thmref{S:S:P:D:main}. By using the
+algorithm of \lemref{refine:d:w}, and increasing the weight and number
+of pairs by a factor of $\Of(1/\epsA)$, one can assume that every pair
 $\{ \PSX, \PSY \} \in \WS$ is not only semi-separated, but also that
 there is an associated double wedge of angle $\leq \epsA$ containing
-$\PSX$ and $\PSY$ in opposing wedges.  The algorithm now computes the
-``square'' Delaunay triangulation for each such pair, and adds the
-edges of the triangulation to the resulting graph $\G$.
+$\PSX$ and $\PSY$ in opposing wedges, using the algorithm of
+\lemref{refine:d:w}.  The algorithm now computes the ``square''
+Delaunay triangulation for each such pair, and adds the edges of the
+triangulation to the resulting graph $\G$.
 
 
 

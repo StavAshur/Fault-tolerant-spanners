@@ -31,8 +31,25 @@
 \usepackage[amsmath,thmmarks]{ntheorem}%
 \theoremseparator{.}%
 
+%%%% Number paragraphs
+%\setcounter{secnumdepth}{5}
+
 \usepackage{titlesec}%
 \titlelabel{\thetitle. }%
+
+\titleformat{\paragraph}[runin]
+  {\normalfont\bfseries}
+  {\theparagraph}
+  {1em}
+  {\addperiod}
+
+\newcommand{\addperiod}[1]{#1.}
+  
+%\let\oldparagraph=\paragraph
+%\renewcommand\paragraph[1]{\oldparagraph{#1.}}
+
+%#\let\oldparagraphx=\paragraph
+%#\renewcommand\paragraph*[1]{\oldparagraphx{#1.}}
 
 \usepackage{graphicx}%
 \usepackage{xcolor}%
@@ -187,6 +204,9 @@
 
 \newcommand{\itemlab}[1]{\label{item:#1}}
 \newcommand{\itemref}[1]{\HLinkSuffix{}{item:#1}{}}
+
+\newcommand{\apndlab}[1]{\label{apnd:#1}}
+\newcommand{\apndref}[1]{\HLink{Appendix}{apnd:#1}}
 
 \newcommand{\lemlab}[1]{\label{lemma:#1}}
 \newcommand{\lemref}[1]{\HLink{Lemma}{lemma:#1}}%
@@ -360,7 +380,9 @@
 \newcommand{\cen}{\Mh{c}}%
 \newcommand{\Pair}{\Mh{\Xi}}%
 \newcommand{\GA}{\Mh{H}}%
+\newcommand{\GB}{\Mh{I}}%
 
+\newcommand{\polylog}{\mathop{\mathrm{polylog}}}%
 \newcommand{\XSays}[2]{{ {$\rule[-0.12cm]{0.2in}{0.5cm}$\fbox{\tt #1:}
       } #2 \marginpar{\textcolor{red}{#1}}
       {$\rule[0.1cm]{0.3in}{0.1cm}$\fbox{\tt
@@ -402,6 +424,44 @@
 \newcommand{\xSlabX}[1]{\overleftrightarrow{#1}}
 \newcommand{\ySlabX}[1]{\updownarrow\!{#1}}
 \newcommand{\widthX}[1]{\Mh{\mathsf{wd}}\pth{#1}} \smallskip%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Restating lemmas/theorems...
+%
+% Example
+%---------------------------------------------------------------------
+% \SaveContent{\LemmaNumVerticesDepthBody}{ BLA BLA }
+% 
+% \begin{lemma}[{{\normalfont Proof in \apndref{num:v:depth}}}]
+%       \lemlab{num:vertices:depth}%
+%       \LemmaNumVerticesDepthBody{}
+% \end{lemma}
+%...
+% \bigskip%
+% \RestatementOf{\lemref{num:vertices:depth}}{\LemmaNumVerticesDepthBody}
+%---------------------------------------------------------------------
+
+\newcommand{\SaveContent}[2]{%
+   \expandafter\newcommand{#1}{#2}%
+}
+
+\newcommand{\RestatementOf}[2]{
+   \noindent%
+   \textbf{Restatement of #1.}
+   % 
+   {\em #2{}}%
+}
+
+%%% End
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\HERE}{%
+   {\noindent\hspace{-1cm}\rule{1.2\linewidth}{4cm}}   
+   % \rule{4cm}{4cm}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%BeginIpePreamble

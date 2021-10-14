@@ -5,7 +5,7 @@
 \begin{document}
 
 \title{Fault-Tolerant and Local Spanners Revisited}
-	
+
 \author{%
    Stav Ashur%
    \StavThanks{}%
@@ -14,49 +14,34 @@
    \SarielThanks{Work on this paper was partially supported by a NSF
       AF award CCF-1907400.  }%
 }%
-	
+
 \maketitle
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{abstract}
-    %	For a set of points $\PS\in \Re^d$ let $G(P)$ denote the
-    % complete graph with $\PS$ as its vertex set, whose edges are
-    % weighted by the length of the segment to which they correspond
-    % in $\Re^d$. For a region $F\subseteq \Re^d$, the local graph of
-    % $P$ induced by $F$ is the subgraph of $G(P)$ that contains only
-    % the points and the edges that are contained in $F$
-	
-    Given a set of points $\PS\in \Re^d $, and a family of regions
-    $\FF$, a geometric $\FF$-local $t$-spanner of $\PS$, is a subgraph
-    of $\G_\PS$, the complete Euclidean graph over $P$, that is also a
-    $t$-spanner of every subgraph of $\G_\PS$ that is induced by a
-    region $F\in \FF$, where the subgraph induced by $F$ is the
-    subgraph that contains only the points and the edges of $\G_\PS$
-    that are contained in $F$.
-	
-    %	Local $t$-spanners can also be thought of fault-tolerant
-    % spanners, where the fault regions. or attacks, are from the
-    % family $\overline{\FF}$ containing all the complements of
-    % regions of $\FF$.
-	
-    A weak $\FF$-local spanner of $P$ is a graph that for any
-    $\region\in\FF$, guarantees the existence of a $t$-path only for
-    pairs of points contained in some region
-    $\region'\subset \region$. Different definitions of the subregion
-    $F'$ are possible, and can imply different results.
-	
-    In this paper we present algorithms for the construction of local
-    and weak local spanners of points in $\Re^2$ with respect to
-    several families of convex regions, including an improvement of
-    the known construction for axis parallel squares, and a
-    construction for disks that does not require Steiner points, along
-    side a closely matching lower bound. The last result settles an
-    open problem raised by Abam and Borouny.
+    For a set of points $\PS\in \Re^d$, and a family of regions $\FF$,
+    a geometric local $t$-spanner of $\PS$, is a sparse graph $\G$
+    over $\PS$, that remains a $t$-spanner even when restricted to a
+    region $\region \in \FF$. That is, for any region
+    $\region \in \FF$, the subgraph restricted to $\region$, denoted
+    by $\restrictY{\G}{\region}$, is still a $t$-spanner. Here
+    $\restrictY{\G}{\region}$ is the subgraph of $\G$ induced on
+    $\PS \cap \region$.  A weak $\FF$-local spanner of $\PS$
+    provides the same guarantee for some smaller subregion of
+    $\region$.
+
+    In this paper, we present algorithms for the construction of local
+    of points in $\Re^2$ with respect to several families of convex
+    regions. This includes an improvement of the known construction
+    for axis parallel squares, and a construction for disks that does
+    not require Steiner points, along with a matching lower bound. The
+    last result settles an open problem raised by Abam and Borouny.
 \end{abstract}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -64,66 +49,52 @@
 
 \section{Introduction}
 
+\paragraph{Euclidean graph}
+For a set $\PS$ of points in $\Re^d$, the \emphw{Euclidean graph}
+$\G_\PS = \bigl(\PS, \binom{\PS}{2}\bigr)$ of $\PS$ is an undirected
+graph.  Here, an edge $\pa \pb \in \EG$ is associated with the segment
+$\pa\pb$, and its weight is the (Euclidean) length of the segment.
+
+
+\paragraph{t-spanners}
+Let $\G=(\PS,\EG)$ and $\GB=(\PS,\EG')$ be two graphs over the same
+set of vertices (usually $\GB$ is a subgraph of $\G$). Consider two
+vertices $\pa,\pb \in \PS$, and parameter $t \geq 1$.  A path $\pi$
+between $\pa$ and $\pb$ in $\GB$, is a \emphw{$t$-path}, if the length
+of $\pi$ in $\GB$ is at most $t\,\dGZ{\G}{\pa}{\pb}$, where
+$\dGZ{\G}{\pa}{\pb}$ is the length of the shortest path between $\pa$
+and $\pb$ in $\G$.  The graph $\GB$ is a \emphw{$t$-spanner} of $\G$
+if there is a $t$-path in $\GB$, for any $\pa,\pb\in \PS$.
+
+Thus, for $\PS\subseteq \Re^d$, a graph $\G$ over $\PS$ is a
+\emphw{$t$-spanner} if it is a $t$-spanner of the euclidean graph
+$\G_\PS$.
+
+
+\paragraph{Local spanners}
 Given a set of points $\PS$ in $\Re^d$ and a parameter $t>1$, the
-problem of constructing graph in which shortest paths approximate the
-Euclidean distance between every pair of points within a factor of
-$t$, is a well known and well studied problem in computation
-geometry. Recently, Abam and Borouny \cite{ab-lgs-21} introduced the
-problem of designing such spanners, with the additional requirement
-that subgraphs of the spanner created by ``cropping'' it , i.e. only
-considering points and edges contained in some region taken from a
-pre-defined set $\FF$, maintain the distance approximation
-property. This property can also be thought of as fault-tolerance,
-where the faults, or attacks as they are sometimes called, are
-complements of members of $\FF$.
+problem of constructing \emph{$t$-spanners} for $\PS$ is well studied
+\cite{ns-gsn-07}.  Recently, Abam and Borouny \cite{ab-lgs-21}
+introduced the problem of designing such spanners, that remains
+spanner when cropped to regions from a prespecified set
+$\FF$. Formally, such a graph $\G = (\PS,\EG)$ has weights on the
+edges that are their euclidean length. Informally, cropping (or
+restricting) $\G$ to a region $\region \in \FF$, is the subgraph
+induced on $\PS \cap \region$. We require that this graph
+$\GB = \restrictY{\G}{\region}$ is a $t$-spanner for all
+$\pa,\pb \in \PS \cap \region$ -- that is,
+$\dGZ{\GB}{\pa}{\pb} \leq t \dY{\pa}{\pb}$, where
+$\dGZ{\GB}{\pa}{\pb}$ denotes the shortest path length in $\GB$
+between $\pa$ and $\pb$.  This property can be interpreted as
+fault-tolerance, where the faults (or attacks) are complements of the
+regions of $\FF$.
 
 
-\paragraph{Euclidean graph.}
-For a set $\PS$ of points in $\Re^d$, a \emphw{Euclidean graph}
-$\G_\PS = (\PS, \EG)$ is an undirected graph with $\PS$ as the set of
-vertices. An edge $\pa \pb \in \EG$ is naturally associated with the
-segment $\overline{\pa\pb}$, and weight of the edge is the (Euclidean)
-length of the segment.
 
 
-\paragraph{t-spanners.}
-Let $\G=(\PS,\EG)$ and $\G'=(\PS,\EG')$ be two graphs over the same
-set of vertices. Consider a pair of vertices $\pa,\pb \in \PS$. For a
-parameter $t \geq 1$, a path between $\pa$ and $\pb$ in $\G'$ is a
-\emphw{$t$-path} w.r.t. $\G$, if the length of the path is at most
-$t \cdot \dGY{\pa}{\pb}$, where $\dGY{\pa}{\pb}$ is the length of the
-shortest path between $\pa,\pb\in \PS$ in the graph $\G$.  The graph
-$\G'$ is a \emphw{$t$-spanner} of $\G$ if there is a $t$-path between
-any pair of points $\pa,\pb\in \PS$.  For $\PS\subseteq \Re^d$ we say
-that a graph $\G$ is a $t$-spanner of $\PS$ if it is a $t$-spanner of
-$\G_\PS$. Throughout the paper, $n$ denotes the cardinality of the
-point set $\PS$, unless stated otherwise.
 
 
-\paragraph{Residual graphs.}
-
-Let $\FF$ be a family of regions in the plane. For a fault region
-$\region \in \FF$ and a geometric graph $\G$ on a point set $\PS$, let
-$\G \gminus \region$ be the residual graph after removing from it all
-the points of $\PS$ in $\region$. and all the edges that intersect
-$\region$.  Formally, let
-\begin{equation*}
-    \G \gminus \region%
-    =%
-    \bigl( \PS \setminus \region, \Set{ uv \in \EG }{ uv \cap
-       \interiorX{\region} = \emptyset} \bigr),
-\end{equation*}
-where $\interiorX{\region}$ denotes the interior of
-$\region$. Similarly, let
-\begin{equation*}
-    \restrictY{\G}{\region}%
-    =%
-    \bigl( \PS \cap {\region},
-    \Set{uv \in \EG}{ uv \subseteq {\region} } \bigr).
-\end{equation*}
-be the residual graph after restricting $\G$ to the region $\region$.
-
-\paragraph{Fault-tolerant and local spanners.}
+\paragraph{Fault-tolerant and local spanners}
 
 An \emphw{ $\FF$-fault-tolerant spanner} for $\PS\subseteq \Re^d$, is
 a graph $\G=(\PS, \EG)$, such that for any region $\region$ (i.e., the
@@ -143,7 +114,7 @@ showed how to construct such spanners for disks, if one is allowed to
 add Steiner points. Abam and Borouny left the question of how to
 construct local spanners for disks as an open problem.
 
-\subsection*{Relted work}
+\subsection*{Related work}
 
 Geometric spanners have been widely studied, see
 \cite{ns-gsn-07}. Fault-tolerant spanners were first studied with
@@ -162,12 +133,12 @@ spanners, where the faults were not arbitrary sets of vertices and/or
 edges, but instead all of the points and geometric edges (segments
 between points) intersecting some region. They showed several results,
 including a construction of convex regions fault tolerant $t$-spanners
-of size $O(n\log n)$. Later Abam and Borouny \cite{ab-lgs-21}
-introduced the concept of local spanners, and showed constructions of
-local $t$-spanners of size $O(n\cdot polylog(n))$ for axis-parallel
-squares and vertical slabs, and also showed that constructions using
-$O(n)$ Steiner points for the same cases as well as for the case of
-disk local spanners.
+of size $\Oeps(n\log n)$. More recently, Abam and Borouny
+\cite{ab-lgs-21} introduced the concept of local spanners, and showed
+constructions of local $t$-spanners of size $\Oeps(n \polylog n)$ for
+axis-parallel squares and vertical slabs, and also showed that
+constructions using $O(n)$ Steiner points for the same cases as well
+as for the case of disk local spanners.
 
 \subsection*{Our results}
 
@@ -184,7 +155,7 @@ spanner is of size $\Of\pth{ \eps^{-2} n\log \spread }$, where
 $\spread$ is the spread of the point set. We also provide a lower
 bound showing that this logarithmic dependency on $\spread$ cannot be
 avoided.
- 
+
 In \secref{homothets} we extend this construction to scaled and
 translated copies (\emph{homothets}) of a convex shape $\CC$.
 
@@ -204,7 +175,7 @@ smallest angle in $\triangle$. We also show that if we allow $\alpha$
 to be arbitrarily small there exists a set of points that requires
 $O(n^2)$ edges for some triangles.
 
-\paragraph{}
+\paragraph{FILL IN}
 For the following families of regions, it is possible to show that
 even after constraining parameter such as fatness/aspect ratio, a
 local spanner with respect to the set of regions might require a
@@ -239,10 +210,10 @@ comparisons to the results of this paper.
 
 \begin{figure}
     \centering
-    
+
     \begin{tabular}{|c|c|c||c|c|}
-    	
-    	
+
+
       \hline
       % ------------------------------------------------------------
       Region
@@ -310,10 +281,10 @@ comparisons to the results of this paper.
       &
         \thmref{main:1}%
       \\
-		
+
       \cline{4-5}
       % ---------------------------------------------------------
-		
+
       &
       &
       &
@@ -366,7 +337,7 @@ comparisons to the results of this paper.
       &
       &
       &
-        $\Of\bigl((\eps^{-2} + \delta^{-2}) n \log^2 n \bigr)\Bigr.$ 
+        $\Of\bigl((\eps^{-2} + \delta^{-2}) n \log^2 n \bigr)\Bigr.$
       &
         \thmref{a:l:s:rectangles}%
       \\
@@ -382,12 +353,37 @@ comparisons to the results of this paper.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	
+
+
 \section{Local spanner for disks}
-\seclab{disks} Our purpose here is to build a local spanner for disks.
+\seclab{disks}
+
+Our purpose here is to build a local spanner for disks.
 
 \subsection{Preliminaries}
+
+
+\paragraph{Residual graphs}
+
+Let $\FF$ be a family of regions in the plane. For a fault region
+$\region \in \FF$ and a geometric graph $\G$ on a point set $\PS$, let
+$\G \gminus \region$ be the residual graph after removing from it all
+the points of $\PS$ in $\region$. Similarly, let
+$\restrictY{\G}{\region}$ denote the graph restricted to $\region$.
+Formally, let
+\begin{equation*}
+    \G \gminus \region%
+    =%
+    \bigl( \PS \setminus \region, \Set{ uv \in \EG }{ uv \cap
+       \interiorX{\region} = \emptyset} \bigr)
+    \qquad\text{and}\qquad%
+    \restrictY{\G}{\region}%
+    =%
+    \bigl( \PS \cap {\region},
+    \Set{uv \in \EG}{ uv \subseteq {\region} } \bigr).
+\end{equation*}
+where $\interiorX{\region}$ denotes the interior of $\region$.
+
 
 % -----------------------------------------------------------------------
 \subsubsection{Well separated pair decomposition}
@@ -418,12 +414,7 @@ $\PSX$ and $\PSY$.
         \item
         $\bigcup_{i=1}^s \PSX_i \otimes \PSY_i = \PS \otimes \PS$.
     \end{enumerate*}
-\end{defn}
-
-\begin{defn}
-    Given a pair decomposition
-    $\WS = \brc{\bigl. \brc{\PSX_1,\PSY_1},\ldots,\brc{\PSX_s,
-          \PSY_s}}$ of a point set $\PS$, its \emphi{weight} is
+    Its \emphi{weight} is
     $\WeightX{\WS} = \sum_{i=1}^s \pth{ \cardin{\PSX_i } +
        \cardin{\PSY_i}}$.
 \end{defn}
@@ -446,6 +437,7 @@ near linear.
 
 \begin{defn}
     \deflab{well:separated}%
+    \deflab{WSPD}%
     %
     The pair of sets $\PSX, \PSY \subseteq \Re^d$ is
     \emphi{$(1/\eps)$-well-separated} if
@@ -453,18 +445,12 @@ near linear.
         \max \pth{ \diameterX{\PSX}, \diameterX{\PSY} } \leq
         \eps \cdot \dsY{\PSX}{\PSY},
     \end{equation*}
-    
     where
     $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
-    \dY{\pa}{\pb}$.
-\end{defn}
-
-\begin{defn}
-    \deflab{WSPD}%
-    %
-    For a point set $\PS$, a \emphOnly{well-separated pair
-       decomposition} (\emphOnly{\WSPD{}}) of $\PS$ with parameter
-    $1/\eps$ is a pair decomposition of $\PS$ with a set of pairs
+    \dY{\pa}{\pb}$.  For a point set $\PS$, a \emphOnly{well-separated
+       pair decomposition} (\emphOnly{\WSPD{}}) of $\PS$ with
+    parameter $1/\eps$ is a pair decomposition of $\PS$ with a set of
+    pairs
     \begin{math}
         \WS = \brc{\bigl.
            \brc{\PSB_1,\PSC_1},\ldots,\brc{\PSB_s,\PSC_s}},
@@ -480,24 +466,23 @@ near linear.
     Let $\PS$ be a set of $n$ points in $\Re^d$, with spread
     $\spread = \spreadX{\PS}$, and let $\eps > 0$ be a
     parameter. Then, one can compute a $(1/\eps)$-\WSPD $\WS$ for
-    $\PS$ of total weight $\Of(n \eps^{-d} \log
-    \spread)$. Furthermore, any point of $\PS$ participates in at most
-    $\Of\pth{ \eps^{-d} \log \spread}$ pairs. Namely,
-    $\WeightX{\WS} = O( \eps^{-d} n \log \spread )$.
+    $\PS$ of total weight
+    $\WeightX{\WS} = \Of(n \eps^{-d} \log \spread)$. Furthermore, any
+    point of $\PS$ participates in at most
+    $\Of\pth{ \eps^{-d} \log \spread}$ pairs.
 \end{lemma}
 
 % ------------------------------------------------------------------------
 \subsubsection{Semi separated pair decomposition}
 
 \begin{defn}%
-    Two sets of points $\PSB$ and $\PSC$ are
+    Two sets of points $\PSX$ and $\PSY$ are
     \emphic{$(1/\eps)$-semi-separated}%
     {separated!semi-separated@$(1+\eps)$-semi-separated} if
     \begin{equation*}
-        \min \pth{ \diameterX{\PSB}, \diameterX{\PSC} } \leq \eps \cdot
-        \dsY{\PSB}{\PSC},%        
+        \min \pth{ \diameterX{\PSX}, \diameterX{\PSY} } \leq \eps \cdot
+        \dsY{\PSX}{\PSY},%
     \end{equation*}
-
     For a point set $\PS$, a \emphOnly{semi-separated pair
        decomposition} (\emphOnly{\SSPD{}}) of $\PS$ with parameter
     $1/\eps$, denoted $(1/\eps)$-\SSPD, is a pair decomposition of
@@ -545,166 +530,50 @@ near linear.
     each pair into $\beta$ smaller portions.
 \end{proof}
 
-\begin{figure}[ht]
-    \centerline{\includegraphics{figs/partition}}
-    \caption{An illustration of refining the pairs in a \SSPD into
-       pairs in opposite parts of an $\eps$-double-wedge. $\PSX$ is
-       contained in the green square $\square$, while $\PSY$ is
-       contained in the red square, and the white gap between them is
-       a result of the separation property. The set of cones with the
-       apex at the center of $\square$ give us the desired partition
-       as demonstrated by the purple double-wedge. }
-    \figlab{partition}
-\end{figure}
+\SaveContent{\LemmaRefineDWBody}%
+{%
+   Given aמ $\eps^{-1}$-\SSPD $\WS$ of $n$ points in the plane, one
+   can refine it, into aמ $\eps^{-1}$-\SSPD $\WS'$, such that each
+   pair $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in a
+   $\eps$-double-wedge $\DW_\Pair$, such that $\PSX$ and $\PSY$ are
+   contained in the two different faces of the double wedge
+   $\DW_\Pair$. We have that $|\WS'| = O(|\WS|/\eps)$ and
+   $\WeightX{\WS'} = O(\WeightX{\WS'}/\eps)$. The construction time is
+   proportional to the weight of $\WS'$.  }
 
-
-\begin{lemma}
+The proof of the following lemma is straightforward, and we delegate
+the proof to the appendix.
+\begin{lemma}[Proof in \apndref{refine:d:w}]
     \lemlab{refine:d:w}%
     %
-    Given aמ $\eps^{-1}$-\SSPD $\WS$ of $n$ points in the plane, one
-    can refine it, into aמ $\eps^{-1}$-\SSPD $\WS'$, such that each
-    pair $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in a
-    $\eps$-double-wedge $\DW_\Pair$, such that $\PSX$ and $\PSY$ are
-    contained in the two different faces of the double wedge
-    $\DW_\Pair$. We have that $|\WS'| = O(|\WS|/\eps)$ and
-    $\WeightX{\WS'} = O(\WeightX{\WS'}/\eps)$. The construction time
-    is proportional to the weight of $\WS'$.
+    \LemmaRefineDWBody{}
 \end{lemma}
-\begin{proof}
-    By using \lemref{chop:easy}, we can assume that $\WS$ is (say)
-    $(10/\eps)$-separated.  Now, the algorithm scans the pairs of
-    $\WS$. For each pair $\Pair = \{ \PSX, \PSY \} \in \WS$, assume
-    that $\diameterX{\PSX} < \diameterX{\PSY}$. Let $\square$ be the
-    smallest axis-parallel square containing $\PSX$, centered at point
-    $o$.  Partition the plane around $o$, by drawing around it
-    $\Of(1/\eps)$ lines with the angle between any two consecutive
-    lines being at most (say) $\eps/4$, see \figref{partition}. This
-    partitions the plane into a set of cones $\ConeSet$. For a cone
-    $C \in \ConeSet$, we show that there exists an $\eps$-double-wedge
-    that contains $\PSX$ in one side, and $\PSY \cap C$ in the other.
-    
-    To see that, take the double-wedge formed by the cross tangents
-    between $\CHX{\PSX}$ and $\CHX{\PSY \cap C}$, where $\CHX{\PSX}$
-    denotes the convex-hull of $\PSX$. Assume w.l.o.g that $\square$
-    has side length 1, and let $c$ be a cone of angle $\eps / 4$ with
-    apex $o$, whose angular bisector is a horizontal ray in the
-    positive direction of the $x$ axis. See figure
-    \figref{double-wedge} for an illustration.
-    
-    We would like to find a vertical segment $s$ such that all points
-    of $Y$ lie to its right, with one endpoint on the upper line of
-    $c$, and the other on the lower line of $c$. Using the segments'
-    height and distance from the right side of $\square$ we will be
-    able to get a bound on the angle of the cross tangents. We first
-    find a segment $s$ with all points of $Y$ to its right. A trivial
-    bound on that distance is given by the segment from, say, the
-    lower left corner of $\square$, denoted $p$, of length $10/\eps$
-    with its right endpoint on the upper line of $c$, denote this
-    point by $q$. This is due to the $10/\eps$ separation property of
-    the SSPD. We know that this segment creates an angle of less than
-    $\pi/4$ with the $x$-axis, since $o$ is the center of $\square$,
-    and lies on the ray with apex $p$ that creates a $\pi/4$ angle
-    with the $x$-axis. We therefore get that the $x$-coordinate
-    difference between $\square$ and $q$ is at most
-    $10/\eps\cdot \cos\frac{\pi}{4}-1\leq 7/\eps-1\leq 6/\eps$. So let
-    $s'$ be a vertical segment between the upper and lower rays of
-    $c$, with $x$-coordinate distance of $6/\eps-\frac{1}{2}$ from
-    $\square$ (in order to make calculations easier). We get that $s'$
-    is of length $2\cdot \frac{6}{\eps}\tan \frac{\eps}{8}$. Finally,
-    we take $s$ to be a vertical segment of length
-    $\frac{12}{\eps}\tan \frac{\eps}{8}$, with its center on the
-    $x$-axis at a distance of $5/\eps+\frac{1}{2}$ away from $o$. The
-    angle of the $x$-axis and the segment between the lower end of the
-    right side of $\square$ and the upper end of $s$ is now given by:
-    
-    \begin{equation*}
-    	\arctan\left(\frac{\frac{6}{\eps}\tan\frac{\eps}{8}+\frac{1}{2}}{\frac{5}{\eps}}\right)%
-    	=%
-    	\arctan \left( \frac{6}{5}\tan\frac{\eps}{8}+\frac{\eps}{10} \right)%
-    	=%
-    	\Theta(\eps)%
-    \end{equation*}
 
- 
-\end{proof}
-
-\begin{figure}[h]
-    \phantom{}\hfill%
-    \includegraphics[page=2, width=0.48\linewidth]{figs/double_wedge}%
-    \hfill%
-    \includegraphics[page=3, width=0.48\linewidth]{figs/double_wedge}%
-    \hfill%
-    \phantom{}%
-    \caption{An illustration of the proof for \lemref{refine:d:w}}
-    \figlab{double-wedge}
-\end{figure}
 
 
 % -----------------------------------------------------------------------
 \subsubsection{Delaunay triangulation}
 
 We need the following well known property of Delaunay triangulation,
-which would play a center role in our construction.
+which would play a center role in our construction. For the sake of
+completeness, we provide a proof in the appendix.
 
-\begin{claim}
-    \clmlab{d:t:connected}%
-    %
+
+\SaveContent{\ClaimDelConnected}%
+{%
     For a set of points $\PS \subseteq \Re^2$ in general position, let
     $\DT = \DTX{\PS}$ denote its Delaunay triangulation.  Then, for
     any closed disk $\disk$, we have $\restrictY{\DTX{\PS}}{\disk}$ is
-    connected.
+    connected.%
+}   
+
+\medskip%
+\begin{claim}[Proof in \apndref{d:t:c:proof}]
+    \clmlab{d:t:connected}%
+    %
+    \ClaimDelConnected{}
 \end{claim}
 
-
-\begin{proof}
-    We first prove that for any (closed) disk $\disk$ with two points
-    $\pa,\pb\in \PS$ on its boundary, there is a path between $\pa$
-    and $\pb$ in $\restrictY{\DT}{\disk}$.  The proof is by induction
-    over the number $m$ of points of $\PS$ in the interior of $\disk$:
-    \begin{compactitem}
-        \item $m=0$: The disk $\disk$ contains no points of $\PS$ in
-        its interior, and thus $\pa \pb$ is an edge of the Delaunay
-        triangulation, as $\disk$ testifies.
-
-        \begin{figure}[h]
-            \phantom{}\hfill%
-            \includegraphics[page=1]{figs/shrink}%
-            \hfill%
-            \includegraphics[page=2]{figs/shrink}%
-            \hfill%
-            \includegraphics[page=3]{figs/shrink}%
-            \hfill%
-            \phantom{}%
-            \caption{}
-            \figlab{shrink}
-        \end{figure}
-        \item $m >0$: Let $\pc\in \PS$ be a point in the interior of
-        $\disk$. We move the center $\cen$ of $\disk$ in the direction
-        of $\pa$, shrinking $\disk$ in the process, so that the radius
-        the disk is $\dY{\cen}{\pa}$, until we get a disk
-        $\disk' \subseteq \disk$ such that $\pc$ is on the boundary of
-        $\disk'$, see \figref{shrink}. Observe that $\pa$ and $\pc$
-        are on the boundary of the new disk, and
-        $|\interiorX{\disk'} \cap \PS| < |\interiorX{\disk} \cap
-        \PS|$. Thus, by induction, there is a path $\gamma'$ between
-        $\pa$ and $\pc$ in
-        $\restrictY{\DT}{\disk'} \subseteq
-        \restrictY{\DT}{\disk}$. Similarly, there must be a path
-        $\gamma''$ between $\pc$ and $\pb$, and concatenating the two
-        paths results in a path between $\pa$ and $\pb$ in
-        $\restrictY{\DT}{\disk}$.
-    \end{compactitem}
-    \medskip%
-    \noindent
-    Back to the original claim.  For any two points
-    $\pa,\pb \in \disk \cap \PS$ one can get a disk
-    $\disk' \subseteq \disk$ that contains $\pa$ and $\pb$ on its
-    boundary.  Indeed, shrink the radius of $\disk$ till, say, $\pa$
-    is on the boundary, and then move the center of the disk towards
-    $\pa$ while shrinking the size of the disk to maintain $\pa$ on
-    the boundary, until $\pb$ is also on the boundary of the shrunken
-    disk.
-\end{proof}
 
 
 
@@ -727,7 +596,7 @@ to the computed graph $\G$.
 
 \subsubsection{Analysis}
 
-\paragraph{Size.}
+\paragraph{Size}
 
 For each pair $\Pair = \{\PSX, \PSY\}$ in the \WSPD, its Delaunay
 triangulation contains at most $\Of( |\PSX| + |\PSY|)$ edges. As such,
@@ -742,7 +611,7 @@ the number of edges in the resulting graph is bounded by
 by \lemref{s:s:p:d:spread}.
 
 
-\paragraph{Construction time.}
+\paragraph{Construction time}
 The construction time is bounded by
 \begin{equation*}
     \sum_{\{\PSX, \PSY\} \in \WS} O\bigl( (|\PSX| + |\PSY|) \log
@@ -750,10 +619,10 @@ The construction time is bounded by
     =%
     O\pth{ \WeightX{\WS} \log n }%
     =%
-    O\pth{ \frac{n\log \spread \log n}{{\epsA}^{2}}},    
+    O\pth{ \frac{n\log \spread \log n}{{\epsA}^{2}}},
 \end{equation*}
 
-\paragraph{Local spanner property.}
+\paragraph{Local spanner property}
 
 \begin{lemma}
     Let $\G$ be the graph constructed above for the point set
@@ -793,7 +662,7 @@ The construction time is bounded by
         \leq%
         \epsA \cdot \dsY{\PSX}{\PSY}%
         \leq%
-        \epsA \ell, 
+        \epsA \ell,
     \end{equation*}
     where $\ell = \dY{\px}{\py}$. In particular,
     $\dY{\px'}{\px} \leq \epsA \ell$ and
@@ -816,17 +685,17 @@ The construction time is bounded by
         +(1+2\epsA)\ell
         + (1+\eps)\epsA \ell
         \leq%
-        \pth{ 2\epsA +1+2\epsA + 2\epsA } \ell        
+        \pth{ 2\epsA +1+2\epsA + 2\epsA } \ell
       \\&%
       =%
-      \pth{ 1+ 6\epsA  } \ell        
+      \pth{ 1+ 6\epsA  } \ell
       \leq%
       \pth{ 1+ \eps  } \dY{\px}{\py},
     \end{align*}
     if $\epsA \leq \eps/6$.
 \end{proof}
 
-\paragraph{The result.}
+\paragraph{The result}
 
 \begin{theorem}
     \thmlab{main:1}%
@@ -844,34 +713,39 @@ The construction time is bounded by
 % ------------------------------------------------------------------------
 \subsubsection{Applications and comments}
 
-
+The following definition defines a ``visibility'' graph restricted to
+a region $R$, where two points are visible if there is a witness disk
+contained in $R$ having both points on its boundary.
 \begin{defn}
     Given a region $R$ in the plane and a point set $\PS$, consider
     two points $\pa, \pb \in \PS$. The edge $\pa \pb$ is \emphw{safe}
     in $R$, if there is a disk $\disk$ such that
-    $\pa,\pb \in \disk \subseteq R$. Let $\GY{\PS}{R}$ be the graph
-    formed by all the safe edges in $\PS$ for $R$. Note, that this
-    graph might have a quadratic number of edges in the worst case.
+    $\pa,\pb \in \disk \subseteq R$. The \emphi{safe graph} for $\PS$
+    and $R$, denoted by $\GY{\PS}{R}$, is the graph formed by all the
+    safe edges in $\PS$ for $R$. Note, that this graph might have a
+    quadratic number of edges in the worst case.
 \end{defn}
 
-Observe that $\GY{\Re^2}{\PS}$ is a clique.
+Observe that $\GY{\PS}{\Re^2}$ is a clique. Surprisingly, the spanner
+graph when restricted to region $R$, is a spanner for 
 
 \begin{corollary}
     Let $\PS$ be a set of $n$ points in the plane, and let
     $\eps \in (0,1)$ be a parameter, and let $\G$ be a local
-    $(1+\eps)$-spanner of $\PS$ for disks. Then, for a region $R$ in
-    the plane, if we denote the graph $\GA = \GY{\PS}{R}$, we have
+    $(1+\eps)$-spanner of $\PS$ for disks. Consider a region $R$ in
+    the plane, and the associated graph $\GA = \GY{\PS}{R}$, we have
     that $\restrictY{\G}{R}$ is a $(1+\eps)$-spanner for
-    $\restrictY{\GA}{R}$. Formally, for any two points
-    $\pa, \pb \in \PS \cap R$, we have that
-    $\dGZ{\GA}{\pa}{\pb} \leq (1+\eps)\dGZ{\G}{\pa}{\pb}$.
+    $\GA$. Formally, for any two points $\pa, \pb \in \PS \cap R$, we
+    have that
+    $\dGZ{\GA}{\pa}{\pb} \leq
+    (1+\eps)\dGZ{\restrictY{\G}{R}}{\pa}{\pb}$.
 
     In particular, for any convex region $C$, the graph $\G \gminus C$
-    is a $(1+\eps)$-spanner for $\GY{\Re^2}{\PS} \gminus C$.
+    is a $(1+\eps)$-spanner for $\GY{\PS}{\Re^2} \gminus C$.
 \end{corollary}
 \begin{proof}
     Consider the shortest path $\pi = u_1 u_2 \ldots u_k$ between
-    $\pa$ and $\pb$ in $\dGZ{\GA}{\pa}{\pb}$. Every edge
+    $\pa$ and $\pb$ realizing $\dGZ{\GA}{\pa}{\pb}$. Every edge
     $e_i = u_i u_{i+1}$ has a disk $\disk_i$ such that
     $u_i, u_{i+1} \in \disk_i \subseteq R$. As such, there is a
     $(1+\eps)$-path between $u_i$ and $u_{i+1}$ in
@@ -885,11 +759,22 @@ Observe that $\GY{\Re^2}{\PS}$ is a clique.
     verbatim.
 \end{proof}
 
-\paragraph{But why not \SSPD?}
+%\paragraph{But why not \SSPD?}
+
+
+% ~\newpage ~\newpage ~\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{A lower bound for local spanner for disks}
+
 
 The result of \thmref{main:1} is somewhat disappointing as it depends
-on the spread of the point set (logarithmically, but still). A natural
-way is to try and emulate the construction of Abam \etal
+on the spread of the point set (logarithmically, but still).
+We next show a lower bound proving that this dependency is
+unavoidable. 
+
+\paragraph{Some intuition}
+A natural way is to try and emulate the construction of Abam \etal
 \cite{abfg-rftgs-09} and use a \SSPD instead of a \WSPD. The total
 weight of the \SSPD is near linear (with no dependency on the
 spread). Furthermore, after some post processing, one can assume every
@@ -912,12 +797,6 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
        points are not well separated.}
     \figlab{bad}
 \end{figure}
-
-
-% ~\newpage ~\newpage ~\newpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{A lower bound for local spanner for disks}
 
 \begin{figure}[h]
     \centering%
@@ -944,7 +823,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     and to the right of $\pa$, let $\diskVY{\pa}{\pb}$ be the disk
     whose boundary passes through $\pa$ and $\pb$, and its center has
     the same $x$-coordinate as $\pa$.
-    
+
     In the $j$\th iteration, for $j=2,\ldots, M-1$, Let
     $x_j = n2^{M-j+1} = x(\pb_{j-1})/2$, and let $y_j < 0$ be the
     maximum $y$-coordinate of a point that lies on the intersection of
@@ -955,7 +834,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
         D_j = \Set{ \diskVY{\pa_i}{\pb_{j-1}} }{i=1,\ldots, n},
     \end{equation*}
     see \figref{flower}.
-    
+
     Clearly, the point $\pb_j$ lies outside all the disks of
     $D_1 \cup \ldots \cup D_j$. The construction now continues to the
     next value of $j$. Let
@@ -1012,7 +891,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1021,131 +900,39 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 \subsection{Homothets of a convex region}
 \seclab{homothets}
 
-Using arguments similar to those used for disk local spanners, we now
-extend the results for the case where $\FF$ is the set of all scaled
-and translated copies of a convex shape $\CC$. This family of regions
-is also known as homothets of $\CC$. Formally, the homothet of the
-shape $\CC$ with center $o$ and scaling $\lambda$ is the set
-$\{o + \lambda o \pa : \pa \in \CC\}$. See \figref{homothet}. While
-the Delaunay triangulation is not well defined for all convex shapes,
-the operation of creating edges between every two points
-$\pa,\pb\in \PS$ such that there exist a homothet of $\CC$ that
-contains only $\pa$ and $\pb$ and no other point of $\PS$, is well
-defined for a point set in general position, and gives us a graph
-known as the $\CC$-Delaunay graph of $\PS$. We denote the
-$\CC$-Delaunay graph of $\PS$ by $\DG_{\CC}(\PS)$.  Note that in these
-settings, the meaning of general position is that no 3 points of $\PS$
-lie on the boundary of a homothet of $\CC$.
+\HERE
 
+The \emphi{homothet} of a convex shape $\CC$ is a scaled and
+translated copy of $\CC$.  While the Delaunay triangulation is not
+well defined for all convex shapes, the operation of creating edges
+between every two points $\pa,\pb\in \PS$ such that there exist a
+homothet of $\CC$ that contains only $\pa$ and $\pb$ and no other
+point of $\PS$, is well defined for a point set in general position,
+and results in the \emphi{$\CC$-Delaunay} graph of $\PS$
+\cite{cd-vdbcdf-85}, denoted by $\DG_{\CC}(\PS)$.  Note that in these
+settings, the meaning of general position is that no four points of
+$\PS$ lie on the boundary of a homothet of $\CC$.
 
-\begin{figure}[h]
-    \centering%
-    \includegraphics{figs/homothet}%
-    \caption{$C'$ is a homothet of $C$ of center $o$ and scaling
-       $\lambda$.}
-    \figlab{homothet}
-\end{figure}
+Observe that for any convex region $\CC\subseteq \Re^2$ and two points
+$\pa,\pb \in C$, there exists a homothet $\CC'$ of $\CC$ with $\pa$
+and $\pb$ on its boundary, such that $\CC'\subseteq \CC$. Thus, a
+straightforward modification of the proof of \clmref{d:t:connected}
+implies the following.
 
+\Sariel{Please add relevant citations to this modified Delaunay
+   triangulations, since this is all well known.}
 
 \begin{claim}
     \clmlab{c:t:connected}%
-	%
+    % 
     Given a set of points $\PS \subseteq \Re^2$ in general position,
     and a convex shape $\CC$, let $\DG = \DG_{\CC}(\PS)$ denote the
     $\CC$-Delaunay graph of $\PS$. For any homothet $C$ of $\CC$, we
     have $\restrictY{\DG}{C}$ is connected.
-
 \end{claim}
 
 
-\begin{proof}
-    This proof very closely resembles that of
-    \clmref{d:t:connected}. The second part of both claims is actually
-    identical, and we therefore only prove that for any (closed)
-    convex region $\CC$ with two points $\pa,\pb\in \PS$ on its
-    boundary, there is a path between $\pa$ and $\pb$ in
-    $\restrictY{\DG}{C}$.  The proof is again by induction over the
-    number of points of $\PS$ in the interior of $C$, and is very
-    similar to its counterpart in \clmref{d:t:connected}. The only
-    difference here is that shrinking an arbitrary convex region
-    towards a point on the boundary is not well defined.  Luckily, it
-    is not hard to prove that such a procedure is possible, and after
-    proving this, the rest of the proof is exactly as that of
-    \clmref{d:t:connected}.  So, let $C$ be a homothet of $\CC$ such
-    that $\pa\in\PS\cap\partial C$. We define shrinking $C$ by a
-    factor of $\lambda$ towards $\pa$ as a homothetical translation of
-    $C$ with center $\pa$ and scaling factor $\lambda$. Since $C$ is
-    convex we have that the resulted region $C'$ is contained in $C$,
-    and by the definition of a homothet we have that $C'$ is a
-    homothet of $C$.  This finishes the proof since we can now follow
-    the proof of \clmref{d:t:connected}.
 
-\end{proof}
-
-Notice that for any convex region $\CC\subseteq \Re^2$ and two points
-$\pa,\pb \in C$, there exists a homothet $C$ of $\CC$ with $\pa$ and
-$\pb$ on its boundary, and such that $C\subseteq \CC$. This can be
-seen in much the same way that a similar claim is proven for disks, as
-we can shrink $\CC$ towards the center of the segment
-$\overline{\pa\pb}$ until one of the points lie on the boundary of the
-shape, and then shrink it further toward that point, which now lies on
-the boundary, until the second point is on the boundary as well. Since
-the center of the shrinking process are always contained in the
-shrinking convex shape, we get that at it is always inside the its
-unshrinked version.
-
-% \begin{claim}
-%     \clmlab{c:t:planar}%
-%	%
-%     Given a set of points $\PS \subseteq \Re^2$ in general position,
-%     and a convex shape $\CC$. $\DG_{\CC}(\PS)$, the $\CC$-Delaunay
-%     graph of $\PS$, is planar.
-%	
-% \end{claim}
-%
-%
-%\begin{proof}
-%    Let $e=\overline{\pa\pb}, e'=\overline{\pa'\pb'}$ be two edges of
-%    $\DG_{\CC}(\PS)$, and assume for a contradiction that $e$
-%    intersects $e'$. W.l.o.g, we assume that $e$ is horizontal,
-%    $\pa'$ is above the line $l$ containing $e$, and $\pb'$ is below
-%    it.
-%	
-%    Let $C$ be a homothet of $\CC$ containing $\pa$ and $\pb$ on its
-%    boundary, and that contains no other point of $\PS$. Such a
-%    homothet exists since $\CC$ is convex, and $e\in \DG_{\CC}(\PS)$.
-%    Let $\phi : [0,1] \longrightarrow C$ be a parameterization of $C$
-%    such that $\phi(x_\pa)=\pa$, and $\phi(x_\pb)=\pb$. Similarly,
-%    let $C'$ be a homothet of $\CC$ containing $\pa'$ and $\pb'$ on
-%    its boundary, and that contains no other point of $\PS$ and let
-%    $\psi(x):= c + \alpha x$ be the translation and scaling such that
-%    $\psi(C) = C'$.
-%	
-%    We denote the segment
-%    $\overline{\psi(\phi(x_\pb))\psi(\phi'(x_\pb))}$ by $s$. This is
-%    a segment contained in $C'$ that corresponds to $e$ in $C$,
-%    meaning that it is horizontal, and has both endpoints on the
-%    boundary of $C'$. W.l.o.g, we assume that $s$ lies above $l$. The
-%    convex hull of $s\cup \pb$ is triangle $\Delta'$ that is
-%    contained in $C'$. We claim that $\psi^{-1}(\Delta')=\Delta$ is
-%    contained in $C$, and contains $\pb$, thus contradicting the
-%    choice of $e$. First, $\Delta\subseteq C$ by the definition of
-%    $\psi$. We now notice that the two non-horizontal edges of
-%    $\Delta'$ intersect $e$, since otherwise we would have that
-%    either $\pa$ or $\pb$ are contained in $C'$, contradicting the
-%    choice of $e'$. Now, since $\Delta \approx \Delta'$ we have that
-%    the part of $\Delta'$ below $l$ is contained in $\Delta$, and we
-%    are thus done. See \figref{planar_DG} for an illustration.
-%	
-%\end{proof}
-%
-%\begin{figure}[h]
-%    \centering%
-%    \includegraphics[]{figs/planar_DG}%
-%    \caption{An illustration of the proof of the planarity of the
-%    $\CC$-Delauny graph }
-%    \figlab{planar_DG}
-%\end{figure}
 
 We will need the following from the paper of Chew and
 Drysdale~\cite{cd-vdbcdf-85} in order to construct the spanner, and
@@ -1164,7 +951,8 @@ bound its size similarly to the local disk spanner.
 \end{lemma}
 
 
-\paragraph{The result}
+We thus get the following.
+
 \begin{theorem}
     \thmlab{l:s:homothets}
 	%
@@ -1190,14 +978,12 @@ bound its size similarly to the local disk spanner.
     spanner, and since the $\CC$-Delaunay graph can be constructed in
     $O(n\log n)$ time, the time complexity bounds hold as well. The
     correctness proof of \thmref{main:1} uses only the connectivity of
-    the Delaunay triangulation, and thus the same proof suffices.
-	
-
+    the Delaunay triangulation, and thus the same proof works.
 \end{proof}
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1225,22 +1011,22 @@ points on its boundary and no points in its interior. Let
 $\DT_\square$ denote the resulting \emphw{$L_\infty$-Delaunay
    triangulation}.
 
-Let $\epsA = \eps/20$.  Instead of constructing a \WSPD, the algorithm
-computes a $1/\epsA$-\SSPD $\WS$, using the algorithm of
-\thmref{S:S:P:D:main}. By using the algorithm of \lemref{refine:d:w},
-and increasing the weight and number of pairs by a factor of
-$\Of(1/\epsA)$, one can assume that every pair
+Let $\epsA = \eps/20$.  The algorithm computes a $1/\epsA$-\SSPD
+$\WS$, using the algorithm of \thmref{S:S:P:D:main}. By using the
+algorithm of \lemref{refine:d:w}, and increasing the weight and number
+of pairs by a factor of $\Of(1/\epsA)$, one can assume that every pair
 $\{ \PSX, \PSY \} \in \WS$ is not only semi-separated, but also that
 there is an associated double wedge of angle $\leq \epsA$ containing
-$\PSX$ and $\PSY$ in opposing wedges.  The algorithm now computes the
-``square'' Delaunay triangulation for each such pair, and adds the
-edges of the triangulation to the resulting graph $\G$.
+$\PSX$ and $\PSY$ in opposing wedges, using the algorithm of
+\lemref{refine:d:w}.  The algorithm now computes the ``square''
+Delaunay triangulation for each such pair, and adds the edges of the
+triangulation to the resulting graph $\G$.
 
 
 
 \subsubsection{Analysis}
 
-\paragraph{Size and running time.}
+\paragraph{Size and running time}
 
 Computing the \SSPD takes $\Of\pth{n \epsA^{-2} \log n}$ time, and the
 refinement takes $\Of\pth{n \epsA^{-3} \log n}$ time (which is also
@@ -1251,7 +1037,7 @@ graph $\G$ is $\Of\pth{ \epsA^{-3} n\log n}$. Computing all these
 Delaunay triangulations takes $\Of\pth{ \epsA^{-3}n \log^2 n}$ time.
 
 
-\paragraph{Shrinking squares.}
+\paragraph{Shrinking squares}
 We need the following lemma about the shrinking of axis-parallel
 squares.  Observe that this property definitely does not hold for
 disks, as illustrated in \figref{bad}.
@@ -1311,7 +1097,7 @@ disks, as illustrated in \figref{bad}.
     choice of $\px$ and $\py$.
 \end{proof}
 
-\paragraph{Local spanner property.}
+\paragraph{Local spanner property}
 \begin{lemma}
     \lemlab{squares}%
     %
@@ -1331,7 +1117,7 @@ disks, as illustrated in \figref{bad}.
     is also separated by a double wedge of angle $\leq \epsA$.  See
     \figref{infty:spanner}.  Furthermore, assume that
     $\diameterX{\PSX} < \diameterX{\PSY}$.
- 
+
     \begin{figure}[h]
         \hfill%
         {\includegraphics{figs/spanner_sq}} \hfill%
@@ -1359,10 +1145,10 @@ disks, as illustrated in \figref{bad}.
 
     % \newpage
 
-    
+
     Let $\ell = \dY{\px'}{\py'}$. Due to the semi-separation property
     and since $\diameterX{\PSX} < \diameterX{\PSY}$,
-    
+
     \begin{equation*}
         \dY{\px}{\px'}%
         \leq%
@@ -1371,11 +1157,11 @@ disks, as illustrated in \figref{bad}.
         \epsA \dY{\PSX}{\PSY}%
         \leq%
         \epsA \sqrt{2} \cdot \dGZ{\infty}{\PSX}{\PSY}%
-        \leq 
+        \leq
         2
         \epsA \ell.
     \end{equation*}
-    
+
     Thus, we have that
     \begin{equation*}
         \dGZ{\G}{\px}{\px'}%
@@ -1426,12 +1212,12 @@ disks, as illustrated in \figref{bad}.
         \dY{\px}{\py'}  \epsA
         \leq%
         \epsA (1+2 \epsA)\ell
-        \leq 
+        \leq
         2 \epsA \ell,
     \end{equation*}
     as $\epsA \in (0,1/10)$, the monotonicity of $\sin$ in this range,
     and as $\sin \epsA \leq \epsA$.
-    
+
     We have that
     $\dY{\px}{\pz} \leq \dY{\px}{\py'} \leq
     (1+2\epsA)\ell$. Similarly, we have
@@ -1440,8 +1226,8 @@ disks, as illustrated in \figref{bad}.
         =%
         \dY{\px}{\py'} \cos \alpha
         \geq%
-        (1-\alpha^2/2)\dY{\px}{\py'} 
-        \geq 
+        (1-\alpha^2/2)\dY{\px}{\py'}
+        \geq
         (1-\epsA^2/2)(1-2\epsA)\ell
         \geq
         (1-3\epsA)\ell.
@@ -1453,7 +1239,7 @@ disks, as illustrated in \figref{bad}.
         \dY{\py'}{\py}
         \geq%
         \dY{\px}{\py}
-        -\dY{\py'}{\px}        
+        -\dY{\py'}{\px}
         \geq%
         \dY{\px}{\py}
         - (1+2\epsA)\ell.
@@ -1467,11 +1253,11 @@ disks, as illustrated in \figref{bad}.
         \dY{\px}{\py} - \dY{\px}{\pz} +
         2 \epsA \ell
         \leq
-        \dY{\px}{\py} - (1-3\epsA)\ell 
+        \dY{\px}{\py} - (1-3\epsA)\ell
         +2 \epsA \ell
       \\&
-      = 
-      \dY{\px}{\py} - (1-5\epsA)\ell 
+      =
+      \dY{\px}{\py} - (1-5\epsA)\ell
       <%
       \dY{\px}{\py}.
     \end{align*}
@@ -1500,7 +1286,7 @@ disks, as illustrated in \figref{bad}.
       \\&
       =%
       \bigl[1+4\epsA
-      - (1+\eps)(1-5\epsA)\bigr]\ell 
+      - (1+\eps)(1-5\epsA)\bigr]\ell
       +
       (1+\eps)
       \dY{\px}{\py}%
@@ -1582,7 +1368,7 @@ triangles are allowed.
     Let $A = \{a_i:=(-i, i/n) ~|~ 0\leq i \leq n \}$, and let
     $B = \{b_i:=(n-i, 1+2^i) ~|~ 1\leq i \leq \log\Phi \}$. It is not
     hard to see that the spread of $A \cup B$ is indeed $O(\Phi)$.
-	
+
     We now take $\triangle$ to be the right angle triangle with
     vertices $\pa :=(1,0), \pb :=(1,1)$, and $\pc:=(x,0)$, where $x$
     is sufficiently large so that for every $i\in \{1,...,n\}$ there
@@ -1592,12 +1378,12 @@ triangles are allowed.
     intuition.  Notice that for every point $a\in A$ and index
     $i\in \{0,..,\log\phi\}$, there exist a homothet $\triangle'$ of
     $\triangle$ such that $B\cap \triangle'=\{b_i,...,b_n\}$.
-	
+
     We now show that
     $\dY{a}{b_{i+1}} + \dY{b_{i}}{b_{i+1}} \geq (1+\eps)
     \dY{a}{b_{i}}$ for $O(n)$ indices. First we make a couple of
     simple observations:
-	
+
     \begin{enumerate}
         \item $1+\eps \leq 2$,
         \item $\dY{a}{b_{i+1}}\geq 2^{i+1}$,
@@ -1607,10 +1393,10 @@ triangles are allowed.
 
     So it is enough to show that for $O(n)$ points in $B$ we have that
     \begin{equation*}
-        2^{i+1} + 2^{i} \geq 2(2n + 2^i).            
+        2^{i+1} + 2^{i} \geq 2(2n + 2^i).
     \end{equation*}
-	
-	
+
+
     Simplifying a bit we get that the above inequality is true when
     $i \geq \log(4n)$, and we therefore have that for sufficiently
     many points of $B$ there must be an edge to every point in $A$.
@@ -1636,7 +1422,7 @@ is the set of cones $C_1\cup C_2\cup C_3$ translated by $\pa$, and for
 each $c\in C_\pa$ we connect $\pa$ to the point $\pb\in c$ closest to
 $\pa$ in an ordering by $v_i$ (where $i$ corresponds to the set $C_i$
 that contains the un-translated copy of $c$).
-  
+
 %
 % For each point we build Let $\eps = ???$.  The algorithm computes a
 % modified version of the $\theta$-graph (see \cite{c-aaspmp-87}). Let
@@ -1665,7 +1451,7 @@ that contains the un-translated copy of $c$).
 \subsubsection{Analysis}
 
 
-\paragraph{Shrinking triangles.}
+\paragraph{Shrinking triangles}
 We will need the following lemmas in order to prove the local spanning
 property of $G$. The first lemma concerns distances between points in
 the construction above (\secref{tri_construction}), and the second
@@ -1678,7 +1464,7 @@ deals with triangle shrinking.
     Let $\pa,\pb,\pc\in \PS$ such that the edge $\{\pa, \pc\}$ was
     added to the graph for the cone $c$ with apex at $\pa$, and such
     that $\pc\in c$ (as well as $\pa$ and $\pb$).
-	
+
     We get that
     \begin{enumerate}
         \item { $ \dY{\pa}{\pc}%
@@ -1702,17 +1488,17 @@ deals with triangle shrinking.
     $\alpha$.  Consider the triangle $\Delta\pa\pb\pc$ and denote the
     angles at $\pa,\pb,$ and $\pc$ by $\theta_\pa,\theta_\pb,$ and
     $\theta_\pc$ respectively.
-	
+
     We now consider two possible cases, either
     $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$ or
     $\dY{\pa}{\pb}> \dY{\pa}{\pc}$. Notice that since the angle of the
     cone $c$, and therefore $\theta_\pa$ as well, is smaller than the
     smallest angle of $\triangle$, we have that
     $\dY{\pb}{\pc}\leq \max \{\dY{\pa}{\pc},\dY{\pa}{\pb}\}$.
-	
+
     $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$: Denote by $\pb'$ the projection
     of $\pb$ on $\overline{\pa\pc}$. We have that
-	
+
 	$$
 	\dY{\pb}{\pb'}%
 	=%
@@ -1723,7 +1509,7 @@ deals with triangle shrinking.
 	\dY{\pb}{\pc}%
 	= \frac{\sin\theta_\pa}{\sin\theta_\pc}\dY{\pa}{\pb}%
 	$$
-	
+
 	$$ \dY{\pa}{\pc}%
 	=%
 	\dY{\pa}{\pb'}%
@@ -1741,9 +1527,9 @@ deals with triangle shrinking.
 	(\cos\theta_\pa +
         \frac{\sin\theta_\pa}{\sin\theta_\pc})\dY{\pa}{\pb}
 	$$
-	
+
 	We use these equalities and get that:
-	
+
 	$$
 	\dY{\pa}{\pc}%
 	+%
@@ -1751,7 +1537,7 @@ deals with triangle shrinking.
 	\leq%
 	(1+\eps)\dY{\pa}{\pb}%
 	$$
-	
+
 	$$
 	\iff%
 	\dY{\pa}{\pb}(\cos\theta_\pa +
@@ -1761,7 +1547,7 @@ deals with triangle shrinking.
 	\leq%
 	(1+\eps)\dY{\pa}{\pb}%
 	$$
-	
+
 	$$
 	\iff%
 	(\cos\theta_\pa + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
@@ -1770,7 +1556,7 @@ deals with triangle shrinking.
 	\leq%
 	(1+\eps)%
 	$$
-	
+
 	$$
 	\impliedby%
 	(1 + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
@@ -1779,7 +1565,7 @@ deals with triangle shrinking.
 	\leq%
 	(1+\eps)%
 	$$
-	
+
 	$$
 	\iff%
 	(2+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}%
@@ -1792,7 +1578,7 @@ deals with triangle shrinking.
 	=%
 	O(\eps)%
 	$$
-	
+
 	The last piece of this part is the fact that point $\pc$ was
         chosen by being the first point in the cone $c$ encountered by
         a line parallel to the edge opposite of $\pa$. See the red
@@ -1802,7 +1588,7 @@ deals with triangle shrinking.
 
 	$\dY{\pa}{\pb}< \dY{\pa}{\pc}$: Denote by $\pc'$ the
         projection of $\pc$ on $\overline{\pa\pb}$. We have that
-	
+
 	$$
 	\dY{\pb}{\pc}%
 	\leq%
@@ -1814,7 +1600,7 @@ deals with triangle shrinking.
 	+%
 	(\dY{\pa}{\pb}-\dY{\pb}{\pc'})%
 	$$
-	
+
 	$$
 	\implies%
 	\dY{\pb}{\pc}%
@@ -1823,7 +1609,7 @@ deals with triangle shrinking.
 	+%
 	(\dY{\pa}{\pb}-\cos\theta_\pa\dY{\pa}{\pc})%
 	$$
-	
+
 	$$
 	\implies%
 	\dY{\pa}{\pc} +%
@@ -1831,7 +1617,7 @@ deals with triangle shrinking.
 	\leq%
 	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}\dY{\pa}{\pb}
 	$$
-	
+
 	Which means that
 
 	$$
@@ -1844,15 +1630,15 @@ deals with triangle shrinking.
 	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}%
 	\leq%
 	1+\eps%
-	$$	
-	
-	
+	$$
+
+
 	Since $\theta_\pa = O(\eps\alpha)$ we get that for a
         sufficiently large constant the condition
         $\frac{1}{\cos\theta_\pa-\sin\theta_\pa} \leq 1+\eps$ holds.
-	
+
  	The second part of the lemma is derived from the first:
-	
+
 	$$
 	\dY{\pa}{\pc}%
 	+%
@@ -1868,8 +1654,8 @@ deals with triangle shrinking.
 	\leq%
 	\dY{\pa}{\pb}%
 	$$
-	
-	
+
+
     \end{proof}
 
 \begin{figure}[h]
@@ -1892,7 +1678,7 @@ We first prove a ``shrinking lemma'' similar to those in
     $\triangle' \subseteq \triangle$ that contains one of $\pa$ and
     $\pb$ on a vertex, and the other on the edge opposite to that
     vertex (possibly on a different vertex)
-	
+
 \end{lemma}
 
 \begin{proof}
@@ -1908,7 +1694,7 @@ We first prove a ``shrinking lemma'' similar to those in
     point must lie on the edge opposite to $v$, since otherwise one of
     the edges can still be moved to shrink $\triangle'$. See
     \figref{shrink_tri}.
-	
+
 \end{proof}
 
 \begin{figure}[h]
@@ -1920,7 +1706,7 @@ We first prove a ``shrinking lemma'' similar to those in
 
 
 
-\paragraph{Local spanner property.}
+\paragraph{Local spanner property}
 \begin{lemma}
     \lemlab{local_span:triangles}%
 	%
@@ -1941,7 +1727,7 @@ We first prove a ``shrinking lemma'' similar to those in
     have that $\dY{\pa'}{\pc'}+\dY{\pb'}{\pc'}\geq 2 \dY{\pa'}{\pb'}$
     regardless of the angle of the cone, a contradiction to
     \lemref{cone_edge:triangles}.
-	
+
     For any other pair $\pa,\pb\in PS\cap \triangle$ we have from
     \lemref{shrink:triangles} that there exists a homothet
     $\triangle'\subseteq \triangle$ with one of the two points, say
@@ -1957,11 +1743,11 @@ We first prove a ``shrinking lemma'' similar to those in
     $\dY{\pa}{\pc}+(1+\eps)\dY{\pb}{\pc}\leq(1+\eps)\dY{\pa}{\pb}$,
     and thus we get the existence of a $(1+\eps)$ path between $\pa$
     and $\pb$ as well.
-	
+
 \end{proof}
 
 
-\paragraph{Size and running time.}
+\paragraph{Size and running time}
 Let $G$ be the graph constructed by the procedure described above.
 
 
@@ -2029,7 +1815,7 @@ $\delta$ is given below.
         \shrinkDY{\body}{\delta}%
         =%
         \Set{ \pa \in \body }{ \dsY{\pa}{ \Re^2 \setminus \body} \geq \delta \cdot
-           \diameterX{\body}}.        
+           \diameterX{\body}}.
     \end{equation*}
     Formally, $\shrinkDY{\body}{\delta}$ is the Minkowski difference
     of $\body$ with a disk of radius $\delta \cdot \diameterX{\body}$.
@@ -2109,9 +1895,9 @@ empty.
         \frac{\ell}{2} \sqrt{(1+\epsA)^2 - 1}
         =%
         \frac{\sqrt{\epsA (2+\epsA)}}{2} \ell%
-        \leq 
+        \leq
         \sqrt{\epsA} \ell
-        \leq 
+        \leq
         \sqrt{\epsA}\cdot \diameterX{\body}.
     \end{equation*}
     as $\ell \leq \diameterX{\body'} \leq \diameterX{\body}$.
@@ -2216,7 +2002,7 @@ quadrant-separated for all $i$.
     $d$\th coordinate), and recursively computes a \QSPD $\QS'$ for
     $\PS'$.
 
-    
+
     For a point set $\PSX' \subseteq \PS'$, let $\liftX{\PSX'}$ be the
     subset of points of $\PS$ whose projection on $h$ is $\PSX'$.  The
     algorithm now computes the set of pairs
@@ -2300,7 +2086,7 @@ previous notion of shrinkage used before are not useful in this case.
        point $\pa=(-x,-y)$ and a pair $\Pair$.
        %We are not showing the
        %subrectangles of $\rectA_\nearrow$ as they are not being used
-       %in the construction. 
+       %in the construction.
     }
     \figlab{grid}%
 \end{figure}
@@ -2586,5 +2372,152 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
 % \bibliography{shortcuts,geometry}
 \bibliography{ft_spanner}
 
+\appendix
+\section{Some missing proofs}
+
+\subsection{Proof of \lemref{refine:d:w}}
+\apndlab{refine:d:w}
+
+\RestatementOf{\lemref{refine:d:w}}%
+{%
+   \LemmaRefineDWBody{}%
+}
+   
+\begin{figure}[ht]
+    \centerline{\includegraphics{figs/partition}}
+    \caption{An illustration of refining the pairs in a \SSPD into
+       pairs in opposite parts of an $\eps$-double-wedge. $\PSX$ is
+       contained in the green square $\square$, while $\PSY$ is
+       contained in the red square, and the white gap between them is
+       a result of the separation property. The set of cones with the
+       apex at the center of $\square$ give us the desired partition
+       as demonstrated by the purple double-wedge. }
+    \figlab{partition}
+\end{figure}
+
+\begin{proof}
+    By using \lemref{chop:easy}, we can assume that $\WS$ is (say)
+    $(10/\eps)$-separated.  Now, the algorithm scans the pairs of
+    $\WS$. For each pair $\Pair = \{ \PSX, \PSY \} \in \WS$, assume
+    that $\diameterX{\PSX} < \diameterX{\PSY}$. Let $\square$ be the
+    smallest axis-parallel square containing $\PSX$, centered at point
+    $o$.  Partition the plane around $o$, by drawing around it
+    $\Of(1/\eps)$ lines with the angle between any two consecutive
+    lines being at most (say) $\eps/4$, see \figref{partition}. This
+    partitions the plane into a set of cones $\ConeSet$. For a cone
+    $C \in \ConeSet$, we show that there exists an $\eps$-double-wedge
+    that contains $\PSX$ in one side, and $\PSY \cap C$ in the other.
+
+    To see that, take the double-wedge formed by the cross tangents
+    between $\CHX{\PSX}$ and $\CHX{\PSY \cap C}$, where $\CHX{\PSX}$
+    denotes the convex-hull of $\PSX$. Assume w.l.o.g that $\square$
+    has side length 1, and let $c$ be a cone of angle $\eps / 4$ with
+    apex $o$, whose angular bisector is a horizontal ray in the
+    positive direction of the $x$ axis. See figure
+    \figref{double-wedge} for an illustration.
+
+    We would like to find a vertical segment $s$ such that all points
+    of $Y$ lie to its right, with one endpoint on the upper line of
+    $c$, and the other on the lower line of $c$. Using the segments'
+    height and distance from the right side of $\square$ we will be
+    able to get a bound on the angle of the cross tangents. We first
+    find a segment $s$ with all points of $Y$ to its right. A trivial
+    bound on that distance is given by the segment from, say, the
+    lower left corner of $\square$, denoted $p$, of length $10/\eps$
+    with its right endpoint on the upper line of $c$, denote this
+    point by $q$. This is due to the $10/\eps$ separation property of
+    the SSPD. We know that this segment creates an angle of less than
+    $\pi/4$ with the $x$-axis, since $o$ is the center of $\square$,
+    and lies on the ray with apex $p$ that creates a $\pi/4$ angle
+    with the $x$-axis. We therefore get that the $x$-coordinate
+    difference between $\square$ and $q$ is at most
+    $10/\eps\cdot \cos\frac{\pi}{4}-1\leq 7/\eps-1\leq 6/\eps$. So let
+    $s'$ be a vertical segment between the upper and lower rays of
+    $c$, with $x$-coordinate distance of $6/\eps-\frac{1}{2}$ from
+    $\square$ (in order to make calculations easier). We get that $s'$
+    is of length $2\cdot \frac{6}{\eps}\tan \frac{\eps}{8}$. Finally,
+    we take $s$ to be a vertical segment of length
+    $\frac{12}{\eps}\tan \frac{\eps}{8}$, with its center on the
+    $x$-axis at a distance of $5/\eps+\frac{1}{2}$ away from $o$. The
+    angle of the $x$-axis and the segment between the lower end of the
+    right side of $\square$ and the upper end of $s$ is now given by:
+
+    \begin{equation*}
+    	\arctan\left(\frac{\frac{6}{\eps}\tan\frac{\eps}{8}+\frac{1}{2}}{\frac{5}{\eps}}\right)%
+    	=%
+    	\arctan \left( \frac{6}{5}\tan\frac{\eps}{8}+\frac{\eps}{10} \right)%
+    	=%
+    	\Theta(\eps)%
+    \end{equation*}
+
+
+\end{proof}
+
+\begin{figure}[h]
+    \phantom{}\hfill%
+    \includegraphics[page=2, width=0.48\linewidth]{figs/double_wedge}%
+    \hfill%
+    \includegraphics[page=3, width=0.48\linewidth]{figs/double_wedge}%
+    \hfill%
+    \phantom{}%
+    \caption{An illustration of the proof for \lemref{refine:d:w}}
+    \figlab{double-wedge}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Proof of \clmref{d:t:connected}}
+\apndlab{d:t:c:proof}
+
+\RestatementOf{\clmlab{d:t:connected}}%
+{%
+   \ClaimDelConnected{}
+}
+
+\begin{proof}
+    We first prove that for any (closed) disk $\disk$ with two points
+    $\pa,\pb\in \PS$ on its boundary, there is a path between $\pa$
+    and $\pb$ in $\restrictY{\DT}{\disk}$.  The proof is by induction
+    over the number $m$ of points of $\PS$ in the interior of $\disk$.
+    If $m=0$ then the disk $\disk$ contains no points of $\PS$ in its
+    interior, and thus $\pa \pb$ is an edge of the Delaunay
+    triangulation, as $\disk$ testifies.
+
+    \begin{figure}[h]
+        \phantom{}\hfill%
+        \includegraphics[page=1]{figs/shrink}%
+        \hfill%
+        \includegraphics[page=2]{figs/shrink}%
+        \hfill%
+        \includegraphics[page=3]{figs/shrink}%
+        \hfill%
+        \phantom{}%
+        \caption{}
+        \figlab{shrink}
+    \end{figure}
+    Otherwise, let $\pc\in \PS$ be a point in the interior of
+    $\disk$. We move the center $\cen$ of $\disk$ in the direction of
+    $\pa$, shrinking $\disk$ in the process, so that the radius the
+    disk is $\dY{\cen}{\pa}$, until we get a disk
+    $\disk' \subseteq \disk$ such that $\pc$ is on the boundary of
+    $\disk'$, see \figref{shrink}. Observe that $\pa$ and $\pc$ are on
+    the boundary of the new disk, and
+    $|\interiorX{\disk'} \cap \PS| < |\interiorX{\disk} \cap
+    \PS|$. Thus, by induction, there is a path $\gamma'$ between $\pa$
+    and $\pc$ in
+    $\restrictY{\DT}{\disk'} \subseteq
+    \restrictY{\DT}{\disk}$. Similarly, there must be a path
+    $\gamma''$ between $\pc$ and $\pb$, and concatenating the two
+    paths results in a path between $\pa$ and $\pb$ in
+    $\restrictY{\DT}{\disk}$.
+
+    Back to the original claim.  For any two points
+    $\pa,\pb \in \disk \cap \PS$ one can get a disk
+    $\disk' \subseteq \disk$ that contains $\pa$ and $\pb$ on its
+    boundary.  Indeed, shrink the radius of $\disk$ till, say, $\pa$
+    is on the boundary, and then move the center of the disk towards
+    $\pa$ while shrinking the size of the disk to maintain $\pa$ on
+    the boundary, until $\pb$ is also on the boundary of the shrunken
+    disk.
+\end{proof}
 
 \end{document}

@@ -775,9 +775,8 @@ graph when restricted to region $R$, is a spanner for
     $\dGZ{\restrictY{\G}{R}}{\pa}{\pb}\leq (1+\eps)\dGZ{\GA}{\pa}{\pb}
     $.
 
-    In particular, for any convex region $D$, the graph
-    $\G \gminus C$ is a $(1+\eps)$-spanner for
-    $\GY{\PS}{\Re^2} \gminus D$.
+    In particular, for any convex region $D$, the graph $\G \gminus D$
+    is a $(1+\eps)$-spanner for $\GY{\PS}{\Re^2} \gminus D$.
 \end{corollary}
 \begin{proof}
     Consider the shortest path $\pi = u_1 u_2 \ldots u_k$ between
@@ -801,6 +800,12 @@ graph when restricted to region $R$, is a spanner for
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Lower bounds}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsubsection{A lower bound for local spanner for disks}
 
 The result of \thmref{main:1} is somewhat disappointing as it depends
@@ -925,10 +930,89 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 \end{proof}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{A lower bound for triangles}
+
+\begin{figure}[h]
+    \centering \includegraphics{figs/triangle_lower_bound}
+    \caption{An Illustration of the construction of 
+       \lemref{l:b:triangles}.}
+    \figlab{tri_low_bd}
+\end{figure}
+
+\begin{lemma}
+    \lemlab{l:b:triangles}%
+    %
+    For any $n > 0$, and $\Phi = \Omega(n)$, one can compute a set
+    $\PS$ of $n+ O(\log\Phi)$ points, with spread $O(\Phi n)$, and a
+    triangle $\triangle$, such that any $\triangle$-local
+    $3/2$-spanner of $\PS$ requires $\Omega\pth{n\log\Phi }$ edges.
+\end{lemma}
+
+\begin{proof}
+    Let $h = \ceil{\log_2 \Phi}$.  Let $\triangle$ be the triangle
+    formed by the points $(0,0)$, $(0,1)$ and $(8\Phi h,0)$.  The
+    hypotenuse of this triangle lies on the line
+    $\Line \equiv \frac{1}{8\Phi h}x + y = 1$, and let
+    $v = \bigl(\frac{1}{8\Phi h}, 1\bigr)$ be the vector orthogonal to
+    this line.
+    
+    For $i \in \IRX{h}$ and $j \in \IRX{n}$, let
+    \begin{align*}
+      \pb_i = \bigl(2^{i+1}, 1 - i/h \bigr)
+      \qquad \text{ and }\qquad
+      \pc_j = \bigl(\tfrac{j}{n}-1, -\tfrac{j}{n} \bigr),
+    \end{align*}
+    and let $\PS = \{ \pb_1, \ldots, \pb_h, \pc_1, \ldots, \pc_n\}$,
+    see \figref{tri_low_bd}.  Observe that
+    $\cpX{\PS} = \dY{\pc_1}{\pc_2} = \sqrt{2}/n$, and as such have
+    that
+    $\SpreadX{\PS} = n \cdot \diamX{\PS}/\sqrt{2} \leq n(4\Phi + 2n)
+    \leq 8 \Phi n$, as $\Phi \geq n$.  Observe that
+    \begin{equation*}
+        \DotProd{\pb_{i+1} - \pb_i}{v}%
+        =%
+        \DotProd{(2^{i+1},-\tfrac{1}{h})}{ \bigl(\tfrac{1}{4\Phi h},
+           1\bigr)}
+        \leq
+        \tfrac{4\Phi}{8\Phi h} - \tfrac{1}{h} < 0.
+    \end{equation*}
+    That is, the points $\pb_1, \ldots, \pb_i$ are in increasing
+    distance from $\Line$.
+
+    Let $\triangle_{i,j}$ be the homothet of $\triangle$, that has its
+    bottom left corner at $\pc_j$, and its hypotenuse passes through
+    $\pb_i$. By the above,
+    $\PS(i,j) = \triangle_{i,j} \cap \PS = \{ \pc_j, \pb_i, \pb_{i+1},
+    \ldots \pb_h \}$.  Any $(1+\eps)$-spanner for $\PS(i,j)$ must
+    contain the edge $\pc_j \pb_i$. Indeed, we have, for any $k$, that
+    $2^{k+1} \leq \dY{\pc_j}{\pb_{k}} \leq 2^{k+1} +3$. As such, any
+    path on a graph induced on $\PS(i,j)$ from $\pc_j$ to $\pb_i$ that
+    uses (say) a midpoint $\pb_k$, for $k >i$, must have dilation at
+    least
+    \begin{equation*}
+        \frac{\dY{\pc_j}{\pb_k} +
+           \dY{\pb_k}{\pb_i}}{\dY{\pc_j}{\pb_{i}}}
+        \geq%
+        \frac{2^{k+1} + 2^{k} }{2^{i+1} + 3}
+        \geq%
+        \frac{3 \cdot 2^{i+1} }{(1+3/4) 2^{i+1} }
+        =
+        \frac{12}{7}
+        >
+        \frac{3}{2}.
+    \end{equation*}
+
+    Thus, any $\triangle$-local $3/2$-spanner for homothets of
+    $\triangle$, must contain the edge $\pb_i \pc_j$, for any
+    $i \in \IRX{h}$ and $j \in \IRX{n}$. Thus, such a spanner must
+    have $ \Omega( n \log \Phi)$ edges, as claimed.
+\end{proof}
+
+
+
+
 
 
 \HERE
@@ -1292,70 +1376,12 @@ on the spread of the points. See \figref{tri_low_bd} for an
 illustration of a construction showing that dependency if "thin"
 triangles are allowed.
 
-\begin{figure}[h]
-    \centering \includegraphics{figs/triangle_lower_bound}
-    \caption{For any fixed $t>1$ we can take a "thin" right angle
-       triangle $\triangle$, and create a point set as shown in the
-       figure, such that every blue point must be connected by an edge
-       to many of the red points (which are of exponentially
-       increasing $x$-coordinate) in order to create a
-       $\triangle$-local $t$-spanner.}
-    \figlab{tri_low_bd}
-\end{figure}
 
 
 \begin{defn}
-    We say that a triangle $\triangle$ is $\alpha$-fat if the smallest
-    angle in $\triangle$ is of size at least $\alpha$.
+    A triangle $\triangle$ is \emphi{$\alpha$-fat} if the smallest
+    angle in $\triangle$ is at least $\alpha$.
 \end{defn}
-
-\begin{claim}
-    For any fixed $\eps \in (0,1)$, there exists a set $\PS$ of
-    $n+\log\Phi$ points with spread $O(\Phi)>> n$ and a triangle
-    $\triangle$, such that the $\triangle$-local $(1+\eps)$-spanner of
-    $\PS$ requires $O\left(n\log\Phi\right)$ edges.
-\end{claim}
-
-\begin{proof}
-    First, we describe two sets of points $A$ and $B$ of sizes $n$ and
-    $\log\Phi$ respectively, such that every point in $A$ must be
-    connected to $O(\log\Phi)$ points of $B$ in any $\triangle$-local
-    $(1+\eps)$-spanner for a triangle that we will choose accordingly.
-    Let $A = \{a_i:=(-i, i/n) ~|~ 0\leq i \leq n \}$, and let
-    $B = \{b_i:=(n-i, 1+2^i) ~|~ 1\leq i \leq \log\Phi \}$. It is not
-    hard to see that the spread of $A \cup B$ is indeed $O(\Phi)$.
-
-    We now take $\triangle$ to be the right angle triangle with
-    vertices $\pa :=(1,0), \pb :=(1,1)$, and $\pc:=(x,0)$, where $x$
-    is sufficiently large so that for every $i\in \{1,...,n\}$ there
-    exist a segment parallel to $\overline{\pb\pc}$ with one endpoint
-    on $\overline{\pa\pb}$, and the other on $\overline{\pa\pc}$, that
-    separates $b_i$ and $b_{i-1}$. See \figref{tri_low_bd} for some
-    intuition.  Notice that for every point $a\in A$ and index
-    $i\in \{0,..,\log\phi\}$, there exist a homothet $\triangle'$ of
-    $\triangle$ such that $B\cap \triangle'=\{b_i,...,b_n\}$.
-
-    We now show that
-    $\dY{a}{b_{i+1}} + \dY{b_{i}}{b_{i+1}} \geq (1+\eps)
-    \dY{a}{b_{i}}$ for $O(n)$ indices. First we make a couple of
-    simple observations:
-    \begin{enumerate}
-        \item $1+\eps \leq 2$,
-        \item $\dY{a}{b_{i+1}}\geq 2^{i+1}$,
-        \item $\dY{b_{i}}{b_{i+1}} \geq 2^i$,
-        \item and $ \dY{a}{b_{i}} \leq 2n + 2^i $.
-    \end{enumerate}
-
-    So it is enough to show that for $O(n)$ points in $B$ we have that
-    \begin{equation*}
-        2^{i+1} + 2^{i} \geq 2(2n + 2^i).
-    \end{equation*}
-
-
-    Simplifying a bit we get that the above inequality is true when
-    $i \geq \log(4n)$, and we therefore have that for sufficiently
-    many points of $B$ there must be an edge to every point in $A$.
-\end{proof}
 
 
 \subsubsection{Construction}

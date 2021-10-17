@@ -516,21 +516,22 @@ delegated to the appendix.
     where the angle between the two lines is at most $\eps$.
 \end{defn}
 
-\SaveContent{\LemmaRefineDWBody}%
-{%
-   Given aמ $\eps^{-1}$-\SSPD $\WS$ of $n$ points in the plane, one
-   can refine it, into aמ $\eps^{-1}$-\SSPD $\WS'$, such that each
-   pair $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in a
+\SaveContent{\LemmaRefineDWBody}{ Given a $\eps^{-1}$-\SSPD $\WS$ of
+   $n$ points in the plane, one can refine it, into a
+   $\eps^{-1}$-\SSPD $\WS'$, such that each pair
+   $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in a
    $\eps$-double-wedge $\DW_\Pair$, such that $\PSX$ and $\PSY$ are
    contained in the two different faces of the double wedge
    $\DW_\Pair$. We have that $|\WS'| = O(|\WS|/\eps)$ and
    $\WeightX{\WS'} = O(\WeightX{\WS'}/\eps)$. The construction time is
    proportional to the weight of $\WS'$.  }
 
+
+
 \begin{lemma}[Proof in \apndref{refine:d:w}]
     \lemlab{refine:d:w}%
     %
-    \LemmaRefineDWBody{}
+    \LemmaRefineDWBody{}%%%
 \end{lemma}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -968,7 +969,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     see \figref{tri_low_bd}.  Observe that
     $\cpX{\PS} = \dY{\pc_1}{\pc_2} = \sqrt{2}/n$, and as such have
     that
-    $\SpreadX{\PS} = n \cdot \diamX{\PS}/\sqrt{2} \leq n(4\Phi + 2n)
+    $\spreadX{\PS} = n \cdot \diamX{\PS}/\sqrt{2} \leq n(4\Phi + 2n)
     \leq 8 \Phi n$, as $\Phi \geq n$.  Observe that
     \begin{equation*}
         \DotProd{\pb_{i+1} - \pb_i}{v}%

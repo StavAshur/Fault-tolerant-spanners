@@ -218,7 +218,7 @@ comparisons to the results of this paper.
       % ------------------------------------------------------------
       Region
       &
-        Known \# edges
+        \# edges
       &
         Paper
       &
@@ -263,7 +263,7 @@ comparisons to the results of this paper.
       \\
       \hline
       % ------------------------------------------------------------
-      Disks with Steiner points
+      Disks+Steiner points
       &
         $\Oeps (n ) \Bigr.$
       &
@@ -294,7 +294,7 @@ comparisons to the results of this paper.
       \\
       \hline
       % ------------------------------------------------------------
-      Homothets of a convex shape
+      Homothets convex shape
       &
       &
       &
@@ -319,7 +319,7 @@ comparisons to the results of this paper.
       \\
       \hline
       % ---------------------------------------------------------
-      Any bounded convex shape
+      Bounded convex shape
       &
       &
       &
@@ -514,6 +514,10 @@ delegated to the appendix.
 \begin{defn}%
     An \emphi{$\eps$-double-wedge} is a region between two lines,
     where the angle between the two lines is at most $\eps$.
+
+    Tow points sets $\PX$ and $\PY$ that each lie on their own cone of
+    a shared $\eps$-double-wedge are \emphi{$\eps$-angularly
+       separated}.
 \end{defn}
 
 \SaveContent{\LemmaRefineDWBody}{ Given a $\eps^{-1}$-\SSPD $\WS$ of
@@ -570,12 +574,17 @@ Let $\CC$ be a bounded convex and closed region in the plane (e.g., a
 disk).  The \emphi{homothet} of a convex shape $\CC$ is a scaled and
 translated copy of $\CC$.  A point set $\PS$ is \emphi{general
    position} for $\CC$, if is four points of $\PS$ lie on the boundary
-of a homothet of $\CC$.  The Delaunay triangulation is well defined if
-the point set is in general position -- edges are inserted between any
-two points $\pa,\pb\in \PS$ such that there exist a homothet of $\CC$
-that contains only $\pa$ and $\pb$ and no other point of $\PS$.  This
-results in the \emphi{$\CC$-Delaunay} graph of $\PS$
-\cite{cd-vdbcdf-85}.
+of a homothet of $\CC$.
+
+\begin{defn}[\cite{cd-vdbcdf-85}]
+    \deflab{c:del:triang}%
+    %
+    Given $\PS$ and $\CC$ as above, the \emphi{$\CC$-Delaunay
+       triangulation} of $\PS$ is the graph formed by edges between
+    any two points $\pa,\pb\in \PS$ such that there exist a homothet
+    of $\CC$ that contains only $\pa$ and $\pb$ and no other point of
+    $\PS$.
+\end{defn}
 
 \begin{theorem}[\cite{cd-vdbcdf-85}]
     \thmlab{c:t:construct_delaunay_graph}%
@@ -1018,9 +1027,50 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 
 \HERE
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+\newcommand{\Trap}{\Mh{T}}%
 
+\section{A local spanner for narrow trapezoids}
+\seclab{traps}
+
+As a reminder, a trapezoids is a quadrilateral with two parallel
+edges, known as its \emph{bases}. The other two edges are its legs.
+For $\eps \in (0,1/4)$, a trapezoid $\Trap$ is \emphi{$\eps$-narrow}
+if the length of each of its legs is at most $\eps \diamX{\Trap}$.
+
+
+XXX
+\begin{lemma}
+    Let $\eps \in (0,1)$ be some parameter, and let $\PX,\PY$ be two
+    points sets that are $\eps$-semi separated, and let $\Trap$ be
+    $\eps$-narrow trapezoid, with two points $\pa \in \PX$ and
+    $\pb \in \PY$ lying on the two legs of $\Trap$. Then, one can
+    compute a homothet $\Trap' \subseteq \Trap$ of $\Trap$, such that:
+    \begin{compactenumI}
+        \item There are two points $\pa' \in \PX$ and $\pb' \in \PY$,
+        such that $\pa'\pb'$ is an edge of the $\Trap$-Delaunay
+        triangulation of $\PX \cup \PY$.
+
+        \item We have that
+        $(1+\eps)\dY{\pa}{\pa'} + \dY{\pa'}{\pb'} + (1+\eps)
+        \dY{\pb'}{\pb} \leq (1+\eps) \dY{\pa}{\pb}$.
+    \end{compactenumI}
+\end{lemma}
+
+\begin{figure}[h]
+    \centerline{\includegraphics{figs/narrow_trap}}%
+    \caption{}
+    \figlab{narrow:trap}
+\end{figure}
+\begin{proof}
+    Assume, that $\diamX{\PX} \leq \eps $
+\end{proof}
+
+XXX
 
 
 
@@ -1031,9 +1081,10 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 
 
 \section{A local spanner for axis parallel squares}
-\seclab{squares} One can modify the above construction for
-axis-parallel squares, and get a local spanner without dependency on
-the spread.
+\seclab{squares}
+
+One can modify the above construction for axis-parallel squares, and
+get a local spanner without dependency on the spread.
 
 \subsubsection{Construction}
 
@@ -1042,15 +1093,9 @@ approximation parameter $\eps \in (0,1/2)$.  We assume that the input
 point set $\PS$ is in general position. Specifically, no two points of
 $\PS$ share a coordinate value, or appear in opposing corners of an
 axis-parallel square -- this can be ensured by slightly perturbing the
-points if necessary (or symbolic perturbation).
-
-
-One can define the Delaunay triangulation when the unit ball is
-replaced by the unit square. Formally, in this triangulation two
-points are connected $\iff$ there is a square that contains these two
-points on its boundary and no points in its interior. Let
-$\DT_\square$ denote the resulting \emphw{$L_\infty$-Delaunay
-   triangulation}.
+points if necessary (or symbolic perturbation). Let
+$\Binfty = [-1,1]^2$ be the unit ``ball'' under the $L_\infty$
+norm.
 
 Let $\epsA = \eps/20$.  The algorithm computes a $1/\epsA$-\SSPD
 $\WS$, using the algorithm of \thmref{S:S:P:D:main}. By using the
@@ -1059,9 +1104,9 @@ of pairs by a factor of $\Of(1/\epsA)$, one can assume that every pair
 $\{ \PSX, \PSY \} \in \WS$ is not only semi-separated, but also that
 there is an associated double wedge of angle $\leq \epsA$ containing
 $\PSX$ and $\PSY$ in opposing wedges, using the algorithm of
-\lemref{refine:d:w}.  The algorithm now computes the ``square''
-Delaunay triangulation for each such pair, and adds the edges of the
-triangulation to the resulting graph $\G$.
+\lemref{refine:d:w}.  The algorithm now computes $\Binfty$-Delaunay
+triangulation, see \defref{c:del:triang}, for each such pair, and adds
+the edges of the triangulation to the resulting graph $\G$.
 
 
 
@@ -1179,7 +1224,7 @@ disks, as illustrated in \figref{bad}.
     $\px', \py'$ on its boundary (on two apposing edges), such that
     $\sqrA \subseteq \sqr$, and $\sqrA$ contains no other points
     $\PSX \cup \PSY$. By construction, we have that $\px'\py'$ is in
-    the $L_\infty$-Delaunay triangulation of $\Pair$, and thus
+    the $\Binfty$-Delaunay triangulation of $\Pair$, and thus
     $\px' \py' \in \G$. Since $\dY{\px}{\px'} \ll \dY{\px}{\py}$ we
     have that by induction
     $\dGZ{\G}{\px}{\px'} \leq (1+\eps)\dY{\px}{\px'}$.

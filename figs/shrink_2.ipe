@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.23">
-<info created="D:20211018130324" modified="D:20211018150307"/>
+<info created="D:20211018150422" modified="D:20211018153954"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -1021,76 +1021,254 @@ h
 </preamble>
 <layout paper="144 144" origin="0 0" frame="144 144"/>
 </ipestyle>
-<ipestyle name="5in">
-<layout paper="360 360" origin="0 0" frame="360 360"/>
-</ipestyle>
 <page>
 <layer name="alpha"/>
 <layer name="beta"/>
 <layer name="gamma"/>
-<view layers="alpha" active="alpha"/>
+<layer name="delta"/>
+<layer name="epsilon"/>
+<view layers="alpha beta" active="gamma"/>
 <view layers="beta gamma" active="beta"/>
-<view layers="beta gamma" active="gamma"/>
-<path layer="gamma" fill="yellow" opacity="20%" stroke-opacity="opaque">
-8 98 m
-148.508 57.1094 l
-152 110 l
-10 62 l
+<view layers="beta gamma delta" active="delta"/>
+<view layers="beta" active="gamma"/>
+<view layers="delta" active="epsilon"/>
+<path layer="alpha" stroke="black" fill="yellow" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
 h
 </path>
-<path layer="beta" stroke="black" fill="orange">
-16 90 m
-143.431 83.8823 l
+<group layer="gamma">
+<path stroke="black" fill="yellow" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
 </path>
-<path layer="alpha" matrix="1 0 0 1 20.3429 -8" stroke="black" fill="orange" opacity="20%" stroke-opacity="opaque">
-4 80 m
-132 80 l
-120 96 l
-0 96 l
-4 80 l
+<use name="mark/disk(sx)" pos="48 96" size="normal" stroke="black"/>
+</group>
+<group matrix="0.8 0 0 0.8 9.6 19.2">
+<path stroke="black" fill="yellow" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
 </path>
-<path matrix="0.7 0 0 0.7 30.9057 17.1772" stroke="black" fill="orange" opacity="20%" stroke-opacity="opaque">
-4 80 m
-132 80 l
-120 96 l
-0 96 l
-4 80 l
+<use name="mark/disk(sx)" pos="48 96" size="normal" stroke="black"/>
+</group>
+<group matrix="0.72 0 0 0.72 13.44 26.88">
+<path stroke="black" fill="yellow" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
 </path>
-<use matrix="1 0 0 1 16 -8" name="mark/fdisk(sfx)" pos="6.58126 87.0464" size="normal" stroke="darkgreen" fill="green"/>
-<use matrix="1 0 0 1 16 -8" name="mark/fdisk(sfx)" pos="127.431 91.8823" size="normal" stroke="brown" fill="pink"/>
-<text matrix="1 0 0 1 10.7094 -10.2089" transformations="translations" pos="4 84" stroke="darkgreen" type="label" width="5.012" height="4.297" depth="1.93" valign="baseline" style="math">p</text>
-<text matrix="1 0 0 1 24.7094 -20.2089" transformations="translations" pos="4 84" stroke="darkgreen" type="label" width="7.808" height="7.497" depth="1.93" valign="baseline" style="math">p&apos;</text>
-<text matrix="1 0 0 1 118.034 -4.51155" transformations="translations" pos="4 84" stroke="red" type="label" width="7.6" height="7.497" depth="1.93" valign="baseline" style="math">q&apos;</text>
-<text matrix="1 0 0 1 144.709 -2.2089" transformations="translations" pos="4 84" stroke="red" type="label" width="4.805" height="4.297" depth="1.93" valign="baseline" style="math">q</text>
-<path stroke="purple" fill="green">
-33.1075 75.57 m
-117.425 81.018 l
+<use name="mark/disk(sx)" pos="48 96" size="normal" stroke="black"/>
+</group>
+<group matrix="0.648 0 0 0.648 16.896 33.792">
+<path stroke="black" fill="yellow" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
 </path>
-<use matrix="1 0 0 1 16 -8" name="mark/fdisk(sfx)" pos="17.1075 83.57" size="normal" stroke="darkgreen" fill="green"/>
-<use matrix="1 0 0 1 16 -8" name="mark/fdisk(sfx)" pos="101.425 89.018" size="normal" stroke="brown" fill="pink"/>
-<text matrix="1 0 0 1 -22.8656 -2.50582" transformations="translations" pos="63.8055 79.5824" stroke="purple" type="label" width="4.151" height="6.918" depth="0" valign="baseline" style="math">\ell</text>
-<use layer="beta" matrix="1 0 0 1 9.41874 2.95363" name="mark/fdisk(sfx)" pos="6.58126 87.0464" size="normal" stroke="darkgreen" fill="green"/>
-<use matrix="1 0 0 1 16 -8" name="mark/fdisk(sfx)" pos="127.431 91.8823" size="normal" stroke="brown" fill="pink"/>
-<text matrix="1 0 0 1 20.7094 -10.2089" transformations="translations" pos="4 84" stroke="darkgreen" type="label" width="7.808" height="7.497" depth="1.93" valign="baseline" style="math">p&apos;</text>
-<text matrix="1 0 0 1 117.501 -17.1941" transformations="translations" pos="4 84" stroke="red" type="label" width="7.6" height="7.497" depth="1.93" valign="baseline" style="math">q&apos;</text>
-<text matrix="1 0 0 1 138.063 6.51395" transformations="translations" pos="4 84" stroke="red" type="label" width="4.805" height="4.297" depth="1.93" valign="baseline" style="math">q</text>
-<path stroke="purple" fill="green">
-33.1075 75.57 m
-123.5 75.5826 l
+<use name="mark/disk(sx)" pos="48 96" size="normal" stroke="black"/>
+</group>
+<group matrix="0.600696 0 0 0.600696 19.1666 38.3332">
+<path stroke="black" fill="yellow" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
 </path>
-<use matrix="1 0 0 1 16 -8" name="mark/fdisk(sfx)" pos="17.1075 83.57" size="normal" stroke="darkgreen" fill="green"/>
-<use matrix="1 0 0 1 22.0749 -13.4354" name="mark/fdisk(sfx)" pos="101.425 89.018" size="normal" stroke="brown" fill="pink"/>
-<text matrix="1 0 0 1 -5.7068 -10.8188" transformations="translations" pos="63.8055 79.5824" stroke="purple" type="label" width="4.151" height="6.918" depth="0" valign="baseline" style="math">\ell</text>
-<use matrix="1 0 0 1 0.190613 1.79789" name="mark/fdisk(sfx)" pos="122.902 83.0608" size="normal" stroke="black" fill="orange"/>
-<text transformations="translations" pos="120.905 90.3612" stroke="black" type="label" width="9.897" height="7.497" depth="1.93" valign="baseline" style="math">q&apos;&apos;</text>
-<path layer="gamma" stroke="blue" fill="orange">
-8 98 m
-148.508 57.1094 l
+<use name="mark/disk(sx)" pos="48 96" size="normal" stroke="black"/>
+</group>
+<group matrix="0.9 0 0 0.9 4.8 9.6">
+<path stroke="black" fill="yellow" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
 </path>
-<path stroke="blue" fill="orange">
-10 62 m
-152 110 l
+<use name="mark/disk(sx)" pos="48 96" size="normal" stroke="black"/>
+</group>
+<group layer="delta">
+<use name="mark/disk(sx)" pos="96 80" size="normal" stroke="red"/>
+<path matrix="0.600696 0 0 0.600696 19.1666 38.3332" stroke="red" fill="lightred" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
 </path>
-<text layer="beta" matrix="1 0 0 1 8.07285 -0.966992" transformations="translations" pos="4 84" stroke="darkgreen" type="label" width="5.012" height="4.297" depth="1.93" valign="baseline" style="math">p</text>
+</group>
+<group matrix="0.9 0 0 0.9 9.6 8">
+<use name="mark/disk(sx)" pos="96 80" size="normal" stroke="red"/>
+<path matrix="0.600696 0 0 0.600696 19.1666 38.3332" stroke="red" fill="lightred" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
+</path>
+</group>
+<group matrix="0.81 0 0 0.81 18.24 15.2">
+<use name="mark/disk(sx)" pos="96 80" size="normal" stroke="red"/>
+<path matrix="0.600696 0 0 0.600696 19.1666 38.3332" stroke="red" fill="lightred" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
+</path>
+</group>
+<group matrix="0.71442 0 0 0.71442 27.4157 22.8464">
+<use name="mark/disk(sx)" pos="96 80" size="normal" stroke="red"/>
+<path matrix="0.600696 0 0 0.600696 19.1666 38.3332" stroke="red" fill="lightred" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
+</path>
+</group>
+<group matrix="0.729 0 0 0.729 26.016 21.68">
+<use name="mark/disk(sx)" pos="96 80" size="normal" stroke="red"/>
+<path matrix="0.600696 0 0 0.600696 19.1666 38.3332" stroke="red" fill="lightred" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
+</path>
+</group>
+<group layer="epsilon">
+<path stroke="black" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
+</path>
+<use name="mark/disk(sx)" pos="48 96" size="normal" stroke="black"/>
+</group>
+<group matrix="0.8 0 0 0.8 9.6 19.2">
+<path stroke="black" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
+</path>
+<use name="mark/disk(sx)" pos="48 96" size="normal" stroke="black"/>
+</group>
+<group matrix="0.72 0 0 0.72 13.44 26.88">
+<path stroke="black" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
+</path>
+<use name="mark/disk(sx)" pos="48 96" size="normal" stroke="black"/>
+</group>
+<group matrix="0.648 0 0 0.648 16.896 33.792">
+<path stroke="black" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
+</path>
+<use name="mark/disk(sx)" pos="48 96" size="normal" stroke="black"/>
+</group>
+<group matrix="0.600696 0 0 0.600696 19.1666 38.3332">
+<path stroke="black" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
+</path>
+<use name="mark/disk(sx)" pos="48 96" size="normal" stroke="black"/>
+</group>
+<group matrix="0.9 0 0 0.9 4.8 9.6">
+<path stroke="black" opacity="10%" stroke-opacity="opaque">
+16 112 m
+64 128 l
+128 112 l
+128 64 l
+112 48 l
+64 32 l
+16 80 l
+h
+</path>
+<use name="mark/disk(sx)" pos="48 96" size="normal" stroke="black"/>
+</group>
+<path layer="beta" stroke="purple" fill="lightblue" cap="1">
+48 96 m
+48 96 l
+h
+</path>
+<use name="mark/fdisk(sfx)" pos="48 96" size="normal" stroke="purple" fill="lightblue"/>
+<use name="mark/fdisk(sfx)" pos="96 80" size="normal" stroke="purple" fill="lightblue"/>
 </page>
 </ipe>

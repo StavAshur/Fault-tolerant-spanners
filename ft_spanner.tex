@@ -1054,8 +1054,10 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 
 \newcommand{\Trap}{\Mh{T}}%
 
-\section{A local spanner for narrow trapezoids}
-\seclab{traps}
+\section{A local spanner for nice polygons}
+
+\subsection{A good jump for narrow trapezoids}
+\seclab{traps:jump}
 
 As a reminder, a trapezoids is a quadrilateral with two parallel
 edges, known as its \emph{bases}. The other two edges are its legs.
@@ -1087,20 +1089,32 @@ if the length of each of its legs is at most $\eps \diamX{\Trap}$.
     \includegraphics{figs/narrow_trap}%
     \hfill%
     \includegraphics[page=2]{figs/narrow_trap}%
+    \hfill%
+    \includegraphics[page=3]{figs/narrow_trap}%
     \hfill\phantom{}%
+
+    \phantom{}\hfill%
+    (i)\qquad\qquad\qquad \hfill%
+    (ii) \hfill%
+    \qquad \qquad \qquad(iii) \hfill\phantom{}%
+
     \caption{}
     \figlab{narrow:trap}
 \end{figure}
 \begin{proof}
-    (I) Let $\DT = \DG_\CC(\PX \cup \PY)$.  \clmref{c:t:connected}
-    implies that $\DT \cap \Trp$ is connected. Thus, there is a path
-    in $\DT \cap \Trap$ between $\pa$ and $\pb$, and thus, there must
-    be an edge $\pa'\pb'$ along this path with $\pa' \in X$ and
-    $\pb' \in Y$.
+    Let $\DT = \DG_\CC(\PX \cup \PY)$.  \clmref{c:t:connected} implies
+    that $\DT \cap \Trap$ is connected. Thus, there is a path in
+    $\DT \cap \Trap$ between $\pa$ and $\pb$, and thus, there must be
+    an edge $\pa'\pb'$ along this path with $\pa' \in X$ and
+    $\pb' \in Y$. This implies part (I).
 
-    (II) Let $\ell = \dY{\pa'}{\pb'}$. Assume for concreteness that
-    $\diamX{\PX} \leq \epsA \dsY{\PX}{\PY} \leq \epsA \ell$. Let $\pb''$ be
-    the closest point on $\pa\pb$ to $\pb'$. We have that
+    Let $\ell = \dY{\pa'}{\pb'}$. Assume for concreteness that
+    $\dY{\pa}{\pa'} \leq \diamX{\PX} \leq \epsA \dsY{\PX}{\PY} \leq
+    \epsA \ell\leq \epsA \diamC$, where $\diamC=\diamX{\Trap}$. Let
+    $\pb''$ be the closest point on $\pa\pb$ to $\pb'$.
+
+    We first consider the case that $\pb'' \in \interiorX{\pa\pb}$.
+    We have that
     \begin{equation*}
         \dY{\pa}{\pb''}
         \geq
@@ -1148,18 +1162,117 @@ if the length of each of its legs is at most $\eps \diamX{\Trap}$.
       \leq%
       (1+\eps)\dY{\pa}{\pb},
     \end{align*}
-    for $\epsA \leq \eps/2$.
+    for $\epsA \leq \eps/2$. Which establish the claim in this case.
 
-    BUG: We are NOT using the narrowness of the trapezoid... 
+    The case that $\pb''=\pa$ is impossible, because of the angular
+    separation property. Thus, the only remaining possibility is that
+    $\pb'' = \pb$. This however implies that $\pb'$ must be in the
+    triangle of all the points of the trapezoids that their nearest
+    point on $\pa \pb$ is $\pb$. The diameter of this triangle is
+    bounded by the length of the leg of the trapezoid, which is
+    bounded by $\epsA \, \diamC$. Namely, we have
+    $\dY{\pb}{\pb'} \leq \epsA \diamC$. Similarly, we have
+    \begin{math}
+        (1 -  2\epsA) \diamC%
+        \leq%
+        \dY{\pa}{\pb}
+        \leq%
+        (1+2\epsA)\diamC.        
+    \end{math}
+    Since 
+    We  $\dY{\pa}{\pa'}, \dY{\pb}{\pb'} \leq \epsA \diamC$, it follows
+    that
+    \begin{equation*}
+        (1-4\epsA) \diamC%
+        \leq%
+        \ell%
+        \leq%
+        (1+4\epsA)\diamC.
+    \end{equation*}
+    As such, for $\epsA \leq \eps/16$ and $\eps \leq 1$, we have
+    \begin{align*}
+      (1+\eps)\dY{\pa}{\pa'} + \ell + (1+\eps)
+      \dY{\pb'}{\pb}
+      &\leq%
+        4 \epsA \diamC + (1+4\epsA)\diamC
+        =%
+        (1+8\epsA)(1+4\epsA) (1 -  2\epsA) \diamC
+      \\&
+      \hspace{-1cm}\leq%
+      (1+8\epsA)(1+4\epsA) \dY{\pa}{\pb}
+      \leq 
+      (1+16\epsA) \dY{\pa}{\pb}
+      \leq
+      (1+\eps) \dY{\pa}{\pb}.
+    \end{align*}
 \end{proof}
 
-XXX
+\subsection{A good jump for narrow triangles}
+\seclab{traps:jump}
+
+A trapezoid $\triangle$ is \emphi{$\epsA$-narrow} if the length of one
+of its edges at most $\epsA \diamX{\Trap}$, which is the \emphi{short}
+edge of $\triangle$, the vertex facing the short edge is the triangle
+\emphi{head}.
+
+\begin{lemma}
+    \lemlab{shrink:triangle}%
+    %
+    Let $\triangle$ be a triangle that contains two points $\pa,
+    \pb$. Then, there is a homothet $\triangle'\subseteq \triangle$ of
+    $\triangle$, such that,one of these points is a vertex of
+    $\triangle'$, and the other point lies on a facing edge of
+    $\triangle'$.
+\end{lemma}
+
+\begin{proof}
+    This follows by the same shrinking argument as
+    \lemref{shrink:shrank}, and is illustrated in 
+    \figref{shrink:triangle}.   
+\end{proof}
+
+\begin{figure}[h]
+    \includegraphics[page=1]{figs/narrow_triangle} \hfill
+    \includegraphics[page=2]{figs/narrow_triangle} \hfill
+    \includegraphics[page=3]{figs/narrow_triangle} \hfill
+    \includegraphics[page=4]{figs/narrow_triangle}
+    \caption{}
+    \figlab{shrink:triangle}
+\end{figure}
+
+\begin{lemma}
+    Let $\eps \in (0,1)$ be some parameter, and $\epsA = \eps/16$.
+    Let $\PX,\PY$ be two points sets that are $\epsA$-semi separated
+    and $\epsA$-angularly separated, and let $\triangle$ be
+    $\epsA$-narrow triangle, with two points $\pa \in \PX$ and
+    $\pb \in \PY$ on $\partial \triangle$, with $\pa$ located at the
+    head of $\triangle$, and $\pb$ on its short edge. Then, there is a
+    homothet $\triangle' \subseteq \triangle$ of $\triangle$, such
+    that:
+    \begin{compactenumI}
+        \item There are two points $\pa' \in \PX$ and $\pb' \in \PY$,
+        such that $\pa'\pb'$ is an edge of the $\triangle$-Delaunay
+        triangulation of $\PX \cup \PY$.
+
+        \item We have that
+        $(1+\eps)\dY{\pa}{\pa'} + \dY{\pa'}{\pb'} + (1+\eps)
+        \dY{\pb'}{\pb} \leq (1+\eps) \dY{\pa}{\pb}$.
+    \end{compactenumI}
+\end{lemma}
+\begin{proof}
+    Part (I) is a ready consequence of \clmref{c:t:connected}.  By
+    \lemref{shrink:triangle}, this edge is realized by a homothet
+    $\triangle' \subseteq \triangle$, such that (say) $\pa$ is a
+    vertex of $\triangle'$, and $\pb'$ is on the facing edge.
 
 
+    As for the second part
+    (II), observe that we can assume that $\pa'$
+\end{proof}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -1499,9 +1612,9 @@ disks, as illustrated in \figref{bad}.
 
 While local spanners for homothets of an arbitrary convex shape are
 costly, if we are given a triangle $\triangle$ with the single
-constraint that $\triangle$ isn't too ``thin'', one can construct a
-$\triangle$-local spanner with a number of edges that does not depend
-on the spread of the points. See \figref{tri_low_bd} for an
+constraint that $\triangle$ is not too ``thin'', then one can
+construct a $\triangle$-local spanner with a number of edges that does
+not depend on the spread of the points. See \figref{tri_low_bd} for an
 illustration of a construction showing that dependency if "thin"
 triangles are allowed.
 
@@ -1513,52 +1626,51 @@ triangles are allowed.
 \end{defn}
 
 
-\subsubsection{Construction}
+\subsection{Construction}
 \seclab{tri_construction}
+
 
 The input is a point set $\PS$ of $n$ points in the plane, an
 $\alpha$-fat triangle $\triangle$, and an approximation parameter
-$\eps \in (0,1)$. We assume that the smallest angle in $\triangle$ is
-of size $\alpha$. Let $c_1,c_2$ and $c_3$ be the 3 cones with an apex
-at the origin that coincide each with one of the angles of $\triangle$
-when translating its respective vertex to the origin. We also denote
-the orthogonal direction to the edge opposite of $\alpha_i$ by
-$v_i$. See \figref{tri_cones} for an illustration. Let $C_1,C_2$, and
-$C_3$ be partitions of each of these cones into cones of angle at most
-$O(\eps)\cdot \alpha$.
+$\eps \in (0,1)$. Let $v_i$ denote the $i$\th vertex of $\triangle$,
+$\alpha_i$ be the adjacent angle, and let $e_i$ denote the facing
+edges, for $i\in \IRX{3}$.  Let
+$\cone_i = \Set{ (\pa - v_i)t }{ \pa \in e_i \text{ and } t \geq 0}$
+denote the cone with an apex at the origin induced by the $i$\th
+vertex of $\triangle$.  Let $\dir_i$ be the outer normal of
+$\triangle$ orthogonal to $e_i$.  We assume that the smallest angle in
+$\triangle$ is at least $\alpha$.  See \figref{tri_cones} for an
+illustration. Let $\ConeSet_i$ be a minimum partition of $\cone_i$
+into cones each with angle in the range $[\beta, 2\beta]$, where
+$\beta = \eps \alpha/\constB$ and $\constB$ is a constant to be determined
+shortly.  For each point $\pa\in\PS$, and a cone
+$\cone \in \ConeSet_i$, let $\nnZ{i}{\pa}{\cone}$ be the first point
+in $(\PS - \pa)\cap ( \pa + \cone)$ ordered by the direction $\dir_i$.
 
-For each point $\pa\in\PS$ we create the set of cones $C_\pa$, which
-is the set of cones $C_1\cup C_2\cup C_3$ translated by $\pa$, and for
-each $c\in C_\pa$ we connect $\pa$ to the point $\pb\in c$ closest to
-$\pa$ in an ordering by $v_i$ (where $i$ corresponds to the set $C_i$
-that contains the un-translated copy of $c$).
-
-%
-% For each point we build Let $\eps = ???$.  The algorithm computes a
-% modified version of the $\theta$-graph (see \cite{c-aaspmp-87}). Let
-% $\triangle$ be a triangle, and let $h_1,h_2$ and $h_3$ be the three
-% half planes such that $h_1\cap h_2\cap h_3 = \triangle$, and let
-% $c_{ij}$ be the cone created by taking the intersection of th
-% halfplanes $h_i$ and $h_j$, and translating the apex of that
-% intersection to the origin. We now divide each of the three cones
-% into sub cones of angle at most $\eps$. Let $C$ be the resulted set
-% of cones.
-%
-% The rest of the construction follows that of the $\theta$-graph with
-% the set of cones $C$. For every $\pa\in\PS$ we create
-% $C_p = \{c+\pa ~|~ c\in C\}$, and for every $c\in C_p$ we connect
-% $\pa$ to the point $c$ whose projection on the bisector of $c$ is
-% closest to $\pa$.
+\paragraph{The construction}
+Let $\G$ be the graph over $\PS$ formed by connecting all points
+$\pa \in \PS$ to $\nnZ{i}{\pa}{\cone}$, for all $i \in \IRX{3}$ and
+$\cone \in \ConeSet_i$.
 
 
 \begin{figure}[h]
-    \centering \includegraphics{figs/triangle_cones}
+    \centering \phantom{}%
+    \hfill%
+    \includegraphics[page=1]{figs/triangle_cones}%
+    \hfill%
+    \includegraphics[page=2]{figs/triangle_cones}%
+    \hfill%
+    \phantom{}%
     \caption{For the triangle $\triangle$ with angles
        $\alpha_1,\alpha_2$, and $\alpha_3$ we create the cones
        $c_1,c_2$, and $c_3$.}
     \figlab{tri_cones}
 \end{figure}
-\subsubsection{Analysis}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+\subsection{Analysis}
 
 
 \paragraph{Shrinking triangles}
@@ -1568,213 +1680,299 @@ the construction above (\secref{tri_construction}), and the second
 deals with triangle shrinking.
 
 
+
+
+
 \begin{lemma}
     \lemlab{cone_edge:triangles}%
-	%
-    Let $\pa,\pb,\pc\in \PS$ such that the edge $\{\pa, \pc\}$ was
-    added to the graph for the cone $c$ with apex at $\pa$, and such
-    that $\pc\in c$ (as well as $\pa$ and $\pb$).
-
-    We get that
-    \begin{enumerate}
-        \item { $ \dY{\pa}{\pc}%
-           +%
-           (1+\eps)\dY{\pb}{\pc}%
-           \leq%
-           (1+\eps)\dY{\pa}{\pb}%
-           $ ,and }
-        \item { $ \dY{\pa}{\pc}%
-           \leq%
-           \dY{\pa}{\pb}%
-           $.  }
-    \end{enumerate}
-
-
-
+    %
+    Let $\pa \in \PS$, $\cone \in \ConeSet_i$, and
+    $\pc =\nnZ{i}{\pa}{\cone}$, and let $\pb$ be a point in
+    $(\PS \cap (\pa + \cone)) \setminus \{\pa, \pc\}$.
+    We have that 
+    \begin{equation*}
+        \dY{\pa}{\pc}%
+        +%
+        (1+\eps)\dY{\pb}{\pc}%
+        \leq%
+        (1+\eps)\dY{\pa}{\pb}.
+    \end{equation*}
 \end{lemma}
 
 \begin{proof}
     We denote the smallest angle of the triangle $\triangle$ by
     $\alpha$.  Consider the triangle $\Delta\pa\pb\pc$ and denote the
     angles at $\pa,\pb,$ and $\pc$ by $\theta_\pa,\theta_\pb,$ and
-    $\theta_\pc$ respectively.
-
-    We now consider two possible cases, either
-    $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$ or
-    $\dY{\pa}{\pb}> \dY{\pa}{\pc}$. Notice that since the angle of the
-    cone $c$, and therefore $\theta_\pa$ as well, is smaller than the
-    smallest angle of $\triangle$, we have that
+    $\theta_\pc$ respectively.  Since the angle of $\cone$ is smaller
+    than $60$ degrees, we have that
     $\dY{\pb}{\pc}\leq \max \{\dY{\pa}{\pc},\dY{\pa}{\pb}\}$.
 
-    $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$: Denote by $\pb'$ the projection
-    of $\pb$ on $\overline{\pa\pc}$. We have that
+    \newpage
+    
+    \begin{figure}[h]
+        \centering \includegraphics{figs/triangle_cone_edge}
+        \caption{The two cases of \lemref{cone_edge:triangles}. The vector
+           used to determine the edge in the cone is shown in red, and
+           marked $\vec{v}$}
+        \figlab{tri_cone_edge}
+    \end{figure}
 
-	$$
-	\dY{\pb}{\pb'}%
-	=%
-	\sin\theta_\pa \dY{\pa}{\pb}%
-	=%
-	\sin\theta_\pc \dY{\pb}{\pc}%
-	\implies%
-	\dY{\pb}{\pc}%
-	= \frac{\sin\theta_\pa}{\sin\theta_\pc}\dY{\pa}{\pb}%
-	$$
+    Consider the case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$.
+    Consider the angles $\theta_\pa = \angle \pc \pa \pb$,
+    $\theta_\pc = \angle \pa \pc \pb$, and
+    $\theta_\pb = \angle \pa \pb \pc$.  Observe that
+    $\theta_\pc \leq \theta_\pb$ as $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$.
+    As such $\theta_\pc \leq \pi/2$.  Furthermore,
+    $\theta_\pc \geq \alpha \gg \eps \alpha/\constB = \beta \geq
+    \theta_\pa$. Similarly, $\theta_\pb \in [\alpha, \pi -\alpha]$.
+    By the $1$-Lipshitz of $\sin$, and as $\sin x \approx x$,
+    for small $x$, and for $\constB$ sufficiently large. we have that
+    \begin{equation*}
+        \sin( \theta_\pb + \theta_\pa) \in [1-\eps/4, 1+\eps/4] \sin
+        \theta_\pb%
+        \qquad\text{and}\qquad
+        \sin \theta_\pa \leq (\eps/4) \sin \theta_\pc.
+    \end{equation*}
+    As such, by the
+    law of sines, we have that
+    \begin{math}
+        \frac{\dY{\pb}{ \pc}}{\sin{\theta_\pa}}%
+        =%
+        \frac{\dY{\pa}{ \pb}}{\sin{\theta_\pc}}%
+        =%
+        \frac{\dY{\pa}{ \pc}}{\sin{\theta_\pb}}.%        
+    \end{math}
+    This implies that
+    \begin{equation*}
+        \dY{\pa}{\pc}%
+        +%
+        (1+\eps)\dY{\pb}{\pc}%
+        =%
+        \pth{\frac{\sin{\theta_\pb}}{\sin{\theta_\pc}} +(1+\eps)
+           \frac{\sin{\theta_\pa}}{\sin{\theta_\pc}} }\dY{\pa}{ \pb}.        
+    \end{equation*}
+    Observe, by the above that
+    \begin{equation*}
+        \frac{\sin{\theta_\pb}}{\sin{\theta_\pc}}
+        +(1+\eps)
+        \frac{\sin{\theta_\pa}}{\sin{\theta_\pc}}        
+        \leq
+        \frac{\sin{\theta_\pb}}{\sin{\pth{\theta_\pa + \theta_\pb}}}
+        +(1+\eps)
+        \frac{\eps}{4}
+        \leq%
+        \frac{\sin{\theta_\pb}}{(1-\eps/4)\sin{\pth{\theta_\pb}}}
+        +(1+\eps)
+        \frac{\eps}{4}
+        \leq%
+        1+\eps.
+    \end{equation*}
 
-	$$ \dY{\pa}{\pc}%
-	=%
-	\dY{\pa}{\pb'}%
-	+%
-	\dY{\pb'}{\pc}%
-	=%
-	\cos\theta_\pa \dY{\pa}{\pb}%
-	+%
-	\cos\theta_\pc \dY{\pb}{\pc}%
-	=%
-	\cos\theta_\pa \dY{\pa}{\pb}%
-	+%
-	\frac{\sin\theta_\pa}{\sin\theta_\pc}\dY{\pa}{\pb}%
-	=%
-	(\cos\theta_\pa +
-        \frac{\sin\theta_\pa}{\sin\theta_\pc})\dY{\pa}{\pb}
-	$$
-
-	We use these equalities and get that:
-
-	$$
-	\dY{\pa}{\pc}%
-	+%
-	(1+\eps)\dY{\pb}{\pc}%
-	\leq%
-	(1+\eps)\dY{\pa}{\pb}%
-	$$
-
-	$$
-	\iff%
-	\dY{\pa}{\pb}(\cos\theta_\pa +
-        \frac{\sin\theta_\pa}{\sin\theta_\pc})%
-	+%
-	(1+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}\dY{\pa}{\pb}%
-	\leq%
-	(1+\eps)\dY{\pa}{\pb}%
-	$$
-
-	$$
-	\iff%
-	(\cos\theta_\pa + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
-	+%
-	(1+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}%
-	\leq%
-	(1+\eps)%
-	$$
-
-	$$
-	\impliedby%
-	(1 + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
-	+%
-	(1+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}%
-	\leq%
-	(1+\eps)%
-	$$
-
-	$$
-	\iff%
-	(2+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}%
-	\leq%
-	\eps%
-	\iff%
-	\frac{\sin\theta_\pa}{\sin\theta_\pc}%
-	\leq%
-	\frac{\eps}{2+\eps}%
-	=%
-	O(\eps)%
-	$$
-
-	The last piece of this part is the fact that point $\pc$ was
-        chosen by being the first point in the cone $c$ encountered by
-        a line parallel to the edge opposite of $\pa$. See the red
-        line and direction in \figref{tri_cone_edge}. This implies
-        that the angle $\theta_\pc$ is at least $\alpha$, and the
-        result then follows.
-
-	$\dY{\pa}{\pb}< \dY{\pa}{\pc}$: Denote by $\pc'$ the
-        projection of $\pc$ on $\overline{\pa\pb}$. We have that
-
-	$$
-	\dY{\pb}{\pc}%
-	\leq%
-	\dY{\pc}{\pc'}%
-	+%
-	\dY{\pb}{\pc'}%
-	=%
-	\sin\theta_\pa\dY{\pa}{\pc}%
-	+%
-	(\dY{\pa}{\pb}-\dY{\pb}{\pc'})%
-	$$
-
-	$$
-	\implies%
-	\dY{\pb}{\pc}%
-	\leq%
-	\sin\theta_\pa\dY{\pa}{\pc}%
-	+%
-	(\dY{\pa}{\pb}-\cos\theta_\pa\dY{\pa}{\pc})%
-	$$
-
-	$$
-	\implies%
-	\dY{\pa}{\pc} +%
-	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}\dY{\pb}{\pc}%
-	\leq%
-	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}\dY{\pa}{\pb}
-	$$
-
-	Which means that
-
-	$$
-	\dY{\pa}{\pc}%
-	+%
-	(1+\eps)\dY{\pb}{\pc}%
-	\leq%
-	(1+\eps)\dY{\pa}{\pb}%
-	\iff%
-	\frac{1}{\cos\theta_\pa-\sin\theta_\pa}%
-	\leq%
-	1+\eps%
-	$$
+    \medskip The other possibility is that
+    $\dY{\pa}{\pb} > \dY{\pa}{\pc}$.  Let $\pc'$ be the projection of
+    $\pc$ to $\pa \pb$. Observe that
+    \begin{equation*}
+        \dY{\pc}{\pc'} \leq \dY{\pa}{\pc'} \tan \sin \Theta_\pa \leq
+        2\beta\dY{\pa}{\pc'} \leq (\eps/8) \dY{\pa}{\pc'}.
+    \end{equation*}
+  Observe that
+    $\cos \theta_\pa \geq 1 - (\theta_\pa)^2/2 \leq 1+\eps^2/4$ as
+    $\theta_\pa$ is an angle smaller than (say) $\eps/16$.  We thus
+    have that
+    \begin{equation*}
+        \dY{\pa}{\pc}%
+        +%
+        (1+\eps)\dY{\pb}{\pc}%
+        \leq%
+        \frac{\dY{\pa}{\pc'}}{\cos \theta_\pa }
+        +(1+\eps)\pth{ \Bigl.
+           \dY{\pc}{\pc'} + \dY{\pc'}{\pb}}
+        \leq %
+        (1+\eps^2/4)\dY{\pa}{\pc'}
+        + (1+\eps)\pth{\Bigl. (\eps/8) \dY{\pa}{\pc'}+ \dY{\pc'}{\pb}}
+    \end{equation*}
+    
 
 
-	Since $\theta_\pa = O(\eps\alpha)$ we get that for a
-        sufficiently large constant the condition
-        $\frac{1}{\cos\theta_\pa-\sin\theta_\pa} \leq 1+\eps$ holds.
-
- 	The second part of the lemma is derived from the first:
-
-	$$
-	\dY{\pa}{\pc}%
-	+%
-	(1+\eps)\dY{\pb}{\pc}%
-	\leq%
-	(1+\eps)\dY{\pa}{\pb}%
-	\iff%
-	\dY{\pb}{\pc}%
-	\leq%
-	\dY{\pa}{\pb}%
-	-%
-	\frac{\dY{\pa}{\pc}}{(1+\eps)}%
-	\leq%
-	\dY{\pa}{\pb}%
-	$$
+    
+    \begin{equation*}
+        \dY{\pa}{\pc}%
+        +%
+        (1+\eps)\dY{\pb}{\pc}%
+        =%        
+        \leq%
+        (1+\eps)\dY{\pa}{\pb}.
+    \end{equation*}
+    
+    \begin{equation*}
+        sin(\alpha + \beta) = \sin \alpha \cos \beta + \cos \alpha \sin \beta
+    \end{equation*}
 
 
-    \end{proof}
+    Let
+    Consider the case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$.  Let
+    $\pb'$ the projection of $\pb$ on $\pa\pc$. We have that
+    \begin{equation*}
+        \dY{\pb}{\pb'}%
+        =%
+        \dY{\pa}{\pb} \sin \beta%
+        =%
+        \sin\theta_\pc \dY{\pb}{\pc}%
+        \implies%
+        \dY{\pb}{\pc}%
+        = \frac{\sin\theta_\pa}{\sin\theta_\pc}\dY{\pa}{\pb}%        
+    \end{equation*}
+    
+    \begin{align*}
+      \dY{\pa}{\pc}%
+      &=%
+        \dY{\pa}{\pb'}%
+        +%
+        \dY{\pb'}{\pc}%
+        =%
+        \cos\theta_\pa \dY{\pa}{\pb}%
+        +%
+        \cos\theta_\pc \dY{\pb}{\pc}%
+        =%
+      \\&
+        \cos\theta_\pa \dY{\pa}{\pb}%
+      +%
+      \frac{\sin\theta_\pa}{\sin\theta_\pc}\dY{\pa}{\pb}%
+      =%
+      (\cos\theta_\pa +
+      \frac{\sin\theta_\pa}{\sin\theta_\pc})\dY{\pa}{\pb}        
+    \end{align*}
+    
+    
+    We use these equalities and get that:
+    
+    $$
+    \dY{\pa}{\pc}%
+    +%
+    (1+\eps)\dY{\pb}{\pc}%
+    \leq%
+    (1+\eps)\dY{\pa}{\pb}%
+    $$
+    
+    $$
+    \iff%
+    \dY{\pa}{\pb}(\cos\theta_\pa +
+    \frac{\sin\theta_\pa}{\sin\theta_\pc})%
+    +%
+    (1+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}\dY{\pa}{\pb}%
+    \leq%
+    (1+\eps)\dY{\pa}{\pb}%
+    $$
+    
+    $$
+    \iff%
+    (\cos\theta_\pa + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
+    +%
+    (1+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}%
+    \leq%
+    (1+\eps)%
+    $$
+    
+    $$
+    \impliedby%
+    (1 + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
+    +%
+    (1+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}%
+    \leq%
+    (1+\eps)%
+    $$
+    
+    $$
+    \iff%
+    (2+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}%
+    \leq%
+    \eps%
+    \iff%
+    \frac{\sin\theta_\pa}{\sin\theta_\pc}%
+    \leq%
+    \frac{\eps}{2+\eps}%
+    =%
+    O(\eps)%
+    $$
+    
+    The last piece of this part is the fact that point $\pc$ was
+    chosen by being the first point in the cone $c$ encountered by a
+    line parallel to the edge opposite of $\pa$. See the red line and
+    direction in \figref{tri_cone_edge}. This implies that the angle
+    $\theta_\pc$ is at least $\alpha$, and the result then follows.
+    
+    $\dY{\pa}{\pb}< \dY{\pa}{\pc}$: Denote by $\pc'$ the projection of
+    $\pc$ on $\overline{\pa\pb}$. We have that
+    
+    $$
+    \dY{\pb}{\pc}%
+    \leq%
+    \dY{\pc}{\pc'}%
+    +%
+    \dY{\pb}{\pc'}%
+    =%
+    \sin\theta_\pa\dY{\pa}{\pc}%
+    +%
+    (\dY{\pa}{\pb}-\dY{\pb}{\pc'})%
+    $$
+    
+    $$
+    \implies%
+    \dY{\pb}{\pc}%
+    \leq%
+    \sin\theta_\pa\dY{\pa}{\pc}%
+    +%
+    (\dY{\pa}{\pb}-\cos\theta_\pa\dY{\pa}{\pc})%
+    $$
+    
+    $$
+    \implies%
+    \dY{\pa}{\pc} +%
+    \frac{1}{\cos\theta_\pa-\sin\theta_\pa}\dY{\pb}{\pc}%
+    \leq%
+    \frac{1}{\cos\theta_\pa-\sin\theta_\pa}\dY{\pa}{\pb}
+    $$
+    
+    Which means that
+    
+    $$
+    \dY{\pa}{\pc}%
+    +%
+    (1+\eps)\dY{\pb}{\pc}%
+    \leq%
+    (1+\eps)\dY{\pa}{\pb}%
+    \iff%
+    \frac{1}{\cos\theta_\pa-\sin\theta_\pa}%
+    \leq%
+    1+\eps%
+    $$
+    
+    
+    Since $\theta_\pa = O(\eps\alpha)$ we get that for a sufficiently
+    large constant the condition
+    $\frac{1}{\cos\theta_\pa-\sin\theta_\pa} \leq 1+\eps$ holds.
+    
+    The second part of the lemma is derived from the first:
+    
+    $$
+    \dY{\pa}{\pc}%
+    +%
+    (1+\eps)\dY{\pb}{\pc}%
+    \leq%
+    (1+\eps)\dY{\pa}{\pb}%
+    \iff%
+    \dY{\pb}{\pc}%
+    \leq%
+    \dY{\pa}{\pb}%
+    -%
+    \frac{\dY{\pa}{\pc}}{(1+\eps)}%
+    \leq%
+    \dY{\pa}{\pb}%
+    $$
+    
+    
+\end{proof}
 
-\begin{figure}[h]
-    \centering \includegraphics{figs/triangle_cone_edge}
-    \caption{The two cases of \lemref{cone_edge:triangles}. The vector
-       used to determine the edge in the cone is shown in red, and
-       marked $\vec{v}$}
-    \figlab{tri_cone_edge}
-\end{figure}
 \subsubsection{Analysis}
 
 We first prove a ``shrinking lemma'' similar to those in
@@ -1782,7 +1980,7 @@ We first prove a ``shrinking lemma'' similar to those in
 
 \begin{lemma}
     \lemlab{shrink:triangles}%
-	%
+    % 
     Let $\triangle$ be a triangle in the plane, and let $\pa, \pb$ be
     two arbitrary points in $\triangle$. Then, there is a triangle
     $\triangle' \subseteq \triangle$ that contains one of $\pa$ and

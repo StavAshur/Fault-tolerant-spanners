@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.23">
-<info created="D:20211018130324" modified="D:20211025131736"/>
+<info created="D:20211025140149" modified="D:20211025155613"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -961,118 +961,94 @@ h
 <preamble>
 \def\ipeMode{TRUE}
 </preamble>
-<layout crop="yes" paper="144 144" origin="0 0" frame="144 144"/>
+<layout paper="144 144" origin="0 0" frame="144 144"/>
 </ipestyle>
-<ipestyle name="5in">
-<layout crop="yes" paper="360 360" origin="0 0" frame="360 360"/>
+<ipestyle name="4in page style">
+<layout paper="288 288" origin="0 0" frame="288 288"/>
 </ipestyle>
 <page>
 <layer name="alpha"/>
 <layer name="beta"/>
-<layer name="gamma"/>
+<layer name="points"/>
 <layer name="delta"/>
+<layer name="gamma"/>
+<layer name="epsilon"/>
 <layer name="VIEWBBOX"/>
-<view layers="alpha VIEWBBOX" active="alpha"/>
-<view layers="beta gamma VIEWBBOX" active="beta"/>
-<view layers="delta VIEWBBOX" active="delta"/>
-<view layers="alpha beta gamma delta VIEWBBOX" active="delta"/>
-<path layer="delta" stroke="black" fill="blue" opacity="50%" stroke-opacity="opaque">
-238.578 132.579 m
-263.87 132.592 l
-233.931 105.678 l
+<view layers="points gamma VIEWBBOX" active="points"/>
+<view layers="alpha points VIEWBBOX" active="gamma"/>
+<view layers="points delta VIEWBBOX" active="epsilon"/>
+<view layers="points epsilon VIEWBBOX" active="epsilon"/>
+<view layers="points epsilon VIEWBBOX" active="epsilon"/>
+<view layers="alpha beta points delta gamma epsilon VIEWBBOX" active="beta"/>
+<path layer="alpha" matrix="1.28 0 0 1.28 30.08 0.712184" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
 h
 </path>
-<path matrix="0 0.297 -0.297 0 259.674 103.567" stroke="red">
-7.1093 86.6747 m
-110.102 68.8843 l
-</path>
-<path matrix="0 0.297 -0.297 0 254.39 72.978" stroke="red">
-7.1093 86.6747 m
-110.102 68.8843 l
-</path>
-<path matrix="0 0.297 -0.297 0 152.427 90.5905" stroke="red">
-7.1093 86.6747 m
-110.102 68.8843 l
-</path>
-<path matrix="0 0.297 -0.297 0 157.711 121.18" stroke="red">
-7.1093 86.6747 m
-110.102 68.8843 l
-</path>
-<path matrix="0.99 0 0 0.99 124.93 37.4829" stroke="red">
-7.1093 86.6747 m
-110.102 68.8843 l
-</path>
-<path layer="gamma" matrix="0.99 0 0 0.99 1.3658 1.05739" fill="yellow" opacity="20%" stroke-opacity="opaque">
-8 98 m
-148.508 57.1094 l
-152 110 l
-10 62 l
+<use layer="beta" matrix="0.64 0 0 0.64 40.32 51.4287" name="mark/fdisk(sfx)" pos="48.1125 95.9813" size="normal" stroke="black" fill="yellow"/>
+<use matrix="0.64 0 0 0.64 40.32 51.4287" name="mark/fdisk(sfx)" pos="85.8864 112.464" size="normal" stroke="black" fill="yellow"/>
+<path layer="alpha" matrix="1.0368 0 0 1.0368 45.6448 27.7668" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
 h
 </path>
-<path layer="beta" matrix="0.99 0 0 0.99 1.3658 1.05739" stroke="black" fill="orange">
-16 90 m
-143.431 83.8823 l
+<path matrix="0.872467 0 0 0.872467 56.1621 46.048" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
 </path>
-<path layer="alpha" matrix="0.99 0 0 0.99 21.5053 -6.86264" stroke="black" fill="orange" opacity="20%" stroke-opacity="opaque">
-4 80 m
-132 80 l
-120 96 l
-0 96 l
-4 80 l
+<path layer="delta" matrix="0.872467 0 0 0.872467 56.1621 46.048" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
 </path>
-<path matrix="0.693 0 0 0.693 31.9624 18.0628" stroke="black" fill="orange" opacity="20%" stroke-opacity="opaque">
-4 80 m
-132 80 l
-120 96 l
-0 96 l
-4 80 l
+<path matrix="0.83296 0 0 0.83296 60.5867 49.5244" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
 </path>
-<use matrix="0.99 0 0 0.99 17.2058 -6.86264" name="mark/fdisk(sfx)" pos="6.58126 87.0464" size="normal" stroke="darkgreen" fill="green"/>
-<use matrix="0.99 0 0 0.99 17.2058 -6.86264" name="mark/fdisk(sfx)" pos="127.431 91.8823" size="normal" stroke="brown" fill="pink"/>
-<text matrix="0.99 0 0 0.99 11.968 -9.04945" transformations="translations" pos="4 84" stroke="darkgreen" type="label" valign="baseline" style="math">p</text>
-<text matrix="0.99 0 0 0.99 25.828 -18.9495" transformations="translations" pos="4 84" stroke="darkgreen" type="label" valign="baseline" style="math">p&apos;</text>
-<text matrix="0.99 0 0 0.99 118.219 -3.40907" transformations="translations" pos="4 84" stroke="red" type="label" valign="baseline" style="math">q&apos;</text>
-<text matrix="0.99 0 0 0.99 144.628 -1.12945" transformations="translations" pos="4 84" stroke="red" type="label" valign="baseline" style="math">q</text>
-<path matrix="0.99 0 0 0.99 1.3658 1.05739" stroke="purple" fill="green">
-33.1075 75.57 m
-117.425 81.018 l
+<path matrix="0.792294 0 0 0.792294 65.1415 53.1032" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
 </path>
-<use matrix="0.99 0 0 0.99 17.2058 -6.86264" name="mark/fdisk(sfx)" pos="17.1075 83.57" size="normal" stroke="darkgreen" fill="green"/>
-<use matrix="0.99 0 0 0.99 17.2058 -6.86264" name="mark/fdisk(sfx)" pos="101.425 89.018" size="normal" stroke="brown" fill="pink"/>
-<text matrix="0.99 0 0 0.99 -21.2712 -1.4234" transformations="translations" pos="63.8055 79.5824" stroke="purple" type="label" valign="baseline" style="math">\ell</text>
-<use layer="beta" matrix="0.99 0 0 0.99 10.6903 3.98141" name="mark/fdisk(sfx)" pos="6.58126 87.0464" size="normal" stroke="darkgreen" fill="green"/>
-<use matrix="0.99 0 0 0.99 17.2058 -6.86264" name="mark/fdisk(sfx)" pos="127.431 91.8823" size="normal" stroke="brown" fill="pink"/>
-<text matrix="0.99 0 0 0.99 21.868 -9.04945" transformations="translations" pos="4 84" stroke="darkgreen" type="label" valign="baseline" style="math">p&apos;</text>
-<text matrix="0.99 0 0 0.99 117.692 -15.9648" transformations="translations" pos="4 84" stroke="red" type="label" valign="baseline" style="math">q&apos;</text>
-<text matrix="0.99 0 0 0.99 138.048 7.50614" transformations="translations" pos="4 84" stroke="red" type="label" valign="baseline" style="math">q</text>
-<path matrix="0.99 0 0 0.99 1.3658 1.05739" stroke="purple" fill="green">
-33.1075 75.57 m
-123.5 75.5826 l
+<path layer="gamma" matrix="1.28 0 0 1.28 30.08 0.712184" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
 </path>
-<use matrix="0.99 0 0 0.99 17.2058 -6.86264" name="mark/fdisk(sfx)" pos="17.1075 83.57" size="normal" stroke="darkgreen" fill="green"/>
-<use matrix="0.99 0 0 0.99 23.2199 -12.2437" name="mark/fdisk(sfx)" pos="101.425 89.018" size="normal" stroke="brown" fill="pink"/>
-<text matrix="0.99 0 0 0.99 -4.28396 -9.65325" transformations="translations" pos="63.8055 79.5824" stroke="purple" type="label" valign="baseline" style="math">\ell</text>
-<use matrix="0.99 0 0 0.99 1.55445 2.8373" name="mark/fdisk(sfx)" pos="122.902 83.0608" size="normal" stroke="black" fill="orange"/>
-<text matrix="0.99 0 0 0.99 1.3658 1.05739" transformations="translations" pos="120.905 90.3612" stroke="black" type="label" valign="baseline" style="math">q&apos;&apos;</text>
-<path layer="gamma" matrix="0.99 0 0 0.99 1.3658 1.05739" stroke="blue" fill="orange">
-8 98 m
-148.508 57.1094 l
+<path layer="epsilon" matrix="0.792294 0 0 0.792294 65.1415 53.1032" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
 </path>
-<path matrix="0.99 0 0 0.99 1.3658 1.05739" stroke="blue" fill="orange">
-10 62 m
-152 110 l
+<path matrix="0.715046 0 0 0.715046 66.3775 59.9011" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
 </path>
-<text layer="beta" matrix="0.99 0 0 0.99 9.35785 0.100038" transformations="translations" pos="4 84" stroke="darkgreen" type="label" valign="baseline" style="math">p</text>
-<path layer="delta" matrix="0.99 0 0 0.99 124.93 37.4829" stroke="black" fill="orange" opacity="20%" stroke-opacity="opaque">
-24.3429 64.0695 m
-104.746 64.0695 l
-140.343 96.0695 l
-0 96 l
-24.3429 64.0695 l
+<path matrix="0.752678 0 0 0.752678 65.7754 56.5893" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
 </path>
-<use matrix="0.99 0 0 1.98 125.453 -49.061" name="mark/fdisk(sfx)" pos="6.58126 87.0464" size="normal" stroke="darkgreen" fill="green"/>
-<text matrix="0.99 0 0 1.98 117.76 -52.9045" transformations="translations" pos="4 84" stroke="darkgreen" type="label" valign="baseline" style="math">p</text>
-<use matrix="0.99 0 0 1.98 107.775 -76.2486" name="mark/fdisk(sfx)" pos="127.431 91.8823" size="normal" stroke="brown" fill="pink"/>
-<text matrix="0.99 0 0 1.98 232.796 -63.8182" transformations="translations" pos="4 84" stroke="red" type="label" valign="baseline" style="math">q</text>
+<path matrix="0.679296 0 0 0.679296 66.9496 63.0473" stroke="darkgreen" fill="green" pen="fat" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
+</path>
+<use layer="points" matrix="0.64 0 0 0.64 40.4662 51.1451" name="mark/fdisk(sfx)" pos="160 112" size="normal" stroke="darkred" fill="gold"/>
+<use matrix="0.64 0 0 0.64 40.32 51.4287" name="mark/fdisk(sfx)" pos="80 128" size="normal" stroke="darkred" fill="gold"/>
 </page>
 </ipe>

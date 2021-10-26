@@ -8,6 +8,7 @@
 % Conditional compilation depending on whether this is my computer or
 % not.
 \IfFileExists{sariel_computer.sty}{\def\sarielComp{1}}{}
+
 \ifx\sarielComp\undefined%
 \newcommand{\SarielComp}[1]{}
 \newcommand{\NotSarielComp}[1]{#1}%
@@ -16,6 +17,7 @@
 \newcommand{\NotSarielComp}[1]{}%
 \fi
 \newcommand{\IfPrinterVer}[2]{#2}%
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
@@ -26,9 +28,6 @@
 \usepackage[cmyk]{xcolor}%
 \usepackage[utf8x]{inputenc}
 \usepackage{euscript}%
-% \usepackage{xcolor}%
-
-\SarielComp{\usepackage{sariel_colors}}%
 
 \usepackage[amsmath,thmmarks]{ntheorem}%
 \theoremseparator{.}%
@@ -60,6 +59,8 @@
 \usepackage{hyperref}%
 
 \usepackage{caption}%
+
+\SarielComp{\usepackage{sariel_colors}}%
 
 \newcommand{\hrefb}[3][black]{\href{#2}{\color{#1}{#3}}}%
 
@@ -202,7 +203,7 @@
 \newcommand{\clientsY}[2]{\Mh{\mathsf{C}}\pth{#1,#2}}
 
 \newcommand{\DW}{\times}
-\newcommand{\ConeSet}{\Mh{\mathcal{C}}}%
+%\newcommand{\ConeSet}{\Mh{\mathcal{C}}}%
 \newcommand{\shrinkDY}[2]{#1_{\boxminus #2}}
 \newcommand{\Rects}{\Mh{\mathcal{R}}}%
 
@@ -499,6 +500,17 @@
 \newcommand{\Binfty}{\Mh{\mathcalb{b}_\infty}}%
 
 \newcommand{\constA}{c_1}
+\newcommand{\constB}{c_2}
+
+%\newcommand{\interiorX}{\mathrm{int}\pth{#1}}
+\newcommand{\diamC}{\Mh{\mathcalb{d}}}%
+
+\newcommand{\cone}{\Mh{\mathcalb{c}}}%
+\newcommand{\ConeSet}{\Mh{\EuScript{C}}}%
+\newcommand{\dir}{\Mh{\mathsf{d}}}
+\newcommand{\nnZ}[3]{\Mh{\mathsf{nn}}_{#1} \pth{#2, #3}}
+
+\newcommand{\normX}[1]{\left\| #1 \right\|}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%EndIpePreamble

@@ -57,6 +57,7 @@
 \usepackage{mleftright}%
 \usepackage{xspace}%
 \usepackage{hyperref}%
+%\usepackage{marvosym}%
 
 \usepackage{caption}%
 
@@ -328,7 +329,10 @@
 
 \newcommand{\dGY}[2]{\Mh{\mathsf{d}}\pth{#1,#2}}%
 \newcommand{\dGZ}[3]{\Mh{\mathsf{d}_{#1}}\pth{#2,#3}}%
-\newcommand{\dY}[2]{\left\| #1 - #2 \right\|}%
+\newcommand{\dY}[2]{\left\| #1  #2 \right\|}%
+\newcommand{\ddY}[2]{\left\| #1 - #2 \right\|}%
+
+\newcommand{\angleX}[1]{#1_\sphericalangle}
 
 
 \newcommand{\dsZ}[3]{\Mh{\mathsf{d}}_{#1}\pth{#2, #3}}%

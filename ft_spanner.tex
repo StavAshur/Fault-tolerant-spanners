@@ -1626,33 +1626,6 @@ triangles are allowed.
 \end{defn}
 
 
-\subsection{Construction}
-\seclab{tri_construction}
-
-
-The input is a point set $\PS$ of $n$ points in the plane, an
-$\alpha$-fat triangle $\triangle$, and an approximation parameter
-$\eps \in (0,1)$. Let $v_i$ denote the $i$\th vertex of $\triangle$,
-$\alpha_i$ be the adjacent angle, and let $e_i$ denote the facing
-edges, for $i\in \IRX{3}$.  Let
-$\cone_i = \Set{ (\pa - v_i)t }{ \pa \in e_i \text{ and } t \geq 0}$
-denote the cone with an apex at the origin induced by the $i$\th
-vertex of $\triangle$.  Let $\dir_i$ be the outer normal of
-$\triangle$ orthogonal to $e_i$.  We assume that the smallest angle in
-$\triangle$ is at least $\alpha$.  See \figref{tri_cones} for an
-illustration. Let $\ConeSet_i$ be a minimum partition of $\cone_i$
-into cones each with angle in the range $[\beta, 2\beta]$, where
-$\beta = \eps \alpha/\constB$ and $\constB$ is a constant to be determined
-shortly.  For each point $\pa\in\PS$, and a cone
-$\cone \in \ConeSet_i$, let $\nnZ{i}{\pa}{\cone}$ be the first point
-in $(\PS - \pa)\cap ( \pa + \cone)$ ordered by the direction $\dir_i$.
-
-\paragraph{The construction}
-Let $\G$ be the graph over $\PS$ formed by connecting all points
-$\pa \in \PS$ to $\nnZ{i}{\pa}{\cone}$, for all $i \in \IRX{3}$ and
-$\cone \in \ConeSet_i$.
-
-
 \begin{figure}[h]
     \centering \phantom{}%
     \hfill%
@@ -1668,19 +1641,39 @@ $\cone \in \ConeSet_i$.
 \end{figure}
 
 
+\subsection{Construction}
+\seclab{tri_construction}
+
+
+The input is a set $\PS$ of $n$ points in the plane, an $\alpha$-fat
+triangle $\triangle$, and an approximation parameter $\eps \in
+(0,1)$. Let $v_i$ denote the $i$\th vertex of $\triangle$, $\alpha_i$
+be the adjacent angle, and let $e_i$ denote the facing edges, for
+$i\in \IRX{3}$.  Let
+$\cone_i = \Set{ (\pa - v_i)t }{ \pa \in e_i \text{ and } t \geq 0}$
+denote the cone with an apex at the origin induced by the $i$\th
+vertex of $\triangle$.  Let $\dir_i$ be the outer normal of
+$\triangle$ orthogonal to $e_i$.  See \figref{tri_cones} for an
+illustration. Let $\ConeSet_i$ be a minimum partition of $\cone_i$
+into cones each with angle in the range $[\beta, 2\beta]$, where
+$\beta = \eps \alpha/\constB$, and $\constB>1$ is a constant to be
+determined shortly.  For each point $\pa\in\PS$, and a cone
+$\cone \in \ConeSet_i$, let $\nnZ{i}{\pa}{\cone}$ be the first point
+in $(\PS - \pa)\cap ( \pa + \cone)$ ordered by the direction $\dir_i$
+(it is the ``nearest-neighbor'' to $\pa$ in $\pa+\cone$).
+
+
+
+\paragraph{The construction}
+Let $\G$ be the graph over $\PS$ formed by connecting all points
+$\pa \in \PS$ to $\nnZ{i}{\pa}{\cone}$, for all $i \in \IRX{3}$ and
+$\cone \in \ConeSet_i$.
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 
 \subsection{Analysis}
-
-
-\paragraph{Shrinking triangles}
-We will need the following lemmas in order to prove the local spanning
-property of $G$. The first lemma concerns distances between points in
-the construction above (\secref{tri_construction}), and the second
-deals with triangle shrinking.
-
-
-
 
 
 \begin{lemma}
@@ -1690,57 +1683,57 @@ deals with triangle shrinking.
     $\pc =\nnZ{i}{\pa}{\cone}$, and let $\pb$ be a point in
     $(\PS \cap (\pa + \cone)) \setminus \{\pa, \pc\}$.
     We have that 
-    \begin{equation*}
+    \begin{math}
         \dY{\pa}{\pc}%
         +%
         (1+\eps)\dY{\pb}{\pc}%
         \leq%
         (1+\eps)\dY{\pa}{\pb}.
-    \end{equation*}
+    \end{math}
 \end{lemma}
 
 \begin{proof}
-    We denote the smallest angle of the triangle $\triangle$ by
-    $\alpha$.  Consider the triangle $\Delta\pa\pb\pc$ and denote the
-    angles at $\pa,\pb,$ and $\pc$ by $\theta_\pa,\theta_\pb,$ and
-    $\theta_\pc$ respectively.  Since the angle of $\cone$ is smaller
-    than $60$ degrees, we have that
+    Consider the triangle $\Delta\pa\pb\pc$ and denote the angles at
+    $\pa,\pb,$ and $\pc$ by $\angleX{\pa},\angleX{\pb}$, and $\angleX{\pc}$
+    respectively.  Since the angle of $\cone$ is smaller than $60$
+    degrees, we have that
     $\dY{\pb}{\pc}\leq \max \{\dY{\pa}{\pc},\dY{\pa}{\pb}\}$.
-
-    \newpage
     
     \begin{figure}[h]
-        \centering \includegraphics{figs/triangle_cone_edge}
-        \caption{The two cases of \lemref{cone_edge:triangles}. The vector
-           used to determine the edge in the cone is shown in red, and
-           marked $\vec{v}$}
-        \figlab{tri_cone_edge}
+        \centering%
+        \includegraphics{figs/triangle_cone_edge}
+        \caption{}%
+        %The two cases of \lemref{cone_edge:triangles}. The
+        %   vector used to determine the edge in the cone is shown in
+        %   red, and marked $\vec{v}$}
+        \figlab{tri_cone_edge:a}
     \end{figure}
 
-    Consider the case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$.
-    Consider the angles $\theta_\pa = \angle \pc \pa \pb$,
-    $\theta_\pc = \angle \pa \pc \pb$, and
-    $\theta_\pb = \angle \pa \pb \pc$.  Observe that
-    $\theta_\pc \leq \theta_\pb$ as $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$.
-    As such $\theta_\pc \leq \pi/2$.  Furthermore,
-    $\theta_\pc \geq \alpha \gg \eps \alpha/\constB = \beta \geq
-    \theta_\pa$. Similarly, $\theta_\pb \in [\alpha, \pi -\alpha]$.
-    By the $1$-Lipshitz of $\sin$, and as $\sin x \approx x$,
-    for small $x$, and for $\constB$ sufficiently large. we have that
+    
+    Consider the case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$,
+    illustrated in \figref{tri_cone_edge:a}.
+    Observe that
+    $\angleX{\pc} \leq \angleX{\pb}$ as
+    $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$.  As such
+    $\angleX{\pc} \leq \pi/2$.  Furthermore,
+    $\angleX{\pc} \geq \alpha \gg \eps \alpha/\constB = \beta \geq
+    \angleX{\pa}$. Similarly, $\angleX{\pb} \in [\alpha, \pi -\alpha]$.
+    By the $1$-Lipshitz of $\sin$, and as $\sin x \approx x$, for
+    small $x$, and for $\constB$ sufficiently large. we have that
     \begin{equation*}
-        \sin( \theta_\pb + \theta_\pa) \in [1-\eps/4, 1+\eps/4] \sin
-        \theta_\pb%
+        \sin( \angleX{\pb} + \angleX{\pa}) \in [1-\eps/4, 1+\eps/4] \sin
+        \angleX{\pb}%
         \qquad\text{and}\qquad
-        \sin \theta_\pa \leq (\eps/4) \sin \theta_\pc.
+        \sin \angleX{\pa} \leq (\eps/4) \sin \angleX{\pc}.
     \end{equation*}
     As such, by the
     law of sines, we have that
     \begin{math}
-        \frac{\dY{\pb}{ \pc}}{\sin{\theta_\pa}}%
+        \frac{\dY{\pb}{ \pc}}{\sin{\angleX{\pa}}}%
         =%
-        \frac{\dY{\pa}{ \pb}}{\sin{\theta_\pc}}%
+        \frac{\dY{\pa}{ \pb}}{\sin{\angleX{\pc}}}%
         =%
-        \frac{\dY{\pa}{ \pc}}{\sin{\theta_\pb}}.%        
+        \frac{\dY{\pa}{ \pc}}{\sin{\angleX{\pb}}}.%        
     \end{math}
     This implies that
     \begin{equation*}
@@ -1748,20 +1741,20 @@ deals with triangle shrinking.
         +%
         (1+\eps)\dY{\pb}{\pc}%
         =%
-        \pth{\frac{\sin{\theta_\pb}}{\sin{\theta_\pc}} +(1+\eps)
-           \frac{\sin{\theta_\pa}}{\sin{\theta_\pc}} }\dY{\pa}{ \pb}.        
+        \pth{\frac{\sin{\angleX{\pb}}}{\sin{\angleX{\pc}}} +(1+\eps)
+           \frac{\sin{\angleX{\pa}}}{\sin{\angleX{\pc}}} }\dY{\pa}{ \pb}.        
     \end{equation*}
     Observe, by the above that
     \begin{equation*}
-        \frac{\sin{\theta_\pb}}{\sin{\theta_\pc}}
+        \frac{\sin{\angleX{\pb}}}{\sin{\angleX{\pc}}}
         +(1+\eps)
-        \frac{\sin{\theta_\pa}}{\sin{\theta_\pc}}        
+        \frac{\sin{\angleX{\pa}}}{\sin{\angleX{\pc}}}        
         \leq
-        \frac{\sin{\theta_\pb}}{\sin{\pth{\theta_\pa + \theta_\pb}}}
+        \frac{\sin{\angleX{\pb}}}{\sin{\pth{\angleX{\pa} + \angleX{\pb}}}}
         +(1+\eps)
         \frac{\eps}{4}
         \leq%
-        \frac{\sin{\theta_\pb}}{(1-\eps/4)\sin{\pth{\theta_\pb}}}
+        \frac{\sin{\angleX{\pb}}}{(1-\eps/4)\sin{\pth{\angleX{\pb}}}}
         +(1+\eps)
         \frac{\eps}{4}
         \leq%
@@ -1772,205 +1765,37 @@ deals with triangle shrinking.
     $\dY{\pa}{\pb} > \dY{\pa}{\pc}$.  Let $\pc'$ be the projection of
     $\pc$ to $\pa \pb$. Observe that
     \begin{equation*}
-        \dY{\pc}{\pc'} \leq \dY{\pa}{\pc'} \tan \sin \Theta_\pa \leq
+        \dY{\pc}{\pc'}%
+        \leq%
+        \dY{\pa}{\pc'} \tan \angleX{\pa}%
+        \leq%
         2\beta\dY{\pa}{\pc'} \leq (\eps/8) \dY{\pa}{\pc'}.
     \end{equation*}
-  Observe that
-    $\cos \theta_\pa \geq 1 - (\theta_\pa)^2/2 \leq 1+\eps^2/4$ as
-    $\theta_\pa$ is an angle smaller than (say) $\eps/16$.  We thus
-    have that
-    \begin{equation*}
-        \dY{\pa}{\pc}%
-        +%
-        (1+\eps)\dY{\pb}{\pc}%
-        \leq%
-        \frac{\dY{\pa}{\pc'}}{\cos \theta_\pa }
-        +(1+\eps)\pth{ \Bigl.
-           \dY{\pc}{\pc'} + \dY{\pc'}{\pb}}
-        \leq %
-        (1+\eps^2/4)\dY{\pa}{\pc'}
-        + (1+\eps)\pth{\Bigl. (\eps/8) \dY{\pa}{\pc'}+ \dY{\pc'}{\pb}}
-    \end{equation*}
-    
-
-
-    
-    \begin{equation*}
-        \dY{\pa}{\pc}%
-        +%
-        (1+\eps)\dY{\pb}{\pc}%
-        =%        
-        \leq%
-        (1+\eps)\dY{\pa}{\pb}.
-    \end{equation*}
-    
-    \begin{equation*}
-        sin(\alpha + \beta) = \sin \alpha \cos \beta + \cos \alpha \sin \beta
-    \end{equation*}
-
-
-    Let
-    Consider the case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$.  Let
-    $\pb'$ the projection of $\pb$ on $\pa\pc$. We have that
-    \begin{equation*}
-        \dY{\pb}{\pb'}%
-        =%
-        \dY{\pa}{\pb} \sin \beta%
-        =%
-        \sin\theta_\pc \dY{\pb}{\pc}%
-        \implies%
-        \dY{\pb}{\pc}%
-        = \frac{\sin\theta_\pa}{\sin\theta_\pc}\dY{\pa}{\pb}%        
-    \end{equation*}
-    
+    Observe that
+    $\cos \angleX{\pa} \geq 1 - (\angleX{\pa})^2/2 \geq 1-\eps^2/8$ as
+    $\angleX{\pa}$ is an angle smaller than (say) $\eps/16$.  As such
+    $1/\cos \angleX{\pa} \leq 1+\eps^2/4$.  We thus have that
     \begin{align*}
-      \dY{\pa}{\pc}%
+      \tau
       &=%
-        \dY{\pa}{\pb'}%
+        \dY{\pa}{\pc}%
         +%
-        \dY{\pb'}{\pc}%
-        =%
-        \cos\theta_\pa \dY{\pa}{\pb}%
-        +%
-        \cos\theta_\pc \dY{\pb}{\pc}%
-        =%
+        (1+\eps)\dY{\pb}{\pc}%
+        \leq%
+        \frac{\dY{\pa}{\pc'}}{\cos \angleX{\pa} }
+        +(1+\eps)\pth{ \Bigl.
+        \dY{\pc}{\pc'} + \dY{\pc'}{\pb}}
       \\&
-        \cos\theta_\pa \dY{\pa}{\pb}%
-      +%
-      \frac{\sin\theta_\pa}{\sin\theta_\pc}\dY{\pa}{\pb}%
+      \leq %
+      (1+\eps^2/4)\dY{\pa}{\pc'}
+      + (1+\eps)\pth{\Bigl. (\eps/8) \dY{\pa}{\pc'}+ \dY{\pc'}{\pb}}
+      \leq%
+      (1+\eps)\dY{\pa}{\pc'} 
+      + (1+\eps)\dY{\pc'}{\pb}
+      % \\&
       =%
-      (\cos\theta_\pa +
-      \frac{\sin\theta_\pa}{\sin\theta_\pc})\dY{\pa}{\pb}        
+      (1+\eps)\dY{\pa}{\pb}.
     \end{align*}
-    
-    
-    We use these equalities and get that:
-    
-    $$
-    \dY{\pa}{\pc}%
-    +%
-    (1+\eps)\dY{\pb}{\pc}%
-    \leq%
-    (1+\eps)\dY{\pa}{\pb}%
-    $$
-    
-    $$
-    \iff%
-    \dY{\pa}{\pb}(\cos\theta_\pa +
-    \frac{\sin\theta_\pa}{\sin\theta_\pc})%
-    +%
-    (1+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}\dY{\pa}{\pb}%
-    \leq%
-    (1+\eps)\dY{\pa}{\pb}%
-    $$
-    
-    $$
-    \iff%
-    (\cos\theta_\pa + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
-    +%
-    (1+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}%
-    \leq%
-    (1+\eps)%
-    $$
-    
-    $$
-    \impliedby%
-    (1 + \frac{\sin\theta_\pa}{\sin\theta_\pc})%
-    +%
-    (1+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}%
-    \leq%
-    (1+\eps)%
-    $$
-    
-    $$
-    \iff%
-    (2+\eps)\frac{\sin\theta_\pa}{\sin\theta_\pc}%
-    \leq%
-    \eps%
-    \iff%
-    \frac{\sin\theta_\pa}{\sin\theta_\pc}%
-    \leq%
-    \frac{\eps}{2+\eps}%
-    =%
-    O(\eps)%
-    $$
-    
-    The last piece of this part is the fact that point $\pc$ was
-    chosen by being the first point in the cone $c$ encountered by a
-    line parallel to the edge opposite of $\pa$. See the red line and
-    direction in \figref{tri_cone_edge}. This implies that the angle
-    $\theta_\pc$ is at least $\alpha$, and the result then follows.
-    
-    $\dY{\pa}{\pb}< \dY{\pa}{\pc}$: Denote by $\pc'$ the projection of
-    $\pc$ on $\overline{\pa\pb}$. We have that
-    
-    $$
-    \dY{\pb}{\pc}%
-    \leq%
-    \dY{\pc}{\pc'}%
-    +%
-    \dY{\pb}{\pc'}%
-    =%
-    \sin\theta_\pa\dY{\pa}{\pc}%
-    +%
-    (\dY{\pa}{\pb}-\dY{\pb}{\pc'})%
-    $$
-    
-    $$
-    \implies%
-    \dY{\pb}{\pc}%
-    \leq%
-    \sin\theta_\pa\dY{\pa}{\pc}%
-    +%
-    (\dY{\pa}{\pb}-\cos\theta_\pa\dY{\pa}{\pc})%
-    $$
-    
-    $$
-    \implies%
-    \dY{\pa}{\pc} +%
-    \frac{1}{\cos\theta_\pa-\sin\theta_\pa}\dY{\pb}{\pc}%
-    \leq%
-    \frac{1}{\cos\theta_\pa-\sin\theta_\pa}\dY{\pa}{\pb}
-    $$
-    
-    Which means that
-    
-    $$
-    \dY{\pa}{\pc}%
-    +%
-    (1+\eps)\dY{\pb}{\pc}%
-    \leq%
-    (1+\eps)\dY{\pa}{\pb}%
-    \iff%
-    \frac{1}{\cos\theta_\pa-\sin\theta_\pa}%
-    \leq%
-    1+\eps%
-    $$
-    
-    
-    Since $\theta_\pa = O(\eps\alpha)$ we get that for a sufficiently
-    large constant the condition
-    $\frac{1}{\cos\theta_\pa-\sin\theta_\pa} \leq 1+\eps$ holds.
-    
-    The second part of the lemma is derived from the first:
-    
-    $$
-    \dY{\pa}{\pc}%
-    +%
-    (1+\eps)\dY{\pb}{\pc}%
-    \leq%
-    (1+\eps)\dY{\pa}{\pb}%
-    \iff%
-    \dY{\pb}{\pc}%
-    \leq%
-    \dY{\pa}{\pb}%
-    -%
-    \frac{\dY{\pa}{\pc}}{(1+\eps)}%
-    \leq%
-    \dY{\pa}{\pb}%
-    $$
-    
-    
 \end{proof}
 
 \subsubsection{Analysis}

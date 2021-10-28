@@ -1041,22 +1041,342 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 \end{proof}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5
+
+\subsection{Local spanners for fat triangles}
+\seclab{triangles}
+
+
+While local spanners for homothets of an arbitrary convex shape are
+costly, if we are given a triangle $\triangle$ with the single
+constraint that $\triangle$ is not too ``thin'', then one can
+construct a $\triangle$-local spanner with a number of edges that does
+not depend on the spread of the points. See \figref{tri_low_bd} for an
+illustration of a construction showing that dependency if "thin"
+triangles are allowed.
+
+
+
+\begin{defn}
+    A triangle $\triangle$ is \emphi{$\alpha$-fat} if the smallest
+    angle in $\triangle$ is at least $\alpha$.
+\end{defn}
+
+
+\begin{figure}[h]
+    \centering \phantom{}%
+    \hfill%
+    \includegraphics[page=1]{figs/triangle_cones}%
+    \hfill%
+    \includegraphics[page=2]{figs/triangle_cones}%
+    \hfill%
+    \phantom{}%
+    \caption{For the triangle $\triangle$ with angles
+       $\alpha_1,\alpha_2$, and $\alpha_3$ we create the cones
+       $c_1,c_2$, and $c_3$.}
+    \figlab{tri_cones}
+\end{figure}
+
+
+\subsubsection{Construction}
+\seclab{tri_construction}
+
+
+The input is a set $\PS$ of $n$ points in the plane, an $\alpha$-fat
+triangle $\triangle$, and an approximation parameter $\eps \in
+(0,1)$. Let $v_i$ denote the $i$\th vertex of $\triangle$, $\alpha_i$
+be the adjacent angle, and let $e_i$ denote the facing edges, for
+$i\in \IRX{3}$.  Let
+$\cone_i = \Set{ (\pa - v_i)t }{ \pa \in e_i \text{ and } t \geq 0}$
+denote the cone with an apex at the origin induced by the $i$\th
+vertex of $\triangle$.  Let $\dir_i$ be the outer normal of
+$\triangle$ orthogonal to $e_i$.  See \figref{tri_cones} for an
+illustration. Let $\ConeSet_i$ be a minimum partition of $\cone_i$
+into cones each with angle in the range $[\beta/2, \beta]$, where
+$\beta = \eps \alpha/\constB$, and $\constB>1$ is a constant to be
+determined shortly.  For each point $\pa\in\PS$, and a cone
+$\cone \in \ConeSet_i$, let $\nnZ{i}{\pa}{\cone}$ be the first point
+in $(\PS - \pa)\cap ( \pa + \cone)$ ordered by the direction $\dir_i$
+(it is the ``nearest-neighbor'' to $\pa$ in $\pa+\cone$).
+
+
+
+\paragraph{The construction}
+Let $\G$ be the graph over $\PS$ formed by connecting all points
+$\pa \in \PS$ to $\nnZ{i}{\pa}{\cone}$, for all $i \in \IRX{3}$ and
+$\cone \in \ConeSet_i$.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+\subsubsection{Analysis}
+
+
+\begin{lemma}
+    \lemlab{cone_edge:triangles}%
+    %
+    Let $\pa \in \PS$, $\cone \in \ConeSet_i$, and
+    $\pc =\nnZ{i}{\pa}{\cone}$, and let $\pb$ be a point in
+    $(\PS \cap (\pa + \cone)) \setminus \{\pa, \pc\}$.
+    We have that 
+    \begin{math}
+        \dY{\pa}{\pc}%
+        +%
+        (1+\eps)\dY{\pb}{\pc}%
+        \leq%
+        (1+\eps)\dY{\pa}{\pb}
+    \end{math}
+    and 
+    \begin{math}
+        \dY{\pb}{\pc}%
+        \leq%
+        \dY{\pa}{\pb}.
+    \end{math}
+\end{lemma}
+
+\begin{proof}
+    Consider the triangle $\Delta\pa\pb\pc$ and denote the angles at
+    $\pa,\pb,$ and $\pc$ by $\angleX{\pa},\angleX{\pb}$, and $\angleX{\pc}$
+    respectively.  Since the angle of $\cone$ is smaller than $60$
+    degrees, we have that
+    $\dY{\pb}{\pc}\leq \max \{\dY{\pa}{\pc},\dY{\pa}{\pb}\}$.
+    
+    \begin{figure}[h]
+        \centering%
+        \includegraphics{figs/triangle_cone_edge}
+        \caption{}%
+        %The two cases of \lemref{cone_edge:triangles}. The
+        %   vector used to determine the edge in the cone is shown in
+        %   red, and marked $\vec{v}$}
+        \figlab{tri_cone_edge:a}
+    \end{figure}
+
+    
+    Consider the case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$,
+    illustrated in \figref{tri_cone_edge:a}.  Observe that
+    $\angleX{\pc} \leq \angleX{\pb}$.  As such
+    $\angleX{\pc} \leq \pi/2$.  Furthermore,
+    $\angleX{\pc} \geq \alpha \gg \eps \alpha/\constB = \beta \geq
+    \angleX{\pa}$. Similarly,
+    $\angleX{\pb} \in [\alpha, \pi -\alpha]$.  By the $1$-Lipshitz of
+    $\sin$, and as $\sin x \approx x$, for small $x$, and for
+    $\constB$ sufficiently large. we have that
+    \begin{equation*}
+        \sin( \angleX{\pb} + \angleX{\pa}) \in [1-\eps/4, 1+\eps/4] \sin
+        \angleX{\pb}%
+        \qquad\text{and}\qquad
+        \sin \angleX{\pa} \leq (\eps/4) \sin \angleX{\pc}.
+    \end{equation*}
+    As such, by the
+    law of sines, we have that
+    \begin{math}
+        \frac{\dY{\pb}{ \pc}}{\sin{\angleX{\pa}}}%
+        =%
+        \frac{\dY{\pa}{ \pb}}{\sin{\angleX{\pc}}}%
+        =%
+        \frac{\dY{\pa}{ \pc}}{\sin{\angleX{\pb}}}.%        
+    \end{math}
+    This implies that
+    \begin{equation*}
+        \dY{\pa}{\pc}%
+        +%
+        (1+\eps)\dY{\pb}{\pc}%
+        =%
+        \pth{\frac{\sin{\angleX{\pb}}}{\sin{\angleX{\pc}}} +(1+\eps)
+           \frac{\sin{\angleX{\pa}}}{\sin{\angleX{\pc}}} }\dY{\pa}{ \pb}.        
+    \end{equation*}
+    Observe, by the above that
+    \begin{equation*}
+        \frac{\sin{\angleX{\pb}}}{\sin{\angleX{\pc}}}
+        +(1+\eps)
+        \frac{\sin{\angleX{\pa}}}{\sin{\angleX{\pc}}}        
+        \leq
+        \frac{\sin{\angleX{\pb}}}{\sin{\pth{\angleX{\pa} + \angleX{\pb}}}}
+        +(1+\eps)
+        \frac{\eps}{4}
+        \leq%
+        \frac{\sin{\angleX{\pb}}}{(1-\eps/4)\sin{\pth{\angleX{\pb}}}}
+        +(1+\eps)
+        \frac{\eps}{4}
+        \leq%
+        1+\eps.
+    \end{equation*}
+
+    \begin{figure}[h]
+        \centering%
+        \includegraphics[page=2]{figs/triangle_cone_edge}
+        \caption{}%
+        \figlab{tri_cone_edge:b}
+    \end{figure}
+
+    The other possibility is that $\dY{\pa}{\pb} > \dY{\pa}{\pc}$,
+    illustrated in \figref{tri_cone_edge:b}.  Let $\pc'$ be the
+    projection of $\pc$ to $\pa \pb$. Observe that
+    \begin{equation*}
+        \dY{\pc}{\pc'}%
+        =%
+        \dY{\pa}{\pc'} \tan \angleX{\pa}%
+        \leq%
+        2\beta\dY{\pa}{\pc'} \leq (\eps/8) \dY{\pa}{\pc'}.
+    \end{equation*}
+    Observe that
+    $\cos \angleX{\pa} \geq 1 - (\angleX{\pa})^2/2 \geq 1-\eps^2/8$ as
+    $\angleX{\pa}$ is an angle smaller than (say) $\eps/16$.  As such
+    $1/\cos \angleX{\pa} \leq 1+\eps^2/4$.
+    This implies that 
+    \begin{math}
+        \dY{\pa}{\pc}%
+        \leq%
+        {\dY{\pa}{\pc'}} / {\cos \angleX{\pa} } \leq %
+        (1+\eps^2/4)\dY{\pa}{\pc'}.
+    \end{math}
+    We thus have that
+    \begin{align*}
+      \tau
+      &=%
+        \dY{\pa}{\pc}%
+        +%
+        (1+\eps)\dY{\pb}{\pc}%
+        \leq%
+        (1+\eps^2/4)\dY{\pa}{\pc'}
+        +(1+\eps)\pth{ \Bigl.
+        \dY{\pc}{\pc'} + \dY{\pc'}{\pb}}
+      \\&
+      \leq%
+      \bigl(1+\eps^2/4 + (1+\eps)\eps/8\bigr)\dY{\pa}{\pc'} 
+      + (1+\eps)\dY{\pc'}{\pb}
+      % \\&
+      \leq%
+      (1+\eps)\dY{\pa}{\pb}.
+    \end{align*}
+\end{proof}
+
+\begin{lemma}
+    \lemlab{shrink:triangles}%
+    %
+    Let $\triangle$ be a triangle that contains two points $\pa,
+    \pb$. Then, there is a homothet $\triangle'\subseteq \triangle$ of
+    $\triangle$, such that,one of these points is a vertex of
+    $\triangle'$, and the other point lies on a facing edge of
+    $\triangle'$.
+\end{lemma}
+
+\begin{proof}
+    This follows by the same shrinking argument as
+    \lemref{shrink:shrank}, and is illustrated in 
+    \figref{shrink:triangle}.   
+\end{proof}
+
+\begin{figure}[h]
+    \includegraphics[page=1]{figs/narrow_triangle} \hfill
+    \includegraphics[page=2]{figs/narrow_triangle} \hfill
+    \includegraphics[page=3]{figs/narrow_triangle} \hfill
+    \includegraphics[page=4]{figs/narrow_triangle}
+    \caption{}
+    \figlab{shrink:triangle}
+\end{figure}
 
 
 
 
-\HERE
+\paragraph{Local spanner property}
+\begin{lemma}
+    \lemlab{local_span:triangles}%
+	%
+    Let $\triangle'$ be a homothet of $\triangle$, for any two points
+    $\pa, \pb \in \PS \cap \triangle'$, we have a $(1+\eps)$-path in
+    $\G' = \restrictY{\G}{\triangle'}$.
+\end{lemma}
+
+
+
+\begin{proof}
+    Consider the closest pair $\pa,\pb \in \PS \cap \triangle$. They
+    must be connected directly in $\G'$, as otherwise there is a point
+    $\pc \in \PS' = \PS \cap \triangle'$ in the cone containing the
+    segment $\pa\pb$, such that $\pa \pc \in \EGX{\G'}$. But then, by
+    \lemref{cone_edge:triangles}, we have
+        \begin{math}
+        \dY{\pa}{\pc}%
+        +%
+        (1+\eps)\dY{\pb}{\pc}%
+        \leq%
+        (1+\eps)\dY{\pa}{\pb},
+    \end{math}
+    which implies that either $\pa\pc$ or $\pb\pc$ are the closest
+    pairs, which is a contradiction.
+
+    
+    For any other pair $\pa,\pb\in PS'$ we have from
+    \lemref{shrink:triangles} that there exists a homothet
+    $\triangle''\subseteq \triangle'$ with one of the two points, say
+    $\pa$, at a vertex, and the other on the opposite edge. We
+    therefore have a cone $\cone$ with apex at $\pa$ such that
+    $\pb\in \cone\cap \triangle''$. If $\pa\pb$ is an edge in $\G$
+    then we are done. Otherwise, we have a vertex $\pc\in \cone$ such
+    that $\pa\pc$ is an edge in $\G$, and by
+    \lemref{cone_edge:triangles} we have
+    $\dY{\pb}{\pc}\leq \dY{\pa}{\pb}$. Thus, by induction, we have
+    that there exists a $(1+\eps)$ path between $\pc$ and $\pb$ in
+    $\G$. \lemref{cone_edge:triangles} now implies that
+    $\dY{\pa}{\pc}+(1+\eps)\dY{\pb}{\pc}\leq(1+\eps)\dY{\pa}{\pb}$. Thus,
+    there is a $(1+\eps)$ path between $\pa$ and $\pb$ in $\G'$, as
+    desired.
+\end{proof}
+ 
+
+
+\paragraph{Size and running time}
+
+
+\begin{theorem}
+    \thmlab{l:s:triangle}%
+	%
+    Let $\PS$ be a set of $n$ points in the plane, and let
+    $\eps \in (0,1)$ be an approximation parameter. The above
+    algorithm computes a local $(1+\eps)$-spanner $\G$ for homothets
+    of an $\alpha$-fat triangle $\triangle$.  The construction time is
+    $O\left(\frac{1}{\alpha\eps}n\log n\right)$, and the spanner $\G$
+    has $O\pth{ n / (\alpha\eps) \bigr.}$ edges.
+\end{theorem}
+
+\begin{proof}
+    The local-spanning property is proven in
+    \lemref{local_span:triangles}, and we are only left with bounding
+    the size and the running time of the algorithm. The bound on the
+    size is immediate from the construction, as every point $\pa$ is
+    the apex of $O\left( \frac{2\pi}{\eps\alpha} \right)$ cones, each
+    giving rise to a single edge incident to $\pa$.  The construction
+    time is bounded by the construction time for a $\theta$-graph with
+    cone size $\alpha\eps$, which is
+    $O\pth{ (\alpha\eps)^{-1}n\log n}$ \cite{c-aaspmp-87}.
+\end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\newcommand{\Trap}{\Mh{T}}%
 
-\section{A local spanner for nice polygons}
+\subsection{A local spanner for nice polygons}
 
-\subsection{A good jump for narrow trapezoids}
+\subsubsection{A good jump for narrow trapezoids}
 \seclab{traps:jump}
 
 As a reminder, a trapezoids is a quadrilateral with two parallel
@@ -1207,73 +1527,27 @@ if the length of each of its legs is at most $\eps \diamX{\Trap}$.
     \end{align*}
 \end{proof}
 
-\subsection{A good jump for narrow triangles}
-\seclab{traps:jump}
 
-A trapezoid $\triangle$ is \emphi{$\epsA$-narrow} if the length of one
-of its edges at most $\epsA \diamX{\Trap}$, which is the \emphi{short}
-edge of $\triangle$, the vertex facing the short edge is the triangle
-\emphi{head}.
+\subsubsection{A local spanner for nice polygons}
 
-\begin{lemma}
-    \lemlab{shrink:triangle}%
-    %
-    Let $\triangle$ be a triangle that contains two points $\pa,
-    \pb$. Then, there is a homothet $\triangle'\subseteq \triangle$ of
-    $\triangle$, such that,one of these points is a vertex of
-    $\triangle'$, and the other point lies on a facing edge of
-    $\triangle'$.
-\end{lemma}
-
-\begin{proof}
-    This follows by the same shrinking argument as
-    \lemref{shrink:shrank}, and is illustrated in 
-    \figref{shrink:triangle}.   
-\end{proof}
-
-\begin{figure}[h]
-    \includegraphics[page=1]{figs/narrow_triangle} \hfill
-    \includegraphics[page=2]{figs/narrow_triangle} \hfill
-    \includegraphics[page=3]{figs/narrow_triangle} \hfill
-    \includegraphics[page=4]{figs/narrow_triangle}
-    \caption{}
-    \figlab{shrink:triangle}
-\end{figure}
+A convex polygon $\Body$ is \emphi{$t$-nice} polygon, if the outer
+angle at any vertex of the polygon is at least $\pi/t$, and the ratio
+of length of any two edges of $\Body$ is bounded by some absolute
+constant.
 
 \begin{lemma}
-    Let $\eps \in (0,1)$ be some parameter, and $\epsA = \eps/16$.
-    Let $\PX,\PY$ be two points sets that are $\epsA$-semi separated
-    and $\epsA$-angularly separated, and let $\triangle$ be
-    $\epsA$-narrow triangle, with two points $\pa \in \PX$ and
-    $\pb \in \PY$ on $\partial \triangle$, with $\pa$ located at the
-    head of $\triangle$, and $\pb$ on its short edge. Then, there is a
-    homothet $\triangle' \subseteq \triangle$ of $\triangle$, such
-    that:
-    \begin{compactenumI}
-        \item There are two points $\pa' \in \PX$ and $\pb' \in \PY$,
-        such that $\pa'\pb'$ is an edge of the $\triangle$-Delaunay
-        triangulation of $\PX \cup \PY$.
-
-        \item We have that
-        $(1+\eps)\dY{\pa}{\pa'} + \dY{\pa'}{\pb'} + (1+\eps)
-        \dY{\pb'}{\pb} \leq (1+\eps) \dY{\pa}{\pb}$.
-    \end{compactenumI}
+    Given a $t$-nice polygon, and a parameter $\epsA$, one can cover
+    it by a set $\Traps$ of $O((t/\eps)^2)$ $\epsA$-narrow trapezoids,
+    such that for any two points $\pa, \pb \in \partial \Body$ that
+    belong to two edges of $\Body$ that are not adjacent, there exists
+    A narrow trapezoid $\Trap \in \Traps$ such that $\pa, \pb$ are
+    located on the two short legs of $\Trap$.
 \end{lemma}
-\begin{proof}
-    Part (I) is a ready consequence of \clmref{c:t:connected}.  By
-    \lemref{shrink:triangle}, this edge is realized by a homothet
-    $\triangle' \subseteq \triangle$, such that (say) $\pa$ is a
-    vertex of $\triangle'$, and $\pb'$ is on the facing edge.
 
 
-    As for the second part
-    (II), observe that we can assume that $\pa'$
-\end{proof}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \section{A local spanner for axis parallel squares}
@@ -1599,313 +1873,6 @@ disks, as illustrated in \figref{bad}.
     $\Of\pth{\eps^{-3} n \log n}$ edges.
 \end{theorem}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\section{Local spanners for fat triangles}
-
-\seclab{triangles}
-
-
-While local spanners for homothets of an arbitrary convex shape are
-costly, if we are given a triangle $\triangle$ with the single
-constraint that $\triangle$ is not too ``thin'', then one can
-construct a $\triangle$-local spanner with a number of edges that does
-not depend on the spread of the points. See \figref{tri_low_bd} for an
-illustration of a construction showing that dependency if "thin"
-triangles are allowed.
-
-
-
-\begin{defn}
-    A triangle $\triangle$ is \emphi{$\alpha$-fat} if the smallest
-    angle in $\triangle$ is at least $\alpha$.
-\end{defn}
-
-
-\begin{figure}[h]
-    \centering \phantom{}%
-    \hfill%
-    \includegraphics[page=1]{figs/triangle_cones}%
-    \hfill%
-    \includegraphics[page=2]{figs/triangle_cones}%
-    \hfill%
-    \phantom{}%
-    \caption{For the triangle $\triangle$ with angles
-       $\alpha_1,\alpha_2$, and $\alpha_3$ we create the cones
-       $c_1,c_2$, and $c_3$.}
-    \figlab{tri_cones}
-\end{figure}
-
-
-\subsection{Construction}
-\seclab{tri_construction}
-
-
-The input is a set $\PS$ of $n$ points in the plane, an $\alpha$-fat
-triangle $\triangle$, and an approximation parameter $\eps \in
-(0,1)$. Let $v_i$ denote the $i$\th vertex of $\triangle$, $\alpha_i$
-be the adjacent angle, and let $e_i$ denote the facing edges, for
-$i\in \IRX{3}$.  Let
-$\cone_i = \Set{ (\pa - v_i)t }{ \pa \in e_i \text{ and } t \geq 0}$
-denote the cone with an apex at the origin induced by the $i$\th
-vertex of $\triangle$.  Let $\dir_i$ be the outer normal of
-$\triangle$ orthogonal to $e_i$.  See \figref{tri_cones} for an
-illustration. Let $\ConeSet_i$ be a minimum partition of $\cone_i$
-into cones each with angle in the range $[\beta, 2\beta]$, where
-$\beta = \eps \alpha/\constB$, and $\constB>1$ is a constant to be
-determined shortly.  For each point $\pa\in\PS$, and a cone
-$\cone \in \ConeSet_i$, let $\nnZ{i}{\pa}{\cone}$ be the first point
-in $(\PS - \pa)\cap ( \pa + \cone)$ ordered by the direction $\dir_i$
-(it is the ``nearest-neighbor'' to $\pa$ in $\pa+\cone$).
-
-
-
-\paragraph{The construction}
-Let $\G$ be the graph over $\PS$ formed by connecting all points
-$\pa \in \PS$ to $\nnZ{i}{\pa}{\cone}$, for all $i \in \IRX{3}$ and
-$\cone \in \ConeSet_i$.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
-
-\subsection{Analysis}
-
-
-\begin{lemma}
-    \lemlab{cone_edge:triangles}%
-    %
-    Let $\pa \in \PS$, $\cone \in \ConeSet_i$, and
-    $\pc =\nnZ{i}{\pa}{\cone}$, and let $\pb$ be a point in
-    $(\PS \cap (\pa + \cone)) \setminus \{\pa, \pc\}$.
-    We have that 
-    \begin{math}
-        \dY{\pa}{\pc}%
-        +%
-        (1+\eps)\dY{\pb}{\pc}%
-        \leq%
-        (1+\eps)\dY{\pa}{\pb}.
-    \end{math}
-\end{lemma}
-
-\begin{proof}
-    Consider the triangle $\Delta\pa\pb\pc$ and denote the angles at
-    $\pa,\pb,$ and $\pc$ by $\angleX{\pa},\angleX{\pb}$, and $\angleX{\pc}$
-    respectively.  Since the angle of $\cone$ is smaller than $60$
-    degrees, we have that
-    $\dY{\pb}{\pc}\leq \max \{\dY{\pa}{\pc},\dY{\pa}{\pb}\}$.
-    
-    \begin{figure}[h]
-        \centering%
-        \includegraphics{figs/triangle_cone_edge}
-        \caption{}%
-        %The two cases of \lemref{cone_edge:triangles}. The
-        %   vector used to determine the edge in the cone is shown in
-        %   red, and marked $\vec{v}$}
-        \figlab{tri_cone_edge:a}
-    \end{figure}
-
-    
-    Consider the case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$,
-    illustrated in \figref{tri_cone_edge:a}.
-    Observe that
-    $\angleX{\pc} \leq \angleX{\pb}$ as
-    $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$.  As such
-    $\angleX{\pc} \leq \pi/2$.  Furthermore,
-    $\angleX{\pc} \geq \alpha \gg \eps \alpha/\constB = \beta \geq
-    \angleX{\pa}$. Similarly, $\angleX{\pb} \in [\alpha, \pi -\alpha]$.
-    By the $1$-Lipshitz of $\sin$, and as $\sin x \approx x$, for
-    small $x$, and for $\constB$ sufficiently large. we have that
-    \begin{equation*}
-        \sin( \angleX{\pb} + \angleX{\pa}) \in [1-\eps/4, 1+\eps/4] \sin
-        \angleX{\pb}%
-        \qquad\text{and}\qquad
-        \sin \angleX{\pa} \leq (\eps/4) \sin \angleX{\pc}.
-    \end{equation*}
-    As such, by the
-    law of sines, we have that
-    \begin{math}
-        \frac{\dY{\pb}{ \pc}}{\sin{\angleX{\pa}}}%
-        =%
-        \frac{\dY{\pa}{ \pb}}{\sin{\angleX{\pc}}}%
-        =%
-        \frac{\dY{\pa}{ \pc}}{\sin{\angleX{\pb}}}.%        
-    \end{math}
-    This implies that
-    \begin{equation*}
-        \dY{\pa}{\pc}%
-        +%
-        (1+\eps)\dY{\pb}{\pc}%
-        =%
-        \pth{\frac{\sin{\angleX{\pb}}}{\sin{\angleX{\pc}}} +(1+\eps)
-           \frac{\sin{\angleX{\pa}}}{\sin{\angleX{\pc}}} }\dY{\pa}{ \pb}.        
-    \end{equation*}
-    Observe, by the above that
-    \begin{equation*}
-        \frac{\sin{\angleX{\pb}}}{\sin{\angleX{\pc}}}
-        +(1+\eps)
-        \frac{\sin{\angleX{\pa}}}{\sin{\angleX{\pc}}}        
-        \leq
-        \frac{\sin{\angleX{\pb}}}{\sin{\pth{\angleX{\pa} + \angleX{\pb}}}}
-        +(1+\eps)
-        \frac{\eps}{4}
-        \leq%
-        \frac{\sin{\angleX{\pb}}}{(1-\eps/4)\sin{\pth{\angleX{\pb}}}}
-        +(1+\eps)
-        \frac{\eps}{4}
-        \leq%
-        1+\eps.
-    \end{equation*}
-
-    \medskip The other possibility is that
-    $\dY{\pa}{\pb} > \dY{\pa}{\pc}$.  Let $\pc'$ be the projection of
-    $\pc$ to $\pa \pb$. Observe that
-    \begin{equation*}
-        \dY{\pc}{\pc'}%
-        \leq%
-        \dY{\pa}{\pc'} \tan \angleX{\pa}%
-        \leq%
-        2\beta\dY{\pa}{\pc'} \leq (\eps/8) \dY{\pa}{\pc'}.
-    \end{equation*}
-    Observe that
-    $\cos \angleX{\pa} \geq 1 - (\angleX{\pa})^2/2 \geq 1-\eps^2/8$ as
-    $\angleX{\pa}$ is an angle smaller than (say) $\eps/16$.  As such
-    $1/\cos \angleX{\pa} \leq 1+\eps^2/4$.  We thus have that
-    \begin{align*}
-      \tau
-      &=%
-        \dY{\pa}{\pc}%
-        +%
-        (1+\eps)\dY{\pb}{\pc}%
-        \leq%
-        \frac{\dY{\pa}{\pc'}}{\cos \angleX{\pa} }
-        +(1+\eps)\pth{ \Bigl.
-        \dY{\pc}{\pc'} + \dY{\pc'}{\pb}}
-      \\&
-      \leq %
-      (1+\eps^2/4)\dY{\pa}{\pc'}
-      + (1+\eps)\pth{\Bigl. (\eps/8) \dY{\pa}{\pc'}+ \dY{\pc'}{\pb}}
-      \leq%
-      (1+\eps)\dY{\pa}{\pc'} 
-      + (1+\eps)\dY{\pc'}{\pb}
-      % \\&
-      =%
-      (1+\eps)\dY{\pa}{\pb}.
-    \end{align*}
-\end{proof}
-
-\subsubsection{Analysis}
-
-We first prove a ``shrinking lemma'' similar to those in
-\secref{disks} and \secref{squares}.
-
-\begin{lemma}
-    \lemlab{shrink:triangles}%
-    % 
-    Let $\triangle$ be a triangle in the plane, and let $\pa, \pb$ be
-    two arbitrary points in $\triangle$. Then, there is a triangle
-    $\triangle' \subseteq \triangle$ that contains one of $\pa$ and
-    $\pb$ on a vertex, and the other on the edge opposite to that
-    vertex (possibly on a different vertex)
-
-\end{lemma}
-
-\begin{proof}
-    Choose one of the edges of $\triangle$ and start ``sliding'' it,
-    i.e. incrementally translating it while keeping its slope,
-    shrinking $\triangle$ in the process. We do so until one of $\pa$
-    or $\pb$ is on the edge. We do the same for the other two edges,
-    choosing the order arbitrarily. The triangle remaining at the end
-    of the process is $\triangle'$, and since we have kept the slopes
-    of all edges we have that $\triangle \sim \triangle'$. We must
-    have that two of the edges were stopped by the same point, which
-    therefore lies on a vertex $v$ of the new triangle. The other
-    point must lie on the edge opposite to $v$, since otherwise one of
-    the edges can still be moved to shrink $\triangle'$. See
-    \figref{shrink_tri}.
-
-\end{proof}
-
-\begin{figure}[h]
-    \centering \includegraphics{figs/shrink_tri}
-    \caption{The edges are moved in the order $a,b,c$, resulting in
-       the required similar triangle.}
-    \figlab{shrink_tri}
-\end{figure}
-
-
-
-\paragraph{Local spanner property}
-\begin{lemma}
-    \lemlab{local_span:triangles}%
-	%
-    For a triangle $\triangle$, denote the graph constructed by the
-    process above \secref{tri_construction}) by $G$. for any homothet
-    of $\triangle$, and any two points $\pa, \pb \in \PS$ in the
-    homothet, we have a $(1+\eps)$-path in
-    $\restrictY{\G}{\triangle}$.
-\end{lemma}
-
-
-
-\begin{proof}
-    We slightly abuse notation and denote the homothet by
-    $\triangle$. We prove the existence of the $(1+\eps)$-path by
-    induction over the rank of the distance $\dY{\pa}{\pb}$. The
-    closest pair $\pa',\pb'$ must be connected in $G$, as otherwise we
-    have that $\dY{\pa'}{\pc'}+\dY{\pb'}{\pc'}\geq 2 \dY{\pa'}{\pb'}$
-    regardless of the angle of the cone, a contradiction to
-    \lemref{cone_edge:triangles}.
-
-    For any other pair $\pa,\pb\in PS\cap \triangle$ we have from
-    \lemref{shrink:triangles} that there exists a homothet
-    $\triangle'\subseteq \triangle$ with one of the two points, say
-    $\pa$, at a vertex, and the other on the opposite edge. We
-    therefore have a cone $c$ with apex at $\pa$ such that
-    $\pb\in c\cap \triangle'$. If $\pa\pb$ is an edge in $G$ then we
-    are done. Otherwise, we have a vertex $\pc\in c$ such that
-    $\pa\pb$ is an edge in $G$, and we therefore get from
-    \lemref{cone_edge:triangles} that
-    $\dY{\pb}{\pc}\leq \dY{\pa}{\pb}$ and therefore, by the induction
-    hypothesis, we have that there exists a $(1+\eps)$ path between
-    $\pc$ and $\pb$ in $G$. From the same lemma it also follows that
-    $\dY{\pa}{\pc}+(1+\eps)\dY{\pb}{\pc}\leq(1+\eps)\dY{\pa}{\pb}$,
-    and thus we get the existence of a $(1+\eps)$ path between $\pa$
-    and $\pb$ as well.
-
-\end{proof}
-
-
-\paragraph{Size and running time}
-Let $G$ be the graph constructed by the procedure described above.
-
-
-\begin{theorem}
-    \thmlab{l:s:triangle}%
-	%
-    Let $\PS$ be a set of $n$ points in the plane, and let
-    $\eps \in (0,1)$ be an approximation parameter. The above
-    algorithm computes a local $(1+\eps)$-spanner $\G$ for homothets
-    of an $\alpha$-fat triangle $\triangle$.  The construction time is
-    $O\left(\frac{1}{\alpha\eps}n\log n\right)$, and the spanner $\G$
-    has $O\left(\frac{1}{\alpha\eps}n\right)$ edges.
-\end{theorem}
-
-\begin{proof}
-    The local-spanning property is proven in
-    \lemref{local_span:triangles}, and we are only left with bounding
-    the size and the running time of the algorithm. The bound on the
-    size is immediate from the construction, as every point $\pa$ is
-    the apex of $O\left( \frac{2\pi}{\eps\alpha} \right)$ cones, each
-    giving rise to a single edge incident to $\pa$.  The construction
-    time is bounded by the construction time for a $\theta$-graph with
-    cone size $\alpha\eps$, which is
-    $O\left(\frac{1}{\alpha\eps}n\log n\right)$ (\cite{c-aaspmp-87})
-\end{proof}
 
 
 

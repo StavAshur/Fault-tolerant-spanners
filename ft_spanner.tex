@@ -1537,42 +1537,58 @@ edges (this quantity is no bigger than the length of the shortest edge
 in the polygon).  A convex polygon $\Body$ is \emphi{$t$-nice}, if the
 outer angle at any vertex of the polygon is at least $2\pi/t$, and the
 length of the longest edge of $\Body$ is $O(\senseX{\Body})$.  As an
-example, a $k$ regular polygon is $t$-nice.
+example, a $k$-regular polygon is $k$-nice.
 
 \begin{lemma}
-    Given a $t$-nice polygon $\Body$, and a parameter $\epsA$, one can
-    cover it by a set $\Traps$ of $O((t/\epsA)^2)$ $\epsA$-narrow
-    trapezoids, such that for any two points
-    $\pa, \pb \in \partial \Body$ that belong to two edges of $\Body$
-    that are not adjacent, there exists a narrow trapezoid
+    Let $t$ be a positive integer.  Given a $t$-nice polygon $\Body$,
+    and a parameter $\epsA$, one can cover it by a set $\Traps$ of
+    $O((t/\epsA)^2)$ $\epsA$-narrow trapezoids, such that for any two
+    points $\pa, \pb \in \partial \Body$ that belong to two edges of
+    $\Body$ that are not adjacent, there exists a narrow trapezoid
     $\Trap \in \Traps$, such that $\pa, \pb$ are located on the two
     short legs of $\Trap$.
 \end{lemma}
 \begin{proof}
     We show a somewhat suboptimal but simple construction. A $t$-nice
-    polygon has at most $t$ edges.  Let $\ell$ be the sensitivity of
+    polygon has at most $t$ edges.  Let $\psi$ be the sensitivity of
     $\Body$, and place a minimum set of points on the boundary of
     $\PS$, which includes all the vertices of $\Body$, and in addition
     the distance between any consecutive pair of points is in the
     range $\gamma$ and $2\gamma$, where
-    $\gamma = \epsA \ell/ \constC$, for some sufficiently large
-    constant $\constC$. In addition, place $O(t)$ equally space points
-    between any two consecutive points of $\PS$, such that the
-    distance between any two consecutive added points is at most (say)
-    $\gamma/20t$. Let $\PSA$ be the resulting set from $\PS$ after
-    adding all these points.
+    $\gamma = \epsA \psi/ \constC$, for some sufficiently large
+    constant $\constC$. In particular, let
+    $M =\max_{e \in \EGX{\Body}} \ceil{\| e\| / \gamma} = O(
+    1/\epsA)$.
 
+    In addition, place $c t$ equally space points between any two
+    consecutive points of $\PS$, where $c$ is constant to be
+    determined shortly. Let $\PSA$ be the resulting set from $\PS$
+    after adding all these points.
+
+    \begin{figure}[h]
+        \phantom{}%
+        \hfill%
+        \includegraphics[page=2]{figs/decompose} \hfill%
+        \includegraphics[page=3]{figs/decompose} \hfill%
+        \includegraphics[page=1]{figs/points_trap} \hfill%
+        \phantom{}%
+        \caption{The round points are the points of $\PS$, and all the
+           points for the set $\PSA$. On the right, a ``vertical''
+           decomposition induced by one of the directions of
+           $\PS \times \PSA$.}
+        \figlab{v:decompose}
+    \end{figure}
 
     Clearly, we have that $|\PS| = O( t /\epsA)$ and
     $|\PSA| = O(t^2/\epsA)$. For a direction $v$, let $\Traps_v$ be
     the decomposition into trapezoids formed by shooting rays from
     inside $\Body$ in the direction of $v$ (or $-v$) from all the
-    points of $\PS$. Let $\Traps_v'$ be the set resulting from
-    throwing away trapezoids with legs that lie on adjacent edges.  It
-    is easy to verify that all the trapezoids of $\Traps_v'$ are
-    $\epsA$-narrow.  Let $U$ be the set of all directions induced by
-    pairs of points of $\PS \times \PSA$, and let
-    $\Traps = \cup_{u \in U} \Traps_u'$. We have that
+    points of $\PS$, see \figref{v:decompose}. Let $\Traps_v'$ be the
+    set resulting from throwing away trapezoids with legs that lie on
+    adjacent edges.  It is easy to verify that all the trapezoids of
+    $\Traps_v'$ are $\epsA$-narrow.  Let $U$ be the set of all
+    directions induced by pairs of points of $\PS \times \PSA$, and
+    let $\Traps = \cup_{u \in U} \Traps_u'$. We have that
     $|\Traps| = O( |\PS| \cdot |U| ) = O(|\PS|^2 |\PSA| ) =O( t^4
     /\epsA^3)$.
 
@@ -1587,11 +1603,23 @@ example, a $k$ regular polygon is $t$-nice.
     Observe that when we project the interval $\pa_1 \pa_2$, to the
     line induced by $\pb_1 \pb_2$, in the direction
     $\overrightarrow{\pa_1 \pb_2}$, the projected interval contains
-    $\pb_1 \pb_2$. Indeed, the angle between two lines supporting
-    $\pa_1\pa_2$ and $\pb_1 \pb_2$ is in the range
-    $[2\pi/t, \pi - 2\pi/t]$, which readily implies the claim. Thus
-    there is a trapezoid in $\Trap$ that contains $\pa$ and $\pb$ on
-    their legs, which implies the claim.
+    $\pb_1 \pb_2$.  The last claim is intuitively obvious, but
+    requires some work to see formally. The minimum height of a
+    triangle involving three vertices of $\Body$ is formed by three
+    consecutive vertices. In the worst case, this is an equilateral
+    triangle, with isosceles triangle with sidelength $\psi$ and side
+    angle $\pi/t$. As such, the height of such a triangle is
+    $h = \psi \sin( \pi/t) \geq \psi/t$. It follows that the height of
+    the triangle $\triangle \pa_1 \pa_2 \pb_2$ is at least
+    $h' = h/M = \Omega( \eps \psi/t )$. The quantity $h'$ is a lower
+    bound on the length of the projection of $\pa_1 \pa_2$ on the line
+    spanned by $\pb_1 \pb_2$. However,
+    $\dY{\pb_1}{\pb_2} \leq 2\gamma/ct = O( \epsA \psi /ct) < h'1$, by
+    picking $c$ to be sufficiently large constant.
+
+    This readily implies that the trapezoid induced by the direction
+    $\overrightarrow{\pa_1 \pb_2}$ contains both $\pa$ and $\pb$ on
+    its legs, which implies the claim.
 \end{proof}
 
 \HERE

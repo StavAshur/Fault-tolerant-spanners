@@ -96,8 +96,8 @@ regions of $\FF$.
 
 \paragraph{Fault-tolerant and local spanners}
 
-An \emphw{ $\FF$-fault-tolerant spanner} for $\PS\subseteq \Re^d$, is
-a graph $\G=(\PS, \EG)$, such that for any region $\region$ (i.e., the
+An \emphw{$\FF$-fault-tolerant spanner} for $\PS\subseteq \Re^d$, is a
+graph $\G=(\PS, \EG)$, such that for any region $\region$ (i.e., the
 ``attack''), the graph $\G \gminus \region$ is a $t$-spanner of
 $\G_\PS - \region$. Surprisingly, as shown by Abam \etal
 \cite{abfg-rftgs-09}, such fault-tolerant spanners can be constructed
@@ -169,8 +169,8 @@ the point set.
 \paragraph{Triangles}
 In \secref{triangles} we give a construction of local spanners for the
 family $\FF$ of homothets of a given triangle $\triangle$, and get a
-spanner of size $O\left((\alpha\eps)^{-1}n\right)$ in
-$O\left((\alpha\eps)^{-1}n\right)\log n$ time, where $\alpha$ is the
+spanner of size $O\pth{ (\alpha\eps)^{-1}n }$ in
+$O\pth{(\alpha\eps)^{-1}n\log n}$ time, where $\alpha$ is the
 smallest angle in $\triangle$. We also show that if we allow $\alpha$
 to be arbitrarily small there exists a set of points that requires
 $O(n^2)$ edges for some triangles.
@@ -522,15 +522,16 @@ delegated to the appendix.
        separated}.
 \end{defn}
 
-\SaveContent{\LemmaRefineDWBody}{ Given a $\eps^{-1}$-\SSPD $\WS$ of
-   $n$ points in the plane, one can refine it, into a
-   $\eps^{-1}$-\SSPD $\WS'$, such that each pair
+\SaveContent{\LemmaRefineDWBody}{%
+   Given a $\eps^{-1}$-\SSPD $\WS$ of $n$ points in the plane, one can
+   refine it, into a $\eps^{-1}$-\SSPD $\WS'$, such that each pair
    $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in a
    $\eps$-double-wedge $\DW_\Pair$, such that $\PSX$ and $\PSY$ are
    contained in the two different faces of the double wedge
    $\DW_\Pair$. We have that $|\WS'| = O(|\WS|/\eps)$ and
    $\WeightX{\WS'} = O(\WeightX{\WS'}/\eps)$. The construction time is
-   proportional to the weight of $\WS'$.  }
+   proportional to the weight of $\WS'$.%
+}
 
 
 
@@ -540,6 +541,17 @@ delegated to the appendix.
     \LemmaRefineDWBody{}%%%
 \end{lemma}
 
+\begin{corollary}
+    \corlab{S:S:P:D:angular}%
+    %
+    Let $\PS$ be a set of $n$ points in the plane, and let $\eps > 0$
+    be a parameter. Then, one can compute a $(1/\eps)$-\SSPD for $\PS$
+    such that every pair is $\eps$-angularly separated.  The total
+    weight of the \SSPD is $\Of\pth{n \eps^{-3} \log n}$. The number
+    of pairs in the \SSPD is $\Of\pth{n \eps^{-3}}$, and the
+    computation time is $\Of\pth{ n \eps^{-3} \log n }$.
+\end{corollary}
+   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -547,14 +559,25 @@ delegated to the appendix.
 \section{Local spanners of homothets of convex region}
 \seclab{disks}
 
-% -----------------------------------------------------------------------
-\subsection{Delaunay triangulation for homothets}
-
 Let $\CC$ be a bounded convex and closed region in the plane (e.g., a
 disk).  A \emphi{homothet} of $\CC$ is a scaled and translated copy of
 $\CC$.  A point set $\PS$ is \emphi{general position} for $\CC$, if no
 four points of $\PS$ lie on the boundary of a homothet of $\CC$, and
 no three points are colinear.
+
+
+A graph $\G=(\PS, \EG)$ is an \emphw{$\CC$-local $(1+\eps)$-spanner}
+for $\PS$ if for any homothet $\region$ of $\CC$, we have that
+$\restrictY{\G}{\region}$ is a $t$-spanner of $\G_\PS \cap \region$.
+
+
+
+XXX
+
+
+% -----------------------------------------------------------------------
+\subsection{Delaunay triangulation for homothets}
+
 
 
 \begin{defn}[\cite{cd-vdbcdf-85}]
@@ -637,7 +660,7 @@ Delaunay triangulations, also holds for homothets.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{The construction}
+\subsection{The generic construction}
 \seclab{disk_construction}
 
 The input is a set $\PS$ of $n$ points in the plane (in general
@@ -1339,8 +1362,8 @@ $\cone \in \ConeSet_i$.
     $\eps \in (0,1)$ be an approximation parameter. The above
     algorithm computes a local $(1+\eps)$-spanner $\G$ for homothets
     of an $\alpha$-fat triangle $\triangle$.  The construction time is
-    $O\left(\frac{1}{\alpha\eps}n\log n\right)$, and the spanner $\G$
-    has $O\pth{ n / (\alpha\eps) \bigr.}$ edges.
+    $O\pth{\frac{1}{\alpha\eps}n\log n}$, and the spanner $\G$ has
+    $O\pth{ n / (\alpha\eps) \bigr.}$ edges.
 \end{theorem}
 
 \begin{proof}
@@ -1348,11 +1371,11 @@ $\cone \in \ConeSet_i$.
     \lemref{local_span:triangles}, and we are only left with bounding
     the size and the running time of the algorithm. The bound on the
     size is immediate from the construction, as every point $\pa$ is
-    the apex of $O\left( \frac{2\pi}{\eps\alpha} \right)$ cones, each
-    giving rise to a single edge incident to $\pa$.  The construction
-    time is bounded by the construction time for a $\theta$-graph with
-    cone size $\alpha\eps$, which is
-    $O\pth{ (\alpha\eps)^{-1}n\log n}$ \cite{c-aaspmp-87}.
+    the apex of $O\pth{ \frac{2\pi}{\eps\alpha} }$ cones, each giving
+    rise to a single edge incident to $\pa$.  The construction time is
+    bounded by the construction time for a $\theta$-graph with cone
+    size $\alpha\eps$, which is $O\pth{ (\alpha\eps)^{-1}n\log n}$
+    \cite{c-aaspmp-87}.
 \end{proof}
 
 
@@ -1529,7 +1552,8 @@ if the length of each of its legs is at most $\eps \diamX{\Trap}$.
 
 \newcommand{\senseX}[1]{\Mh{\mathrm{sen}} \pth{#1}}%
 
-\subsubsection{A local spanner for nice polygons}
+\subsubsection{Breaking a nice polygon into narrow %
+   trapezoids}
 
 For a convex polygon $\Body$, its \emphi{sensitivity}, denoted by
 $\senseX{\Body}$, is the minimum distance between any two non-adjacent
@@ -1540,13 +1564,15 @@ length of the longest edge of $\Body$ is $O(\senseX{\Body})$.  As an
 example, a $k$-regular polygon is $k$-nice.
 
 \begin{lemma}
+    \lemlab{narrow:traps:decomp}%
+    %
     Let $t$ be a positive integer.  Given a $t$-nice polygon $\Body$,
     and a parameter $\epsA$, one can cover it by a set $\Traps$ of
-    $O((t/\epsA)^2)$ $\epsA$-narrow trapezoids, such that for any two
+    $O(t^4/\epsA^3)$ $\epsA$-narrow trapezoids, such that for any two
     points $\pa, \pb \in \partial \Body$ that belong to two edges of
     $\Body$ that are not adjacent, there exists a narrow trapezoid
-    $\Trap \in \Traps$, such that $\pa, \pb$ are located on the two
-    short legs of $\Trap$.
+    $\Trap \in \Traps$, such that $\pa$ and $\pb$ are located on two
+    different short legs of $\Trap$.
 \end{lemma}
 \begin{proof}
     We show a somewhat suboptimal but simple construction. A $t$-nice
@@ -1560,9 +1586,9 @@ example, a $k$-regular polygon is $k$-nice.
     $M =\max_{e \in \EGX{\Body}} \ceil{\| e\| / \gamma} = O(
     1/\epsA)$.
 
-    In addition, place $c t$ equally space points between any two
-    consecutive points of $\PS$, where $c$ is constant to be
-    determined shortly. Let $\PSA$ be the resulting set from $\PS$
+    In addition, place $\constD t$ equally space points between any
+    two consecutive points of $\PS$, where $\constD$ is a constant to
+    be determined shortly. Let $\PSA$ be the resulting set from $\PS$
     after adding all these points.
 
     \begin{figure}[h]
@@ -1579,12 +1605,12 @@ example, a $k$-regular polygon is $k$-nice.
         \figlab{v:decompose}
     \end{figure}
 
-    Clearly, we have that $|\PS| = O( t /\epsA)$ and
-    $|\PSA| = O(t^2/\epsA)$. For a direction $v$, let $\Traps_v$ be
-    the decomposition into trapezoids formed by shooting rays from
-    inside $\Body$ in the direction of $v$ (or $-v$) from all the
-    points of $\PS$, see \figref{v:decompose}. Let $\Traps_v'$ be the
-    set resulting from throwing away trapezoids with legs that lie on
+    We have that $|\PS| = O( t /\epsA)$ and $|\PSA| =
+    O(t^2/\epsA)$. For a direction $v$, let $\Traps_v$ be the
+    decomposition into trapezoids formed by shooting rays from inside
+    $\Body$ in the direction of $v$ (or $-v$) from all the points of
+    $\PS$, see \figref{v:decompose}. Let $\Traps_v'$ be the set
+    resulting from throwing away trapezoids with legs that lie on
     adjacent edges.  It is easy to verify that all the trapezoids of
     $\Traps_v'$ are $\epsA$-narrow.  Let $U$ be the set of all
     directions induced by pairs of points of $\PS \times \PSA$, and
@@ -1606,27 +1632,101 @@ example, a $k$-regular polygon is $k$-nice.
     $\pb_1 \pb_2$.  The last claim is intuitively obvious, but
     requires some work to see formally. The minimum height of a
     triangle involving three vertices of $\Body$ is formed by three
-    consecutive vertices. In the worst case, this is an equilateral
-    triangle, with isosceles triangle with sidelength $\psi$ and side
-    angle $\pi/t$. As such, the height of such a triangle is
-    $h = \psi \sin( \pi/t) \geq \psi/t$. It follows that the height of
-    the triangle $\triangle \pa_1 \pa_2 \pb_2$ is at least
-    $h' = h/M = \Omega( \eps \psi/t )$. The quantity $h'$ is a lower
-    bound on the length of the projection of $\pa_1 \pa_2$ on the line
-    spanned by $\pb_1 \pb_2$. However,
-    $\dY{\pb_1}{\pb_2} \leq 2\gamma/ct = O( \epsA \psi /ct) < h'1$, by
-    picking $c$ to be sufficiently large constant.
+    consecutive vertices. In the worst case, this is an isosceles
+    triangle with sidelength $\psi$ and base angle $\pi/t$. As such,
+    the height of such a triangle is
+    $h = \psi \sin( \pi/t) \geq \psi/t$.
+
+    \begin{figure}[h]
+        \includegraphics[page=2]{figs/points_trap_2}%
+        \hfill%
+        \includegraphics[page=3]{figs/points_trap_2}
+        \hfill%
+        \includegraphics[page=4]{figs/points_trap_2}
+        \hfill%
+        \includegraphics[page=5]{figs/points_trap_2}
+        \caption{}%
+        \figlab{points:move}
+    \end{figure}
+
+    The height of the triangle $\triangle \pa_1 \pa_2 \pb_2$ is
+    minimized when $\pa_1$ or $\pa_2$ is a vertex of $\Body$, and
+    $\pb_2$ is at a vertex of $\Body$, see
+    \figref{points:move}. Assume, for concreteness, that $\pa_1$ is a
+    vertex of $\Body$, and observe that
+    $\dY{\pa_1}{\pa_2} \geq \| e\|/M$, where $e$ is the edge of
+    $\Body$ containing this segment. Using similar triangles, it is
+    straightforward to show that the height of this triangle is at
+    least $h' = h/M = \Omega( \eps \psi/t )$. The quantity $h'$ is a
+    lower bound on the length of the projection of $\pa_1 \pa_2$ on
+    the line spanned by $\pb_1 \pb_2$. However,
+    $\dY{\pb_1}{\pb_2} \leq 2\gamma/\constD t = O( \epsA \psi /\constD
+    t) < h'$, by picking $\constD$ to be sufficiently large constant.
 
     This readily implies that the trapezoid induced by the direction
-    $\overrightarrow{\pa_1 \pb_2}$ contains both $\pa$ and $\pb$ on
-    its legs, which implies the claim.
+    $ u = \overrightarrow{\pa_1 \pb_2}$ in $\Traps_u'$ that contains
+    $\pa$ on its leg, contains $\pb$ on its other leg.
 \end{proof}
 
-\HERE
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\subsubsection{Constructing the local spanner for nice %
+   polygons}
+
+\begin{theorem}
+    Let $\Body$ be a $k$-nice convex polygon, $\PS$ be a set of $n$
+    points in the plane, and let $\eps \in (0,1)$ be a parameter. Then
+    one can construct a $\CC$-local $(1+\eps)$-spanner of complexity 
+    XXX
+    
+\end{theorem}
+\newcommand{\Triangles}{\bm\Delta}%
+\begin{proof}
+    Let $\epsA = \eps/\constE$, for $\constE$ sufficiently large
+    constant.  We construct a family of $\Triangles$, induced by a
+    vertex of $\Body$, and an non-adjacent edge of $\Body$. This
+    family has $O(k^2)$ triangles. Each such triangle is
+    $\Omega(1/k)$-fat, and for each such triangle we construct the
+    $(1+\epsA)$-spanner of \thmref{l:s:triangle}. Next, we cover $\CC$
+    by a set $\Traps$ of $k' = O(k^4/\epsA^3)$ $\epsA$-narrow trapezoids
+    using \lemref{narrow:traps:decomp}.
+
+    We compute an $\epsA$-angular $\epsA^{-1}$-\SSPD $\WS$
+    decomposition of $\PS$ using \corref{S:S:P:D:angular} -- the total
+    weight of the decomposition is
+    $w = \Of\pth{ n \epsA^{-3} \log n }$. For each pair
+    $\{\PX, \PY\} \in \WS$, and each trapezoid $\Trap \in \Traps$, we
+    compute the $\Trap$-Delaunay triangulation of $\PX \cup \PY$.
+
+    Let $\G$ denote the union of all these graphs. We claim that it is
+    the desired spanner.  The construction time is
+    \begin{equation*}
+        O(( k^3 /\epsA) n \log n + k' w \log n)
+        =%
+        O\pth{
+           \frac{k^3 }{\epsA} n \log n + \frac{k^4}{\epsA^3} \cdot
+           \frac{n}{\epsA^{3}} \log n \cdot \log n
+        }%
+        =%
+        O\pth{ \frac{k^4}{\epsA^6}n \log^2 n}.%
+    \end{equation*}
+    And the resulting graph has
+    $O\pth{\bigl. ( {k^4}/{\epsA^6})n \log n}$ edges.
+    
+    For each trapezoid $\Trap \in \Traps$, we compute their
+
+    XXX
+
+    XXX
+    
+\end{proof}
+
+
+\HERE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \section{A local spanner for axis parallel squares}
@@ -2647,14 +2747,15 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
     right side of $\square$ and the upper end of $s$ is now given by:
 
     \begin{equation*}
-    	\arctan\left(\frac{\frac{6}{\eps}\tan\frac{\eps}{8}+\frac{1}{2}}{\frac{5}{\eps}}\right)%
-    	=%
-    	\arctan \left( \frac{6}{5}\tan\frac{\eps}{8}+\frac{\eps}{10} \right)%
-    	=%
-    	\Theta(\eps)%
-    \end{equation*}
-
-
+ 	\arctan
+        \pth{\frac{\frac{6}{\eps}
+              \tan\frac{\eps}{8}+\frac{1}{2}}{\frac{5}{\eps}}
+        }%
+        =%
+        \arctan \pth{ \frac{6}{5}\tan\frac{\eps}{8}+\frac{\eps}{10} }%
+        =%
+        \Theta(\eps)%
+   \end{equation*}
 \end{proof}
 
 \begin{figure}[h]

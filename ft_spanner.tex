@@ -92,10 +92,10 @@ faults, meaning that some arbitrary set of maximum size $k$ of
 vertices and edges has failed. Levcopoulos \etal \cite{lns-iacfts-02}
 showed the existence of $k$-vertex/edges fault tolerant spanners for a
 set of points $\PS$ in some metric space. Their spanner had
-$O(kn\log n)$ edges, and weight, i.e. sum of edge weights, bounded by
+$\Of(kn\log n)$ edges, and weight, i.e. sum of edge weights, bounded by
 $f(k)\cdot wt(MST(\PS))$ for some function $f$. Lukovszki
 \cite{l-nrftgs-99} later achieved a similar construction, improving
-the number of edges to $O(kn)$ and was able to prove that the result
+the number of edges to $\Of(kn)$ and was able to prove that the result
 is asymptotically tight.
 
 
@@ -353,7 +353,7 @@ replace the unit disk (of the standard $L_2$-norm) by the provided
 convex region. It is well known \cite{cd-vdbcdf-85} that such diagrams
 exist, have linear complexity in the plane, and can be computed
 quickly.  In \secref{del:homothets} we review these results, and
-(re)prove the critical property that the $\Body$-Delaunay
+restate the well-known property that the $\Body$-Delaunay
 triangulation is connected when restricted to a homothet of $\Body$.
 By compute these triangulations to carefully chosen subsets of the
 input point set, yields the above results.
@@ -366,12 +366,12 @@ to compute these subsets.
 \paragraph{Fat triangles}
 In \secref{triangles} we give a construction of local spanners for the
 family $\FF$ of homothets of a given triangle $\triangle$, and get a
-spanner of size $O\pth{ (\alpha\eps)^{-1}n }$ in
-$O\pth{(\alpha\eps)^{-1}n\log n}$ time, where $\alpha$ is the smallest
-angle in $\triangle$. This construction is a careful adaptation of the
-$\theta$-graph spanner construction to the given triangle, and it is
-technically significantly more challenging than the original
-construction.
+spanner of size $\Of\pth{ (\alpha\eps)^{-1}n }$ in
+$\Of\pth{(\alpha\eps)^{-1}n\log n}$ time, where $\alpha$ is the
+smallest angle in $\triangle$. This construction is a careful
+adaptation of the $\theta$-graph spanner construction to the given
+triangle, and it is technically significantly more challenging than
+the original construction.
 
 
 \paragraph{$k$-regular polygons}
@@ -579,12 +579,11 @@ delegated to the appendix.
 
 \SaveContent{\LemmaChopEasyBody}%
 {%
-    Given an $\alpha$-\SSPD $\WS$ of a set $\PS$ of $n$ points in
-    $\Re^d$ and a parameter $\beta \geq 2$, one can refine $\WS$ into
-    an $\alpha\beta$-\SSPD $\WS'$, such that that
-    $|\WS'| = O(|\WS|/\beta^d)$ and
-    $\WeightX{\WS'} = O(\WeightX{\WS'}/\beta^d)$.
- }
+   Given an $\alpha$-\SSPD $\WS$ of a set $\PS$ of $n$ points in
+   $\Re^d$ and a parameter $\beta \geq 2$, one can refine $\WS$ into
+   an $\alpha\beta$-\SSPD $\WS'$, such that that
+   $|\WS'| = \Of(|\WS|/\beta^d)$ and
+   $\WeightX{\WS'} = \Of(\WeightX{\WS'}/\beta^d)$.  }
  
 \begin{lemma}[Proof in \apndref{chop:easy}]
     \lemlab{chop:easy}%
@@ -609,9 +608,9 @@ delegated to the appendix.
    $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in a
    $\eps$-double-wedge $\DW_\Pair$, such that $\PSX$ and $\PSY$ are
    contained in the two different faces of the double wedge
-   $\DW_\Pair$. We have that $|\WS'| = O(|\WS|/\eps)$ and
-   $\WeightX{\WS'} = O(\WeightX{\WS'}/\eps)$. The construction time is
-   proportional to the weight of $\WS'$.%
+   $\DW_\Pair$. We have that $|\WS'| = \Of(|\WS|/\eps)$ and
+   $\WeightX{\WS'} = \Of(\WeightX{\WS'}/\eps)$. The construction time
+   is proportional to the weight of $\WS'$.%
 }
 
 
@@ -671,7 +670,7 @@ delegated to the appendix.
 
 Note, that if a convex region $\body$ has bounded aspect ratio, then
 $\shrinkDY{\body}{\delta}$ is similar to the result of scaling $\body$
-by a factor of $1-O(\delta)$. On the other hand, if $\body$ is long
+by a factor of $1-\Of(\delta)$. On the other hand, if $\body$ is long
 and skinny then this region is much smaller. Specifically, if $\body$
 has width smaller than $2 \delta \cdot \diameterX{\body}$, then
 $\shrinkDY{\body}{\delta}$ is empty.
@@ -797,9 +796,9 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\G_\PS \cap \region$.
     \thmlab{c:t:construct_delaunay_graph}%
     %
     For any convex shape $\CC$ and a set of points $\PS$,
-    $\DG_{\CC}(\PS)$ can be computed in $O(n \log n)$ time.
-    Furthermore, the triangulation $\DG_{\CC}(\PS)$ has $O(n)$ edges,
-    vertices, and faces.
+    $\DG_{\CC}(\PS)$ can be computed in $\Of(n \log n)$ time.
+    Furthermore, the triangulation $\DG_{\CC}(\PS)$ has $\Of(n)$
+    edges, vertices, and faces.
 \end{theorem}
 
 \begin{figure}[h]
@@ -890,9 +889,9 @@ edges. As such, the number of edges in the resulting graph is bounded
 by
 \begin{math}
     \sum_{\{\PSX, \PSY\} \in \WS} O\bigl( |\PSX| + |\PSY| \bigr) =%
-    O\pth{ \WeightX{\WS} }%
+    \Of\pth{ \WeightX{\WS} }%
     =%
-    O\pth{ \frac{n\log \spread}{{\epsA}^{2}}},
+    \Of\pth{ \frac{n\log \spread}{{\epsA}^{2}}},
 \end{math}
 by \lemref{s:s:p:d:spread}.
 
@@ -903,9 +902,9 @@ The construction time is bounded by
     \sum_{\{\PSX, \PSY\} \in \WS} O\bigl( (|\PSX| + |\PSY|) \log
     (|\PSX| + |\PSY|)  \bigr)
     =%
-    O\pth{ \WeightX{\WS} \log n }%
+    \Of\pth{ \WeightX{\WS} \log n }%
     =%
-    O\pth{ \frac{n\log \spread \log n}{{\epsA}^{2}}},    
+    \Of\pth{ \frac{n\log \spread \log n}{{\epsA}^{2}}},    
 \end{math}
 
 \begin{lemma}[Local spanner property]
@@ -1107,7 +1106,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     %
     For $\eps =1/4$, and parameters $n$ and $\spread \geq 1$, there is
     a point set $\PS$ of $n + \ceil{\log \spread}$ points in the
-    plane, with spread $O( n \spread )$, such that any local
+    plane, with spread $\Of( n \spread )$, such that any local
     $(1+\eps)$-spanner of $\PS$ for disks, must have
     $\Omega( n \log \spread )$ edges.
 \end{lemma}
@@ -1143,7 +1142,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     $\dY{\pb_M}{\pa_1} \geq 2n$.  The diameter of $\PS$ is
     $\dY{\pa_1}{\pb_1} = \sqrt{(n +n2^{M})^2+ 1} \leq 2 n 2^M $. As
     such, the spread of $\PS$ is bounded by
-    $\leq n 2^{M+1} = O( n \spread)$.
+    $\leq n 2^{M+1} = \Of( n \spread)$.
 
     For any $i$ and $j$, consider the disk
     $\diskVY{\pa_i}{\pb_j}$. This disk does not contain any point of
@@ -1202,8 +1201,8 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     \lemlab{l:b:triangles}%
     %
     For any $n > 0$, and $\Phi = \Omega(n)$, one can compute a set
-    $\PS$ of $n+ O(\log\Phi)$ points, with spread $O(\Phi n)$, and a
-    triangle $\triangle$, such that any $\triangle$-local
+    $\PS$ of $n+ \Of(\log\Phi)$ points, with spread $\Of(\Phi n)$, and
+    a triangle $\triangle$, such that any $\triangle$-local
     $3/2$-spanner of $\PS$ requires $\Omega\pth{n\log\Phi }$ edges.
 \end{lemma}
 
@@ -1566,8 +1565,8 @@ $\cone \in \ConeSet_i$.
     $\eps \in (0,1)$ be an approximation parameter. The above
     algorithm computes a local $(1+\eps)$-spanner $\G$ for homothets
     of an $\alpha$-fat triangle $\triangle$.  The construction time is
-    $O\pth{\frac{1}{\alpha\eps}n\log n}$, and the spanner $\G$ has
-    $O\pth{ n / (\alpha\eps) \bigr.}$ edges.
+    $\Of\pth{\frac{1}{\alpha\eps}n\log n}$, and the spanner $\G$ has
+    $\Of\pth{ n / (\alpha\eps) \bigr.}$ edges.
 \end{theorem}
 
 \begin{proof}
@@ -1575,10 +1574,10 @@ $\cone \in \ConeSet_i$.
     \lemref{local_span:triangles}, and we are only left with bounding
     the size and the running time of the algorithm. The bound on the
     size is immediate from the construction, as every point $\pa$ is
-    the apex of $O\pth{ \frac{2\pi}{\eps\alpha} }$ cones, each giving
+    the apex of $\Of\pth{ \frac{2\pi}{\eps\alpha} }$ cones, each giving
     rise to a single edge incident to $\pa$.  The construction time is
     bounded by the construction time for a $\theta$-graph with cone
-    size $\alpha\eps$, which is $O\pth{ (\alpha\eps)^{-1}n\log n}$
+    size $\alpha\eps$, which is $\Of\pth{ (\alpha\eps)^{-1}n\log n}$
     \cite{c-aaspmp-87}.
 \end{proof}
 
@@ -1767,7 +1766,7 @@ $\senseX{\Body}$, is the minimum distance between any two non-adjacent
 edges (this quantity is no bigger than the length of the shortest edge
 in the polygon).  A convex polygon $\Body$ is \emphi{$t$-nice}, if the
 outer angle at any vertex of the polygon is at least $2\pi/t$, and the
-length of the longest edge of $\Body$ is $O(\senseX{\Body})$.  As an
+length of the longest edge of $\Body$ is $\Of(\senseX{\Body})$.  As an
 example, a $k$-regular polygon is $k$-nice.
 
 \begin{lemma}
@@ -1775,9 +1774,9 @@ example, a $k$-regular polygon is $k$-nice.
     %
     Let $t$ be a positive integer.  Given a $t$-nice polygon $\Body$,
     and a parameter $\epsA$, one can cover it by a set $\Traps$ of
-    $O(t^4/\epsA^3)$ $\epsA$-narrow trapezoids, such that for any two
-    points $\pa, \pb \in \partial \Body$ that belong to two edges of
-    $\Body$ that are not adjacent, there exists a narrow trapezoid
+    $\Of(t^4/\epsA^3)$ $\epsA$-narrow trapezoids, such that for any
+    two points $\pa, \pb \in \partial \Body$ that belong to two edges
+    of $\Body$ that are not adjacent, there exists a narrow trapezoid
     $\Trap \in \Traps$, such that $\pa$ and $\pb$ are located on two
     different short legs of $\Trap$.
 \end{lemma}
@@ -1790,7 +1789,7 @@ example, a $k$-regular polygon is $k$-nice.
     range $\gamma$ and $2\gamma$, where
     $\gamma = \epsA \psi/ \constC$, for some sufficiently large
     constant $\constC$. In particular, let
-    $M =\max_{e \in \EGX{\Body}} \ceil{\| e\| / \gamma} = O(
+    $M =\max_{e \in \EGX{\Body}} \ceil{\| e\| / \gamma} = \Of(
     1/\epsA)$.
 
     In addition, place $\constD t$ equally space points between any
@@ -1812,18 +1811,18 @@ example, a $k$-regular polygon is $k$-nice.
         \figlab{v:decompose}
     \end{figure}
 
-    We have that $|\PS| = O( t /\epsA)$ and $|\PSA| =
-    O(t^2/\epsA)$. For a direction $v$, let $\Traps_v$ be the
-    decomposition into trapezoids formed by shooting rays from inside
-    $\Body$ in the direction of $v$ (or $-v$) from all the points of
-    $\PS$, see \figref{v:decompose}. Let $\Traps_v'$ be the set
-    resulting from throwing away trapezoids with legs that lie on
+    We have that $|\PS| = \Of( t /\epsA)$ and
+    $|\PSA| = \Of(t^2/\epsA)$. For a direction $v$, let $\Traps_v$ be
+    the decomposition into trapezoids formed by shooting rays from
+    inside $\Body$ in the direction of $v$ (or $-v$) from all the
+    points of $\PS$, see \figref{v:decompose}. Let $\Traps_v'$ be the
+    set resulting from throwing away trapezoids with legs that lie on
     adjacent edges.  It is easy to verify that all the trapezoids of
     $\Traps_v'$ are $\epsA$-narrow.  Let $U$ be the set of all
     directions induced by pairs of points of $\PS \times \PSA$, and
     let $\Traps = \cup_{u \in U} \Traps_u'$. We have that
-    $|\Traps| = O( |\PS| \cdot |U| ) = O(|\PS|^2 |\PSA| ) =O( t^4
-    /\epsA^3)$.
+    $|\Traps| = \Of( |\PS| \cdot |U| ) = \Of(|\PS|^2 |\PSA| ) =\Of(
+    t^4 /\epsA^3)$.
 
     Consider any two points $\pa, \pb$ on non-adjacent edges of
     $\Body$, and let $\pa_1, \pa_2 $ be the two adjacent points of
@@ -1867,8 +1866,9 @@ example, a $k$-regular polygon is $k$-nice.
     least $h' = h/M = \Omega( \eps \psi/t )$. The quantity $h'$ is a
     lower bound on the length of the projection of $\pa_1 \pa_2$ on
     the line spanned by $\pb_1 \pb_2$. However,
-    $\dY{\pb_1}{\pb_2} \leq 2\gamma/\constD t = O( \epsA \psi /\constD
-    t) < h'$, by picking $\constD$ to be sufficiently large constant.
+    $\dY{\pb_1}{\pb_2} \leq 2\gamma/\constD t = \Of( \epsA \psi
+    /\constD t) < h'$, by picking $\constD$ to be sufficiently large
+    constant.
 
     This readily implies that the trapezoid induced by the direction
     $ u = \overrightarrow{\pa_1 \pb_2}$ in $\Traps_u'$ that contains
@@ -1887,9 +1887,9 @@ example, a $k$-regular polygon is $k$-nice.
     Let $\Body$ be a $k$-nice convex polygon, $\PS$ be a set of $n$
     points in the plane, and let $\eps \in (0,1)$ be a parameter. Then
     one can construct a $\CC$-local $(1+\eps)$-spanner of $\PS$.  The
-    construction time is $O\pth{\bigl. ({k^4}/{\eps^6})n \log^2 n}$,
+    construction time is $\Of\pth{\bigl. ({k^4}/{\eps^6})n \log^2 n}$,
     and the resulting graph has
-    $O\pth{\bigl. ( {k^4}/{\eps^6})n \log n}$ edges. In particular
+    $\Of\pth{\bigl. ( {k^4}/{\eps^6})n \log n}$ edges. In particular
     these bounds hold if $\Body$ is a $k$-regular gon.
 \end{theorem}
 \newcommand{\Triangles}{\bm\Delta}%
@@ -1897,11 +1897,11 @@ example, a $k$-regular polygon is $k$-nice.
     Let $\epsA = \eps/\constE$, for $\constE$ sufficiently large
     constant.  We construct a family of $\Triangles$, induced by a
     vertex of $\Body$, and an non-adjacent edge of $\Body$. This
-    family has $O(k^2)$ triangles. Each such triangle is
+    family has $\Of(k^2)$ triangles. Each such triangle is
     $\Omega(1/k)$-fat, and for each such triangle we construct the
     $(1+\epsA)$-spanner of \thmref{l:s:triangle}. Next, we cover $\CC$
-    by a set $\Traps$ of $k' = O(k^4/\epsA^3)$ $\epsA$-narrow trapezoids
-    using \lemref{narrow:traps:decomp}.
+    by a set $\Traps$ of $k' = \Of(k^4/\epsA^3)$ $\epsA$-narrow
+    trapezoids using \lemref{narrow:traps:decomp}.
 
     We compute an $\epsA$-angular $\epsA^{-1}$-\SSPD $\WS$
     decomposition of $\PS$ using \corref{S:S:P:D:angular} -- the total
@@ -1913,17 +1913,17 @@ example, a $k$-regular polygon is $k$-nice.
     Let $\G$ denote the union of all these graphs. We claim that it is
     the desired spanner.  The construction time is
     \begin{equation*}
-        O(( k^3 /\epsA) n \log n + k' w \log n)
+        \Of(( k^3 /\epsA) n \log n + k' w \log n)
         =%
-        O\pth{
+        \Of\pth{
            \frac{k^3 }{\epsA} n \log n + \frac{k^4}{\epsA^3} \cdot
            \frac{n}{\epsA^{3}} \log n \cdot \log n
         }%
         =%
-        O\pth{ \frac{k^4}{\epsA^6}n \log^2 n}.%
+        \Of\pth{ \frac{k^4}{\epsA^6}n \log^2 n}.%
     \end{equation*}
     And the resulting graph has
-    $O\pth{\bigl. ( {k^4}/{\epsA^6})n \log n}$ edges.
+    $\Of\pth{\bigl. ( {k^4}/{\epsA^6})n \log n}$ edges.
     
     As for correctness, consider a homothet $\Body'$ of $\Body$ that
     contains two points $\pa, \pb \in \PS$. By \lemref{shrink:shrank},
@@ -1971,10 +1971,10 @@ example, a $k$-regular polygon is $k$-nice.
     \remlab{improved}%
     %
     For axis-parallel squares \thmref{k:gon} implies a local spanner
-    with $O\pth{\eps^{-6} n \log n}$ edges.  However, for this special
-    case, the decomposition into narrow trapezoid can be skipped. In
-    particular, in this case, the resulting spanner has
-    $O( \eps^{-3} n \log n)$ edges. We do not provide the details
+    with $\Of\pth{\eps^{-6} n \log n}$ edges.  However, for this
+    special case, the decomposition into narrow trapezoid can be
+    skipped. In particular, in this case, the resulting spanner has
+    $\Of( \eps^{-3} n \log n)$ edges. We do not provide the details
     here, as it is only a minor improvement over the above, and
     requires quite a bit of additional work -- essentially, one has to
     prove a version of \lemref{good:jump:traps} for squares.
@@ -2101,14 +2101,14 @@ quadrant-separated for all $i$.
     \begin{math}
         N(n,d) = 2N(n,d-1) + 2N\pth{ n/2, d }
     \end{math}
-    with $N(n,1) = O(n)$. The solution to this recurrence is
-    $N(n,d) = O( n \log^{d-1} n)$.  The total weight of the
+    with $N(n,1) = \Of(n)$. The solution to this recurrence is
+    $N(n,d) = \Of( n \log^{d-1} n)$.  The total weight of the
     decomposition is
     \begin{math}
         W(n,d) = 2W(n,d-1) + 2W\pth{ n/2, d }
     \end{math}
-    with $W(n,1) = O(n \log n)$. The solution to this recurrence is
-    $W(n,d) = O( n \log^{d} n)$. Clearly, this also bounds the
+    with $W(n,1) = \Of(n \log n)$. The solution to this recurrence is
+    $W(n,d) = \Of( n \log^{d} n)$. Clearly, this also bounds the
     construction time.
 \end{proof}
 

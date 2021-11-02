@@ -77,27 +77,7 @@ a set of points $\PS\subseteq \Re^d$, a graph $\G$ over $\PS$ is a
 $\G_\PS$. There is a lot of work on building geometric spanners, see
 \cite{ns-gsn-07} and references there in.
 
-
-\paragraph{Local spanners}
-
-Recently, Abam and Borouny \cite{ab-lgs-21} introduced the notion of
-local spanners.  For a family of regions $\FF$, a graph
-$\G = (\PS,\EG)$ is a \emphw{local $t$-spanner} for $\FF$, if for any
-$\region \in \FF$, the subgraph of $\G$ induced on $\PS \cap \region$
-is a $t$-spanner.  Specifically, this induced subgraph
-$ \restrictY{\G}{\region}$ is a $t$-spanner for all
-$\pa,\pb \in \PS \cap \region$ (note, that we keep an edge in the
-subgraph only if both its endpoints are in $\region$).
-
-Abam and Borouny \cite{ab-lgs-21} showed how to construct such
-spanners for axis-parallel squares and vertical slabs. In this work,
-we are further extending their results.  They also showed how to
-construct such spanners for disks, if one is allowed to add Steiner
-points. Abam and Borouny left the question of how to construct local
-spanners for disks as an open problem.
-
-
-\paragraph{Fault-tolerant and local spanners}
+\paragraph{Fault-tolerant spanners}
 
 An \emphw{$\FF$-fault-tolerant spanner} for $\PS\subseteq \Re^d$, is a
 graph $\G=(\PS, \EG)$, such that for any region $\region$ (i.e., the
@@ -119,103 +99,67 @@ the number of edges to $O(kn)$ and was able to prove that the result
 is asymptotically tight.
 
 
+\paragraph{Local spanners}
 
-\subsection*{Our results}
+Recently, Abam and Borouny \cite{ab-lgs-21} introduced the notion of
+local spanners.  For a family of regions $\FF$, a graph
+$\G = (\PS,\EG)$ is a \emphw{local $t$-spanner} for $\FF$, if for any
+$\region \in \FF$, the subgraph of $\G$ induced on $\PS \cap \region$
+is a $t$-spanner.  Specifically, this induced subgraph
+$ \restrictY{\G}{\region}$ is a $t$-spanner for all
+$\pa,\pb \in \PS \cap \region$ (note, that we keep an edge in the
+subgraph only if both its endpoints are in $\region$).
 
-\paragraph{Almost local spanners.}
+Abam and Borouny \cite{ab-lgs-21} showed how to construct such
+spanners for axis-parallel squares and vertical slabs. In this work,
+we are further extending their results.  They also showed how to
+construct such spanners for disks, if one is allowed to add Steiner
+points. Abam and Borouny left the question of how to construct local
+spanners for disks as an open problem.
 
-We start by showing that regular geometric spanners are local spanners
-if one is required provide the spanner guarantee only to shrunken
-region. Namely, if $\G$ is a $(1+\eps)$-spanner of $\PS$, then for any
-convex region $\Body$, the graph $ \restrictY{\G}{\Body}$ is a spanner
-for $\Body' \cap \PS$, where $\Body'$ is the set of all points in
-$\Body$ that are in distance at least $\eps \diamX{\Body}$ from its
-boundary.
+To appreciate the difficulty in constructing local spanner, observe
+that unlike regular spanners, the construction has to take into
+account many different scenarios as far as which points are available
+to be used in the spanner. As a concrete example, a local spanner for
+axis-parallel rectangle requires quadratic number of edges, see
+\figref{bad:rectangles}.
 
-This emphasize the challenge in constructing local spanners if one is
-not allowed to be fuzzy about the area of service -- while regular
-spanners can rely on mid points, under the assurance that they are
-always there, for local spanners this is significantly harder as
-natural midpoints
+\begin{figure}[h]
+    \centerline{\includegraphics{figs/local_rectangles}}
+    \caption{For any point in the top diagonal and bottom diagonal,
+       there is a fat axis parallel rectangle that contains only these
+       two points. Thus, a local spanner requires quadratic size in
+       this case.  }
+    \figlab{bad:rectangles}
+\end{figure}
 
-XXX
-
-
-
-
-
-\paragraph{Disks.}
-In \secref{disks} we present a construction of spanners, which
-surprisingly, is not only fault-tolerant for convex regions, but it
-also a local spanner for disks. This resolves the aforementioned open
-problem from Abam and Borouny \cite{ab-lgs-21}. Our construction is a
-variant of the original construction of Abam \etal
-\cite{abfg-rftgs-09}. For a parameter $\eps>0$ the construction of a
-$(1+\eps)$-local spanner for disks takes
-$\Of\pth{ \eps^{-2} n\log \spread \log n }$ time, and the resulted
-spanner is of size $\Of\pth{ \eps^{-2} n\log \spread }$, where
-$\spread$ is the spread of the point set. We also provide a lower
-bound showing that this logarithmic dependency on $\spread$ cannot be
-avoided.
-
-In \secref{homothets} we extend this construction to scaled and
-translated copies (\emph{homothets}) of a convex shape $\CC$.
-
-\paragraph{Squares}
-In \secref{squares} we show a construction similar to that of
-\secref{disks}, but prove that for the case of axis parallel square
-local spanners we are able to produce a spanner of size
-$\Of\pth{\eps^{-3} n \log n}$, that is, independent of the spread of
-the point set.
-
-\paragraph{Triangles}
-In \secref{triangles} we give a construction of local spanners for the
-family $\FF$ of homothets of a given triangle $\triangle$, and get a
-spanner of size $O\pth{ (\alpha\eps)^{-1}n }$ in
-$O\pth{(\alpha\eps)^{-1}n\log n}$ time, where $\alpha$ is the
-smallest angle in $\triangle$. We also show that if we allow $\alpha$
-to be arbitrarily small there exists a set of points that requires
-$O(n^2)$ edges for some triangles.
-
-\paragraph{FILL IN}
-For the following families of regions, it is possible to show that
-even after constraining parameter such as fatness/aspect ratio, a
-local spanner with respect to the set of regions might require a
-quadratic number of edges. We therefore present constructions of weak
-spanners for those families, where the mathematical definition of
-``weak'' changes between the two section, even though the two
-definitions are very closely related. In both cases, the size of the
-spanner and the construction time both depend on the ``weakness'' of
-the requested spanner, parameterized by $\delta\in (0,1)$.
-
-\paragraph{Convex regions}
-In \secref{convex regions} we construct weak local spanners for
-homothets of a given convex region $\CC$ with a bounded aspect
-ratio. We are able to show an algorithm for constructing a
-$\delta$-weak $\CC$-local $(1+\eps)$-spanner of size
-$\Of\bigl( (\eps^{-1} + \delta^{-2}) n \bigr) $ in
-$\Of( (\eps^{-1} + \delta^{-2}) n \log n)$ time.
+Namely, regular spanners can rely on using midpoints in their path
+under the assurance that they are always there. For local spanners
+this is significantly harder as natural midpoints might
+``disappear''. Intuitively, a local spanner construction needs to use
+midpoints that are guaranteed to be present judging only from the
+source and destination points of the path.
 
 
-\paragraph{Rectangles}
-In \secref{rectangles} we describe a new pair decomposition data
-structure, the \emph{Quadrant Separated Pair Decomposition} (QSPD),
-and use it to construct a weak local spanner for axis parallel
-rectangles.We get a $\delta$-weak local $(1+\eps)$-spanner for the
-axis parallel rectangles, with size
-$\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$, in
-$\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$ time.
+\paragraph{A good jump is hard to find}
 
-See \figref{results_summary} for a summary of known results and
-comparisons to the results of this paper.
+Most constructions for spanners can be viewed as searching for a way
+to build a path from the source to the destination by finding a good
+jump. Either by finding a way to move locally from the source to a
+near by point in the right direction, as done in the $\theta$-graph
+construction, or alternatively, by finding a major a connection in the
+spanner from the neighborhood of the source to the neighborhood of the
+destination, as done in the spanner constructions using well-separated
+pairs decomposition (\WSPD). Usually, one argues inductively that the
+spanner must have a short path from to the source to the start of the
+jump, and a path from the end of the jump to the destination, and
+combining these one prove that the resulting new path is not too long.
 
 
-\begin{figure}
+\begin{figure}[t]
     \centering
 
-    \begin{tabular}{|c|c|c||c|c|}
-
-
+    \begin{tabular}{|l|c|c||c|c|}
       \hline
       % ------------------------------------------------------------
       Region
@@ -251,7 +195,7 @@ comparisons to the results of this paper.
       &
         $\Of\pth{\eps^{-3} n \log n}$
       &
-        \thmref{l:s:squares}%
+        \remref{improved}%
       \\
       \hline
       % ------------------------------------------------------------
@@ -302,17 +246,27 @@ comparisons to the results of this paper.
       &
         $\Of\pth{ \eps^{-2} n\log \spread  }\Bigr.$
       &
-        \thmref{l:s:homothets}%
+        \thmref{main:1}%
       \\
       \hline
       % ------------------------------------------------------------
-      $\alpha$-fat triangles
+      Homothets $\alpha$-fat triangles
       &
       &
       &
         $\Of\pth{ (\alpha\eps)^{-1} n}\Bigr.$
       &
         \thmref{l:s:triangle}%
+      \\
+      \hline
+      % ------------------------------------------------------------
+      Homothets triangles
+      &
+      &
+      &       
+        $\Omega\pth{ n \log \spread }\Bigr.$
+      &
+        \lemref{l:b:triangles}%
       \\
       \hline
       % ---------------------------------------------------------
@@ -350,6 +304,131 @@ comparisons to the results of this paper.
        original work.}
     \figlab{results_summary}
 \end{figure}
+
+
+\subsection*{Our results}
+
+\paragraph{Almost local spanners}
+
+We start by showing that regular geometric spanners are local spanners
+if one is required provide the spanner guarantee only to shrunken
+region. Namely, if $\G$ is a $(1+\eps)$-spanner of $\PS$, then for any
+convex region $\Body$, the graph $ \restrictY{\G}{\Body}$ is a spanner
+for $\Body' \cap \PS$, where $\Body'$ is the set of all points in
+$\Body$ that are in distance at least $\eps \diamX{\Body}$ from its
+boundary.
+
+\paragraph{Homothets}
+A \emphw{homothet} of a convex region $\Body$, is a translated and
+scaled copy of $\Body$.  In \secref{disks} we present a construction
+of spanners, which surprisingly, is not only fault-tolerant for all
+convex regions, but it is also a local spanner for homothets of a
+prespecified convex region.  This in particular works for disks, and
+resolves the aforementioned open problem from Abam and Borouny
+\cite{ab-lgs-21}. Our construction is somewhat similar to the original
+construction of Abam \etal \cite{abfg-rftgs-09}. For a parameter
+$\eps>0$ the construction of a $(1+\eps)$-local spanner for homothets
+takes $\Of\pth{ \eps^{-2} n\log \spread \log n }$ time, and the
+resulted spanner is of size $\Of\pth{ \eps^{-2} n\log \spread }$,
+where $\spread$ is the spread of the input point set $\PS$, and
+$n=|\PS|$. We also provide a lower bound showing that this logarithmic
+dependency on $\spread$ cannot be avoided.
+
+The dependency on the spread $\spread$ in the above construction is
+somewhat disappointing. However.  the lower bound constructions,
+provided in \secref{lower:bound}, show that this is unavoidable, for
+disks or homothets of triangles.
+
+
+Thus, the natural question is what are the cases where one can avoid
+the ``curse of the spread'' -- that is, cases where one can construct
+local spanners of size independent of the spread of the input point
+set.
+
+\paragraph{The basic building block: $\Body$-Delaunay triangulation}
+
+A key ingredient in the above construction, is the concept of Delaunay
+triangulation induces by a homothet of a convex body. Intuitively, one
+replace the unit disk (of the standard $L_2$-norm) by the provided
+convex region. It is well known \cite{cd-vdbcdf-85} that such diagrams
+exist, have linear complexity in the plane, and can be computed
+quickly.  In \secref{del:homothets} we review these results, and
+(re)prove the critical property that the $\Body$-Delaunay
+triangulation is connected when restricted to a homothet of $\Body$.
+By compute these triangulations to carefully chosen subsets of the
+input point set, yields the above results.
+
+Specifically, we use well-separated and semi-separated decompositions
+to compute these subsets.
+
+
+
+\paragraph{Fat triangles}
+In \secref{triangles} we give a construction of local spanners for the
+family $\FF$ of homothets of a given triangle $\triangle$, and get a
+spanner of size $O\pth{ (\alpha\eps)^{-1}n }$ in
+$O\pth{(\alpha\eps)^{-1}n\log n}$ time, where $\alpha$ is the smallest
+angle in $\triangle$. This construction is a careful adaptation of the
+$\theta$-graph spanner construction to the given triangle, and it is
+technically significantly more challenging than the original
+construction.
+
+
+\paragraph{$k$-regular polygons}
+
+It seems natural that if one can handle fat triangles, then homothets
+of $k$-regular polygons should readily follow by a simple
+decomposition of the polygon into fat triangles. Maybe surprisingly,
+this is not the case -- a critical configuration might involve two
+points that are on the interior of the edges of a homothet of the
+input polygon. We overcome this, by first showing that sufficiently
+narrow trapezoids, provide us with a good jump somewhere inside the
+trapezoid, assuming one compute the Delaunay triangulation induced by
+the trapezoid, and that the source and destination lies on the two
+legs of the trapezoid. Next, we show that such a polygon can be
+covered by a small number of narrow trapezoids and fat triangles. By
+building appropriate graphs for each trapezoid/triangle in the
+collection, we prove that the resulting graph is a spanner for
+homothets of the given $k$-regular polygon, and that the resulting
+graph size has no dependency on the spread. Of course, the size does
+depend on $k$.  See \secref{k:gons} for details, and \thmref{k:gon}
+for the precise result.
+
+
+
+\paragraph{Quadrant separated pair decomposition (\QSPD)}
+
+In \secref{qspd}, we describe a novel pair-decomposition.
+Specifically, the \QSPD breaks the input point set $\PS$ into pairs,
+such that for any pair $\{\PX, \PY\}$ we have the property that there
+is a translated axis system, such that $\PX$ and $\PY$ belong to two
+antipodal quadrants.  In $d$ dimensions there is such a decomposition
+with $\Of( n \log^{d-1} n)$ pair, and total weight
+$\Of( n \log^{d} n)$.  A somewhat similar idea was used by Abam and
+Borouny \cite{ab-lgs-21} for the $d=1$ case. We believe this
+decomposition might be useful and is of independent interest.
+
+\paragraph{Multiplicative weak local spanner for rectangles}
+
+In \secref{w:l:s:rect}, we use \QSPD{}s to construct a weak local
+spanner for axis parallel rectangles.  Here, the constructed graph
+$\G$ over $\PS$, has the property that for any axis-parallel rectangle
+$\rect$, the graph $\restrictY{\G}{\rect}$ is an $(1+\eps)$-spanner
+for all the points of $\bigl((1-\eps)\rect \bigr)\cap \PS$, where
+$(1-\eps)\rect$ is the scaling of the rectangle by $1-\eps$ around its
+center. Importantly, this works for narrow rectangles when this form
+of multiplicative shrinking is still meaningful (unlike the diameter
+based shrinking mentioned above). Contrast this with the lower bound
+of $\Omega(n^2)$, illustrated in \figref{bad:rectangles}, on the size
+of local spanner if one does not shrink the rectangles. See
+\thmref{a:l:s:rectangles} for details of the precise result.
+
+\bigskip
+
+See \figref{results_summary} for a summary of known results and
+comparisons to the results of this paper.
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -701,7 +780,7 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\G_\PS \cap \region$.
 
 % -----------------------------------------------------------------------
 \subsection{Delaunay triangulation for homothets}
-
+\seclab{del:homothets}
 
 
 \begin{defn}[\cite{cd-vdbcdf-85}]
@@ -980,6 +1059,7 @@ graph when restricted to region $R$, is a spanner for
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Lower bounds}
+\seclab{lower:bound}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1522,6 +1602,7 @@ $\cone \in \ConeSet_i$.
 
 
 \subsection{A local spanner for nice polygons}
+\seclab{k:gons}
 
 \subsubsection{A good jump for narrow trapezoids}
 \seclab{traps:jump}
@@ -1801,6 +1882,8 @@ example, a $k$-regular polygon is $k$-nice.
    polygons}
 
 \begin{theorem}
+    \thmlab{k:gon}%
+    %
     Let $\Body$ be a $k$-nice convex polygon, $\PS$ be a set of $n$
     points in the plane, and let $\eps \in (0,1)$ be a parameter. Then
     one can construct a $\CC$-local $(1+\eps)$-spanner of $\PS$.  The
@@ -1885,13 +1968,16 @@ example, a $k$-regular polygon is $k$-nice.
 \end{proof}
 
 \begin{remark}
-    For the case of axis-parallel squares, the decomposition into
-    narrow trapezoid can be skipped. In particular, in this case, the
-    resulting spanner has $O( \eps^{-3} n \log n)$ edges. We do not
-    provide the details here, as it is only a minor improvement over
-    the above, and requires quite a bit of additional work --
-    essentially, one has to prove a version of
-    \lemref{good:jump:traps} for squares.
+    \remlab{improved}%
+    %
+    For axis-parallel squares \thmref{k:gon} implies a local spanner
+    with $O\pth{\eps^{-6} n \log n}$ edges.  However, for this special
+    case, the decomposition into narrow trapezoid can be skipped. In
+    particular, in this case, the resulting spanner has
+    $O( \eps^{-3} n \log n)$ edges. We do not provide the details
+    here, as it is only a minor improvement over the above, and
+    requires quite a bit of additional work -- essentially, one has to
+    prove a version of \lemref{good:jump:traps} for squares.
 \end{remark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -1902,19 +1988,10 @@ example, a $k$-regular polygon is $k$-nice.
 \section{Weak local spanners for axis-parallel rectangles}
 \seclab{rectangles}
 
-\begin{figure}
-    \centerline{\includegraphics{figs/local_rectangles}}
-    \caption{There are quadratic number of pairs of points that has to
-       be connected in any local spanner for axis parallel
-       rectangles. Indeed, for any point in the top diagonal and
-       bottom diagonal, there is an axis parallel rectangle that
-       contains only these two points. This holds even if we restrict
-       ourselves to fat rectangles of similar size.}
-    \figlab{bad:rectangles}
-\end{figure}
 
 
 \subsection{Quadrant separated pair decomposition}
+\seclab{qspd}
 
 For points $\pa = (p_1, \ldots, p_d)$ and $\pb = (q_1, \ldots, q_d)$
 in $\Re^d$, let $\pa \prec \pb$ denotes that $\pb$ \emphi{dominates}
@@ -2038,6 +2115,7 @@ quadrant-separated for all $i$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Weak local spanner for axis parallel rectangles}
+\seclab{w:l:s:rect}
 
 For a parameter $\delta \in (0,1)$, and an interval $I = [b,c]$, let
 $(1-\delta)I = [t - (1-\delta)r, t+ (1-\delta)r]$ be the shrinking of

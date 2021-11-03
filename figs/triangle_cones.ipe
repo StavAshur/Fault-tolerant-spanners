@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.23">
-<info created="D:20210922011254" modified="D:20211026125656"/>
+<info created="D:20210922011254" modified="D:20211103084412"/>
 <preamble>\DeclareFontFamily{U}{BOONDOX-calo}{\skewchar\font=45 }
 \DeclareFontShape{U}{BOONDOX-calo}{m}{n}{
   &lt;-&gt; s*[1.05] BOONDOX-r-calo}{}
@@ -1128,7 +1128,7 @@ h
 208 80 m
 191.452 107.389 l
 </path>
-<text matrix="0.8 0 0 0.8 20.0931 29.5517" transformations="translations" pos="112.614 103.366" stroke="darkred" type="label" width="10.737" height="5.317" depth="1.79" valign="baseline" size="large" style="math">\mathsf{n}_1</text>
+<text matrix="0.8 0 0 0.8 20.0931 29.5517" transformations="translations" pos="112.614 103.366" stroke="darkred" type="label" width="10.737" height="5.317" depth="1.79" valign="baseline" size="large" style="math">\mathsf{n}_2</text>
 <path matrix="0.8 0 0 0.8 -47.3109 123.696" stroke="darkblue" rarrow="normal/normal">
 203.009 111.608 m
 208 80 l

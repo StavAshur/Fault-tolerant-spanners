@@ -40,7 +40,7 @@
     set. We prove that this dependency can not be removed, thus
     settling an open problem raised by Abam and Borouny.  We also show
     improved constructions of local spanners for fat triangles, and
-    $k$-regular gons, In particular, this improves over the known
+    regular $k$-gons, In particular, this improves over the known
     construction for axis parallel squares.
 
     Finally, we study a somewhat weaker notion of local spanner where
@@ -95,7 +95,7 @@ set of points $\PS$ in some metric space. Their spanner had
 $\Of(kn\log n)$ edges, and weight, i.e. sum of edge weights, bounded by
 $f(k)\cdot wt(MST(\PS))$ for some function $f$. Lukovszki
 \cite{l-nrftgs-99} later achieved a similar construction, improving
-the number of edges to $\Of(kn)$ and was able to prove that the result
+the number of edges to $\Of(kn)$, and was able to prove that the result
 is asymptotically tight.
 
 
@@ -105,9 +105,14 @@ Recently, Abam and Borouny \cite{ab-lgs-21} introduced the notion of
 local spanners.  For a family of regions $\FF$, a graph
 $\G = (\PS,\EG)$ is a \emphw{local $t$-spanner} for $\FF$, if for any
 $\region \in \FF$, the subgraph of $\G$ induced on $\PS \cap \region$
-is a $t$-spanner.  Specifically, this induced subgraph
-$ \restrictY{\G}{\region}$ is a $t$-spanner for all
-$\pa,\pb \in \PS \cap \region$ (note, that we keep an edge in the
+is a $t$-spanner.
+%Specifically, this induced subgraph
+%$ \restrictY{\G}{\region}$ is a $t$-spanner for all
+%$\pa,\pb \in \PS \cap \region$
+Specifically, this induced subgraph
+$ \restrictY{\G}{\region}$ contains a $t$-path between any
+$\pa,\pb \in \PS \cap \region$
+(note, that we keep an edge in the
 subgraph only if both its endpoints are in $\region$).
 
 Abam and Borouny \cite{ab-lgs-21} showed how to construct such

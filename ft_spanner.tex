@@ -1378,16 +1378,14 @@ $\cone \in \ConeSet_i$.
     Consider the triangle $\Delta\pa\pb\pc$ and denote the angles at
     $\pa,\pb,$ and $\pc$ by $\angleX{\pa},\angleX{\pb}$, and $\angleX{\pc}$
     respectively.  Since the angle of $\cone$ is smaller than $60$
-    degrees, we have that
+    degrees (for an appropriate choice of $\gamma$), we have that
     $\dY{\pb}{\pc}\leq \max \{\dY{\pa}{\pc},\dY{\pa}{\pb}\}$.
     
     \begin{figure}[h]
         \centering%
         \includegraphics{figs/triangle_cone_edge}
-        \caption{}%
-        %The two cases of \lemref{cone_edge:triangles}. The
-        %   vector used to determine the edge in the cone is shown in
-        %   red, and marked $\vec{v}$}
+        \caption{ The case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$ in \lemref{cone_edge:triangles}. The vector used to determine $\nnZ{i}{\pa}{\cone}$ is shown in red, and denoted $\dir$}
+
         \figlab{tri_cone_edge:a}
     \end{figure}
 
@@ -1400,7 +1398,7 @@ $\cone \in \ConeSet_i$.
     \angleX{\pa}$. Similarly,
     $\angleX{\pb} \in [\alpha, \pi -\alpha]$.  By the $1$-Lipshitz of
     $\sin$, and as $\sin x \approx x$, for small $x$, and for
-    $\gamma$ sufficiently large. we have that
+    $\gamma$ sufficiently large, we have that
     \begin{equation*}
         \sin( \angleX{\pb} + \angleX{\pa}) \in [1-\eps/4, 1+\eps/4] \sin
         \angleX{\pb}%
@@ -1445,7 +1443,7 @@ $\cone \in \ConeSet_i$.
     \begin{figure}[h]
         \centering%
         \includegraphics[page=2]{figs/triangle_cone_edge}
-        \caption{}%
+        \caption{The case that $\dY{\pa}{\pb}> \dY{\pa}{\pc}$ in \lemref{cone_edge:triangles}.}%
         \figlab{tri_cone_edge:b}
     \end{figure}
 
@@ -1496,7 +1494,7 @@ $\cone \in \ConeSet_i$.
     %
     Let $\triangle$ be a triangle that contains two points $\pa,
     \pb$. Then, there is a homothet $\triangle'\subseteq \triangle$ of
-    $\triangle$, such that,one of these points is a vertex of
+    $\triangle$, such that one of these points is a vertex of
     $\triangle'$, and the other point lies on a facing edge of
     $\triangle'$.
 \end{lemma}
@@ -1512,7 +1510,7 @@ $\cone \in \ConeSet_i$.
     \includegraphics[page=2]{figs/narrow_triangle} \hfill
     \includegraphics[page=3]{figs/narrow_triangle} \hfill
     \includegraphics[page=4]{figs/narrow_triangle}
-    \caption{}
+    \caption{ An illustration of the shrinking process mentioned in  \lemref{shrink:triangles}.}
     \figlab{shrink:triangle}
 \end{figure}
 
@@ -1536,7 +1534,7 @@ $\cone \in \ConeSet_i$.
     $\pc \in \PS' = \PS \cap \triangle'$ in the cone containing the
     segment $\pa\pb$, such that $\pa \pc \in \EGX{\G'}$. But then, by
     \lemref{cone_edge:triangles}, we have
-        \begin{math}
+     \begin{math}
         \dY{\pa}{\pc}%
         +%
         (1+\eps)\dY{\pb}{\pc}%
@@ -1547,7 +1545,7 @@ $\cone \in \ConeSet_i$.
     pairs, which is a contradiction.
 
     
-    For any other pair $\pa,\pb\in PS'$ we have from
+    For any other pair $\pa,\pb\in \PS'$ we have from
     \lemref{shrink:triangles} that there exists a homothet
     $\triangle''\subseteq \triangle'$ with one of the two points, say
     $\pa$, at a vertex, and the other on the opposite edge. We
@@ -1556,12 +1554,12 @@ $\cone \in \ConeSet_i$.
     then we are done. Otherwise, we have a vertex $\pc\in \cone$ such
     that $\pa\pc$ is an edge in $\G$, and by
     \lemref{cone_edge:triangles} we have
-    $\dY{\pb}{\pc}\leq \dY{\pa}{\pb}$. Thus, by induction, we have
+    $\dY{\pb}{\pc}\leq \dY{\pa}{\pb}$, which, by induction, means
     that there exists a $(1+\eps)$ path between $\pc$ and $\pb$ in
     $\G$. \lemref{cone_edge:triangles} now implies that
     $\dY{\pa}{\pc}+(1+\eps)\dY{\pb}{\pc}\leq(1+\eps)\dY{\pa}{\pb}$. Thus,
     there is a $(1+\eps)$ path between $\pa$ and $\pb$ in $\G'$, as
-    desired.
+    stated.
 \end{proof}
  
 
@@ -1576,8 +1574,8 @@ $\cone \in \ConeSet_i$.
     $\eps \in (0,1)$ be an approximation parameter. The above
     algorithm computes a local $(1+\eps)$-spanner $\G$ for homothets
     of an $\alpha$-fat triangle $\triangle$.  The construction time is
-    $\Of\pth{\frac{1}{\alpha\eps}n\log n}$, and the spanner $\G$ has
-    $\Of\pth{ n / (\alpha\eps) \bigr.}$ edges.
+    $\Of\pth{(\alpha\eps)^{-1}n\log n}$, and the spanner $\G$ has
+    $\Of\pth{(\alpha\eps)^{-1} n\bigr.}$ edges.
 \end{theorem}
 
 \begin{proof}
@@ -1589,7 +1587,7 @@ $\cone \in \ConeSet_i$.
     rise to a single edge incident to $\pa$.  The construction time is
     bounded by the construction time for a $\theta$-graph with cone
     size $\alpha\eps$, which is $\Of\pth{ (\alpha\eps)^{-1}n\log n}$
-    \cite{c-aaspmp-87}.
+    (\cite{c-aaspmp-87}).
 \end{proof}
 
 
@@ -1617,7 +1615,7 @@ $\cone \in \ConeSet_i$.
 \subsubsection{A good jump for narrow trapezoids}
 \seclab{traps:jump}
 
-As a reminder, a trapezoids is a quadrilateral with two parallel
+As a reminder, a trapezoid is a quadrilateral with two parallel
 edges, known as its \emph{bases}. The other two edges are its legs.
 For $\eps \in (0,1/4)$, a trapezoid $\Trap$ is \emphi{$\eps$-narrow}
 if the length of each of its legs is at most $\eps \diamX{\Trap}$.

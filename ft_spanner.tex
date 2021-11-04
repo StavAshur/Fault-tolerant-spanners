@@ -320,7 +320,7 @@ if one is required provide the spanner guarantee only to shrunken
 region. Namely, if $\G$ is a $(1+\eps)$-spanner of $\PS$, then for any
 convex region $\Body$, the graph $ \restrictY{\G}{\Body}$ is a spanner
 for $\Body' \cap \PS$, where $\Body'$ is the set of all points in
-$\Body$ that are in distance at least $\eps \diamX{\Body}$ from its
+$\Body$ that are in distance at least $\eps\cdot \diamX{\Body}$ from its
 boundary.
 
 \paragraph{Homothets}
@@ -341,7 +341,7 @@ dependency on $\spread$ cannot be avoided.
 
 The dependency on the spread $\spread$ in the above construction is
 somewhat disappointing. However.  the lower bound constructions,
-provided in \secref{lower:bound}, show that this is unavoidable, for
+provided in \secref{lower:bound}, show that this is unavoidable for
 disks or homothets of triangles.
 
 
@@ -353,15 +353,15 @@ set.
 \paragraph{The basic building block: $\Body$-Delaunay triangulation}
 
 A key ingredient in the above construction, is the concept of Delaunay
-triangulation induces by a homothet of a convex body. Intuitively, one
-replace the unit disk (of the standard $L_2$-norm) by the provided
-convex region. It is well known \cite{cd-vdbcdf-85} that such diagrams
+triangulation induced by homothets of a convex body. Intuitively, one
+replaces the unit disk (of the standard $L_2$-norm) by the provided
+convex region. It is well known (\cite{cd-vdbcdf-85}) that such diagrams
 exist, have linear complexity in the plane, and can be computed
 quickly.  In \secref{del:homothets} we review these results, and
 restate the well-known property that the $\Body$-Delaunay
 triangulation is connected when restricted to a homothet of $\Body$.
-By compute these triangulations to carefully chosen subsets of the
-input point set, yields the above results.
+By computing these triangulations for carefully chosen subsets of the
+input point set, we get the results stated above.
 
 Specifically, we use well-separated and semi-separated decompositions
 to compute these subsets.
@@ -375,7 +375,7 @@ spanner of size $\Of\pth{ (\alpha\eps)^{-1}n }$ in
 $\Of\pth{(\alpha\eps)^{-1}n\log n}$ time, where $\alpha$ is the
 smallest angle in $\triangle$. This construction is a careful
 adaptation of the $\theta$-graph spanner construction to the given
-triangle, and it is technically significantly more challenging than
+triangle, and it is significantly more technically challenging than
 the original construction.
 
 
@@ -386,7 +386,7 @@ of $k$-regular polygons should readily follow by a simple
 decomposition of the polygon into fat triangles. Maybe surprisingly,
 this is not the case -- a critical configuration might involve two
 points that are on the interior of the edges of a homothet of the
-input polygon. We overcome this, by first showing that sufficiently
+input polygon. We overcome this by first showing that sufficiently
 narrow trapezoids, provide us with a good jump somewhere inside the
 trapezoid, assuming one compute the Delaunay triangulation induced by
 the trapezoid, and that the source and destination lies on the two
@@ -408,7 +408,7 @@ Specifically, the \QSPD breaks the input point set $\PS$ into pairs,
 such that for any pair $\{\PX, \PY\}$ we have the property that there
 is a translated axis system, such that $\PX$ and $\PY$ belong to two
 antipodal quadrants.  In $d$ dimensions there is such a decomposition
-with $\Of( n \log^{d-1} n)$ pair, and total weight
+with $\Of( n \log^{d-1} n)$ pairs, and total weight
 $\Of( n \log^{d} n)$.  A somewhat similar idea was used by Abam and
 Borouny \cite{ab-lgs-21} for the $d=1$ case. We believe this
 decomposition might be useful and is of independent interest.
@@ -418,7 +418,7 @@ decomposition might be useful and is of independent interest.
 In \secref{w:l:s:rect}, we use \QSPD{}s to construct a weak local
 spanner for axis parallel rectangles.  Here, the constructed graph
 $\G$ over $\PS$, has the property that for any axis-parallel rectangle
-$\rect$, the graph $\restrictY{\G}{\rect}$ is an $(1+\eps)$-spanner
+$\rect$, the graph $\restrictY{\G}{\rect}$ is a $(1+\eps)$-spanner
 for all the points of $\bigl((1-\eps)\rect \bigr)\cap \PS$, where
 $(1-\eps)\rect$ is the scaling of the rectangle by $1-\eps$ around its
 center. Importantly, this works for narrow rectangles when this form
@@ -515,8 +515,9 @@ The \emphi{diameter} of $\PS$ is
 The \emphi{spread} of $\PS$ is
 $\spreadX{\PS} = \diamX{\PS} / \cpX{\PS}$, which is the ratio between
 the diameter and closest pair distance.  While in general the weight
-of a \WSPD can be quadratic, if the spread is bounded, the weight is
-near linear.  For $\PSX, \PSY \subseteq \Re^d$, let
+of a \WSPD (defined below) can be quadratic, if the spread is bounded,
+the weight is near linear. 
+For $\PSX, \PSY \subseteq \Re^d$, let
 $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
 \dY{\pa}{\pb}$ be the \emphi{distance} between the two sets.
 
@@ -586,9 +587,9 @@ delegated to the appendix.
 {%
    Given an $\alpha$-\SSPD $\WS$ of a set $\PS$ of $n$ points in
    $\Re^d$ and a parameter $\beta \geq 2$, one can refine $\WS$ into
-   an $\alpha\beta$-\SSPD $\WS'$, such that that
+   an $\alpha\beta$-\SSPD $\WS'$, such that
    $|\WS'| = \Of(|\WS|/\beta^d)$ and
-   $\WeightX{\WS'} = \Of(\WeightX{\WS'}/\beta^d)$.  }
+   $\WeightX{\WS'} = \Of(\WeightX{\WS}/\beta^d)$.  }
  
 \begin{lemma}[Proof in \apndref{chop:easy}]
     \lemlab{chop:easy}%
@@ -602,19 +603,19 @@ delegated to the appendix.
     An \emphi{$\eps$-double-wedge} is a region between two lines,
     where the angle between the two lines is at most $\eps$.
 
-    Tow points sets $\PX$ and $\PY$ that each lie on their own cone of
+    Two points sets $\PX$ and $\PY$ that each lie on their own cone of
     a shared $\eps$-double-wedge are \emphi{$\eps$-angularly
        separated}.
 \end{defn}
 
 \SaveContent{\LemmaRefineDWBody}{%
-   Given a $\eps^{-1}$-\SSPD $\WS$ of $n$ points in the plane, one can
-   refine it, into a $\eps^{-1}$-\SSPD $\WS'$, such that each pair
+   Given a $(1/\eps)$-\SSPD $\WS$ of $n$ points in the plane, one can
+   refine it, into a $(1/\eps)$-\SSPD $\WS'$, such that each pair
    $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in a
    $\eps$-double-wedge $\DW_\Pair$, such that $\PSX$ and $\PSY$ are
    contained in the two different faces of the double wedge
    $\DW_\Pair$. We have that $|\WS'| = \Of(|\WS|/\eps)$ and
-   $\WeightX{\WS'} = \Of(\WeightX{\WS'}/\eps)$. The construction time
+   $\WeightX{\WS'} = \Of(\WeightX{\WS}/\eps)$. The construction time
    is proportional to the weight of $\WS'$.%
 }
 
@@ -711,7 +712,7 @@ $\shrinkDY{\body}{\delta}$ is empty.
     the segment $\pa\pb$ in this ellipse is realized by the co-vertex
     of the ellipse. Formally, it is one of the two intersection points
     of the boundary of the ellipse with the line orthogonal to
-    $\overline{\pa \pb}$ that passes through the middle point $\cen$
+    $\pa \pb$ that passes through the middle point $\cen$
     of this segment, see \figref{ellipse}. Let $\pz$ be one of these
     points.
 
@@ -769,12 +770,12 @@ $\shrinkDY{\body}{\delta}$ is empty.
 
 Let $\CC$ be a bounded convex and closed region in the plane (e.g., a
 disk).  A \emphi{homothet} of $\CC$ is a scaled and translated copy of
-$\CC$.  A point set $\PS$ is \emphi{general position} for $\CC$, if no
-four points of $\PS$ lie on the boundary of a homothet of $\CC$, and
-no three points are colinear.
+$\CC$.  A point set $\PS$ is in \emphi{general position} with respect
+to $\CC$, if no four points of $\PS$ lie on the boundary of a homothet
+of $\CC$, and no three points are colinear.
 
 
-A graph $\G=(\PS, \EG)$ is an \emphw{$\CC$-local $(1+\eps)$-spanner}
+A graph $\G=(\PS, \EG)$ is a \emphw{$\CC$-local $(1+\eps)$-spanner}
 for $\PS$ if for any homothet $\region$ of $\CC$, we have that
 $\restrictY{\G}{\region}$ is a $t$-spanner of $\G_\PS \cap \region$.
 
@@ -791,7 +792,8 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\G_\PS \cap \region$.
     \deflab{c:del:triang}%
     %
     Given $\CC$ as above, and a point set $\PS$ in general position
-    for $\CC$, the \emphi{$\CC$-Delaunay triangulation} of $\PS$ is
+    for $\CC$, the \emphi{$\CC$-Delaunay triangulation} of $\PS$,
+    denoted $\DG_{\CC}(\PS)$, is
     the graph formed by edges between any two points $\pa,\pb\in \PS$
     such that there exist a homothet of $\CC$ that contains only $\pa$
     and $\pb$ and no other point of $\PS$.
@@ -822,14 +824,14 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\G_\PS \cap \region$.
     %
     Let $\CC$ be a convex bounded body, and let $\PS$ be a set of
     points in general position for $\CC$. Then, if $C$ is a homothet
-    of $\CC$ that contains two points $\pa. \pb \in \CC \cap \PS$,
+    of $\CC$ that contains two points $\pa, \pb \in \CC \cap \PS$,
     then there exists a homothet $C' \subseteq C$ of $\CC$ such that
     $\pa, \pb \in \partial C'$.
 \end{lemma}
 \begin{proof}
     The idea is to apply a shrinking process of $C$, as illustrated in
     \figref{shrink:h}.  Consider the mapping
-    $f_{\beta, \pd} : \pc \rightarrow \beta (\px - \pd) + \pd $. It is
+    $f_{\beta, \pd} : \px \mapsto \beta (\px - \pd) + \pd $. It is
     a scaling of the plane around $\pd$ by a factor of $\beta$. Let
     $\beta'$ be the minimum value of $\beta$ such that
     $C_1 = f_{\beta,\pa}(C)$ contains $\pb$ (i.e., we shrink $C$
@@ -876,11 +878,11 @@ $\eps \in (0,1)$. We have a convex body $\CC$ that defines the
 ``unit'' ball. The task is to construct a local spanner for any
 homothet of $\CC$.
 
-The algorithm computes a $1/\epsA$-\WSPD $\WS$ of $\PS$ using the
+The algorithm computes a $(1/\epsA)$-\WSPD $\WS$ of $\PS$ using the
 algorithm of \lemref{s:s:p:d:spread}, where $\epsA = \eps/6$.  For
 each pair $\Pair = \{\PSX, \PSY \} \in \WS$, the algorithm computes
 the $\CC$-Delaunay triangulation
-$\DT_{\Pair} = \DTX{ \PSX \cup \PSY}$. The algorithm adds all the
+$\DT_{\Pair} = \DG_{\CC}(\PSX \cup \PSY)$. The algorithm adds all the
 edges in $\DT_{\Pair} \cap (\PSX \otimes \PSY)$ to the computed graph
 $\G$.
 
@@ -1020,7 +1022,7 @@ homothet contained in $R$ having both points on its boundary.
 \end{defn}
 
 Observe that $\GY{\PS}{\Re^2}$ is a clique. Surprisingly, the spanner
-graph when restricted to region $R$, is a spanner for
+graph described above, when restricted to region $R$, is a spanner for $\GY{\PS}{R}$.
 
 \begin{corollary}
     Let $\CC$ be a bounded convex body, $\PS$ be a set of $n$ points
@@ -1075,7 +1077,8 @@ show a lower bound proving that this dependency is unavoidable, even
 in the case of disks.
 
 \paragraph{Some intuition}
-A natural way is to try and emulate the construction of Abam \etal
+A natural way to attempt a spread-independent construction is to try
+and emulate the construction of Abam \etal,
 \cite{abfg-rftgs-09} and use a \SSPD instead of a \WSPD. The total
 weight of the \SSPD is near linear (with no dependency on the
 spread). Furthermore, after some post processing, one can assume every
@@ -1120,7 +1123,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 \begin{proof}
     Let $\pa_i = (-i, 0)$, for $i=1, \ldots, n$.  Let
     $M = 1+ \ceil{ \log_2 \spread }$ and $\pb_1 = (n 2^M, -1)$.  For a
-    point $\pa$ on the $x$-axis, and a point $\pb$ below the $x$-axis,
+    point $\pa$ on the $x$-axis, and a point $\pb$ below the $x$-axis
     and to the right of $\pa$, let $\diskVY{\pa}{\pb}$ be the disk
     whose boundary passes through $\pa$ and $\pb$, and its center has
     the same $x$-coordinate as $\pa$.
@@ -1129,12 +1132,15 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     $x_j = n2^{M-j+1} = x(\pb_{j-1})/2$, and let $y_j < 0$ be the
     maximum $y$-coordinate of a point that lies on the intersection of
     the vertical line $x =x_j$ and the disks of
-    $D_1 \cup \cdots \cup D_j$. Let $\pb_j = (x_j, 0.99
-    y_j)$. Consider the set of disks
+    $D_1 \cup \cdots \cup D_j$ where
+    
     \begin{equation*}
-        D_j = \Set{ \diskVY{\pa_i}{\pb_{j-1}} }{i=1,\ldots, n},
+    D_j = \Set{ \diskVY{\pa_i}{\pb_{j-1}} }{i=1,\ldots, n},
     \end{equation*}
-    see \figref{flower}.
+    see \figref{flower} for an illustration of  $D_1 $.
+    
+    Let $\pb_j = (x_j, 0.99y_j)$.
+    
 
     Clearly, the point $\pb_j$ lies outside all the disks of
     $D_1 \cup \ldots \cup D_j$. The construction now continues to the
@@ -1143,8 +1149,8 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     that $|\PS| = n + M-1$.
 
     The minimum distance between any points in the construction is $1$
-    (i.e., $\dY{\pa_1}{\pa_2}\bigr.$). Indeed $x(\pb_M) = 2n$ and thus
-    $\dY{\pb_M}{\pa_1} \geq 2n$.  The diameter of $\PS$ is
+    (i.e., $\dY{\pa_1}{\pa_2}\bigr.$). Indeed $x(\pb_{M-1}) = 4n$ and thus
+    $\dY{\pb_{M-1}}{\pa_1} \geq 2n$.  The diameter of $\PS$ is
     $\dY{\pa_1}{\pb_1} = \sqrt{(n +n2^{M})^2+ 1} \leq 2 n 2^M $. As
     such, the spread of $\PS$ is bounded by
     $\leq n 2^{M+1} = \Of( n \spread)$.
@@ -1227,19 +1233,19 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     \end{align*}
     and let $\PS = \{ \pb_1, \ldots, \pb_h, \pc_1, \ldots, \pc_n\}$,
     see \figref{tri_low_bd}.  Observe that
-    $\cpX{\PS} = \dY{\pc_1}{\pc_2} = \sqrt{2}/n$, and as such have
+    $\cpX{\PS} = \dY{\pc_1}{\pc_2} = \sqrt{2}/n$, and as such we have
     that
     $\spreadX{\PS} = n \cdot \diamX{\PS}/\sqrt{2} \leq n(4\Phi + 2n)
     \leq 8 \Phi n$, as $\Phi \geq n$.  Observe that
     \begin{equation*}
         \DotProd{\pb_{i+1} - \pb_i}{v}%
         =%
-        \DotProd{(2^{i+1},-\tfrac{1}{h})}{ \bigl(\tfrac{1}{4\Phi h},
+        \DotProd{(2^{i+1},-\tfrac{1}{h})}{ \bigl(\tfrac{1}{8\Phi h},
            1\bigr)}
         \leq
         \tfrac{4\Phi}{8\Phi h} - \tfrac{1}{h} < 0.
     \end{equation*}
-    That is, the points $\pb_1, \ldots, \pb_i$ are in increasing
+    That is, the points $\pb_1, \ldots, \pb_i$ are increasing in 
     distance from $\Line$.
 
     Let $\triangle_{i,j}$ be the homothet of $\triangle$, that has its
@@ -1326,7 +1332,7 @@ vertex of $\triangle$.  Let $\dir_i$ be the outer normal of
 $\triangle$ orthogonal to $e_i$.  See \figref{tri_cones} for an
 illustration. Let $\ConeSet_i$ be a minimum partition of $\cone_i$
 into cones each with angle in the range $[\beta/2, \beta]$, where
-$\beta = \eps \alpha/\constB$, and $\constB>1$ is a constant to be
+$\beta = \eps \alpha/\gamma$, and $\gamma>1$ is a constant to be
 determined shortly.  For each point $\pa\in\PS$, and a cone
 $\cone \in \ConeSet_i$, let $\nnZ{i}{\pa}{\cone}$ be the first point
 in $(\PS - \pa)\cap ( \pa + \cone)$ ordered by the direction $\dir_i$
@@ -1335,7 +1341,7 @@ in $(\PS - \pa)\cap ( \pa + \cone)$ ordered by the direction $\dir_i$
 
 
 \paragraph{The construction}
-Let $\G$ be the graph over $\PS$ formed by connecting all points
+Let $\G$ be the graph over $\PS$ formed by connecting every point
 $\pa \in \PS$ to $\nnZ{i}{\pa}{\cone}$, for all $i \in \IRX{3}$ and
 $\cone \in \ConeSet_i$.
 
@@ -1390,11 +1396,11 @@ $\cone \in \ConeSet_i$.
     illustrated in \figref{tri_cone_edge:a}.  Observe that
     $\angleX{\pc} \leq \angleX{\pb}$.  As such
     $\angleX{\pc} \leq \pi/2$.  Furthermore,
-    $\angleX{\pc} \geq \alpha \gg \eps \alpha/\constB = \beta \geq
+    $\angleX{\pc} \geq \alpha \gg \eps \alpha/\gamma = \beta \geq
     \angleX{\pa}$. Similarly,
     $\angleX{\pb} \in [\alpha, \pi -\alpha]$.  By the $1$-Lipshitz of
     $\sin$, and as $\sin x \approx x$, for small $x$, and for
-    $\constB$ sufficiently large. we have that
+    $\gamma$ sufficiently large. we have that
     \begin{equation*}
         \sin( \angleX{\pb} + \angleX{\pa}) \in [1-\eps/4, 1+\eps/4] \sin
         \angleX{\pb}%

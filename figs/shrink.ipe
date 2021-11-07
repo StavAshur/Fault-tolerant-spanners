@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.23">
-<info created="D:20210803104327" modified="D:20210803111429"/>
+<info created="D:20210803104327" modified="D:20211106222538"/>
 <preamble>\usepackage{wasysym}</preamble>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
@@ -1090,9 +1090,9 @@ h
 64 64 m
 21.8037 103.338 l
 </path>
-<text layer="beta" transformations="translations" pos="18.2939 11.4741" stroke="blue" type="label" valign="baseline" style="math">q</text>
+<text layer="beta" transformations="translations" pos="18.2939 11.4741" stroke="blue" type="label" width="4.805" height="4.297" depth="1.93" valign="baseline" style="math">q</text>
 <use layer="disk_center" name="mark/fsquare(sfx)" pos="64 64" size="normal" stroke="black" fill="purple"/>
-<text matrix="1 0 0 1 -7.73161 -0.406927" transformations="translations" pos="80 64" stroke="black" type="label" valign="baseline" style="math">c</text>
+<text matrix="1 0 0 1 -7.73161 -0.406927" transformations="translations" pos="80 64" stroke="black" type="label" width="4.311" height="4.289" depth="0" valign="baseline" style="math">c</text>
 <path layer="delta" matrix="0.5 0 0 0.5 10.9019 51.669" stroke="black">
 21.8037 103.338 m
 85.1688 92.3584 l
@@ -1138,14 +1138,14 @@ h
 <path stroke="blue">
 49.9776 0 0 49.9776 58.3596 69.2583 e
 </path>
-<text layer="disk'" transformations="translations" pos="49.8143 43.5995" stroke="red" type="label" valign="baseline" style="math">\ocircle&apos;</text>
-<text layer="alpha" matrix="1 0 0 1 61.8529 -22.1775" transformations="translations" pos="49.8143 43.5995" stroke="black" type="label" valign="baseline" style="math">\ocircle</text>
+<text layer="disk'" transformations="translations" pos="49.8143 43.5995" stroke="red" type="label" width="10.628" height="7.49" depth="0" valign="baseline" style="math">C&apos;</text>
+<text layer="alpha" matrix="1 0 0 1 61.8529 -22.1775" transformations="translations" pos="49.8143 43.5995" stroke="black" type="label" width="7.833" height="6.808" depth="0" valign="baseline" style="math">C</text>
 <path layer="iota" matrix="0 0.5 -0.5 0 100.758 14.8154" stroke="darkgreen" fill="lightred" pen="heavier">
 85.1688 92.3584 m
 23.9892 22.4411 l
 </path>
 <use layer="disk''_center" name="mark/fsquare(sfx)" pos="56.2435 55.9434" size="normal" stroke="blue" fill="lightblue"/>
-<text layer="kappa" matrix="1 0 0 1 54.3247 16.4805" transformations="translations" pos="49.8143 43.5995" stroke="blue" type="label" valign="baseline" style="math">\ocircle&apos;&apos;</text>
+<text layer="kappa" matrix="1 0 0 1 54.3247 16.4805" transformations="translations" pos="49.8143 43.5995" stroke="blue" type="label" width="12.925" height="7.49" depth="0" valign="baseline" style="math">C&apos;&apos;</text>
 <path layer="paths" stroke="darkred" pen="heavier">
 21.8037 103.338 m
 36.0459 85.719
@@ -1156,11 +1156,11 @@ h
 77.1455 100.775
 85.1688 92.3584 c
 </path>
-<text layer="beta" transformations="translations" pos="11.95 105.575" stroke="blue" type="label" valign="baseline" style="math">p</text>
+<text layer="beta" transformations="translations" pos="11.95 105.575" stroke="blue" type="label" width="5.012" height="4.297" depth="1.93" valign="baseline" style="math">p</text>
 <use name="mark/fdisk(sfx)" pos="21.8037 103.338" size="normal" stroke="blue" fill="yellow"/>
-<text layer="paths" transformations="translations" pos="11.95 105.575" stroke="blue" type="label" valign="baseline" style="math">p</text>
+<text layer="paths" transformations="translations" pos="11.95 105.575" stroke="blue" type="label" width="5.012" height="4.297" depth="1.93" valign="baseline" style="math">p</text>
 <use name="mark/fdisk(sfx)" pos="21.8037 103.338" size="normal" stroke="blue" fill="yellow"/>
-<text layer="beta" matrix="1 0 0 1 -22.4226 4.70152" transformations="translations" pos="96.7993 85.2216" stroke="red" type="label" valign="baseline" style="math">u</text>
+<text layer="beta" matrix="1 0 0 1 -22.4226 4.70152" transformations="translations" pos="96.7993 85.2216" stroke="red" type="label" width="5.703" height="4.289" depth="0" valign="baseline" style="math">u</text>
 <path layer="paths" stroke="darkblue" pen="heavier">
 85.1688 92.3584 m
 73.6866 84.7017
@@ -1179,7 +1179,7 @@ h
 </path>
 <use layer="beta" name="mark/fdisk(sfx)" pos="23.9892 22.4411" size="normal" stroke="blue" fill="yellow"/>
 <use name="mark/fdisk(sfx)" pos="85.1688 92.3584" size="normal" stroke="red" fill="yellow"/>
-<text layer="paths" matrix="1 0 0 1 -6.51083 -5.69698" transformations="translations" pos="76.1282 33.8359" stroke="darkblue" type="label" valign="baseline" style="math">\gamma&apos;&apos;</text>
-<text matrix="1 0 0 1 -37.8442 48.8312" transformations="translations" pos="76.1282 33.8359" stroke="darkred" type="label" valign="baseline" style="math">\gamma&apos;</text>
+<text layer="paths" matrix="1 0 0 1 -6.51083 -5.69698" transformations="translations" pos="76.1282 33.8359" stroke="darkblue" type="label" width="10.803" height="7.497" depth="1.93" valign="baseline" style="math">\gamma&apos;&apos;</text>
+<text matrix="1 0 0 1 -37.8442 48.8312" transformations="translations" pos="76.1282 33.8359" stroke="darkred" type="label" width="8.507" height="7.497" depth="1.93" valign="baseline" style="math">\gamma&apos;</text>
 </page>
 </ipe>

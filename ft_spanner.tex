@@ -159,6 +159,11 @@ pairs decomposition (\WSPD). Usually, one argues inductively that the
 spanner must have a short path from to the source to the start of the
 jump, and a path from the end of the jump to the destination, and
 combining these one prove that the resulting new path is not too long.
+These two heuristics guide our constructions, but since, as shown
+above, the task is far from trivial, some seemingly benign variants
+do not have a solution better than the trivial one, and for
+others, a non-negligible amount of sophistication is required in order
+to ensure that good jumps exist for all pairs of vertices.
 
 
 \begin{figure}[t]
@@ -1618,7 +1623,7 @@ $\cone \in \ConeSet_i$.
 As a reminder, a trapezoid is a quadrilateral with two parallel
 edges, known as its \emph{bases}. The other two edges are its legs.
 For $\eps \in (0,1/4)$, a trapezoid $\Trap$ is \emphi{$\eps$-narrow}
-if the length of each of its legs is at most $\eps \diamX{\Trap}$.
+if the length of each of its legs is at most $\eps \cdot \diamX{\Trap}$.
 
 
 \begin{lemma}
@@ -1627,7 +1632,7 @@ if the length of each of its legs is at most $\eps \diamX{\Trap}$.
     Let $\eps \in (0,1)$ be some parameter, and $\epsA = \eps/16$.
     Let $\PX,\PY$ be two points sets that are $\epsA$-semi separated
     and $\epsA$-angularly separated (see \defref{angular:separated}),
-    and let $\Trap$ be $\epsA$-narrow trapezoid, with two points
+    and let $\Trap$ be a $\epsA$-narrow trapezoid, with two points
     $\pa \in \PX$ and $\pb \in \PY$ lying on the two legs of
     $\Trap$. Then, one can compute a homothet $\Trap' \subseteq \Trap$
     of $\Trap$, such that:
@@ -1660,7 +1665,7 @@ if the length of each of its legs is at most $\eps \diamX{\Trap}$.
     \figlab{narrow:trap}
 \end{figure}
 \begin{proof}
-    Let $\DT = \DG_\CC(\PX \cup \PY)$.  \clmref{c:t:connected} implies
+    Let $\DT = \DG_\Trap(\PX \cup \PY)$.  \clmref{c:t:connected} implies
     that $\DT \cap \Trap$ is connected. Thus, there is a path in
     $\DT \cap \Trap$ between $\pa$ and $\pb$, and thus, there must be
     an edge $\pa'\pb'$ along this path with $\pa' \in X$ and
@@ -1673,6 +1678,8 @@ if the length of each of its legs is at most $\eps \diamX{\Trap}$.
 
     We first consider the case that $\pb'' \in \interiorX{\pa\pb}$.
     We have that
+    
+    \stav{Dont understand some transitions below.}
     \begin{equation*}
         \dY{\pa}{\pb''}
         \geq
@@ -1737,8 +1744,7 @@ if the length of each of its legs is at most $\eps \diamX{\Trap}$.
         \leq%
         (1+2\epsA)\diamC.        
     \end{math}
-    Since 
-    We  $\dY{\pa}{\pa'}, \dY{\pb}{\pb'} \leq \epsA \diamC$, it follows
+    Since $\dY{\pa}{\pa'}, \dY{\pb}{\pb'} \leq \epsA \diamC$, it follows
     that
     \begin{equation*}
         (1-4\epsA) \diamC%
@@ -1747,21 +1753,27 @@ if the length of each of its legs is at most $\eps \diamX{\Trap}$.
         \leq%
         (1+4\epsA)\diamC.
     \end{equation*}
-    As such, for $\epsA \leq \eps/16$ and $\eps \leq 1$, we have
+    \stav{Changed this equation}
+    
+    
+    As such, for $\epsA \leq \eps/8$ and $\eps \leq 1$, we have
     \begin{align*}
       (1+\eps)\dY{\pa}{\pa'} + \ell + (1+\eps)
       \dY{\pb'}{\pb}
       &\leq%
         4 \epsA \diamC + (1+4\epsA)\diamC
         =%
-        (1+8\epsA)(1+4\epsA) (1 -  2\epsA) \diamC
-      \\&
-      \hspace{-1cm}\leq%
-      (1+8\epsA)(1+4\epsA) \dY{\pa}{\pb}
-      \leq 
-      (1+16\epsA) \dY{\pa}{\pb}
-      \leq
-      (1+\eps) \dY{\pa}{\pb}.
+        (1+8\epsA)\diamC
+	    \leq
+	    (1+\eps) \dY{\pa}{\pb}.
+%        (1+8\epsA)(1+4\epsA) (1 -  2\epsA) \diamC
+%      \\&
+%      \hspace{-1cm}\leq%
+%      (1+8\epsA)(1+4\epsA) \dY{\pa}{\pb}
+%      \leq 
+%      (1+16\epsA) \dY{\pa}{\pb}
+%      \leq
+%      (1+\eps) \dY{\pa}{\pb}.
     \end{align*}
 \end{proof}
 
@@ -1792,18 +1804,17 @@ example, a $k$-regular polygon is $k$-nice.
 \begin{proof}
     We show a somewhat suboptimal but simple construction. A $t$-nice
     polygon has at most $t$ edges.  Let $\psi$ be the sensitivity of
-    $\Body$, and place a minimum set of points on the boundary of
-    $\PS$, which includes all the vertices of $\Body$, and in addition
-    the distance between any consecutive pair of points is in the
-    range $\gamma$ and $2\gamma$, where
-    $\gamma = \epsA \psi/ \constC$, for some sufficiently large
-    constant $\constC$. In particular, let
-    $M =\max_{e \in \EGX{\Body}} \ceil{\| e\| / \gamma} = \Of(
+    $\Body$, and place a minimum set of points $\PS$ on the boundary of
+    $\Body$, which includes all the vertices of $\Body$, and such that the distance between any consecutive pair of points is in
+    the range $[\constA, 2\constA]$, where
+    $\constA = \epsA \psi/ \constB$, for some sufficiently large
+    constant $\constB$. In particular, let
+    $M =\max_{e \in \EGX{\Body}} \ceil{\| e\| / \constA} = \Of(
     1/\epsA)$.
 
-    In addition, place $\constD t$ equally space points between any
-    two consecutive points of $\PS$, where $\constD$ is a constant to
-    be determined shortly. Let $\PSA$ be the resulting set from $\PS$
+    In addition, place $\constC t$ equally spaced points between any
+    two consecutive points of $\PS$, where $\constC$ is a constant to
+    be determined shortly. Let $\PSA$ be the set resulting from $\PS$
     after adding all these points.
 
     \begin{figure}[h]
@@ -1813,8 +1824,8 @@ example, a $k$-regular polygon is $k$-nice.
         \includegraphics[page=3]{figs/decompose} \hfill%
         \includegraphics[page=1]{figs/points_trap} \hfill%
         \phantom{}%
-        \caption{The round points are the points of $\PS$, and all the
-           points for the set $\PSA$. On the right, a ``vertical''
+        \caption{The points of $\PS$ (round), and all the
+           points added to $\PS$ in order to create $\PSA$ (square). On the right, a ``vertical''
            decomposition induced by one of the directions of
            $\PS \times \PSA$.}
         \figlab{v:decompose}
@@ -1851,6 +1862,7 @@ example, a $k$-regular polygon is $k$-nice.
     triangle with sidelength $\psi$ and base angle $\pi/t$. As such,
     the height of such a triangle is
     $h = \psi \sin( \pi/t) \geq \psi/t$.
+    \stav{I don't really understand these figures, so I don't want to write their captions at this point.}
 
     \begin{figure}[h]
         \includegraphics[page=2]{figs/points_trap_2}%
@@ -1875,8 +1887,8 @@ example, a $k$-regular polygon is $k$-nice.
     least $h' = h/M = \Omega( \eps \psi/t )$. The quantity $h'$ is a
     lower bound on the length of the projection of $\pa_1 \pa_2$ on
     the line spanned by $\pb_1 \pb_2$. However,
-    $\dY{\pb_1}{\pb_2} \leq 2\gamma/\constD t = \Of( \epsA \psi
-    /\constD t) < h'$, by picking $\constD$ to be sufficiently large
+    $\dY{\pb_1}{\pb_2} \leq 2\constA/\constC t = \Of( \epsA \psi
+    /\constC t) < h'$, by picking $\constC$ to be sufficiently large
     constant.
 
     This readily implies that the trapezoid induced by the direction
@@ -1903,16 +1915,16 @@ example, a $k$-regular polygon is $k$-nice.
 \end{theorem}
 \newcommand{\Triangles}{\bm\Delta}%
 \begin{proof}
-    Let $\epsA = \eps/\constE$, for $\constE$ sufficiently large
-    constant.  We construct a family of $\Triangles$, induced by a
+    Let $\epsA = \eps/\constD$, for $\constD$ sufficiently large
+    constant.  We construct $\Triangles$, a family of triangles induced by a
     vertex of $\Body$, and an non-adjacent edge of $\Body$. This
     family has $\Of(k^2)$ triangles. Each such triangle is
     $\Omega(1/k)$-fat, and for each such triangle we construct the
-    $(1+\epsA)$-spanner of \thmref{l:s:triangle}. Next, we cover $\CC$
+    $(1+\epsA)$-spanner of \thmref{l:s:triangle} for \PS. Next, we cover $\CC$
     by a set $\Traps$ of $k' = \Of(k^4/\epsA^3)$ $\epsA$-narrow
     trapezoids using \lemref{narrow:traps:decomp}.
 
-    We compute an $\epsA$-angular $\epsA^{-1}$-\SSPD $\WS$
+    We compute an $\epsA$-angular $(1/\epsA)$-\SSPD $\WS$
     decomposition of $\PS$ using \corref{S:S:P:D:angular} -- the total
     weight of the decomposition is
     $w = \Of\pth{ n \epsA^{-3} \log n }$. For each pair
@@ -1941,7 +1953,7 @@ example, a $k$-regular polygon is $k$-nice.
     \begin{compactitem}
         \item The point $\pa$ is on a vertex of $\Body''$ and $\pb$ is
         on an edge. In this case, the vertex and the edge induce a fat
-        triangle, that is a homothet to a triangle
+        triangle, that is a homothet of a triangle
         $\triangle \in \Triangles$. Since the graph $\G$ contains a
         $\triangle$-local $(1+\eps)$-spanner for $\PS$, it follows
         readily that $\G$ is a $(1+\eps)$-spanner for these points,
@@ -1952,11 +1964,11 @@ example, a $k$-regular polygon is $k$-nice.
         $\Trap'$ that has $\pa$ and $\pb$ on its two legs, and a
         homothet of $\Trap'$, denoted by $\Trap$, is in
         $\Traps$. There is a pair $\{\PX, \PY\} \in \WS$ that is
-        $\epsA^{-1}$-semi separated (and $\epsA$-angularly separated),
+        $(1/\epsA)$-semi separated (and $\epsA$-angularly separated),
         such that $\pa \in \PX$ and $\pb \in \PY$.  By
         \lemref{good:jump:traps}, there are two points $\pa' \in \PX$
         and $\pb' \in \PY$, such that $\pa'\pb'$ is an edge of the
-        $\Trap$-Delaunay triangulation of $\PX \cup \PY$. By
+        $\Trap$-Delaunay triangulation of $\PX \cup \PY$, and by
         construction this edge is in $\G$. We now use induction on the
         shortest paths from $\pa$ to $\pa'$ and from $\pb$ to $\pb'$
         in $\G$.  By induction, and \lemref{good:jump:traps}, we have
@@ -2002,7 +2014,7 @@ example, a $k$-regular polygon is $k$-nice.
 \subsection{Quadrant separated pair decomposition}
 \seclab{qspd}
 
-For points $\pa = (p_1, \ldots, p_d)$ and $\pb = (q_1, \ldots, q_d)$
+For two points $\pa = (p_1, \ldots, p_d)$ and $\pb = (q_1, \ldots, q_d)$
 in $\Re^d$, let $\pa \prec \pb$ denotes that $\pb$ \emphi{dominates}
 $\pa$ coordinate-wise. That is $p_i < q_i$, for all $i$. More
 generally, let $\pa <_i \pb$ denote that $\pa_i < \pb_i$. For two
@@ -2127,8 +2139,8 @@ quadrant-separated for all $i$.
 \seclab{w:l:s:rect}
 
 For a parameter $\delta \in (0,1)$, and an interval $I = [b,c]$, let
-$(1-\delta)I = [t - (1-\delta)r, t+ (1-\delta)r]$ be the shrinking of
-$I$ by a factor of $1-\delta$, where $t = (b+c)/2$, and $r = (c-b)/2$.
+$(1-\delta)I = [t - (1-\delta)r, t+ (1-\delta)r]$, where $t = (b+c)/2$, and
+$r = (c-b)/2$, be the shrinking of $I$ by a factor of $1-\delta$.
 
 
 Let $\Rects$ be the set of all axis parallel rectangles in the
@@ -2146,7 +2158,7 @@ rectangle resulting from shrinking $\rect$ by a factor of $1-\delta$.
 \end{defn}
 
 Observe that rectangles in $\Rects$ might be quite ``skinny'', so the
-previous notion of shrinkage used before are not useful in this case.
+previous notion of shrinkage used before is not useful in this case.
 
 \subsubsection{Construction for a single quadrant separated pair}
 \seclab{pair:edges}
@@ -2174,14 +2186,15 @@ $\PSX \prec (0,0 ) \prec \PSY$. That is, the points of $\PSX$ are in
 the negative quadrant, and the points of $\PSY$ are in the positive
 quadrant.
 
-Consider a point $\pa = (-x,-y) \in \PSX$. Its \emphw{set of clients}
-in $\PSY$, is
-\begin{equation*}
-    \clientsY{\pa}{\PSY}%
-    =%
-    \Set{ \pb \in \PSY }{ \dZ{1}{\pb}{\cen_\Pair}  \leq
-       \dZ{1}{\pa}{\cen_\Pair}}.
-\end{equation*}
+\stav{Removed definition of ``set of clients'' (is never used)}
+%Consider a point $\pa = (-x,-y) \in \PSX$. Its \emphw{set of clients}
+%in $\PSY$, is 
+%\begin{equation*}
+%    \clientsY{\pa}{\PSY}%
+%    =%
+%    \Set{ \pb \in \PSY }{ \dZ{1}{\pb}{\cen_\Pair}  \leq
+%       \dZ{1}{\pa}{\cen_\Pair}}.
+%\end{equation*}
 
 We construct a non-uniform grid $\grid(\pa, \Pair)$ in the square
 $[0,x+y]^2$.  To this end, we first partition it into four
@@ -2206,8 +2219,8 @@ $1/\gConst$.  See \figref{grid}. This grid has $\Of(\gConst^2)$
 cells. For a cell $\cell$ in this grid, let $\PSY \cap \cell$ be the
 points of $\PSY$ contained in it. We connect $\pa$ to the left-most
 and bottom-most points in $\PSY \cap \cell$. This process generates
-two edges in the constructed graph for each grid cell, and
-$\Of( \gConst^2)$ edges overall.
+two edges in the constructed graph for each grid cell (that contains
+at least two points), and $\Of( \gConst^2)$ edges overall.
 
 The algorithm repeats this construction for all the points
 $\pa \in \PSX$, and does the symmetric construction for all the points
@@ -2230,7 +2243,7 @@ spanner $\G$.
     \hfill%
     \includegraphics[page=2]{figs/expand}%
     \hfill\phantom{}%
-    \caption{}
+%    \caption{Left: The two rectangles $\rect$, $\rect'$. Right: In green $\xSlabX{\rect} \cap \rect'$, the restriction of the slab $\xSlabX{\rect}$ to the rectangle $\rect'$.}
     \figlab{x:expand}
 \end{figure}
 
@@ -2249,6 +2262,7 @@ $\rect'$, the resulting set is $\xSlabX{\rect} \cap \rect'$, depicted
 in \figref{x:expand}.  Similarly, we denote
 $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
 
+\stav{arg1}
 \begin{figure}[h]
     \includegraphics[page=2]{figs/grid_2}%
     \hfill%
@@ -2263,7 +2277,7 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
     %
     Assume that $\gConst \geq \ceil{20/\eps + 20/\delta}$.  Consider a
     pair $\Pair = \{\PSX, \PSY \}$ in the above construction, and a
-    point $\pa =(-x,-y) \in \PSX$, and its associated grid
+    point $\pa =(-x,-y) \in \PSX$ with its associated grid
     $\grid = \grid(\pa, \Pair)$. Consider any axis parallel rectangle
     $\rect$, such that $\pa \in (1-\delta)\rect = I\times J$, and
     $(1-\delta)\rect$ intersects a cell $\cell \in \grid$. We have
@@ -2310,7 +2324,7 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
         \diameterX{\cell}%
         \leq%
         (x+y) /\gConst%
-        \leq%
+        =%
         \|\pa\|_1 /\gConst \leq %
         (\eps/4) \dsY{\pa}{\cell}.
     \end{math}
@@ -2356,8 +2370,7 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
     $(1+\eps)$-path between $\pa$ and $\pb$ in $\G$.
 \end{lemma}
 \begin{proof}
-    The proof is the spirit of the ``standard'' recursive proof for
-    spanners, and is done by induction over the size of $\rect$
+    The proof is by induction over the size of $\rect$
     (i.e. area, width, or height). Let
     $\Pair = \{ \PSX, \PSY \} \in \WS$ be the pair in the \QSPD that
     separates $\pa$ and $\pb$, let $\cen$ be the separation point of
@@ -2390,7 +2403,7 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
     The remaining case is that $x \geq y$ and
     $\cell \subseteq \rect_\nwarrow$.  Let
     $\rectB= \xSlabX{ (1-\delta)\rect} \cap \cell$.  By \itemref{n:w},
-    we have $(1-\delta)^{-1} \bigl(\rectB \bigr) \subseteq
+    we have $(1-\delta)^{-1}\rectB \subseteq
     \rect$. Namely,
     $\pb \in (1-\delta)\rect \cap \cell \subseteq \rectB$, and let
     $\pc$ be the lowest point in $\cell \cap \PS$. By construction
@@ -2483,11 +2496,11 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
 \begin{figure}[ht]
     \centerline{\includegraphics{figs/partition}}
     \caption{An illustration of refining the pairs in a \SSPD into
-       pairs in opposite parts of an $\eps$-double-wedge. $\PSX$ is
+       pairs contained in opposite parts of an $\eps$-double-wedge. $\PSX$ is
        contained in the green square $\square$, while $\PSY$ is
        contained in the red square, and the white gap between them is
        a result of the separation property. The set of cones with the
-       apex at the center of $\square$ give us the desired partition
+       apex at the center of $\square$ gives us the desired partition
        as demonstrated by the purple double-wedge. }
     \figlab{partition}
 \end{figure}
@@ -2498,46 +2511,46 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
     $\WS$. For each pair $\Pair = \{ \PSX, \PSY \} \in \WS$, assume
     that $\diameterX{\PSX} < \diameterX{\PSY}$. Let $\square$ be the
     smallest axis-parallel square containing $\PSX$, centered at point
-    $o$.  Partition the plane around $o$, by drawing around it
-    $\Of(1/\eps)$ lines with the angle between any two consecutive
+    $\origin$.  Partition the plane around $\origin$, by drawing $\Of(1/\eps)$
+    lines intersecting $\origin$ with the angle between any two consecutive
     lines being at most (say) $\eps/4$, see \figref{partition}. This
     partitions the plane into a set of cones $\ConeSet$. For a cone
-    $C \in \ConeSet$, we show that there exists an $\eps$-double-wedge
-    that contains $\PSX$ in one side, and $\PSY \cap C$ in the other.
+    $\cone \in \ConeSet$, we show that there exists an $\eps$-double-wedge
+    that contains $\PSX$ in one side, and $\PSY \cap \cone$ in the other.
 
     To see that, take the double-wedge formed by the cross tangents
-    between $\CHX{\PSX}$ and $\CHX{\PSY \cap C}$, where $\CHX{\PSX}$
+    between $\CHX{\PSX}$ and $\CHX{\PSY \cap \cone}$, where $\CHX{\PSX}$
     denotes the convex-hull of $\PSX$. Assume w.l.o.g that $\square$
-    has side length 1, and let $c$ be a cone of angle $\eps / 4$ with
-    apex $o$, whose angular bisector is a horizontal ray in the
+    has side length 1, and let $\coneB$ be a cone of angle $\eps / 4$ with
+    apex $\origin$, whose angular bisector is a horizontal ray in the
     positive direction of the $x$ axis. See figure
     \figref{double-wedge} for an illustration.
 
-    We would like to find a vertical segment $s$ such that all points
-    of $Y$ lie to its right, with one endpoint on the upper line of
-    $c$, and the other on the lower line of $c$. Using the segments'
+    We would like to find a vertical segment $\seg$ such that all points
+    of $\PSY$ lie to its right, with one endpoint on the upper line of
+    $\coneB$, and the other on the lower line of $\coneB$. Using the segments'
     height and distance from the right side of $\square$ we will be
     able to get a bound on the angle of the cross tangents. We first
-    find a segment $s$ with all points of $Y$ to its right. A trivial
+    find a segment $\seg$ with all points of $\PSY$ to its right. A trivial
     bound on that distance is given by the segment from, say, the
-    lower left corner of $\square$, denoted $p$, of length $10/\eps$
-    with its right endpoint on the upper line of $c$, denote this
-    point by $q$. This is due to the $10/\eps$ separation property of
-    the SSPD. We know that this segment creates an angle of less than
-    $\pi/4$ with the $x$-axis, since $o$ is the center of $\square$,
-    and lies on the ray with apex $p$ that creates a $\pi/4$ angle
-    with the $x$-axis. We therefore get that the $x$-coordinate
-    difference between $\square$ and $q$ is at most
+    lower left corner of $\square$, denoted $\pa$, of length $10/\eps$
+    with its right endpoint on the upper line of $\coneB$, denote this
+    point by $\pb$. We know that all points of $\PSY$ lie to the right
+    of $\pb$ due to the $10/\eps$ separation property of
+    the SSPD. The segment $\pa\pb$ creates an angle $\leq\pi/4$ with
+    the $x$-axis (by the choice of the angle of $\coneB$).
+    We therefore get that the $x$-coordinate
+    difference between $\square$ and $\pb$ is at most
     $10/\eps\cdot \cos\frac{\pi}{4}-1\leq 7/\eps-1\leq 6/\eps$. So let
-    $s'$ be a vertical segment between the upper and lower rays of
-    $c$, with $x$-coordinate distance of $6/\eps-\frac{1}{2}$ from
+    $\seg'$ be a vertical segment between the upper and lower rays of
+    $\coneB$, with $x$-coordinate distance of $6/\eps-\frac{1}{2}$ from
     $\square$ (in order to make calculations easier). We get that $s'$
     is of length $2\cdot \frac{6}{\eps}\tan \frac{\eps}{8}$. Finally,
-    we take $s$ to be a vertical segment of length
+    we take $\seg$ to be a vertical segment of length
     $\frac{12}{\eps}\tan \frac{\eps}{8}$, with its center on the
-    $x$-axis at a distance of $5/\eps+\frac{1}{2}$ away from $o$. The
+    $x$-axis at a distance of $5/\eps+\frac{1}{2}$ away from $\origin$. The
     angle of the $x$-axis and the segment between the lower end of the
-    right side of $\square$ and the upper end of $s$ is now given by:
+    right side of $\square$ and the upper end of $\seg$ is now given by:
 
     \begin{equation*}
  	\arctan
@@ -2546,8 +2559,8 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
         }%
         =%
         \arctan \pth{ \frac{6}{5}\tan\frac{\eps}{8}+\frac{\eps}{10} }%
-        =%
-        \Theta(\eps)%
+        \leq%
+        \eps%
    \end{equation*}
 \end{proof}
 
@@ -2571,13 +2584,14 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
    \ClaimDelConnected{} }
 
 \begin{proof}
-    We first prove that for any homothet $C$ with two points
+    We  prove that for any homothet $C$ with two points
     $\pa,\pb\in \PS$ on its boundary, there is a path between $\pa$
-    and $\pb$ in $\restrictY{\DT}{C}$.  The proof is by induction over
-    the number $m$ of points of $\PS$ in the interior of $C$.  If
-    $m=0$ then $C$ contains no points of $\PS$ in its interior, and
-    thus $\pa \pb$ is an edge of the Delaunay triangulation, as $C$
-    testifies.
+    and $\pb$ in $\restrictY{\DT}{C}$, and \lemlab{shrink:shrank}
+    will immediately imply the general statement. The proof is by
+    induction over the number $m$ of points of $\PS$ in the interior
+    of $C$. If $m=0$ then $C$ contains no points of $\PS$ in its
+    interior, and thus $\pa \pb$ is an edge of the Delaunay
+    triangulation, as $C$ testifies.
 
     \begin{figure}[h]
         \phantom{}\hfill%
@@ -2588,32 +2602,22 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
         \includegraphics[page=3]{figs/shrink}%
         \hfill%
         \phantom{}%
-        \caption{}
+        \caption{An illustration of the proof of \clmref{c:t:connected} in the case that $C$ is a disk.}
         \figlab{shrink}
     \end{figure}
+
     Otherwise, let $\pc\in \PS$ be a point in the interior of
-    $C$. We move the center $\cen$ of $C$ in the direction of
-    $\pa$, shrinking $C$ in the process, so that the radius the
-    disk is $\dY{\cen}{\pa}$, until we get a disk
-    $C' \subseteq C$ such that $\pc$ is on the boundary of
-    $C'$, see \figref{shrink}. Observe that $\pa$ and $\pc$ are on
-    the boundary of the new disk, and
-    $|\interiorX{C'} \cap \PS| < |\interiorX{C} \cap
-    \PS|$. Thus, by induction, there is a path $\gamma'$ between $\pa$
+    $C$. From \lemref{shrink:shrank} we get that there exists
+    a homothet $C'$ of $C$ with $C'\subseteq C$, such that $\pa$
+    and $\pc$ lie on the boundary of $C'$ Thus, by induction,
+    there is a path $\gamma'$ between $\pa$
     and $\pc$ in
     $\restrictY{\DT}{C'} \subseteq
-    \restrictY{\DT}{C}$. Similarly, there must be a path
-    $\gamma''$ between $\pc$ and $\pb$, and concatenating the two
-    paths results in a path between $\pa$ and $\pb$ in
-    $\restrictY{\DT}{C}$.
+    \restrictY{\DT}{C}$. Similarly, there must be a homothet $C''$,
+    that gives rise to a path $\gamma''$ between $\pc$ and $\pb$, and
+    concatenating the two paths results in a path between $\pa$ and $\pb$
+    in $\restrictY{\DT}{C}$.
 
-    Back to the original claim.  For any two points
-    $\pa,\pb \in C \cap \PS$ one can get a disk $C' \subseteq C$ that
-    contains $\pa$ and $\pb$ on its boundary.  Indeed, shrink the
-    radius of $C$ till, say, $\pa$ is on the boundary, and then move
-    the center of the disk towards $\pa$ while shrinking the size of
-    the disk to maintain $\pa$ on the boundary, until $\pb$ is also on
-    the boundary of the shrunken disk.
 \end{proof}
 
 \end{document}

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.23">
-<info created="D:20211018130324" modified="D:20211025131736"/>
+<info created="D:20211018130324" modified="D:20211108091900"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -961,10 +961,10 @@ h
 <preamble>
 \def\ipeMode{TRUE}
 </preamble>
-<layout crop="yes" paper="144 144" origin="0 0" frame="144 144"/>
+<layout paper="144 144" origin="0 0" frame="144 144"/>
 </ipestyle>
 <ipestyle name="5in">
-<layout crop="yes" paper="360 360" origin="0 0" frame="360 360"/>
+<layout paper="360 360" origin="0 0" frame="360 360"/>
 </ipestyle>
 <page>
 <layer name="alpha"/>
@@ -976,6 +976,12 @@ h
 <view layers="beta gamma VIEWBBOX" active="beta"/>
 <view layers="delta VIEWBBOX" active="delta"/>
 <view layers="alpha beta gamma delta VIEWBBOX" active="delta"/>
+<path layer="beta" fill="darkorange" opacity="30%" stroke-opacity="opaque">
+63.4437 87.9376 m
+17.2057 90.1573 l
+63.0861 84.0041 l
+h
+</path>
 <path layer="delta" stroke="black" fill="blue" opacity="50%" stroke-opacity="opaque">
 238.578 132.579 m
 263.87 132.592 l
@@ -1029,31 +1035,27 @@ h
 </path>
 <use matrix="0.99 0 0 0.99 17.2058 -6.86264" name="mark/fdisk(sfx)" pos="6.58126 87.0464" size="normal" stroke="darkgreen" fill="green"/>
 <use matrix="0.99 0 0 0.99 17.2058 -6.86264" name="mark/fdisk(sfx)" pos="127.431 91.8823" size="normal" stroke="brown" fill="pink"/>
-<text matrix="0.99 0 0 0.99 11.968 -9.04945" transformations="translations" pos="4 84" stroke="darkgreen" type="label" valign="baseline" style="math">p</text>
-<text matrix="0.99 0 0 0.99 25.828 -18.9495" transformations="translations" pos="4 84" stroke="darkgreen" type="label" valign="baseline" style="math">p&apos;</text>
-<text matrix="0.99 0 0 0.99 118.219 -3.40907" transformations="translations" pos="4 84" stroke="red" type="label" valign="baseline" style="math">q&apos;</text>
-<text matrix="0.99 0 0 0.99 144.628 -1.12945" transformations="translations" pos="4 84" stroke="red" type="label" valign="baseline" style="math">q</text>
+<text matrix="0.99 0 0 0.99 11.968 -9.04945" transformations="translations" pos="4 84" stroke="darkgreen" type="label" width="5.012" height="4.297" depth="1.93" valign="baseline" style="math">p</text>
+<text matrix="0.99 0 0 0.99 25.828 -18.9495" transformations="translations" pos="4 84" stroke="darkgreen" type="label" width="7.808" height="7.497" depth="1.93" valign="baseline" style="math">p&apos;</text>
+<text matrix="0.99 0 0 0.99 118.219 -3.40907" transformations="translations" pos="4 84" stroke="red" type="label" width="7.6" height="7.497" depth="1.93" valign="baseline" style="math">q&apos;</text>
+<text matrix="0.99 0 0 0.99 144.628 -1.12945" transformations="translations" pos="4 84" stroke="red" type="label" width="4.805" height="4.297" depth="1.93" valign="baseline" style="math">q</text>
 <path matrix="0.99 0 0 0.99 1.3658 1.05739" stroke="purple" fill="green">
 33.1075 75.57 m
 117.425 81.018 l
 </path>
 <use matrix="0.99 0 0 0.99 17.2058 -6.86264" name="mark/fdisk(sfx)" pos="17.1075 83.57" size="normal" stroke="darkgreen" fill="green"/>
 <use matrix="0.99 0 0 0.99 17.2058 -6.86264" name="mark/fdisk(sfx)" pos="101.425 89.018" size="normal" stroke="brown" fill="pink"/>
-<text matrix="0.99 0 0 0.99 -21.2712 -1.4234" transformations="translations" pos="63.8055 79.5824" stroke="purple" type="label" valign="baseline" style="math">\ell</text>
-<use layer="beta" matrix="0.99 0 0 0.99 10.6903 3.98141" name="mark/fdisk(sfx)" pos="6.58126 87.0464" size="normal" stroke="darkgreen" fill="green"/>
-<use matrix="0.99 0 0 0.99 17.2058 -6.86264" name="mark/fdisk(sfx)" pos="127.431 91.8823" size="normal" stroke="brown" fill="pink"/>
-<text matrix="0.99 0 0 0.99 21.868 -9.04945" transformations="translations" pos="4 84" stroke="darkgreen" type="label" valign="baseline" style="math">p&apos;</text>
-<text matrix="0.99 0 0 0.99 117.692 -15.9648" transformations="translations" pos="4 84" stroke="red" type="label" valign="baseline" style="math">q&apos;</text>
-<text matrix="0.99 0 0 0.99 138.048 7.50614" transformations="translations" pos="4 84" stroke="red" type="label" valign="baseline" style="math">q</text>
+<text matrix="0.99 0 0 0.99 -21.2712 -1.4234" transformations="translations" pos="63.8055 79.5824" stroke="purple" type="label" width="4.151" height="6.918" depth="0" valign="baseline" style="math">\ell</text>
+<use layer="beta" matrix="0.99 0 0 0.99 17.2058 -6.86264" name="mark/fdisk(sfx)" pos="127.431 91.8823" size="normal" stroke="brown" fill="pink"/>
+<text matrix="0.99 0 0 0.99 21.868 -9.04945" transformations="translations" pos="4 84" stroke="darkgreen" type="label" width="7.808" height="7.497" depth="1.93" valign="baseline" style="math">p&apos;</text>
+<text matrix="0.99 0 0 0.99 138.048 7.50614" transformations="translations" pos="4 84" stroke="red" type="label" width="4.805" height="4.297" depth="1.93" valign="baseline" style="math">q</text>
 <path matrix="0.99 0 0 0.99 1.3658 1.05739" stroke="purple" fill="green">
 33.1075 75.57 m
 123.5 75.5826 l
 </path>
 <use matrix="0.99 0 0 0.99 17.2058 -6.86264" name="mark/fdisk(sfx)" pos="17.1075 83.57" size="normal" stroke="darkgreen" fill="green"/>
-<use matrix="0.99 0 0 0.99 23.2199 -12.2437" name="mark/fdisk(sfx)" pos="101.425 89.018" size="normal" stroke="brown" fill="pink"/>
-<text matrix="0.99 0 0 0.99 -4.28396 -9.65325" transformations="translations" pos="63.8055 79.5824" stroke="purple" type="label" valign="baseline" style="math">\ell</text>
-<use matrix="0.99 0 0 0.99 1.55445 2.8373" name="mark/fdisk(sfx)" pos="122.902 83.0608" size="normal" stroke="black" fill="orange"/>
-<text matrix="0.99 0 0 0.99 1.3658 1.05739" transformations="translations" pos="120.905 90.3612" stroke="black" type="label" valign="baseline" style="math">q&apos;&apos;</text>
+<text matrix="0.99 0 0 0.99 -4.28396 -9.65325" transformations="translations" pos="63.8055 79.5824" stroke="purple" type="label" width="4.151" height="6.918" depth="0" valign="baseline" style="math">\ell</text>
+<text matrix="0.99 0 0 0.99 1.3658 1.05739" transformations="translations" pos="120.905 90.3612" stroke="black" type="label" width="9.897" height="7.497" depth="1.93" valign="baseline" style="math">q&apos;&apos;</text>
 <path layer="gamma" matrix="0.99 0 0 0.99 1.3658 1.05739" stroke="blue" fill="orange">
 8 98 m
 148.508 57.1094 l
@@ -1062,7 +1064,6 @@ h
 10 62 m
 152 110 l
 </path>
-<text layer="beta" matrix="0.99 0 0 0.99 9.35785 0.100038" transformations="translations" pos="4 84" stroke="darkgreen" type="label" valign="baseline" style="math">p</text>
 <path layer="delta" matrix="0.99 0 0 0.99 124.93 37.4829" stroke="black" fill="orange" opacity="20%" stroke-opacity="opaque">
 24.3429 64.0695 m
 104.746 64.0695 l
@@ -1071,8 +1072,25 @@ h
 24.3429 64.0695 l
 </path>
 <use matrix="0.99 0 0 1.98 125.453 -49.061" name="mark/fdisk(sfx)" pos="6.58126 87.0464" size="normal" stroke="darkgreen" fill="green"/>
-<text matrix="0.99 0 0 1.98 117.76 -52.9045" transformations="translations" pos="4 84" stroke="darkgreen" type="label" valign="baseline" style="math">p</text>
+<text matrix="0.99 0 0 1.98 117.76 -52.9045" transformations="translations" pos="4 84" stroke="darkgreen" type="label" width="5.012" height="4.297" depth="1.93" valign="baseline" style="math">p</text>
 <use matrix="0.99 0 0 1.98 107.775 -76.2486" name="mark/fdisk(sfx)" pos="127.431 91.8823" size="normal" stroke="brown" fill="pink"/>
-<text matrix="0.99 0 0 1.98 232.796 -63.8182" transformations="translations" pos="4 84" stroke="red" type="label" valign="baseline" style="math">q</text>
+<text matrix="0.99 0 0 1.98 232.796 -63.8182" transformations="translations" pos="4 84" stroke="red" type="label" width="4.805" height="4.297" depth="1.93" valign="baseline" style="math">q</text>
+<path layer="beta" stroke="darkgreen">
+17.2058 90.1574 m
+123.631 75.8841 l
+</path>
+<use matrix="0.99 0 0 0.99 10.6903 3.98141" name="mark/fdisk(sfx)" pos="6.58126 87.0464" size="normal" stroke="darkgreen" fill="green"/>
+<text matrix="0.99 0 0 0.99 9.35785 0.100038" transformations="translations" pos="4 84" stroke="darkgreen" type="label" width="5.012" height="4.297" depth="1.93" valign="baseline" style="math">p</text>
+<text matrix="0.99 0 0 0.99 117.692 -15.9648" transformations="translations" pos="4 84" stroke="red" type="label" width="7.6" height="7.497" depth="1.93" valign="baseline" style="math">q&apos;</text>
+<path stroke="darkgreen">
+123.227 85.0675 m
+123.631 75.8842 l
+</path>
+<use matrix="0.99 0 0 0.99 1.55445 2.8373" name="mark/fdisk(sfx)" pos="122.902 83.0608" size="normal" stroke="black" fill="orange"/>
+<use matrix="0.99 0 0 0.99 23.2199 -12.2437" name="mark/fdisk(sfx)" pos="101.425 89.018" size="normal" stroke="brown" fill="pink"/>
+<path stroke="darkgreen" fill="darkorange">
+63.4437 87.9376 m
+46.2912 0 0 -46.2912 17.2057 90.1573 63.0861 84.0041 a
+</path>
 </page>
 </ipe>

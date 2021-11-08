@@ -145,25 +145,24 @@ this is significantly harder as natural midpoints might
 midpoints that are guaranteed to be present judging only from the
 source and destination points of the path.
 
-
 \paragraph{A good jump is hard to find}
 
 Most constructions for spanners can be viewed as searching for a way
-to build a path from the source to the destination by finding a good
-jump. Either by finding a way to move locally from the source to a
-near by point in the right direction, as done in the $\theta$-graph
-construction, or alternatively, by finding a major a connection in the
-spanner from the neighborhood of the source to the neighborhood of the
-destination, as done in the spanner constructions using well-separated
-pairs decomposition (\WSPD). Usually, one argues inductively that the
-spanner must have a short path from to the source to the start of the
-jump, and a path from the end of the jump to the destination, and
-combining these one prove that the resulting new path is not too long.
-These two heuristics guide our constructions, but since, as shown
-above, the task is far from trivial, some seemingly benign variants
-do not have a solution better than the trivial one, and for
-others, a non-negligible amount of sophistication is required in order
-to ensure that good jumps exist for all pairs of vertices.
+to build a path from the source to the destination by finding a
+``good'' jump. Either by finding a way to move locally from the source
+to a near by point in the right direction, as done in the
+$\theta$-graph construction, or alternatively, by finding an edge in
+the spanner from the neighborhood of the source to the neighborhood of
+the destination, as done in the spanner constructions using
+well-separated pairs decomposition (\WSPD). Usually, one argues
+inductively that the spanner must have (sufficiently short) paths from
+the source to the start of the jump, and from the end of the jump to
+the destination. Then, combining these implies that the resulting new
+path is short.  These ideas guide our constructions as well. However,
+the availability of specific edges depends on the query region, making
+the search for a good jump significantly more challenging. The
+constructions have to guarantee that there are many edges available,
+and at least one of them is useful as a jump.
 
 
 \begin{figure}[t]
@@ -1678,20 +1677,21 @@ if the length of each of its legs is at most $\eps \cdot \diamX{\Trap}$.
 
     We first consider the case that $\pb'' \in \interiorX{\pa\pb}$.
     We have that
-    
-    \stav{Dont understand some transitions below.}
     \begin{equation*}
         \dY{\pa}{\pb''}
+        =%
+        \dY{\pa}{\pb'} \cos \angle \pb' \pa \pb
         \geq
         \bigl(\dY{\pa'}{\pb'} - \dY{\pa}{\pa'} \bigr)
-        \cos \angle\pa'\pa \pb'
+        \cos \angle \pb' \pa \pb
         \geq
-        (1-\epsA) \ell (1-\epsA^2/2)
+        (1-\epsA) \ell \cdot (1-\epsA^2/2)
         \geq
-        (1-2\epsA) \ell.
+        (1-2\epsA) \ell,
     \end{equation*}
-    Similar argumentation implies that
-    $\dY{\pa}{\pb''} \leq (1+\epsA) \ell$. As such, we have
+    since $\cos \epsA \geq 1-\epsA^2 /2$, for $\epsA <1/2$.  Similar
+    argumentation implies that $\dY{\pa}{\pb''} \leq (1+\epsA)
+    \ell$. As such, we have
     \begin{equation*}
         \dY{\pb'}{\pb''} \leq ( 1+\epsA)\ell \sin \angle\pa'\pa \pb'
         \leq
@@ -1753,31 +1753,19 @@ if the length of each of its legs is at most $\eps \cdot \diamX{\Trap}$.
         \leq%
         (1+4\epsA)\diamC.
     \end{equation*}
-    \stav{Changed this equation}
-    
-    
     As such, for $\epsA \leq \eps/8$ and $\eps \leq 1$, we have
-    \begin{align*}
-      (1+\eps)\dY{\pa}{\pa'} + \ell + (1+\eps)
-      \dY{\pb'}{\pb}
-      &\leq%
+    \begin{equation*}
+        (1+\eps)\dY{\pa}{\pa'} + \ell + (1+\eps)
+        \dY{\pb'}{\pb}
+        \leq%
         4 \epsA \diamC + (1+4\epsA)\diamC
         =%
         (1+8\epsA)\diamC
-	    \leq
-	    (1+\eps) \dY{\pa}{\pb}.
-%        (1+8\epsA)(1+4\epsA) (1 -  2\epsA) \diamC
-%      \\&
-%      \hspace{-1cm}\leq%
-%      (1+8\epsA)(1+4\epsA) \dY{\pa}{\pb}
-%      \leq 
-%      (1+16\epsA) \dY{\pa}{\pb}
-%      \leq
-%      (1+\eps) \dY{\pa}{\pb}.
-    \end{align*}
+        \leq
+        (1+\eps) \dY{\pa}{\pb}.        
+    \end{equation*}
 \end{proof}
 
-\newcommand{\senseX}[1]{\Mh{\mathrm{sen}} \pth{#1}}%
 
 \subsubsection{Breaking a nice polygon into narrow %
    trapezoids}
@@ -1862,7 +1850,12 @@ example, a $k$-regular polygon is $k$-nice.
     triangle with sidelength $\psi$ and base angle $\pi/t$. As such,
     the height of such a triangle is
     $h = \psi \sin( \pi/t) \geq \psi/t$.
-    \stav{I don't really understand these figures, so I don't want to write their captions at this point.}
+
+    \sariel{Stav: Please update caption...
+
+       STAV:
+       I don't really understand these figures, so I don't want to
+       write their captions at this point.}
 
     \begin{figure}[h]
         \includegraphics[page=2]{figs/points_trap_2}%
@@ -1913,7 +1906,6 @@ example, a $k$-regular polygon is $k$-nice.
     $\Of\pth{\bigl. ( {k^4}/{\eps^6})n \log n}$ edges. In particular
     these bounds hold if $\Body$ is a $k$-regular gon.
 \end{theorem}
-\newcommand{\Triangles}{\bm\Delta}%
 \begin{proof}
     Let $\epsA = \eps/\constD$, for $\constD$ sufficiently large
     constant.  We construct $\Triangles$, a family of triangles induced by a
@@ -2186,7 +2178,7 @@ $\PSX \prec (0,0 ) \prec \PSY$. That is, the points of $\PSX$ are in
 the negative quadrant, and the points of $\PSY$ are in the positive
 quadrant.
 
-\stav{Removed definition of ``set of clients'' (is never used)}
+%Stav{Removed definition of ``set of clients'' (is never used)}
 %Consider a point $\pa = (-x,-y) \in \PSX$. Its \emphw{set of clients}
 %in $\PSY$, is 
 %\begin{equation*}

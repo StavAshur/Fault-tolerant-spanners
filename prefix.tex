@@ -1,7 +1,17 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
-% All style files are available from 
-%   http://wwww.uiuc.edu/~sariel/research/latex/
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+\ifx\SoCG\undefined%
+\documentclass[11pt]{article}%
+\providecommand{\SoCGVer}[1]{}%
+\providecommand{\NotSoCGVer}[1]{#1}%
+\else%
+%%%% Search the lipics/ subdirectory for style/files...
+\makeatletter
+\def\input@path{{lipics/}{../lipics/}}
+\makeatother
+\documentclass[a4paper,USenglish,cleveref,autoref,thm-restate, nolineno ]{socg-lipics-v2021}
+\hideLIPIcs 
+\providecommand{\SoCGVer}[1]{#1}%
+\providecommand{\NotSoCGVer}[1]{}%
+\fi
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
@@ -21,31 +31,38 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-
+\NotSoCGVer{%
 \usepackage[cm]{fullpage}%
+}
+
 \usepackage{amsmath}%
 \usepackage{amssymb}%
 \usepackage[cmyk]{xcolor}%
-\usepackage[utf8x]{inputenc}
-\usepackage{euscript}%
 
-\usepackage[amsmath,thmmarks]{ntheorem}%
-\theoremseparator{.}%
+\NotSoCGVer{%
+   \usepackage[utf8x]{inputenc}%
+   \usepackage{euscript}%
+}
+\NotSoCGVer{%
+   \usepackage[amsmath,thmmarks]{ntheorem}%
+   \theoremseparator{.}%
+}
 
 %%%% Number paragraphs
 %\setcounter{secnumdepth}{5}
 
-\usepackage{titlesec}%
-\titlelabel{\thetitle. }%
-
-\titleformat{\paragraph}[runin]
-  {\normalfont\bfseries}
-  {\theparagraph}
-  {1em}
-  {\addperiod}
-
-\newcommand{\addperiod}[1]{#1.}
-  
+\NotSoCGVer{%
+   \usepackage{titlesec}%
+   \titlelabel{\thetitle. }%
+   
+   \titleformat{\paragraph}[runin]
+   {\normalfont\bfseries}
+   {\theparagraph}
+   {1em}
+   {\addperiod}
+   
+   \newcommand{\addperiod}[1]{#1.}%
+}  
 %\let\oldparagraph=\paragraph
 %\renewcommand\paragraph[1]{\oldparagraph{#1.}}
 
@@ -82,11 +99,72 @@
    % \usepackage{cleveref}
 }
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Biblatex....
+%
+\providecommand{\BibLatexMode}[1]{}
+\providecommand{\BibTexMode}[1]{#1}
+
+\ifx\UseBibLatex\undefined%
+  \renewcommand{\BibLatexMode}[1]{}
+  \renewcommand{\BibTexMode}[1]{#1}
+\else
+  \renewcommand{\BibLatexMode}[1]{#1}
+  \renewcommand{\BibTexMode}[1]{}
+\fi
+
+%\usepackage{proofapnd}
+
+% Bib latex stuff
+\BibLatexMode{%
+%   \usepackage[bibencoding=utf8,style=alphabetic,%
+%   backend=biber,sortlocale=en_US]{biblatex}%
+   \usepackage{styles/sariel_biblatex}%
+   \usepackage[english]{babel}%
+   \usepackage{csquotes}
+   \renewcommand*{\multicitedelim}{\addcomma\space}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SoCG Style: Defining theorem like environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\SoCGVer{%
+   \theoremstyle{plain}%
+   \newtheorem{FakeCounter}{FakeCounter}%[subsection]%
+
+%   \newtheorem{conjecture}[theorem]{Conjecture}
+   \newtheorem{fact}[theorem]{Fact}
+%   \newtheorem{observation}[theorem]{Observation}
+   \newtheorem{invariant}[theorem]{Invariant}
+   \newtheorem{question}[theorem]{Question}
+%   \newtheorem{proposition}[theorem]{Proposition}
+   \newtheorem{prop}[theorem]{Proposition}
+   \newtheorem{openproblem}[theorem]{Open Problem}
+
+   \theoremstyle{plain}%
+   \newtheorem{defn}[theorem]{Definition}
+%   \newtheorem{exercise}[theorem]{Exercise}
+   \newtheorem{problem}[theorem]{Problem}
+   \newtheorem{xca}[theorem]{Exercise}
+   \newtheorem{exercise_h}[theorem]{Exercise}
+   \newtheorem{assumption}[theorem]{Assumption}%
+
+   \newtheorem{proofof}{Proof of\!}%
+}%
+% SoCG style theorem block END
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 % ----------------------------------------------------------------------
 % ----------------------------------------------------------------------
 % Defining theorem like environments
 % ----------------------------------------------------------------------
 % ----------------------------------------------------------------------
+\NotSoCGVer{%
 \theoremseparator{.}%
 
 \theoremstyle{plain}%
@@ -129,7 +207,7 @@
 \newtheorem{proof}{Proof:}%
 
 \newtheorem{proofof}{Proof of\!}%
-
+}
 % theorem block end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

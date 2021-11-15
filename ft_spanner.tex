@@ -1,11 +1,11 @@
-\documentclass[12pt]{article}%
+\def\SoCG{1}%
 \input{prefix}%
 
 
-\begin{document}
 
 \title{Local Spanners Revisited}
 
+\NotSoCGVer{%
 \author{%
    Stav Ashur%
    \StavThanks{}%
@@ -14,6 +14,37 @@
    \SarielThanks{Work on this paper was partially supported by a NSF
       AF award CCF-1907400.  }%
 }%
+}%
+
+\SoCGVer{%
+   \author{Stav Ashur}%
+   {Department of Computer Science, University of Illinois, 201
+      N. Goodwin Avenue, Urbana, IL 61801, USA}%
+   {stava2@illinois.edu}% Email
+   {https://orcid.org/0000-0003-0533-8978}%
+   {}%
+   % 
+   % 
+   \author{Sariel Har-Peled}%
+   {Department of Computer Science, University of Illinois, 201
+      N. Goodwin Avenue, Urbana, IL 61801, USA}%
+   {sariel@illinois.edu}% Email
+   {https://orcid.org/0000-0003-2638-9635}% Orchid ID
+   {Work on this paper was partially supported by a NSF AF award
+      CCF-1907400.}%
+}%
+
+\SoCGVer{%
+   \authorrunning{S. Ashur and S. Har-Peled} %
+   \Copyright{Stav Ashur and Sariel Har-Peled}%
+   \ccsdesc[500]{Theory of computation~Computational geometry}%
+   \keywords{Linear Programming, Active learning, Classification} }
+
+
+
+\NotSoCGVer{\date{\today}}
+
+\begin{document}
 
 \maketitle
 
@@ -2448,9 +2479,16 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\bibliographystyle{alpha}
-% \bibliography{shortcuts,geometry}
-\bibliography{ft_spanner}
+\BibTexMode{%
+   \SoCGVer{%
+      \bibliographystyle{plainurl}%
+   }%
+   \NotSoCGVer{%
+      \bibliographystyle{alpha}%
+   }%
+   \bibliography{ft_spanner}
+}%
+
 
 \appendix
 \section{Some missing proofs}
@@ -2579,14 +2617,14 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
    \ClaimDelConnected{} }
 
 \begin{proof}
-    We  prove that for any homothet $C$ with two points
+    We prove that for any homothet $C$ with two points
     $\pa,\pb\in \PS$ on its boundary, there is a path between $\pa$
-    and $\pb$ in $\restrictY{\DT}{C}$, and \lemlab{shrink:shrank}
-    will immediately imply the general statement. The proof is by
-    induction over the number $m$ of points of $\PS$ in the interior
-    of $C$. If $m=0$ then $C$ contains no points of $\PS$ in its
-    interior, and thus $\pa \pb$ is an edge of the Delaunay
-    triangulation, as $C$ testifies.
+    and $\pb$ in $\restrictY{\DT}{C}$, and \lemref{shrink:shrank} will
+    immediately imply the general statement. The proof is by induction
+    over the number $m$ of points of $\PS$ in the interior of $C$. If
+    $m=0$ then $C$ contains no points of $\PS$ in its interior, and
+    thus $\pa \pb$ is an edge of the Delaunay triangulation, as $C$
+    testifies.
 
     \begin{figure}[h]
         \phantom{}\hfill%

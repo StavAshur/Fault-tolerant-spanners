@@ -1,4 +1,4 @@
-\def\SoCG{1}%
+%\def\SoCG{1}%
 \input{prefix}%
 
 
@@ -6,14 +6,14 @@
 \title{Local Spanners Revisited}
 
 \NotSoCGVer{%
-\author{%
-   Stav Ashur%
-   \StavThanks{}%
-   \and%
-   Sariel Har-Peled%
-   \SarielThanks{Work on this paper was partially supported by a NSF
-      AF award CCF-1907400.  }%
-}%
+   \author{%
+      Stav Ashur%
+      \StavThanks{}%
+      \and%
+      Sariel Har-Peled%
+      \SarielThanks{Work on this paper was partially supported by a
+         NSF AF award CCF-1907400.  }%
+   }%
 }%
 
 \SoCGVer{%
@@ -108,7 +108,7 @@ a set of points $\PS\subseteq \Re^d$, a graph $\G$ over $\PS$ is a
 $\G_\PS$. There is a lot of work on building geometric spanners, see
 \cite{ns-gsn-07} and references there in.
 
-\paragraph{Fault-tolerant spanners}
+\paragraph*{Fault-tolerant spanners}
 
 An \emphw{$\FF$-fault-tolerant spanner} for $\PS\subseteq \Re^d$, is a
 graph $\G=(\PS, \EG)$, such that for any region $\region$ (i.e., the
@@ -130,7 +130,7 @@ the number of edges to $\Of(kn)$, and was able to prove that the result
 is asymptotically tight.
 
 
-\paragraph{Local spanners}
+\paragraph*{Local spanners}
 
 Recently, Abam and Borouny \cite{ab-lgs-21} introduced the notion of
 local spanners.  For a family of regions $\FF$, a graph
@@ -176,7 +176,7 @@ this is significantly harder as natural midpoints might
 midpoints that are guaranteed to be present judging only from the
 source and destination points of the path.
 
-\paragraph{A good jump is hard to find}
+\paragraph*{A good jump is hard to find}
 
 Most constructions for spanners can be viewed as searching for a way
 to build a path from the source to the destination by finding a
@@ -348,7 +348,7 @@ and at least one of them is useful as a jump.
 
 \subsection*{Our results}
 
-\paragraph{Almost local spanners}
+\paragraph*{Almost local spanners}
 
 We start by showing that regular geometric spanners are local spanners
 if one is required provide the spanner guarantee only to shrunken
@@ -358,7 +358,7 @@ for $\Body' \cap \PS$, where $\Body'$ is the set of all points in
 $\Body$ that are in distance at least $\eps\cdot \diamX{\Body}$ from its
 boundary.
 
-\paragraph{Homothets}
+\paragraph*{Homothets}
 A \emphw{homothet} of a convex region $\Body$, is a translated and
 scaled copy of $\Body$.  In \secref{disks} we present a construction
 of spanners, which surprisingly, is not only fault-tolerant for all
@@ -385,7 +385,7 @@ the ``curse of the spread'' -- that is, cases where one can construct
 local spanners of size independent of the spread of the input point
 set.
 
-\paragraph{The basic building block: $\Body$-Delaunay triangulation}
+\paragraph*{The basic building block: $\Body$-Delaunay triangulation}
 
 A key ingredient in the above construction, is the concept of Delaunay
 triangulation induced by homothets of a convex body. Intuitively, one
@@ -403,7 +403,7 @@ to compute these subsets.
 
 
 
-\paragraph{Fat triangles}
+\paragraph*{Fat triangles}
 In \secref{triangles} we give a construction of local spanners for the
 family $\FF$ of homothets of a given triangle $\triangle$, and get a
 spanner of size $\Of\pth{ (\alpha\eps)^{-1}n }$ in
@@ -414,7 +414,7 @@ triangle, and it is significantly more technically challenging than
 the original construction.
 
 
-\paragraph{$k$-regular polygons}
+\paragraph*{$k$-regular polygons}
 
 It seems natural that if one can handle fat triangles, then homothets
 of $k$-regular polygons should readily follow by a simple
@@ -436,7 +436,7 @@ for the precise result.
 
 
 
-\paragraph{Quadrant separated pair decomposition (\QSPD)}
+\paragraph*{Quadrant separated pair decomposition (\QSPD)}
 
 In \secref{qspd}, we describe a novel pair-decomposition.
 Specifically, the \QSPD breaks the input point set $\PS$ into pairs,
@@ -448,7 +448,7 @@ $\Of( n \log^{d} n)$.  A somewhat similar idea was used by Abam and
 Borouny \cite{ab-lgs-21} for the $d=1$ case. We believe this
 decomposition might be useful and is of independent interest.
 
-\paragraph{Multiplicative weak local spanner for rectangles}
+\paragraph*{Multiplicative weak local spanner for rectangles}
 
 In \secref{w:l:s:rect}, we use \QSPD{}s to construct a weak local
 spanner for axis parallel rectangles.  Here, the constructed graph
@@ -481,7 +481,7 @@ comparisons to the results of this paper.
 \section{Preliminaries}
 
 
-\paragraph{Residual graphs}
+\paragraph*{Residual graphs}
 
 Let $\FF$ be a family of regions in the plane. For a fault region
 $\region \in \FF$ and a geometric graph $\G$ on a point set $\PS$, let
@@ -923,7 +923,7 @@ $\G$.
 
 \subsubsection{Analysis}
 
-\paragraph{Size}
+\paragraph*{Size}
 
 For each pair $\Pair = \{\PSX, \PSY\}$ in the \WSPD, its
 $\CC$-Delaunay triangulation contains at most $\Of( |\PSX| + |\PSY|)$
@@ -938,7 +938,7 @@ by
 by \lemref{s:s:p:d:spread}.
 
 
-\paragraph{Construction time}
+\paragraph*{Construction time}
 The construction time is bounded by
 \begin{math}
     \sum_{\{\PSX, \PSY\} \in \WS} O\bigl( (|\PSX| + |\PSY|) \log
@@ -1022,7 +1022,7 @@ The construction time is bounded by
     if $\epsA \leq \eps/6$.
 \end{proof}
 
-\paragraph{The result}
+\paragraph*{The result}
 
 \begin{theorem}
     \thmlab{main:1}%
@@ -1111,7 +1111,7 @@ on the spread of the point set (logarithmically, but still).  We next
 show a lower bound proving that this dependency is unavoidable, even
 in the case of disks.
 
-\paragraph{Some intuition}
+\paragraph*{Some intuition}
 A natural way to attempt a spread-independent construction is to try
 and emulate the construction of Abam \etal,
 \cite{abfg-rftgs-09} and use a \SSPD instead of a \WSPD. The total
@@ -1127,9 +1127,12 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 
 \begin{figure}[h]
     \phantom{} \hfill%
-    \includegraphics[page=1]{figs/bad_example} \hfill%
-    \includegraphics[page=2]{figs/bad_example} \hfill%
-    \includegraphics[page=3]{figs/bad_example} \hfill%
+    \includegraphics[page=1,width=0.3\linewidth]{figs/bad_example}
+    \hfill%
+    \includegraphics[page=2,width=0.3\linewidth]{figs/bad_example}
+    \hfill%
+    \includegraphics[page=3,width=0.3\linewidth]{figs/bad_example}
+    \hfill%
     \phantom{}
     \caption{A bridge too far -- the only surviving bridge between the
        red and blue points is too far to be useful if the sets of
@@ -1375,7 +1378,7 @@ in $(\PS - \pa)\cap ( \pa + \cone)$ ordered by the direction $\dir_i$
 
 
 
-\paragraph{The construction}
+\paragraph*{The construction}
 Let $\G$ be the graph over $\PS$ formed by connecting every point
 $\pa \in \PS$ to $\nnZ{i}{\pa}{\cone}$, for all $i \in \IRX{3}$ and
 $\cone \in \ConeSet_i$.
@@ -1541,10 +1544,13 @@ $\cone \in \ConeSet_i$.
 \end{proof}
 
 \begin{figure}[h]
-    \includegraphics[page=1]{figs/narrow_triangle} \hfill
-    \includegraphics[page=2]{figs/narrow_triangle} \hfill
-    \includegraphics[page=3]{figs/narrow_triangle} \hfill
-    \includegraphics[page=4]{figs/narrow_triangle}
+    \includegraphics[page=1,width=0.22\linewidth]{figs/narrow_triangle}%
+    \hfill
+    \includegraphics[page=2,width=0.22\linewidth]{figs/narrow_triangle}%
+    \hfill
+    \includegraphics[page=3,width=0.22\linewidth]{figs/narrow_triangle}%
+    \hfill
+    \includegraphics[page=4,width=0.22\linewidth]{figs/narrow_triangle}
     \caption{ An illustration of the shrinking process mentioned in  \lemref{shrink:triangles}.}
     \figlab{shrink:triangle}
 \end{figure}
@@ -1552,7 +1558,7 @@ $\cone \in \ConeSet_i$.
 
 
 
-\paragraph{Local spanner property}
+\paragraph*{Local spanner property}
 \begin{lemma}
     \lemlab{local_span:triangles}%
 	%
@@ -1599,7 +1605,7 @@ $\cone \in \ConeSet_i$.
  
 
 
-\paragraph{Size and running time}
+\paragraph*{Size and running time}
 
 
 \begin{theorem}
@@ -1679,11 +1685,11 @@ if the length of each of its legs is at most $\eps \cdot \diamX{\Trap}$.
 
 \begin{figure}[h]
     \phantom{}\hfill%
-    \includegraphics{figs/narrow_trap}%
+    \includegraphics[width=0.3\linewidth]{figs/narrow_trap}%
     \hfill%
-    \includegraphics[page=2]{figs/narrow_trap}%
+    \includegraphics[page=2,width=0.3\linewidth]{figs/narrow_trap}%
     \hfill%
-    \includegraphics[page=3]{figs/narrow_trap}%
+    \includegraphics[page=3,width=0.3\linewidth]{figs/narrow_trap}%
     \hfill\phantom{}%
 
     \phantom{}\hfill%
@@ -1839,9 +1845,12 @@ example, a $k$-regular polygon is $k$-nice.
     \begin{figure}[h]
         \phantom{}%
         \hfill%
-        \includegraphics[page=2]{figs/decompose} \hfill%
-        \includegraphics[page=3]{figs/decompose} \hfill%
-        \includegraphics[page=1]{figs/points_trap} \hfill%
+        \includegraphics[page=2,width=0.3\linewidth]{figs/decompose}
+        \hfill%
+        \includegraphics[page=3,width=0.3\linewidth]{figs/decompose}
+        \hfill%
+        \includegraphics[page=1,width=0.3\linewidth]{figs/points_trap}
+        \hfill%
         \phantom{}%
         \caption{The points of $\PS$ (round), and all the
            points added to $\PS$ in order to create $\PSA$ (square). On the right, a ``vertical''
@@ -1889,13 +1898,13 @@ example, a $k$-regular polygon is $k$-nice.
        write their captions at this point.}
 
     \begin{figure}[h]
-        \includegraphics[page=2]{figs/points_trap_2}%
+        \includegraphics[page=2,width=0.23\linewidth]{figs/points_trap_2}%
         \hfill%
-        \includegraphics[page=3]{figs/points_trap_2}
+        \includegraphics[page=3,width=0.23\linewidth]{figs/points_trap_2}
         \hfill%
-        \includegraphics[page=4]{figs/points_trap_2}
+        \includegraphics[page=4,width=0.23\linewidth]{figs/points_trap_2}
         \hfill%
-        \includegraphics[page=5]{figs/points_trap_2}
+        \includegraphics[page=5,width=0.23\linewidth]{figs/points_trap_2}
         \caption{}%
         \figlab{points:move}
     \end{figure}
@@ -2209,15 +2218,6 @@ $\PSX \prec (0,0 ) \prec \PSY$. That is, the points of $\PSX$ are in
 the negative quadrant, and the points of $\PSY$ are in the positive
 quadrant.
 
-%Stav{Removed definition of ``set of clients'' (is never used)}
-%Consider a point $\pa = (-x,-y) \in \PSX$. Its \emphw{set of clients}
-%in $\PSY$, is 
-%\begin{equation*}
-%    \clientsY{\pa}{\PSY}%
-%    =%
-%    \Set{ \pb \in \PSY }{ \dZ{1}{\pb}{\cen_\Pair}  \leq
-%       \dZ{1}{\pa}{\cen_\Pair}}.
-%\end{equation*}
 
 We construct a non-uniform grid $\grid(\pa, \Pair)$ in the square
 $[0,x+y]^2$.  To this end, we first partition it into four

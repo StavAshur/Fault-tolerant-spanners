@@ -71,7 +71,7 @@
     set. We prove that this dependency can not be removed, thus
     settling an open problem raised by Abam and Borouny.  We also show
     improved constructions of local spanners for fat triangles, and
-    regular $k$-gons, In particular, this improves over the known
+    regular $k$-gons. In particular, this improves over the known
     construction for axis parallel squares.
 
     Finally, we study a somewhat weaker notion of local spanner where
@@ -99,7 +99,7 @@ Let $\G=(\PS,\EG)$ and $\GB=(\PS,\EG')$ be two graphs over the same
 set of vertices (usually $\GB$ is a subgraph of $\G$). Consider two
 vertices $\pa,\pb \in \PS$, and parameter $t \geq 1$.  A path $\pi$
 between $\pa$ and $\pb$ in $\GB$, is a \emphw{$t$-path}, if the length
-of $\pi$ in $\GB$ is at most $t\,\dGZ{\G}{\pa}{\pb}$, where
+of $\pi$ in $\GB$ is at most $t\cdot\dGZ{\G}{\pa}{\pb}$, where
 $\dGZ{\G}{\pa}{\pb}$ is the length of the shortest path between $\pa$
 and $\pb$ in $\G$.  The graph $\GB$ is a \emphw{$t$-spanner} of $\G$
 if there is a $t$-path in $\GB$, for any $\pa,\pb\in \PS$.  Thus, for
@@ -113,7 +113,7 @@ $\G_\PS$. There is a lot of work on building geometric spanners, see
 An \emphw{$\FF$-fault-tolerant spanner} for $\PS\subseteq \Re^d$, is a
 graph $\G=(\PS, \EG)$, such that for any region $\region$ (i.e., the
 ``attack''), the graph $\G \gminus \region$ is a $t$-spanner of
-$\G_\PS - \region$. Surprisingly, as shown by Abam \etal
+$\G_\PS - \region$ (See \defref{def:residual:graph} for a formal definition of this notation). Surprisingly, as shown by Abam \etal
 \cite{abfg-rftgs-09}, such fault-tolerant spanners can be constructed
 where the attack region is any convex set. Furthermore, these spanners
 have a near linear number of edges.
@@ -143,17 +143,17 @@ is a $t$-spanner.
 Specifically, this induced subgraph
 $ \restrictY{\G}{\region}$ contains a $t$-path between any
 $\pa,\pb \in \PS \cap \region$
-(note, that we keep an edge in the
-subgraph only if both its endpoints are in $\region$).
+(note that we keep an edge in the
+subgraph only if both its endpoints are in $\region$, see \defref{def:residual:graph}).
 
 Abam and Borouny \cite{ab-lgs-21} showed how to construct such
 spanners for axis-parallel squares and vertical slabs. In this work,
 we are further extending their results.  They also showed how to
-construct such spanners for disks, if one is allowed to add Steiner
+construct such spanners for disks if one is allowed to add Steiner
 points. Abam and Borouny left the question of how to construct local
 spanners for disks as an open problem.
 
-To appreciate the difficulty in constructing local spanner, observe
+To appreciate the difficulty in constructing local spanners, observe
 that unlike regular spanners, the construction has to take into
 account many different scenarios as far as which points are available
 to be used in the spanner. As a concrete example, a local spanner for
@@ -180,23 +180,23 @@ source and destination points of the path.
 
 Most constructions for spanners can be viewed as searching for a way
 to build a path from the source to the destination by finding a
-``good'' jump. Either by finding a way to move locally from the source
-to a near by point in the right direction, as done in the
+``good'' jump, either by finding a way to move locally from the source
+to a nearby point in the right direction, as done in the
 $\theta$-graph construction, or alternatively, by finding an edge in
 the spanner from the neighborhood of the source to the neighborhood of
 the destination, as done in the spanner constructions using
 well-separated pairs decomposition (\WSPD). Usually, one argues
 inductively that the spanner must have (sufficiently short) paths from
 the source to the start of the jump, and from the end of the jump to
-the destination. Then, combining these implies that the resulting new
+the destination, and then, combining these implies that the resulting new
 path is short.  These ideas guide our constructions as well. However,
 the availability of specific edges depends on the query region, making
 the search for a good jump significantly more challenging. The
 constructions have to guarantee that there are many edges available,
-and at least one of them is useful as a jump.
+and that at least one of them is useful as a jump regardless of the chosen region.
 
 
-\begin{figure}[t]
+\begin{table}[t]
     \centering
 
     \begin{tabular}{|l|c|c||c|c|}
@@ -338,12 +338,13 @@ and at least one of them is useful as a jump.
         \thmref{a:l:s:rectangles}%
       \\
       \hline
+
     \end{tabular}
     \caption{Known and new results. The notation $\Oeps$ hides
-       polynomial dependency on $\eps$ which is not specified in the
-       original work.}
-    \figlab{results_summary}
-\end{figure}
+	polynomial dependency on $\eps$ which is not specified in the
+	original work.}
+    \tablab{results_summary}
+\end{table}
 
 
 \subsection*{Our results}
@@ -352,7 +353,7 @@ and at least one of them is useful as a jump.
 
 We start by showing that regular geometric spanners are local spanners
 if one is required provide the spanner guarantee only to shrunken
-region. Namely, if $\G$ is a $(1+\eps)$-spanner of $\PS$, then for any
+regions. Namely, if $\G$ is a $(1+\eps)$-spanner of $\PS$, then for any
 convex region $\Body$, the graph $ \restrictY{\G}{\Body}$ is a spanner
 for $\Body' \cap \PS$, where $\Body'$ is the set of all points in
 $\Body$ that are in distance at least $\eps\cdot \diamX{\Body}$ from its
@@ -362,9 +363,9 @@ boundary.
 A \emphw{homothet} of a convex region $\Body$, is a translated and
 scaled copy of $\Body$.  In \secref{disks} we present a construction
 of spanners, which surprisingly, is not only fault-tolerant for all
-convex regions, but it is also a local spanner for homothets of a
+convex regions, but is also a local spanner for homothets of a
 prespecified convex region.  This in particular works for disks, and
-resolves the aforementioned open problem from Abam and Borouny
+resolves the aforementioned open problem of Abam and Borouny
 \cite{ab-lgs-21}. Our construction is somewhat similar to the original
 construction of Abam \etal \cite{abfg-rftgs-09}. For a parameter
 $\eps>0$ the construction of a $(1+\eps)$-local spanner for homothets
@@ -387,8 +388,8 @@ set.
 
 \paragraph*{The basic building block: $\Body$-Delaunay triangulation}
 
-A key ingredient in the above construction, is the concept of Delaunay
-triangulation induced by homothets of a convex body. Intuitively, one
+A key ingredient in the above construction is the concept of Delaunay
+triangulationsS induced by homothets of a convex body. Intuitively, one
 replaces the unit disk (of the standard $L_2$-norm) by the provided
 convex region. It is well known (\cite{cd-vdbcdf-85}) that such diagrams
 exist, have linear complexity in the plane, and can be computed
@@ -420,17 +421,16 @@ It seems natural that if one can handle fat triangles, then homothets
 of $k$-regular polygons should readily follow by a simple
 decomposition of the polygon into fat triangles. Maybe surprisingly,
 this is not the case -- a critical configuration might involve two
-points that are on the interior of the edges of a homothet of the
+points that are on the interior of two non-adjacent edges of a homothet of the
 input polygon. We overcome this by first showing that sufficiently
 narrow trapezoids, provide us with a good jump somewhere inside the
 trapezoid, assuming one compute the Delaunay triangulation induced by
-the trapezoid, and that the source and destination lies on the two
+the trapezoid, and that the source and destination lie on the two
 legs of the trapezoid. Next, we show that such a polygon can be
 covered by a small number of narrow trapezoids and fat triangles. By
 building appropriate graphs for each trapezoid/triangle in the
-collection, we prove that the resulting graph is a spanner for
-homothets of the given $k$-regular polygon, and that the resulting
-graph size has no dependency on the spread. Of course, the size does
+collection, we get a spanner for
+homothets of the given $k$-regular polygon, with size that has no dependency on the spread. Of course, the size does
 depend on $k$.  See \secref{k:gons} for details, and \thmref{k:gon}
 for the precise result.
 
@@ -441,7 +441,7 @@ for the precise result.
 In \apndref{qspd}, we describe a novel pair-decomposition.
 Specifically, the \QSPD breaks the input point set $\PS$ into pairs,
 such that for any pair $\{\PX, \PY\}$ we have the property that there
-is a translated axis system, such that $\PX$ and $\PY$ belong to two
+is a translated axis system such that $\PX$ and $\PY$ belong to two
 antipodal quadrants.  In $d$ dimensions there is such a decomposition
 with $\Of( n \log^{d-1} n)$ pairs, and total weight
 $\Of( n \log^{d} n)$.  A somewhat similar idea was used by Abam and
@@ -455,17 +455,17 @@ spanner for axis parallel rectangles.  Here, the constructed graph
 $\G$ over $\PS$, has the property that for any axis-parallel rectangle
 $\rect$, the graph $\restrictY{\G}{\rect}$ is a $(1+\eps)$-spanner
 for all the points of $\bigl((1-\eps)\rect \bigr)\cap \PS$, where
-$(1-\eps)\rect$ is the scaling of the rectangle by $1-\eps$ around its
-center. Importantly, this works for narrow rectangles when this form
+$(1-\eps)\rect$ is the scaling of the rectangle by a factor of $1-\eps$ around its
+center. Importantly, this works for narrow rectangles where this form
 of multiplicative shrinking is still meaningful (unlike the diameter
-based shrinking mentioned above). Contrast this with the lower bound
-of $\Omega(n^2)$, illustrated in \figref{bad:rectangles}, on the size
+based shrinking mentioned above). Contrast this with the lower bound (illustrated in \figref{bad:rectangles})
+of $\Omega(n^2)$ on the size
 of local spanner if one does not shrink the rectangles. See
 \thmref{a:l:s:rectangles} for details of the precise result.
 
 \bigskip
 
-See \figref{results_summary} for a summary of known results and
+See \tabref{results_summary} for a summary of known results and
 comparisons to the results of this paper.
 
 
@@ -482,25 +482,28 @@ comparisons to the results of this paper.
 
 
 \paragraph*{Residual graphs}
-
-Let $\FF$ be a family of regions in the plane. For a fault region
-$\region \in \FF$ and a geometric graph $\G$ on a point set $\PS$, let
-$\G \gminus \region$ be the residual graph after removing from it all
-the points of $\PS$ in $\region$. Similarly, let
-$\restrictY{\G}{\region}$ denote the graph restricted to $\region$.
-Formally, let
+\begin{definition}
+	\deflab{def:residual:graph}
+	Let $\FF$ be a family of regions in the plane. For a fault region
+	$\region \in \FF$ and a geometric graph $\G$ on a point set $\PS$, let
+	$\G \gminus \region$ be the residual graph after removing from it all
+	the points of $\PS$ in $\region$. Similarly, let
+	$\restrictY{\G}{\region}$ denote the graph restricted to $\region$.
+	Formally, let
 \begin{equation*}
-    \G \gminus \region%
-    =%
-    \bigl( \PS \setminus \region, \Set{ uv \in \EG }{ uv \cap
-       \interiorX{\region} = \emptyset} \bigr)
-    \qquad\text{and}\qquad%
-    \restrictY{\G}{\region}%
-    =%
-    \bigl( \PS \cap {\region},
-    \Set{uv \in \EG}{ uv \subseteq {\region} } \bigr).
-\end{equation*}
-where $\interiorX{\region}$ denotes the interior of $\region$.
+	\G \gminus \region%
+	=%
+	\bigl( \PS \setminus \region, \Set{ uv \in \EG }{ uv \cap
+		\interiorX{\region} = \emptyset} \bigr)
+	\qquad\text{and}\qquad%
+	\restrictY{\G}{\region}%
+	=%
+	\bigl( \PS \cap {\region},
+	\Set{uv \in \EG}{ uv \subseteq {\region} } \bigr).
+	\end{equation*}
+	where $\interiorX{\region}$ denotes the interior of $\region$.
+\end{definition}
+
 
 
 % -----------------------------------------------------------------------
@@ -566,15 +569,15 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
       \text{\emphi{$1/\eps$-well-separated}}
       \qquad
       &\text{if}\qquad
-        \max \pth{ \diameterX{\PSX}, \diameterX{\PSY} } \leq
-        \eps \, \dsY{\PSX}{\PSY},
+        \mathbf{max} \pth{ \diameterX{\PSX}, \diameterX{\PSY} } \leq
+        \eps \cdot \dsY{\PSX}{\PSY},
       \\
       \text{and} \qquad \text{\emphi{$1/\eps$-semi-separated}}
       \qquad
       &\text{if}\qquad
         \mathbf{min} \pth{ \diameterX{\PSX}, \diameterX{\PSY} }
         \leq
-        \eps \, \dsY{\PSX}{\PSY}.
+        \eps \cdot \dsY{\PSX}{\PSY}.
     \end{align*}
     For a point set $\PS$, a \emphOnly{well-separated pair
        decomposition} (\emphOnly{\WSPD{}}) of $\PS$ with parameter
@@ -583,8 +586,8 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
         \WS = \brc{\bigl.
            \brc{\PSB_1,\PSC_1},\ldots,\brc{\PSB_s,\PSC_s}},
     \end{math}
-    such that, for all $i$, the sets $\PSB_i$ and $\PSC_i$ are
-    $(1/\eps)$-separated. The notion of $1/\eps$-\SSPD (aka
+    such that for all $i$, the sets $\PSB_i$ and $\PSC_i$ are
+    $(1/\eps)$-separated. The notion of $1/\eps$-\SSPD (a.k.a
     \emphi{semi-separated pairs decomposition}) is defined
     analogously.
 \end{defn}
@@ -615,8 +618,8 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
     $\Of\pth{ n \eps^{-d} \log n }$.
 \end{theorem}
 
-The proof of the following two lemmas is straightforward, and are
-delegated to the appendix.
+%The proof of the following two lemmas is straightforward, and are
+%delegated to the appendix.
 
 \SaveContent{\LemmaChopEasyBody}%
 {%
@@ -638,14 +641,14 @@ delegated to the appendix.
     An \emphi{$\eps$-double-wedge} is a region between two lines,
     where the angle between the two lines is at most $\eps$.
 
-    Two points sets $\PX$ and $\PY$ that each lie on their own cone of
+    Two point sets $\PX$ and $\PY$ that each lie in their own cone of
     a shared $\eps$-double-wedge are \emphi{$\eps$-angularly
        separated}.
 \end{defn}
 
 \SaveContent{\LemmaRefineDWBody}{%
    Given a $(1/\eps)$-\SSPD $\WS$ of $n$ points in the plane, one can
-   refine it, into a $(1/\eps)$-\SSPD $\WS'$, such that each pair
+   refine $\WS$ into a $(1/\eps)$-\SSPD $\WS'$, such that each pair
    $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in a
    $\eps$-double-wedge $\DW_\Pair$, such that $\PSX$ and $\PSY$ are
    contained in the two different faces of the double wedge
@@ -668,7 +671,7 @@ delegated to the appendix.
     Let $\PS$ be a set of $n$ points in the plane, and let $\eps > 0$
     be a parameter. Then, one can compute a $(1/\eps)$-\SSPD for $\PS$
     such that every pair is $\eps$-angularly separated.  The total
-    weight of the \SSPD is $\Of\pth{n \eps^{-3} \log n}$. The number
+    weight of the \SSPD is $\Of\pth{n \eps^{-3} \log n}$, the number
     of pairs in the \SSPD is $\Of\pth{n \eps^{-3}}$, and the
     computation time is $\Of\pth{ n \eps^{-3} \log n }$.
 \end{corollary}
@@ -739,7 +742,7 @@ $\shrinkDY{\body}{\delta}$ is empty.
 
     So, consider any body $\body \in \FF$, and any two vertices
     $\pa, \pb \in \PS \cap \body'$, where
-    $\body'=\shrinkDY{\body}{\delta}$. Let $\ell = \dY{\pa}{\pb}$, let
+    $\body'=\shrinkDY{\body}{\delta}$, Let $\ell = \dY{\pa}{\pb}$, let
     $\pi$ be the shortest path between $\pa$ and $\pb$ in $\G$, and
     let $\Elp$ be the locus of all points $\pc$, such that
     $\dY{\pa}{\pc} + \dY{\pc}{\pb} \leq (1+\epsA) \ell$. The region
@@ -753,7 +756,7 @@ $\shrinkDY{\body}{\delta}$ is empty.
 
     \begin{figure}[h]
         \centerline{\includegraphics{figs/ellipse}}
-        \caption{An illustration of the settings in the proof of \lemref{w:l:s:regions}}
+        \caption{An illustration of the settings in the proof of \lemref{w:l:s:regions} with $\Elp$ shown in blue.}
         \figlab{ellipse}
     \end{figure}
 
@@ -810,8 +813,8 @@ to $\CC$, if no four points of $\PS$ lie on the boundary of a homothet
 of $\CC$, and no three points are colinear.
 
 
-A graph $\G=(\PS, \EG)$ is a \emphw{$\CC$-local $(1+\eps)$-spanner}
-for $\PS$ if for any homothet $\region$ of $\CC$, we have that
+A graph $\G=(\PS, \EG)$ is a \emphw{$\CC$-local $t$-spanner}
+for $\PS$ if for any homothet $\region$ of $\CC$ we have that
 $\restrictY{\G}{\region}$ is a $t$-spanner of $\G_\PS \cap \region$.
 
 
@@ -827,7 +830,7 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\G_\PS \cap \region$.
     \deflab{c:del:triang}%
     %
     Given $\CC$ as above, and a point set $\PS$ in general position
-    for $\CC$, the \emphi{$\CC$-Delaunay triangulation} of $\PS$,
+    with respect to $\CC$, the \emphi{$\CC$-Delaunay triangulation} of $\PS$,
     denoted $\DG_{\CC}(\PS)$, is
     the graph formed by edges between any two points $\pa,\pb\in \PS$
     such that there exist a homothet of $\CC$ that contains only $\pa$

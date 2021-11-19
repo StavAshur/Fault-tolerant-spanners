@@ -260,6 +260,9 @@
 \newcommand{\HLink}[2]{\hyperref[#2]{#1~\ref*{#2}}}
 \newcommand{\HLinkSuffix}[3]{\hyperref[#2]{#1\ref*{#2}{#3}}}
 
+\newcommand{\tablab}[1]{\label{table:#1}}
+\newcommand{\tabref}[1]{\HLink{Table}{table:#1}}
+
 \newcommand{\figlab}[1]{\label{fig:#1}}
 \newcommand{\figref}[1]{\HLink{Figure}{fig:#1}}
 

@@ -1270,43 +1270,27 @@ $\cone \in \ConeSet_i$.
 		\dY{\pa}{\pb}.
 	\end{math}
 }
-\begin{lemma}
-    \lemlab{cone_edge:triangles}[Proof in \apndref{cone_edge:triangles:proof}]%
+\begin{lemma}[Proof in \apndref{cone_edge:triangles:proof}]
+    \lemlab{cone_edge:triangles}%
     %
     \LemmaConeEdgeTriangles
 
 \end{lemma}
 
+\SaveContent{\LemmaShrinkTriangles}%
+{%
+    Let $\triangle$ be a triangle that contains two points $\pa,
+	\pb$. Then, there is a homothet $\triangle'\subseteq \triangle$ of
+	$\triangle$, such that one of these points is a vertex of
+	$\triangle'$, and the other point lies on a facing edge of
+	$\triangle'$.
+}
 
-
-\begin{lemma}
+\begin{lemma}[Proof in \apndref{shrink:triangles:proof}]
     \lemlab{shrink:triangles}%
     %
-    Let $\triangle$ be a triangle that contains two points $\pa,
-    \pb$. Then, there is a homothet $\triangle'\subseteq \triangle$ of
-    $\triangle$, such that one of these points is a vertex of
-    $\triangle'$, and the other point lies on a facing edge of
-    $\triangle'$.
+	\LemmaShrinkTriangles
 \end{lemma}
-
-\begin{proof}
-    This follows by the same shrinking argument as
-    \lemref{shrink:shrank}, with the addition of a single step. When a homothet $\triangle'$ with $\pa,\pb \in \partial\triangle'$  is found, if neither point is on a vertex, we ``push'' the only edge that does not contain one of the points towards the vertex $v$ opposite of it (this the same mapping described in \lemref{shrink:shrank} with center $v$), until one of the points lies on the edge. That point now lies on two edges. See \figref{shrink:triangle}.   
-\end{proof}
-
-\begin{figure}[h]
-    \includegraphics[page=1,width=0.22\linewidth]{figs/narrow_triangle}%
-    \hfill
-    \includegraphics[page=2,width=0.22\linewidth]{figs/narrow_triangle}%
-    \hfill
-    \includegraphics[page=3,width=0.22\linewidth]{figs/narrow_triangle}%
-    \hfill
-    \includegraphics[page=4,width=0.22\linewidth]{figs/narrow_triangle}
-    \caption{ An illustration of the shrinking process of \lemref{shrink:triangles}. The three left subfigures are an activation of \lemref{shrink:shrank} for the case that the convex region $\CC$ is a triangle, and the rightmost subfigure is the additional final step.}
-    \figlab{shrink:triangle}
-\end{figure}
-
-
 
 
 \paragraph*{Local spanner property}
@@ -1364,8 +1348,7 @@ $\cone \in \ConeSet_i$.
 	%
     Let $\PS$ be a set of $n$ points in the plane, and let
     $\eps \in (0,1)$ be an approximation parameter. The above
-    algorithm computes a local $(1+\eps)$-spanner $\G$ for homothets
-    of an $\alpha$-fat triangle $\triangle$.  The construction time is
+    algorithm computes a $\triangle$-local $(1+\eps)$-spanner $\G$ for an $\alpha$-fat triangle $\triangle$.  The construction time is
     $\Of\pth{(\alpha\eps)^{-1}n\log n}$, and the spanner $\G$ has
     $\Of\pth{(\alpha\eps)^{-1} n\bigr.}$ edges.
 \end{theorem}
@@ -1408,7 +1391,7 @@ $\cone \in \ConeSet_i$.
 \seclab{traps:jump}
 
 As a reminder, a trapezoid is a quadrilateral with two parallel
-edges, known as its \emph{bases}. The other two edges are its legs.
+edges, known as its \emph{bases}. The other two edges are its \emph{legs}.
 For $\eps \in (0,1/4)$, a trapezoid $\Trap$ is \emphi{$\eps$-narrow}
 if the length of each of its legs is at most $\eps \cdot \diamX{\Trap}$.
 
@@ -1480,7 +1463,7 @@ example, a $k$-regular polygon is $k$-nice.
     \thmlab{k:gon}%
     %
     Let $\Body$ be a $k$-nice convex polygon, $\PS$ be a set of $n$
-    points in the plane, and let $\eps \in (0,1)$ be a parameter. Then
+    points in the plane, and let $\eps \in (0,1)$ be a parameter. Then,
     one can construct a $\CC$-local $(1+\eps)$-spanner of $\PS$.  The
     construction time is $\Of\pth{\bigl. ({k^4}/{\eps^6})n \log^2 n}$,
     and the resulting graph has
@@ -1514,9 +1497,9 @@ example, a $k$-regular polygon is $k$-nice.
            \frac{n}{\epsA^{3}} \log n \cdot \log n
         }%
         =%
-        \Of\pth{ \frac{k^4}{\epsA^6}n \log^2 n}.%
+        \Of\pth{ \frac{k^4}{\epsA^6}n \log^2 n},%
     \end{equation*}
-    And the resulting graph has
+    and the resulting graph has
     $\Of\pth{\bigl. ( {k^4}/{\epsA^6})n \log n}$ edges.
     
     As for correctness, consider a homothet $\Body'$ of $\Body$ that
@@ -2514,6 +2497,32 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
 	(1+\eps)\dY{\pa}{\pb}.
 	\end{align*}
 \end{proof}
+
+\subsection{Proof of \lemref{shrink:triangles}}
+\apndlab{shrink:triangles:proof}
+
+\RestatementOf{\lemref{shrink:triangles}}%
+{%
+	\LemmaShrinkTriangles{}
+}
+
+
+\begin{proof}
+	This follows by the same shrinking argument as
+	\lemref{shrink:shrank}, with the addition of a single step. When a homothet $\triangle'$ with $\pa,\pb \in \partial\triangle'$  is found, if neither point is on a vertex, we ``push'' the only edge that does not contain one of the points towards the vertex $v$ opposite of it (this the same mapping described in \lemref{shrink:shrank} with center $v$), until one of the points, say $\pa$ lies on the edge. $\pa$ now lies on two edges, meaning, at a vertex, while $q$ lies on the only remaining edge which must be opposite of that vertex. See \figref{shrink:triangle}.   
+\end{proof}
+
+\begin{figure}[h]
+	\includegraphics[page=1,width=0.22\linewidth]{figs/narrow_triangle}%
+	\hfill
+	\includegraphics[page=2,width=0.22\linewidth]{figs/narrow_triangle}%
+	\hfill
+	\includegraphics[page=3,width=0.22\linewidth]{figs/narrow_triangle}%
+	\hfill
+	\includegraphics[page=4,width=0.22\linewidth]{figs/narrow_triangle}
+	\caption{ An illustration of the shrinking process of \lemref{shrink:triangles}. The three left subfigures are an activation of \lemref{shrink:shrank} for the case that the convex region $\CC$ is a triangle, and the rightmost subfigure is the additional final step.}
+	\figlab{shrink:triangle}
+\end{figure}
 
 
 \subsection{Proof of \lemref{good:jump:traps}}

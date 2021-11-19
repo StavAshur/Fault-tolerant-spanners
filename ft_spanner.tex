@@ -861,7 +861,7 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\G_\PS \cap \region$.
     \lemlab{shrink:shrank}%
     %
     Let $\CC$ be a convex bounded body, and let $\PS$ be a set of
-    points in general position for $\CC$. Then, if $C$ is a homothet
+    points in general position with respect to $\CC$. Then, if $C$ is a homothet
     of $\CC$ that contains two points $\pa, \pb \in \CC \cap \PS$,
     then there exists a homothet $C' \subseteq C$ of $\CC$ such that
     $\pa, \pb \in \partial C'$.
@@ -887,7 +887,7 @@ Delaunay triangulations, also holds for homothets.
 \SaveContent{\ClaimDelConnected}%
 {%
    Let $\CC$ be a bounded close convex shape.  Given a set of points
-   $\PS \subseteq \Re^2$ in general position for $\CC$, let
+   $\PS \subseteq \Re^2$ in general position with respect to $\CC$, let
    $\DG = \DG_{\CC}(\PS)$ be the $\CC$-Delaunay triangulation of
    $\PS$. For any homothet $C$ of $\CC$, we have that
    $\restrictY{\DG}{C}$ is connected.%
@@ -947,7 +947,7 @@ The construction time is bounded by
     =%
     \Of\pth{ \WeightX{\WS} \log n }%
     =%
-    \Of\pth{ \frac{n\log \spread \log n}{{\epsA}^{2}}},    
+    \Of\pth{ \frac{n\log \spread \log n}{{\epsA}^{2}}}.    
 \end{math}
 
 \begin{lemma}[Local spanner property]
@@ -955,8 +955,7 @@ The construction time is bounded by
     above for the point set $\PS$. Then, for any homothet $C$ of $\CC$
     and any two points $\px, \py \in \PS \cap C$, we have that
     $\restrictY{\G}{C}$ has a $(1+\eps)$-path between $\px$ and
-    $\py$. That is, $\G$ is a $(1+\eps)$-local spanner for homothets
-    of $\CC$.
+    $\py$. That is, $\G$ is a $\CC$-local $(1+\eps)$-spanner.
 \end{lemma}
 
 \begin{proof}
@@ -978,7 +977,7 @@ The construction time is bounded by
        $\px, \py \in C$, and the edge $\px \py \in \EGX{\G}$, implying
        the claim.  }%
     
-    If $\px \py \in \DT_\Pair$ then the claim holds. So assume this is
+    If $\px \py \in \DT_\Pair$ then the claim holds, so assume this is
     not the case. By the connectivity of $\DT_\Pair \cap C$, see
     \clmref{c:t:connected}, there must be points
     $\px' \in \PSX \cap C$, $\py' \in \PSY \cap C$, such that
@@ -1031,8 +1030,7 @@ The construction time is bounded by
     Let $\CC$ be a bounded convex shape in the plane, let $\PS$ be a
     given set of $n$ points in the plane (in general position), and
     let $\eps \in (0,1/2)$ be a parameter. The above algorithm
-    constructs a local $(1+\eps)$-spanner $\G$ for homothets of
-    $\CC$. The spanner has $\Of\pth{ \eps^{-2} n\log \spread }$ edges,
+    constructs a  $\CC$-local $(1+\eps)$-spanner $\G$. The spanner has $\Of\pth{ \eps^{-2} n\log \spread }$ edges,
     and the construction time is
     $\Of\pth{ \eps^{-2} n\log \spread \log n }$.  Formally, for any
     homothet $C$ of $\CC$, and any two points
@@ -1049,7 +1047,7 @@ homothet contained in $R$ having both points on its boundary.
 \begin{defn}
     Let $\CC$ be a bounded convex shape in the plane.  Given a region
     $R$ in the plane and a point set $\PS$, consider two points
-    $\pa, \pb \in \PS$. The edge $\pa \pb$ is \emphw{safe} in $R$, if
+    $\pa, \pb \in \PS$. The edge $\pa \pb$ is \emphw{safe} in $R$ if
     there is a homothet $C$ of $\CC$, such that
     $\pa,\pb \in C \subseteq R$. The \emphi{safe graph} for $\PS$ and
     $R$, denoted by $\GY{\PS}{R}$, is the graph formed by all the safe
@@ -1064,8 +1062,7 @@ graph described above, when restricted to region $R$, is a spanner for $\GY{\PS}
 {%
     Let $\CC$ be a bounded convex body, $\PS$ be a set of $n$ points
 	in the plane, $\eps \in (0,1)$ be a parameter, and let $\G$ be a
-	local $(1+\eps)$-spanner of $\PS$ for homothets of $\CC$. Let $\G$
-	be the above spanner constructed for $\PS$ and $\CC$.
+	$\CC$-local $(1+\eps)$-spanner of $\PS$.
 	
 	Consider a region $R$ in the plane, and the associated graph
 	$\GA = \GY{\PS}{R}$, we have that $\restrictY{\G}{R}$ is a
@@ -1103,14 +1100,14 @@ graph described above, when restricted to region $R$, is a spanner for $\GY{\PS}
 \subsubsection{A lower bound for local spanner for disks}
 
 The result of \thmref{main:1} is somewhat disappointing as it depends
-on the spread of the point set (logarithmically, but still).  We next
+on the spread of the point set (logarithmically, but still).  Next, we
 show a lower bound proving that this dependency is unavoidable, even
 in the case of disks.
 
 \paragraph*{Some intuition}
 A natural way to attempt a spread-independent construction is to try
-and emulate the construction of Abam \etal,
-\cite{abfg-rftgs-09} and use a \SSPD instead of a \WSPD. The total
+and emulate the construction of Abam \etal
+\cite{abfg-rftgs-09} and use a \SSPD instead of a \WSPD, as the total
 weight of the \SSPD is near linear (with no dependency on the
 spread). Furthermore, after some post processing, one can assume every
 pair $\Pair = \{ \PSX, \PSY \}$ is angularly $\eps$-separated -- that
@@ -1168,7 +1165,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     For any $n > 0$, and $\Phi = \Omega(n)$, one can compute a set
 	$\PS$ of $n+ \Of(\log\Phi)$ points, with spread $\Of(\Phi n)$, and
 	a triangle $\triangle$, such that any $\triangle$-local
-	$3/2$-spanner of $\PS$ requires $\Omega\pth{n\log\Phi }$ edges.
+	$(3/2)$-spanner of $\PS$ requires $\Omega\pth{n\log\Phi }$ edges.
 }
 
 \begin{lemma}
@@ -1190,7 +1187,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 While local spanners for homothets of an arbitrary convex shape are
 costly, if we are given a triangle $\triangle$ with the single
 constraint that $\triangle$ is not too ``thin'', then one can
-construct a $\triangle$-local spanner with a number of edges that does
+construct a $\triangle$-local $t$-spanner with a number of edges that does
 not depend on the spread of the points. See \figref{tri_low_bd} for an
 illustration of a construction showing that dependency if "thin"
 triangles are allowed.
@@ -1213,7 +1210,7 @@ triangles are allowed.
     \phantom{}%
     \caption{For the triangle $\triangle$ with angles
        $\alpha_1,\alpha_2$, and $\alpha_3$ we create the cones
-       $c_1,c_2$, and $c_3$.}
+       $\cone_1,\cone_2$, and $\cone_3$.}
     \figlab{tri_cones}
 \end{figure}
 
@@ -1225,19 +1222,19 @@ triangles are allowed.
 The input is a set $\PS$ of $n$ points in the plane, an $\alpha$-fat
 triangle $\triangle$, and an approximation parameter $\eps \in
 (0,1)$. Let $v_i$ denote the $i$\th vertex of $\triangle$, $\alpha_i$
-be the adjacent angle, and let $e_i$ denote the facing edges, for
+be the adjacent angle, and let $e_i$ denote the opposing edge, for
 $i\in \IRX{3}$.  Let
 $\cone_i = \Set{ (\pa - v_i)t }{ \pa \in e_i \text{ and } t \geq 0}$
 denote the cone with an apex at the origin induced by the $i$\th
 vertex of $\triangle$.  Let $\dir_i$ be the outer normal of
 $\triangle$ orthogonal to $e_i$.  See \figref{tri_cones} for an
-illustration. Let $\ConeSet_i$ be a minimum partition of $\cone_i$
+illustration. Let $\ConeSet_i$ be a minimum size partition of $\cone_i$
 into cones each with angle in the range $[\beta/2, \beta]$, where
 $\beta = \eps \alpha/\gamma$, and $\gamma>1$ is a constant to be
 determined shortly.  For each point $\pa\in\PS$, and a cone
 $\cone \in \ConeSet_i$, let $\nnZ{i}{\pa}{\cone}$ be the first point
 in $(\PS - \pa)\cap ( \pa + \cone)$ ordered by the direction $\dir_i$
-(it is the ``nearest-neighbor'' to $\pa$ in $\pa+\cone$).
+(it is the ``nearest-neighbor'' to $\pa$ in $\pa+\cone$ with respect to the direction $\dir_i$).
 
 
 
@@ -1294,8 +1291,7 @@ $\cone \in \ConeSet_i$.
 
 \begin{proof}
     This follows by the same shrinking argument as
-    \lemref{shrink:shrank}, and is illustrated in 
-    \figref{shrink:triangle}.   
+    \lemref{shrink:shrank}, with the addition of a single step. When a homothet $\triangle'$ with $\pa,\pb \in \partial\triangle'$  is found, if neither point is on a vertex, we ``push'' the only edge that does not contain one of the points towards the vertex $v$ opposite of it (this the same mapping described in \lemref{shrink:shrank} with center $v$), until one of the points lies on the edge. That point now lies on two edges. See \figref{shrink:triangle}.   
 \end{proof}
 
 \begin{figure}[h]
@@ -1306,7 +1302,7 @@ $\cone \in \ConeSet_i$.
     \includegraphics[page=3,width=0.22\linewidth]{figs/narrow_triangle}%
     \hfill
     \includegraphics[page=4,width=0.22\linewidth]{figs/narrow_triangle}
-    \caption{ An illustration of the shrinking process mentioned in  \lemref{shrink:triangles}.}
+    \caption{ An illustration of the shrinking process of \lemref{shrink:triangles}. The three left subfigures are an activation of \lemref{shrink:shrank} for the case that the convex region $\CC$ is a triangle, and the rightmost subfigure is the additional final step.}
     \figlab{shrink:triangle}
 \end{figure}
 
@@ -1317,7 +1313,7 @@ $\cone \in \ConeSet_i$.
 \begin{lemma}
     \lemlab{local_span:triangles}%
 	%
-    Let $\triangle'$ be a homothet of $\triangle$, for any two points
+    Let $\triangle'$ be a homothet of $\triangle$. For any two points
     $\pa, \pb \in \PS \cap \triangle'$, we have a $(1+\eps)$-path in
     $\G' = \restrictY{\G}{\triangle'}$.
 \end{lemma}
@@ -1338,7 +1334,7 @@ $\cone \in \ConeSet_i$.
         (1+\eps)\dY{\pa}{\pb},
     \end{math}
     which implies that either $\pa\pc$ or $\pb\pc$ are the closest
-    pairs, which is a contradiction.
+    pair, which is a contradiction.
 
     
     For any other pair $\pa,\pb\in \PS'$ we have from

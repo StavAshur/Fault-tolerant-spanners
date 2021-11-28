@@ -56,31 +56,28 @@
 \begin{abstract}
     For a set of points $\PS \subseteq \Re^2$, and a family of regions
     $\FF$, a \emph{local $t$-spanner} of $\PS$, is a sparse graph $\G$
-    over $\PS$, that remains a $t$-spanner even when restricted to a
-    region $\region \in \FF$. That is, for any region
-    $\region \in \FF$, the subgraph restricted to $\region$, denoted
-    by $\restrictY{\G}{\region}$, is still a $t$-spanner for all the
-    points of $\region \cap \PS$. Here $\restrictY{\G}{\region}$ is
-    the subgraph of $\G$ induced on $\PS \cap \region$.
+    over $\PS$, such that, for any region $\region \in \FF$, the
+    subgraph restricted to $\region$, denoted by
+    $\restrictY{\G}{\region} = \G_{\PS \cap \region}$, is a
+    $t$-spanner for all the points of $\region \cap \PS$.
 
     We present algorithms for the construction of local spanners with
-    respect to several families of convex regions. In particular, we
-    construct a near linear size local spanner for homothets of a
+    respect to several families of regions, such as homothets of a
     convex region. Unfortunately, the number of edges in the resulting
     graph depends logarithmically on the spread of the input point
     set. We prove that this dependency can not be removed, thus
     settling an open problem raised by Abam and Borouny.  We also show
-    improved constructions of local spanners for fat triangles, and
-    regular $k$-gons. In particular, this improves over the known
-    construction for axis parallel squares.
+    improved constructions (with no dependency on the spread) of local
+    spanners for fat triangles, and regular $k$-gons. In particular,
+    this improves over the known construction for axis parallel
+    squares.
 
-    Finally, we study a somewhat weaker notion of local spanner where
-    one allows to shrink the region a ``bit''. We show that any spanner is
-    a weak local spanner if one is allowed to shrink the region by
-    some fraction of its diameter. Surprisingly, we show a near linear
-    size construction of a weak spanner for axis-parallel rectangles,
-    where the shrinkage is \emph{multiplicative}.
-
+    We also study a somewhat weaker notion of local spanner where one
+    allows to shrink the region a ``bit''. Any spanner is a weak local
+    spanner if the shrinking is proportional to the
+    diameter. Surprisingly, we show a near linear size construction of
+    a weak spanner for axis-parallel rectangles, where the shrinkage
+    is \emph{multiplicative}.
 \end{abstract}
 
 
@@ -92,7 +89,7 @@
 
 %\paragraph{Euclidean graph}
 For a set $\PS$ of points in $\Re^d$, the \emphw{Euclidean graph}
-$\G_\PS = \bigl(\PS, \binom{\PS}{2}\bigr)$ of $\PS$ is an undirected
+$\EucG = \bigl(\PS, \binom{\PS}{2}\bigr)$ of $\PS$ is an undirected
 graph.  Here, an edge $\pa \pb \in \EG$ is associated with the segment
 $\pa\pb$, and its weight is the (Euclidean) length of the segment.
 Let $\G=(\PS,\EG)$ and $\GB=(\PS,\EG')$ be two graphs over the same
@@ -105,7 +102,7 @@ and $\pb$ in $\G$.  The graph $\GB$ is a \emphw{$t$-spanner} of $\G$
 if there is a $t$-path in $\GB$, for any $\pa,\pb\in \PS$.  Thus, for
 a set of points $\PS\subseteq \Re^d$, a graph $\G$ over $\PS$ is a
 \emphw{$t$-spanner} if it is a $t$-spanner of the euclidean graph
-$\G_\PS$. There is a lot of work on building geometric spanners, see
+$\EucG$. There is a lot of work on building geometric spanners, see
 \cite{ns-gsn-07} and references there in.
 
 \paragraph*{Fault-tolerant spanners}
@@ -113,7 +110,11 @@ $\G_\PS$. There is a lot of work on building geometric spanners, see
 An \emphw{$\FF$-fault-tolerant spanner} for $\PS\subseteq \Re^d$, is a
 graph $\G=(\PS, \EG)$, such that for any region $\region$ (i.e., the
 ``attack''), the graph $\G \gminus \region$ is a $t$-spanner of
-$\G_\PS - \region$ (See \defref{def:residual:graph} for a formal definition of this notation). Surprisingly, as shown by Abam \etal
+$\EucG - \region$ (See \defref{def:residual:graph} for a formal
+definition of this notation).  Here $\G \gminus \region$ denotes the
+graph after one deletes from $\G$ all the vertices in
+$\PS \cap \region$, and all the edges in $\G$ that their corresponding
+segments intersect $\region$.  Surprisingly, as shown by Abam \etal
 \cite{abfg-rftgs-09}, such fault-tolerant spanners can be constructed
 where the attack region is any convex set. Furthermore, these spanners
 have a near linear number of edges.
@@ -148,7 +149,7 @@ subgraph only if both its endpoints are in $\region$, see \defref{def:residual:g
 
 Abam and Borouny \cite{ab-lgs-21} showed how to construct such
 spanners for axis-parallel squares and vertical slabs. In this work,
-we are further extending their results.  They also showed how to
+we are further extend their results.  They also showed how to
 construct such spanners for disks if one is allowed to add Steiner
 points. Abam and Borouny left the question of how to construct local
 spanners for disks as an open problem.
@@ -340,6 +341,7 @@ and that at least one of them is useful as a jump regardless of the chosen regio
       \hline
 
     \end{tabular}
+    \smallskip%
     \caption{Known and new results. The notation $\Oeps$ hides
 	polynomial dependency on $\eps$ which is not specified in the
 	original work.}
@@ -348,6 +350,8 @@ and that at least one of them is useful as a jump regardless of the chosen regio
 
 
 \subsection*{Our results}
+
+Our results are summarized in \tabref{results_summary}.
 
 \paragraph*{Almost local spanners}
 
@@ -383,15 +387,15 @@ disks or homothets of triangles.
 
 Thus, the natural question is what are the cases where one can avoid
 the ``curse of the spread'' -- that is, cases where one can construct
-local spanners of size independent of the spread of the input point
-set.
+local spanners of near-linear size independent of the spread of the
+input point set.
 
 \paragraph*{The basic building block: $\Body$-Delaunay triangulation}
 
 A key ingredient in the above construction is the concept of Delaunay
-triangulationsS induced by homothets of a convex body. Intuitively, one
+triangulations induced by homothets of a convex body. Intuitively, one
 replaces the unit disk (of the standard $L_2$-norm) by the provided
-convex region. It is well known (\cite{cd-vdbcdf-85}) that such diagrams
+convex region. It is well known \cite{cd-vdbcdf-85} that such diagrams
 exist, have linear complexity in the plane, and can be computed
 quickly.  In \secref{del:homothets} we review these results, and
 restate the well-known property that the $\Body$-Delaunay
@@ -421,18 +425,18 @@ It seems natural that if one can handle fat triangles, then homothets
 of $k$-regular polygons should readily follow by a simple
 decomposition of the polygon into fat triangles. Maybe surprisingly,
 this is not the case -- a critical configuration might involve two
-points that are on the interior of two non-adjacent edges of a homothet of the
-input polygon. We overcome this by first showing that sufficiently
-narrow trapezoids, provide us with a good jump somewhere inside the
-trapezoid, assuming one compute the Delaunay triangulation induced by
-the trapezoid, and that the source and destination lie on the two
-legs of the trapezoid. Next, we show that such a polygon can be
-covered by a small number of narrow trapezoids and fat triangles. By
-building appropriate graphs for each trapezoid/triangle in the
-collection, we get a spanner for
-homothets of the given $k$-regular polygon, with size that has no dependency on the spread. Of course, the size does
-depend on $k$.  See \secref{k:gons} for details, and \thmref{k:gon}
-for the precise result.
+points that are on the interior of two non-adjacent edges of a
+homothet of the input polygon. We overcome this by first showing that
+sufficiently narrow trapezoids, provide us with a good jump somewhere
+inside the trapezoid, assuming one computes the Delaunay triangulation
+induced by the trapezoid, and that the source and destination lie on
+the two legs of the trapezoid. Next, we show that such a polygon can
+be covered by a small number of narrow trapezoids and fat
+triangles. By building appropriate graphs for each trapezoid/triangle
+in the collection, we get a spanner for homothets of the given
+$k$-regular polygon, with size that has no dependency on the
+spread. Of course, the size does depend on $k$.  See \secref{k:gons}
+for details, and \thmref{k:gon} for the precise result.
 
 
 

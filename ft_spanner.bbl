@@ -1,52 +1,66 @@
-\begin{thebibliography}{AdBFG09}
+\begin{thebibliography}{10}
 
-\bibitem[AB21]{ab-lgs-21}
+\bibitem{ah-ncsa-12}
+M.~A. Abam and S.~{Har{-}Peled}.
+\newblock New constructions of \textsf{SSPD}s and their applications.
+\newblock {\em Comput. Geom. Theory Appl.}, 45(5--6):200--214, 2012.
+\newblock \href {https://doi.org/10.1016/j.comgeo.2011.12.003}
+  {\path{doi:10.1016/j.comgeo.2011.12.003}}.
+
+\bibitem{ab-lgs-21}
 Mohammad~Ali Abam and Mohammad~Sadegh Borouny.
 \newblock Local geometric spanners.
 \newblock To appear in Algorithmica, 2021.
 
-\bibitem[AdBFG09]{abfg-rftgs-09}
+\bibitem{abfg-rftgs-09}
 Mohammad~Ali Abam, Mark de~Berg, Mohammad Farshi, and Joachim Gudmundsson.
 \newblock Region-fault tolerant geometric spanners.
 \newblock {\em Discret. Comput. Geom.}, 41(4):556--582, 2009.
+\newblock \href {https://doi.org/10.1007/s00454-009-9137-7}
+  {\path{doi:10.1007/s00454-009-9137-7}}.
 
-\bibitem[AH12]{ah-ncsa-12}
-M.~A. Abam and S.~{Har{-}Peled}.
-\newblock New constructions of \textsf{SSPD}s and their applications.
-\newblock {\em Comput. Geom. Theory Appl.}, 45(5--6):200--214, 2012.
-
-\bibitem[AMS99]{ams-dagss-99}
+\bibitem{ams-dagss-99}
 \hrefb{http://www.cs.ust.hk/faculty/arya/}{S. {Arya}}, \hrefb{http://www.cs.umd.edu/~mount/}{D.~M. {Mount}}, and M.~Smid.
 \newblock Dynamic algorithms for geometric spanners of small diameter:
   Randomized solutions.
 \newblock {\em Comput. Geom. Theory Appl.}, 13(2):91--107, 1999.
+\newblock URL:
+  \url{http://www.sciencedirect.com/science/article/pii/S0925772199000140},
+  \href {https://doi.org/https://doi.org/10.1016/S0925-7721(99)00014-0}
+  {\path{doi:https://doi.org/10.1016/S0925-7721(99)00014-0}}.
 
-\bibitem[CDI85]{cd-vdbcdf-85}
+\bibitem{cd-vdbcdf-85}
 L~Paul Chew and Robert~L Dyrsdale~III.
 \newblock Voronoi diagrams based on convex distance functions.
 \newblock In {\em Proc. 1st Annu. Sympos. Comput. Geom. {\em(SoCG)}}, pages
   235--244, 1985.
 
-\bibitem[Cla87]{c-aaspmp-87}
+\bibitem{c-aaspmp-87}
 Kenneth~L. Clarkson.
 \newblock Approximation algorithms for shortest path motion planning (extended
   abstract).
 \newblock In Alfred~V. Aho, editor, {\em Proceedings of the 19th Annual {ACM}
   Symposium on Theory of Computing, 1987, New York, New York, {USA}}, pages
   56--65. {ACM}, 1987.
+\newblock \href {https://doi.org/10.1145/28395.28402}
+  {\path{doi:10.1145/28395.28402}}.
 
-\bibitem[{Har}11]{h-gaa-11}
+\bibitem{h-gaa-11}
 S.~{Har{-}Peled}.
 \newblock {\em Geometric Approximation Algorithms}, volume 173 of {\em Math.
   Surveys \& Monographs}.
 \newblock Amer. Math. Soc., Boston, MA, USA, 2011.
+\newblock URL: \url{http://sarielhp.org/book/}, \href
+  {https://doi.org/10.1090/surv/173} {\path{doi:10.1090/surv/173}}.
 
-\bibitem[LNS02]{lns-iacfts-02}
+\bibitem{lns-iacfts-02}
 Christos Levcopoulos, Giri Narasimhan, and Michiel H.~M. Smid.
 \newblock Improved algorithms for constructing fault-tolerant spanners.
 \newblock {\em Algorithmica}, 32(1):144--156, 2002.
+\newblock \href {https://doi.org/10.1007/s00453-001-0075-x}
+  {\path{doi:10.1007/s00453-001-0075-x}}.
 
-\bibitem[Luk99]{l-nrftgs-99}
+\bibitem{l-nrftgs-99}
 Tam{\'{a}}s Lukovszki.
 \newblock New results of fault tolerant geometric spanners.
 \newblock In Frank K. H.~A. Dehne, Arvind Gupta, J{\"{o}}rg{-}R{\"{u}}diger
@@ -54,8 +68,10 @@ Tam{\'{a}}s Lukovszki.
   International Workshop, {WADS} '99, Vancouver, British Columbia, Canada,
   August 11-14, 1999, Proceedings}, volume 1663 of {\em Lecture Notes in
   Computer Science}, pages 193--204. Springer, 1999.
+\newblock \href {https://doi.org/10.1007/3-540-48447-7\_20}
+  {\path{doi:10.1007/3-540-48447-7\_20}}.
 
-\bibitem[NS07]{ns-gsn-07}
+\bibitem{ns-gsn-07}
 Giri Narasimhan and Michiel H.~M. Smid.
 \newblock {\em Geometric spanner networks}.
 \newblock Cambridge University Press, 2007.

@@ -2,7 +2,6 @@
 \input{prefix}%
 
 
-
 \title{Local Spanners Revisited}
 
 \NotSoCGVer{%
@@ -487,13 +486,13 @@ comparisons to the results of this paper.
 
 \paragraph*{Residual graphs}
 \begin{definition}
-	\deflab{def:residual:graph}
-	Let $\FF$ be a family of regions in the plane. For a fault region
-	$\region \in \FF$ and a geometric graph $\G$ on a point set $\PS$, let
-	$\G \gminus \region$ be the residual graph after removing from it all
-	the points of $\PS$ in $\region$. Similarly, let
-	$\restrictY{\G}{\region}$ denote the graph restricted to $\region$.
-	Formally, let
+    \deflab{def:residual:graph} Let $\FF$ be a family of regions in
+    the plane. For a fault region $\region \in \FF$ and a geometric
+    graph $\G$ on a point set $\PS$, let $\G \gminus \region$ be the
+    residual graph after removing from it all the points of $\PS$ in
+    $\region$ and all the edges that their corresponding segments
+    intersect $\region$. Similarly, let $\restrictY{\G}{\region}$
+    denote the graph restricted to $\region$.  Formally, let
 \begin{equation*}
 	\G \gminus \region%
 	=%
@@ -817,9 +816,9 @@ to $\CC$, if no four points of $\PS$ lie on the boundary of a homothet
 of $\CC$, and no three points are colinear.
 
 
-A graph $\G=(\PS, \EG)$ is a \emphw{$\CC$-local $t$-spanner}
-for $\PS$ if for any homothet $\region$ of $\CC$ we have that
-$\restrictY{\G}{\region}$ is a $t$-spanner of $\G_\PS \cap \region$.
+A graph $\G=(\PS, \EG)$ is a \emphw{$\CC$-local $t$-spanner} for $\PS$
+if for any homothet $\region$ of $\CC$ we have that
+$\restrictY{\G}{\region}$ is a $t$-spanner of $\EucG \cap \region$.
 
 
 
@@ -834,11 +833,11 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\G_\PS \cap \region$.
     \deflab{c:del:triang}%
     %
     Given $\CC$ as above, and a point set $\PS$ in general position
-    with respect to $\CC$, the \emphi{$\CC$-Delaunay triangulation} of $\PS$,
-    denoted $\DG_{\CC}(\PS)$, is
-    the graph formed by edges between any two points $\pa,\pb\in \PS$
-    such that there exist a homothet of $\CC$ that contains only $\pa$
-    and $\pb$ and no other point of $\PS$.
+    with respect to $\CC$, the \emphi{$\CC$-Delaunay triangulation} of
+    $\PS$, denoted by $\DG_{\CC}(\PS)$, is the graph formed by edges
+    between any two points $\pa,\pb\in \PS$ such that there is a
+    homothet of $\CC$ that contains only $\pa$ and $\pb$ and no other
+    point of $\PS$.
 \end{defn}
 
 \begin{theorem}[\cite{cd-vdbcdf-85}]
@@ -873,8 +872,8 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\G_\PS \cap \region$.
 \begin{proof}
     The idea is to apply a shrinking process of $C$, as illustrated in
     \figref{shrink:h}.  Consider the mapping
-    $f_{\beta, \pd} : \px \mapsto \beta (\px - \pd) + \pd $. It is
-    a scaling of the plane around $\pd$ by a factor of $\beta$. Let
+    $f_{\beta, \pd} : \px \mapsto \beta (\px - \pd) + \pd $. It is a
+    scaling of the plane around $\pd$ by a factor of $\beta$. Let
     $\beta'$ be the minimum value of $\beta$ such that
     $C_1 = f_{\beta,\pa}(C)$ contains $\pb$ (i.e., we shrink $C$
     around $\pa$ till $\pb$ becomes a boundary point). Next, shrink
@@ -885,8 +884,8 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\G_\PS \cap \region$.
     the claim follows.
 \end{proof}
 
-The following standard claim, usually stated about the standard
-Delaunay triangulations, also holds for homothets.
+The following standard claim, usually stated for the standard Delaunay
+triangulations, also holds for homothets.
 
 \SaveContent{\ClaimDelConnected}%
 {%
@@ -928,8 +927,8 @@ $\G$.
 
 \subsubsection{Analysis}
 
-\paragraph*{Size}
-
+\myparagraph{Size} %
+%
 For each pair $\Pair = \{\PSX, \PSY\}$ in the \WSPD, its
 $\CC$-Delaunay triangulation contains at most $\Of( |\PSX| + |\PSY|)$
 edges. As such, the number of edges in the resulting graph is bounded
@@ -943,7 +942,7 @@ by
 by \lemref{s:s:p:d:spread}.
 
 
-\paragraph*{Construction time}
+\myparagraph{Construction time} %
 The construction time is bounded by
 \begin{math}
     \sum_{\{\PSX, \PSY\} \in \WS} O\bigl( (|\PSX| + |\PSY|) \log
@@ -1026,7 +1025,9 @@ The construction time is bounded by
     if $\epsA \leq \eps/6$.
 \end{proof}
 
-\paragraph*{The result}
+\myparagraph{The result} %
+%
+We thus get the following.
 
 \begin{theorem}
     \thmlab{main:1}%
@@ -1150,7 +1151,8 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 
 
 \begin{lemma}
-    \lemlab{l:s:lower:bound}[Proof in \apndref{l:s:lower:bound:proof}]%
+    \lemlab{l:s:lower:bound}[Proof in
+    \apndref{l:s:lower:bound:proof}] %
     %
     \LemmaDiskLowerBound
 
@@ -1467,12 +1469,12 @@ example, a $k$-regular polygon is $k$-nice.
     \thmlab{k:gon}%
     %
     Let $\Body$ be a $k$-nice convex polygon, $\PS$ be a set of $n$
-    points in the plane, and let $\eps \in (0,1)$ be a parameter. Then,
-    one can construct a $\CC$-local $(1+\eps)$-spanner of $\PS$.  The
-    construction time is $\Of\pth{\bigl. ({k^4}/{\eps^6})n \log^2 n}$,
-    and the resulting graph has
-    $\Of\pth{\bigl. ( {k^4}/{\eps^6})n \log n}$ edges. In particular
-    these bounds hold if $\Body$ is a $k$-regular gon.
+    points in the plane, and let $\eps \in (0,1)$ be a
+    parameter. Then, one can construct a $\CC$-local
+    $(1+\eps)$-spanner of $\PS$.  The construction time is
+    $\Of\pth{\bigl. ({k^4}/{\eps^6})n \log^2 n}$, and the resulting
+    graph has $\Of\pth{\bigl. ( {k^4}/{\eps^6})n \log n}$ edges. In
+    particular these bounds hold if $\Body$ is a $k$-regular polygon.
 \end{theorem}
 \begin{proof}
     Let $\epsA = \eps/\constD$, for $\constD$ sufficiently large
@@ -1510,16 +1512,24 @@ example, a $k$-regular polygon is $k$-nice.
     contains two points $\pa, \pb \in \PS$. By \lemref{shrink:shrank},
     there is a homothet $\Body'' \subseteq \Body'$ of $\Body$ such
     that $\pa, \pb \in \partial \Body''$. There are two possibilities:
-    \begin{compactitem}
-        \item The point $\pa$ is on a vertex of $\Body''$ and $\pb$ is
-        on an edge. In this case, the vertex and the edge induce a fat
-        triangle, that is a homothet of a triangle
-        $\triangle \in \Triangles$. Since the graph $\G$ contains a
-        $\triangle$-local $(1+\eps)$-spanner for $\PS$, it follows
-        readily that $\G$ is a $(1+\eps)$-spanner for these points,
-        and the path is strictly inside $\Body''$.
+%    \begin{itemize}
+    %\item
 
-        \item The points $\pa$ and $\pb$ are on two non-adjacent edges
+    \smallskip%
+    \noindent
+    \textbf{(A)} The point $\pa$ is on a vertex of $\Body''$ and $\pb$
+    is on an edge. In this case, the vertex and the edge induce a fat
+    triangle, that is a homothet of a triangle
+    $\triangle \in \Triangles$. Since the graph $\G$ contains a
+    $\triangle$-local $(1+\eps)$-spanner for $\PS$, it follows readily
+    that $\G$ is a $(1+\eps)$-spanner for these points, and the path
+    is strictly inside $\Body''$.
+
+    % \item
+    \smallskip%
+    \noindent%
+    \textbf{(B)} %
+    The points $\pa$ and $\pb$ are on two non-adjacent edges
         of $\Body''$. Then, there is an $\epsA$-narrow trapezoid
         $\Trap'$ that has $\pa$ and $\pb$ on its two legs, and a
         homothet of $\Trap'$, denoted by $\Trap$, is in
@@ -1545,7 +1555,7 @@ example, a $k$-regular polygon is $k$-nice.
         \end{equation*}
         which implies that the there is $(1+\eps)$-path from $\pa$ to
         $\pb$ inside $\Body'$.
-    \end{compactitem}
+        % \end{itemize}
 \end{proof}
 
 \begin{remark}
@@ -1851,7 +1861,8 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
 	\includegraphics[page=3]{figs/grid_2}%
 	\hfill%
 	\includegraphics[page=4]{figs/grid_2}
-	\caption{An illustration of $\grid(\pa, \Pair)$ with three rectngles and their shrunken version.}
+	\caption{An illustration of $\grid(\pa, \Pair)$ with three
+           rectangles and their shrunken version.}
 	\figlab{grid:2}
 \end{figure}
 \begin{lemma}
@@ -2094,31 +2105,32 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
     positive direction of the $x$ axis. See figure
     \figref{double-wedge} for an illustration.
 
-    We would like to find a vertical segment $\seg$ such that all points
-    of $\PSY$ lie to its right, with one endpoint on the upper line of
-    $\coneB$, and the other on the lower line of $\coneB$. Using the segments'
-    height and distance from the right side of $\square$ we will be
-    able to get a bound on the angle of the cross tangents. We first
-    find a segment $\seg$ with all points of $\PSY$ to its right. A trivial
-    bound on that distance is given by the segment from, say, the
-    lower left corner of $\square$, denoted $\pa$, of length $10/\eps$
-    with its right endpoint on the upper line of $\coneB$, denote this
-    point by $\pb$. We know that all points of $\PSY$ lie to the right
-    of $\pb$ due to the $10/\eps$ separation property of
-    the SSPD. The segment $\pa\pb$ creates an angle $\leq\pi/4$ with
-    the $x$-axis (by the choice of the angle of $\coneB$).
-    We therefore get that the $x$-coordinate
+    We would like to find a vertical segment $\seg$ such that all
+    points of $\PSY$ lie to its right, with one endpoint on the upper
+    line of $\coneB$, and the other on the lower line of
+    $\coneB$. Using the segments' height and distance from the right
+    side of $\square$ we will be able to get a bound on the angle of
+    the cross tangents. We first find a segment $\seg$ with all points
+    of $\PSY$ to its right. A trivial bound on that distance is given
+    by the segment from, say, the lower left corner of $\square$,
+    denoted $\pa$, of length $10/\eps$ with its right endpoint on the
+    upper line of $\coneB$, denote this point by $\pb$. We know that
+    all points of $\PSY$ lie to the right of $\pb$ due to the
+    $10/\eps$ separation property of the \SSPD. The segment $\pa\pb$
+    creates an angle $\leq\pi/4$ with the $x$-axis (by the choice of
+    the angle of $\coneB$).  We therefore get that the $x$-coordinate
     difference between $\square$ and $\pb$ is at most
     $10/\eps\cdot \cos\frac{\pi}{4}-1\leq 7/\eps-1\leq 6/\eps$. So let
     $\seg'$ be a vertical segment between the upper and lower rays of
-    $\coneB$, with $x$-coordinate distance of $6/\eps-\frac{1}{2}$ from
-    $\square$ (in order to make calculations easier). We get that $s'$
-    is of length $2\cdot \frac{6}{\eps}\tan \frac{\eps}{8}$. Finally,
-    we take $\seg$ to be a vertical segment of length
-    $\frac{12}{\eps}\tan \frac{\eps}{8}$, with its center on the
-    $x$-axis at a distance of $5/\eps+\frac{1}{2}$ away from $\origin$. The
-    angle of the $x$-axis and the segment between the lower end of the
-    right side of $\square$ and the upper end of $\seg$ is now given by:
+    $\coneB$, with $x$-coordinate distance of $6/\eps-\frac{1}{2}$
+    from $\square$ (in order to make calculations easier). We get that
+    $s'$ is of length $2\cdot \frac{6}{\eps}\tan
+    \frac{\eps}{8}$. Finally, we take $\seg$ to be a vertical segment
+    of length $\frac{12}{\eps}\tan \frac{\eps}{8}$, with its center on
+    the $x$-axis at a distance of $5/\eps+\frac{1}{2}$ away from
+    $\origin$. The angle of the $x$-axis and the segment between the
+    lower end of the right side of $\square$ and the upper end of
+    $\seg$ is now given by:
 
     \begin{equation*}
  	\arctan
@@ -2404,14 +2416,14 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
 	
 	
 	Consider the case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$,
-	illustrated in \figref{tri_cone_edge:a}.  Observe that
-	$\angleX{\pc} \leq \angleX{\pb}$.  As such
-	$\angleX{\pc} \leq \pi/2$.  Furthermore,
-	$\angleX{\pc} \geq \alpha \gg \eps \alpha/\gamma = \beta \geq
-	\angleX{\pa}$. Similarly,
-	$\angleX{\pb} \in [\alpha, \pi -\alpha]$.  By the $1$-Lipshitz of
-	$\sin$, and as $\sin x \approx x$, for small $x$, and for
-	$\gamma$ sufficiently large, we have that
+        illustrated in \figref{tri_cone_edge:a}.  Observe that
+        $\angleX{\pc} \leq \angleX{\pb}$.  As such
+        $\angleX{\pc} \leq \pi/2$.  Furthermore,
+        $\angleX{\pc} \geq \alpha \gg \eps \alpha/\gamma = \beta \geq
+        \angleX{\pa}$. Similarly,
+        $\angleX{\pb} \in [\alpha, \pi -\alpha]$.  By the $1$-Lipshitz
+        of $\sin$, and as $\sin x \approx x$, for small $x$, and for
+        $\gamma$ sufficiently large, we have that
 	\begin{equation*}
 	\sin( \angleX{\pb} + \angleX{\pa}) \in [1-\eps/4, 1+\eps/4] \sin
 	\angleX{\pb}%
@@ -2524,7 +2536,11 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
 	\includegraphics[page=3,width=0.22\linewidth]{figs/narrow_triangle}%
 	\hfill
 	\includegraphics[page=4,width=0.22\linewidth]{figs/narrow_triangle}
-	\caption{ An illustration of the shrinking process of \lemref{shrink:triangles}. The three left subfigures are an activation of \lemref{shrink:shrank} for the case that the convex region $\CC$ is a triangle, and the rightmost subfigure is the additional final step.}
+	\caption{ An illustration of the shrinking process of
+           \lemref{shrink:triangles}. The three left subfigures are an
+           activation of \lemref{shrink:shrank} for the case that the
+           convex region $\CC$ is a triangle, and the rightmost
+           subfigure is the additional final step.}
 	\figlab{shrink:triangle}
 \end{figure}
 
@@ -2667,15 +2683,16 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
 }
 
 \begin{proof}
-	We show a somewhat suboptimal but simple construction. A $t$-nice
-	polygon has at most $t$ edges.  Let $\psi$ be the sensitivity of
-	$\Body$, and place a minimum set of points $\PS$ on the boundary of
-	$\Body$, which includes all the vertices of $\Body$, and such that the distance between any consecutive pair of points is in
-	the range $[\constA, 2\constA]$, where
-	$\constA = \epsA \psi/ \constB$, for some sufficiently large
-	constant $\constB$. In particular, let
-	$M =\max_{e \in \EGX{\Body}} \ceil{\| e\| / \constA} = \Of(
-	1/\epsA)$.
+    We show a somewhat suboptimal but simple construction. A $t$-nice
+    polygon has at most $t$ edges.  Let $\psi$ be the sensitivity of
+    $\Body$, and place a minimum set of points $\PS$ on the boundary
+    of $\Body$, which includes all the vertices of $\Body$, and such
+    that the distance between any consecutive pair of points is in the
+    range $[\constA, 2\constA]$, where
+    $\constA = \epsA \psi/ \constB$, for some sufficiently large
+    constant $\constB$. In particular, let
+    $M =\max_{e \in \EGX{\Body}} \ceil{\| e\| / \constA} = \Of(
+    1/\epsA)$.
 	
 	In addition, place $\constC t$ equally spaced points between any
 	two consecutive points of $\PS$, where $\constC$ is a constant to

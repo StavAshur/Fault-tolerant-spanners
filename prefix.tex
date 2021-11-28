@@ -582,6 +582,18 @@
    % \rule{4cm}{4cm}
 }
 
+\SoCGVer{%
+   \newcommand{\myparagraph}[1]{%
+      \noindent%
+      \textbf{#1.}
+   }%
+}
+\NotSoCGVer{%
+   \newcommand{\myparagraph}[1]{%
+      \paragraph{#1}
+   }%
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%BeginIpePreamble
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

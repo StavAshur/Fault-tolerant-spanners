@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.23">
-<info created="D:20211025140149" modified="D:20211025155613"/>
+<info created="D:20211025140149" modified="D:20211118212422"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -974,12 +974,58 @@ h
 <layer name="gamma"/>
 <layer name="epsilon"/>
 <layer name="VIEWBBOX"/>
+<layer name="zeta"/>
+<layer name="eta"/>
 <view layers="points gamma VIEWBBOX" active="points"/>
 <view layers="alpha points VIEWBBOX" active="gamma"/>
-<view layers="points delta VIEWBBOX" active="epsilon"/>
-<view layers="points epsilon VIEWBBOX" active="epsilon"/>
+<view layers="points VIEWBBOX zeta" active="epsilon"/>
+<view layers="points VIEWBBOX eta" active="epsilon"/>
 <view layers="points epsilon VIEWBBOX" active="epsilon"/>
 <view layers="alpha beta points delta gamma epsilon VIEWBBOX" active="beta"/>
+<view layers="points VIEWBBOX zeta" active="zeta"/>
+<view layers="points VIEWBBOX eta" active="eta"/>
+<path layer="eta" matrix="0.681872 0 0 0.681872 66.631 62.8206" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
+</path>
+<path matrix="0.703098 0 0 0.703098 66.2908 60.9532" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
+</path>
+<path matrix="0.724843 0 0 0.724843 65.9429 59.0393" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
+</path>
+<path matrix="0.748032 0 0 0.748032 65.5719 56.9986" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
+</path>
+<path layer="zeta" matrix="0.804144 0 0 0.804144 61.1093 52.0605" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
+</path>
+<path matrix="0.748032 0 0 0.748032 65.5717 56.9984" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
+</path>
+<path matrix="0.872467 0 0 0.872467 56.1625 46.0481" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
+</path>
 <path layer="alpha" matrix="1.28 0 0 1.28 30.08 0.712184" stroke="black" fill="blue" opacity="10%" stroke-opacity="opaque">
 16 88 m
 77.3249 134.489 l
@@ -1048,7 +1094,13 @@ h
 112 88 l
 h
 </path>
-<use layer="points" matrix="0.64 0 0 0.64 40.4662 51.1451" name="mark/fdisk(sfx)" pos="160 112" size="normal" stroke="darkred" fill="gold"/>
-<use matrix="0.64 0 0 0.64 40.32 51.4287" name="mark/fdisk(sfx)" pos="80 128" size="normal" stroke="darkred" fill="gold"/>
+<path layer="eta" matrix="0.681872 0 0 0.681872 66.631 62.8204" stroke="darkolivegreen4" pen="heavier">
+16 88 m
+77.3249 134.489 l
+112 88 l
+h
+</path>
+<use layer="points" matrix="0.64 0 0 0.64 40.32 51.4287" name="mark/fdisk(sfx)" pos="80 128" size="normal" stroke="darkred" fill="gold"/>
+<use matrix="0.64 0 0 0.64 40.4662 51.1451" name="mark/fdisk(sfx)" pos="160 112" size="normal" stroke="darkred" fill="gold"/>
 </page>
 </ipe>

@@ -10,7 +10,9 @@ M.~A. Abam and S.~{Har{-}Peled}.
 \bibitem{ab-lgs-21}
 Mohammad~Ali Abam and Mohammad~Sadegh Borouny.
 \newblock Local geometric spanners.
-\newblock To appear in Algorithmica, 2021.
+\newblock {\em Algorithmica}, 83(12):3629--3648, 2021.
+\newblock \href {https://doi.org/10.1007/s00453-021-00860-5}
+  {\path{doi:10.1007/s00453-021-00860-5}}.
 
 \bibitem{abfg-rftgs-09}
 Mohammad~Ali Abam, Mark de~Berg, Mohammad Farshi, and Joachim Gudmundsson.

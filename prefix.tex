@@ -43,7 +43,7 @@
 \usepackage[cmyk]{xcolor}%
 
 \NotSoCGVer{%
-   \usepackage[utf8x]{inputenc}%
+%   \usepackage[utf8x]{inputenc}%
    \usepackage{euscript}%
 }
 \NotSoCGVer{%
@@ -92,7 +92,8 @@
    \usepackage{hyperref}%
    \hypersetup{%
       breaklinks,%
-      ocgcolorlinks, colorlinks=true,%
+      %ocgcolorlinks,
+      colorlinks=true,%
       urlcolor=[rgb]{0.25,0.0,0.0},%
       linkcolor=[rgb]{0.5,0.0,0.0},%
       citecolor=[rgb]{0,0.2,0.445},%
@@ -118,12 +119,23 @@
 \fi
 
 %\usepackage{proofapnd}
+\newcommand{\UsePackage}[1]{%
+  \IfFileExists{../styles/#1.sty}{%
+      \usepackage{../styles/#1}%
+   }{%
+      \IfFileExists{./styles/#1.sty}{%
+         \usepackage{styles/#1}%
+      }{%
+         \usepackage{#1}%
+      }%
+   }%
+}
 
 % Bib latex stuff
 \BibLatexMode{%
 %   \usepackage[bibencoding=utf8,style=alphabetic,%
 %   backend=biber,sortlocale=en_US]{biblatex}%
-   \usepackage{styles/sariel_biblatex}%
+   \UsePackage{sariel_biblatex}%
    \usepackage[english]{babel}%
    \usepackage{csquotes}
    \renewcommand*{\multicitedelim}{\addcomma\space}%
@@ -249,8 +261,10 @@
 \newcommand{\atgen}{\symbol{'100}}
 \newcommand{\SarielThanks}[1]{\thanks{Department of Computer Science;
       University of Illinois; 201 N. Goodwin Avenue; Urbana, IL,
-      61801, USA; {\tt sariel\atgen{}illinois.edu}; {\tt
-         \url{http://sarielhp.org/}.} #1}}
+      61801, USA; %
+      \href{mailto:sariel.spam@illinois.edu}%
+      {sariel@illinois.edu}; %
+      \url{http://sarielhp.org/}. #1}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -314,7 +328,7 @@
 % Sariel's standard commands...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-\newcommand{\remove}[1]{}%
+\providecommand{\remove}[1]{}%
 \newcommand{\Set}[2]{\left\{ #1 \;\middle\vert\; #2 \right\}}
 \newcommand{\pth}[2][\!]{\mleft({#2}\mright)}%
 \newcommand{\pbrcx}[1]{\left[ {#1} \right]}%
@@ -399,10 +413,12 @@
 \newcommand{\QSPD}{\Term{QSPD}\xspace}
 
 \newcommand{\StavThanks}[1]{%
-   \thanks{Department of Computer Science;
-      University of Illinois; 201 N. Goodwin Avenue; Urbana, IL,
-      61801, USA; {\tt stava2\atgen{}illinois.edu}; {\tt
-         \url{https://publish.illinois.edu/stav-ashur}.} #1}}
+   \thanks{Department of Computer Science; University of Illinois; 201
+      N. Goodwin Avenue; Urbana, IL, 61801, USA; %
+      \href{mailto:stava2.spam@illinois.edu}%
+      {stava2@illinois.edu}; %
+      \url{https://publish.illinois.edu/stav-ashur}. %
+      #1}}
 
 \newcommand{\pa}{\Mh{p}}%
 \newcommand{\pb}{\Mh{q}}%

@@ -1,63 +1,457 @@
-\begin{thebibliography}{AdBFG09}
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
 
-\bibitem[AB21]{ab-lgs-21}
-Mohammad~Ali Abam and Mohammad~Sadegh Borouny.
-\newblock Local geometric spanners.
-\newblock {\em Algorithmica}, 83(12):3629--3648, 2021.
 
-\bibitem[AdBFG09]{abfg-rftgs-09}
-Mohammad~Ali Abam, Mark de~Berg, Mohammad Farshi, and Joachim Gudmundsson.
-\newblock Region-fault tolerant geometric spanners.
-\newblock {\em Discret. Comput. Geom.}, 41(4):556--582, 2009.
+\refsection{0}
+  \datalist[entry]{anyt/global//global/global}
+    \entry{ab-lgs-21}{article}{}
+      \name{author}{2}{}{%
+        {{hash=1d669ba7e619204f2732012100e2a695}{%
+           family={Abam},
+           familyi={A\bibinitperiod},
+           given={Mohammad\bibnamedelima Ali},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=c4de58b4e21ab4cb47f300588826ff51}{%
+           family={Borouny},
+           familyi={B\bibinitperiod},
+           given={Mohammad\bibnamedelima Sadegh},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{8171f0cdb0a424371ea2d0953ea9b75a}
+      \strng{fullhash}{8171f0cdb0a424371ea2d0953ea9b75a}
+      \strng{bibnamehash}{8171f0cdb0a424371ea2d0953ea9b75a}
+      \strng{authorbibnamehash}{8171f0cdb0a424371ea2d0953ea9b75a}
+      \strng{authornamehash}{8171f0cdb0a424371ea2d0953ea9b75a}
+      \strng{authorfullhash}{8171f0cdb0a424371ea2d0953ea9b75a}
+      \field{labelalpha}{AB21}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Algorithmica}
+      \field{number}{12}
+      \field{title}{Local Geometric Spanners}
+      \field{volume}{83}
+      \field{year}{2021}
+      \field{pages}{3629\bibrangedash 3648}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1007/s00453-021-00860-5
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s00453-021-00860-5
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s00453-021-00860-5
+      \endverb
+    \endentry
+    \entry{abfg-rftgs-09}{article}{}
+      \name{author}{4}{}{%
+        {{hash=1d669ba7e619204f2732012100e2a695}{%
+           family={Abam},
+           familyi={A\bibinitperiod},
+           given={Mohammad\bibnamedelima Ali},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=aff678a462fa10e25a9a69949be042aa}{%
+           family={Berg},
+           familyi={B\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod},
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{hash=226e369a1d338e10350282298fc4184c}{%
+           family={Farshi},
+           familyi={F\bibinitperiod},
+           given={Mohammad},
+           giveni={M\bibinitperiod}}}%
+        {{hash=1b62594ac20a1dc7b061e15af1caa07d}{%
+           family={Gudmundsson},
+           familyi={G\bibinitperiod},
+           given={Joachim},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{8c8bf8933377457fa752f08827334a51}
+      \strng{fullhash}{05cc71b62767352af270072dd95527e0}
+      \strng{bibnamehash}{05cc71b62767352af270072dd95527e0}
+      \strng{authorbibnamehash}{05cc71b62767352af270072dd95527e0}
+      \strng{authornamehash}{8c8bf8933377457fa752f08827334a51}
+      \strng{authorfullhash}{05cc71b62767352af270072dd95527e0}
+      \field{labelalpha}{ABFG09}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Discret. Comput. Geom.}
+      \field{number}{4}
+      \field{title}{Region-Fault Tolerant Geometric Spanners}
+      \field{volume}{41}
+      \field{year}{2009}
+      \field{pages}{556\bibrangedash 582}
+      \range{pages}{27}
+      \verb{doi}
+      \verb 10.1007/s00454-009-9137-7
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s00454-009-9137-7
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s00454-009-9137-7
+      \endverb
+    \endentry
+    \entry{ah-ncsa-12}{article}{}
+      \name{author}{2}{}{%
+        {{hash=88da459a75680aff71c3a947975e8ce1}{%
+           family={Abam},
+           familyi={A\bibinitperiod},
+           given={M.\bibnamedelimi A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=b6aa124494ca4a4053b1d4d6cddef01d}{%
+           family={{Har-Peled}},
+           familyi={H\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{828811e69d74d077c6f2ac17d695b030}
+      \strng{fullhash}{828811e69d74d077c6f2ac17d695b030}
+      \strng{bibnamehash}{828811e69d74d077c6f2ac17d695b030}
+      \strng{authorbibnamehash}{828811e69d74d077c6f2ac17d695b030}
+      \strng{authornamehash}{828811e69d74d077c6f2ac17d695b030}
+      \strng{authorfullhash}{828811e69d74d077c6f2ac17d695b030}
+      \field{labelalpha}{AH12}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Comput. Geom. Theory Appl.}
+      \field{number}{5--6}
+      \field{title}{New Constructions of \textsf{SSPD}s and their Applications}
+      \field{volume}{45}
+      \field{year}{2012}
+      \field{pages}{200\bibrangedash 214}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1016/j.comgeo.2011.12.003
+      \endverb
+    \endentry
+    \entry{ams-dagss-99}{article}{}
+      \name{author}{3}{}{%
+        {{hash=d2c26e650dd1c2b557b1f59c9ce2ccac}{%
+           family={Arya},
+           familyi={A\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=3206b4e8ff40111fd5070bf5a1782cad}{%
+           family={Mount},
+           familyi={M\bibinitperiod},
+           given={D.\bibnamedelimi M.},
+           giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=4a31e156f0d420a7073f009f7cc26e43}{%
+           family={Smid},
+           familyi={S\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{de367e768641a0eb80a59557b0cff665}
+      \strng{fullhash}{de367e768641a0eb80a59557b0cff665}
+      \strng{bibnamehash}{de367e768641a0eb80a59557b0cff665}
+      \strng{authorbibnamehash}{de367e768641a0eb80a59557b0cff665}
+      \strng{authornamehash}{de367e768641a0eb80a59557b0cff665}
+      \strng{authorfullhash}{de367e768641a0eb80a59557b0cff665}
+      \field{labelalpha}{AMS99}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0925-7721}
+      \field{journaltitle}{Comput. Geom. Theory Appl.}
+      \field{number}{2}
+      \field{title}{Dynamic algorithms for geometric spanners of small diameter: Randomized solutions}
+      \field{volume}{13}
+      \field{year}{1999}
+      \field{pages}{91\bibrangedash 107}
+      \range{pages}{17}
+      \verb{doi}
+      \verb https://doi.org/10.1016/S0925-7721(99)00014-0
+      \endverb
+      \verb{urlraw}
+      \verb http://www.sciencedirect.com/science/article/pii/S0925772199000140
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/S0925772199000140
+      \endverb
+    \endentry
+    \entry{cd-vdbcdf-85}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=d816dc9fffbefc3458e6c60933b78ad0}{%
+           family={Chew},
+           familyi={C\bibinitperiod},
+           given={L\bibnamedelima Paul},
+           giveni={L\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=707d4894974948f3950699a6c29fbd01}{%
+           family={Dyrsdale\bibnamedelima III},
+           familyi={D\bibinitperiod\bibinitdelim I\bibinitperiod},
+           given={Robert\bibnamedelima L},
+           giveni={R\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{de82df9cea4fdbf13aa0f2b21a4dbfda}
+      \strng{fullhash}{de82df9cea4fdbf13aa0f2b21a4dbfda}
+      \strng{bibnamehash}{de82df9cea4fdbf13aa0f2b21a4dbfda}
+      \strng{authorbibnamehash}{de82df9cea4fdbf13aa0f2b21a4dbfda}
+      \strng{authornamehash}{de82df9cea4fdbf13aa0f2b21a4dbfda}
+      \strng{authorfullhash}{de82df9cea4fdbf13aa0f2b21a4dbfda}
+      \field{labelalpha}{CD85}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proc. 1st Annu. Sympos. Comput. Geom. {\em(SoCG)}}
+      \field{title}{Voronoi diagrams based on convex distance functions}
+      \field{year}{1985}
+      \field{pages}{235\bibrangedash 244}
+      \range{pages}{10}
+    \endentry
+    \entry{c-aaspmp-87}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=e54ef8c38c1aa694275407c4672f171e}{%
+           family={Clarkson},
+           familyi={C\bibinitperiod},
+           given={Kenneth\bibnamedelima L.},
+           giveni={K\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=87e9142329f09390b038692270dc2168}{%
+           family={Aho},
+           familyi={A\bibinitperiod},
+           given={Alfred\bibnamedelima V.},
+           giveni={A\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{e54ef8c38c1aa694275407c4672f171e}
+      \strng{fullhash}{e54ef8c38c1aa694275407c4672f171e}
+      \strng{bibnamehash}{e54ef8c38c1aa694275407c4672f171e}
+      \strng{authorbibnamehash}{e54ef8c38c1aa694275407c4672f171e}
+      \strng{authornamehash}{e54ef8c38c1aa694275407c4672f171e}
+      \strng{authorfullhash}{e54ef8c38c1aa694275407c4672f171e}
+      \strng{editorbibnamehash}{87e9142329f09390b038692270dc2168}
+      \strng{editornamehash}{87e9142329f09390b038692270dc2168}
+      \strng{editorfullhash}{87e9142329f09390b038692270dc2168}
+      \field{labelalpha}{Cla87}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 19th Annual {ACM} Symposium on Theory of Computing, 1987, New York, New York, {USA}}
+      \field{title}{Approximation Algorithms for Shortest Path Motion Planning (Extended Abstract)}
+      \field{year}{1987}
+      \field{pages}{56\bibrangedash 65}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1145/28395.28402
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/28395.28402
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/28395.28402
+      \endverb
+    \endentry
+    \entry{h-gaa-11}{book}{}
+      \name{author}{1}{}{%
+        {{hash=b6aa124494ca4a4053b1d4d6cddef01d}{%
+           family={{Har-Peled}},
+           familyi={H\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Boston, MA, USA}%
+      }
+      \list{publisher}{1}{%
+        {Amer. Math. Soc.}%
+      }
+      \strng{namehash}{b6aa124494ca4a4053b1d4d6cddef01d}
+      \strng{fullhash}{b6aa124494ca4a4053b1d4d6cddef01d}
+      \strng{bibnamehash}{b6aa124494ca4a4053b1d4d6cddef01d}
+      \strng{authorbibnamehash}{b6aa124494ca4a4053b1d4d6cddef01d}
+      \strng{authornamehash}{b6aa124494ca4a4053b1d4d6cddef01d}
+      \strng{authorfullhash}{b6aa124494ca4a4053b1d4d6cddef01d}
+      \field{labelalpha}{Har11}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Math. Surveys \& Monographs}
+      \field{title}{Geometric Approximation Algorithms}
+      \field{volume}{173}
+      \field{year}{2011}
+      \verb{doi}
+      \verb 10.1090/surv/173
+      \endverb
+      \verb{urlraw}
+      \verb http://sarielhp.org/book/
+      \endverb
+      \verb{url}
+      \verb http://sarielhp.org/book/
+      \endverb
+    \endentry
+    \entry{lns-iacfts-02}{article}{}
+      \name{author}{3}{}{%
+        {{hash=a5607652cc768ec7094127a024af91ca}{%
+           family={Levcopoulos},
+           familyi={L\bibinitperiod},
+           given={Christos},
+           giveni={C\bibinitperiod}}}%
+        {{hash=40f30a62df9f0b90e9171ccf18cb3b2a}{%
+           family={Narasimhan},
+           familyi={N\bibinitperiod},
+           given={Giri},
+           giveni={G\bibinitperiod}}}%
+        {{hash=52d2bc8ebda859d9761050a75088fc47}{%
+           family={Smid},
+           familyi={S\bibinitperiod},
+           given={Michiel\bibnamedelimb H.\bibnamedelimi M.},
+           giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{fc33f9e4b9bcf438f4dd81064c5b2e67}
+      \strng{fullhash}{fc33f9e4b9bcf438f4dd81064c5b2e67}
+      \strng{bibnamehash}{fc33f9e4b9bcf438f4dd81064c5b2e67}
+      \strng{authorbibnamehash}{fc33f9e4b9bcf438f4dd81064c5b2e67}
+      \strng{authornamehash}{fc33f9e4b9bcf438f4dd81064c5b2e67}
+      \strng{authorfullhash}{fc33f9e4b9bcf438f4dd81064c5b2e67}
+      \field{labelalpha}{LNS02}
+      \field{sortinit}{L}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Algorithmica}
+      \field{number}{1}
+      \field{title}{Improved Algorithms for Constructing Fault-Tolerant Spanners}
+      \field{volume}{32}
+      \field{year}{2002}
+      \field{pages}{144\bibrangedash 156}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1007/s00453-001-0075-x
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s00453-001-0075-x
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s00453-001-0075-x
+      \endverb
+    \endentry
+    \entry{l-nrftgs-99}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=79bc814895991c0369dfd297a5a440cd}{%
+           family={Lukovszki},
+           familyi={L\bibinitperiod},
+           given={Tam{\'{a}}s},
+           giveni={T\bibinitperiod}}}%
+      }
+      \name{editor}{4}{}{%
+        {{hash=06be778f6556795a7c72a2b78b45821f}{%
+           family={Dehne},
+           familyi={D\bibinitperiod},
+           given={Frank\bibnamedelimb K.\bibnamedelimi H.\bibnamedelimi A.},
+           giveni={F\bibinitperiod\bibinitdelim K\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=31ec1fef089575af9737775d2e0d4cd6}{%
+           family={Gupta},
+           familyi={G\bibinitperiod},
+           given={Arvind},
+           giveni={A\bibinitperiod}}}%
+        {{hash=60e6ebfd58ae1b67c030be2e0ecb6f57}{%
+           family={Sack},
+           familyi={S\bibinitperiod},
+           given={J{\"{o}}rg-R{\"{u}}diger},
+           giveni={J\bibinitperiod}}}%
+        {{hash=73002fbcaa8fe0ee76011401f23f2ab3}{%
+           family={Tamassia},
+           familyi={T\bibinitperiod},
+           given={Roberto},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{79bc814895991c0369dfd297a5a440cd}
+      \strng{fullhash}{79bc814895991c0369dfd297a5a440cd}
+      \strng{bibnamehash}{79bc814895991c0369dfd297a5a440cd}
+      \strng{authorbibnamehash}{79bc814895991c0369dfd297a5a440cd}
+      \strng{authornamehash}{79bc814895991c0369dfd297a5a440cd}
+      \strng{authorfullhash}{79bc814895991c0369dfd297a5a440cd}
+      \strng{editorbibnamehash}{288c27adda25e9c540f0bd3543898c93}
+      \strng{editornamehash}{a591b6fcd40ca1529dd0b94e6095261c}
+      \strng{editorfullhash}{288c27adda25e9c540f0bd3543898c93}
+      \field{labelalpha}{Luk99}
+      \field{sortinit}{L}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Algorithms and Data Structures, 6th International Workshop, {WADS} '99, Vancouver, British Columbia, Canada, August 11-14, 1999, Proceedings}
+      \field{series}{Lecture Notes in Computer Science}
+      \field{title}{New Results of Fault Tolerant Geometric Spanners}
+      \field{volume}{1663}
+      \field{year}{1999}
+      \field{pages}{193\bibrangedash 204}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1007/3-540-48447-7\_20
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/3-540-48447-7\_20
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/3-540-48447-7%5C_20
+      \endverb
+    \endentry
+    \entry{ns-gsn-07}{book}{}
+      \name{author}{2}{}{%
+        {{hash=40f30a62df9f0b90e9171ccf18cb3b2a}{%
+           family={Narasimhan},
+           familyi={N\bibinitperiod},
+           given={Giri},
+           giveni={G\bibinitperiod}}}%
+        {{hash=52d2bc8ebda859d9761050a75088fc47}{%
+           family={Smid},
+           familyi={S\bibinitperiod},
+           given={Michiel\bibnamedelimb H.\bibnamedelimi M.},
+           giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{2da77973cee80475c80a867adce5f6cb}
+      \strng{fullhash}{2da77973cee80475c80a867adce5f6cb}
+      \strng{bibnamehash}{2da77973cee80475c80a867adce5f6cb}
+      \strng{authorbibnamehash}{2da77973cee80475c80a867adce5f6cb}
+      \strng{authornamehash}{2da77973cee80475c80a867adce5f6cb}
+      \strng{authorfullhash}{2da77973cee80475c80a867adce5f6cb}
+      \field{labelalpha}{NS07}
+      \field{sortinit}{N}
+      \field{sortinithash}{98cf339a479c0454fe09153a08675a15}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Geometric spanner networks}
+      \field{year}{2007}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
 
-\bibitem[AH12]{ah-ncsa-12}
-M.~A. Abam and S.~{Har{-}Peled}.
-\newblock New constructions of \textsf{SSPD}s and their applications.
-\newblock {\em Comput. Geom. Theory Appl.}, 45(5--6):200--214, 2012.
-
-\bibitem[AMS99]{ams-dagss-99}
-\hrefb{http://www.cs.ust.hk/faculty/arya/}{S. {Arya}}, \hrefb{http://www.cs.umd.edu/~mount/}{D.~M. {Mount}}, and M.~Smid.
-\newblock Dynamic algorithms for geometric spanners of small diameter:
-  Randomized solutions.
-\newblock {\em Comput. Geom. Theory Appl.}, 13(2):91--107, 1999.
-
-\bibitem[CDI85]{cd-vdbcdf-85}
-L~Paul Chew and Robert~L Dyrsdale~III.
-\newblock Voronoi diagrams based on convex distance functions.
-\newblock In {\em Proc. 1st Annu. Sympos. Comput. Geom. {\em(SoCG)}}, pages
-  235--244, 1985.
-
-\bibitem[Cla87]{c-aaspmp-87}
-Kenneth~L. Clarkson.
-\newblock Approximation algorithms for shortest path motion planning (extended
-  abstract).
-\newblock In Alfred~V. Aho, editor, {\em Proceedings of the 19th Annual {ACM}
-  Symposium on Theory of Computing, 1987, New York, New York, {USA}}, pages
-  56--65. {ACM}, 1987.
-
-\bibitem[{Har}11]{h-gaa-11}
-S.~{Har{-}Peled}.
-\newblock {\em Geometric Approximation Algorithms}, volume 173 of {\em Math.
-  Surveys \& Monographs}.
-\newblock Amer. Math. Soc., Boston, MA, USA, 2011.
-
-\bibitem[LNS02]{lns-iacfts-02}
-Christos Levcopoulos, Giri Narasimhan, and Michiel H.~M. Smid.
-\newblock Improved algorithms for constructing fault-tolerant spanners.
-\newblock {\em Algorithmica}, 32(1):144--156, 2002.
-
-\bibitem[Luk99]{l-nrftgs-99}
-Tam{\'{a}}s Lukovszki.
-\newblock New results of fault tolerant geometric spanners.
-\newblock In Frank K. H.~A. Dehne, Arvind Gupta, J{\"{o}}rg{-}R{\"{u}}diger
-  Sack, and Roberto Tamassia, editors, {\em Algorithms and Data Structures, 6th
-  International Workshop, {WADS} '99, Vancouver, British Columbia, Canada,
-  August 11-14, 1999, Proceedings}, volume 1663 of {\em Lecture Notes in
-  Computer Science}, pages 193--204. Springer, 1999.
-
-\bibitem[NS07]{ns-gsn-07}
-Giri Narasimhan and Michiel H.~M. Smid.
-\newblock {\em Geometric spanner networks}.
-\newblock Cambridge University Press, 2007.
-
-\end{thebibliography}

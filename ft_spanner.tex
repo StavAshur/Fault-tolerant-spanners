@@ -1,6 +1,8 @@
+\def\UseBibLatex{1}
 % \def\SoCG{1}%
 \input{prefix}%
 
+\BibLatexMode{\bibliography{ft_spanner}}
 
 \title{Local Spanners Revisited}
 
@@ -583,7 +585,7 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
         \eps \cdot \dsY{\PSX}{\PSY}.
     \end{align*}
     For a point set $\PS$, a \emphOnly{well-separated pair
-       decomposition} (\emphOnly{\WSPD{}}) of $\PS$ with parameter
+       decomposition} (\emphOnly{W{S}{P}D{}}) of $\PS$ with parameter
     $1/\eps$ is a pair decomposition of $\PS$ with a set of pairs
     \begin{math}
         \WS = \brc{\bigl.
@@ -984,13 +986,13 @@ by \lemref{s:s:p:d:spread}.
 
 \myparagraph{Construction time} %
 The construction time is bounded by
-\begin{math}
+\begin{equation*}
     \sum_{\{\PSX, \PSY\} \in \WS} O\bigl( (|\PSX| + |\PSY|) \log
     (|\PSX| + |\PSY|) \bigr) =%
     \Of\pth{ \WeightX{\WS} \log n }%
     =%
-    \Of\pth{ \frac{n\log \spread \log n}{{\epsA}^{2}}}.
-\end{math}
+    \Of\pth{ \frac{n\log \spread \log n}{{\epsA}^{2}}}.    
+\end{equation*}
 
 \begin{lemma}[Local spanner property]
     For $\PS, \CC, \eps$ as above, let $\G$ be the graph constructed
@@ -1472,7 +1474,16 @@ $\cone \in \ConeSet_i$.
        \dY{\pa}{\pb}.
    \end{math}
 \end{lemma}
-
+\begin{figure}[ht]
+    \centering%
+    \includegraphics{figs/triangle_cone_edge}
+    \caption{The case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$ in
+       \lemref{cone_edge:triangles}. The vector used to determine
+       $\nnZ{i}{\pa}{\cone}$ is shown in red, and denoted $\dir$}
+    
+    \figlab{tri_cone_edge:a}
+\end{figure}
+    
 \begin{proof}
     Consider the triangle $\Delta\pa\pb\pc$ and denote the angles at
     $\pa,\pb,$ and $\pc$ by $\angleX{\pa},\angleX{\pb}$, and
@@ -1481,16 +1492,6 @@ $\cone \in \ConeSet_i$.
     we have that
     $\dY{\pb}{\pc}\leq \max \{\dY{\pa}{\pc},\dY{\pa}{\pb}\}$.
 	
-    \begin{figure}[h]
-        \centering%
-        \includegraphics{figs/triangle_cone_edge}
-        \caption{ The case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$
-           in \lemref{cone_edge:triangles}. The vector used to
-           determine $\nnZ{i}{\pa}{\cone}$ is shown in red, and
-           denoted $\dir$}
-        
-        \figlab{tri_cone_edge:a}
-    \end{figure}
     
     
     Consider the case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$,
@@ -1615,7 +1616,7 @@ $\cone \in \ConeSet_i$.
     be opposite of that vertex. See \figref{shrink:triangle}.
 \end{proof}
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \includegraphics[page=1,width=0.22\linewidth]{figs/narrow_triangle}%
     \hfill
     \includegraphics[page=2,width=0.22\linewidth]{figs/narrow_triangle}%
@@ -1757,7 +1758,7 @@ $\eps \cdot \diamX{\Trap}$.
    \end{compactenumI}
 \end{lemma}
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \phantom{}\hfill%
     \includegraphics[width=0.3\linewidth]{figs/narrow_trap}%
     \hfill%
@@ -2386,7 +2387,9 @@ $\xSlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x',y) \in \rect}$ be
 its expansion into a horizontal slab. Restricted to a rectangle
 $\rect'$, the resulting set is $\xSlabX{\rect} \cap \rect'$, depicted
 in \figref{x:expand}.  Similarly, we denote
-$\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
+\begin{equation*}
+    \ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}.
+\end{equation*}
 
 
 \begin{figure}[h]
@@ -2585,7 +2588,9 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
    \NotSoCGVer{%
       \bibliographystyle{alpha}%
    }%
-   \bibliography{ft_spanner} }%
+   \bibliography{ft_spanner}%
+}%
+\BibLatexMode{\printbibliography}
 
 
 \appendix
@@ -2639,6 +2644,17 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
     horizontal ray in the positive direction of the $x$ axis. See
     figure \figref{double-wedge} for an illustration.
 
+    \begin{figure}[h]
+    \phantom{}\hfill%
+    \includegraphics[page=2, width=0.48\linewidth]{figs/double_wedge}%
+    \hfill%
+    \includegraphics[page=3, width=0.48\linewidth]{figs/double_wedge}%
+    \hfill%
+    \phantom{}%
+    \caption{An illustration of the proof for \lemref{refine:d:w}}
+    \figlab{double-wedge}
+\end{figure}
+
     We would like to find a vertical segment $\seg$ such that all
     points of $\PSY$ lie to its right, with one endpoint on the upper
     line of $\coneB$, and the other on the lower line of
@@ -2678,16 +2694,6 @@ $\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}$.
     \end{equation*}
 \end{proof}
 
-\begin{figure}[h]
-    \phantom{}\hfill%
-    \includegraphics[page=2, width=0.48\linewidth]{figs/double_wedge}%
-    \hfill%
-    \includegraphics[page=3, width=0.48\linewidth]{figs/double_wedge}%
-    \hfill%
-    \phantom{}%
-    \caption{An illustration of the proof for \lemref{refine:d:w}}
-    \figlab{double-wedge}
-\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

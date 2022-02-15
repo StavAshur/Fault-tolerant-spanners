@@ -121,7 +121,7 @@
            given={M.\bibnamedelimi A.},
            giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
         {{hash=b6aa124494ca4a4053b1d4d6cddef01d}{%
-           family={{Har-Peled}},
+           family={{Har{-}Peled}},
            familyi={H\bibinitperiod},
            given={S.},
            giveni={S\bibinitperiod}}}%
@@ -275,7 +275,7 @@
     \entry{h-gaa-11}{book}{}
       \name{author}{1}{}{%
         {{hash=b6aa124494ca4a4053b1d4d6cddef01d}{%
-           family={{Har-Peled}},
+           family={{Har{-}Peled}},
            familyi={H\bibinitperiod},
            given={S.},
            giveni={S\bibinitperiod}}}%
@@ -362,7 +362,7 @@
         {{hash=79bc814895991c0369dfd297a5a440cd}{%
            family={Lukovszki},
            familyi={L\bibinitperiod},
-           given={Tam{\'{a}}s},
+           given={Tam\'{a}s},
            giveni={T\bibinitperiod}}}%
       }
       \name{editor}{4}{}{%
@@ -379,7 +379,7 @@
         {{hash=60e6ebfd58ae1b67c030be2e0ecb6f57}{%
            family={Sack},
            familyi={S\bibinitperiod},
-           given={J{\"{o}}rg-R{\"{u}}diger},
+           given={J\"{o}rg{-}R\"{u}diger},
            giveni={J\bibinitperiod}}}%
         {{hash=73002fbcaa8fe0ee76011401f23f2ab3}{%
            family={Tamassia},

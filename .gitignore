@@ -12,3 +12,4 @@ figs/old/
 *.synctex.gz
 .config_latex
 .latex_color
+sariel_biblatex.sty

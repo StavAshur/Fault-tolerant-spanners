@@ -2,6 +2,8 @@
 % \def\SoCG{1}%
 \input{prefix}%
 
+
+
 \BibLatexMode{\bibliography{ft_spanner}}
 
 \title{Local Spanners Revisited}
@@ -48,6 +50,8 @@
 
 \begin{document}
 
+\input{reviews}
+
 \maketitle
 
 
@@ -56,15 +60,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{abstract}
-    For a set of points $\PS \subseteq \Re^2$, and a family of regions
-    $\FF$, a \emph{local $t$-spanner} of $\PS$, is a sparse graph $\G$
-    over $\PS$, such that, for any region $\region \in \FF$, the
+    For a set of points $\PS \subseteq \Re^2$ and a family of regions
+    $\FF$, a \emph{local $t$-spanner} of $\PS$ is a sparse graph $\G$
+    over $\PS$, such that for any region $\region \in \FF$ the
     subgraph restricted to $\region$, denoted by
     $\restrictY{\G}{\region} = \G_{\PS \cap \region}$, is a
     $t$-spanner for all the points of $\region \cap \PS$.
 
     We present algorithms for the construction of local spanners with
-    respect to several families of regions, such as homothets of a
+    respect to several families of regions such as homothets of a
     convex region. Unfortunately, the number of edges in the resulting
     graph depends logarithmically on the spread of the input point
     set. We prove that this dependency can not be removed, thus
@@ -88,7 +92,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Introduction}
-
+\paragraph{L24 "see [10] and references there in."This is a 15-year old book. Is there a more recent survey?} 
+\stav{There's "On plane geometric spanners: A survey and open problems" by Bose and Smid from 2013, but that is not as comprehensive, and cites the '07 one as a comprehensive survey.}
 % \paragraph{Euclidean graph}
 For a set $\PS$ of points in $\Re^d$, the \emphw{Euclidean graph}
 $\EucG = \bigl(\PS, \binom{\PS}{2}\bigr)$ of $\PS$ is an undirected
@@ -103,10 +108,12 @@ $\dGZ{\G}{\pa}{\pb}$ is the length of the shortest path between $\pa$
 and $\pb$ in $\G$.  The graph $\GB$ is a \emphw{$t$-spanner} of $\G$
 if there is a $t$-path in $\GB$, for any $\pa,\pb\in \PS$.  Thus, for
 a set of points $\PS\subseteq \Re^d$, a graph $\G$ over $\PS$ is a
-\emphw{$t$-spanner} if it is a $t$-spanner of the euclidean graph
+\emphw{$t$-spanner} if it is a $t$-spanner of the Euclidean graph
 $\EucG$. There is a lot of work on building geometric spanners, see
 \cite{ns-gsn-07} and references there in.
 
+\paragraph{L25 It is unclear why Fault-tolerant spanners are introduced before Local spanners, and how these concepts are related. See also comments about Corollary 20 and Remark 21 below (L325). By the way, Alam and Borouny clarifies the relation in Section 1.3 of their paper---but they are careful to talk about halfplanes only.}
+\stav{Not sure what to do about this}
 \paragraph*{Fault-tolerant spanners}
 
 An \emphw{$\FF$-fault-tolerant spanner} for $\PS\subseteq \Re^d$, is a
@@ -115,7 +122,7 @@ graph $\G=(\PS, \EG)$, such that for any region $\region$ (i.e., the
 $\EucG - \region$ (See \defref{def:residual:graph} for a formal
 definition of this notation).  Here $\G \gminus \region$ denotes the
 graph after one deletes from $\G$ all the vertices in
-$\PS \cap \region$, and all the edges in $\G$ that their corresponding
+$\PS \cap \region$, and all the edges in $\G$ whose corresponding
 segments intersect $\region$.  Surprisingly, as shown by Abam \etal
 \cite{abfg-rftgs-09}, such fault-tolerant spanners can be constructed
 where the attack region is any convex set. Furthermore, these spanners
@@ -149,7 +156,7 @@ $\region$, see \defref{def:residual:graph}).
 
 Abam and Borouny \cite{ab-lgs-21} showed how to construct such
 spanners for axis-parallel squares and vertical slabs. In this work,
-we are further extend their results.  They also showed how to
+we further extend their results.  They also showed how to
 construct such spanners for disks if one is allowed to add Steiner
 points. Abam and Borouny left the question of how to construct local
 spanners for disks as an open problem.
@@ -158,7 +165,7 @@ To appreciate the difficulty in constructing local spanners, observe
 that unlike regular spanners, the construction has to take into
 account many different scenarios as far as which points are available
 to be used in the spanner. As a concrete example, a local spanner for
-axis-parallel rectangle requires quadratic number of edges, see
+axis-parallel rectangles requires a quadratic number of edges, see
 \figref{bad:rectangles}.
 
 \begin{figure}[h]
@@ -179,6 +186,9 @@ source and destination points of the path.
 
 \paragraph*{A good jump is hard to find}
 
+\paragraph{L72 "The constructions have to guarantee that there are many edges available,"This claim is unsubstantiated. It is unclear why many edges are needed----perhaps one can do with fewer...}
+\stav{Not sure how to change}
+
 Most constructions for spanners can be viewed as searching for a way
 to build a path from the source to the destination by finding a
 ``good'' jump, either by finding a way to move locally from the source
@@ -197,7 +207,13 @@ challenging. The constructions have to guarantee that there are many
 edges available, and that at least one of them is useful as a jump
 regardless of the chosen region.
 
+\paragraph{L80-86 Please, repeat the definition of Phi (spread of the point set). In the lower bounds (Lemmas 22-23), the spread is actually $n\Phi$. If you denote the spread by Phi, then the lower bounds in the table should be $\Omega(n log (\Phi/n))$}
 
+\stav{Changed to $\Omega(n\log \frac{\spread}{n})$ in table}
+
+\paragraph{L85 "(1-delta)-local (1+eps)-spanners" This is undefined in the fist 500 lines. The explanation at the end of the Intro (L147-155) does not define these terms, and takes $\delta=\eps$.}
+
+\stav{Should we remove this result from the table? Add a definition?}
 \begin{table}[t]
     \centering
 
@@ -253,7 +269,7 @@ regardless of the chosen region.
       % ------------------------------------------------------------
       Disks+Steiner points
       &
-        $\Oeps (n ) \Bigr.$
+        $\Oeps (n \log^2 n ) \Bigr.$
       &
         \cite{ab-lgs-21}
       &
@@ -276,13 +292,13 @@ regardless of the chosen region.
       &
       &
       &
-        $\Omega(n \log \spread)\Bigr.$
+        $\Omega(n \log \frac{\spread}{n})\Bigr.$
       &
         \lemref{l:s:lower:bound}%
       \\
       \hline
       % ------------------------------------------------------------
-      Homothets convex shape
+      Homothets convex body
       &
       &
       &
@@ -306,7 +322,7 @@ regardless of the chosen region.
       &
       &
       &       
-        $\Omega\pth{ n \log \spread }\Bigr.$
+        $\Omega\pth{ n \log \frac{\spread}{n} }\Bigr.$
       &
         \lemref{l:b:triangles}%
       \\
@@ -317,7 +333,7 @@ regardless of the chosen region.
       \\
       \hline
       % ---------------------------------------------------------
-      Bounded convex shape
+      Bounded convex body
       &
       &
       &
@@ -356,13 +372,18 @@ Our results are summarized in \tabref{results_summary}.
 
 \paragraph*{Almost local spanners}
 
+
+\paragraph{Counter example talks about this.}
+\stav{Our description was lacking. I changed the last sentence to include a reference to $\delta$.}
+
+
 We start by showing that regular geometric spanners are local spanners
 if one is required provide the spanner guarantee only to shrunken
 regions. Namely, if $\G$ is a $(1+\eps)$-spanner of $\PS$, then for
 any convex region $\Body$, the graph $ \restrictY{\G}{\Body}$ is a
 spanner for $\Body' \cap \PS$, where $\Body'$ is the set of all points
-in $\Body$ that are in distance at least $\eps\cdot \diamX{\Body}$
-from its boundary.
+in $\Body$ that are in distance at least $\delta\cdot \diamX{\Body}$
+from its boundary, where $\eps \leq \delta^2$.
 
 \paragraph*{Homothets}
 A \emphw{homothet} of a convex region $\Body$, is a translated and
@@ -373,15 +394,15 @@ prespecified convex region.  This in particular works for disks, and
 resolves the aforementioned open problem of Abam and Borouny
 \cite{ab-lgs-21}. Our construction is somewhat similar to the original
 construction of Abam \etal \cite{abfg-rftgs-09}. For a parameter
-$\eps>0$ the construction of a $(1+\eps)$-local spanner for homothets
+$\eps>0$ the construction of a local $(1+\eps)$-spanner for homothets
 takes $\Of\pth{ \eps^{-2} n\log \spread \log n }$ time, and the
-resulted spanner is of size $\Of\pth{ \eps^{-2} n\log \spread }$,
+resulting spanner is of size $\Of\pth{ \eps^{-2} n\log \spread }$,
 where $\spread$ is the spread of the input point set $\PS$, and
 $n=|\PS|$. We also provide a lower bound showing that this logarithmic
 dependency on $\spread$ cannot be avoided.
 
 The dependency on the spread $\spread$ in the above construction is
-somewhat disappointing. However.  the lower bound constructions,
+somewhat disappointing. However,  the lower bound constructions,
 provided in \secref{lower:bound}, show that this is unavoidable for
 disks or homothets of triangles.
 
@@ -422,13 +443,15 @@ the original construction.
 
 \paragraph*{$k$-regular polygons}
 
+\paragraph{L138 "Of course, the size does depend on k." You probably mean that it depends on k, but not on the spread. Then would be clear that some dependence on k is necessary.}
+\stav{Added "polynomially"}
 It seems natural that if one can handle fat triangles, then homothets
 of $k$-regular polygons should readily follow by a simple
 decomposition of the polygon into fat triangles. Maybe surprisingly,
 this is not the case -- a critical configuration might involve two
 points that are on the interior of two non-adjacent edges of a
 homothet of the input polygon. We overcome this by first showing that
-sufficiently narrow trapezoids, provide us with a good jump somewhere
+sufficiently narrow trapezoids provide us with a good jump somewhere
 inside the trapezoid, assuming one computes the Delaunay triangulation
 induced by the trapezoid, and that the source and destination lie on
 the two legs of the trapezoid. Next, we show that such a polygon can
@@ -436,7 +459,7 @@ be covered by a small number of narrow trapezoids and fat
 triangles. By building appropriate graphs for each trapezoid/triangle
 in the collection, we get a spanner for homothets of the given
 $k$-regular polygon, with size that has no dependency on the
-spread. Of course, the size does depend on $k$.  See \secref{k:gons}
+spread. Of course, the size does depend polynomially on $k$.  See \secref{k:gons}
 for details, and \thmref{k:gon} for the precise result.
 
 
@@ -446,12 +469,13 @@ for details, and \thmref{k:gon} for the precise result.
 In \apndref{qspd}, we describe a novel pair-decompos\-\si{ition}.
 Specifically, the \QSPD breaks the input point set $\PS$ into pairs,
 such that for any pair $\{\PX, \PY\}$ we have the property that there
-is a translated axis system such that $\PX$ and $\PY$ belong to two
+is a translated set of axes such that $\PX$ and $\PY$ belong to two
 antipodal quadrants.  In $d$ dimensions there is such a decomposition
-with $\Of( n \log^{d-1} n)$ pairs, and total weight
+with $\Of( n \log^{d-1} n)$ pairs, and weight
 $\Of( n \log^{d} n)$.  A somewhat similar idea was used by Abam and
-Borouny \cite{ab-lgs-21} for the $d=1$ case. We believe this
-decomposition might be useful and is of independent interest.
+Borouny \cite{ab-lgs-21} for the $d=1$ case. This
+decomposition is very useful in this scenario and We believe
+it may be of independent interest.
 
 \paragraph*{Multiplicative weak local spanner for rectangles}
 
@@ -493,7 +517,7 @@ comparisons to the results of this paper.
     the plane. For a fault region $\region \in \FF$ and a geometric
     graph $\G$ on a point set $\PS$, let $\G \gminus \region$ be the
     residual graph after removing from it all the points of $\PS$ in
-    $\region$ and all the edges that their corresponding segments
+    $\region$ and all the edges whose corresponding segments
     intersect $\region$. Similarly, let $\restrictY{\G}{\region}$
     denote the graph restricted to $\region$.  Formally, let
     \begin{equation*}
@@ -507,7 +531,7 @@ comparisons to the results of this paper.
 	\bigl( \PS \cap {\region},
 	\Set{uv \in \EG}{ uv \subseteq {\region} } \bigr).
     \end{equation*}
-    where $\interiorX{\region}$ denotes the interior of $\region$.
+    where $\interiorX{\region}$ denotes the interior of $\region$,
 \end{definition}
 
 
@@ -656,7 +680,7 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
     An \emphi{$\eps$-double-wedge} is a region between two lines,
     where the angle between the two lines is at most $\eps$.
 
-    Two point sets $\PX$ and $\PY$ that each lie in their own cone of
+    Two point sets $\PX$ and $\PY$ that each lie in their own face of
     a shared $\eps$-double-wedge are \emphi{$\eps$-angularly
        separated}.
 \end{defn}
@@ -710,7 +734,7 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
         \Set{ \pa \in \body }{ \dsY{\pa}{ \Re^2 \setminus \body} \geq \delta \cdot
            \diameterX{\body}}.
     \end{equation*}
-    Formally, $\shrinkDY{\body}{\delta}$ is the Minkowski difference
+    More formally, $\shrinkDY{\body}{\delta}$ is the Minkowski difference
     of $\body$ with a disk of radius $\delta \cdot \diameterX{\body}$.
 \end{defn}
 
@@ -723,7 +747,7 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
 
     The \emphi{aspect ratio} of a region $\body$ in the plane is
     $\arX{\body} = \routX{\body}/\rinX{\body}$. Given a family $\FF$
-    or regions in the plane, its \emphw{aspect ratio} is
+    of regions in the plane, its \emphw{aspect ratio} is
     $\arX{\FF} = \max_{\body \in \FF} \arX{\body}$.
 \end{defn}
 
@@ -749,6 +773,8 @@ $\shrinkDY{\body}{\delta}$ is empty.
     $\pb$.
 \end{lemma}
 
+\paragraph{L226-241: This is one of the few proofs given in the main paper, but this proof is rather standard and not very interesting.}
+\stav{Not sure what to do about this.}
 \begin{proof}
     Let $\epsA = \min( \eps, \delta^2)$. Construct, in
     $\Of(\epsA^{-1} n \log n)$ time, a standard $(1+\epsA)$-spanner
@@ -757,7 +783,7 @@ $\shrinkDY{\body}{\delta}$ is empty.
 
     So, consider any body $\body \in \FF$, and any two vertices
     $\pa, \pb \in \PS \cap \body'$, where
-    $\body'=\shrinkDY{\body}{\delta}$, Let $\ell = \dY{\pa}{\pb}$, let
+    $\body'=\shrinkDY{\body}{\delta}$, let $\ell = \dY{\pa}{\pb}$, let
     $\pi$ be the shortest path between $\pa$ and $\pb$ in $\G$, and
     let $\Elp$ be the locus of all points $\pc$, such that
     $\dY{\pa}{\pc} + \dY{\pc}{\pb} \leq (1+\epsA) \ell$. The region
@@ -855,7 +881,7 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\EucG \cap \region$.
 \begin{theorem}[\cite{cd-vdbcdf-85}]
     \thmlab{c:t:construct_delaunay_graph}%
     %
-    For any convex shape $\CC$ and a set of points $\PS$,
+    For any convex body $\CC$ and a set of points $\PS$,
     $\DG_{\CC}(\PS)$ can be computed in $\Of(n \log n)$ time.
     Furthermore, the triangulation $\DG_{\CC}(\PS)$ has $\Of(n)$
     edges, vertices, and faces.
@@ -881,13 +907,16 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\EucG \cap \region$.
     $\pa, \pb \in \CC \cap \PS$, then there exists a homothet
     $C' \subseteq C$ of $\CC$ such that $\pa, \pb \in \partial C'$.
 \end{lemma}
+
+\paragraph{L260-265: Isn't this known, or a direct modification of an existing proof? It does not seem the most important proof to give in the main part of the paper.}
+\stav{Not sure what to do about this}
 \begin{proof}
     The idea is to apply a shrinking process of $C$, as illustrated in
     \figref{shrink:h}.  Consider the mapping
     $f_{\beta, \pd} : \px \mapsto \beta (\px - \pd) + \pd $. It is a
     scaling of the plane around $\pd$ by a factor of $\beta$. Let
     $\beta'$ be the minimum value of $\beta$ such that
-    $C_1 = f_{\beta,\pa}(C)$ contains $\pb$ (i.e., we shrink $C$
+    $C_1 = f_{\beta,\pa}(C)$ contains $\pb$ (i.e. central dilation, we shrink $C$
     around $\pa$ till $\pb$ becomes a boundary point). Next, shrink
     $C'$ around $\pb$, till $\pa$ becomes a boundary point --
     formally, let $\beta''$ be the minimum value of $\beta$ such that
@@ -902,7 +931,7 @@ triangulations, also holds for homothets.
 \begin{claim}
     \clmlab{c:t:connected}%
     %
-   Let $\CC$ be a bounded close convex shape.  Given a set of points
+   Let $\CC$ be a compact (bounded and closed) convex body.  Given a set of points
    $\PS \subseteq \Re^2$ in general position with respect to $\CC$,
    let $\DG = \DG_{\CC}(\PS)$ be the $\CC$-Delaunay triangulation of
    $\PS$. For any homothet $C$ of $\CC$, we have that
@@ -952,6 +981,10 @@ triangulations, also holds for homothets.
 
 \subsection{The generic construction}
 \seclab{disk_construction}
+
+\paragraph{L275, 282: The paper cites Lemma 4, suggesting that the result follows from this paper, but Lemma 4 appears in [1], so these results really follow from previously known results}.
+\stav{Not sure what to do.}
+
 
 The input is a set $\PS$ of $n$ points in the plane (in general
 position) with spread $\spread = \spreadX{\PS}$, and a parameter
@@ -1073,7 +1106,7 @@ We thus get the following.
 \begin{theorem}
     \thmlab{main:1}%
     %
-    Let $\CC$ be a bounded convex shape in the plane, let $\PS$ be a
+    Let $\CC$ be a bounded convex body in the plane, let $\PS$ be a
     given set of $n$ points in the plane (in general position), and
     let $\eps \in (0,1/2)$ be a parameter. The above algorithm
     constructs a $\CC$-local $(1+\eps)$-spanner $\G$. The spanner has
@@ -1090,15 +1123,17 @@ We thus get the following.
 The following defines a ``visibility'' graph when we are restricted to
 a region $R$, where two points are visible if there is a witness
 homothet contained in $R$ having both points on its boundary.
+
+\paragraph{L316, 317: Do not put observations in a definition environment. Besides, the first sentence after the definition shows the same thing, so the observation in the definition seems superfluous.} 
+\stav{Removed observation from the definition}
 \begin{defn}
-    Let $\CC$ be a bounded convex shape in the plane.  Given a region
+    Let $\CC$ be a bounded convex body in the plane.  Given a region
     $R$ in the plane and a point set $\PS$, consider two points
     $\pa, \pb \in \PS$. The edge $\pa \pb$ is \emphw{safe} in $R$ if
     there is a homothet $C$ of $\CC$, such that
     $\pa,\pb \in C \subseteq R$. The \emphi{safe graph} for $\PS$ and
     $R$, denoted by $\GY{\PS}{R}$, is the graph formed by all the safe
-    edges in $\PS$ for $R$. Note, that this graph might have a
-    quadratic number of edges in the worst case.
+    edges in $\PS$ for $R$.
 \end{defn}
 
 Observe that $\GY{\PS}{\Re^2}$ is a clique. Surprisingly, the spanner
@@ -1119,6 +1154,8 @@ $\GY{\PS}{R}$.
    $\dGZ{\restrictY{\G}{R}}{\pa}{\pb}\leq (1+\eps)\dGZ{\GA}{\pa}{\pb}
    $.
 	
+   \paragraph{L325 "In particular, for any convex region $D$, the graph $G-D$ is a (1+eps)-spanner for $S(P,R2)-D$." This claim seems to be false. Specifically, in the proof (L744-746), one the "infinite" homothet of $C$ is not necessarily disjoint from the region $D$. An easy counterexample: Take $C=D$ to be a regular triangle, and $p,q$ two points close to a side of $D$ such that any homothet of $C$ that contains both p and q would intersect D. One might get around this by relaxing the condition $p,q$ in $C \subseteq R$ in the definition of safe graphs. Note the difference between $S(P,R2)-D$ and $S(P,R2-D)$. In any case, Remark 21 should be reconsidered, as well as the application to fault-tolerant spanners...}
+   \stav{I think they're correct. This works with $S(P,R2-D)$, but not with $S(P,R2)-D$.}
    In particular, for any convex region $D$, the graph $\G \gminus D$
    is a $(1+\eps)$-spanner for $\GY{\PS}{\Re^2} \gminus D$.
 \end{corollary}
@@ -1141,7 +1178,7 @@ $\GY{\PS}{R}$.
     The above implies that local spanners for homothets are also
     robust to convex region faults. Namely, this construction both
     provides a local spanner and a fault tolerant spanner, where the
-    locality is for homothets of the given shape, and the faults are
+    locality is for homothets of the given body, and the faults are
     for any convex regions.
 \end{remark}
 
@@ -1176,6 +1213,8 @@ $\DT_\Pair \cap \disk$ is much longer than the distance between the
 two points of interest. This somewhat counter-intuitive situation is
 illustrated in \figref{bad}.
 
+\paragraph{L344: The example (figure) is not clear enough.}
+\stav{Not sure how to make this clearer.}
 \begin{figure}[h]
     \phantom{} \hfill%
     \includegraphics[page=1,width=0.3\linewidth]{figs/bad_example}
@@ -1192,7 +1231,11 @@ illustrated in \figref{bad}.
 \end{figure}
 
 
+\paragraph{L346 "For $\eps=1/4$, and parameters $n$ and $\Phi>=1$," The spread could, in principle, be unbounded, but the number of edges is always $O(n^2)$, so the lower bound $\Omega(n \log \Phi)$ fails for $\Phi>>2^n$. Does it hold for all $\Phi$ in $[1,2^n]$ ?}
+\stav{Not sure if it's interesting or not.}
 
+\paragraph{L346-8 "with spread $O(\Phi n)$," For fair comparison, it would be helpful to denote the spread by Phi here, and then the lower bound on the number of edges becomes $\Omega(n \log(\Phi/n))$.}
+\stav{I've changed the results in the table. Maybe we should change spread to $\Phi$ and result accordingly? Should change something in statement regardless. )}
 \SaveContent{\LemmaDiskLowerBound}%
 {%
    For $\eps =1/4$, and parameters $n$ and $\spread \geq 1$, there is
@@ -1233,7 +1276,7 @@ illustrated in \figref{bad}.
     In the $j$\th iteration, for $j=2,\ldots, M-1$, Let
     $x_j = n2^{M-j+1} = x(\pb_{j-1})/2$, and let $y_j < 0$ be the
     maximum $y$-coordinate of a point that lies on the intersection of
-    the vertical line $x =x_j$ and the disks of
+    the vertical line $x =x_j$ and the union of disks
     $D_1 \cup \cdots \cup D_j$ where
 	
     \begin{equation*}
@@ -1387,7 +1430,7 @@ illustrated in \figref{bad}.
 \seclab{triangles}
 
 
-While local spanners for homothets of an arbitrary convex shape are
+While local spanners for homothets of an arbitrary convex body are
 costly, if we are given a triangle $\triangle$ with the single
 constraint that $\triangle$ is not too ``thin'', then one can
 construct a $\triangle$-local $t$-spanner with a number of edges that
@@ -1741,7 +1784,7 @@ $\eps \cdot \diamX{\Trap}$.
     \lemlab{good:jump:traps}%
     %
    Let $\eps \in (0,1)$ be some parameter, and $\epsA = \eps/16$.  Let
-   $\PX,\PY$ be two points sets that are $\epsA$-semi separated and
+   $\PX,\PY$ be two point sets that are $\epsA$-semi separated and
    $\epsA$-angularly separated (see \defref{angular:separated}), and
    let $\Trap$ be a $\epsA$-narrow trapezoid, with two points
    $\pa \in \PX$ and $\pb \in \PY$ lying on the two legs of
@@ -2107,6 +2150,9 @@ example, a $k$-regular polygon is $k$-nice.
     % \end{itemize}
 \end{proof}
 
+
+\paragraph{L486 "the resulting spanner has $O(\eps^{-3} n \log n)$ edges" Is the dependence on epsilon tight? Is the logarithmic factor necessary?}
+\stav{Don't know}
 \begin{remark}
     \remlab{improved}%
     %

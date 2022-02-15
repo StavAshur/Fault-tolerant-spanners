@@ -1,0 +1,95 @@
+
+
+
+\paragraph{The opening line of the abstract contains eight commas, leading to a very fragmented sentence. Some commas should be removed, but I suggest to break up the sentence anyway.} Removed several commas.
+
+\paragraph{L23: capitalize euclidean} Done.
+
+\paragraph{L29: improve grammar (clause with "that")} Done.
+
+\paragraph{L47: improve grammar ("are further extend")} Done.
+
+\paragraph{L52-53: improve grammar (plural with s, or singular with an article)} Done.
+
+\paragraph{L106: replace the period by a comma} Done.
+
+\paragraph{L132: remove  the comma} Done.
+
+\paragraph{L146: The statement "We believe this decomposition might be useful" is strange, given that you use it to get your results.} Changed to "This
+decomposition is very useful in this scenario and We believe
+it may be of independent interest."
+
+\paragraph{L162: improve grammar (clause with "that")} Done.
+
+\paragraph{L164: there is a period at the end, but the sentence continues on line 165.} Done.
+
+\paragraph{L212: "Formally" suggests that the first part of Definition 10 is not formal, but I think it is formally defined already.} Changed to "More formally"
+
+\paragraph{L217: "or" should be "of"} Done.
+
+\paragraph{L228: a comma followed by a capital} Done.
+
+\paragraph{L226-241: This is one of the few proofs given in the main paper, but this proof is rather standard and not very interesting.} Not sure what to do about this.
+
+\paragraph{L242: Improve grammar} Done.
+
+\paragraph{L260-265: Isn't this known, or a direct modification of an existing proof? It does not seem the most important proof to give in the main part of the paper.} Not sure what to do.
+
+\paragraph{L268: "close" should be "closed"} Done.
+
+\paragraph{L275, 282: The paper cites Lemma 4, suggesting that the result follows from this paper, but Lemma 4 appears in [1], so these results really follow from previously known results}.
+
+\paragraph{L313, 320: The words "shape" and "body" are for the same concept. Use only one word for one concept.} Replaced "shape" with "body" throughout the paper.
+
+\paragraph{L316, 317: Do not put observations in a definition environment. Besides, the first sentence after the definition shows the same thing, so the observation in the definition seems superfluous.} Removed observation from the definition.
+
+\paragraph{L344: The example (figure) is not clear enough.}
+Not sure how to make this clearer.
+
+\paragraph{L24 "see [10] and references there in."This is a 15-year old book. Is there a more recent survey?} 
+
+\paragraph{L25 It is unclear why Fault-tolerant spanners are introduced before Local spanners, and how these concepts are related. See also comments about Corollary 20 and Remark 21 below (L325). By the way, Alam and Borouny clarifies the relation in Section 1.3 of their paper---but they are careful to talk about halfplanes only.}
+
+\paragraph{L78 In Theorem 8 of Alam and Borouny [2], the number of edges is $O_{eps}(n \log^2 n)$, only the number of Steiner points is $O_{eps}(n)$.} Done.
+
+\paragraph{L80-86 Please, repeat the definition of Phi (spread of the point set). In the lower bounds (Lemmas 22-23), the spread is actually $n\Phi$. If you denote the spread by Phi, then the lower bounds in the table should be $\Omega(n log (\Phi/n))$.}
+
+\paragraph{L72 "The constructions have to guarantee that there are many edges available,"This claim is unsubstantiated. It is unclear why many edges are needed----perhaps one can do with fewer...}
+
+\paragraph{L85 "(1-delta)-local (1+eps)-spanners" This is undefined in the fist 500 lines. The explanation at the end of the Intro (L147-155) does not define these terms, and takes $\delta=\eps$.}
+
+\paragraph{L138 "Of course, the size does depend on k." You probably mean that it depends on k, but not on the spread. Then would be clear that some dependence on k is necessary.}
+
+\paragraph{L144 "total weight" Undefined. The weight of a decomposition is defined only in L173. So far, a weight meant only the Euclidean length of an edge.} Changed to "weight".
+
+\paragraph{L198 and L201 "in their own cone" ... "in the two different faces" Use the same terms consistently for the same mathematical object.} Changed to "faces" throughout the section.
+
+\paragraph{L325 "In particular, for any convex region $D$, the graph $G-D$ is a (1+eps)-spanner for $S(P,R2)-D$." This claim seems to be false. Specifically, in the proof (L744-746), one the "infinite" homothet of $C$ is not necessarily disjoint from the region $D$. An easy counterexample: Take $C=D$ to be a regular triangle, and $p,q$ two points close to a side of $D$ such that any homothet of $C$ that contains both p and q would intersect D. One might get around this by relaxing the condition $p,q$ in $C \subseteq R$ in the definition of safe graphs. Note the difference between $S(P,R2)-D$ and $S(P,R2-D)$. In any case, Remark 21 should be reconsidered, as well as the application to fault-tolerant spanners...}
+
+\paragraph{L346 "For $\eps=1/4$, and parameters $n$ and $\Phi>=1$," The spread could, in principle, be unbounded, but the number of edges is always $O(n^2)$, so the lower bound $\Omega(n \log \Phi)$ fails for $\Phi>>2^n$. Does it hold for all $\Phi$ in $[1,2^n]$ ?}
+
+\paragraph{L346-8 "with spread $O(\Phi n)$," For fair comparison, it would be helpful to denote the spread by Phi here, and then the lower bound on the number of edges becomes $\Omega(n \log(\Phi/n))$.}
+
+\paragraph{L355 "the disks of $D1 \cup ... \cup Dj$" Do you mean the boundary of the union of disks?} Changed to "union of disks"
+
+\paragraph{L486 "the resulting spanner has $O(\eps^{-3} n \log n)$ edges" Is the dependence on epsilon tight? Is the logarithmic factor necessary?}
+
+
+\paragraph{TYPOS} Done.
+\begin{itemize}
+	\item L23 euclidean $\rightarrow$ Euclidean
+	\item L53 axis-parallel rectangle $\rightarrow$ axis-parallel rectangles
+	\item L101 $(1+\eps)$-local spanner $\rightarrow$ local (1+eps)-spanner
+	\item L102 the resulted spanner $\rightarrow$ the resulting spanner
+	\item L132 trapezoids, provide $\rightarrow$ trapezoids provide
+	\item L143 axis system $\rightarrow$ coordinate system?
+	\item L262-3 "shrink C around p" Do you mean a central dilation?
+	\item L268 bounded close convex shape $\rightarrow$ compact convex body
+	\item L313 shape $\rightarrow$ body
+	\item L436 two points sets $\rightarrow$ two point sets
+	\item L447 k-regular polygon $\rightarrow$ regular k-gon
+\end{itemize}
+
+
+\paragraph{Line 141: The QSPD already appears in P. K. Agarwal and H. Edelsbrunner and O. Schwarzkopf and E. Welzl, Euclidean minimum spanning trees and bichromatic closest pairs}
+

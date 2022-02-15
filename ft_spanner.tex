@@ -200,16 +200,6 @@ useful as a jump regardless of the chosen region (since slight
 perturbation in the region might make many of these edges
 unavailable).
 
-
-\reviewLeftoverX{L85 "(1-delta)-local (1+eps)-spanners" This is undefined in
-   the fist 500 lines. The explanation at the end of the Intro
-   (L147-155) does not define these terms, and takes $\delta=\eps$.}
-
-\stav{Should we remove this result from the table? Add a definition?}
-
-\sariel{Add informal definition in the introduction to this concept..}
-
-   
 \begin{table}[t]
     \centering
 
@@ -477,9 +467,11 @@ In \apndref{w:l:s:rect}, we use \QSPD{}s to construct a weak local
 spanner for axis parallel rectangles.  Here, the constructed graph
 $\G$ over $\PS$, has the property that for any axis-parallel rectangle
 $\rect$, the graph $\restrictY{\G}{\rect}$ is a $(1+\eps)$-spanner for
-all the points of $\bigl((1-\eps)\rect \bigr)\cap \PS$, where
-$(1-\eps)\rect$ is the scaling of the rectangle by a factor of
-$1-\eps$ around its center. Importantly, this works for narrow
+all the points of $\bigl((1-\delta)\rect \bigr)\cap \PS$, where
+$(1-\delta)\rect$ is the scaling of the rectangle by a factor of
+$1-\delta$ around its center. Intuitively, $\delta$ is a parameterization
+of the weakness of the spanner, which guarantees $(1+\eps)$-paths for
+smaller regions as $\delta$ approaches $1$. Importantly, this works for narrow
 rectangles where this form of multiplicative shrinking is still
 meaningful (unlike the diameter based shrinking mentioned
 above). Contrast this with the lower bound (illustrated in

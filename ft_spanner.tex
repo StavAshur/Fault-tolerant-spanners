@@ -90,13 +90,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Introduction}
-\reviewCX{L24 "see [10] and references there in."This is a 15-year old
-   book. Is there a more recent survey?}
-
-\stav{There's "On plane geometric spanners: A survey and open
-   problems" by Bose and Smid from 2013, but that is not as
-   comprehensive, and cites the '07 one as a comprehensive survey.}
-% \paragraph{Euclidean graph}
 For a set $\PS$ of points in $\Re^d$, the \emphw{Euclidean graph}
 $\EucG = \bigl(\PS, \binom{\PS}{2}\bigr)$ of $\PS$ is an undirected
 graph.  Here, an edge $\pa \pb \in \EG$ is associated with the segment
@@ -114,8 +107,6 @@ a set of points $\PS\subseteq \Re^d$, a graph $\G$ over $\PS$ is a
 $\EucG$. There is a lot of work on building geometric spanners, see
 \cite{ns-gsn-07} and references there in.
 
-\reviewCX{L25 It is unclear why Fault-tolerant spanners are introduced before Local spanners, and how these concepts are related. See also comments about Corollary 20 and Remark 21 below (L325). By the way, Alam and Borouny clarifies the relation in Section 1.3 of their paper---but they are careful to talk about halfplanes only.}
-\stav{Not sure what to do about this}
 \paragraph*{Fault-tolerant spanners}
 
 An \emphw{$\FF$-fault-tolerant spanner} for $\PS\subseteq \Re^d$, is a
@@ -145,10 +136,11 @@ result is asymptotically tight.
 \paragraph*{Local spanners}
 
 Recently, Abam and Borouny \cite{ab-lgs-21} introduced the notion of
-local spanners.  For a family of regions $\FF$, a graph
-$\G = (\PS,\EG)$ is a \emphw{local $t$-spanner} for $\FF$, if for any
-$\region \in \FF$, the subgraph of $\G$ induced on $\PS \cap \region$
-is a $t$-spanner.
+local spanners, which can be interpreted as having the complement
+property to being fault-tolerant.  For a family of regions $\FF$, a
+graph $\G = (\PS,\EG)$ is a \emphw{local $t$-spanner} for $\FF$, if
+for any $\region \in \FF$, the subgraph of $\G$ induced on
+$\PS \cap \region$ is a $t$-spanner.
 % Specifically, this induced subgraph $ \restrictY{\G}{\region}$ is a
 % $t$-spanner for all $\pa,\pb \in \PS \cap \region$
 Specifically, this induced subgraph $ \restrictY{\G}{\region}$
@@ -188,9 +180,6 @@ source and destination points of the path.
 
 \paragraph*{A good jump is hard to find}
 
-\reviewCX{L72 "The constructions have to guarantee that there are many edges available,"This claim is unsubstantiated. It is unclear why many edges are needed----perhaps one can do with fewer...}
-\stav{Not sure how to change}
-
 Most constructions for spanners can be viewed as searching for a way
 to build a path from the source to the destination by finding a
 ``good'' jump, either by finding a way to move locally from the source
@@ -205,9 +194,11 @@ the destination, and then, combining these implies that the resulting
 new path is short.  These ideas guide our constructions as
 well. However, the availability of specific edges depends on the query
 region, making the search for a good jump significantly more
-challenging. The constructions have to guarantee that there are many
-edges available, and that at least one of them is useful as a jump
-regardless of the chosen region.
+challenging. Intuitively, the constructions have to guarantee that
+there are many edges available, and that at least one of them is
+useful as a jump regardless of the chosen region (since slight
+perturbation in the region might make many of these edges
+unavailable).
 
 \reviewCX{L80-86 Please, repeat the definition of Phi (spread of the point set). In the lower bounds (Lemmas 22-23), the spread is actually $n\Phi$. If you denote the spread by Phi, then the lower bounds in the table should be $\Omega(n log (\Phi/n))$}
 
@@ -296,7 +287,7 @@ regardless of the chosen region.
       &
       &
       &
-        $\Omega(n \log \frac{\spread}{n})\Bigr.$
+        $\Omega\bigl(n \log ( 1+ \frac{\spread}{n}) \bigr)\Bigr.$
       &
         \lemref{l:s:lower:bound}%
       \\
@@ -326,7 +317,7 @@ regardless of the chosen region.
       &
       &
       &       
-        $\Omega\pth{ n \log \frac{\spread}{n} }\Bigr.$
+        $\Omega\bigl( n \log(1+ \frac{\spread}{n}) \bigr)\Bigr.$
       &
         \lemref{l:b:triangles}%
       \\

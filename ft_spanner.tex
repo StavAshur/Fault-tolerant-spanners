@@ -200,15 +200,16 @@ useful as a jump regardless of the chosen region (since slight
 perturbation in the region might make many of these edges
 unavailable).
 
-\reviewCX{L80-86 Please, repeat the definition of Phi (spread of the point set). In the lower bounds (Lemmas 22-23), the spread is actually $n\Phi$. If you denote the spread by Phi, then the lower bounds in the table should be $\Omega(n log (\Phi/n))$}
 
-\stav{Changed to $\Omega(n\log \frac{\spread}{n})$ in table}
-
-\reviewCX{L85 "(1-delta)-local (1+eps)-spanners" This is undefined in
+\reviewLeftoverX{L85 "(1-delta)-local (1+eps)-spanners" This is undefined in
    the fist 500 lines. The explanation at the end of the Intro
    (L147-155) does not define these terms, and takes $\delta=\eps$.}
 
 \stav{Should we remove this result from the table? Add a definition?}
+
+\sariel{Add informal definition in the introduction to this concept..}
+
+   
 \begin{table}[t]
     \centering
 
@@ -368,17 +369,16 @@ Our results are summarized in \tabref{results_summary}.
 \paragraph*{Almost local spanners}
 
 
-\reviewCX{Counter example talks about this.}
-\stav{Our description was lacking. I changed the last sentence to include a reference to $\delta$.}
-
-
 We start by showing that regular geometric spanners are local spanners
 if one is required provide the spanner guarantee only to shrunken
 regions. Namely, if $\G$ is a $(1+\eps)$-spanner of $\PS$, then for
 any convex region $\Body$, the graph $ \restrictY{\G}{\Body}$ is a
 spanner for $\Body' \cap \PS$, where $\Body'$ is the set of all points
 in $\Body$ that are in distance at least $\delta\cdot \diamX{\Body}$
-from its boundary, where $\eps \leq \delta^2$.
+from its boundary, for $\delta = \Omega(\sqrt{\eps})$ -- see
+\lemref{w:l:s:regions}.
+
+
 
 \paragraph*{Homothets}
 A \emphw{homothet} of a convex region $\Body$, is a translated and
@@ -438,8 +438,6 @@ the original construction.
 
 \paragraph*{$k$-regular polygons}
 
-\reviewCX{L138 "Of course, the size does depend on k." You probably mean that it depends on k, but not on the spread. Then would be clear that some dependence on k is necessary.}
-\stav{Added "polynomially"}
 It seems natural that if one can handle fat triangles, then homothets
 of $k$-regular polygons should readily follow by a simple
 decomposition of the polygon into fat triangles. Maybe surprisingly,
@@ -454,8 +452,9 @@ be covered by a small number of narrow trapezoids and fat
 triangles. By building appropriate graphs for each trapezoid/triangle
 in the collection, we get a spanner for homothets of the given
 $k$-regular polygon, with size that has no dependency on the
-spread. Of course, the size does depend polynomially on $k$.  See \secref{k:gons}
-for details, and \thmref{k:gon} for the precise result.
+spread. Of course, the size does depend polynomially on $k$.  See
+\secref{k:gons} for details, and \thmref{k:gon} for the precise
+result.
 
 
 
@@ -754,6 +753,7 @@ has width smaller than $2 \delta \cdot \diameterX{\body}$, then
 $\shrinkDY{\body}{\delta}$ is empty.
 
 
+
 \begin{lemma}
     \lemlab{w:l:s:regions}%
     %
@@ -767,14 +767,13 @@ $\shrinkDY{\body}{\delta}$ is empty.
     $\restrictY{ \body }{\PS}$ has $(1+\eps)$-path between $\pa$ and
     $\pb$.
 \end{lemma}
-
-\reviewCX{L226-241: This is one of the few proofs given in the main paper, but this proof is rather standard and not very interesting.}
-\stav{Not sure what to do about this.}
 \begin{proof}
-    Let $\epsA = \min( \eps, \delta^2)$. Construct, in
-    $\Of(\epsA^{-1} n \log n)$ time, a standard $(1+\epsA)$-spanner
-    $\G$ for $\PS$ using $\Of( \epsA^{-1} n)$ edges
-    \cite{ams-dagss-99}.
+    The proof of the following claim is straightforward, and is
+    included for the sake of completeness.  Let
+    $\epsA = \min( \eps, \delta^2)$. Construct, in
+    $\Of(\epsA^{-1} n \log n)$ time, any standard $(1+\epsA)$-spanner
+    $\G$ for $\PS$ using $\Of( \epsA^{-1} n)$ edges (e.g.,
+    \cite{ams-dagss-99}).
 
     So, consider any body $\body \in \FF$, and any two vertices
     $\pa, \pb \in \PS \cap \body'$, where
@@ -903,21 +902,18 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\EucG \cap \region$.
     $C' \subseteq C$ of $\CC$ such that $\pa, \pb \in \partial C'$.
 \end{lemma}
 
-\reviewCX{L260-265: Isn't this known, or a direct modification of an
-   existing proof? It does not seem the most important proof to give
-   in the main part of the paper.}
-\stav{Not sure what to do about this}
 \begin{proof}
-    The idea is to apply a shrinking process of $C$, as illustrated in
-    \figref{shrink:h}.  Consider the mapping
+    This claim is standard, and the proof is included for the sake of
+    completeness.  The idea is to apply a shrinking process of $C$, as
+    illustrated in \figref{shrink:h}.  Consider the mapping
     $f_{\beta, \pd} : \px \mapsto \beta (\px - \pd) + \pd $. It is a
     scaling of the plane around $\pd$ by a factor of $\beta$. Let
     $\beta'$ be the minimum value of $\beta$ such that
-    $C_1 = f_{\beta,\pa}(C)$ contains $\pb$ (i.e. central dilation, we shrink $C$
-    around $\pa$ till $\pb$ becomes a boundary point). Next, shrink
-    $C'$ around $\pb$, till $\pa$ becomes a boundary point --
-    formally, let $\beta''$ be the minimum value of $\beta$ such that
-    $C' = f_{\beta,\pb}(C_1)$ contains $\pa$. Since
+    $C_1 = f_{\beta,\pa}(C)$ contains $\pb$ (i.e. central dilation, we
+    shrink $C$ around $\pa$ till $\pb$ becomes a boundary
+    point). Next, shrink $C'$ around $\pb$, till $\pa$ becomes a
+    boundary point -- formally, let $\beta''$ be the minimum value of
+    $\beta$ such that $C' = f_{\beta,\pb}(C_1)$ contains $\pa$. Since
     $C' \subseteq C_1 \subseteq C$, and $\pa, \pb \in \partial C'$,
     the claim follows.
 \end{proof}
@@ -979,12 +975,6 @@ triangulations, also holds for homothets.
 \subsection{The generic construction}
 \seclab{disk_construction}
 
-\reviewCX{L275, 282: The paper cites Lemma 4, suggesting that the
-   result follows from this paper, but Lemma 4 appears in [1], so
-   these results really follow from previously known results}.
-\stav{Not sure what to do.}
-
-
 The input is a set $\PS$ of $n$ points in the plane (in general
 position) with spread $\spread = \spreadX{\PS}$, and a parameter
 $\eps \in (0,1)$. We have a convex body $\CC$ that defines the
@@ -998,6 +988,12 @@ the $\CC$-Delaunay triangulation
 $\DT_{\Pair} = \DG_{\CC}(\PSX \cup \PSY)$. The algorithm adds all the
 edges in $\DT_{\Pair} \cap (\PSX \otimes \PSY)$ to the computed graph
 $\G$.
+
+\begin{remark:unnumbered}
+    In the above algorithm, the idea of computing a triangulation for
+    each \WSPD pair seems to be new.
+\end{remark:unnumbered}
+    
 
 \subsubsection{Analysis}
 
@@ -1123,8 +1119,6 @@ The following defines a ``visibility'' graph when we are restricted to
 a region $R$, where two points are visible if there is a witness
 homothet contained in $R$ having both points on its boundary.
 
-\reviewCX{L316, 317: Do not put observations in a definition environment. Besides, the first sentence after the definition shows the same thing, so the observation in the definition seems superfluous.} 
-\stav{Removed observation from the definition}
 \begin{defn}
     Let $\CC$ be a bounded convex body in the plane.  Given a region
     $R$ in the plane and a point set $\PS$, consider two points
@@ -1152,23 +1146,12 @@ $\GY{\PS}{R}$.
    $\pa, \pb \in \PS \cap R$, we have that
    $\dGZ{\restrictY{\G}{R}}{\pa}{\pb}\leq (1+\eps)\dGZ{\GA}{\pa}{\pb}
    $.
-	
-   \reviewCX{L325 "In particular, for any convex region $D$, the graph
-      $G-D$ is a (1+eps)-spanner for $S(P,R2)-D$." This claim seems to
-      be false. Specifically, in the proof (L744-746), one the
-      "infinite" homothet of $C$ is not necessarily disjoint from the
-      region $D$. An easy counterexample: Take $C=D$ to be a regular
-      triangle, and $p,q$ two points close to a side of $D$ such that
-      any homothet of $C$ that contains both p and q would intersect
-      D. One might get around this by relaxing the condition $p,q$ in
-      $C \subseteq R$ in the definition of safe graphs. Note the
-      difference between $S(P,R2)-D$ and $S(P,R2-D)$. In any case,
-      Remark 21 should be reconsidered, as well as the application to
-      fault-tolerant spanners...}  \stav{I think they're correct. This
-      works with $S(P,R2-D)$, but not with $S(P,R2)-D$.}  In
-   particular, for any convex region $D$, the graph $\G \gminus D$ is
-   a $(1+\eps)$-spanner for $\GY{\PS}{\Re^2} \gminus D$.
+
+   In particular, if $\CC$ is smooth, then for any convex region $D$,
+   the graph $\G \gminus D$ is a $(1+\eps)$-spanner for
+   $\GY{\PS}{\Re^2} \gminus D$.
 \end{corollary}
+
 \begin{proof}
     Consider the shortest path $\pi = u_1 u_2 \ldots u_k$ between
     $\pa$ and $\pb$ realizing $\dGZ{\GA}{\pa}{\pb}$. Every edge
@@ -1185,11 +1168,11 @@ $\GY{\PS}{R}$.
 \end{proof}
 
 \begin{remark}
-    The above implies that local spanners for homothets are also
-    robust to convex region faults. Namely, this construction both
-    provides a local spanner and a fault tolerant spanner, where the
-    locality is for homothets of the given body, and the faults are
-    for any convex regions.
+    The above implies that local spanners for (smooth) homothets are
+    also robust to convex region faults. Namely, this construction
+    both provides a local spanner and a fault tolerant spanner, where
+    the locality is for homothets of the given body, and the faults
+    are for any convex regions.
 \end{remark}
 
 
@@ -1223,10 +1206,6 @@ $\DT_\Pair \cap \disk$ is much longer than the distance between the
 two points of interest. This somewhat counter-intuitive situation is
 illustrated in \figref{bad}.
 
-\reviewCX{L344: The example (figure) is not clear enough.}
-
-\stav{Not sure how to make this clearer.}
-
 \begin{figure}[h]
     \phantom{} \hfill%
     \includegraphics[page=1,width=0.3\linewidth]{figs/bad_example}
@@ -1243,29 +1222,15 @@ illustrated in \figref{bad}.
 \end{figure}
 
 
-\reviewCX{L346 "For $\eps=1/4$, and parameters $n$ and $\Phi>=1$," The
-   spread could, in principle, be unbounded, but the number of edges
-   is always $O(n^2)$, so the lower bound $\Omega(n \log \Phi)$ fails
-   for $\Phi>>2^n$. Does it hold for all $\Phi$ in $[1,2^n]$ ?}
-
-\stav{Not sure if it's interesting or not.}
-
-\reviewCX{L346-8 "with spread $O(\Phi n)$," For fair comparison, it
-   would be helpful to denote the spread by Phi here, and then the
-   lower bound on the number of edges becomes
-   $\Omega(n \log(\Phi/n))$.}
-
-\stav{I've changed the results in the
-   table. Maybe we should change spread to $\Phi$ and result
-   accordingly? Should change something in statement regardless. )}
-
 \SaveContent{\LemmaDiskLowerBound}%
 {%
-   For $\eps =1/4$, and parameters $n$ and $\spread \geq 1$, there is
-   a point set $\PS$ of $n + \ceil{\log \spread}$ points in the plane,
-   with spread $\Of( n \spread )$, such that any local
-   $(1+\eps)$-spanner of $\PS$ for disks, must have
-   $\Omega( n \log \spread )$ edges.  }
+   For $\eps =1/4$, and parameters $n$ and $\spread$, there is a point
+   set $\PS$ of $n + \ceil{\log \spread}$ points in the plane, with
+   spread $\Of( n \spread )$, such that any local $(1+\eps)$-spanner
+   of $\PS$ for disks, must have
+   $\Omega\bigl( n (1+ \log \tfrac{\spread}{n}) \bigr)$ edges, as long
+   as $\sqrt{n} \leq \Phi \leq n2^n$.%
+}
 
 
 \begin{lemma}
@@ -1376,7 +1341,8 @@ illustrated in \figref{bad}.
     For any $n > 0$, and $\Phi = \Omega(n)$, one can compute a set
     $\PS$ of $n+ \Of(\log\Phi)$ points, with spread $\Of(\Phi n)$, and
     a triangle $\triangle$, such that any $\triangle$-local
-    $(3/2)$-spanner of $\PS$ requires $\Omega\pth{n\log\Phi }$ edges.
+    $(3/2)$-spanner of $\PS$ requires
+    $\Omega\bigl( n\log( 1 + \tfrac{\Phi}{n}) \bigr)$ edges.
 \end{lemma}
 
 \begin{figure}[b]

@@ -38,11 +38,11 @@
 }%
 
 \SoCGVer{%
-	\authorrunning{S. Ashur and S. Har-Peled} %
-	\Copyright{Stav Ashur and Sariel Har-Peled}%
-	\ccsdesc[500]{Theory of computation~Computational geometry}%
-	\keywords{Geometric graphs, Fault-tolerant spanners}
-	\Copyright{Stav Ashur and Sariel Har-Peled}
+   \authorrunning{S. Ashur and S. Har-Peled} %
+   \Copyright{Stav Ashur and Sariel Har-Peled}%
+   \ccsdesc[500]{Theory of computation~Computational geometry}%
+   \keywords{Geometric graphs, Fault-tolerant spanners}
+   \Copyright{Stav Ashur and Sariel Har-Peled}
 }
 
 
@@ -90,8 +90,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Introduction}
-\paragraph{L24 "see [10] and references there in."This is a 15-year old book. Is there a more recent survey?} 
-\stav{There's "On plane geometric spanners: A survey and open problems" by Bose and Smid from 2013, but that is not as comprehensive, and cites the '07 one as a comprehensive survey.}
+\reviewCX{L24 "see [10] and references there in."This is a 15-year old
+   book. Is there a more recent survey?}
+
+\stav{There's "On plane geometric spanners: A survey and open
+   problems" by Bose and Smid from 2013, but that is not as
+   comprehensive, and cites the '07 one as a comprehensive survey.}
 % \paragraph{Euclidean graph}
 For a set $\PS$ of points in $\Re^d$, the \emphw{Euclidean graph}
 $\EucG = \bigl(\PS, \binom{\PS}{2}\bigr)$ of $\PS$ is an undirected
@@ -110,7 +114,7 @@ a set of points $\PS\subseteq \Re^d$, a graph $\G$ over $\PS$ is a
 $\EucG$. There is a lot of work on building geometric spanners, see
 \cite{ns-gsn-07} and references there in.
 
-\paragraph{L25 It is unclear why Fault-tolerant spanners are introduced before Local spanners, and how these concepts are related. See also comments about Corollary 20 and Remark 21 below (L325). By the way, Alam and Borouny clarifies the relation in Section 1.3 of their paper---but they are careful to talk about halfplanes only.}
+\reviewCX{L25 It is unclear why Fault-tolerant spanners are introduced before Local spanners, and how these concepts are related. See also comments about Corollary 20 and Remark 21 below (L325). By the way, Alam and Borouny clarifies the relation in Section 1.3 of their paper---but they are careful to talk about halfplanes only.}
 \stav{Not sure what to do about this}
 \paragraph*{Fault-tolerant spanners}
 
@@ -184,7 +188,7 @@ source and destination points of the path.
 
 \paragraph*{A good jump is hard to find}
 
-\paragraph{L72 "The constructions have to guarantee that there are many edges available,"This claim is unsubstantiated. It is unclear why many edges are needed----perhaps one can do with fewer...}
+\reviewCX{L72 "The constructions have to guarantee that there are many edges available,"This claim is unsubstantiated. It is unclear why many edges are needed----perhaps one can do with fewer...}
 \stav{Not sure how to change}
 
 Most constructions for spanners can be viewed as searching for a way
@@ -205,11 +209,13 @@ challenging. The constructions have to guarantee that there are many
 edges available, and that at least one of them is useful as a jump
 regardless of the chosen region.
 
-\paragraph{L80-86 Please, repeat the definition of Phi (spread of the point set). In the lower bounds (Lemmas 22-23), the spread is actually $n\Phi$. If you denote the spread by Phi, then the lower bounds in the table should be $\Omega(n log (\Phi/n))$}
+\reviewCX{L80-86 Please, repeat the definition of Phi (spread of the point set). In the lower bounds (Lemmas 22-23), the spread is actually $n\Phi$. If you denote the spread by Phi, then the lower bounds in the table should be $\Omega(n log (\Phi/n))$}
 
 \stav{Changed to $\Omega(n\log \frac{\spread}{n})$ in table}
 
-\paragraph{L85 "(1-delta)-local (1+eps)-spanners" This is undefined in the fist 500 lines. The explanation at the end of the Intro (L147-155) does not define these terms, and takes $\delta=\eps$.}
+\reviewCX{L85 "(1-delta)-local (1+eps)-spanners" This is undefined in
+   the fist 500 lines. The explanation at the end of the Intro
+   (L147-155) does not define these terms, and takes $\delta=\eps$.}
 
 \stav{Should we remove this result from the table? Add a definition?}
 \begin{table}[t]
@@ -371,7 +377,7 @@ Our results are summarized in \tabref{results_summary}.
 \paragraph*{Almost local spanners}
 
 
-\paragraph{Counter example talks about this.}
+\reviewCX{Counter example talks about this.}
 \stav{Our description was lacking. I changed the last sentence to include a reference to $\delta$.}
 
 
@@ -441,7 +447,7 @@ the original construction.
 
 \paragraph*{$k$-regular polygons}
 
-\paragraph{L138 "Of course, the size does depend on k." You probably mean that it depends on k, but not on the spread. Then would be clear that some dependence on k is necessary.}
+\reviewCX{L138 "Of course, the size does depend on k." You probably mean that it depends on k, but not on the spread. Then would be clear that some dependence on k is necessary.}
 \stav{Added "polynomially"}
 It seems natural that if one can handle fat triangles, then homothets
 of $k$-regular polygons should readily follow by a simple
@@ -771,7 +777,7 @@ $\shrinkDY{\body}{\delta}$ is empty.
     $\pb$.
 \end{lemma}
 
-\paragraph{L226-241: This is one of the few proofs given in the main paper, but this proof is rather standard and not very interesting.}
+\reviewCX{L226-241: This is one of the few proofs given in the main paper, but this proof is rather standard and not very interesting.}
 \stav{Not sure what to do about this.}
 \begin{proof}
     Let $\epsA = \min( \eps, \delta^2)$. Construct, in
@@ -906,7 +912,9 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\EucG \cap \region$.
     $C' \subseteq C$ of $\CC$ such that $\pa, \pb \in \partial C'$.
 \end{lemma}
 
-\paragraph{L260-265: Isn't this known, or a direct modification of an existing proof? It does not seem the most important proof to give in the main part of the paper.}
+\reviewCX{L260-265: Isn't this known, or a direct modification of an
+   existing proof? It does not seem the most important proof to give
+   in the main part of the paper.}
 \stav{Not sure what to do about this}
 \begin{proof}
     The idea is to apply a shrinking process of $C$, as illustrated in
@@ -980,7 +988,9 @@ triangulations, also holds for homothets.
 \subsection{The generic construction}
 \seclab{disk_construction}
 
-\paragraph{L275, 282: The paper cites Lemma 4, suggesting that the result follows from this paper, but Lemma 4 appears in [1], so these results really follow from previously known results}.
+\reviewCX{L275, 282: The paper cites Lemma 4, suggesting that the
+   result follows from this paper, but Lemma 4 appears in [1], so
+   these results really follow from previously known results}.
 \stav{Not sure what to do.}
 
 
@@ -1122,7 +1132,7 @@ The following defines a ``visibility'' graph when we are restricted to
 a region $R$, where two points are visible if there is a witness
 homothet contained in $R$ having both points on its boundary.
 
-\paragraph{L316, 317: Do not put observations in a definition environment. Besides, the first sentence after the definition shows the same thing, so the observation in the definition seems superfluous.} 
+\reviewCX{L316, 317: Do not put observations in a definition environment. Besides, the first sentence after the definition shows the same thing, so the observation in the definition seems superfluous.} 
 \stav{Removed observation from the definition}
 \begin{defn}
     Let $\CC$ be a bounded convex body in the plane.  Given a region
@@ -1152,10 +1162,21 @@ $\GY{\PS}{R}$.
    $\dGZ{\restrictY{\G}{R}}{\pa}{\pb}\leq (1+\eps)\dGZ{\GA}{\pa}{\pb}
    $.
 	
-   \paragraph{L325 "In particular, for any convex region $D$, the graph $G-D$ is a (1+eps)-spanner for $S(P,R2)-D$." This claim seems to be false. Specifically, in the proof (L744-746), one the "infinite" homothet of $C$ is not necessarily disjoint from the region $D$. An easy counterexample: Take $C=D$ to be a regular triangle, and $p,q$ two points close to a side of $D$ such that any homothet of $C$ that contains both p and q would intersect D. One might get around this by relaxing the condition $p,q$ in $C \subseteq R$ in the definition of safe graphs. Note the difference between $S(P,R2)-D$ and $S(P,R2-D)$. In any case, Remark 21 should be reconsidered, as well as the application to fault-tolerant spanners...}
-   \stav{I think they're correct. This works with $S(P,R2-D)$, but not with $S(P,R2)-D$.}
-   In particular, for any convex region $D$, the graph $\G \gminus D$
-   is a $(1+\eps)$-spanner for $\GY{\PS}{\Re^2} \gminus D$.
+   \reviewCX{L325 "In particular, for any convex region $D$, the graph
+      $G-D$ is a (1+eps)-spanner for $S(P,R2)-D$." This claim seems to
+      be false. Specifically, in the proof (L744-746), one the
+      "infinite" homothet of $C$ is not necessarily disjoint from the
+      region $D$. An easy counterexample: Take $C=D$ to be a regular
+      triangle, and $p,q$ two points close to a side of $D$ such that
+      any homothet of $C$ that contains both p and q would intersect
+      D. One might get around this by relaxing the condition $p,q$ in
+      $C \subseteq R$ in the definition of safe graphs. Note the
+      difference between $S(P,R2)-D$ and $S(P,R2-D)$. In any case,
+      Remark 21 should be reconsidered, as well as the application to
+      fault-tolerant spanners...}  \stav{I think they're correct. This
+      works with $S(P,R2-D)$, but not with $S(P,R2)-D$.}  In
+   particular, for any convex region $D$, the graph $\G \gminus D$ is
+   a $(1+\eps)$-spanner for $\GY{\PS}{\Re^2} \gminus D$.
 \end{corollary}
 \begin{proof}
     Consider the shortest path $\pi = u_1 u_2 \ldots u_k$ between
@@ -1211,8 +1232,10 @@ $\DT_\Pair \cap \disk$ is much longer than the distance between the
 two points of interest. This somewhat counter-intuitive situation is
 illustrated in \figref{bad}.
 
-\paragraph{L344: The example (figure) is not clear enough.}
+\reviewCX{L344: The example (figure) is not clear enough.}
+
 \stav{Not sure how to make this clearer.}
+
 \begin{figure}[h]
     \phantom{} \hfill%
     \includegraphics[page=1,width=0.3\linewidth]{figs/bad_example}
@@ -1229,11 +1252,22 @@ illustrated in \figref{bad}.
 \end{figure}
 
 
-\paragraph{L346 "For $\eps=1/4$, and parameters $n$ and $\Phi>=1$," The spread could, in principle, be unbounded, but the number of edges is always $O(n^2)$, so the lower bound $\Omega(n \log \Phi)$ fails for $\Phi>>2^n$. Does it hold for all $\Phi$ in $[1,2^n]$ ?}
+\reviewCX{L346 "For $\eps=1/4$, and parameters $n$ and $\Phi>=1$," The
+   spread could, in principle, be unbounded, but the number of edges
+   is always $O(n^2)$, so the lower bound $\Omega(n \log \Phi)$ fails
+   for $\Phi>>2^n$. Does it hold for all $\Phi$ in $[1,2^n]$ ?}
+
 \stav{Not sure if it's interesting or not.}
 
-\paragraph{L346-8 "with spread $O(\Phi n)$," For fair comparison, it would be helpful to denote the spread by Phi here, and then the lower bound on the number of edges becomes $\Omega(n \log(\Phi/n))$.}
-\stav{I've changed the results in the table. Maybe we should change spread to $\Phi$ and result accordingly? Should change something in statement regardless. )}
+\reviewCX{L346-8 "with spread $O(\Phi n)$," For fair comparison, it
+   would be helpful to denote the spread by Phi here, and then the
+   lower bound on the number of edges becomes
+   $\Omega(n \log(\Phi/n))$.}
+
+\stav{I've changed the results in the
+   table. Maybe we should change spread to $\Phi$ and result
+   accordingly? Should change something in statement regardless. )}
+
 \SaveContent{\LemmaDiskLowerBound}%
 {%
    For $\eps =1/4$, and parameters $n$ and $\spread \geq 1$, there is
@@ -2149,7 +2183,7 @@ example, a $k$-regular polygon is $k$-nice.
 \end{proof}
 
 
-\paragraph{L486 "the resulting spanner has $O(\eps^{-3} n \log n)$ edges" Is the dependence on epsilon tight? Is the logarithmic factor necessary?}
+\reviewCX{L486 "the resulting spanner has $O(\eps^{-3} n \log n)$ edges" Is the dependence on epsilon tight? Is the logarithmic factor necessary?}
 \stav{Don't know}
 \begin{remark}
     \remlab{improved}%

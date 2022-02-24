@@ -62,7 +62,7 @@
     $\FF$, a \emph{local $t$-spanner} of $\PS$ is a sparse graph $\G$
     over $\PS$, such that for any region $\region \in \FF$ the
     subgraph restricted to $\region$, denoted by
-    $\restrictY{\G}{\region} = \G_{\PS \cap \region}$, is a
+    $\restrictY{\G}{\region}$, is a
     $t$-spanner for all the points of $\region \cap \PS$.
 
     We present algorithms for the construction of local spanners with
@@ -76,12 +76,12 @@
     this improves over the known construction for axis parallel
     squares.
 
-    We also study a somewhat weaker notion of local spanner where one
-    allows to shrink the region a ``bit''. Any spanner is a weak local
-    spanner if the shrinking is proportional to the
-    diameter. Surprisingly, we show a near linear size construction of
+    We also study notions of weaker local spanners where one
+    ie allowed to shrink the region a ``bit''. Surprisingly, we show a near linear size construction of
     a weak spanner for axis-parallel rectangles, where the shrinkage
-    is \emph{multiplicative}.
+    is \emph{multiplicative}. Any spanner is a weak local
+    spanner if the shrinking is proportional to the
+    diameter of the region.
 \end{abstract}
 
 
@@ -101,7 +101,7 @@ between $\pa$ and $\pb$ in $\GB$, is a \emphw{$t$-path}, if the length
 of $\pi$ in $\GB$ is at most $t\cdot\dGZ{\G}{\pa}{\pb}$, where
 $\dGZ{\G}{\pa}{\pb}$ is the length of the shortest path between $\pa$
 and $\pb$ in $\G$.  The graph $\GB$ is a \emphw{$t$-spanner} of $\G$
-if there is a $t$-path in $\GB$, for any $\pa,\pb\in \PS$.  Thus, for
+if there is a $t$-path in $\GB$, for every $\pa,\pb\in \PS$.  Thus, for
 a set of points $\PS\subseteq \Re^d$, a graph $\G$ over $\PS$ is a
 \emphw{$t$-spanner} if it is a $t$-spanner of the Euclidean graph
 $\EucG$. There is a lot of work on building geometric spanners, see
@@ -112,11 +112,11 @@ $\EucG$. There is a lot of work on building geometric spanners, see
 An \emphw{$\FF$-fault-tolerant spanner} for $\PS\subseteq \Re^d$, is a
 graph $\G=(\PS, \EG)$, such that for any region $\region$ (i.e., the
 ``attack''), the graph $\G \gminus \region$ is a $t$-spanner of
-$\EucG - \region$ (See \defref{def:residual:graph} for a formal
-definition of this notation).  Here $\G \gminus \region$ denotes the
+$\EucG - \region$, where $\G \gminus \region$ denotes the
 graph after one deletes from $\G$ all the vertices in
 $\PS \cap \region$, and all the edges in $\G$ whose corresponding
-segments intersect $\region$.  Surprisingly, as shown by Abam \etal
+segments intersect $\region$ (See \defref{def:residual:graph} for a formal
+definition of this notation).  Surprisingly, as shown by Abam \etal
 \cite{abfg-rftgs-09}, such fault-tolerant spanners can be constructed
 where the attack region is any convex set. Furthermore, these spanners
 have a near linear number of edges.
@@ -138,7 +138,7 @@ result is asymptotically tight.
 Recently, Abam and Borouny \cite{ab-lgs-21} introduced the notion of
 local spanners, which can be interpreted as having the complement
 property to being fault-tolerant.  For a family of regions $\FF$, a
-graph $\G = (\PS,\EG)$ is a \emphw{local $t$-spanner} for $\FF$, if
+graph $\G = (\PS,\EG)$ is a \emphw{$\FF$-local $t$-spanner} for $\PS$, if
 for any $\region \in \FF$, the subgraph of $\G$ induced on
 $\PS \cap \region$ is a $t$-spanner.
 % Specifically, this induced subgraph $ \restrictY{\G}{\region}$ is a
@@ -152,8 +152,8 @@ Abam and Borouny \cite{ab-lgs-21} showed how to construct such
 spanners for axis-parallel squares and vertical slabs. In this work,
 we further extend their results.  They also showed how to
 construct such spanners for disks if one is allowed to add Steiner
-points. Abam and Borouny left the question of how to construct local
-spanners for disks as an open problem.
+points, but left the question of how to construct local
+spanners for disks (without Steiner points) as an open problem.
 
 To appreciate the difficulty in constructing local spanners, observe
 that unlike regular spanners, the construction has to take into
@@ -166,7 +166,7 @@ axis-parallel rectangles requires a quadratic number of edges, see
     \centerline{\includegraphics{figs/local_rectangles}}
     \caption{For any point in the top diagonal and bottom diagonal,
        there is a fat axis parallel rectangle that contains only these
-       two points. Thus, a local spanner requires quadratic size in
+       two points. Thus, a local spanner requires a quadratic number of edges in
        this case.  }
     \figlab{bad:rectangles}
 \end{figure}
@@ -186,8 +186,8 @@ to build a path from the source to the destination by finding a
 to a nearby point in the right direction, as done in the
 $\theta$-graph construction, or alternatively, by finding an edge in
 the spanner from the neighborhood of the source to the neighborhood of
-the destination, as done in the spanner constructions using
-well-separated pairs decomposition (\WSPD). Usually, one argues
+the destination, as done in the spanner constructions using a 
+well-separated pair decomposition (\WSPD). Usually, one argues
 inductively that the spanner must have (sufficiently short) paths from
 the source to the start of the jump, and from the end of the jump to
 the destination, and then, combining these implies that the resulting
@@ -284,7 +284,7 @@ unavailable).
       \\
       \hline
       % ------------------------------------------------------------
-      Homothets convex body
+      Homothets of a convex body
       &
       &
       &
@@ -294,7 +294,7 @@ unavailable).
       \\
       \hline
       % ------------------------------------------------------------
-      Homothets $\alpha$-fat triangles
+      Homothets of $\alpha$-fat triangles
       &
       &
       &
@@ -304,7 +304,7 @@ unavailable).
       \\
       \hline
       % ------------------------------------------------------------
-      Homothets triangles
+      Homothets of triangles
       &
       &
       &       
@@ -374,7 +374,7 @@ from its boundary, for $\delta = \Omega(\sqrt{\eps})$ -- see
 A \emphw{homothet} of a convex region $\Body$, is a translated and
 scaled copy of $\Body$.  In \secref{disks} we present a construction
 of spanners, which surprisingly, is not only fault-tolerant for all
-convex regions, but is also a local spanner for homothets of a
+smooth convex regions, but is also a local spanner for homothets of a
 prespecified convex region.  This in particular works for disks, and
 resolves the aforementioned open problem of Abam and Borouny
 \cite{ab-lgs-21}. Our construction is somewhat similar to the original
@@ -383,8 +383,7 @@ $\eps>0$ the construction of a local $(1+\eps)$-spanner for homothets
 takes $\Of\pth{ \eps^{-2} n\log \spread \log n }$ time, and the
 resulting spanner is of size $\Of\pth{ \eps^{-2} n\log \spread }$,
 where $\spread$ is the spread of the input point set $\PS$, and
-$n=|\PS|$. We also provide a lower bound showing that this logarithmic
-dependency on $\spread$ cannot be avoided.
+$n=|\PS|$.
 
 The dependency on the spread $\spread$ in the above construction is
 somewhat disappointing. However,  the lower bound constructions,
@@ -458,7 +457,7 @@ antipodal quadrants.  In $d$ dimensions there is such a decomposition
 with $\Of( n \log^{d-1} n)$ pairs, and weight
 $\Of( n \log^{d} n)$.  A somewhat similar idea was used by Abam and
 Borouny \cite{ab-lgs-21} for the $d=1$ case. This
-decomposition is very useful in this scenario and We believe
+decomposition is very useful in this scenario and we believe
 it may be of independent interest.
 
 \paragraph*{Multiplicative weak local spanner for rectangles}

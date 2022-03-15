@@ -449,16 +449,14 @@ result.
 
 \paragraph*{Quadrant separated pair decomposition (\QSPD)}
 
-In \apndref{qspd}, we describe a novel pair-decompos\-\si{ition}.
+In \apndref{qspd}, we describe a pair-decompos\-\si{ition} which is a special case of a decomposition given by Agarwal \etal\cite{aesw-emstbcp-90}.
 Specifically, the \QSPD breaks the input point set $\PS$ into pairs,
 such that for any pair $\{\PX, \PY\}$ we have the property that there
 is a translated set of axes such that $\PX$ and $\PY$ belong to two
 antipodal quadrants.  In $d$ dimensions there is such a decomposition
 with $\Of( n \log^{d-1} n)$ pairs, and weight
 $\Of( n \log^{d} n)$.  A somewhat similar idea was used by Abam and
-Borouny \cite{ab-lgs-21} for the $d=1$ case. This
-decomposition is very useful in this scenario and we believe
-it may be of independent interest.
+Borouny \cite{ab-lgs-21} for the $d=1$ case.
 
 \paragraph*{Multiplicative weak local spanner for rectangles}
 
@@ -649,13 +647,13 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
     axis-parallel cube containing $\PSX$, and denote its sidelength by
     $r$.  Let $r' = r / \ceil{\sqrt{d} \beta }$.  Partition $\sqr$
     into a grid of cubes of sidelength $r'$, and let $T_\Pair$ be the
-    resulting set of squares. The algorithm now add the set pairs
+    resulting set of squares. The algorithm now add the set of pairs
     \begin{equation*}
         \Set{ \{ \PSX \cap \sqrA, \PSY \} }{ \sqrA \in T_\Pair }
     \end{equation*}
     to the output \SSPD. Clearly, the resulting set is now
     $\alpha\beta$-semi separated, as we chopped the smaller part of
-    each pair into $\beta$ smaller portions.
+    each pair into portions smaller by a factor of $1/\beta$.
 \end{proof}
 
 
@@ -719,7 +717,7 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
         \Set{ \pa \in \body }{ \dsY{\pa}{ \Re^2 \setminus \body} \geq \delta \cdot
            \diameterX{\body}}.
     \end{equation*}
-    More formally, $\shrinkDY{\body}{\delta}$ is the Minkowski difference
+    In other words, $\shrinkDY{\body}{\delta}$ is the Minkowski difference
     of $\body$ with a disk of radius $\delta \cdot \diameterX{\body}$.
 \end{defn}
 
@@ -755,7 +753,7 @@ $\shrinkDY{\body}{\delta}$ is empty.
     that for any (bounded) convex $\body$ in the plane, we have that
     for any two points
     $\pa, \pb \in \PS \cap \shrinkDY{\body}{\delta}$ the graph
-    $\restrictY{ \body }{\PS}$ has $(1+\eps)$-path between $\pa$ and
+    $\restrictY{ \body }{\PS}$ has a $(1+\eps)$-path between $\pa$ and
     $\pb$.
 \end{lemma}
 \begin{proof}
@@ -766,7 +764,7 @@ $\shrinkDY{\body}{\delta}$ is empty.
     $\G$ for $\PS$ using $\Of( \epsA^{-1} n)$ edges (e.g.,
     \cite{ams-dagss-99}).
 
-    So, consider any body $\body \in \FF$, and any two vertices
+    So, consider any body $\body \in \FF$, and any two points
     $\pa, \pb \in \PS \cap \body'$, where
     $\body'=\shrinkDY{\body}{\delta}$, let $\ell = \dY{\pa}{\pb}$, let
     $\pi$ be the shortest path between $\pa$ and $\pb$ in $\G$, and
@@ -866,7 +864,7 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\EucG \cap \region$.
 \begin{theorem}[\cite{cd-vdbcdf-85}]
     \thmlab{c:t:construct_delaunay_graph}%
     %
-    For any convex body $\CC$ and a set of points $\PS$,
+    For any convex body $\CC$ and set of points $\PS$,
     $\DG_{\CC}(\PS)$ can be computed in $\Of(n \log n)$ time.
     Furthermore, the triangulation $\DG_{\CC}(\PS)$ has $\Of(n)$
     edges, vertices, and faces.
@@ -878,8 +876,7 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\EucG \cap \region$.
     \includegraphics[page=2]{figs/shrink_2}%
     \hfill%
     \includegraphics[page=3]{figs/shrink_2}
-    \caption{Shrinking of homothets so two points becomes on the
-       boundary of the homothet.}
+    \caption{Shrinking of a homothet so that two specific points would lie on its boundary.}
     \figlab{shrink:h}
 \end{figure}
 
@@ -900,8 +897,7 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\EucG \cap \region$.
     $f_{\beta, \pd} : \px \mapsto \beta (\px - \pd) + \pd $. It is a
     scaling of the plane around $\pd$ by a factor of $\beta$. Let
     $\beta'$ be the minimum value of $\beta$ such that
-    $C_1 = f_{\beta,\pa}(C)$ contains $\pb$ (i.e. central dilation, we
-    shrink $C$ around $\pa$ till $\pb$ becomes a boundary
+    $C_1 = f_{\beta,\pa}(C)$ contains $\pb$ (i.e. we perform central dilation of $C$ around $\pa$ till $\pb$ becomes a boundary
     point). Next, shrink $C'$ around $\pb$, till $\pa$ becomes a
     boundary point -- formally, let $\beta''$ be the minimum value of
     $\beta$ such that $C' = f_{\beta,\pb}(C_1)$ contains $\pa$. Since
@@ -967,16 +963,15 @@ triangulations, also holds for homothets.
 \seclab{disk_construction}
 
 The input is a set $\PS$ of $n$ points in the plane (in general
-position) with spread $\spread = \spreadX{\PS}$, and a parameter
-$\eps \in (0,1)$. We have a convex body $\CC$ that defines the
-``unit'' ball. The task is to construct a local spanner for any
-homothet of $\CC$.
+position) with spread $\spread = \spreadX{\PS}$, a parameter
+$\eps \in (0,1)$, and a convex body $\CC$ that defines the
+``unit'' ball. The task is to construct $\CC$-local spanner.	
 
 The algorithm computes a $(1/\epsA)$-\WSPD $\WS$ of $\PS$ using the
 algorithm of \lemref{s:s:p:d:spread}, where $\epsA = \eps/6$.  For
 each pair $\Pair = \{\PSX, \PSY \} \in \WS$, the algorithm computes
 the $\CC$-Delaunay triangulation
-$\DT_{\Pair} = \DG_{\CC}(\PSX \cup \PSY)$. The algorithm adds all the
+$\DT_{\Pair} = \DG_{\CC}(\PSX \cup \PSY)$, and adds all the
 edges in $\DT_{\Pair} \cap (\PSX \otimes \PSY)$ to the computed graph
 $\G$.
 
@@ -998,7 +993,7 @@ by
     \sum_{\{\PSX, \PSY\} \in \WS} O\bigl( |\PSX| + |\PSY| \bigr) =%
     \Of\pth{ \WeightX{\WS} }%
     =%
-    \Of\pth{ \frac{n\log \spread}{{\epsA}^{2}}},
+    \Of\pth{ n{\epsA}^{-2}\log \spread},
 \end{math}
 by \lemref{s:s:p:d:spread}.
 
@@ -1010,7 +1005,7 @@ The construction time is bounded by
     (|\PSX| + |\PSY|) \bigr) =%
     \Of\pth{ \WeightX{\WS} \log n }%
     =%
-    \Of\pth{ \frac{n\log \spread \log n}{{\epsA}^{2}}}.    
+    \Of\pth{ n{\epsA}^{-2}\log \spread \log n}.    
 \end{equation*}
 
 \begin{lemma}[Local spanner property]
@@ -1153,7 +1148,7 @@ $\GY{\PS}{R}$.
     these paths directly yields the desired result.
 	
     The second claim follows by observing that the complement of $D$
-    is the union of halfspaces, and halfspaces can be considered to be
+    is a union of halfspaces, and halfspaces can be considered to be
     ``infinite'' homothets of $\CC$. As such, the above argument
     applies verbatim.
 \end{proof}
@@ -1162,8 +1157,8 @@ $\GY{\PS}{R}$.
     The above implies that local spanners for (smooth) homothets are
     also robust to convex region faults. Namely, this construction
     both provides a local spanner and a fault tolerant spanner, where
-    the locality is for homothets of the given body, and the faults
-    are for any convex regions.
+    the locality is for homothets of the given body, and the fault-tolerance
+    is for any convex region.
 \end{remark}
 
 
@@ -1190,8 +1185,8 @@ as the total weight of the \SSPD is near linear (with no dependency on
 the spread). Furthermore, after some post processing, one can assume
 every pair $\Pair = \{ \PSX, \PSY \}$ is angularly $\eps$-separated --
 that is, there is a double wedge with angle $\leq \eps$, such that
-$\PSX$ and $\PSY$ are of different sides of the double wedge. The
-problem is that for the local disk $\disk$, it might be that the
+$\PSX$ and $\PSY$ are on different sides of the double wedge. The
+problem is that for a disk $\disk$, it might be that the
 bridge edge between $\PSX$ and $\PSY$ that is in
 $\DT_\Pair \cap \disk$ is much longer than the distance between the
 two points of interest. This somewhat counter-intuitive situation is
@@ -1574,8 +1569,8 @@ $\cone \in \ConeSet_i$.
         \figlab{tri_cone_edge:b}
     \end{figure}
     
-    The other possibility is that $\dY{\pa}{\pb} > \dY{\pa}{\pc}$,
-    illustrated in \figref{tri_cone_edge:b}.  Let $\pc'$ be the
+    The other possibility, illustrated in \figref{tri_cone_edge:b}, is that $\dY{\pa}{\pb} > \dY{\pa}{\pc}$,
+    Let $\pc'$ be the
     projection of $\pc$ to $\pa \pb$. Observe that
     \begin{equation*}
         \dY{\pc}{\pc'}%
@@ -1596,8 +1591,8 @@ $\cone \in \ConeSet_i$.
     \end{math}
     We thus have that
     \begin{align*}
-      \tau
-      &=%
+      {\color{white}\tau}
+      &%
         \dY{\pa}{\pc}%
         +%
         (1+\eps)\dY{\pb}{\pc}%
@@ -1605,7 +1600,8 @@ $\cone \in \ConeSet_i$.
         (1+\eps^2/4)\dY{\pa}{\pc'}
         +(1+\eps)\pth{ \Bigl.
         \dY{\pc}{\pc'} + \dY{\pc'}{\pb}}
-      \\&
+      \\
+      &
       \leq%
       \bigl(1+\eps^2/4 + (1+\eps)\eps/8\bigr)\dY{\pa}{\pc'} 
       + (1+\eps)\dY{\pc'}{\pb}
@@ -1622,8 +1618,8 @@ $\cone \in \ConeSet_i$.
     Let $\triangle$ be a triangle that contains two points $\pa,
     \pb$. Then, there is a homothet $\triangle'\subseteq \triangle$ of
     $\triangle$, such that one of these points is a vertex of
-    $\triangle'$, and the other point lies on a facing edge of
-    $\triangle'$. %
+    $\triangle'$, and the other point lies on the edge of
+    $\triangle'$ facing that vertex. %
 \end{lemma}
 
 \begin{proof}
@@ -1632,7 +1628,7 @@ $\cone \in \ConeSet_i$.
     homothet $\triangle'$ with $\pa,\pb \in \partial\triangle'$ is
     found, if neither point is on a vertex, we ``push'' the only edge
     that does not contain one of the points towards the vertex $v$
-    opposite of it (this the same mapping described in
+    opposite of it (this is the same mapping described in
     \lemref{shrink:shrank} with center $v$), until one of the points,
     say $\pa$ lies on the edge. $\pa$ now lies on two edges, meaning,
     at a vertex, while $q$ lies on the only remaining edge which must
@@ -1764,7 +1760,7 @@ $\eps \cdot \diamX{\Trap}$.
     \lemlab{good:jump:traps}%
     %
    Let $\eps \in (0,1)$ be some parameter, and $\epsA = \eps/16$.  Let
-   $\PX,\PY$ be two point sets that are $\epsA$-semi separated and
+   $\PX,\PY$ be two point sets that are $(1/\epsA)$-semi separated and
    $\epsA$-angularly separated (see \defref{angular:separated}), and
    let $\Trap$ be a $\epsA$-narrow trapezoid, with two points
    $\pa \in \PX$ and $\pb \in \PY$ lying on the two legs of
@@ -1799,14 +1795,14 @@ $\eps \cdot \diamX{\Trap}$.
        \lemref{good:jump:traps}. Left: A $\epsA$-narrow trapezoid with
        $\pa$ and $\pb$ on its legs. Center: $\pa$ and $\pb$ are
        $\epsA$-semi separated and $\epsA$-angularly separated. Right:
-       The triangle of all the points of the trapezoids that their
+       The triangle of all the points of the trapezoids whose
        nearest point on $\pa \pb$ is $\pb$. }
     \figlab{narrow:trap}
 \end{figure}
 \begin{proof}
     Let $\DT = \DG_\Trap(\PX \cup \PY)$.  \clmref{c:t:connected}
     implies that $\DT \cap \Trap$ is connected. Thus, there is a path
-    in $\DT \cap \Trap$ between $\pa$ and $\pb$, and thus, there must
+    in $\DT \cap \Trap$ between $\pa$ and $\pb$, and therefore, there must
     be an edge $\pa'\pb'$ along this path with $\pa' \in X$ and
     $\pb' \in Y$. This implies part (I).
     
@@ -2166,6 +2162,7 @@ example, a $k$-regular polygon is $k$-nice.
 % \seclab{qspd}
 \apndlab{qspd}
 
+For the purpose of building our spanners, we use a variation of a pair decomposition introduced by Agarwal \etal \cite{aesw-emstbcp-90}.
 For two points $\pa = (p_1, \ldots, p_d)$ and
 $\pb = (q_1, \ldots, q_d)$ in $\Re^d$, let $\pa \prec \pb$ denotes
 that $\pb$ \emphi{dominates} $\pa$ coordinate-wise. That is

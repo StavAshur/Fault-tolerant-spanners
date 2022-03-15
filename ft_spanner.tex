@@ -1826,7 +1826,7 @@ $\eps \cdot \diamX{\Trap}$.
         (1-2\epsA) \ell,
     \end{equation*}
     since $\cos \epsA \geq 1-\epsA^2 /2$, for $\epsA <1/2$.  Similar
-    argumentation implies that $\dY{\pa}{\pb''} \leq (1+\epsA)
+    arguments imply that $\dY{\pa}{\pb''} \leq (1+\epsA)
     \ell$. As such, we have
     \begin{equation*}
         \dY{\pb'}{\pb''} \leq ( 1+\epsA)\ell \sin \angle\pa'\pa \pb'
@@ -1846,7 +1846,7 @@ $\eps \cdot \diamX{\Trap}$.
         \dY{\pa}{\pb} - \ell.
     \end{equation*}
     
-    Thus, we have that
+    and finally,
     \begin{align*}
       &(1+\eps)\dY{\pa}{\pa'} + \dY{\pa'}{\pb'} + (1+\eps)
         \dY{\pb'}{\pb}
@@ -1863,12 +1863,12 @@ $\eps \cdot \diamX{\Trap}$.
       \leq%
       (1+\eps)\dY{\pa}{\pb},
     \end{align*}
-    for $\epsA \leq \eps/2$. Which establish the claim in this case.
+    for $\epsA \leq \eps/2$. Which establishes the claim in this case.
     
-    The case that $\pb''=\pa$ is impossible, because of the angular
-    separation property. Thus, the only remaining possibility is that
+    The case $\pb''=\pa$ is impossible because of the angular
+    separation property, and so, the only remaining possibility is that
     $\pb'' = \pb$. This however implies that $\pb'$ must be in the
-    triangle of all the points of the trapezoids that their nearest
+    triangle of all the points of the trapezoid whose nearest
     point on $\pa \pb$ is $\pb$. The diameter of this triangle is
     bounded by the length of the leg of the trapezoid, which is
     bounded by $\epsA \, \diamC$. Namely, we have
@@ -1941,7 +1941,7 @@ example, a $k$-regular polygon is $k$-nice.
     $M =\max_{e \in \EGX{\Body}} \ceil{\| e\| / \constA} = \Of(
     1/\epsA)$.
     
-    In addition, place $\constC t$ equally spaced points between any
+    In addition, place $\constC \cdot t$ equally spaced points between any
     two consecutive points of $\PS$, where $\constC$ is a constant to
     be determined shortly. Let $\PSA$ be the set resulting from $\PS$
     after adding all these points.
@@ -2021,12 +2021,12 @@ example, a $k$-regular polygon is $k$-nice.
     lower bound on the length of the projection of $\pa_1 \pa_2$ on
     the line spanned by $\pb_1 \pb_2$. However,
     $\dY{\pb_1}{\pb_2} \leq 2\constA/\constC t = \Of( \epsA \psi
-    /\constC t) < h'$, by picking $\constC$ to be sufficiently large
+    /\constC t) < h'$, by picking $\constC$ to be a sufficiently large
     constant.
     
     This readily implies that the trapezoid induced by the direction
     $ u = \overrightarrow{\pa_1 \pb_2}$ in $\Traps_u'$ that contains
-    $\pa$ on its leg, contains $\pb$ on its other leg.
+    $\pa$ on one of its leg, and $\pb$ on the other.
 \end{proof}
 
 
@@ -2162,9 +2162,9 @@ example, a $k$-regular polygon is $k$-nice.
 % \seclab{qspd}
 \apndlab{qspd}
 
-For the purpose of building our spanners, we use a variation of a pair decomposition introduced by Agarwal \etal \cite{aesw-emstbcp-90}.
+For the purpose of building the spanners in this section, we use a variation of a pair decomposition introduced by Agarwal \etal \cite{aesw-emstbcp-90}.
 For two points $\pa = (p_1, \ldots, p_d)$ and
-$\pb = (q_1, \ldots, q_d)$ in $\Re^d$, let $\pa \prec \pb$ denotes
+$\pb = (q_1, \ldots, q_d)$ in $\Re^d$, let $\pa \prec \pb$ denote
 that $\pb$ \emphi{dominates} $\pa$ coordinate-wise. That is
 $p_i < q_i$, for all $i$. More generally, let $\pa <_i \pb$ denote
 that $\pa_i < \pb_i$. For two point sets $\PSX, \PSY \subseteq \Re^d$,
@@ -2199,9 +2199,9 @@ quadrant-separated for all $i$.
     $\PS_{\leq x} = \Set{ \pa \in \PS }{\pa \leq x}$ contains exactly
     $\ceil{n/2}$ points, and $\PS_{> x} = \PS \setminus \PS_{\leq x}$
     contains $\floor{n/2}$ points. Construct the pair
-    $\Pair = \{ \PS_{\leq x}, \PS_{> x} \}$, and compute recursively a
+    $\Pair = \{ \PS_{\leq x}, \PS_{> x} \}$, and recursively compute 
     \QSPD{}s $\QS_{\leq x}$ and $\QS_{> x}$ for $\PS_{\leq x}$ and
-    $\PS_{> x}$, respectively. The desired \QSPD is
+    $\PS_{> x}$ respectively. The desired \QSPD is
     \begin{math}
 	\QS_{\leq x} \cup \QS_{> x} \cup \{ \Pair \}.
     \end{math}
@@ -2229,7 +2229,7 @@ quadrant-separated for all $i$.
     Let $\PS_{\uparrow}$ and $\PS_{\downarrow}$ be the subset of
     points of $\PS$ that are above and below $h$, respectively. The
     algorithm recursively computes \QSPD{}s $\QS_\uparrow$ and
-    $\QSdown$ for $\PSup$ and $\PS_{\downarrow}$, respectively.  Next,
+    $\QSdown$ for $\PSup$ and $\PS_{\downarrow}$ respectively.  Next,
     the algorithm projects the points of $\PS$ on $h$, let $\PS'$ be
     the resulting $d-1$ dimensional point set (after we ignore the
     $d$\th coordinate), and recursively computes a \QSPD $\QS'$ for
@@ -2252,9 +2252,8 @@ quadrant-separated for all $i$.
     \end{equation*}
     The desired \QSPD is $\widehat{\QS} \cup \QSup \cup \QSdown$.
 	
-    To observe that this is indeed a \QSPD, observe that all the pairs
-    in $\QSup, \QSdown$ are quadrant separated by induction. As for
-    pairs in $\widehat{\QS}$, they are quadrant separated in the first
+    To observe that this is indeed a \QSPD as all the pairs
+    in $\QSup, \QSdown$ are quadrant separated by induction, and pairs in $\widehat{\QS}$ are quadrant separated in the first
     $d-1$ coordinates by induction on the dimension, and separated in
     the $d$ coordinate since one side of the pair comes from $\PSup$,
     and the other side from $\PSdown$.
@@ -2262,7 +2261,7 @@ quadrant-separated for all $i$.
     As for coverage, consider any pair of points $\pa, \pb \in \PS$,
     and observe that the claim holds by induction if they are both in
     $\PSup$ or $\PSdown$. As such, assume that $\pa \in \PSup$ and
-    $\pb \ni \PSdown$. But then there is a pair
+    $\pb \in \PSdown$. But then there is a pair
     $\{\PSX', \PSY'\} \in \QS'$ that separates the two projected
     points in $h$, and clearly one of the two lifted pairs that
     corresponds to this pair quadrant-separates $\pa$ and $\pb$ as
@@ -2297,7 +2296,7 @@ of $1-\delta$.
 
 
 Let $\Rects$ be the set of all axis parallel rectangles in the
-plane. For a rectangle $\rect \in \Rects$, with $\rect = I \times J$,
+plane. For a rectangle $\rect \in \Rects$ with $\rect = I \times J$,
 let $(1-\delta)\rect = (1-\delta)I \times (1-\delta)J$ denote the
 rectangle resulting from shrinking $\rect$ by a factor of $1-\delta$.
 
@@ -2329,11 +2328,11 @@ previous notion of shrinkage used before is not useful in this case.
          \end{figure}
 
          Consider a pair $\Pair = \{\PSX, \PSY \}$ in a \QSPD of
-         $\PS$. The set $\PSX$ is quadrant-separated from $\PSY$. That
-         is, there is a point $\cen_\Pair$, such that $\PSX$ and
+         $\PS$. The set $\PSX$ is quadrant-separated from $\PSY$, that
+         is, there is a point $\cen_\Pair$ such that $\PSX$ and
          $\PSY$ are contained in two opposing quadrants in the
          partition of the plane formed by the vertical and horizontal
-         line through $\cen_\Pair$.
+         lines through $\cen_\Pair$.
 
          For simplicity of exposition, assume that
          $\cen_\Pair = (0,0)$, and $\PSX \prec (0,0 ) \prec
@@ -2342,7 +2341,7 @@ previous notion of shrinkage used before is not useful in this case.
          quadrant.
 
 
-         We construct a non-uniform grid $\grid(\pa, \Pair)$ in the
+         For a point $\pa = (-x,-y)\in \PSX$ we construct a non-uniform grid $\grid(\pa, \Pair)$ in the
          square $[0,x+y]^2$.  To this end, we first partition it into
          four subrectangles
          \begin{equation*}
@@ -2545,7 +2544,7 @@ in \figref{x:expand}.  Similarly, we denote
     by \lemref{cases} \itemref{small:diam} (verifying this requires
     some standard calculations which we omit).
 	
-    Otherwise, one need to apply the same argument using the
+    Otherwise, one needs to apply the same argument using the
     appropriate case of \lemref{cases}.  So assume that $x \geq y$
     (the case that $y \geq x$ is handled symmetrically). If
     $\cell \subseteq \rect_\swarrow \cup \rect_\searrow$, then
@@ -2559,7 +2558,7 @@ in \figref{x:expand}.  Similarly, we denote
     we have $(1-\delta)^{-1}\rectB \subseteq \rect$. Namely,
     $\pb \in (1-\delta)\rect \cap \cell \subseteq \rectB$, and let
     $\pc$ be the lowest point in $\cell \cap \PS$. By construction
-    $\pa \pc \in \EGX{\G}$, $\pb, \pc \in \rectB$,
+    $\pa \pc \in \EGX{\G}$, $\pb, \pc \in \rectB$, and 
     $(1-\delta)^{-1} \rectB \subseteq \rect$. As such, we can apply
     induction to $\pb$, $\pc$, and $(1-\delta)^{-1} \rectB$, and
     conclude that $\dGZ{\G}{\pb}{\pc} \leq (1+\eps) \dY{\pb}{\pc}$.
@@ -2586,7 +2585,7 @@ in \figref{x:expand}.  Similarly, we denote
     leftmost points in $(\PSX \cup \PSY) \cap \cell$, for each cell in
     the constructed grid. This can readily be done using orthogonal
     range trees in $\Of( \log^2 n)$ time per query (a somewhat faster
-    query time should be possible by using that offline nature of the
+    query time should be possible by using the offline nature of the
     queries, etc). This yields the construction time. The size of the
     computed graph is
     $\Of(\WeightX{\WS} \gConst^2) = O\bigl((1/\delta^2 + 1/\eps^2) n
@@ -2656,11 +2655,11 @@ the numerous detailed comments.
 
 \begin{proof}
     By using \lemref{chop:easy}, we can assume that $\WS$ is (say)
-    $(10/\eps)$-separated.  Now, the algorithm scans the pairs of
-    $\WS$. For each pair $\Pair = \{ \PSX, \PSY \} \in \WS$, assume
-    that $\diameterX{\PSX} < \diameterX{\PSY}$. Let $\square$ be the
+    $(10/\eps)$-separated. For each pair $\Pair = \{ \PSX, \PSY \} \in \WS$, assume
+    that $\diameterX{\PSX} < \diameterX{\PSY}$. Now, the algorithm scans the pairs of
+    $\WS$ and performs the following procedure for each one. Let $\square$ be the
     smallest axis-parallel square containing $\PSX$, centered at point
-    $\origin$.  Partition the plane around $\origin$, by drawing
+    $\origin$. Partition the plane around $\origin$, by drawing
     $\Of(1/\eps)$ lines intersecting $\origin$ with the angle between
     any two consecutive lines being at most (say) $\eps/4$, see
     \figref{partition}. This partitions the plane into a set of cones
@@ -2702,7 +2701,7 @@ the numerous detailed comments.
     creates an angle $\leq\pi/4$ with the $x$-axis (by the choice of
     the angle of $\coneB$).  We therefore get that the $x$-coordinate
     difference between $\square$ and $\pb$ is at most
-    $10/\eps\cdot \cos\frac{\pi}{4}-1\leq 7/\eps-1\leq 6/\eps$. So let
+    $10/\eps\cdot \cos\frac{\pi}{4}-1\leq 7/\eps-1\leq 6/\eps$. So, let
     $\seg'$ be a vertical segment between the upper and lower rays of
     $\coneB$, with $x$-coordinate distance of $6/\eps-\frac{1}{2}$
     from $\square$ (in order to make calculations easier). We get that

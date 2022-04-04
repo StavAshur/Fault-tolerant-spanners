@@ -1,5 +1,5 @@
 \def\UseBibLatex{1}
-% \def\SoCG{1}%
+\def\ESA{1}%
 \input{prefix}%
 
 
@@ -8,7 +8,7 @@
 
 \title{Local Spanners Revisited}
 
-\NotSoCGVer{%
+\NotESAVer{%
    \author{%
       Stav Ashur%
       \StavThanks{}%
@@ -19,7 +19,7 @@
    }%
 }%
 
-\SoCGVer{%
+\ESAVer{%
    \author{Stav Ashur}%
    {Department of Computer Science, University of Illinois, 201
       N. Goodwin Avenue, Urbana, IL 61801, USA}%
@@ -37,7 +37,7 @@
       CCF-1907400.}%
 }%
 
-\SoCGVer{%
+\ESAVer{%
    \authorrunning{S. Ashur and S. Har-Peled} %
    \Copyright{Stav Ashur and Sariel Har-Peled}%
    \ccsdesc[500]{Theory of computation~Computational geometry}%
@@ -46,7 +46,7 @@
 }
 
 
-\NotSoCGVer{\date{\today}}
+\NotESAVer{\date{\today}}
 
 \begin{document}
 
@@ -975,10 +975,10 @@ $\DT_{\Pair} = \DG_{\CC}(\PSX \cup \PSY)$, and adds all the
 edges in $\DT_{\Pair} \cap (\PSX \otimes \PSY)$ to the computed graph
 $\G$.
 
-\begin{remark:unnumbered}
+\begin{remark}
     In the above algorithm, the idea of computing a triangulation for
     each \WSPD pair seems to be new.
-\end{remark:unnumbered}
+\end{remark}
     
 
 \subsubsection{Analysis}
@@ -1177,7 +1177,7 @@ on the spread of the point set (logarithmically, but still).  Next, we
 show a lower bound proving that this dependency is unavoidable, even
 in the case of disks.
 
-\SoCGVer{\bigskip}%
+\ESAVer{\bigskip}%
 \myparagraph{Some intuition} A natural way to attempt a
 spread-independent construction is to try and emulate the construction
 of Abam \etal \cite{abfg-rftgs-09} and use a \SSPD instead of a \WSPD,
@@ -2613,10 +2613,10 @@ the numerous detailed comments.
 
 
 \BibTexMode{%
-   \SoCGVer{%
+   \ESAVer{%
       \bibliographystyle{plainurl}%
    }%
-   \NotSoCGVer{%
+   \NotESAVer{%
       \bibliographystyle{alpha}%
    }%
    \bibliography{ft_spanner}%

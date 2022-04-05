@@ -1,4 +1,4 @@
-%\def\UseBibLatex{1}%
+% \def\UseBibLatex{1}%
 \def\ESA{1}%
 \input{prefix}%
 
@@ -18,22 +18,23 @@
 }%
 
 \ESAVer{%
-   \author{Stav Ashur}%
-   {Department of Computer Science, University of Illinois, 201
-      N. Goodwin Avenue, Urbana, IL 61801, USA}%
-   {stava2@illinois.edu}% Email
-   {https://orcid.org/0000-0003-0533-8978}%
-   {}%
+   \remove{%
+      \author{Stav Ashur}%
+      {Department of Computer Science, University of Illinois, 201
+         N. Goodwin Avenue, Urbana, IL 61801, USA}%
+      {stava2@illinois.edu}% Email
+      {https://orcid.org/0000-0003-0533-8978}%
+      {}%
    % 
    % 
-   \author{Sariel Har-Peled}%
-   {Department of Computer Science, University of Illinois, 201
-      N. Goodwin Avenue, Urbana, IL 61801, USA}%
-   {sariel@illinois.edu}% Email
-   {https://orcid.org/0000-0003-2638-9635}% Orchid ID
-   {Work on this paper was partially supported by a NSF AF award
-      CCF-1907400.}%
-}%
+      \author{Sariel Har-Peled}%
+      {Department of Computer Science, University of Illinois, 201
+         N. Goodwin Avenue, Urbana, IL 61801, USA}%
+      {sariel@illinois.edu}% Email
+      {https://orcid.org/0000-0003-2638-9635}% Orchid ID
+      {Work on this paper was partially supported by a NSF AF award
+         CCF-1907400.}%
+   } }%
 
 \ESAVer{%
    \authorrunning{S. Ashur and S. Har-Peled} %
@@ -47,6 +48,7 @@
 \NotESAVer{\date{\today}}
 
 \begin{document}
+\pagestyle{empty}%
 
 \maketitle
 
@@ -74,16 +76,21 @@
     this improves over the known construction for axis parallel
     squares.
 
-    We also study notions of weaker local spanners where one
-    ie allowed to shrink the region a ``bit''. Surprisingly, we show a near linear size construction of
-    a weak spanner for axis-parallel rectangles, where the shrinkage
-    is \emph{multiplicative}. Any spanner is a weak local
-    spanner if the shrinking is proportional to the
-    diameter of the region.
+    We also study notions of weaker local spanners where one is
+    allowed to shrink the region a ``bit''. Surprisingly, we show a
+    near linear size construction of a weak spanner for axis-parallel
+    rectangles, where the shrinkage is \emph{multiplicative}. Any
+    spanner is a weak local spanner if the shrinking is proportional
+    to the diameter of the region.
 \end{abstract}
 
+\ESAVer{%
+   \newpage%
+   \pagestyle{headings}%
+   \setcounter{page}{1} 
+}%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -447,7 +454,7 @@ result.
 
 \paragraph*{Quadrant separated pair decomposition (\QSPD)}
 
-In \apndref{qspd}, we describe a pair-decompos\-\si{ition} which is a special case of a decomposition given by Agarwal \etal\cite{aesw-emstbcp-90}.
+In \apndref{qspd}, we describe a pair-\si{decompos\-\si{ition}} which is a special case of a decomposition given by Agarwal \etal\cite{aesw-emstbcp-90}.
 Specifically, the \QSPD breaks the input point set $\PS$ into pairs,
 such that for any pair $\{\PX, \PY\}$ we have the property that there
 is a translated set of axes such that $\PX$ and $\PY$ belong to two
@@ -2608,7 +2615,7 @@ the numerous detailed comments.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\ESAVer{\newpage}
 
 \BibTexMode{%
    \ESAVer{%

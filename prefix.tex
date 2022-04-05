@@ -6,10 +6,9 @@
 %%%% Search the lipics/ subdirectory for style/files...
 \makeatletter
 \def\input@path{{lipics/}{../lipics/}}
-
 \makeatother
 %\documentclass[a4paper,USenglish,cleveref,autoref,thm-restate, nolineno ]{socg-lipics-v2021}
-\documentclass[a4paper,USenglish,cleveref,autoref,thm-restate]%
+\documentclass[a4paper,USenglish,cleveref,autoref,thm-restate, nolineno]%
 {lipics-v2021}
 
 \hideLIPIcs 
@@ -136,14 +135,10 @@
 \BibLatexMode{%
 %   \usepackage[bibencoding=utf8,style=alphabetic,%
 %   backend=biber,sortlocale=en_US]{biblatex}%
-   \UsePackage{sariel_biblatex}%
-%   Stav: changed this because of some option clash (it is USenglish at the top)
-%	\usepackage[english]{babel}%
-
-   \usepackage[]{babel}%
-   
-   \usepackage{csquotes}
-   \renewcommand*{\multicitedelim}{\addcomma\space}%
+	\UsePackage{sariel_biblatex}%
+	\usepackage[english]{babel}%
+	\usepackage{csquotes}
+	\renewcommand*{\multicitedelim}{\addcomma\space}%
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

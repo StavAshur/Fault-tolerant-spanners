@@ -13,3 +13,7 @@ figs/old/
 .config_latex
 .latex_color
 sariel_biblatex.sty
+ESA/ft_spanner.bbl
+ESA/ft_spanner.blg
+ESA/ft_spanner.pdf
+ESA/ft_spanner.vtc

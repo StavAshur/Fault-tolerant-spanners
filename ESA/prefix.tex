@@ -1,0 +1,690 @@
+\ifx\ESA\undefined%
+\documentclass[11pt]{article}%
+\providecommand{\ESAVer}[1]{}%
+\providecommand{\NotESAVer}[1]{#1}%
+\else%
+%%%% Search the lipics/ subdirectory for style/files...
+\makeatletter
+\def\input@path{{lipics/}{../lipics/}}
+\makeatother
+%\documentclass[a4paper,USenglish,cleveref,autoref,thm-restate, nolineno ]{socg-lipics-v2021}
+\documentclass[a4paper,USenglish,cleveref,autoref,thm-restate, nolineno]%
+{lipics-v2021}
+
+\hideLIPIcs 
+\providecommand{\ESAVer}[1]{#1}%
+\providecommand{\NotESAVer}[1]{}%
+\fi
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+% Conditional compilation depending on whether this is my computer or
+% not.
+\IfFileExists{sariel_computer.sty}{\def\sarielComp{1}}{}
+
+\ifx\sarielComp\undefined%
+\newcommand{\SarielComp}[1]{}
+\newcommand{\NotSarielComp}[1]{#1}%
+\else
+\newcommand{\SarielComp}[1]{#1}%
+\newcommand{\NotSarielComp}[1]{}%
+\fi
+\newcommand{\IfPrinterVer}[2]{#2}%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\NotESAVer{%
+\usepackage[cm]{fullpage}%
+}
+
+\usepackage{amsmath}%
+\usepackage{amssymb}%
+\usepackage[cmyk]{xcolor}%
+
+\NotESAVer{%
+%   \usepackage[utf8x]{inputenc}%
+   \usepackage{euscript}%
+}
+\NotESAVer{%
+   \usepackage[amsmath,thmmarks]{ntheorem}%
+   \theoremseparator{.}%
+}
+
+%%%% Number paragraphs
+%\setcounter{secnumdepth}{5}
+
+\NotESAVer{%
+   \usepackage{titlesec}%
+   \titlelabel{\thetitle. }%
+   
+   \titleformat{\paragraph}[runin]
+   {\normalfont\bfseries}
+   {\theparagraph}
+   {1em}
+   {\addperiod}
+   
+   \newcommand{\addperiod}[1]{#1.}%
+}  
+%\let\oldparagraph=\paragraph
+%\renewcommand\paragraph[1]{\oldparagraph{#1.}}
+
+%#\let\oldparagraphx=\paragraph
+%#\renewcommand\paragraph*[1]{\oldparagraphx{#1.}}
+
+\usepackage{graphicx}%
+\usepackage{xcolor}%
+\usepackage{mleftright}%
+\usepackage{xspace}%
+\usepackage{hyperref}%
+%\usepackage{marvosym}%
+\usepackage{bm}
+
+\usepackage{caption}%
+
+\SarielComp{\usepackage{sariel_colors}}%
+
+\newcommand{\hrefb}[3][black]{\href{#2}{\color{#1}{#3}}}%
+
+\IfPrinterVer{%
+   \usepackage{hyperref}%
+}{%
+   \usepackage{hyperref}%
+   \hypersetup{%
+      breaklinks,%
+      %ocgcolorlinks,
+      colorlinks=true,%
+      urlcolor=[rgb]{0.25,0.0,0.0},%
+      linkcolor=[rgb]{0.5,0.0,0.0},%
+      citecolor=[rgb]{0,0.2,0.445},%
+      filecolor=[rgb]{0,0,0.4},
+      anchorcolor=[rgb]={0.0,0.1,0.2}%
+   }
+   % \usepackage{cleveref}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Biblatex....
+%
+\providecommand{\BibLatexMode}[1]{}
+\providecommand{\BibTexMode}[1]{#1}
+
+\ifx\UseBibLatex\undefined%
+  \renewcommand{\BibLatexMode}[1]{}
+  \renewcommand{\BibTexMode}[1]{#1}
+\else
+  \renewcommand{\BibLatexMode}[1]{#1}
+  \renewcommand{\BibTexMode}[1]{}
+\fi
+
+%\usepackage{proofapnd}
+\newcommand{\UsePackage}[1]{%
+  \IfFileExists{../styles/#1.sty}{%
+      \usepackage{../styles/#1}%
+   }{%
+      \IfFileExists{./styles/#1.sty}{%
+         \usepackage{styles/#1}%
+      }{%
+         \usepackage{#1}%
+      }%
+   }%
+}
+
+% Bib latex stuff
+\BibLatexMode{%
+%   \usepackage[bibencoding=utf8,style=alphabetic,%
+%   backend=biber,sortlocale=en_US]{biblatex}%
+	\UsePackage{sariel_biblatex}%
+	\usepackage[english]{babel}%
+	\usepackage{csquotes}
+	\renewcommand*{\multicitedelim}{\addcomma\space}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ESA Style: Defining theorem like environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ESAVer{%
+   \theoremstyle{plain}%
+   \newtheorem{FakeCounter}{FakeCounter}%[subsection]%
+
+%   \newtheorem{conjecture}[theorem]{Conjecture}
+   \newtheorem{fact}[theorem]{Fact}
+%   \newtheorem{observation}[theorem]{Observation}
+   \newtheorem{invariant}[theorem]{Invariant}
+   \newtheorem{question}[theorem]{Question}
+%   \newtheorem{proposition}[theorem]{Proposition}
+   \newtheorem{prop}[theorem]{Proposition}
+   \newtheorem{openproblem}[theorem]{Open Problem}
+
+   \theoremstyle{plain}%
+   \newtheorem{defn}[theorem]{Definition}
+%   \newtheorem{exercise}[theorem]{Exercise}
+   \newtheorem{problem}[theorem]{Problem}
+   \newtheorem{xca}[theorem]{Exercise}
+   \newtheorem{exercise_h}[theorem]{Exercise}
+   \newtheorem{assumption}[theorem]{Assumption}%
+
+   \newtheorem{proofof}{Proof of\!}%
+}%
+% ESA style theorem block END
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% ----------------------------------------------------------------------
+% ----------------------------------------------------------------------
+% Defining theorem like environments
+% ----------------------------------------------------------------------
+% ----------------------------------------------------------------------
+\NotESAVer{%
+\theoremseparator{.}%
+
+\theoremstyle{plain}%
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}%
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{invariant}[theorem]{Invariant}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{openproblem}[theorem]{Open Problem}
+
+\theoremstyle{plain}%
+\theoremheaderfont{\sf} \theorembodyfont{\upshape}%
+\newtheorem*{remark:unnumbered}[theorem]{Remark}%
+\newtheorem*{remarks}[theorem]{Remarks}%
+\newtheorem{remark}[theorem]{Remark}%
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{xca}[theorem]{Exercise}
+\newtheorem{exercise_h}[theorem]{Exercise}
+\newtheorem{assumption}[theorem]{Assumption}%
+
+% Proof environment
+\newcommand{\myqedsymbol}{\rule{2mm}{2mm}}
+
+\theoremheaderfont{\em}%
+\theorembodyfont{\upshape}%
+\theoremstyle{nonumberplain}%
+\theoremseparator{}%
+\theoremsymbol{\myqedsymbol}%
+\newtheorem{proof}{Proof:}%
+
+\newtheorem{proofof}{Proof of\!}%
+}
+% theorem block end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5
+% Color emph
+\providecommand{\emphind}[1]{\emph{#1}\index{#1}}
+\definecolor{nalmostblack}{rgb}{0, 0, 0.7}
+\providecommand{\emphic}[2]{%
+   \textcolor{nalmostblack}{%
+      \textbf{\emph{#1}}}%
+   \index{#2}}
+
+
+\providecommand{\emphi}[1]{\emphic{#1}{#1}}
+
+\definecolor{almostblack}{rgb}{0, 0, 0.5}
+\providecommand{\emphw}[1]{{\emph{{\textcolor{almostblack}{#1}}}}}%
+
+\providecommand{\emphOnly}[1]{\emph{\textcolor{almostblack}{\textbf{#1}}}}
+% Color emph - end 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5
+
+
+\numberwithin{figure}{section}%
+\numberwithin{table}{section}%
+\numberwithin{equation}{section}%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sariel's thanks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\providecommand{\tildegen}{{\protect\raisebox{-0.1cm}
+      {\symbol{'176}\hspace{-0.01cm}}}}
+\newcommand{\atgen}{\symbol{'100}}
+\newcommand{\SarielThanks}[1]{\thanks{Department of Computer Science;
+      University of Illinois; 201 N. Goodwin Avenue; Urbana, IL,
+      61801, USA; %
+      \href{mailto:sariel.spam@illinois.edu}%
+      {sariel@illinois.edu}; %
+      \url{http://sarielhp.org/}. #1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    Handling references
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\HLink}[2]{\hyperref[#2]{#1~\ref*{#2}}}
+\newcommand{\HLinkSuffix}[3]{\hyperref[#2]{#1\ref*{#2}{#3}}}
+
+\newcommand{\tablab}[1]{\label{table:#1}}
+\newcommand{\tabref}[1]{\HLink{Table}{table:#1}}
+
+\newcommand{\figlab}[1]{\label{fig:#1}}
+\newcommand{\figref}[1]{\HLink{Figure}{fig:#1}}
+
+\newcommand{\thmlab}[1]{{\label{theo:#1}}}
+\newcommand{\thmref}[1]{\HLink{Theorem}{theo:#1}}
+
+\newcommand{\corlab}[1]{\label{cor:#1}}
+\newcommand{\corref}[1]{\HLink{Corollary}{cor:#1}}%
+
+\providecommand{\deflab}[1]{\label{def:#1}}
+\newcommand{\defref}[1]{\HLink{Definition}{def:#1}}
+
+
+\newcommand{\clmlab}[1]{\label{claim:#1}}
+\newcommand{\clmref}[1]{\HLink{Claim}{claim:#1}}
+
+%\newcommand{\apndlab}[1]{\label{apnd:#1}}
+%\newcommand{\apndref}[1]{\HLink{Appendix}{apnd:#1}}
+
+\newcommand{\seclab}[1]{\label{sec:#1}}
+\newcommand{\secref}[1]{\HLink{Section}{sec:#1}}
+\newcommand{\rectA}{\Mh{B}}%
+\newcommand{\rectB}{\Mh{D}}%
+\newcommand{\clientsY}[2]{\Mh{\mathsf{C}}\pth{#1,#2}}
+
+\newcommand{\DW}{\times}
+%\newcommand{\ConeSet}{\Mh{\mathcal{C}}}%
+\newcommand{\shrinkDY}[2]{#1_{\boxminus #2}}
+\newcommand{\Rects}{\Mh{\mathcal{R}}}%
+
+
+\newcommand{\itemlab}[1]{\label{item:#1}}
+\newcommand{\itemref}[1]{\HLinkSuffix{}{item:#1}{}}
+
+\newcommand{\apndlab}[1]{\label{apnd:#1}}
+\newcommand{\apndref}[1]{\HLink{Appendix}{apnd:#1}}
+
+\newcommand{\remlab}[1]{\label{rem:#1}}
+\newcommand{\remref}[1]{\HLink{Remark}{rem:#1}}%
+
+\newcommand{\lemlab}[1]{\label{lemma:#1}}
+\newcommand{\lemref}[1]{\HLink{Lemma}{lemma:#1}}%
+
+\providecommand{\eqlab}[1]{}%
+\renewcommand{\eqlab}[1]{\label{equation:#1}}
+\newcommand{\Eqref}[1]{\HLinkSuffix{Eq.~(}{equation:#1}{)}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Sariel's standard commands...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\providecommand{\remove}[1]{}%
+\newcommand{\Set}[2]{\left\{ #1 \;\middle\vert\; #2 \right\}}
+\newcommand{\pth}[2][\!]{\mleft({#2}\mright)}%
+\newcommand{\pbrcx}[1]{\left[ {#1} \right]}%
+\newcommand{\Prob}[1]{\mathop{\mathbf{Pr}}\!\pbrcx{#1}}
+\newcommand{\Ex}[2][\!]{\mathop{\mathbf{E}}#1\pbrcx{#2}}
+
+\newcommand{\ceil}[1]{\left\lceil {#1} \right\rceil}
+\newcommand{\floor}[1]{\left\lfloor {#1} \right\rfloor}
+
+\newcommand{\brc}[1]{\left\{ {#1} \right\}}
+\newcommand{\cardin}[1]{\left| {#1} \right|}%
+
+\renewcommand{\th}{th\xspace}
+\newcommand{\ds}{\displaystyle}%
+
+\renewcommand{\Re}{\mathbb{R}}%
+\newcommand{\reals}{\Re}%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Defining comptenum environment using enumitem
+\usepackage[inline]{enumitem}
+
+\newlist{compactenumA}{enumerate}{5}%
+\setlist[compactenumA]{topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex,%
+   label=(\Alph*)}%
+
+\newlist{compactenuma}{enumerate}{5}%
+\setlist[compactenuma]{topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex,%
+   label=(\alph*)}%
+
+\newlist{compactenumI}{enumerate}{5}%
+\setlist[compactenumI]{topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex,%
+   label=(\Roman*)}%
+
+\newlist{compactenumi}{enumerate}{5}%
+\setlist[compactenumi]{topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex,%
+   label=(\roman*)}%
+
+\newlist{compactitem}{itemize}{5}%
+\setlist[compactitem]{label=\ensuremath{\bullet}}%
+\setlist[compactitem]{topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex,%
+   label=\ensuremath{\bullet}}%
+
+
+\usepackage{stmaryrd}%
+\providecommand{\IntRange}[1]{\mleft\llbracket #1 \mright\rrbracket}
+\newcommand{\IRX}[1]{\IntRange{#1}}%
+\newcommand{\IRY}[2]{\left\llbracket #1:#2 \right\rrbracket}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{wasysym}
+
+\newcommand{\disk}{\Mh{\ocircle}}
+\newcommand{\diskVY}[2]{\disk_{\downarrow}^{#1}\pth{#2}}%
+\newcommand{\si}[1]{#1}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Papers specific commands...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\providecommand{\Mh}[1]{#1}%
+
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\FF}{\Mh{\mathcal{F}}}%
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\DT}{\Mh{\mathcal{D}}}%
+\newcommand{\DTX}[1]{\Mh{\mathcal{DT}}\pth{#1}}
+\newcommand{\DG}{\Mh{\mathcal{D}}}%
+
+\newcommand{\etal}{\textit{et~al.}\xspace}
+
+\newcommand{\Term}[1]{\textsf{#1}}
+\newcommand{\TermI}[1]{\Term{#1}\index{#1@\Term{#1}}}
+
+\newcommand{\QSPD}{\Term{QSPD}\xspace}
+
+\newcommand{\StavThanks}[1]{%
+   \thanks{Department of Computer Science; University of Illinois; 201
+      N. Goodwin Avenue; Urbana, IL, 61801, USA; %
+      \href{mailto:stava2.spam@illinois.edu}%
+      {stava2@illinois.edu}; %
+      \url{https://publish.illinois.edu/stav-ashur}. %
+      #1}}
+
+\newcommand{\pa}{\Mh{p}}%
+\newcommand{\pb}{\Mh{q}}%
+\newcommand{\pc}{\Mh{u}}%
+\newcommand{\pd}{\Mh{v}}%
+
+
+\newcommand{\px}{\Mh{x}}%
+\newcommand{\py}{\Mh{y}}%
+\newcommand{\pz}{\Mh{z}}%
+
+\newcommand{\dGY}[2]{\Mh{\mathsf{d}}\pth{#1,#2}}%
+\newcommand{\dGZ}[3]{\Mh{\mathsf{d}_{#1}}\pth{#2,#3}}%
+\newcommand{\dY}[2]{\left\| #1  #2 \right\|}%
+\newcommand{\ddY}[2]{\left\| #1 - #2 \right\|}%
+
+\newcommand{\angleX}[1]{\sphericalangle #1}
+
+
+\newcommand{\dsZ}[3]{\Mh{\mathsf{d}}_{#1}\pth{#2, #3}}%
+\newcommand{\dZ}[3]{\left\| #2 - #3 \right\|_{#1}}%
+
+\newcommand{\dsY}[2]{\mathsf{d}\pth{#1,#2}}
+\newcommand{\DistSetY}[2]{\dsY{#1}{#2}}%
+
+\newcommand{\body}{\Mh{C}}%
+
+\newcommand{\grid}{\Mh{\mathsf{K}}}%
+
+\newcommand{\EucG}{\Mh{\EuScript{K}}_\PS}
+
+
+\providecommand{\G}{\Mh{G}}%
+\renewcommand{\G}{\Mh{G}}%
+\newcommand{\GA}{\Mh{H}}%
+%\newcommand{\GA}{\Mh{H}}%
+\newcommand{\GB}{\Mh{I}}%
+
+\providecommand{\GB}{\Mh{I}}%
+\renewcommand{\GB}{\Mh{I}}%
+
+
+\newcommand{\PS}{\Mh{P}}%
+\newcommand{\PSA}{\Mh{Q}}%
+
+\newcommand{\PX}{\Mh{X}}%
+\newcommand{\PY}{\Mh{Y}}%
+
+\newcommand{\DotProd}[2]{\permut{{#1},{#2}}}
+\newcommand{\permut}[1]{\left\langle {#1} \right\rangle}
+
+\newcommand{\Line}{\Mh{\ell}}%
+
+\newcommand{\PSup}{\Mh{P}_\uparrow}%
+\newcommand{\PSdown}{\Mh{P}_\downarrow}%
+
+\newcommand{\QS}{\Mh{\mathcal{Q}}}%
+\newcommand{\liftX}[1]{\mathrm{lift}\pth{#1}}%
+
+\newcommand{\rect}{{\Mh{R}}}%
+
+\newcommand{\EG}{\Mh{E}}%
+\newcommand{\EGX}[1]{\Mh{E}\pth{#1}}%
+\newcommand{\region}{\Mh{\mathcalb{r}}}%
+\newcommand{\gminus}{-}%
+\newcommand{\interiorX}[1]{\mathrm{int}\pth{#1}}%
+\newcommand{\restrictY}[2]{#1 \cap {#2}}
+
+\newcommand{\cpX}[1]{\Mh{\mathrm{c{}p}}\pth{#1}}%
+\newcommand{\diamX}[1]{\mathrm{diam}\pth{#1}}%
+
+\newcommand{\spread}{\Mh{\Phi}}
+\newcommand{\spreadX}[1]{\spread\pth{#1}}
+
+\newcommand{\WS}{\Mh{\mathcal{W}}}%
+\newcommand{\WeightX}[1]{\Mh{\omega} \pth{#1}}
+\newcommand{\diameterX}[1]{\mathrm{d{}i{}am}\pth{#1}}
+
+\newcommand{\SSPD}{\Term{SSPD}\xspace}%
+
+\newcommand{\PSB}{\Mh{B}}%
+\newcommand{\PSC}{\Mh{C}}%
+
+\newcommand{\PSX}{\Mh{X}}%
+\newcommand{\PSY}{\Mh{Y}}%
+
+\newcommand{\WSPD}{\Term{WSPD}\xspace}%
+
+\newcommand{\coneY}[2]{\mathrm{cone}\pth{#1,#2}}%
+\newcommand{\IS}{\Mh{\mathcal{I}}}%
+\newcommand{\epsA}{\Mh{\vartheta}}%
+
+\newcommand{\GY}[2]{\Mh{\mathcal{S}}\pth{#1, #2}}%
+\newcommand{\cen}{\Mh{c}}%
+\newcommand{\Pair}{\Mh{\Xi}}%
+
+%\newcommand{\polylog}{\mathop{\mathrm{polylog}}}%
+\newcommand{\XSays}[2]{{ {$\rule[-0.12cm]{0.2in}{0.5cm}$\fbox{\tt #1:}
+      } #2 \marginpar{\textcolor{red}{#1}}
+      {$\rule[0.1cm]{0.3in}{0.1cm}$\fbox{\tt
+            end}$\rule[0.1cm]{0.3in}{0.1cm}$} } }
+\newcommand{\sariel}[1]{{\XSays{Sariel}{#1}}}
+\newcommand{\stav}[1]{{\XSays{Stav}{#1}}}
+
+\newcommand{\QSup}{\QS_{\uparrow}}
+\newcommand{\QSdown}{\QS_{\downarrow}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Restating lemmas/theorems...
+%
+% Example
+%---------------------------------------------------------------------
+% \SaveContent{\LemmaNumVerticesDepthBody}{ BLA BLA }
+% 
+% \begin{lemma}[{{\normalfont Proof in \apndref{num:v:depth}}}]
+%       \lemlab{num:vertices:depth}%
+%       \LemmaNumVerticesDepthBody{}
+% \end{lemma}
+%...
+% \bigskip%
+% \RestatementOf{\lemref{num:vertices:depth}}{\LemmaNumVerticesDepthBody}
+%---------------------------------------------------------------------
+
+\newcommand{\SaveContent}[2]{%
+   \expandafter\newcommand{#1}{#2}%
+}
+
+\newcommand{\RestatementOf}[2]{
+   \noindent%
+   \textbf{Restatement of #1.}
+   % 
+   {\em #2{}}%
+}
+
+%%% End
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \mathcalb - a different font that looks a bit like mathcal
+
+\DeclareFontFamily{U}{BOONDOX-calo}{\skewchar\font=45 }
+\DeclareFontShape{U}{BOONDOX-calo}{m}{n}{<-> s*[1.05] BOONDOX-r-calo}{}
+\DeclareFontShape{U}{BOONDOX-calo}{b}{n}{<-> s*[1.05] BOONDOX-b-calo}{}
+\DeclareMathAlphabet{\mathcalb}{U}{BOONDOX-calo}{m}{n}
+\SetMathAlphabet{\mathcalb}{bold}{U}{BOONDOX-calo}{b}{n}
+\DeclareMathAlphabet{\mathbcalb}{U}{BOONDOX-calo}{b}{n}
+
+% \mathcalb - end of file
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\CHX}[1]{\mathsf{ch}\pth{#1}}%
+
+\newcommand{\rinX}[1]{\Mh{r}_{\mathrm{in}}\pth{#1}}%
+\newcommand{\routX}[1]{\Mh{R}_{\mathrm{out}}\pth{#1}}%
+\newcommand{\arX}[1]{\Mh{\mathsf{a{}r}}\pth{#1}}%
+\newcommand{\Elp}{\Mh{\mathcal{E}}}
+
+\newcommand{\cell}{\Mh{\mathsf{C}}}%
+
+\newcommand{\Of}{\Mh{\mathcal{O}}}%
+\newcommand{\Oeps}{\Mh{\mathcal{O}_\eps}}%
+\newcommand{\gConst}{\Mh{\tau}}%
+\newcommand{\xSlabX}[1]{{\protect\overleftrightarrow{#1}}}
+\newcommand{\ySlabX}[1]{\updownarrow\!{#1}}
+\newcommand{\widthX}[1]{\Mh{\mathsf{wd}}\pth{#1}} \smallskip%
+
+
+\newcommand{\HERE}{%
+   {\noindent\hspace{-1cm}\rule{1.2\linewidth}{4cm}}   
+   % \rule{4cm}{4cm}
+}
+
+\ESAVer{%
+   \newcommand{\myparagraph}[1]{%
+      \noindent%
+      \textbf{#1.}
+   }%
+}
+\NotESAVer{%
+   \newcommand{\myparagraph}[1]{%
+      \paragraph{#1}
+   }%
+}
+
+\providecommand{\TPDF}[2]{\texorpdfstring{#1}{#2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%BeginIpePreamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\sqr}{\mathcalb{s}}%
+\newcommand{\sqrA}{\mathcalb{t}}%
+\newcommand{\sqrB}{\mathcalb{u}}%
+\newcommand{\seg}{s}%
+\newcommand{\origin}{o}%
+\newcommand{\polylog}{\mathop{\mathrm{polylog}}}%
+
+\newcommand{\Binfty}{\Mh{\mathcalb{b}_\infty}}%
+
+\newcommand{\constA}{c_1}
+\newcommand{\constB}{c_2}
+\newcommand{\constC}{c_3}
+\newcommand{\constD}{c_4}
+\newcommand{\constE}{c_5}
+\newcommand{\constF}{c_6}
+
+%\newcommand{\interiorX}{\mathrm{int}\pth{#1}}
+\newcommand{\diamC}{\Mh{\mathcalb{d}}}%
+
+\newcommand{\cone}{\Mh{\mathcalb{c}}}%
+\newcommand{\coneB}{c}%
+\newcommand{\ConeSet}{\Mh{\EuScript{C}}}%
+\newcommand{\dir}{\Mh{\mathsf{n}}}
+\newcommand{\nnZ}[3]{\Mh{\mathsf{nn}}_{#1} \pth{#2, #3}}
+
+\newcommand{\normX}[1]{\left\| #1 \right\|}
+
+\newcommand{\Trap}{\Mh{T}}%
+\newcommand{\Traps}{\Mh{\mathcal{T}}}%
+
+\newcommand{\CC}{\Mh{\mathcal{C}}}%
+\newcommand{\Body}{\CC}
+
+\newcommand{\senseX}[1]{\Mh{\mathrm{sen}} \pth{#1}}%
+\newcommand{\Triangles}{\bm\Delta}%
+
+\newcommand{\hr}{\noindent \rule{\linewidth}{0.2mm}}%
+\newcommand{\Hr}{\noindent \rule{\linewidth}{0.6mm}}%
+
+\newcommand{\reviewCX}[1]{%
+
+   \bigskip%
+   \noindent%
+   \Hr
+
+   \bigskip%
+   \noindent%
+   \textbf{comment}: #1
+
+   \noindent%
+   \hr }
+
+\newcommand{\reviewLeftoverX}[1]{%
+
+   \bigskip%
+   \noindent%
+   \Hr
+   \Hr
+
+   \bigskip%
+   \noindent%
+   \textbf{comment}: #1
+
+   \noindent%
+   \Hr }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%EndIpePreamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+

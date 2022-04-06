@@ -344,21 +344,22 @@ unavailable).
       &
         $\Of\bigl((\eps^{-2} + \delta^{-2}) n \log^2 n \bigr)\Bigr.$
       &
-        \thmref{a:l:s:rectangles}%
+        In full version%
       \\
       \hline
 
     \end{tabular}
     \smallskip%
     \caption{Known and new results. The notation $\Oeps$ hides
-       polynomial dependency on $\eps$ which is not specified in the
-       original work.}
+    	polynomial dependency on $\eps$ which is not specified in the
+       	original work. The last result appears in the full version of
+   		this paper.}
     \tablab{results_summary}
 \end{table}
 
 
 \subsection*{Our results}
-
+\stav{changed table after removing Section 4}
 Our results are summarized in \tabref{results_summary}.
 
 \paragraph*{Almost local spanners}
@@ -449,37 +450,6 @@ $k$-regular polygon, with size that has no dependency on the
 spread. Of course, the size does depend polynomially on $k$.  See
 \secref{k:gons} for details, and \thmref{k:gon} for the precise
 result.
-
-
-
-\paragraph*{Quadrant separated pair decomposition (\QSPD)}
-
-In \apndref{qspd}, we describe a pair-\si{decompos\-\si{ition}} which is a special case of a decomposition given by Agarwal \etal\cite{aesw-emstbcp-90}.
-Specifically, the \QSPD breaks the input point set $\PS$ into pairs,
-such that for any pair $\{\PX, \PY\}$ we have the property that there
-is a translated set of axes such that $\PX$ and $\PY$ belong to two
-antipodal quadrants.  In $d$ dimensions there is such a decomposition
-with $\Of( n \log^{d-1} n)$ pairs, and weight
-$\Of( n \log^{d} n)$.  A somewhat similar idea was used by Abam and
-Borouny \cite{ab-lgs-21} for the $d=1$ case.
-
-\paragraph*{Multiplicative weak local spanner for rectangles}
-
-In \apndref{w:l:s:rect}, we use \QSPD{}s to construct a weak local
-spanner for axis parallel rectangles.  Here, the constructed graph
-$\G$ over $\PS$, has the property that for any axis-parallel rectangle
-$\rect$, the graph $\restrictY{\G}{\rect}$ is a $(1+\eps)$-spanner for
-all the points of $\bigl((1-\delta)\rect \bigr)\cap \PS$, where
-$(1-\delta)\rect$ is the scaling of the rectangle by a factor of
-$1-\delta$ around its center. Intuitively, $\delta$ is a parameterization
-of the weakness of the spanner, which guarantees $(1+\eps)$-paths for
-smaller regions as $\delta$ approaches $1$. Importantly, this works for narrow
-rectangles where this form of multiplicative shrinking is still
-meaningful (unlike the diameter based shrinking mentioned
-above). Contrast this with the lower bound (illustrated in
-\figref{bad:rectangles}) of $\Omega(n^2)$ on the size of local spanner
-if one does not shrink the rectangles. See \thmref{a:l:s:rectangles}
-for details of the precise result.
 
 \bigskip
 
@@ -1380,186 +1350,49 @@ $\cone \in \ConeSet_i$.
 
 \subsubsection{Analysis}
 
+\stav{The following lemma is similar in flavor and proof to a technical
+lemma used to prove the spanning property of the $\Theta$-graph. The
+proof is therefore delegated to the appendix.
+}
 
-\begin{lemma}
-    \lemlab{cone_edge:triangles}%
-    %
+\SaveContent{\LemmaConeEdgeTriangles}{%
    Let $\pa \in \PS$, $\cone \in \ConeSet_i$, and
-   $\pc =\nnZ{i}{\pa}{\cone}$, and let $\pb$ be a point in
-   $(\PS \cap (\pa + \cone)) \setminus \{\pa, \pc\}$.  We have that
-   \begin{math}
-       \dY{\pa}{\pc}%
-       +%
-       (1+\eps)\dY{\pb}{\pc}%
-       \leq%
-       (1+\eps)\dY{\pa}{\pb}
-   \end{math}
-   and
-   \begin{math}
-       \dY{\pb}{\pc}%
-       \leq%
-       \dY{\pa}{\pb}.
-   \end{math}
+	$\pc =\nnZ{i}{\pa}{\cone}$, and let $\pb$ be a point in
+	$(\PS \cap (\pa + \cone)) \setminus \{\pa, \pc\}$.  We have that
+	\begin{math}
+		\dY{\pa}{\pc}%
+		+%
+		(1+\eps)\dY{\pb}{\pc}%
+		\leq%
+		(1+\eps)\dY{\pa}{\pb}
+	\end{math}
+	and
+	\begin{math}
+		\dY{\pb}{\pc}%
+		\leq%
+		\dY{\pa}{\pb}.
+	\end{math}
+}
+
+\begin{lemma}[Proof in \apndref{cone_edge:triangles}]
+	\lemlab{cone_edge:triangles}%
+	%
+	\LemmaConeEdgeTriangles
 \end{lemma}
-\begin{figure}[ht]
-    \centering%
-    \includegraphics{../figs/triangle_cone_edge}
-    \caption{The case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$ in
-       \lemref{cone_edge:triangles}. The vector used to determine
-       $\nnZ{i}{\pa}{\cone}$ is shown in red, and denoted $\dir$}
-    
-    \figlab{tri_cone_edge:a}
-\end{figure}
-    
-\begin{proof}
-    Consider the triangle $\Delta\pa\pb\pc$ and denote the angles at
-    $\pa,\pb,$ and $\pc$ by $\angleX{\pa},\angleX{\pb}$, and
-    $\angleX{\pc}$ respectively.  Since the angle of $\cone$ is
-    smaller than $60$ degrees (for an appropriate choice of $\gamma$),
-    we have that
-    $\dY{\pb}{\pc}\leq \max \{\dY{\pa}{\pc},\dY{\pa}{\pb}\}$.
-	
-    
-    
-    Consider the case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$,
-    illustrated in \figref{tri_cone_edge:a}.  Observe that
-    $\angleX{\pc} \leq \angleX{\pb}$.  As such
-    $\angleX{\pc} \leq \pi/2$.  Furthermore,
-    $\angleX{\pc} \geq \alpha \gg \eps \alpha/\gamma = \beta \geq
-    \angleX{\pa}$. Similarly,
-    $\angleX{\pb} \in [\alpha, \pi -\alpha]$.  By the $1$-Lipshitz of
-    $\sin$, and as $\sin x \approx x$, for small $x$, and for $\gamma$
-    sufficiently large, we have that
-    \begin{equation*}
-        \sin( \angleX{\pb} + \angleX{\pa}) \in [1-\eps/4, 1+\eps/4] \sin
-        \angleX{\pb}%
-        \qquad\text{and}\qquad
-        \sin \angleX{\pa} \leq (\eps/4) \sin \angleX{\pc}.
-    \end{equation*}
-    As such, by the law of sines, we have that
-    \begin{math}
-        \frac{\dY{\pb}{ \pc}}{\sin{\angleX{\pa}}}%
-        =%
-        \frac{\dY{\pa}{ \pb}}{\sin{\angleX{\pc}}}%
-        =%
-        \frac{\dY{\pa}{ \pc}}{\sin{\angleX{\pb}}}.%
-    \end{math}
-    This implies that
-    \begin{equation*}
-        \dY{\pa}{\pc}%
-        +%
-        (1+\eps)\dY{\pb}{\pc}%
-        =%
-        \pth{\frac{\sin{\angleX{\pb}}}{\sin{\angleX{\pc}}} +(1+\eps)
-           \frac{\sin{\angleX{\pa}}}{\sin{\angleX{\pc}}} }\dY{\pa}{ \pb}.        
-    \end{equation*}
-    Observe, by the above that
-    \begin{equation*}
-        \frac{\sin{\angleX{\pb}}}{\sin{\angleX{\pc}}}
-        +(1+\eps)
-        \frac{\sin{\angleX{\pa}}}{\sin{\angleX{\pc}}}        
-        \leq
-        \frac{\sin{\angleX{\pb}}}{\sin{\pth{\angleX{\pa} + \angleX{\pb}}}}
-        +(1+\eps)
-        \frac{\eps}{4}
-        \leq%
-        \frac{\sin{\angleX{\pb}}}{(1-\eps/4)\sin{\pth{\angleX{\pb}}}}
-        +(1+\eps)
-        \frac{\eps}{4}
-        \leq%
-        1+\eps.
-    \end{equation*}
-    
-    \begin{figure}[h]
-        \centering%
-        \includegraphics[page=2]{../figs/triangle_cone_edge}
-        \caption{The case that $\dY{\pa}{\pb}> \dY{\pa}{\pc}$ in
-           \lemref{cone_edge:triangles}.}%
-        \figlab{tri_cone_edge:b}
-    \end{figure}
-    
-    The other possibility, illustrated in \figref{tri_cone_edge:b}, is that $\dY{\pa}{\pb} > \dY{\pa}{\pc}$,
-    Let $\pc'$ be the
-    projection of $\pc$ to $\pa \pb$. Observe that
-    \begin{equation*}
-        \dY{\pc}{\pc'}%
-        =%
-        \dY{\pa}{\pc'} \tan \angleX{\pa}%
-        \leq%
-        2\beta\dY{\pa}{\pc'} \leq (\eps/8) \dY{\pa}{\pc'}.
-    \end{equation*}
-    Observe that
-    $\cos \angleX{\pa} \geq 1 - (\angleX{\pa})^2/2 \geq 1-\eps^2/8$ as
-    $\angleX{\pa}$ is an angle smaller than (say) $\eps/16$.  As such
-    $1/\cos \angleX{\pa} \leq 1+\eps^2/4$.  This implies that
-    \begin{math}
-        \dY{\pa}{\pc}%
-        \leq%
-        {\dY{\pa}{\pc'}} / {\cos \angleX{\pa} } \leq %
-        (1+\eps^2/4)\dY{\pa}{\pc'}.
-    \end{math}
-    We thus have that
-    \begin{align*}
-      {\color{white}\tau}
-      &%
-        \dY{\pa}{\pc}%
-        +%
-        (1+\eps)\dY{\pb}{\pc}%
-        \leq%
-        (1+\eps^2/4)\dY{\pa}{\pc'}
-        +(1+\eps)\pth{ \Bigl.
-        \dY{\pc}{\pc'} + \dY{\pc'}{\pb}}
-      \\
-      &
-      \leq%
-      \bigl(1+\eps^2/4 + (1+\eps)\eps/8\bigr)\dY{\pa}{\pc'} 
-      + (1+\eps)\dY{\pc'}{\pb}
-      % \\&
-      \leq%
-      (1+\eps)\dY{\pa}{\pb}.
-    \end{align*}
-\end{proof}
 
+\SaveContent{\LemmaShrinkTriangles}{%
+    Let $\triangle$ be a triangle that contains two points $\pa,
+	\pb$. Then, there is a homothet $\triangle'\subseteq \triangle$ of
+	$\triangle$, such that one of these points is a vertex of
+	$\triangle'$, and the other point lies on the edge of
+	$\triangle'$ facing that vertex. %
+}
 
-\begin{lemma}
+\begin{lemma}[Proof in \apndref{shrink:triangles}]
     \lemlab{shrink:triangles}%
     %
-    Let $\triangle$ be a triangle that contains two points $\pa,
-    \pb$. Then, there is a homothet $\triangle'\subseteq \triangle$ of
-    $\triangle$, such that one of these points is a vertex of
-    $\triangle'$, and the other point lies on the edge of
-    $\triangle'$ facing that vertex. %
+	\LemmaShrinkTriangles
 \end{lemma}
-
-\begin{proof}
-    This follows by the same shrinking argument as
-    \lemref{shrink:shrank}, with the addition of a single step. When a
-    homothet $\triangle'$ with $\pa,\pb \in \partial\triangle'$ is
-    found, if neither point is on a vertex, we ``push'' the only edge
-    that does not contain one of the points towards the vertex $v$
-    opposite of it (this is the same mapping described in
-    \lemref{shrink:shrank} with center $v$), until one of the points,
-    say $\pa$ lies on the edge. $\pa$ now lies on two edges, meaning,
-    at a vertex, while $q$ lies on the only remaining edge which must
-    be opposite of that vertex. See \figref{shrink:triangle}.
-\end{proof}
-
-\begin{figure}[ht]
-    \includegraphics[page=1,width=0.22\linewidth]{../figs/narrow_triangle}%
-    \hfill
-    \includegraphics[page=2,width=0.22\linewidth]{../figs/narrow_triangle}%
-    \hfill
-    \includegraphics[page=3,width=0.22\linewidth]{../figs/narrow_triangle}%
-    \hfill
-    \includegraphics[page=4,width=0.22\linewidth]{../figs/narrow_triangle}
-    \caption{ An illustration of the shrinking process of
-       \lemref{shrink:triangles}. The three left figures illustrates
-       the process of \lemref{shrink:shrank}, for the case that the
-       convex region $\CC$ is a triangle, and the rightmost figure is
-       the additional final step.}
-    \figlab{shrink:triangle}
-\end{figure}
-
 
 \paragraph*{Local spanner property}
 \begin{lemma}
@@ -2769,6 +2602,173 @@ in \figref{x:expand}.  Similarly, we denote
 	paths results in a path between $\pa$ and $\pb$ in
 	$\restrictY{\DT}{C}$.
 \end{proof}
+
+
+\subsection{Proof of \TPDF{\lemref{cone_edge:triangles}}{{cone_edge:triangles}}}
+\apndlab{cone_edge:triangles}
+
+\RestatementOf{\lemref{cone_edge:triangles}}%
+{%
+	\LemmaConeEdgeTriangles{}%
+}
+
+
+\begin{figure}[ht]
+	\centering%
+	\includegraphics{../figs/triangle_cone_edge}
+	\caption{The case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$ in
+		\lemref{cone_edge:triangles}. The vector used to determine
+		$\nnZ{i}{\pa}{\cone}$ is shown in red, and denoted $\dir$}
+	
+	\figlab{tri_cone_edge:a}
+\end{figure}
+
+\begin{proof}
+	Consider the triangle $\Delta\pa\pb\pc$ and denote the angles at
+	$\pa,\pb,$ and $\pc$ by $\angleX{\pa},\angleX{\pb}$, and
+	$\angleX{\pc}$ respectively.  Since the angle of $\cone$ is
+	smaller than $60$ degrees (for an appropriate choice of $\gamma$),
+	we have that
+	$\dY{\pb}{\pc}\leq \max \{\dY{\pa}{\pc},\dY{\pa}{\pb}\}$.
+	
+	
+	
+	Consider the case that $\dY{\pa}{\pb}\leq \dY{\pa}{\pc}$,
+	illustrated in \figref{tri_cone_edge:a}.  Observe that
+	$\angleX{\pc} \leq \angleX{\pb}$.  As such
+	$\angleX{\pc} \leq \pi/2$.  Furthermore,
+	$\angleX{\pc} \geq \alpha \gg \eps \alpha/\gamma = \beta \geq
+	\angleX{\pa}$. Similarly,
+	$\angleX{\pb} \in [\alpha, \pi -\alpha]$.  By the $1$-Lipshitz of
+	$\sin$, and as $\sin x \approx x$, for small $x$, and for $\gamma$
+	sufficiently large, we have that
+	\begin{equation*}
+		\sin( \angleX{\pb} + \angleX{\pa}) \in [1-\eps/4, 1+\eps/4] \sin
+		\angleX{\pb}%
+		\qquad\text{and}\qquad
+		\sin \angleX{\pa} \leq (\eps/4) \sin \angleX{\pc}.
+	\end{equation*}
+	As such, by the law of sines, we have that
+	\begin{math}
+		\frac{\dY{\pb}{ \pc}}{\sin{\angleX{\pa}}}%
+		=%
+		\frac{\dY{\pa}{ \pb}}{\sin{\angleX{\pc}}}%
+		=%
+		\frac{\dY{\pa}{ \pc}}{\sin{\angleX{\pb}}}.%
+	\end{math}
+	This implies that
+	\begin{equation*}
+		\dY{\pa}{\pc}%
+		+%
+		(1+\eps)\dY{\pb}{\pc}%
+		=%
+		\pth{\frac{\sin{\angleX{\pb}}}{\sin{\angleX{\pc}}} +(1+\eps)
+			\frac{\sin{\angleX{\pa}}}{\sin{\angleX{\pc}}} }\dY{\pa}{ \pb}.        
+	\end{equation*}
+	Observe, by the above that
+	\begin{equation*}
+		\frac{\sin{\angleX{\pb}}}{\sin{\angleX{\pc}}}
+		+(1+\eps)
+		\frac{\sin{\angleX{\pa}}}{\sin{\angleX{\pc}}}        
+		\leq
+		\frac{\sin{\angleX{\pb}}}{\sin{\pth{\angleX{\pa} + \angleX{\pb}}}}
+		+(1+\eps)
+		\frac{\eps}{4}
+		\leq%
+		\frac{\sin{\angleX{\pb}}}{(1-\eps/4)\sin{\pth{\angleX{\pb}}}}
+		+(1+\eps)
+		\frac{\eps}{4}
+		\leq%
+		1+\eps.
+	\end{equation*}
+	
+	\begin{figure}[h]
+		\centering%
+		\includegraphics[page=2]{../figs/triangle_cone_edge}
+		\caption{The case that $\dY{\pa}{\pb}> \dY{\pa}{\pc}$ in
+			\lemref{cone_edge:triangles}.}%
+		\figlab{tri_cone_edge:b}
+	\end{figure}
+	
+	The other possibility, illustrated in \figref{tri_cone_edge:b}, is that $\dY{\pa}{\pb} > \dY{\pa}{\pc}$,
+	Let $\pc'$ be the
+	projection of $\pc$ to $\pa \pb$. Observe that
+	\begin{equation*}
+		\dY{\pc}{\pc'}%
+		=%
+		\dY{\pa}{\pc'} \tan \angleX{\pa}%
+		\leq%
+		2\beta\dY{\pa}{\pc'} \leq (\eps/8) \dY{\pa}{\pc'}.
+	\end{equation*}
+	Observe that
+	$\cos \angleX{\pa} \geq 1 - (\angleX{\pa})^2/2 \geq 1-\eps^2/8$ as
+	$\angleX{\pa}$ is an angle smaller than (say) $\eps/16$.  As such
+	$1/\cos \angleX{\pa} \leq 1+\eps^2/4$.  This implies that
+	\begin{math}
+		\dY{\pa}{\pc}%
+		\leq%
+		{\dY{\pa}{\pc'}} / {\cos \angleX{\pa} } \leq %
+		(1+\eps^2/4)\dY{\pa}{\pc'}.
+	\end{math}
+	We thus have that
+	\begin{align*}
+		{\color{white}\tau}
+		&%
+		\dY{\pa}{\pc}%
+		+%
+		(1+\eps)\dY{\pb}{\pc}%
+		\leq%
+		(1+\eps^2/4)\dY{\pa}{\pc'}
+		+(1+\eps)\pth{ \Bigl.
+			\dY{\pc}{\pc'} + \dY{\pc'}{\pb}}
+		\\
+		&
+		\leq%
+		\bigl(1+\eps^2/4 + (1+\eps)\eps/8\bigr)\dY{\pa}{\pc'} 
+		+ (1+\eps)\dY{\pc'}{\pb}
+		% \\&
+		\leq%
+		(1+\eps)\dY{\pa}{\pb}.
+	\end{align*}
+\end{proof}
+
+\subsection{Proof of \TPDF{\lemref{shrink:triangles}}{{shrink:triangles}}}
+\apndlab{shrink:triangles}
+
+\RestatementOf{\lemref{shrink:triangles}}%
+{%
+	\LemmaShrinkTriangles{}%
+}
+
+\begin{proof}
+	This follows by the same shrinking argument as
+	\lemref{shrink:shrank}, with the addition of a single step. When a
+	homothet $\triangle'$ with $\pa,\pb \in \partial\triangle'$ is
+	found, if neither point is on a vertex, we ``push'' the only edge
+	that does not contain one of the points towards the vertex $v$
+	opposite of it (this is the same mapping described in
+	\lemref{shrink:shrank} with center $v$), until one of the points,
+	say $\pa$ lies on the edge. $\pa$ now lies on two edges, meaning,
+	at a vertex, while $q$ lies on the only remaining edge which must
+	be opposite of that vertex. See \figref{shrink:triangle}.
+\end{proof}
+
+\begin{figure}[ht]
+	\includegraphics[page=1,width=0.22\linewidth]{../figs/narrow_triangle}%
+	\hfill
+	\includegraphics[page=2,width=0.22\linewidth]{../figs/narrow_triangle}%
+	\hfill
+	\includegraphics[page=3,width=0.22\linewidth]{../figs/narrow_triangle}%
+	\hfill
+	\includegraphics[page=4,width=0.22\linewidth]{../figs/narrow_triangle}
+	\caption{ An illustration of the shrinking process of
+		\lemref{shrink:triangles}. The three left figures illustrates
+		the process of \lemref{shrink:shrank}, for the case that the
+		convex region $\CC$ is a triangle, and the rightmost figure is
+		the additional final step.}
+	\figlab{shrink:triangle}
+\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

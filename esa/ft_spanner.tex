@@ -342,7 +342,7 @@ unavailable).
       &
         $\Of\bigl((\eps^{-2} + \delta^{-2}) n \log^2 n \bigr)\Bigr.$
       &
-      \apndref{w:l:s:rect}
+      \apndref{rectangles}
       \\
       \hline
 
@@ -447,7 +447,7 @@ result.
 
 \paragraph*{Multiplicative weak local spanner for rectangles}
 
-In the final result, moved to \apndref{w:l:s:rect} due to space constraints,
+In the final result, moved to \apndref{rectangles} due to space constraints,
 we use a lesser known type of pair-decomposition to construct a weak local
 spanner for axis parallel rectangles.
 Here, the constructed graph$\G$ over $\PS$, has the
@@ -462,7 +462,7 @@ where this form of multiplicative shrinking is still meaningful (unlike
 the diameter based shrinking mentioned above). Contrast this with the
 lower bound (illustrated in \figref{bad:rectangles}) of $\Omega(n^2)$
 on the size of local spanner if one does not shrink the rectangles.
-See \apndref{w:l:s:rect} for details of the precise result.
+See \apndref{rectangles} for details of the precise result.
 
 \bigskip
 
@@ -658,24 +658,108 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
        separated}.
 \end{defn}
 
-\SaveContent{\LemmaRefineDWBody}{%
-   Given a $(1/\eps)$-\SSPD $\WS$ of $n$ points in the plane, one can
-   refine $\WS$ into a $(1/\eps)$-\SSPD $\WS'$, such that each pair
-   $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in a
-   $\eps$-double-wedge $\DW_\Pair$, such that $\PSX$ and $\PSY$ are
-   contained in the two different faces of the double wedge
-   $\DW_\Pair$. We have that $|\WS'| = \Of(|\WS|/\eps)$ and
-   $\WeightX{\WS'} = \Of(\WeightX{\WS}/\eps)$. The construction time
-   is proportional to the weight of $\WS'$.%
-}
+\begin{theorem}\RefProofInAppendix{refine:d:w}
+	\lemlab{refine:d:w}%
+	%
+	Given a $(1/\eps)$-\SSPD $\WS$ of $n$ points in the plane, one can
+	refine $\WS$ into a $(1/\eps)$-\SSPD $\WS'$, such that each pair
+	$\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in a
+	$\eps$-double-wedge $\DW_\Pair$, such that $\PSX$ and $\PSY$ are
+	contained in the two different faces of the double wedge
+	$\DW_\Pair$. We have that $|\WS'| = \Of(|\WS|/\eps)$ and
+	$\WeightX{\WS'} = \Of(\WeightX{\WS}/\eps)$. The construction time
+	is proportional to the weight of $\WS'$.%
+\end{theorem}
+
+\begin{proof:in:appendix:e}{\lemref{refine:d:w}}{refine:d:w}
+		\begin{figure}[ht]
+			\centerline{\includegraphics{../figs/partition}}
+			\caption{An illustration of refining the pairs in a \SSPD into
+				pairs contained in opposite parts of an
+				$\eps$-double-wedge. $\PSX$ is contained in the green square
+				$\square$, while $\PSY$ is contained in the red square, and the
+				white gap between them is a result of the separation
+				property. The set of cones with the apex at the center of
+				$\square$ gives us the desired partition as demonstrated by the
+				purple double-wedge. }
+			\figlab{partition}
+		\end{figure}
+	
+		By using \lemref{chop:easy}, we can assume that $\WS$ is (say)
+		$(10/\eps)$-separated. For each pair
+		$\Pair = \{ \PSX, \PSY \} \in \WS$, assume that
+		$\diameterX{\PSX} < \diameterX{\PSY}$. Now, the algorithm scans
+		the pairs of $\WS$ and performs the following procedure for each
+		one. Let $\square$ be the smallest axis-parallel square containing
+		$\PSX$, centered at point $\origin$. Partition the plane around
+		$\origin$, by drawing $\Of(1/\eps)$ lines intersecting $\origin$
+		with the angle between any two consecutive lines being at most
+		(say) $\eps/4$, see \figref{partition}. This partitions the plane
+		into a set of cones $\ConeSet$. For a cone $\cone \in \ConeSet$,
+		we show that there exists an $\eps$-double-wedge that contains
+		$\PSX$ in one side, and $\PSY \cap \cone$ in the other.
+		
+		To see that, take the double-wedge formed by the cross tangents
+		between $\CHX{\PSX}$ and $\CHX{\PSY \cap \cone}$, where
+		$\CHX{\PSX}$ denotes the convex-hull of $\PSX$. Assume w.l.o.g
+		that $\square$ has side length 1, and let $\coneB$ be a cone of
+		angle $\eps / 4$ with apex $\origin$, whose angular bisector is a
+		horizontal ray in the positive direction of the $x$ axis. See
+		figure \figref{double-wedge} for an illustration.
+		
+		\begin{figure}[h]
+			\phantom{}\hfill%
+			\includegraphics[page=2,
+			width=0.48\linewidth]{../figs/double_wedge}%
+			\hfill%
+			\includegraphics[page=3,
+			width=0.48\linewidth]{../figs/double_wedge}%
+			\hfill%
+			\phantom{}%
+			\caption{An illustration of the proof for \lemref{refine:d:w}}
+			\figlab{double-wedge}
+		\end{figure}
+		
+		We would like to find a vertical segment $\seg$ such that all
+		points of $\PSY$ lie to its right, with one endpoint on the upper
+		line of $\coneB$, and the other on the lower line of
+		$\coneB$. Using the segments' height and distance from the right
+		side of $\square$ we will be able to get a bound on the angle of
+		the cross tangents. We first find a segment $\seg$ with all points
+		of $\PSY$ to its right. A trivial bound on that distance is given
+		by the segment from, say, the lower left corner of $\square$,
+		denoted $\pa$, of length $10/\eps$ with its right endpoint on the
+		upper line of $\coneB$, denote this point by $\pb$. We know that
+		all points of $\PSY$ lie to the right of $\pb$ due to the
+		$10/\eps$ separation property of the \SSPD. The segment $\pa\pb$
+		creates an angle $\leq\pi/4$ with the $x$-axis (by the choice of
+		the angle of $\coneB$).  We therefore get that the $x$-coordinate
+		difference between $\square$ and $\pb$ is at most
+		$10/\eps\cdot \cos\frac{\pi}{4}-1\leq 7/\eps-1\leq 6/\eps$. So,
+		let $\seg'$ be a vertical segment between the upper and lower rays
+		of $\coneB$, with $x$-coordinate distance of $6/\eps-\frac{1}{2}$
+		from $\square$ (in order to make calculations easier). We get that
+		$s'$ is of length $2\cdot \frac{6}{\eps}\tan
+		\frac{\eps}{8}$. Finally, we take $\seg$ to be a vertical segment
+		of length $\frac{12}{\eps}\tan \frac{\eps}{8}$, with its center on
+		the $x$-axis at a distance of $5/\eps+\frac{1}{2}$ away from
+		$\origin$. The angle of the $x$-axis and the segment between the
+		lower end of the right side of $\square$ and the upper end of
+		$\seg$ is now given by:
+		
+		\begin{equation*}
+			\arctan
+			\pth{\frac{\frac{6}{\eps}
+					\tan\frac{\eps}{8}+\frac{1}{2}}{\frac{5}{\eps}}
+			}%
+			=%
+			\arctan \pth{ \frac{6}{5}\tan\frac{\eps}{8}+\frac{\eps}{10} }%
+			\leq%
+			\eps%
+		\end{equation*}
+\end{proof:in:appendix:e}
 
 
-
-\begin{lemma}[Proof in \apndref{refine:d:w}]
-    \lemlab{refine:d:w}%
-    %
-    \LemmaRefineDWBody{}%%%
-\end{lemma}
 
 \begin{corollary}
     \corlab{S:S:P:D:angular}%
@@ -733,21 +817,83 @@ has width smaller than $2 \delta \cdot \diameterX{\body}$, then
 $\shrinkDY{\body}{\delta}$ is empty.
 
 
-\SaveContent{\LemmaWLSRegions}{%
-   Given a set $\PS$ of $n$ points in the plane, and parameters
-   $\delta, \eps \in (0,1)$.  One can construct a graph $\G$ over
-   $\PS$, in $\Of( (\eps^{-1} + \delta^{-2}) n \log n)$ time, and with
-   $\Of\bigl( (\eps^{-1} + \delta^{-2}) n \bigr) $ edges, such that
-   for any (bounded) convex $\body$ in the plane, we have that for any
-   two points $\pa, \pb \in \PS \cap \shrinkDY{\body}{\delta}$ the
-   graph $\restrictY{ \body }{\PS}$ has a $(1+\eps)$-path between
-   $\pa$ and $\pb$.  }
-
-\begin{lemma}[Proof in \apndref{w:l:s:regions}]
-    \lemlab{w:l:s:regions}%
-    %
-    \LemmaWLSRegions
+\begin{lemma}\RefProofInAppendix{w:l:s:regions}
+	\lemlab{w:l:s:regions}%
+	%
+	Given a set $\PS$ of $n$ points in the plane, and parameters
+	$\delta, \eps \in (0,1)$.  One can construct a graph $\G$ over
+	$\PS$, in $\Of( (\eps^{-1} + \delta^{-2}) n \log n)$ time, and with
+	$\Of\bigl( (\eps^{-1} + \delta^{-2}) n \bigr) $ edges, such that
+	for any (bounded) convex $\body$ in the plane, we have that for any
+	two points $\pa, \pb \in \PS \cap \shrinkDY{\body}{\delta}$ the
+	graph $\restrictY{ \body }{\PS}$ has a $(1+\eps)$-path between
+	$\pa$ and $\pb$. 
 \end{lemma}
+\begin{proof:in:appendix:e}{\lemref{w:l:s:regions}}{w:l:s:regions}
+	    The proof of the following claim is straightforward, and is
+	included for the sake of completeness.  Let
+	$\epsA = \min( \eps, \delta^2)$. Construct, in
+	$\Of(\epsA^{-1} n \log n)$ time, any standard $(1+\epsA)$-spanner
+	$\G$ for $\PS$ using $\Of( \epsA^{-1} n)$ edges (e.g.,
+	\cite{ams-dagss-99}).
+	
+	So, consider any body $\body \in \FF$, and any two points
+	$\pa, \pb \in \PS \cap \body'$, where
+	$\body'=\shrinkDY{\body}{\delta}$, let $\ell = \dY{\pa}{\pb}$, let
+	$\pi$ be the shortest path between $\pa$ and $\pb$ in $\G$, and
+	let $\Elp$ be the locus of all points $\pc$, such that
+	$\dY{\pa}{\pc} + \dY{\pc}{\pb} \leq (1+\epsA) \ell$. The region
+	$\Elp$ is an ellipse that contains $\pi$. The furthest point from
+	the segment $\pa\pb$ in this ellipse is realized by the co-vertex
+	of the ellipse. Formally, it is one of the two intersection points
+	of the boundary of the ellipse with the line orthogonal to
+	$\pa \pb$ that passes through the middle point $\cen$ of this
+	segment, see \figref{ellipse}. Let $\pz$ be one of these points.
+	
+	\begin{figure}[h]
+		\centerline{\includegraphics{../figs/ellipse}}
+		\caption{An illustration of the settings in the proof of
+			\lemref{w:l:s:regions} with $\Elp$ shown in blue.}
+		\figlab{ellipse}
+	\end{figure}
+	
+	We have that
+	\begin{math}
+		\dY{\pa}{\pz} = (1+\epsA)\ell/2.
+	\end{math}
+	Setting $h = \dY{\pz}{\cen}$, we have that
+	\begin{equation*}
+		h%
+		=%
+		\sqrt{\dY{\pa}{\pz}^2 - \dY{\pa}{\cen}^2 }
+		=%
+		\frac{\ell}{2} \sqrt{(1+\epsA)^2 - 1}
+		=%
+		\frac{\sqrt{\epsA (2+\epsA)}}{2} \ell%
+		\leq
+		\sqrt{\epsA} \ell
+		\leq
+		\sqrt{\epsA}\cdot \diameterX{\body}.
+	\end{equation*}
+	as $\ell \leq \diameterX{\body'} \leq \diameterX{\body}$.
+	
+	For any point $\px \in \body'$, we have that
+	$\dsY{\px}{\Re^2 \setminus \body} \geq \delta \cdot
+	\diamX{\body}$.  As such, to ensure that
+	$\pi \subseteq \Elp \subseteq \body$, we need that
+	\begin{math}
+		\delta \cdot \diamX{\body} \geq h,
+	\end{math}
+	which holds if
+	\begin{math}
+		\delta \cdot \diamX{\body} \geq \sqrt{\epsA} \cdot
+		\diameterX{\body}.
+	\end{math}
+	This in turn holds if $\epsA \leq \delta^2$. Namely, we have
+	the desired properties if $\epsA = \min( \eps, \delta^2)$.
+\end{proof:in:appendix:e}
+
+
 
 
 
@@ -812,41 +958,85 @@ $\restrictY{\G}{\region}$ is a $t$-spanner of $\EucG \cap \region$.
 
 
 
-
-\SaveContent{\LemmShrinkShrank}{%
+\begin{lemma}\RefProofInAppendix{shrink:shrank}
+	\lemlab{shrink:shrank}%
+	%
    Let $\CC$ be a convex bounded body, and let $\PS$ be a set of
-   points in general position with respect to $\CC$. Then, if $C$ is a
-   homothet of $\CC$ that contains two points
-   $\pa, \pb \in \CC \cap \PS$, then there exists a homothet
-   $C' \subseteq C$ of $\CC$ such that $\pa, \pb \in \partial C'$.  }
-
-
-\begin{lemma}[Proof in \apndref{shrink:shrank}]
-    \lemlab{shrink:shrank}%
-    %
-    \LemmShrinkShrank
+	points in general position with respect to $\CC$. Then, if $C$ is a
+	homothet of $\CC$ that contains two points
+	$\pa, \pb \in \CC \cap \PS$, then there exists a homothet
+	$C' \subseteq C$ of $\CC$ such that $\pa, \pb \in \partial C'$. 
 \end{lemma}
 
+
+\begin{proof:in:appendix:e}{\lemref{shrink:shrank}}{shrink:shrank}
+    This claim is standard, and the proof is included for the sake of
+	completeness.  The idea is to apply a shrinking process of $C$, as
+	illustrated in \figref{shrink:h}.  Consider the mapping
+	$f_{\beta, \pd} : \px \mapsto \beta (\px - \pd) + \pd $. It is a
+	scaling of the plane around $\pd$ by a factor of $\beta$. Let
+	$\beta'$ be the minimum value of $\beta$ such that
+	$C_1 = f_{\beta,\pa}(C)$ contains $\pb$ (i.e. we perform central
+	dilation of $C$ around $\pa$ till $\pb$ becomes a boundary
+	point). Next, shrink $C'$ around $\pb$, till $\pa$ becomes a
+	boundary point -- formally, let $\beta''$ be the minimum value of
+	$\beta$ such that $C' = f_{\beta,\pb}(C_1)$ contains $\pa$. Since
+	$C' \subseteq C_1 \subseteq C$, and $\pa, \pb \in \partial C'$,
+	the claim follows.
+\end{proof:in:appendix:e}
 
 
 The following standard claim, usually stated for the standard Delaunay
 triangulations, also holds for homothets.
 
 
-\SaveContent{\ClaimCTConnected}{%
+\begin{claim}\RefProofInAppendix{c:t:connected}
+	\clmlab{c:t:connected}%
+	%
    Let $\CC$ be a compact (bounded and closed) convex body.  Given a
-   set of points $\PS \subseteq \Re^2$ in general position with
-   respect to $\CC$, let $\DG = \DG_{\CC}(\PS)$ be the $\CC$-Delaunay
-   triangulation of $\PS$. For any homothet $C$ of $\CC$, we have that
-   $\restrictY{\DG}{C}$ is connected.%
-}
-
-
-\begin{claim}[Proof in \apndref{c:t:connected}]
-    \clmlab{c:t:connected}%
-    %
-    \ClaimCTConnected
+	set of points $\PS \subseteq \Re^2$ in general position with
+	respect to $\CC$, let $\DG = \DG_{\CC}(\PS)$ be the $\CC$-Delaunay
+	triangulation of $\PS$. For any homothet $C$ of $\CC$, we have that
+	$\restrictY{\DG}{C}$ is connected.%
 \end{claim}
+
+
+\begin{proof:in:appendix:e}{\clmref{c:t:connected}}{c:t:connected}
+	We prove that for any homothet $C$ with two points
+	$\pa,\pb\in \PS$ on its boundary, there is a path between $\pa$
+	and $\pb$ in $\restrictY{\DT}{C}$, and \lemref{shrink:shrank} will
+	immediately imply the general statement. The proof is by induction
+	over the number $m$ of points of $\PS$ in the interior of $C$. If
+	$m=0$ then $C$ contains no points of $\PS$ in its interior, and
+	thus $\pa \pb$ is an edge of the Delaunay triangulation, as $C$
+	testifies.
+	
+	\begin{figure}[h]
+		\phantom{}\hfill%
+		\includegraphics[page=1]{../figs/shrink}%
+		\hfill%
+		\includegraphics[page=2]{../figs/shrink}%
+		\hfill%
+		\includegraphics[page=3]{../figs/shrink}%
+		\hfill%
+		\phantom{}%
+		\caption{An illustration of the proof of
+			\clmref{c:t:connected} in the case that $C$ is a disk.}
+		\figlab{shrink}
+	\end{figure}
+	
+	Otherwise, let $\pc\in \PS$ be a point in the interior of
+	$C$. From \lemref{shrink:shrank} we get that there exists a
+	homothet $C'$ of $C$ with $C'\subseteq C$, such that $\pa$ and
+	$\pc$ lie on the boundary of $C'$ Thus, by induction, there is
+	a path $\gamma'$ between $\pa$ and $\pc$ in
+	$\restrictY{\DT}{C'} \subseteq \restrictY{\DT}{C}$. Similarly,
+	there must be a homothet $C''$, that gives rise to a path
+	$\gamma''$ between $\pc$ and $\pb$, and concatenating the two
+	paths results in a path between $\pa$ and $\pb$ in
+	$\restrictY{\DT}{C}$.
+\end{proof:in:appendix:e}
+
 
 
 
@@ -1995,37 +2185,8 @@ rectangle resulting from shrinking $\rect$ by a factor of $1-\delta$.
 \end{defn}
 
 
-
 Observe that rectangles in $\Rects$ might be quite ``skinny'', so the
 previous notion of shrinkage used before is not useful in this case.
-
-\subsubsection{Quadrant separated pair decomposition (QSPD)}
-For the purpose of building the spanners in this section, we use a variation of a pair decomposition introduced by Agarwal \etal \cite{aesw-emstbcp-90}.
-For two points $\pa = (p_1, \ldots, p_d)$ and
-$\pb = (q_1, \ldots, q_d)$ in $\Re^d$, let $\pa \prec \pb$ denote
-that $\pb$ \emphi{dominates} $\pa$ coordinate-wise. That is
-$p_i < q_i$, for all $i$. More generally, let $\pa <_i \pb$ denote
-that $\pa_i < \pb_i$. For two point sets $\PSX, \PSY \subseteq \Re^d$,
-we use $\PSX <_i \PSY$ to denote that
-$\forall \px \in \PSX, \py \in \PSY \quad \px <_i \py$.  In particular
-$\PSX$ and $\PSY$ are \emphw{$i$-coordinate separated} if
-$\PSX <_i \PSY$ or $\PSY <_i \PSX$. A pair $\{ \PSX, \PSY\}$ is
-\emphi{quadrant-separated}, if $\PSX$ and $\PSY$ are $i$-coordinate
-separated, for $i=1,\ldots, d$.
-
-A \emphi{quadrant-separated pair decomposition} of a point set
-$\PS \subseteq \Re^d$, is a pair decomposition (see
-\defref{pair:decomposition})
-$\WS = \bigl\{ \{ \PSX_1, \PSY_1 \}, \ldots, \{ \PSX_s, \PSY_s \}
-\bigr\}$ of $\PS$, such that $\{ \PSX_i, \PSY_i\}$ are
-quadrant-separated for all $i$.
-
-\begin{lemma}[\cite{aesw-emstbcp-90}]
-	Given a set $\PS$ of $n$ points in $\Re^d$, one can compute, in
-	$\Of( n \log^d n)$ time, a \QSPD of $\PS$ with
-	$\Of(n \log^{d-1} n)$ pairs, and of total weight
-	$\Of( n \log^d n)$.
-\end{lemma}
 
 \subsubsection{Construction for a single quadrant separated pair}
 \seclab{pair:edges}
@@ -2312,260 +2473,6 @@ in \figref{x:expand}.  Similarly, we denote
 \end{proof}
 
 
-
-
-
-\section{Some missing proofs}
-
-
-\subsection{Proof of \TPDF{\lemref{refine:d:w}}{{refine:d:w}}}
-\apndlab{refine:d:w}
-
-\RestatementOf{\lemref{refine:d:w}}%
-{%
-   \LemmaRefineDWBody{}%
-}
-   
-\begin{figure}[ht]
-    \centerline{\includegraphics{../figs/partition}}
-    \caption{An illustration of refining the pairs in a \SSPD into
-       pairs contained in opposite parts of an
-       $\eps$-double-wedge. $\PSX$ is contained in the green square
-       $\square$, while $\PSY$ is contained in the red square, and the
-       white gap between them is a result of the separation
-       property. The set of cones with the apex at the center of
-       $\square$ gives us the desired partition as demonstrated by the
-       purple double-wedge. }
-    \figlab{partition}
-\end{figure}
-
-\begin{proof}
-    By using \lemref{chop:easy}, we can assume that $\WS$ is (say)
-    $(10/\eps)$-separated. For each pair
-    $\Pair = \{ \PSX, \PSY \} \in \WS$, assume that
-    $\diameterX{\PSX} < \diameterX{\PSY}$. Now, the algorithm scans
-    the pairs of $\WS$ and performs the following procedure for each
-    one. Let $\square$ be the smallest axis-parallel square containing
-    $\PSX$, centered at point $\origin$. Partition the plane around
-    $\origin$, by drawing $\Of(1/\eps)$ lines intersecting $\origin$
-    with the angle between any two consecutive lines being at most
-    (say) $\eps/4$, see \figref{partition}. This partitions the plane
-    into a set of cones $\ConeSet$. For a cone $\cone \in \ConeSet$,
-    we show that there exists an $\eps$-double-wedge that contains
-    $\PSX$ in one side, and $\PSY \cap \cone$ in the other.
-
-    To see that, take the double-wedge formed by the cross tangents
-    between $\CHX{\PSX}$ and $\CHX{\PSY \cap \cone}$, where
-    $\CHX{\PSX}$ denotes the convex-hull of $\PSX$. Assume w.l.o.g
-    that $\square$ has side length 1, and let $\coneB$ be a cone of
-    angle $\eps / 4$ with apex $\origin$, whose angular bisector is a
-    horizontal ray in the positive direction of the $x$ axis. See
-    figure \figref{double-wedge} for an illustration.
-
-    \begin{figure}[h]
-        \phantom{}\hfill%
-        \includegraphics[page=2,
-        width=0.48\linewidth]{../figs/double_wedge}%
-        \hfill%
-        \includegraphics[page=3,
-        width=0.48\linewidth]{../figs/double_wedge}%
-        \hfill%
-        \phantom{}%
-        \caption{An illustration of the proof for \lemref{refine:d:w}}
-        \figlab{double-wedge}
-    \end{figure}
-
-    We would like to find a vertical segment $\seg$ such that all
-    points of $\PSY$ lie to its right, with one endpoint on the upper
-    line of $\coneB$, and the other on the lower line of
-    $\coneB$. Using the segments' height and distance from the right
-    side of $\square$ we will be able to get a bound on the angle of
-    the cross tangents. We first find a segment $\seg$ with all points
-    of $\PSY$ to its right. A trivial bound on that distance is given
-    by the segment from, say, the lower left corner of $\square$,
-    denoted $\pa$, of length $10/\eps$ with its right endpoint on the
-    upper line of $\coneB$, denote this point by $\pb$. We know that
-    all points of $\PSY$ lie to the right of $\pb$ due to the
-    $10/\eps$ separation property of the \SSPD. The segment $\pa\pb$
-    creates an angle $\leq\pi/4$ with the $x$-axis (by the choice of
-    the angle of $\coneB$).  We therefore get that the $x$-coordinate
-    difference between $\square$ and $\pb$ is at most
-    $10/\eps\cdot \cos\frac{\pi}{4}-1\leq 7/\eps-1\leq 6/\eps$. So,
-    let $\seg'$ be a vertical segment between the upper and lower rays
-    of $\coneB$, with $x$-coordinate distance of $6/\eps-\frac{1}{2}$
-    from $\square$ (in order to make calculations easier). We get that
-    $s'$ is of length $2\cdot \frac{6}{\eps}\tan
-    \frac{\eps}{8}$. Finally, we take $\seg$ to be a vertical segment
-    of length $\frac{12}{\eps}\tan \frac{\eps}{8}$, with its center on
-    the $x$-axis at a distance of $5/\eps+\frac{1}{2}$ away from
-    $\origin$. The angle of the $x$-axis and the segment between the
-    lower end of the right side of $\square$ and the upper end of
-    $\seg$ is now given by:
-
-    \begin{equation*}
- 	\arctan
-        \pth{\frac{\frac{6}{\eps}
-              \tan\frac{\eps}{8}+\frac{1}{2}}{\frac{5}{\eps}}
-        }%
-        =%
-        \arctan \pth{ \frac{6}{5}\tan\frac{\eps}{8}+\frac{\eps}{10} }%
-        \leq%
-        \eps%
-    \end{equation*}
-\end{proof}
-
-\subsection{Proof of \TPDF{\lemref{w:l:s:regions}}{{w:l:s:regions}}}
-\apndlab{w:l:s:regions}
-
-\RestatementOf{\lemref{w:l:s:regions}}%
-{%
-   \LemmaWLSRegions{}%
-}
-
-
-\begin{proof}
-    The proof of the following claim is straightforward, and is
-    included for the sake of completeness.  Let
-    $\epsA = \min( \eps, \delta^2)$. Construct, in
-    $\Of(\epsA^{-1} n \log n)$ time, any standard $(1+\epsA)$-spanner
-    $\G$ for $\PS$ using $\Of( \epsA^{-1} n)$ edges (e.g.,
-    \cite{ams-dagss-99}).
-	
-    So, consider any body $\body \in \FF$, and any two points
-    $\pa, \pb \in \PS \cap \body'$, where
-    $\body'=\shrinkDY{\body}{\delta}$, let $\ell = \dY{\pa}{\pb}$, let
-    $\pi$ be the shortest path between $\pa$ and $\pb$ in $\G$, and
-    let $\Elp$ be the locus of all points $\pc$, such that
-    $\dY{\pa}{\pc} + \dY{\pc}{\pb} \leq (1+\epsA) \ell$. The region
-    $\Elp$ is an ellipse that contains $\pi$. The furthest point from
-    the segment $\pa\pb$ in this ellipse is realized by the co-vertex
-    of the ellipse. Formally, it is one of the two intersection points
-    of the boundary of the ellipse with the line orthogonal to
-    $\pa \pb$ that passes through the middle point $\cen$ of this
-    segment, see \figref{ellipse}. Let $\pz$ be one of these points.
-	
-	\begin{figure}[h]
-            \centerline{\includegraphics{../figs/ellipse}}
-            \caption{An illustration of the settings in the proof of
-               \lemref{w:l:s:regions} with $\Elp$ shown in blue.}
-            \figlab{ellipse}
-	\end{figure}
-	
-	We have that
-	\begin{math}
-            \dY{\pa}{\pz} = (1+\epsA)\ell/2.
-	\end{math}
-	Setting $h = \dY{\pz}{\cen}$, we have that
-	\begin{equation*}
-            h%
-            =%
-            \sqrt{\dY{\pa}{\pz}^2 - \dY{\pa}{\cen}^2 }
-            =%
-            \frac{\ell}{2} \sqrt{(1+\epsA)^2 - 1}
-            =%
-            \frac{\sqrt{\epsA (2+\epsA)}}{2} \ell%
-            \leq
-            \sqrt{\epsA} \ell
-            \leq
-            \sqrt{\epsA}\cdot \diameterX{\body}.
-	\end{equation*}
-	as $\ell \leq \diameterX{\body'} \leq \diameterX{\body}$.
-	
-	For any point $\px \in \body'$, we have that
-        $\dsY{\px}{\Re^2 \setminus \body} \geq \delta \cdot
-        \diamX{\body}$.  As such, to ensure that
-        $\pi \subseteq \Elp \subseteq \body$, we need that
-	\begin{math}
-            \delta \cdot \diamX{\body} \geq h,
-	\end{math}
-	which holds if
-	\begin{math}
-            \delta \cdot \diamX{\body} \geq \sqrt{\epsA} \cdot
-            \diameterX{\body}.
-	\end{math}
-	This in turn holds if $\epsA \leq \delta^2$. Namely, we have
-        the desired properties if $\epsA = \min( \eps, \delta^2)$.
-    \end{proof}
-
-
-
-\subsection{Proof of \TPDF{\lemref{shrink:shrank}}{{shrink:shrank}}}
-\apndlab{shrink:shrank}
-
-\RestatementOf{\lemref{shrink:shrank}}%
-{%
-   \LemmShrinkShrank{}%
-}
-
-
-\begin{proof}
-    This claim is standard, and the proof is included for the sake of
-    completeness.  The idea is to apply a shrinking process of $C$, as
-    illustrated in \figref{shrink:h}.  Consider the mapping
-    $f_{\beta, \pd} : \px \mapsto \beta (\px - \pd) + \pd $. It is a
-    scaling of the plane around $\pd$ by a factor of $\beta$. Let
-    $\beta'$ be the minimum value of $\beta$ such that
-    $C_1 = f_{\beta,\pa}(C)$ contains $\pb$ (i.e. we perform central
-    dilation of $C$ around $\pa$ till $\pb$ becomes a boundary
-    point). Next, shrink $C'$ around $\pb$, till $\pa$ becomes a
-    boundary point -- formally, let $\beta''$ be the minimum value of
-    $\beta$ such that $C' = f_{\beta,\pb}(C_1)$ contains $\pa$. Since
-    $C' \subseteq C_1 \subseteq C$, and $\pa, \pb \in \partial C'$,
-    the claim follows.
-\end{proof}
-
-
-\subsection{Proof of \TPDF{\clmref{c:t:connected}}{{c:t:connected}}}
-\apndlab{c:t:connected}
-
-\RestatementOf{\clmref{c:t:connected}}%
-{%
-   \ClaimCTConnected{}%
-}
-
-
-\begin{proof}
-    We prove that for any homothet $C$ with two points
-    $\pa,\pb\in \PS$ on its boundary, there is a path between $\pa$
-    and $\pb$ in $\restrictY{\DT}{C}$, and \lemref{shrink:shrank} will
-    immediately imply the general statement. The proof is by induction
-    over the number $m$ of points of $\PS$ in the interior of $C$. If
-    $m=0$ then $C$ contains no points of $\PS$ in its interior, and
-    thus $\pa \pb$ is an edge of the Delaunay triangulation, as $C$
-    testifies.
-	
-	\begin{figure}[h]
-            \phantom{}\hfill%
-            \includegraphics[page=1]{../figs/shrink}%
-            \hfill%
-            \includegraphics[page=2]{../figs/shrink}%
-            \hfill%
-            \includegraphics[page=3]{../figs/shrink}%
-            \hfill%
-            \phantom{}%
-            \caption{An illustration of the proof of
-               \clmref{c:t:connected} in the case that $C$ is a disk.}
-            \figlab{shrink}
-	\end{figure}
-	
-	Otherwise, let $\pc\in \PS$ be a point in the interior of
-        $C$. From \lemref{shrink:shrank} we get that there exists a
-        homothet $C'$ of $C$ with $C'\subseteq C$, such that $\pa$ and
-        $\pc$ lie on the boundary of $C'$ Thus, by induction, there is
-        a path $\gamma'$ between $\pa$ and $\pc$ in
-        $\restrictY{\DT}{C'} \subseteq \restrictY{\DT}{C}$. Similarly,
-        there must be a homothet $C''$, that gives rise to a path
-        $\gamma''$ between $\pc$ and $\pb$, and concatenating the two
-        paths results in a path between $\pa$ and $\pb$ in
-        $\restrictY{\DT}{C}$.
-    \end{proof}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \section{Missing details about spanner for fat triangles}

@@ -97,14 +97,14 @@ For a set $\PS$ of points in $\Re^d$, the \emphw{Euclidean graph}
 $\EucG = \bigl(\PS, \binom{\PS}{2}\bigr)$ of $\PS$ is an undirected
 graph.  Here, an edge $\pa \pb \in \EG$ is associated with the segment
 $\pa\pb$, and its weight is the (Euclidean) length of the segment.
-Let $\G=(\PS,\EG)$ and $\GB=(\PS,\EG')$ be two graphs over the same
-set of vertices (usually $\GB$ is a subgraph of $\G$). Consider two
+Let $\G=(\PS,\EG)$ and $\GA=(\PS,\EG')$ be two graphs over the same
+set of vertices (usually $\GA$ is a subgraph of $\G$). Consider two
 vertices $\pa,\pb \in \PS$, and parameter $t \geq 1$.  A path $\pi$
-between $\pa$ and $\pb$ in $\GB$, is a \emphw{$t$-path}, if the length
-of $\pi$ in $\GB$ is at most $t\cdot\dGZ{\G}{\pa}{\pb}$, where
+between $\pa$ and $\pb$ in $\GA$, is a \emphw{$t$-path}, if the length
+of $\pi$ in $\GA$ is at most $t\cdot\dGZ{\G}{\pa}{\pb}$, where
 $\dGZ{\G}{\pa}{\pb}$ is the length of the shortest path between $\pa$
-and $\pb$ in $\G$.  The graph $\GB$ is a \emphw{$t$-spanner} of $\G$
-if there is a $t$-path in $\GB$, for every $\pa,\pb\in \PS$.  Thus,
+and $\pb$ in $\G$.  The graph $\GA$ is a \emphw{$t$-spanner} of $\G$
+if there is a $t$-path in $\GA$, for every $\pa,\pb\in \PS$.  Thus,
 for a set of points $\PS\subseteq \Re^d$, a graph $\G$ over $\PS$ is a
 \emphw{$t$-spanner} if it is a $t$-spanner of the Euclidean graph
 $\EucG$. There is a lot of work on building geometric spanners, see
@@ -113,7 +113,7 @@ $\EucG$. There is a lot of work on building geometric spanners, see
 \paragraph*{Fault-tolerant spanners}
 
 An \emphw{$\FF$-fault-tolerant spanner} for $\PS\subseteq \Re^d$, is a
-graph $\G=(\PS, \EG)$, such that for any region $\region$ (i.e., the
+graph $\G=(\PS, \EG)$, such that for any region $\region\in\FF$ (i.e., the
 ``attack''), the graph $\G \gminus \region$ is a $t$-spanner of
 $\EucG - \region$, where $\G \gminus \region$ denotes the graph after
 one deletes from $\G$ all the vertices in $\PS \cap \region$, and all
@@ -141,7 +141,7 @@ result is asymptotically tight.
 Recently, Abam and Borouny \cite{ab-lgs-21} introduced the notion of
 local spanners, which can be interpreted as having the complement
 property to being fault-tolerant.  For a family of regions $\FF$, a
-graph $\G = (\PS,\EG)$ is a \emphw{$\FF$-local $t$-spanner} for $\PS$,
+graph $\G = (\PS,\EG)$ is an \emphw{$\FF$-local $t$-spanner} for $\PS$,
 if for any $\region \in \FF$, the subgraph of $\G$ induced on
 $\PS \cap \region$ is a $t$-spanner.
 % Specifically, this induced subgraph $ \restrictY{\G}{\region}$ is a
@@ -342,7 +342,7 @@ unavailable).
       &
         $\Of\bigl((\eps^{-2} + \delta^{-2}) n \log^2 n \bigr)\Bigr.$
       &
-      \apndref{rectangles}
+		\thmref{a:l:s:rectangles}
       \\
       \hline
 
@@ -360,7 +360,7 @@ unavailable).
 
 
 We start by showing that regular geometric spanners are local spanners
-if one is required provide the spanner guarantee only to shrunken
+if one is required to provide the spanner guarantee only to shrunken
 regions. Namely, if $\G$ is a $(1+\eps)$-spanner of $\PS$, then for
 any convex region $\Body$, the graph $ \restrictY{\G}{\Body}$ is a
 spanner for $\Body' \cap \PS$, where $\Body'$ is the set of all points
@@ -450,7 +450,7 @@ result.
 In the final result, moved to \apndref{rectangles} due to space constraints,
 we use a lesser known type of pair-decomposition to construct a weak local
 spanner for axis parallel rectangles.
-Here, the constructed graph$\G$ over $\PS$, has the
+Here, the graph $\G$, constructed over $\PS$, has the
 property that for any axis-parallel rectangle $\rect$, the graph
 $\restrictY{\G}{\rect}$ is a $(1+\eps)$-spanner for all the points of
 $\bigl((1-\delta)\rect \bigr)\cap \PS$, where $(1-\delta)\rect$ is the
@@ -581,13 +581,13 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
     \end{align*}
     For a point set $\PS$, a \emphOnly{well-separated pair
        decomposition} (\emphOnly{W{S}{P}D{}}) of $\PS$ with parameter
-    $1/\eps$ is a pair decomposition of $\PS$ with a set of pairs
+    $\eps$ is a pair decomposition of $\PS$ with a set of pairs
     \begin{math}
         \WS = \brc{\bigl.
            \brc{\PSB_1,\PSC_1},\ldots,\brc{\PSB_s,\PSC_s}},
     \end{math}
     such that for all $i$, the sets $\PSB_i$ and $\PSC_i$ are
-    $(1/\eps)$-separated. The notion of $1/\eps$-\SSPD (a.k.a
+    $(1/\eps)$-separated. The notion of $(1/\eps)$-\SSPD (a.k.a
     \emphi{semi-separated pairs decomposition}) is defined
     analogously.
 \end{defn}
@@ -824,7 +824,7 @@ $\shrinkDY{\body}{\delta}$ is empty.
 	$\delta, \eps \in (0,1)$.  One can construct a graph $\G$ over
 	$\PS$, in $\Of( (\eps^{-1} + \delta^{-2}) n \log n)$ time, and with
 	$\Of\bigl( (\eps^{-1} + \delta^{-2}) n \bigr) $ edges, such that
-	for any (bounded) convex $\body$ in the plane, we have that for any
+	for any (bounded) convex region $\body$ in the plane, we have that for any
 	two points $\pa, \pb \in \PS \cap \shrinkDY{\body}{\delta}$ the
 	graph $\restrictY{ \body }{\PS}$ has a $(1+\eps)$-path between
 	$\pa$ and $\pb$. 
@@ -1545,7 +1545,7 @@ to the direction $\dir_i$).
 
 
 
-\paragraph*{The construction}
+\paragraph*{The result}
 Let $\G$ be the graph over $\PS$ formed by connecting every point
 $\pa \in \PS$ to $\nnZ{i}{\pa}{\cone}$, for all $i \in \IRX{3}$ and
 $\cone \in \ConeSet_i$.  We get the following result (see

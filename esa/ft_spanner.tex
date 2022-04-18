@@ -1551,28 +1551,23 @@ $\pa \in \PS$ to $\nnZ{i}{\pa}{\cone}$, for all $i \in \IRX{3}$ and
 $\cone \in \ConeSet_i$.  We get the following result (see
 \apndref{l:s:triangle:details} for details).
 
+
+\SaveContent{\ThmLSTriangle}%
+{%
+    Let $\PS$ be a set of $n$ points in the plane, and let
+	$\eps \in (0,1)$ be an approximation parameter. The above
+	algorithm computes a $\triangle$-local $(1+\eps)$-spanner $\G$ for
+	an $\alpha$-fat triangle $\triangle$.  The construction time is
+	$\Of\pth{(\alpha\eps)^{-1}n\log n}$, and the spanner $\G$ has
+	$\Of\pth{(\alpha\eps)^{-1} n\bigr.}$ edges.
+}
+
+
 \begin{theorem}
     \thmlab{l:s:triangle}%
 	%
-    Let $\PS$ be a set of $n$ points in the plane, and let
-    $\eps \in (0,1)$ be an approximation parameter. The above
-    algorithm computes a $\triangle$-local $(1+\eps)$-spanner $\G$ for
-    an $\alpha$-fat triangle $\triangle$.  The construction time is
-    $\Of\pth{(\alpha\eps)^{-1}n\log n}$, and the spanner $\G$ has
-    $\Of\pth{(\alpha\eps)^{-1} n\bigr.}$ edges.
+	\ThmLSTriangle
 \end{theorem}
-
-\begin{proof}
-    The local-spanning property is proven in
-    \lemref{local_span:triangles}, and we are only left with bounding
-    the size and the running time of the algorithm. The bound on the
-    size is immediate from the construction, as every point $\pa$ is
-    the apex of $\Of\pth{ \frac{2\pi}{\eps\alpha} }$ cones, each
-    giving rise to a single edge incident to $\pa$.  The construction
-    time is bounded by the construction time for a $\theta$-graph with
-    cone size $\alpha\eps$, which is
-    $\Of\pth{ (\alpha\eps)^{-1}n\log n}$ \cite{c-aaspmp-87}.
-\end{proof}
 
 
 
@@ -2715,8 +2710,24 @@ in \figref{x:expand}.  Similarly, we denote
  
 
 
-%\paragraph*{Size and running time}
+\paragraph*{Size and running time}
 
+
+ \RestatementOf{\thmref{l:s:triangle}}%
+ {%%
+	 \ThmLSTriangle{} }
+
+\begin{proof}
+	The local-spanning property is proven in
+	\lemref{local_span:triangles}, and we are only left with bounding
+	the size and the running time of the algorithm. The bound on the
+	size is immediate from the construction, as every point $\pa$ is
+	the apex of $\Of\pth{ \frac{2\pi}{\eps\alpha} }$ cones, each
+	giving rise to a single edge incident to $\pa$.  The construction
+	time is bounded by the construction time for a $\theta$-graph with
+	cone size $\alpha\eps$, which is
+	$\Of\pth{ (\alpha\eps)^{-1}n\log n}$ \cite{c-aaspmp-87}.
+\end{proof}
 
 
 

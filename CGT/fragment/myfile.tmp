@@ -1,0 +1,8 @@
+\ProofInclude{\lemref {refine:d:w}}{fragment/0}{refine:d:w}
+\ProofInclude{\lemref {w:l:s:regions}}{fragment/1}{w:l:s:regions}
+\ProofInclude{\lemref {shrink:shrank}}{fragment/2}{shrink:shrank}
+\ProofInclude{\clmref {c:t:connected}}{fragment/3}{c:t:connected}
+\ProofInclude{\lemref {l:b:triangles}}{fragment/4}{proof_l_b_triangles}
+\ProofInclude{\lemref {good:jump:traps}}{fragment/5}{good:jump:traps:p}
+\ProofInclude{\lemref {narrow:traps:decomp}}{fragment/6}{p:narrow:traps:d}
+\ProofInclude{\thmref {k:gon}}{fragment/7}{p:k:gon}

@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: ft_spanner.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: plainurl.bst
+Reallocating 'name_of_file' (item size: 1) to 14 items.
+Reallocating 'glb_str_end' (item size: 4) to 20 items.
+Reallocating 'glb_str_ptr' (item size: 4) to 20 items.
+Reallocating 'global_strs' (item size: 1) to 4000000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Database file #1: ../ft_spanner.bib
+You've used 11 entries,
+            2882 wiz_defined-function locations,
+            720 strings with 7610 characters,
+and the built_in function-call counts, 5851 in all, are:
+= -- 630
+> -- 193
+< -- 6
++ -- 67
+- -- 56
+* -- 373
+:= -- 822
+add.period$ -- 45
+call.type$ -- 11
+change.case$ -- 56
+chr.to.int$ -- 0
+cite$ -- 11
+duplicate$ -- 175
+empty$ -- 549
+format.name$ -- 56
+if$ -- 1507
+int.to.chr$ -- 0
+int.to.str$ -- 11
+missing$ -- 13
+newline$ -- 67
+num.names$ -- 28
+pop$ -- 104
+preamble$ -- 1
+purify$ -- 47
+quote$ -- 0
+skip$ -- 401
+stack$ -- 0
+substring$ -- 299
+swap$ -- 71
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 40
+warning$ -- 0
+while$ -- 46
+width$ -- 13
+write$ -- 147

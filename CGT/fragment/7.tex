@@ -1,0 +1,77 @@
+    Let $\epsA = \eps/\constD$, for $\constD$ sufficiently large
+    constant.  We construct $\Triangles$, a family of triangles
+    induced by a vertex of $\Body$, and an non-adjacent edge of
+    $\Body$. This family has $\Of(k^2)$ triangles. Each such triangle
+    is $\Omega(1/k)$-fat, and for each such triangle we construct the
+    $(1+\epsA)$-spanner of \thmref{l:s:triangle} for \PS. Next, we
+    cover $\CC$ by a set $\Traps$ of $k' = \Of(k^4/\epsA^3)$
+    $\epsA$-narrow trapezoids using \lemref{narrow:traps:decomp}.
+
+    We compute an $\epsA$-angular $(1/\epsA)$-\SSPD $\WS$
+    decomposition of $\PS$ using \corref{S:S:P:D:angular} -- the total
+    weight of the decomposition is
+    $w = \Of\pth{ n \epsA^{-3} \log n }$. For each pair
+    $\{\PX, \PY\} \in \WS$, and each trapezoid $\Trap \in \Traps$, we
+    compute the $\Trap$-Delaunay triangulation of $\PX \cup \PY$.
+
+    Let $\G$ denote the union of all these graphs. We claim that it is
+    the desired spanner.  The construction time is
+    \begin{equation*}
+        \Of(( k^3 /\epsA) n \log n + k' w \log n)
+        =%
+        \Of\pth{
+           \frac{k^3 }{\epsA} n \log n + \frac{k^4}{\epsA^3} \cdot
+           \frac{n}{\epsA^{3}} \log n \cdot \log n
+        }%
+        =%
+        \Of\pth{ \frac{k^4}{\epsA^6}n \log^2 n},%
+    \end{equation*}
+    and the resulting graph has
+    $\Of\pth{\bigl. ( {k^4}/{\epsA^6})n \log n}$ edges.
+
+    As for correctness, consider a homothet $\Body'$ of $\Body$ that
+    contains two points $\pa, \pb \in \PS$. By \lemref{shrink:shrank},
+    there is a homothet $\Body'' \subseteq \Body'$ of $\Body$ such
+    that $\pa, \pb \in \partial \Body''$. There are two possibilities:
+    % \begin{itemize}
+    %     \item
+
+    \smallskip%
+    \noindent
+    \textbf{(A)} The point $\pa$ is on a vertex of $\Body''$ and $\pb$
+    is on an edge. In this case, the vertex and the edge induce a fat
+    triangle, that is a homothet of a triangle
+    $\triangle \in \Triangles$. Since the graph $\G$ contains a
+    $\triangle$-local $(1+\eps)$-spanner for $\PS$, it follows readily
+    that $\G$ is a $(1+\eps)$-spanner for these points, and the path
+    is strictly inside $\Body''$.
+
+    % \item
+    \smallskip%
+    \noindent%
+    \textbf{(B)} %
+    The points $\pa$ and $\pb$ are on two non-adjacent edges of
+    $\Body''$. Then, there is an $\epsA$-narrow trapezoid $\Trap'$
+    that has $\pa$ and $\pb$ on its two legs, and a homothet of
+    $\Trap'$, denoted by $\Trap$, is in $\Traps$. There is a pair
+    $\{\PX, \PY\} \in \WS$ that is $(1/\epsA)$-semi separated (and
+    $\epsA$-angularly separated), such that $\pa \in \PX$ and
+    $\pb \in \PY$.  By \lemref{good:jump:traps}, there are two points
+    $\pa' \in \PX$ and $\pb' \in \PY$, such that $\pa'\pb'$ is an edge
+    of the $\Trap$-Delaunay triangulation of $\PX \cup \PY$, and by
+    construction this edge is in $\G$. We now use induction on the
+    shortest paths from $\pa$ to $\pa'$ and from $\pb$ to $\pb'$ in
+    $\G$.  By induction, and \lemref{good:jump:traps}, we have that
+    \begin{equation*}
+        \dGY{\pa}{\pb} %
+        \leq%
+        \dGY{\pa}{\pa'} + \dY{\pa'}{\pb'} + \dGY{\pb'}{\pb}
+        \leq
+        (1+\eps)\dY{\pa}{\pa'} + \dY{\pa'}{\pb'} + (1+\eps)
+        \dY{\pb'}{\pb}
+        \leq%
+        (1+\eps) \dY{\pa}{\pb},
+    \end{equation*}
+    which implies that the there is $(1+\eps)$-path from $\pa$ to
+    $\pb$ inside $\Body'$.
+    % \end{itemize}

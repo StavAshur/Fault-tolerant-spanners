@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
-<ipe version="70218" creator="Ipe 7.2.23">
-<info created="D:20210804141159" modified="D:20211010133110"/>
+<ipe version="70218" creator="Ipe 7.2.24">
+<info created="D:20210804141159" modified="D:20230329212202"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -1043,13 +1043,6 @@ h
 <view layers="alpha" active="beta"/>
 <view layers="complement_of_a_circle" active="complement_of_a_circle"/>
 <view layers="zeta" active="zeta"/>
-<path layer="alpha" matrix="1 0 0 1 -0.001 -0.00046786" stroke="black" fill="green" opacity="30%" stroke-opacity="opaque">
-106.132 133.867 m
-106.132 122.132 l
-117.868 122.132 l
-117.868 133.867 l
-h
-</path>
 <path layer="delta" stroke="blue" pen="fat">
 132.647 152.448 m
 132.465 152.601 l
@@ -1300,6 +1293,9 @@ h
 <path matrix="5.85 0 0 5.85 -627.411 -623.848" stroke="purple" fill="yellow" pen="fat">
 142.888 136.277 m
 115.838 120.981 l
+</path>
+<path layer="alpha" stroke="black" fill="lightgreen" opacity="30%" stroke-opacity="opaque">
+7.35377 0 0 7.35377 112 128 e
 </path>
 </page>
 </ipe>

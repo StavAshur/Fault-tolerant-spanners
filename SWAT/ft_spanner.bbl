@@ -31,14 +31,14 @@ Pankaj~K. Agarwal, Herbert Edelsbrunner, Otfried Schwarzkopf, and Emo Welzl.
   {\path{doi:10.1145/98524.98567}}.
 
 \bibitem{ams-dagss-99}
-\hrefb{http://www.cs.ust.hk/faculty/arya/}{S. {Arya}}, \hrefb{http://www.cs.umd.edu/~mount/}{D.~M. {Mount}}, and M.~Smid.
+S.~Arya, D.~M. Mount, and M.~Smid.
 \newblock Dynamic algorithms for geometric spanners of small diameter:
   Randomized solutions.
 \newblock {\em Comput. Geom. Theory Appl.}, 13(2):91--107, 1999.
 \newblock URL:
   \url{http://www.sciencedirect.com/science/article/pii/S0925772199000140},
-  \href {https://doi.org/https://doi.org/10.1016/S0925-7721(99)00014-0}
-  {\path{doi:https://doi.org/10.1016/S0925-7721(99)00014-0}}.
+  \href {https://doi.org/10.1016/S0925-7721(99)00014-0}
+  {\path{doi:10.1016/S0925-7721(99)00014-0}}.
 
 \bibitem{cd-vdbcdf-85}
 L~Paul Chew and Robert~L Dyrsdale~III.

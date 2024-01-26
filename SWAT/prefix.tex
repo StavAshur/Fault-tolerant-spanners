@@ -1,7 +1,7 @@
-\ifx\ESA\undefined%
+\ifx\SWAT\undefined%
 \documentclass[11pt]{article}%
-\providecommand{\ESAVer}[1]{}%
-\providecommand{\NotESAVer}[1]{#1}%
+\providecommand{\SWATVer}[1]{}%
+\providecommand{\NotSWATVer}[1]{#1}%
 \else%
 %%%% Search the lipics/ subdirectory for style/files...
 \makeatletter
@@ -12,8 +12,8 @@
 {lipics-v2021}
 
 \hideLIPIcs 
-\providecommand{\ESAVer}[1]{#1}%
-\providecommand{\NotESAVer}[1]{}%
+\providecommand{\SWATVer}[1]{#1}%
+\providecommand{\NotSWATVer}[1]{}%
 \fi
 
 
@@ -34,7 +34,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-\NotESAVer{%
+\NotSWATVer{%
 \usepackage[cm]{fullpage}%
 }
 
@@ -42,11 +42,11 @@
 \usepackage{amssymb}%
 \usepackage[cmyk]{xcolor}%
 
-\NotESAVer{%
+\NotSWATVer{%
 %   \usepackage[utf8x]{inputenc}%
    \usepackage{euscript}%
 }
-\NotESAVer{%
+\NotSWATVer{%
    \usepackage[amsmath,thmmarks]{ntheorem}%
    \theoremseparator{.}%
 }
@@ -54,7 +54,7 @@
 %%%% Number paragraphs
 %\setcounter{secnumdepth}{5}
 
-\NotESAVer{%
+\NotSWATVer{%
    \usepackage{titlesec}%
    \titlelabel{\thetitle. }%
    
@@ -142,11 +142,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ESA Style: Defining theorem like environments
+% SWAT Style: Defining theorem like environments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ESAVer{%
+\SWATVer{%
    \theoremstyle{plain}%
    \newtheorem{FakeCounter}{FakeCounter}%[subsection]%
 
@@ -169,7 +169,7 @@
 
    \newtheorem{proofof}{Proof of\!}%
 }%
-% ESA style theorem block END
+% SWAT style theorem block END
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -178,7 +178,7 @@
 % Defining theorem like environments
 % ----------------------------------------------------------------------
 % ----------------------------------------------------------------------
-\NotESAVer{%
+\NotSWATVer{%
 \theoremseparator{.}%
 
 \theoremstyle{plain}%
@@ -597,13 +597,13 @@
    % \rule{4cm}{4cm}
 }
 
-\ESAVer{%
+\SWATVer{%
    \newcommand{\myparagraph}[1]{%
       \noindent%
       \textbf{#1.}
    }%
 }
-\NotESAVer{%
+\NotSWATVer{%
    \newcommand{\myparagraph}[1]{%
       \paragraph{#1}
    }%

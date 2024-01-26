@@ -1,4 +1,4 @@
-\def\ProofInAppendix{TRUE} \def\ESA{1}%
+\def\ProofInAppendix{TRUE} \def\SWAT{1}%
 \input{prefix}%
 
 
@@ -6,7 +6,7 @@
 
 \title{Local Spanners Revisited}
 
-\NotESAVer{%
+\NotSWATVer{%
    \author{%
       Stav Ashur%
       \StavThanks{}%
@@ -17,8 +17,8 @@
    }%
 }%
 
-\ESAVer{%
-   \remove{%
+\SWATVer{%
+
       \author{Stav Ashur}%
       {Department of Computer Science, University of Illinois, 201
          N. Goodwin Avenue, Urbana, IL 61801, USA}%
@@ -34,17 +34,17 @@
       {https://orcid.org/0000-0003-2638-9635}% Orchid ID
       {Work on this paper was partially supported by a NSF AF award
          CCF-1907400.}%
-   } }%
+   }%
 
-\ESAVer{%
+\SWATVer{%
    \authorrunning{S. Ashur and S. Har-Peled} %
    \Copyright{Stav Ashur and Sariel Har-Peled}%
-   \ccsdesc[500]{Theory of computation~Computational geometry}%
+   \ccsdesc[100]{Theory of computation~Computational geometry}%
    \keywords{Geometric graphs, Fault-tolerant spanners}
    \Copyright{Stav Ashur and Sariel Har-Peled} }
 
 
-\NotESAVer{\date{\today}}
+\NotSWATVer{\date{\today}}
 
 \begin{document}
 \pagestyle{empty}%
@@ -83,7 +83,7 @@
     to the diameter of the region.
 \end{abstract}
 
-\ESAVer{%
+\SWATVer{%
    \newpage%
    \pagestyle{headings}%
    \setcounter{page}{1} }%
@@ -618,7 +618,7 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
     $\Of\pth{ n \eps^{-d} \log n }$.
 \end{theorem}
 
-\ESAVer{The following claim is straightforward.}
+\SWATVer{The following claim is straightforward.}
 \begin{lemma}
     \lemlab{chop:easy}%
     %
@@ -628,7 +628,7 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
     $|\WS'| = \Of(|\WS|/\beta^d)$ and
     $\WeightX{\WS'} = \Of(\WeightX{\WS}/\beta^d)$.
 \end{lemma}
-\NotESAVer{%
+\NotSWATVer{%
    \begin{proof}
        The algorithm scans the pairs of $\WS$. For each pair
        $\Pair = \{ \PSX, \PSY \} \in \WS$, assume that
@@ -1181,7 +1181,7 @@ We thus get the following.
 \end{theorem}
 
 % ------------------------------------------------------------------------
-\NotESAVer{%
+\NotSWATVer{%
    \subsubsection{Applications and comments}
 
    The following defines a ``visibility'' graph when we are restricted
@@ -1221,7 +1221,7 @@ $\GY{\PS}{R}$.
     $\GY{\PS}{\Re^2} \gminus D$.
 \end{corollary}
 
-\NotESAVer{%
+\NotSWATVer{%
    \begin{proof}
        Consider the shortest path $\pi = u_1 u_2 \ldots u_k$ between
        $\pa$ and $\pb$ realizing $\dGZ{\GA}{\pa}{\pb}$. Every edge
@@ -1247,7 +1247,7 @@ $\GY{\PS}{R}$.
     fault-tolerance is for any convex region.
 \end{remark}
 
-}% NotESAVer
+}% NotSWATVer
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1264,7 +1264,7 @@ on the spread of the point set (logarithmically, but still).  Next, we
 show a lower bound proving that this dependency is unavoidable, even
 in the case of disks.
 
-\ESAVer{\bigskip}%
+\SWATVer{\bigskip}%
 \myparagraph{Some intuition} A natural way to attempt a
 spread-independent construction is to try and emulate the construction
 of Abam \etal \cite{abfg-rftgs-09} and use a \SSPD instead of a \WSPD,
@@ -1881,7 +1881,7 @@ example, a $k$-regular polygon is $k$-nice.
 \subsubsection{Constructing the local spanner for nice %
    polygons}
 
-\begin{theorem}\RefProofInAppendix{p:k:gon}
+\begin{theorem}
     \thmlab{k:gon}%
     %
     Let $\Body$ be a $k$-nice convex polygon, $\PS$ be a set of $n$
@@ -1892,7 +1892,7 @@ example, a $k$-regular polygon is $k$-nice.
     graph has $\Of\pth{\bigl. ( {k^4}/{\eps^6})n \log n}$ edges. In
     particular these bounds hold if $\Body$ is a $k$-regular polygon.
 \end{theorem}
-\begin{proof:in:appendix:e}{\thmref{k:gon}}{p:k:gon}
+\begin{proof}
     Let $\epsA = \eps/\constD$, for $\constD$ sufficiently large
     constant.  We construct $\Triangles$, a family of triangles
     induced by a vertex of $\Body$, and an non-adjacent edge of
@@ -1970,7 +1970,7 @@ example, a $k$-regular polygon is $k$-nice.
     which implies that the there is $(1+\eps)$-path from $\pa$ to
     $\pb$ inside $\Body'$.
     % \end{itemize}
-\end{proof:in:appendix:e}
+\end{proof}
 
 
 \begin{remark}
@@ -1993,42 +1993,13 @@ example, a $k$-regular polygon is $k$-nice.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\paragraph*{Acknowledgements} %
-The authors thanks Mohammad Abam for providing us with an early
-version of \cite{ab-lgs-21}. The authors also thank the reviewers for
-the numerous detailed comments.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ESAVer{\newpage}
-
-\BibTexMode{%
-   \ESAVer{%
-      \bibliographystyle{plainurl}%
-   }%
-   \NotESAVer{%
-      \bibliographystyle{alpha}%
-   }%
-   \bibliography{../ft_spanner}%
-}%
-\BibLatexMode{\printbibliography}
-
-\ESAVer{\newpage}
-
-% \appendix
-\AppendixOfProofs
-
 
 \section{Weak local spanners for axis-parallel rectangles}
-% \seclab{rectangles}
-\apndlab{rectangles}
-
-
-
+ \seclab{rectangles}
+%\apndlab{rectangles}
 \subsection{Quadrant separated pair decomposition}
-% \seclab{qspd}
-\apndlab{qspd}
+ \seclab{qspd}
+%\apndlab{qspd}
 
 For the purpose of building the spanners in this section, we use a
 variation of a pair decomposition introduced by Agarwal \etal
@@ -2051,112 +2022,114 @@ $\WS = \bigl\{ \{ \PSX_1, \PSY_1 \}, \ldots, \{ \PSX_s, \PSY_s \}
 \bigr\}$ of $\PS$, such that $\{ \PSX_i, \PSY_i\}$ are
 quadrant-separated for all $i$.
 
+	
 
-\begin{lemma}
-    \lemlab{d:1}%
+\begin{lemma}\RefProofInAppendix{d:1}
+	\lemlab{d:1}%
 	%
-    Given a set $\PS$ of $n$ points in $\Re$, one can compute, in
-    $\Of( n \log n)$ time, a \QSPD of $\PS$ with $\Of(n)$ pairs, and
-    of total weight $\Of( n \log n)$.
+	Given a set $\PS$ of $n$ points in $\Re$, one can compute, in
+	$\Of( n \log n)$ time, a \QSPD of $\PS$ with $\Of(n)$ pairs, and
+	of total weight $\Of( n \log n)$.
 \end{lemma}
-\begin{proof}
-    If $\PS$ is a singleton then there is nothing to do. If
-    $\PS = \{ \pa, \pb \}$, then the decomposition is the pair formed
-    by the two singleton points.
+\begin{proof:in:appendix:e}{\lemref{d:1}}{d:1}
+	If $\PS$ is a singleton then there is nothing to do. If
+	$\PS = \{ \pa, \pb \}$, then the decomposition is the pair formed
+	by the two singleton points.
 	
-    Otherwise, let $x$ be the median of $\PS$, such that
-    $\PS_{\leq x} = \Set{ \pa \in \PS }{\pa \leq x}$ contains exactly
-    $\ceil{n/2}$ points, and $\PS_{> x} = \PS \setminus \PS_{\leq x}$
-    contains $\floor{n/2}$ points. Construct the pair
-    $\Pair = \{ \PS_{\leq x}, \PS_{> x} \}$, and recursively compute
-    \QSPD{}s $\QS_{\leq x}$ and $\QS_{> x}$ for $\PS_{\leq x}$ and
-    $\PS_{> x}$ respectively. The desired \QSPD is
-    \begin{math}
-        \QS_{\leq x} \cup \QS_{> x} \cup \{ \Pair \}.
-    \end{math}
-    The bounds on the size and weight of the desired \QSPD are
-    immediate.
-\end{proof}
+	Otherwise, let $x$ be the median of $\PS$, such that
+	$\PS_{\leq x} = \Set{ \pa \in \PS }{\pa \leq x}$ contains exactly
+	$\ceil{n/2}$ points, and $\PS_{> x} = \PS \setminus \PS_{\leq x}$
+	contains $\floor{n/2}$ points. Construct the pair
+	$\Pair = \{ \PS_{\leq x}, \PS_{> x} \}$, and recursively compute
+	\QSPD{}s $\QS_{\leq x}$ and $\QS_{> x}$ for $\PS_{\leq x}$ and
+	$\PS_{> x}$ respectively. The desired \QSPD is
+	\begin{math}
+		\QS_{\leq x} \cup \QS_{> x} \cup \{ \Pair \}.
+	\end{math}
+	The bounds on the size and weight of the desired \QSPD are
+	immediate.
+\end{proof:in:appendix:e}
 
 
-\begin{lemma}
-    Given a set $\PS$ of $n$ points in $\Re^d$, one can compute, in
-    $\Of( n \log^d n)$ time, a \QSPD of $\PS$ with
-    $\Of(n \log^{d-1} n)$ pairs, and of total weight
-    $\Of( n \log^d n)$.
+\begin{lemma}\RefProofInAppendix{d:D}
+	\lemlab{d:D}%
+	Given a set $\PS$ of $n$ points in $\Re^d$, one can compute, in
+	$\Of( n \log^d n)$ time, a \QSPD of $\PS$ with
+	$\Of(n \log^{d-1} n)$ pairs, and of total weight
+	$\Of( n \log^d n)$.
 \end{lemma}
-\begin{proof}
-    The construction algorithm is recursive on the dimensions, using
-    the algorithm of \lemref{d:1} in one dimension.
+\begin{proof:in:appendix:e}{\lemref{d:D}}{d:D}
+	The construction algorithm is recursive on the dimensions, using
+	the algorithm of \lemref{d:1} in one dimension.
 	
-    The algorithm computes a value $\alpha_d$ that partitions the
-    values of the points' $d$\th coordinates roughly equally (and is
-    distinct from all of them), and let $h$ be a hyperplane parallel
-    to the first $d-1$ coordinate axes, and having value $\alpha_d$ in
-    the $d$\th coordinate.
+	The algorithm computes a value $\alpha_d$ that partitions the
+	values of the points' $d$\th coordinates roughly equally (and is
+	distinct from all of them), and let $h$ be a hyperplane parallel
+	to the first $d-1$ coordinate axes, and having value $\alpha_d$ in
+	the $d$\th coordinate.
 	
-    Let $\PS_{\uparrow}$ and $\PS_{\downarrow}$ be the subset of
-    points of $\PS$ that are above and below $h$, respectively. The
-    algorithm recursively computes \QSPD{}s $\QS_\uparrow$ and
-    $\QSdown$ for $\PSup$ and $\PS_{\downarrow}$ respectively.  Next,
-    the algorithm projects the points of $\PS$ on $h$, let $\PS'$ be
-    the resulting $d-1$ dimensional point set (after we ignore the
-    $d$\th coordinate), and recursively computes a \QSPD $\QS'$ for
-    $\PS'$.
+	Let $\PS_{\uparrow}$ and $\PS_{\downarrow}$ be the subset of
+	points of $\PS$ that are above and below $h$, respectively. The
+	algorithm recursively computes \QSPD{}s $\QS_\uparrow$ and
+	$\QSdown$ for $\PSup$ and $\PS_{\downarrow}$ respectively.  Next,
+	the algorithm projects the points of $\PS$ on $h$, let $\PS'$ be
+	the resulting $d-1$ dimensional point set (after we ignore the
+	$d$\th coordinate), and recursively computes a \QSPD $\QS'$ for
+	$\PS'$.
 	
 	
-    For a point set $\PSX' \subseteq \PS'$, let $\liftX{\PSX'}$ be the
-    subset of points of $\PS$ whose projection on $h$ is $\PSX'$.  The
-    algorithm now computes the set of pairs
-    \begin{equation*}
-        \widehat{\QS}%
-        =%
-        \Set{\Bigl.
-           \{ \liftX{ \PSX'} \cap \PSup , \liftX{ \PSY' } \cap \PSdown
-           \}, \,\,
-           \{ \liftX{ \PSX'} \cap \PSdown , \liftX{ \PSY' } \cap \PSup
-           \}
-        }%
-        { \{ \PSX', \PSY' \} \in \QS'}     .
-    \end{equation*}
-    The desired \QSPD is $\widehat{\QS} \cup \QSup \cup \QSdown$.
+	For a point set $\PSX' \subseteq \PS'$, let $\liftX{\PSX'}$ be the
+	subset of points of $\PS$ whose projection on $h$ is $\PSX'$.  The
+	algorithm now computes the set of pairs
+	\begin{equation*}
+		\widehat{\QS}%
+		=%
+		\Set{\Bigl.
+			\{ \liftX{ \PSX'} \cap \PSup , \liftX{ \PSY' } \cap \PSdown
+			\}, \,\,
+			\{ \liftX{ \PSX'} \cap \PSdown , \liftX{ \PSY' } \cap \PSup
+			\}
+		}%
+		{ \{ \PSX', \PSY' \} \in \QS'}     .
+	\end{equation*}
+	The desired \QSPD is $\widehat{\QS} \cup \QSup \cup \QSdown$.
 	
-    To observe that this is indeed a \QSPD as all the pairs in
-    $\QSup, \QSdown$ are quadrant separated by induction, and pairs in
-    $\widehat{\QS}$ are quadrant separated in the first $d-1$
-    coordinates by induction on the dimension, and separated in the
-    $d$ coordinate since one side of the pair comes from $\PSup$, and
-    the other side from $\PSdown$.
+	To observe that this is indeed a \QSPD as all the pairs in
+	$\QSup, \QSdown$ are quadrant separated by induction, and pairs in
+	$\widehat{\QS}$ are quadrant separated in the first $d-1$
+	coordinates by induction on the dimension, and separated in the
+	$d$ coordinate since one side of the pair comes from $\PSup$, and
+	the other side from $\PSdown$.
 	
-    As for coverage, consider any pair of points $\pa, \pb \in \PS$,
-    and observe that the claim holds by induction if they are both in
-    $\PSup$ or $\PSdown$. As such, assume that $\pa \in \PSup$ and
-    $\pb \in \PSdown$. But then there is a pair
-    $\{\PSX', \PSY'\} \in \QS'$ that separates the two projected
-    points in $h$, and clearly one of the two lifted pairs that
-    corresponds to this pair quadrant-separates $\pa$ and $\pb$ as
-    desired.
+	As for coverage, consider any pair of points $\pa, \pb \in \PS$,
+	and observe that the claim holds by induction if they are both in
+	$\PSup$ or $\PSdown$. As such, assume that $\pa \in \PSup$ and
+	$\pb \in \PSdown$. But then there is a pair
+	$\{\PSX', \PSY'\} \in \QS'$ that separates the two projected
+	points in $h$, and clearly one of the two lifted pairs that
+	corresponds to this pair quadrant-separates $\pa$ and $\pb$ as
+	desired.
 	
-    The number pairs in the decomposition is
-    \begin{math}
-        N(n,d) = 2N(n,d-1) + 2N\pth{ n/2, d }
-    \end{math}
-    with $N(n,1) = \Of(n)$. The solution to this recurrence is
-    $N(n,d) = \Of( n \log^{d-1} n)$.  The total weight of the
-    decomposition is
-    \begin{math}
-        W(n,d) = 2W(n,d-1) + 2W\pth{ n/2, d }
-    \end{math}
-    with $W(n,1) = \Of(n \log n)$. The solution to this recurrence is
-    $W(n,d) = \Of( n \log^{d} n)$. Clearly, this also bounds the
-    construction time.
-\end{proof}
+	The number pairs in the decomposition is
+	\begin{math}
+		N(n,d) = 2N(n,d-1) + 2N\pth{ n/2, d }
+	\end{math}
+	with $N(n,1) = \Of(n)$. The solution to this recurrence is
+	$N(n,d) = \Of( n \log^{d-1} n)$.  The total weight of the
+	decomposition is
+	\begin{math}
+		W(n,d) = 2W(n,d-1) + 2W\pth{ n/2, d }
+	\end{math}
+	with $W(n,1) = \Of(n \log n)$. The solution to this recurrence is
+	$W(n,d) = \Of( n \log^{d} n)$. Clearly, this also bounds the
+	construction time.
+\end{proof:in:appendix:e}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Weak local spanner for axis parallel rectangles}
-% \seclab{w:l:s:rect}
-\apndlab{w:l:s:rect}
+ \seclab{w:l:s:rect}
+%\apndlab{w:l:s:rect}
 
 
 For a parameter $\delta \in (0,1)$, and an interval $I = [b,c]$, let
@@ -2171,12 +2144,12 @@ let $(1-\delta)\rect = (1-\delta)I \times (1-\delta)J$ denote the
 rectangle resulting from shrinking $\rect$ by a factor of $1-\delta$.
 
 \begin{defn}
-    Given a set $\PS$ of $n$ points in the plane, and parameters
-    $\eps, \delta \in (0,1)$, a graph $\G$ is a
-    \emphw{$(1-\delta)$-local $(1+\eps)$-spanner} for rectangles, if
-    for any axis-parallel rectangle $\rect$, we have that
-    $\restrictY{\G}{\rect}$ is a $(1+\eps)$-spanner for all the points
-    in $\bigl((1-\delta)\rect\bigr) \cap \PS$.
+	Given a set $\PS$ of $n$ points in the plane, and parameters
+	$\eps, \delta \in (0,1)$, a graph $\G$ is a
+	\emphw{$(1-\delta)$-local $(1+\eps)$-spanner} for rectangles, if
+	for any axis-parallel rectangle $\rect$, we have that
+	$\restrictY{\G}{\rect}$ is a $(1+\eps)$-spanner for all the points
+	in $\bigl((1-\delta)\rect\bigr) \cap \PS$.
 \end{defn}
 
 
@@ -2187,85 +2160,85 @@ previous notion of shrinkage used before is not useful in this case.
 \seclab{pair:edges}
 
 \begin{figure}[t]
-    \centering%
-    \includegraphics{../figs/grid_construction}%
+	\centering%
+	\includegraphics{../figs/grid_construction75}%
 	\caption{The construction of the grid $\grid(\pa,\Pair)$ for a
 		point $\pa=(-x,-y)$ and a pair $\Pair$.
 		%We are not showing the
 		%subrectangles of $\rectA_\nearrow$ as they are not being used
 		%in the construction.
-             }
-             \figlab{grid}%
-         \end{figure}
+	}
+	\figlab{grid}%
+\end{figure}
 
-         Consider a pair $\Pair = \{\PSX, \PSY \}$ in a \QSPD of
-         $\PS$. The set $\PSX$ is quadrant-separated from $\PSY$, that
-         is, there is a point $\cen_\Pair$ such that $\PSX$ and $\PSY$
-         are contained in two opposing quadrants in the partition of
-         the plane formed by the vertical and horizontal lines through
-         $\cen_\Pair$.
+Consider a pair $\Pair = \{\PSX, \PSY \}$ in a \QSPD of
+$\PS$. The set $\PSX$ is quadrant-separated from $\PSY$, that
+is, there is a point $\cen_\Pair$ such that $\PSX$ and $\PSY$
+are contained in two opposing quadrants in the partition of
+the plane formed by the vertical and horizontal lines through
+$\cen_\Pair$.
 
-         For simplicity of exposition, assume that
-         $\cen_\Pair = (0,0)$, and $\PSX \prec (0,0 ) \prec
-         \PSY$. That is, the points of $\PSX$ are in the negative
-         quadrant, and the points of $\PSY$ are in the positive
-         quadrant.
-
-
-         For a point $\pa = (-x,-y)\in \PSX$ we construct a
-         non-uniform grid $\grid(\pa, \Pair)$ in the square
-         $[0,x+y]^2$.  To this end, we first partition it into four
-         subrectangles
-         \begin{equation*}
-             \begin{array}{l|l}
-               \rectA_\nwarrow = [0,x] \times [y,x+y]
-               &
-                 \rectA_\nearrow = [x,x+y] \times [y,x+y]\Bigr.\\
-               \hline
-               \rectA_{\swarrow} = [0,x]\times [0,y]
-               &
-                 \rectA_\searrow = [x,x+y] \times [0,y].\Bigr.\\
-             \end{array}
-         \end{equation*}
+For simplicity of exposition, assume that
+$\cen_\Pair = (0,0)$, and $\PSX \prec (0,0 ) \prec
+\PSY$. That is, the points of $\PSX$ are in the negative
+quadrant, and the points of $\PSY$ are in the positive
+quadrant.
 
 
-         Let $\gConst \geq 4/\eps + 4/\delta$ be an integer number.
-         We partition each of these rectangles into a
-         $\gConst \times \gConst$ grid, where each cell is a copy of
-         the rectangle scaled by a factor of $1/\gConst$.  See
-         \figref{grid}. This grid has $\Of(\gConst^2)$ cells. For a
-         cell $\cell$ in this grid, let $\PSY \cap \cell$ be the
-         points of $\PSY$ contained in it. We connect $\pa$ to the
-         left-most and bottom-most points in $\PSY \cap \cell$. This
-         process generates two edges in the constructed graph for each
-         grid cell (that contains at least two points), and
-         $\Of( \gConst^2)$ edges overall.
+For a point $\pa = (-x,-y)\in \PSX$ we construct a
+non-uniform grid $\grid(\pa, \Pair)$ in the square
+$[0,x+y]^2$.  To this end, we first partition it into four
+subrectangles
+\begin{equation*}
+	\begin{array}{l|l}
+		\rectA_\nwarrow = [0,x] \times [y,x+y]
+		&
+		\rectA_\nearrow = [x,x+y] \times [y,x+y]\Bigr.\\
+		\hline
+		\rectA_{\swarrow} = [0,x]\times [0,y]
+		&
+		\rectA_\searrow = [x,x+y] \times [0,y].\Bigr.\\
+	\end{array}
+\end{equation*}
 
-         The algorithm repeats this construction for all the points
-         $\pa \in \PSX$, and does the symmetric construction for all
-         the points of $\PSY$.
+
+Let $\gConst \geq 4/\eps + 4/\delta$ be an integer number.
+We partition each of these rectangles into a
+$\gConst \times \gConst$ grid, where each cell is a copy of
+the rectangle scaled by a factor of $1/\gConst$.  See
+\figref{grid}. This grid has $\Of(\gConst^2)$ cells. For a
+cell $\cell$ in this grid, let $\PSY \cap \cell$ be the
+points of $\PSY$ contained in it. We connect $\pa$ to the
+left-most and bottom-most points in $\PSY \cap \cell$. This
+process generates two edges in the constructed graph for each
+grid cell (that contains at least two points), and
+$\Of( \gConst^2)$ edges overall.
+
+The algorithm repeats this construction for all the points
+$\pa \in \PSX$, and does the symmetric construction for all
+the points of $\PSY$.
 
 
-         \subsubsection{The construction algorithm}
+\subsubsection{The construction algorithm}
 
-         The algorithm computes a \QSPD $\WS$ of $\PS$. For each pair
-         $\Pair \in \WS$, the algorithm generates edges for $\Pair$
-         using the algorithm of \secref{pair:edges} and adds them to
-         the generated spanner $\G$.
+The algorithm computes a \QSPD $\WS$ of $\PS$. For each pair
+$\Pair \in \WS$, the algorithm generates edges for $\Pair$
+using the algorithm of \secref{pair:edges} and adds them to
+the generated spanner $\G$.
 
 
 
 
 \begin{figure}
-    \phantom{}\hfill%
-    \includegraphics[page=1]{../figs/expand}%
-    \hfill%
-    \includegraphics[page=2]{../figs/expand}%
-    \hfill\phantom{}%
-    \caption{Left: The two rectangles $\rect$, $\rect'$. Right: In
-       green $\xSlabX{\rect} \cap \rect'$, the restriction of the slab
-       $\xSlabX{\rect}$ to the rectangle $\rect'$.}
-    \figlab{x:expand}
+	\phantom{}\hfill%
+	\includegraphics[page=1]{../figs/expand}%
+	\hfill%
+	\includegraphics[page=2]{../figs/expand}%
+	\hfill\phantom{}%
+	\caption{Left: The two rectangles $\rect$, $\rect'$. Right: In
+		green $\xSlabX{\rect} \cap \rect'$, the restriction of the slab
+		$\xSlabX{\rect}$ to the rectangle $\rect'$.}
+	\figlab{x:expand}
 \end{figure}
 
 
@@ -2282,190 +2255,228 @@ its expansion into a horizontal slab. Restricted to a rectangle
 $\rect'$, the resulting set is $\xSlabX{\rect} \cap \rect'$, depicted
 in \figref{x:expand}.  Similarly, we denote
 \begin{equation*}
-    \ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}.
+	\ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}.
 \end{equation*}
 
 
 \begin{figure}[h]
-    \includegraphics[page=2]{../figs/grid_2}%
-    \hfill%
-    \includegraphics[page=3]{../figs/grid_2}%
-    \hfill%
-    \includegraphics[page=4]{../figs/grid_2}
-    \caption{An illustration of $\grid(\pa, \Pair)$ with three
-       rectangles and their shrunken version.}
-    \figlab{grid:2}
+	\includegraphics[page=2]{../figs/grid_2}%
+	\hfill%
+	\includegraphics[page=3]{../figs/grid_2}%
+	\hfill%
+	\includegraphics[page=4]{../figs/grid_2}
+	\caption{An illustration of $\grid(\pa, \Pair)$ with three
+		rectangles and their shrunken version.}
+	\figlab{grid:2}
 \end{figure}
 \begin{lemma}
-    \lemlab{cases}%
+	\lemlab{cases}%
 	%
-    Assume that $\gConst \geq \ceil{20/\eps + 20/\delta}$.  Consider a
-    pair $\Pair = \{\PSX, \PSY \}$ in the above construction, and a
-    point $\pa =(-x,-y) \in \PSX$ with its associated grid
-    $\grid = \grid(\pa, \Pair)$. Consider any axis parallel rectangle
-    $\rect$, such that $\pa \in (1-\delta)\rect = I\times J$, and
-    $(1-\delta)\rect$ intersects a cell $\cell \in \grid$. We have
-    that:
-    \begin{compactenumI}
-        \smallskip%
-        \item \itemlab{i:c} If $\cell \subseteq (1-\delta)\rect$ then
-        $(1-\delta)^{-1} \cell \subseteq \rect$.
+	Assume that $\gConst \geq \ceil{20/\eps + 20/\delta}$.  Consider a
+	pair $\Pair = \{\PSX, \PSY \}$ in the above construction, and a
+	point $\pa =(-x,-y) \in \PSX$ with its associated grid
+	$\grid = \grid(\pa, \Pair)$. Consider any axis parallel rectangle
+	$\rect$, such that $\pa \in (1-\delta)\rect = I\times J$, and
+	$(1-\delta)\rect$ intersects a cell $\cell \in \grid$. We have
+	that:
+	\begin{compactenumI}
+		\smallskip%
+		\item \itemlab{i:c} If $\cell \subseteq (1-\delta)\rect$ then
+		$(1-\delta)^{-1} \cell \subseteq \rect$.
 		
-        \item \itemlab{small:diam}
-        $\diameterX{\cell} \leq (\eps/4) \dsY{\pa}{\cell}$.
+		\item \itemlab{small:diam}
+		$\diameterX{\cell} \leq (\eps/4) \dsY{\pa}{\cell}$.
 		
-        % \smallskip%
-        \item \itemlab{x:bigger} If $x \geq y$ and
-        $\cell \subseteq \rect_\swarrow \cup \rect_\searrow$ then
-        $(1-\delta)^{-1} \cell \subseteq \rect$.
+		% \smallskip%
+		\item \itemlab{x:bigger} If $x \geq y$ and
+		$\cell \subseteq \rect_\swarrow \cup \rect_\searrow$ then
+		$(1-\delta)^{-1} \cell \subseteq \rect$.
 		
-        \item \itemlab{y:bigger} If $x \leq y$ and
-        $\cell \subseteq \rect_\swarrow \cup \rect_\nwarrow$ then
-        $(1-\delta)^{-1} \cell \subseteq \rect$.
+		\item \itemlab{y:bigger} If $x \leq y$ and
+		$\cell \subseteq \rect_\swarrow \cup \rect_\nwarrow$ then
+		$(1-\delta)^{-1} \cell \subseteq \rect$.
 		
-        \smallskip%
-        \item \itemlab{n:w} If $x \geq y$ and
-        $\cell \subseteq \rect_\nwarrow$, then
-        $(1-\delta)^{-1} \bigl(\xSlabX{ (1-\delta)\rect} \cap \cell
-        \bigr) \subseteq \rect$.
+		\smallskip%
+		\item \itemlab{n:w} If $x \geq y$ and
+		$\cell \subseteq \rect_\nwarrow$, then
+		$(1-\delta)^{-1} \bigl(\xSlabX{ (1-\delta)\rect} \cap \cell
+		\bigr) \subseteq \rect$.
 		
-        \smallskip%
-        \item \itemlab{s:e} If $x \leq y$ and
-        $\cell \subseteq \rect_\searrow$, then
-        $(1-\delta)^{-1} \Bigl(\ySlabX{\bigl( (1-\delta)\rect \bigr)}
-        \cap \cell \Bigr) \subseteq \rect$.
-    \end{compactenumI}
+		\smallskip%
+		\item \itemlab{s:e} If $x \leq y$ and
+		$\cell \subseteq \rect_\searrow$, then
+		$(1-\delta)^{-1} \Bigl(\ySlabX{\bigl( (1-\delta)\rect \bigr)}
+		\cap \cell \Bigr) \subseteq \rect$.
+	\end{compactenumI}
 \end{lemma}
 \begin{proof}
-    \itemref{i:c} is immediate, \itemref{y:bigger} and \itemref{s:e}
-    follows by symmetry from \itemref{x:bigger} and \itemref{n:w},
-    respectively.
+	\itemref{i:c} is immediate, \itemref{y:bigger} and \itemref{s:e}
+	follows by symmetry from \itemref{x:bigger} and \itemref{n:w},
+	respectively.
 	
-    \smallskip%
-    \noindent%
-    \itemref{small:diam} We have that
-    \begin{math}
-        \diameterX{\cell}%
-        \leq%
-        (x+y) /\gConst%
-        =%
-        \|\pa\|_1 /\gConst \leq %
-        (\eps/4) \dsY{\pa}{\cell}.
-    \end{math}
+	\smallskip%
+	\noindent%
+	\itemref{small:diam} We have that
+	\begin{math}
+		\diameterX{\cell}%
+		\leq%
+		(x+y) /\gConst%
+		=%
+		\|\pa\|_1 /\gConst \leq %
+		(\eps/4) \dsY{\pa}{\cell}.
+	\end{math}
 	
-    \smallskip%
-    \noindent%
-    \itemref{x:bigger} The width, denoted $\widthX{\cdot}$, of
-    $(1-\delta)\rect$ is at least $x$, as it contains both $\pa$ and
-    the origin. As such,
-    \begin{equation*}
-        \bigl( \widthX{\rect} - \widthX{(1-\delta)\rect} \bigr)/2 \geq
-        2(x /\tau) \geq 2 \widthX{\cell}.
-    \end{equation*}
-    That is, the width of the ``expanded'' rectangle $\rect$ is enough
-    to cover $\cell$, and a grid cell adjacent to it to the right.
+	\smallskip%
+	\noindent%
+	\itemref{x:bigger} The width, denoted $\widthX{\cdot}$, of
+	$(1-\delta)\rect$ is at least $x$, as it contains both $\pa$ and
+	the origin. As such,
+	\begin{equation*}
+		\bigl( \widthX{\rect} - \widthX{(1-\delta)\rect} \bigr)/2 \geq
+		2(x /\tau) \geq 2 \widthX{\cell}.
+	\end{equation*}
+	That is, the width of the ``expanded'' rectangle $\rect$ is enough
+	to cover $\cell$, and a grid cell adjacent to it to the right.
 	
-    A similar argument about the height shows that $\rect$ covers the
-    region immediately above $\cell$ -- in particular, the vertical
-    distance from $\cell$ to the top boundary of $\rect$ is at least
-    the height of $\cell$. This implies that the expanded cell
-    $(1-\delta)^{-1}\cell$ is contained in $\rect$, as claimed, as
-    $\delta < 1/2$.
+	A similar argument about the height shows that $\rect$ covers the
+	region immediately above $\cell$ -- in particular, the vertical
+	distance from $\cell$ to the top boundary of $\rect$ is at least
+	the height of $\cell$. This implies that the expanded cell
+	$(1-\delta)^{-1}\cell$ is contained in $\rect$, as claimed, as
+	$\delta < 1/2$.
 	
 	
-    \smallskip%
-    \noindent%
-    \itemref{n:w} We decompose the claim to the two dimensions of the
-    region. Let
-    $\rectA = \bigl(\xSlabX{ (1-\delta)\rect} \cap \cell
-    \bigr)$. Observe that containment in the $x$-axis follows by
-    arguing as in \itemref{x:bigger}. As for the $y$-interval of $B$,
-    observe that it is contained in the $y$-interval of
-    $(1-\delta)\rect$, which implies that when expanded by
-    $(1-\delta)^{-1}$, it would be contained in the $y$-interval of
-    $\rect$. Combining the two implies the result.
+	\smallskip%
+	\noindent%
+	\itemref{n:w} We decompose the claim to the two dimensions of the
+	region. Let
+	$\rectA = \bigl(\xSlabX{ (1-\delta)\rect} \cap \cell
+	\bigr)$. Observe that containment in the $x$-axis follows by
+	arguing as in \itemref{x:bigger}. As for the $y$-interval of $B$,
+	observe that it is contained in the $y$-interval of
+	$(1-\delta)\rect$, which implies that when expanded by
+	$(1-\delta)^{-1}$, it would be contained in the $y$-interval of
+	$\rect$. Combining the two implies the result.
 \end{proof}
 
 \begin{lemma}
-    \lemlab{local:spanner}%
+	\lemlab{local:spanner}%
 	%
-    For any axis-parallel rectangle $\rect$, and any two points
-    $\pa, \pb \in (1-\delta)\rect \cap \PS$, there exists a
-    $(1+\eps)$-path between $\pa$ and $\pb$ in $\G$.
+	For any axis-parallel rectangle $\rect$, and any two points
+	$\pa, \pb \in (1-\delta)\rect \cap \PS$, there exists a
+	$(1+\eps)$-path between $\pa$ and $\pb$ in $\G$.
 \end{lemma}
 \begin{proof}
-    The proof is by induction over the size of $\rect$ (i.e. area,
-    width, or height). Let $\Pair = \{ \PSX, \PSY \} \in \WS$ be the
-    pair in the \QSPD that separates $\pa$ and $\pb$, let $\cen$ be
-    the separation point of the pair, and assume for the simplicity of
-    exposition that $\pa \in \PSX$, $\PSX \prec \cen \prec \PSY$, and
-    $\cen = (0,0)$. Furthermore, assume that
-    $\|\pa\|_1 \geq \|\pb\|_1$.
+	The proof is by induction over the size of $\rect$ (i.e. area,
+	width, or height). Let $\Pair = \{ \PSX, \PSY \} \in \WS$ be the
+	pair in the \QSPD that separates $\pa$ and $\pb$, let $\cen$ be
+	the separation point of the pair, and assume for the simplicity of
+	exposition that $\pa \in \PSX$, $\PSX \prec \cen \prec \PSY$, and
+	$\cen = (0,0)$. Furthermore, assume that
+	$\|\pa\|_1 \geq \|\pb\|_1$.
 	
-    Let $\pa = (-x,-y)$, and let $\cell$ be the grid cell of
-    $\grid(\pa, \Pair)$ that contains $\pb$. If
-    $\cell \subseteq (1-\delta)\rect$, then
-    $(1-\delta)^{-1}\cell \subseteq \rect$ by \lemref{cases}
-    \itemref{i:c}. As such, let $\pc$ be the leftmost point in
-    $\cell \cap \PS$. Both $\pb, \pc \in (1-\delta)^{-1}\cell$, and by
-    induction, there is an $(1+\eps)$-path $\pi$ between them in $\G$
-    (note that the induction applies to the two points, and the
-    ``expanded'' rectangle $(1-\delta)^{-1}\cell$). Since $\pa \pc$ is
-    an edge of $\G$, prefixing $\pi$ by this edge results in an
-    $(1+\eps)$-path, as $\dY{\pb}{\pc} \leq (\eps/4) \dY{\pa}{\pb}$,
-    by \lemref{cases} \itemref{small:diam} (verifying this requires
-    some standard calculations which we omit).
+	Let $\pa = (-x,-y)$, and let $\cell$ be the grid cell of
+	$\grid(\pa, \Pair)$ that contains $\pb$. If
+	$\cell \subseteq (1-\delta)\rect$, then
+	$(1-\delta)^{-1}\cell \subseteq \rect$ by \lemref{cases}
+	\itemref{i:c}. As such, let $\pc$ be the leftmost point in
+	$\cell \cap \PS$. Both $\pb, \pc \in (1-\delta)^{-1}\cell$, and by
+	induction, there is an $(1+\eps)$-path $\pi$ between them in $\G$
+	(note that the induction applies to the two points, and the
+	``expanded'' rectangle $(1-\delta)^{-1}\cell$). Since $\pa \pc$ is
+	an edge of $\G$, prefixing $\pi$ by this edge results in an
+	$(1+\eps)$-path, as $\dY{\pb}{\pc} \leq (\eps/4) \dY{\pa}{\pb}$,
+	by \lemref{cases} \itemref{small:diam} (verifying this requires
+	some standard calculations which we omit).
 	
-    Otherwise, one needs to apply the same argument using the
-    appropriate case of \lemref{cases}.  So assume that $x \geq y$
-    (the case that $y \geq x$ is handled symmetrically). If
-    $\cell \subseteq \rect_\swarrow \cup \rect_\searrow$, then
-    \itemref{x:bigger} implies that
-    $(1-\delta)^{-1} \cell \subseteq \rect$. Which implies that
-    induction applies, and the claim holds.
+	Otherwise, one needs to apply the same argument using the
+	appropriate case of \lemref{cases}.  So assume that $x \geq y$
+	(the case that $y \geq x$ is handled symmetrically). If
+	$\cell \subseteq \rect_\swarrow \cup \rect_\searrow$, then
+	\itemref{x:bigger} implies that
+	$(1-\delta)^{-1} \cell \subseteq \rect$. Which implies that
+	induction applies, and the claim holds.
 	
-    The remaining case is that $x \geq y$ and
-    $\cell \subseteq \rect_\nwarrow$.  Let
-    $\rectB= \xSlabX{ (1-\delta)\rect} \cap \cell$.  By \itemref{n:w},
-    we have $(1-\delta)^{-1}\rectB \subseteq \rect$. Namely,
-    $\pb \in (1-\delta)\rect \cap \cell \subseteq \rectB$, and let
-    $\pc$ be the lowest point in $\cell \cap \PS$. By construction
-    $\pa \pc \in \EGX{\G}$, $\pb, \pc \in \rectB$, and
-    $(1-\delta)^{-1} \rectB \subseteq \rect$. As such, we can apply
-    induction to $\pb$, $\pc$, and $(1-\delta)^{-1} \rectB$, and
-    conclude that $\dGZ{\G}{\pb}{\pc} \leq (1+\eps) \dY{\pb}{\pc}$.
-    Plugging this into the regular machinery implies the claim.
+	The remaining case is that $x \geq y$ and
+	$\cell \subseteq \rect_\nwarrow$.  Let
+	$\rectB= \xSlabX{ (1-\delta)\rect} \cap \cell$.  By \itemref{n:w},
+	we have $(1-\delta)^{-1}\rectB \subseteq \rect$. Namely,
+	$\pb \in (1-\delta)\rect \cap \cell \subseteq \rectB$, and let
+	$\pc$ be the lowest point in $\cell \cap \PS$. By construction
+	$\pa \pc \in \EGX{\G}$, $\pb, \pc \in \rectB$, and
+	$(1-\delta)^{-1} \rectB \subseteq \rect$. As such, we can apply
+	induction to $\pb$, $\pc$, and $(1-\delta)^{-1} \rectB$, and
+	conclude that $\dGZ{\G}{\pb}{\pc} \leq (1+\eps) \dY{\pb}{\pc}$.
+	Plugging this into the regular machinery implies the claim.
 \end{proof}
 
 \begin{theorem}
-    \thmlab{a:l:s:rectangles}%
+	\thmlab{a:l:s:rectangles}%
 	%
-    Let $\PS$ be a set of $n$ points in the plane, and let
-    $\eps, \delta \in (0,1)$ be parameters. The above algorithm
-    constructs, in $\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$ time, a
-    graph $\G$ with $\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$
-    edges. The graph $\G$ is a $(1-\delta)$-local $(1+\eps)$-spanner
-    for axis parallel rectangles. Formally, for any axis-parallel
-    rectangle $\rect$, we have that $\rect \cap \PS$ is an
-    $(1+\eps)$-spanner for all the points of
-    $\bigl((1-\delta)\rect \bigr)\cap \PS$.
+	Let $\PS$ be a set of $n$ points in the plane, and let
+	$\eps, \delta \in (0,1)$ be parameters. The above algorithm
+	constructs, in $\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$ time, a
+	graph $\G$ with $\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$
+	edges. The graph $\G$ is a $(1-\delta)$-local $(1+\eps)$-spanner
+	for axis parallel rectangles. Formally, for any axis-parallel
+	rectangle $\rect$, we have that $\rect \cap \PS$ is an
+	$(1+\eps)$-spanner for all the points of
+	$\bigl((1-\delta)\rect \bigr)\cap \PS$.
 \end{theorem}
 \begin{proof}
-    Computing the \QSPD $\WS$ takes $\Of(n \log^2 n)$ time. For each
-    pair $\{\PSX, \PSY\}$ in the decomposition with
-    $m = |\PSX| + |\PSY|$ points, we need to compute the lowest and
-    leftmost points in $(\PSX \cup \PSY) \cap \cell$, for each cell in
-    the constructed grid. This can readily be done using orthogonal
-    range trees in $\Of( \log^2 n)$ time per query (a somewhat faster
-    query time should be possible by using the offline nature of the
-    queries, etc). This yields the construction time. The size of the
-    computed graph is
-    $\Of(\WeightX{\WS} \gConst^2) = O\bigl((1/\delta^2 + 1/\eps^2) n
-    \log^2 n\bigr)$.
+	Computing the \QSPD $\WS$ takes $\Of(n \log^2 n)$ time. For each
+	pair $\{\PSX, \PSY\}$ in the decomposition with
+	$m = |\PSX| + |\PSY|$ points, we need to compute the lowest and
+	leftmost points in $(\PSX \cup \PSY) \cap \cell$, for each cell in
+	the constructed grid. This can readily be done using orthogonal
+	range trees in $\Of( \log^2 n)$ time per query (a somewhat faster
+	query time should be possible by using the offline nature of the
+	queries, etc). This yields the construction time. The size of the
+	computed graph is
+	$\Of(\WeightX{\WS} \gConst^2) = O\bigl((1/\delta^2 + 1/\eps^2) n
+	\log^2 n\bigr)$.
 	
-    The desired local spanner property is provided by
-    \lemref{local:spanner}.
+	The desired local spanner property is provided by
+	\lemref{local:spanner}.
 \end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%s
+
+
+
+
+
+
+
+
+\paragraph*{Acknowledgements} %
+The authors thanks Mohammad Abam for providing us with an early
+version of \cite{ab-lgs-21}. The authors also thank the reviewers for
+the numerous detailed comments.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\SWATVer{\newpage}
+
+\BibTexMode{%
+   \SWATVer{%
+      \bibliographystyle{plainurl}%
+   }%
+   \NotSWATVer{%
+      \bibliographystyle{alpha}%
+   }%
+   \bibliography{../ft_spanner}%
+}%
+\BibLatexMode{\printbibliography}
+
+\SWATVer{\newpage}
+
+% \appendix
+\AppendixOfProofs
+
 
 
 

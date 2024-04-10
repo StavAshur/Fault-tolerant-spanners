@@ -81,7 +81,7 @@
     rectangles, where the shrinkage is \emph{multiplicative}. Any
     spanner is a weak local spanner if the shrinking is proportional
     to the diameter of the region.
-    
+
     \stav{The authors use phrases "region", "body", "set" inconsistently. Please make the use of those phrases consistent. When we say "body", we usually mean that it is compact. So, saying "bounded convex body" sounds repetitive and weird.}
 \end{abstract}
 
@@ -661,11 +661,15 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
        separated}.
 \end{defn}
 
-\begin{theorem}\RefProofInAppendix{refine:d:w}
+
+
+\begin{theorem}
     \lemlab{refine:d:w}%
 	%
-    Given a $(1/\eps)$-\SSPD $\WS$ of $n$ points in the plane, one can
-    refine $\WS$ into a $(1/\eps)$-\SSPD $\WS'$, such that each pair
+    \InFullVer{}%\SWATVer{(Proof in full version \cite{ah-lsr-22}.)}
+    Given a
+    $(1/\eps)$-\SSPD $\WS$ of $n$ points in the plane, one can refine
+    $\WS$ into a $(1/\eps)$-\SSPD $\WS'$, such that each pair
     $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in an
     $\eps$-double-wedge $\DW_\Pair$, such that $\PSX$ and $\PSY$ are
     contained in the two different faces of the double wedge
@@ -674,7 +678,8 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
     is proportional to the weight of $\WS'$.%
 \end{theorem}
 
-\begin{proof:in:appendix:e}{\lemref{refine:d:w}}{refine:d:w}
+\NotSWATVer{%
+\begin{proof}
     \begin{figure}[ht]
         \centerline{\includegraphics{../figs/partition}}
         \caption{An illustration of refining the pairs in a \SSPD into
@@ -750,17 +755,19 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
     lower end of the right side of $\square$ and the upper end of
     $\seg$ is now given by:
 
-		\begin{equation*}
-                    \arctan
-                    \pth{\frac{\frac{6}{\eps}
-                          \tan\frac{\eps}{8}+\frac{1}{2}}{\frac{5}{\eps}}
-                    }%
-                    =%
-                    \arctan \pth{ \frac{6}{5}\tan\frac{\eps}{8}+\frac{\eps}{10} }%
-                    \leq%
-                    \eps%
-		\end{equation*}
-            \end{proof:in:appendix:e}
+    \begin{equation*}
+        \arctan
+        \pth{\frac{\frac{6}{\eps}
+              \tan\frac{\eps}{8}+\frac{1}{2}}{\frac{5}{\eps}}
+        }%
+        =%
+        \arctan \pth{ \frac{6}{5}\tan\frac{\eps}{8}+\frac{\eps}{10} }%
+        \leq%
+        \eps%
+    \end{equation*}
+\end{proof}%
+}
+
 
 
 
@@ -820,9 +827,10 @@ has width smaller than $2 \delta \cdot \diameterX{\body}$, then
 $\shrinkDY{\body}{\delta}$ is empty.
 
 
-\begin{lemma}\RefProofInAppendix{w:l:s:regions}
+\begin{lemma}
     \lemlab{w:l:s:regions}%
-	%
+    %
+    \InFullVer{}
     Given a set $\PS$ of $n$ points in the plane, and parameters
     $\delta, \eps \in (0,1)$, one can construct a graph $\G$ over
     $\PS$, in $\Of( (\eps^{-1} + \delta^{-2}) n \log n)$ time, and
@@ -833,7 +841,9 @@ $\shrinkDY{\body}{\delta}$ is empty.
     $\restrictY{ \body }{\PS}$ has a $(1+\eps)$-path between $\pa$ and
     $\pb$.
 \end{lemma}
-\begin{proof:in:appendix:e}{\lemref{w:l:s:regions}}{w:l:s:regions}
+
+\NotSWATVer{%
+\begin{proof}
     The proof of the following claim is straightforward, and is
     included for the sake of completeness.  Let
     $\epsA = \min( \eps, \delta^2)$. Construct, in
@@ -854,50 +864,49 @@ $\shrinkDY{\body}{\delta}$ is empty.
     $\pa \pb$ that passes through the middle point $\cen$ of this
     segment, see \figref{ellipse}. Let $\pz$ be one of these points.
 
-	\begin{figure}[h]
-            \centerline{\includegraphics{../figs/ellipse}}
-            \caption{An illustration of the settings in the proof of
-               \lemref{w:l:s:regions} with $\Elp$ shown in blue.}
-            \figlab{ellipse}
-	\end{figure}
+    \begin{figure}[h]
+        \centerline{\includegraphics{../figs/ellipse}}
+        \caption{An illustration of the settings in the proof of
+           \lemref{w:l:s:regions} with $\Elp$ shown in blue.}
+        \figlab{ellipse}
+    \end{figure}
 
-	We have that
-	\begin{math}
-            \dY{\pa}{\pz} = (1+\epsA)\ell/2.
-	\end{math}
-	Setting $h = \dY{\pz}{\cen}$, we have that
-	\begin{equation*}
-            h%
-            =%
-            \sqrt{\dY{\pa}{\pz}^2 - \dY{\pa}{\cen}^2 }
-            =%
-            \frac{\ell}{2} \sqrt{(1+\epsA)^2 - 1}
-            =%
-            \frac{\sqrt{\epsA (2+\epsA)}}{2} \ell%
-            \leq
-            \sqrt{\epsA} \ell
-            \leq
-            \sqrt{\epsA}\cdot \diameterX{\body}.
-	\end{equation*}
-	as $\ell \leq \diameterX{\body'} \leq \diameterX{\body}$.
+    We have that
+    \begin{math}
+        \dY{\pa}{\pz} = (1+\epsA)\ell/2.
+    \end{math}
+    Setting $h = \dY{\pz}{\cen}$, we have that
+    \begin{equation*}
+        h%
+        =%
+        \sqrt{\dY{\pa}{\pz}^2 - \dY{\pa}{\cen}^2 }
+        =%
+        \frac{\ell}{2} \sqrt{(1+\epsA)^2 - 1}
+        =%
+        \frac{\sqrt{\epsA (2+\epsA)}}{2} \ell%
+        \leq
+        \sqrt{\epsA} \ell
+        \leq
+        \sqrt{\epsA}\cdot \diameterX{\body}.
+    \end{equation*}
+    as $\ell \leq \diameterX{\body'} \leq \diameterX{\body}$.
 
-	For any point $\px \in \body'$, we have that
-        $\dsY{\px}{\Re^2 \setminus \body} \geq \delta \cdot
-        \diamX{\body}$.  As such, to ensure that
-        $\pi \subseteq \Elp \subseteq \body$, we need that
-	\begin{math}
-            \delta \cdot \diamX{\body} \geq h,
-	\end{math}
-	which holds if
-	\begin{math}
-            \delta \cdot \diamX{\body} \geq \sqrt{\epsA} \cdot
-            \diameterX{\body}.
-	\end{math}
-	This in turn holds if $\epsA \leq \delta^2$. Namely, we have
-        the desired properties if $\epsA = \min( \eps, \delta^2)$.
-    \end{proof:in:appendix:e}
-
-
+    For any point $\px \in \body'$, we have that
+    $\dsY{\px}{\Re^2 \setminus \body} \geq \delta \cdot
+    \diamX{\body}$.  As such, to ensure that
+    $\pi \subseteq \Elp \subseteq \body$, we need that
+    \begin{math}
+        \delta \cdot \diamX{\body} \geq h,
+    \end{math}
+    which holds if
+    \begin{math}
+        \delta \cdot \diamX{\body} \geq \sqrt{\epsA} \cdot
+        \diameterX{\body}.
+    \end{math}
+    This in turn holds if $\epsA \leq \delta^2$. Namely, we have
+    the desired properties if $\epsA = \min( \eps, \delta^2)$.
+\end{proof}
+}
 
 
 
@@ -964,9 +973,10 @@ $\shrinkDY{\body}{\delta}$ is empty.
 
 
 
-\begin{lemma}\RefProofInAppendix{shrink:shrank}
+\begin{lemma}
     \lemlab{shrink:shrank}%
-	%
+    %
+    \InFullVer{}%
     Let $\CC$ be a convex bounded body, and let $\PS$ be a set of
     points in general position with respect to $\CC$. Then, if $C$ is
     a homothet of $\CC$ that contains two points
@@ -976,7 +986,8 @@ $\shrinkDY{\body}{\delta}$ is empty.
 
 See \figref{shrink:h} for An illustration of the claim in \lemref{shrink:shrank}.
 
-\begin{proof:in:appendix:e}{\lemref{shrink:shrank}}{shrink:shrank}
+\NotSWATVer{%
+\begin{proof}
     This claim is standard, and the proof is included for the sake of
     completeness.  The idea is to apply a shrinking process of $C$, as
     illustrated in \figref{shrink:h}.  Consider the mapping
@@ -990,16 +1001,18 @@ See \figref{shrink:h} for An illustration of the claim in \lemref{shrink:shrank}
     $\beta$ such that $C' = f_{\beta,\pb}(C_1)$ contains $\pa$. Since
     $C' \subseteq C_1 \subseteq C$, and $\pa, \pb \in \partial C'$,
     the claim follows.
-\end{proof:in:appendix:e}
+\end{proof}%
+}
 
 
 The following standard claim, usually stated for the standard Delaunay
 triangulations, also holds for homothets.
 
 
-\begin{claim}\RefProofInAppendix{c:t:connected}
+\begin{claim}
     \clmlab{c:t:connected}%
-	%
+    %
+    \InFullVer{}%
     Let $\CC$ be a compact (bounded and closed) convex body.  Given a
     set $\PS \subseteq \Re^2$ of points in general position with
     respect to $\CC$, let $\DG = \DG_{\CC}(\PS)$ be the $\CC$-Delaunay
@@ -1007,8 +1020,8 @@ triangulations, also holds for homothets.
     that $\restrictY{\DG}{C}$ is connected.%
 \end{claim}
 
-
-\begin{proof:in:appendix:e}{\clmref{c:t:connected}}{c:t:connected}
+\NotSWATVer{%
+\begin{proof}
     We prove that for any homothet $C$ with two points
     $\pa,\pb\in \PS$ on its boundary, there is a path between $\pa$
     and $\pb$ in $\restrictY{\DT}{C}$, and \lemref{shrink:shrank} will
@@ -1018,31 +1031,32 @@ triangulations, also holds for homothets.
     thus $\pa \pb$ is an edge of the Delaunay triangulation, as $C$
     testifies.
 
-	\begin{figure}[h]
-            \phantom{}\hfill%
-            \includegraphics[page=1]{../figs/shrink}%
-            \hfill%
-            \includegraphics[page=2]{../figs/shrink}%
-            \hfill%
-            \includegraphics[page=3]{../figs/shrink}%
-            \hfill%
-            \phantom{}%
-            \caption{An illustration of the proof of
-               \clmref{c:t:connected} in the case that $C$ is a disk.}
-            \figlab{shrink}
-	\end{figure}
+    \begin{figure}[h]
+        \phantom{}\hfill%
+        \includegraphics[page=1]{../figs/shrink}%
+        \hfill%
+        \includegraphics[page=2]{../figs/shrink}%
+        \hfill%
+        \includegraphics[page=3]{../figs/shrink}%
+        \hfill%
+        \phantom{}%
+        \caption{An illustration of the proof of
+           \clmref{c:t:connected} in the case that $C$ is a disk.}
+        \figlab{shrink}
+    \end{figure}
 
-	Otherwise, let $\pc\in \PS$ be a point in the interior of
-        $C$. From \lemref{shrink:shrank} we get that there exists a
-        homothet $C'$ of $C$ with $C'\subseteq C$, such that $\pa$ and
-        $\pc$ lie on the boundary of $C'$ Thus, by induction, there is
-        a path $\gamma'$ between $\pa$ and $\pc$ in
-        $\restrictY{\DT}{C'} \subseteq \restrictY{\DT}{C}$. Similarly,
-        there must be a homothet $C''$, that gives rise to a path
-        $\gamma''$ between $\pc$ and $\pb$, and concatenating the two
-        paths results in a path between $\pa$ and $\pb$ in
-        $\restrictY{\DT}{C}$.
-    \end{proof:in:appendix:e}
+    Otherwise, let $\pc\in \PS$ be a point in the interior of
+    $C$. From \lemref{shrink:shrank} we get that there exists a
+    homothet $C'$ of $C$ with $C'\subseteq C$, such that $\pa$ and
+    $\pc$ lie on the boundary of $C'$ Thus, by induction, there is a
+    path $\gamma'$ between $\pa$ and $\pc$ in
+    $\restrictY{\DT}{C'} \subseteq \restrictY{\DT}{C}$. Similarly,
+    there must be a homothet $C''$, that gives rise to a path
+    $\gamma''$ between $\pc$ and $\pb$, and concatenating the two
+    paths results in a path between $\pa$ and $\pb$ in
+    $\restrictY{\DT}{C}$.
+\end{proof}%
+}
 
 
 
@@ -1339,7 +1353,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     and to the right of $\pa$, let $\diskVY{\pa}{\pb}$ be the disk
     whose boundary passes through $\pa$ and $\pb$, and its center has
     the same $x$-coordinate as $\pa$.
-% 
+%
     In the $j$\th iteration, for $j=2,\ldots, M-1$, Let
     $x_j = n2^{M-j+1} = x(\pb_{j-1})/2$\stav{$x(q_{j-1})$--> $x_{j-1}$}, and let $y_j < 0$ be the
     maximum $y$-coordinate of a point that lies on the intersection of
@@ -1414,9 +1428,10 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 
 \subsubsection{A lower bound for triangles}
 
-\begin{lemma}\RefProofInAppendix{proof_l_b_triangles}
+\begin{lemma}
     \lemlab{l:b:triangles}%
     %
+    \InFullVer{}%
     For any $n > 0$, and $\Phi = \Omega(n)$, one can compute a set
     $\PS$ of $n+ \Of(\log\Phi)$ points, with spread $\Of(\Phi n)$, and
     a triangle $\triangle$, such that any $\triangle$-local
@@ -1424,8 +1439,8 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     $\Omega\bigl( n\log( 1 + \tfrac{\Phi}{n}) \bigr)$ edges.
 \end{lemma}
 
-
-\begin{proof:in:appendix:e}{\lemref{l:b:triangles}}{proof_l_b_triangles}
+\NotSWATVer{%
+\begin{proof}
     Let $h = \ceil{\log_2 \Phi}$.  Let $\triangle$ be the triangle
     formed by the points $(0,0)$, $(0,1)$ and $(8\Phi h,0)$.  The
     hypotenuse of this triangle lies on the line
@@ -1490,12 +1505,14 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     $\triangle$, must contain the edge $\pb_i \pc_j$, for any
     $i \in \IRX{h}$ and $j \in \IRX{n}$. Thus, such a spanner must
     have $ \Omega( n \log \Phi)$ edges, as claimed.
-\end{proof:in:appendix:e}
+\end{proof}%
+}
 
-See \figref{tri_low_bd} for an illustration of the construction
-described in \lemref{l:b:triangles} showing the dependency between
-the spread and the number of edges if "thin" triangles are allowed.
-
+\NotSWATVer{%
+   See \figref{tri_low_bd} for an illustration of the construction
+   described in \lemref{l:b:triangles} showing the dependency between
+   the spread and the number of edges if "thin" triangles are allowed.
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5 5 5
 
@@ -1508,8 +1525,6 @@ costly, if we are given a triangle $\triangle$ with the single
 constraint that $\triangle$ is not too ``thin'', then one can
 construct a $\triangle$-local $t$-spanner with a number of edges that
 does not depend on the spread of the points.
-
-
 
 \begin{defn}
     A triangle $\triangle$ is \emphi{$\alpha$-fat} if the smallest
@@ -1560,7 +1575,8 @@ to the direction $\dir_i$).
 Let $\G$ be the graph over $\PS$ formed by connecting every point
 $\pa \in \PS$ to $\nnZ{i}{\pa}{\cone}$, for all $i \in \IRX{3}$ and
 $\cone \in \ConeSet_i$.  We get the following result (see
-\apndref{l:s:triangle:details} for details).
+\SWATVer{full version \cite{ah-lsr-22} for details}%
+\NotSWATVer{\apndref{l:s:triangle:details} for details}).
 
 
 \SaveContent{\ThmLSTriangle}%
@@ -1610,9 +1626,10 @@ For $\eps \in (0,1/4)$, a trapezoid $\Trap$ is \emphi{$\eps$-narrow}
 if the length of each of its legs is at most
 $\eps \cdot \diamX{\Trap}$.
 
-\begin{lemma}\RefProofInAppendix{good:jump:traps:p}
+\begin{lemma}
     \lemlab{good:jump:traps}%
     %
+    \InFullVer{}%
     Let $\eps \in (0,1)$ be some parameter, and $\epsA = \eps/16$.
     Let $\PX,\PY$ be two point sets that are $(1/\epsA)$-semi
     separated and $\epsA$-angularly separated (see
@@ -1631,131 +1648,132 @@ $\eps \cdot \diamX{\Trap}$.
     \end{compactenumI}
 \end{lemma}
 
-\begin{proof:in:appendix:e}{\lemref{good:jump:traps}}{good:jump:traps:p}
+\NotSWATVer{%
+\begin{proof}
     Let $\DT = \DG_\Trap(\PX \cup \PY)$.  \clmref{c:t:connected}
     implies that $\DT \cap \Trap$ is connected. Thus, there is a path
     in $\DT \cap \Trap$ between $\pa$ and $\pb$, and therefore, there
     must be an edge $\pa'\pb'$ along this path with $\pa' \in X$ and
     $\pb' \in Y$. This implies part (I).
 
-\begin{figure}[ht]
-    \phantom{}\hfill%
-    \includegraphics[width=0.3\linewidth]{../figs/narrow_trap}%
-    \hfill%
-    \includegraphics[page=2,width=0.3\linewidth]{../figs/narrow_trap}%
-    \hfill%
-    \includegraphics[page=3,width=0.3\linewidth]{../figs/narrow_trap}%
-    \hfill\phantom{}%
+    \begin{figure}[ht]
+        \phantom{}\hfill%
+        \includegraphics[width=0.3\linewidth]{../figs/narrow_trap}%
+        \hfill%
+        \includegraphics[page=2,width=0.3\linewidth]{../figs/narrow_trap}%
+        \hfill%
+        \includegraphics[page=3,width=0.3\linewidth]{../figs/narrow_trap}%
+        \hfill\phantom{}%
 
-    \phantom{}\hfill%
-    (i)\qquad\qquad\qquad \hfill%
-    (ii) \hfill%
-    \qquad \qquad \qquad(iii) \hfill\phantom{}%
+        \phantom{}\hfill%
+        (i)\qquad\qquad\qquad \hfill%
+        (ii) \hfill%
+        \qquad \qquad \qquad(iii) \hfill\phantom{}%
 
-    \caption{Illustration of the settings in the proof of
-       \lemref{good:jump:traps}. Left: A $\epsA$-narrow trapezoid with
-       $\pa$ and $\pb$ on its legs. Center: $\pa$ and $\pb$ are
-       $\epsA$-semi separated and $\epsA$-angularly separated. Right:
-       The triangle of all the points of the trapezoids whose
-       nearest point on $\pa \pb$ is $\pb$. }
-    \figlab{narrow:trap}
-\end{figure}
+        \caption{Illustration of the settings in the proof of
+           \lemref{good:jump:traps}. Left: A $\epsA$-narrow trapezoid with
+           $\pa$ and $\pb$ on its legs. Center: $\pa$ and $\pb$ are
+           $\epsA$-semi separated and $\epsA$-angularly separated. Right:
+           The triangle of all the points of the trapezoids whose
+           nearest point on $\pa \pb$ is $\pb$. }
+        \figlab{narrow:trap}
+    \end{figure}
 
+    Let $\ell = \dY{\pa'}{\pb'}$. Assume for concreteness that
+    $\dY{\pa}{\pa'} \leq \diamX{\PX} \leq \epsA \dsY{\PX}{\PY} \leq
+    \epsA \ell\leq \epsA \diamC$, where $\diamC=\diamX{\Trap}$. Let
+    $\pb''$ be the closest point on $\pa\pb$ to $\pb'$.
 
-Let $\ell = \dY{\pa'}{\pb'}$. Assume for concreteness that
-$\dY{\pa}{\pa'} \leq \diamX{\PX} \leq \epsA \dsY{\PX}{\PY} \leq \epsA
-\ell\leq \epsA \diamC$, where $\diamC=\diamX{\Trap}$. Let $\pb''$ be
-the closest point on $\pa\pb$ to $\pb'$.
+    We first consider the case that $\pb'' \in \interiorX{\pa\pb}$.
+    We have that
+    \begin{equation*}
+        \dY{\pa}{\pb''}
+        =%
+        \dY{\pa}{\pb'} \cos \angle \pb' \pa \pb
+        \geq
+        \bigl(\dY{\pa'}{\pb'} - \dY{\pa}{\pa'} \bigr)
+        \cos \angle \pb' \pa \pb
+        \geq
+        (1-\epsA) \ell \cdot (1-\epsA^2/2)
+        \geq
+        (1-2\epsA) \ell,
+    \end{equation*}
+    since $\cos \epsA \geq 1-\epsA^2 /2$, for $\epsA <1/2$.  Similar
+    arguments imply that $\dY{\pa}{\pb''} \leq (1+\epsA) \ell$. As
+    such, we have
+    \begin{equation*}
+        \dY{\pb'}{\pb''} \leq ( 1+\epsA)\ell \sin \angle\pa'\pa \pb'
+        \leq
+        2 \epsA \ell.
+    \end{equation*}
+    Thus, we have that
+    \begin{equation*}
+        \dY{\pb}{\pb'}
+        \leq
+        \dY{\pb}{\pb''}  + \dY{\pb''}{\pb'}
+        \leq%
+        \dY{\pa}{\pb} -    \dY{\pa}{\pb''} + 2\epsA \ell
+        \leq%
+        \dY{\pa}{\pb} - (1-2\epsA)\ell + 2\epsA \ell
+        \leq
+        \dY{\pa}{\pb} - \ell.
+    \end{equation*}
 
-We first consider the case that $\pb'' \in \interiorX{\pa\pb}$.  We
-have that
-\begin{equation*}
-    \dY{\pa}{\pb''}
-    =%
-    \dY{\pa}{\pb'} \cos \angle \pb' \pa \pb
-    \geq
-    \bigl(\dY{\pa'}{\pb'} - \dY{\pa}{\pa'} \bigr)
-    \cos \angle \pb' \pa \pb
-    \geq
-    (1-\epsA) \ell \cdot (1-\epsA^2/2)
-    \geq
-    (1-2\epsA) \ell,
-\end{equation*}
-since $\cos \epsA \geq 1-\epsA^2 /2$, for $\epsA <1/2$.  Similar
-arguments imply that $\dY{\pa}{\pb''} \leq (1+\epsA) \ell$. As such,
-we have
-\begin{equation*}
-    \dY{\pb'}{\pb''} \leq ( 1+\epsA)\ell \sin \angle\pa'\pa \pb'
-    \leq
-    2 \epsA \ell.
-\end{equation*}
-Thus, we have that
-\begin{equation*}
-    \dY{\pb}{\pb'}
-    \leq
-    \dY{\pb}{\pb''}  + \dY{\pb''}{\pb'}
-    \leq%
-    \dY{\pa}{\pb} -    \dY{\pa}{\pb''} + 2\epsA \ell
-    \leq%
-    \dY{\pa}{\pb} - (1-2\epsA)\ell + 2\epsA \ell
-    \leq
-    \dY{\pa}{\pb} - \ell.
-\end{equation*}
+    and finally,
+    \begin{align*}
+      &(1+\eps)\dY{\pa}{\pa'} + \dY{\pa'}{\pb'} + (1+\eps)
+        \dY{\pb'}{\pb}
+        \leq%
+        (1+\eps)\epsA \ell
+        + \ell + (1+\eps)\bigl(
+        \dY{\pa}{\pb} - \ell\bigr)
+      \\&%
+      \qquad=%
+      (1+\eps)\dY{\pa}{\pb}
+      +
+      (1+\eps)\epsA \ell
+      + \ell - (1+\eps)\ell
+      \leq%
+      (1+\eps)\dY{\pa}{\pb},
+    \end{align*}
+    for $\epsA \leq \eps/2$. Which establishes the claim in this case.
 
-and finally,
-\begin{align*}
-  &(1+\eps)\dY{\pa}{\pa'} + \dY{\pa'}{\pb'} + (1+\eps)
-    \dY{\pb'}{\pb}
-    \leq%
-    (1+\eps)\epsA \ell
-    + \ell + (1+\eps)\bigl(
-    \dY{\pa}{\pb} - \ell\bigr)
-  \\&%
-  \qquad=%
-  (1+\eps)\dY{\pa}{\pb}
-  +
-  (1+\eps)\epsA \ell
-  + \ell - (1+\eps)\ell
-  \leq%
-  (1+\eps)\dY{\pa}{\pb},
-\end{align*}
-for $\epsA \leq \eps/2$. Which establishes the claim in this case.
-
-The case $\pb''=\pa$ is impossible because of the angular separation
-property, and so, the only remaining possibility is that
-$\pb'' = \pb$. This however implies that $\pb'$ must be in the
-triangle of all the points of the trapezoid whose nearest point on
-$\pa \pb$ is $\pb$. The diameter of this triangle is bounded by the
-length of the leg of the trapezoid, which is bounded by
-$\epsA \, \diamC$. Namely, we have $\dY{\pb}{\pb'} \leq \epsA
-\diamC$. Similarly, we have
-\begin{math}
-    (1 - 2\epsA) \diamC%
-    \leq%
-    \dY{\pa}{\pb} \leq%
-    (1+2\epsA)\diamC.
-\end{math}
-Since $\dY{\pa}{\pa'}, \dY{\pb}{\pb'} \leq \epsA \diamC$, it follows
-that
-\begin{equation*}
-    (1-4\epsA) \diamC%
-    \leq%
-    \ell%
-    \leq%
-    (1+4\epsA)\diamC.
-\end{equation*}
-As such, for $\epsA \leq \eps/8$ and $\eps \leq 1$, we have
-\begin{equation*}
-    (1+\eps)\dY{\pa}{\pa'} + \ell + (1+\eps)
-    \dY{\pb'}{\pb}
-    \leq%
-    4 \epsA \diamC + (1+4\epsA)\diamC
-    =%
-    (1+8\epsA)\diamC
-    \leq
-    (1+\eps) \dY{\pa}{\pb}.
-\end{equation*}
-\end{proof:in:appendix:e}
+    The case $\pb''=\pa$ is impossible because of the angular
+    separation property, and so, the only remaining possibility is
+    that $\pb'' = \pb$. This however implies that $\pb'$ must be in
+    the triangle of all the points of the trapezoid whose nearest
+    point on $\pa \pb$ is $\pb$. The diameter of this triangle is
+    bounded by the length of the leg of the trapezoid, which is
+    bounded by $\epsA \, \diamC$. Namely, we have
+    $\dY{\pb}{\pb'} \leq \epsA \diamC$. Similarly, we have
+    \begin{math}
+        (1 - 2\epsA) \diamC%
+        \leq%
+        \dY{\pa}{\pb} \leq%
+        (1+2\epsA)\diamC.
+    \end{math}
+    Since $\dY{\pa}{\pa'}, \dY{\pb}{\pb'} \leq \epsA \diamC$, it
+    follows that
+    \begin{equation*}
+        (1-4\epsA) \diamC%
+        \leq%
+        \ell%
+        \leq%
+        (1+4\epsA)\diamC.
+    \end{equation*}
+    As such, for $\epsA \leq \eps/8$ and $\eps \leq 1$, we have
+    \begin{equation*}
+        (1+\eps)\dY{\pa}{\pa'} + \ell + (1+\eps)
+        \dY{\pb'}{\pb}
+        \leq%
+        4 \epsA \diamC + (1+4\epsA)\diamC
+        =%
+        (1+8\epsA)\diamC
+        \leq
+        (1+\eps) \dY{\pa}{\pb}.
+    \end{equation*}
+\end{proof}%
+}
 
 
 
@@ -1772,9 +1790,10 @@ length of the longest edge of $\Body$ is $\Of(\senseX{\Body})$.  As an
 example, a $k$-regular polygon is $k$-nice.
 
 
-\begin{lemma}\RefProofInAppendix{p:narrow:traps:d}
+\begin{lemma}
     \lemlab{narrow:traps:decomp}%
     %
+    \InFullVer{}%
     Let $t$ be a positive integer.  Given a $t$-nice polygon $\Body$,
     and a parameter $\epsA$, one can cover it by a set $\Traps$ of
     $\Of(t^4/\epsA^3)$ $\epsA$-narrow trapezoids, such that for any
@@ -1785,105 +1804,108 @@ example, a $k$-regular polygon is $k$-nice.
 \end{lemma}
 
 
-\begin{proof:in:appendix:e}{\lemref{narrow:traps:decomp}}{p:narrow:traps:d}
-    We show a somewhat suboptimal but simple construction. A $t$-nice
-    polygon has at most $t$ edges.  Let $\psi$ be the sensitivity of
-    $\Body$, and place a minimum set $\PS$ of points on the boundary
-    of $\Body$, which includes all the vertices of $\Body$, and such
-    that the distance between any consecutive pair of points is in the
-    range $[\constA, 2\constA]$, where
-    $\constA = \epsA \psi/ \constB$, for some sufficiently large
-    constant $\constB$. In particular, let
-    $M =\max_{e \in \EGX{\Body}} \ceil{\| e\| / \constA} = \Of(
-    1/\epsA)$.
+\NotSWATVer{%
+   \begin{proof}
+       We show a somewhat suboptimal but simple construction. A
+       $t$-nice polygon has at most $t$ edges.  Let $\psi$ be the
+       sensitivity of $\Body$, and place a minimum set $\PS$ of points
+       on the boundary of $\Body$, which includes all the vertices of
+       $\Body$, and such that the distance between any consecutive
+       pair of points is in the range $[\constA, 2\constA]$, where
+       $\constA = \epsA \psi/ \constB$, for some sufficiently large
+       constant $\constB$. In particular, let
+       $M =\max_{e \in \EGX{\Body}} \ceil{\| e\| / \constA} = \Of(
+       1/\epsA)$.
 
-    In addition, place $\constC \cdot t$ equally spaced points between
-    any two consecutive points of $\PS$, where $\constC$ is a constant
-    to be determined shortly. Let $\PSA$ be the set resulting from
-    $\PS$ after adding all these points.
+       In addition, place $\constC \cdot t$ equally spaced points
+       between any two consecutive points of $\PS$, where $\constC$ is
+       a constant to be determined shortly. Let $\PSA$ be the set
+       resulting from $\PS$ after adding all these points.
+       
+       \begin{figure}[h]
+           \phantom{}%
+           \hfill%
+           \includegraphics[page=2,width=0.3\linewidth]{../figs/decompose}
+           \hfill%
+           \includegraphics[page=3,width=0.3\linewidth]{../figs/decompose}
+           \hfill%
+           \includegraphics[page=1,width=0.3\linewidth]{../figs/points_trap}
+           \hfill%
+           \phantom{}%
+           \caption{The points of $\PS$ (round), and all the points
+              added to $\PS$ in order to create $\PSA$ (square). On
+              the right, a ``vertical'' decomposition induced by one
+              of the directions of $\PS \times \PSA$.}
+           \figlab{v:decompose}
+       \end{figure}
 
-    \begin{figure}[h]
-        \phantom{}%
-        \hfill%
-        \includegraphics[page=2,width=0.3\linewidth]{../figs/decompose}
-        \hfill%
-        \includegraphics[page=3,width=0.3\linewidth]{../figs/decompose}
-        \hfill%
-        \includegraphics[page=1,width=0.3\linewidth]{../figs/points_trap}
-        \hfill%
-        \phantom{}%
-        \caption{The points of $\PS$ (round), and all the points added
-           to $\PS$ in order to create $\PSA$ (square). On the right,
-           a ``vertical'' decomposition induced by one of the
-           directions of $\PS \times \PSA$.}
-        \figlab{v:decompose}
-    \end{figure}
+       We have that $|\PS| = \Of( t /\epsA)$ and
+       $|\PSA| = \Of(t^2/\epsA)$. For a direction $v$, let $\Traps_v$
+       be the decomposition into trapezoids formed by shooting rays
+       from inside $\Body$ in the direction of $v$ (or $-v$) from all
+       the points of $\PS$, see \figref{v:decompose}. Let $\Traps_v'$
+       be the set resulting from throwing away trapezoids with legs
+       that lie on adjacent edges.  It is easy to verify that all the
+       trapezoids of $\Traps_v'$ are $\epsA$-narrow.  Let $U$ be the
+       set of all directions induced by pairs of points of
+       $\PS \times \PSA$, and let $\Traps = \cup_{u \in U}
+       \Traps_u'$. We have that
+       $|\Traps| = \Of( |\PS| \cdot |U| ) = \Of(|\PS|^2 |\PSA| ) =\Of(
+       t^4 /\epsA^3)$.
 
-    We have that $|\PS| = \Of( t /\epsA)$ and
-    $|\PSA| = \Of(t^2/\epsA)$. For a direction $v$, let $\Traps_v$ be
-    the decomposition into trapezoids formed by shooting rays from
-    inside $\Body$ in the direction of $v$ (or $-v$) from all the
-    points of $\PS$, see \figref{v:decompose}. Let $\Traps_v'$ be the
-    set resulting from throwing away trapezoids with legs that lie on
-    adjacent edges.  It is easy to verify that all the trapezoids of
-    $\Traps_v'$ are $\epsA$-narrow.  Let $U$ be the set of all
-    directions induced by pairs of points of $\PS \times \PSA$, and
-    let $\Traps = \cup_{u \in U} \Traps_u'$. We have that
-    $|\Traps| = \Of( |\PS| \cdot |U| ) = \Of(|\PS|^2 |\PSA| ) =\Of(
-    t^4 /\epsA^3)$.
+       Consider any two points $\pa, \pb$ on non-adjacent edges of
+       $\Body$, and let $\pa_1, \pa_2 $ be the two adjacent points of
+       $\PS$ such that $\pa \in \pa_1 \pa_2$.  Now, let $\pb_1, \pb_2$
+       be the adjacent points of $\PSA$ such that
+       $\pb \in \pb_1 \pb_2$.  We assume that
+       $\pa_1, \pa_2, \pb_1,\pb_2$ are in this clockwise order along
+       the boundary of $\Body$.
 
-    Consider any two points $\pa, \pb$ on non-adjacent edges of
-    $\Body$, and let $\pa_1, \pa_2 $ be the two adjacent points of
-    $\PS$ such that $\pa \in \pa_1 \pa_2$.  Now, let $\pb_1, \pb_2$ be
-    the adjacent points of $\PSA$ such that $\pb \in \pb_1 \pb_2$.  We
-    assume that $\pa_1, \pa_2, \pb_1,\pb_2$ are in this clockwise
-    order along the boundary of $\Body$.
+       Observe that when we project the interval $\pa_1 \pa_2$, to the
+       line induced by $\pb_1 \pb_2$, in the direction
+       $\overrightarrow{\pa_1 \pb_2}$, the projected interval contains
+       $\pb_1 \pb_2$.  The last claim is intuitively obvious, but
+       requires some work to see formally. The minimum height of a
+       triangle involving three vertices of $\Body$ is formed by three
+       consecutive vertices. In the worst case, this is an isosceles
+       triangle with sidelength $\psi$ and base angle $\pi/t$. As
+       such, the height of such a triangle is
+       $h = \psi \sin( \pi/t) \geq \psi/t$.
 
-    Observe that when we project the interval $\pa_1 \pa_2$, to the
-    line induced by $\pb_1 \pb_2$, in the direction
-    $\overrightarrow{\pa_1 \pb_2}$, the projected interval contains
-    $\pb_1 \pb_2$.  The last claim is intuitively obvious, but
-    requires some work to see formally. The minimum height of a
-    triangle involving three vertices of $\Body$ is formed by three
-    consecutive vertices. In the worst case, this is an isosceles
-    triangle with sidelength $\psi$ and base angle $\pi/t$. As such,
-    the height of such a triangle is
-    $h = \psi \sin( \pi/t) \geq \psi/t$.
+       \begin{figure}[h]
+           \includegraphics[page=2,width=0.23\linewidth]{../figs/points_trap_2}%
+           \hfill%
+           \includegraphics[page=3,width=0.23\linewidth]{../figs/points_trap_2}
+           \hfill%
+           \includegraphics[page=4,width=0.23\linewidth]{../figs/points_trap_2}
+           \hfill%
+           \includegraphics[page=5,width=0.23\linewidth]{../figs/points_trap_2}
+           \caption{The height of the triangle
+              $\triangle \pa_1 \pa_2 \pb_2$ is minimized as $\pb_2$
+              and $\pa_1$ are moved to vertices of $\Body$.}%
+           \figlab{points:move}
+       \end{figure}
 
+       The height of the triangle $\triangle \pa_1 \pa_2 \pb_2$ is
+       minimized when $\pa_1$ or $\pa_2$ is a vertex of $\Body$, and
+       $\pb_2$ is at a vertex of $\Body$, see
+       \figref{points:move}. Assume, for concreteness, that $\pa_1$ is
+       a vertex of $\Body$, and observe that
+       $\dY{\pa_1}{\pa_2} \geq \| e\|/M$, where $e$ is the edge of
+       $\Body$ containing this segment. Using similar triangles, it is
+       straightforward to show that the height of this triangle is at
+       least $h' = h/M = \Omega( \eps \psi/t )$. The quantity $h'$ is
+       a lower bound on the length of the projection of $\pa_1 \pa_2$
+       on the line spanned by $\pb_1 \pb_2$. However,
+       $\dY{\pb_1}{\pb_2} \leq 2\constA/\constC t = \Of( \epsA \psi
+       /\constC t) < h'$, by picking $\constC$ to be a sufficiently
+       large constant.
 
-    \begin{figure}[h]
-        \includegraphics[page=2,width=0.23\linewidth]{../figs/points_trap_2}%
-        \hfill%
-        \includegraphics[page=3,width=0.23\linewidth]{../figs/points_trap_2}
-        \hfill%
-        \includegraphics[page=4,width=0.23\linewidth]{../figs/points_trap_2}
-        \hfill%
-        \includegraphics[page=5,width=0.23\linewidth]{../figs/points_trap_2}
-        \caption{The height of the triangle
-           $\triangle \pa_1 \pa_2 \pb_2$ is minimized as $\pb_2$ and
-           $\pa_1$ are moved to vertices of $\Body$.}%
-        \figlab{points:move}
-    \end{figure}
-
-    The height of the triangle $\triangle \pa_1 \pa_2 \pb_2$ is
-    minimized when $\pa_1$ or $\pa_2$ is a vertex of $\Body$, and
-    $\pb_2$ is at a vertex of $\Body$, see
-    \figref{points:move}. Assume, for concreteness, that $\pa_1$ is a
-    vertex of $\Body$, and observe that
-    $\dY{\pa_1}{\pa_2} \geq \| e\|/M$, where $e$ is the edge of
-    $\Body$ containing this segment. Using similar triangles, it is
-    straightforward to show that the height of this triangle is at
-    least $h' = h/M = \Omega( \eps \psi/t )$. The quantity $h'$ is a
-    lower bound on the length of the projection of $\pa_1 \pa_2$ on
-    the line spanned by $\pb_1 \pb_2$. However,
-    $\dY{\pb_1}{\pb_2} \leq 2\constA/\constC t = \Of( \epsA \psi
-    /\constC t) < h'$, by picking $\constC$ to be a sufficiently large
-    constant.
-
-    This readily implies that the trapezoid induced by the direction
-    $ u = \overrightarrow{\pa_1 \pb_2}$ in $\Traps_u'$ that contains
-    $\pa$ on one of its leg, and $\pb$ on the other.
-\end{proof:in:appendix:e}
+       This readily implies that the trapezoid induced by the
+       direction $ u = \overrightarrow{\pa_1 \pb_2}$ in $\Traps_u'$
+       that contains $\pa$ on one of its leg, and $\pb$ on the other.
+   \end{proof}%
+}
 
 
 
@@ -1894,6 +1916,7 @@ example, a $k$-regular polygon is $k$-nice.
 \begin{theorem}
     \thmlab{k:gon}%
     %
+    \InFullVer{}%
     Let $\Body$ be a $k$-nice convex polygon, $\PS$ be a set of $n$
     points in the plane, and let $\eps \in (0,1)$ be a
     parameter. Then, one can construct a $\CC$-local
@@ -1902,6 +1925,7 @@ example, a $k$-regular polygon is $k$-nice.
     graph has $\Of\pth{\bigl. ( {k^4}/{\eps^6})n \log n}$ edges. In
     particular these bounds hold if $\Body$ is a $k$-regular polygon.
 \end{theorem}
+\NotSWATVer{%
 \begin{proof}
     Let $\epsA = \eps/\constD$, for $\constD$ sufficiently large
     constant.  We construct $\Triangles$, a family of triangles
@@ -1980,8 +2004,8 @@ example, a $k$-regular polygon is $k$-nice.
     which implies that there is $(1+\eps)$-path from $\pa$ to
     $\pb$ inside $\Body'$.
     % \end{itemize}
-\end{proof}
-
+\end{proof}%
+}
 
 \begin{remark}
     \remlab{improved}%
@@ -2032,9 +2056,11 @@ $\WS = \bigl\{ \{ \PSX_1, \PSY_1 \}, \ldots, \{ \PSX_s, \PSY_s \}
 \bigr\}$ of $\PS$ such that $\{ \PSX_i, \PSY_i\}$ are
 orthant-separated for all $i$.
 
-In \apndref{l:s:qspd:details} we prove the properties regarding
-the computational and combinatorial complexity of \QSPD{}s that are used
-in the proof of \thmref{a:l:s:rectangles}%}.
+\SWATVer{In the full version of the paper \cite{ah-lsr-22}, }%
+\NotSWATVer{In \apndref{l:s:qspd:details}, }%
+we prove the properties regarding the computational and combinatorial
+complexity of \QSPD{}s that are used in the proof of
+\thmref{a:l:s:rectangles}%}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -2182,14 +2208,16 @@ in \figref{x:expand}.  Similarly, we denote
 \end{figure}
 \begin{lemma}
     \lemlab{cases}%
-	%
-    Assume that $\delta < 1/2$, and $\gConst \geq \ceil{20/\eps + 20/\delta}$.  Consider a
-    pair $\Pair = \{\PSX, \PSY \}$ in the above construction, and a
-    point $\pa =(-x,-y) \in \PSX$ with its associated grid
+    % 
+    \InFullVer{}%
+    Assume that $\delta < 1/2$, and
+    $\gConst \geq \ceil{20/\eps + 20/\delta}$.  Consider a pair
+    $\Pair = \{\PSX, \PSY \}$ in the above construction, and a point
+    $\pa =(-x,-y) \in \PSX$ with its associated grid
     $\grid = \grid(\pa, \Pair)$. Consider any axis-parallel rectangle
     $\rect$, such that $\pa \in (1-\delta)\rect = I\times J$, and
-    $(1-\delta)\rect$ intersects a cell $\cell \in \grid$. We have
-    the following.
+    $(1-\delta)\rect$ intersects a cell $\cell \in \grid$. We have the
+    following.
     \begin{enumerate}
         \smallskip%
         \item \itemlab{i:c} If $\cell \subseteq (1-\delta)\rect$ then
@@ -2220,6 +2248,7 @@ in \figref{x:expand}.  Similarly, we denote
         \cap \cell \Bigr) \subseteq \rect$.
     \end{enumerate}
 \end{lemma}
+\NotSWATVer{%
 \begin{proof}
     \itemref{i:c} is immediate, \itemref{y:bigger} and \itemref{s:e}
     follow by symmetry from \itemref{x:bigger} and \itemref{n:w},
@@ -2268,16 +2297,19 @@ in \figref{x:expand}.  Similarly, we denote
     $(1-\delta)\rect$, which implies that when expanded by
     $(1-\delta)^{-1}$, it would be contained in the $y$-interval of
     $\rect$. Combining the two implies the result.
-\end{proof}
+\end{proof}%
+}
 
-\begin{lemma}\RefProofInAppendix{local:spanner:x}
+\begin{lemma}
     \lemlab{local:spanner}%
     %
+    \InFullVer{}%
     For any axis-parallel rectangle $\rect$, and any two points
     $\pa, \pb \in (1-\delta)\rect \cap \PS$, there exists a
     $(1+\eps)$-path between $\pa$ and $\pb$ in $\G$.
 \end{lemma}
-\begin{proof:in:appendix:e}{\lemref{local:spanner}}{local:spanner:x}
+\NotSWATVer{%
+\begin{proof}%{\lemref{local:spanner}}{local:spanner:x}
     The proof is by induction over the size of $\rect$ (i.e. area,
     width, or height). Let $\Pair = \{ \PSX, \PSY \} \in \WS$ be the
     pair in the \QSPD that separates $\pa$ and $\pb$, let $\cen$ be
@@ -2319,11 +2351,13 @@ in \figref{x:expand}.  Similarly, we denote
     induction to $\pb$, $\pc$, and $(1-\delta)^{-1} \rectB$, and
     conclude that $\dGZ{\G}{\pb}{\pc} \leq (1+\eps) \dY{\pb}{\pc}$.
     Plugging this into the regular machinery implies the claim.
-\end{proof:in:appendix:e}
+\end{proof}%
+}
 
-\begin{theorem}\RefProofInAppendix{rectangles:3}
+\begin{theorem}
     \thmlab{a:l:s:rectangles}%
-    % 
+    %
+    \InFullVer{}%
     Let $\PS$ be a set of $n$ points in the plane, and let
     $\eps, \delta \in (0,1)$ be parameters. The above algorithm
     constructs, in $\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$ time, a
@@ -2334,22 +2368,24 @@ in \figref{x:expand}.  Similarly, we denote
     $(1+\eps)$-spanner for all the points of
     $\bigl((1-\delta)\rect \bigr)\cap \PS$.
 \end{theorem}
-\begin{proof:in:appendix:e}{\thmref{a:l:s:rectangles}}{rectangles:3}
-    Computing the \QSPD $\WS$ takes $\Of(n \log^2 n)$ time. For each
-    pair $\{\PSX, \PSY\}$ in the decomposition with
-    $m = |\PSX| + |\PSY|$ points, we need to compute the lowest and
-    leftmost points in $(\PSX \cup \PSY) \cap \cell$, for each cell in
-    the constructed grid. This can readily be done using orthogonal
-    range trees in $\Of( \log^2 n)$ time per query (a somewhat faster
-    query time should be possible by using the offline nature of the
-    queries, etc). This yields the construction time. The size of the
-    computed graph is
-    $\Of(\WeightX{\WS} \gConst^2) = O\bigl((1/\delta^2 + 1/\eps^2) n
-    \log^2 n\bigr)$.
+\NotSWATVer{%
+   \begin{proof}%{\thmref{a:l:s:rectangles}}{rectangles:3}
+       Computing the \QSPD $\WS$ takes $\Of(n \log^2 n)$ time. For
+       each pair $\{\PSX, \PSY\}$ in the decomposition with
+       $m = |\PSX| + |\PSY|$ points, we need to compute the lowest and
+       leftmost points in $(\PSX \cup \PSY) \cap \cell$, for each cell
+       in the constructed grid. This can readily be done using
+       orthogonal range trees in $\Of( \log^2 n)$ time per query (a
+       somewhat faster query time should be possible by using the
+       offline nature of the queries, etc). This yields the
+       construction time. The size of the computed graph is
+       $\Of(\WeightX{\WS} \gConst^2) = O\bigl((1/\delta^2 + 1/\eps^2)
+       n \log^2 n\bigr)$.
 
-    The desired local spanner property is provided by
-    \lemref{local:spanner}.
-\end{proof:in:appendix:e}
+       The desired local spanner property is provided by
+       \lemref{local:spanner}.
+   \end{proof}%
+}
 % \end{proof}
 
 
@@ -2357,7 +2393,7 @@ in \figref{x:expand}.  Similarly, we denote
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% s
 
 
-\SWATVer{\newpage}
+\NotSWATVer{\newpage}
 
 
 
@@ -2386,13 +2422,11 @@ the numerous detailed comments.
 
 \SWATVer{\newpage}
 
-% \appendix
-\AppendixOfProofs
 
 
 
 
-
+\NotSWATVer{%
 \section{Missing details about spanner for fat triangles}
 \apndlab{l:s:triangle:details}
 
@@ -2651,7 +2685,11 @@ the numerous detailed comments.
 	$\Of\pth{ (\alpha\eps)^{-1}n\log n}$ \cite{c-aaspmp-87}.
 \end{proof}
 
+}
 
+
+
+\NotSWATVer{%
 \section{Missing details about orthant separated pair decompositions}
 \apndlab{l:s:qspd:details}
 
@@ -2666,7 +2704,7 @@ the numerous detailed comments.
 	If $\PS$ is a singleton then there is nothing to do. If
 	$\PS = \{ \pa, \pb \}$, then the decomposition is the pair formed
 	by the two singleton points.
-	
+
 	Otherwise, let $x$ be the median of $\PS$, such that
 	$\PS_{\leq x} = \Set{ \pa \in \PS }{\pa \leq x}$ contains exactly
 	$\ceil{n/2}$ points, and $\PS_{> x} = \PS \setminus \PS_{\leq x}$
@@ -2692,13 +2730,13 @@ the numerous detailed comments.
 \begin{proof}
 	The construction algorithm is recursive on the dimensions, using
 	the algorithm of \lemref{d:1} in one dimension.
-	
+
 	The algorithm computes a value $\alpha_d$ that partitions the
 	values of the points' $d$\th coordinates roughly equally (and is
 	distinct from all of them), and let $h$ be a hyperplane parallel
 	to the first $d-1$ coordinate axes, and having value $\alpha_d$ in
 	the $d$\th coordinate.
-	
+
 	Let $\PS_{\uparrow}$ and $\PS_{\downarrow}$ be the subset of
 	points of $\PS$ that are above and below $h$, respectively. The
 	algorithm recursively computes \QSPD{}s $\QS_\uparrow$ and
@@ -2707,8 +2745,8 @@ the numerous detailed comments.
 	the resulting $d-1$ dimensional point set (after we ignore the
 	$d$\th coordinate), and recursively computes a \QSPD $\QS'$ for
 	$\PS'$.
-	
-	
+
+
 	For a point set $\PSX' \subseteq \PS'$, let $\liftX{\PSX'}$ be the
 	subset of points of $\PS$ whose projection on $h$ is $\PSX'$.  The
 	algorithm now computes the set of pairs
@@ -2724,14 +2762,14 @@ the numerous detailed comments.
 		{ \{ \PSX', \PSY' \} \in \QS'}     .
 	\end{equation*}
 	The desired \QSPD is $\widehat{\QS} \cup \QSup \cup \QSdown$.
-	
+
 	To observe that this is indeed a \QSPD as all the pairs in
 	$\QSup, \QSdown$ are orthant separated by induction, and pairs in
 	$\widehat{\QS}$ are orthant separated in the first $d-1$
 	coordinates by induction on the dimension, and separated in the
 	$d$ coordinate since one side of the pair comes from $\PSup$, and
 	the other side from $\PSdown$.
-	
+
 	As for coverage, consider any pair of points $\pa, \pb \in \PS$,
 	and observe that the claim holds by induction if they are both in
 	$\PSup$ or $\PSdown$. As such, assume that $\pa \in \PSup$ and
@@ -2740,7 +2778,7 @@ the numerous detailed comments.
 	points in $h$, and clearly one of the two lifted pairs that
 	corresponds to this pair orthant-separates $\pa$ and $\pb$ as
 	desired.
-	
+
 	The number pairs in the decomposition is
 	\begin{math}
 		N(n,d) = 2N(n,d-1) + 2N\pth{ n/2, d }
@@ -2756,5 +2794,6 @@ the numerous detailed comments.
 	construction time.
 \end{proof}
 
+}
 
 \end{document}

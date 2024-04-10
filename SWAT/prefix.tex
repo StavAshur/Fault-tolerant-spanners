@@ -10,8 +10,9 @@
 %\documentclass[a4paper,USenglish,cleveref,autoref,thm-restate, nolineno ]{socg-lipics-v2021}
 \documentclass[a4paper,USenglish,cleveref,autoref,thm-restate, nolineno]%
 {lipics-v2021}
+\nolinenumbers
 
-\hideLIPIcs 
+%\hideLIPIcs 
 \providecommand{\SWATVer}[1]{#1}%
 \providecommand{\NotSWATVer}[1]{}%
 \fi
@@ -409,7 +410,7 @@
 \newcommand{\Term}[1]{\textsf{#1}}
 \newcommand{\TermI}[1]{\Term{#1}\index{#1@\Term{#1}}}
 
-\newcommand{\QSPD}{\Term{QSPD}\xspace}
+\newcommand{\QSPD}{\Term{OSPD}\xspace}
 
 \newcommand{\StavThanks}[1]{%
    \thanks{Department of Computer Science; University of Illinois; 201
@@ -519,8 +520,17 @@
       } #2 \marginpar{\textcolor{red}{#1}}
       {$\rule[0.1cm]{0.3in}{0.1cm}$\fbox{\tt
             end}$\rule[0.1cm]{0.3in}{0.1cm}$} } }
-\newcommand{\sariel}[1]{{\XSays{Sariel}{#1}}}
-\newcommand{\stav}[1]{{\XSays{Stav}{#1}}}
+%\newcommand{\sariel}[1]{{\XSays{Sariel}{#1}}}
+%\newcommand{\stav}[1]{{\XSays{Stav}{#1}}}
+
+\usepackage{todonotes}
+
+\newcommand{\sariel}[1]{%
+	\todo[author=Sariel,inline,color=blue!25]{#1}}
+
+\newcommand{\stav}[1]{
+	\todo[author=stav,inline,color=black!25]{#1}}
+
 
 \newcommand{\QSup}{\QS_{\uparrow}}
 \newcommand{\QSdown}{\QS_{\downarrow}}

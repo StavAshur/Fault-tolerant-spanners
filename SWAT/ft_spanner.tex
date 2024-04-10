@@ -57,8 +57,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{abstract}
-    For a set of points $\PS \subseteq \Re^2$ and a family of regions
-    $\FF$, a \emph{local $t$-spanner} of $\PS$ is a sparse graph $\G$
+    For a set $\PS \subseteq \Re^2$ of points and a family $\FF$ of
+    regions, a \emph{local $t$-spanner} of $\PS$ is a sparse graph $\G$
     over $\PS$, such that for any region $\region \in \FF$ the
     subgraph restricted to $\region$, denoted by
     $\restrictY{\G}{\region}$, is a $t$-spanner for all the points of
@@ -68,19 +68,21 @@
     respect to several families of regions such as homothets of a
     convex region. Unfortunately, the number of edges in the resulting
     graph depends logarithmically on the spread of the input point
-    set. We prove that this dependency can not be removed, thus
+    set. We prove that this dependency cannot be removed, thus
     settling an open problem raised by Abam and Borouny.  We also show
     improved constructions (with no dependency on the spread) of local
     spanners for fat triangles, and regular $k$-gons. In particular,
-    this improves over the known construction for axis parallel
+    this improves over the known construction for axis-parallel
     squares.
 
     We also study notions of weaker local spanners where one is
     allowed to shrink the region a ``bit''. Surprisingly, we show a
-    near linear size construction of a weak spanner for axis-parallel
+    near linear-size construction of a weak spanner for axis-parallel
     rectangles, where the shrinkage is \emph{multiplicative}. Any
     spanner is a weak local spanner if the shrinking is proportional
     to the diameter of the region.
+    
+    \stav{The authors use phrases "region", "body", "set" inconsistently. Please make the use of those phrases consistent. When we say "body", we usually mean that it is compact. So, saying "bounded convex body" sounds repetitive and weird.}
 \end{abstract}
 
 \SWATVer{%
@@ -95,25 +97,25 @@
 \section{Introduction}
 For a set $\PS$ of points in $\Re^d$, the \emphw{Euclidean graph}
 $\EucG = \bigl(\PS, \binom{\PS}{2}\bigr)$ of $\PS$ is an undirected
-graph.  Here, an edge $\pa \pb \in \EG$ is associated with the segment
+graph.  Here, an edge $\pa \pb \in \binom{\PS}{2}$ is associated with the segment
 $\pa\pb$, and its weight is the (Euclidean) length of the segment.
 Let $\G=(\PS,\EG)$ and $\GA=(\PS,\EG')$ be two graphs over the same
 set of vertices (usually $\GA$ is a subgraph of $\G$). Consider two
 vertices $\pa,\pb \in \PS$, and parameter $t \geq 1$.  A path $\pi$
-between $\pa$ and $\pb$ in $\GA$, is a \emphw{$t$-path}, if the length
+between $\pa$ and $\pb$ in $\GA$ is a \emphw{$t$-path} if the length
 of $\pi$ in $\GA$ is at most $t\cdot\dGZ{\G}{\pa}{\pb}$, where
 $\dGZ{\G}{\pa}{\pb}$ is the length of the shortest path between $\pa$
 and $\pb$ in $\G$.  The graph $\GA$ is a \emphw{$t$-spanner} of $\G$
-if there is a $t$-path in $\GA$, for every $\pa,\pb\in \PS$.  Thus,
-for a set of points $\PS\subseteq \Re^d$, a graph $\G$ over $\PS$ is a
+if there is a $t$-path in $\GA$ for every $\pa,\pb\in \PS$.  Thus,
+for a set $\PS\subseteq \Re^d$ of points, a graph $\G$ over $\PS$ is a
 \emphw{$t$-spanner} if it is a $t$-spanner of the Euclidean graph
 $\EucG$. There is a lot of work on building geometric spanners, see
 \cite{ns-gsn-07} and references there in.
 
 \paragraph*{Fault-tolerant spanners}
 
-An \emphw{$\FF$-fault-tolerant spanner} for $\PS\subseteq \Re^d$, is a
-graph $\G=(\PS, \EG)$, such that for any region $\region\in\FF$ (i.e.,
+An \emphw{$\FF$-fault-tolerant spanner} for $\PS\subseteq \Re^d$ is a
+graph $\G=(\PS, \EG)$ such that for any region $\region\in\FF$ (i.e.,
 the ``attack''), the graph $\G \gminus \region$ is a $t$-spanner of
 $\EucG - \region$, where $\G \gminus \region$ denotes the graph after
 one deletes from $\G$ all the vertices in $\PS \cap \region$, and all
@@ -125,12 +127,13 @@ region is any convex set. Furthermore, these spanners have a near
 linear number of edges.
 
 Fault-tolerant spanners were first studied with vertex and edge
-faults, meaning that some arbitrary set of maximum size $k$ of
+faults, meaning that some arbitrary set of at most $k$ of
 vertices and edges has failed. Levcopoulos \etal \cite{lns-iacfts-02}
-showed the existence of $k$-vertex/edges fault tolerant spanners for a
-set of points $\PS$ in some metric space. Their spanner had
+showed the existence of $k$-vertex/edge fault tolerant spanners for a
+set $\PS$ of points in some metric space. Their spanner had
 $\Of(kn\log n)$ edges, and weight, i.e. sum of edge weights, bounded
-by $f(k)\cdot wt(MST(\PS))$ for some function $f$. Lukovszki
+by $f(k)\cdot wt(MST(\PS))$, where $wt(MST(\PS))$ is the weight of
+$MST(\PS)$, for some function $f$. Lukovszki
 \cite{l-nrftgs-99} later achieved a similar construction, improving
 the number of edges to $\Of(kn)$, and was able to prove that the
 result is asymptotically tight.
@@ -140,9 +143,9 @@ result is asymptotically tight.
 
 Recently, Abam and Borouny \cite{ab-lgs-21} introduced the notion of
 local spanners, which can be interpreted as having the complement
-property to being fault-tolerant.  For a family of regions $\FF$, a
+property to being fault-tolerant.  For a family $\FF$ of regions, a
 graph $\G = (\PS,\EG)$ is an \emphw{$\FF$-local $t$-spanner} for
-$\PS$, if for any $\region \in \FF$, the subgraph of $\G$ induced on
+$\PS$ if for any $\region \in \FF$, the subgraph of $\G$ induced on
 $\PS \cap \region$ is a $t$-spanner.
 % Specifically, this induced subgraph $ \restrictY{\G}{\region}$ is a
 % $t$-spanner for all $\pa,\pb \in \PS \cap \region$
@@ -168,7 +171,7 @@ axis-parallel rectangles requires a quadratic number of edges, see
 \begin{figure}[h]
     \centerline{\includegraphics{../figs/local_rectangles}}
     \caption{For any point in the top diagonal and bottom diagonal,
-       there is a fat axis parallel rectangle that contains only these
+       there is a fat axis-parallel rectangle that contains only these
        two points. Thus, a local spanner requires a quadratic number
        of edges in this case.  }
     \figlab{bad:rectangles}
@@ -371,9 +374,9 @@ from its boundary, for $\delta = \Omega(\sqrt{\eps})$ -- see
 
 
 \paragraph*{Homothets}
-A \emphw{homothet} of a convex region $\Body$, is a translated and
+A \emphw{homothet} of a convex region $\Body$ is a translated and
 scaled copy of $\Body$.  In \secref{disks} we present a construction
-of spanners, which surprisingly, is not only fault-tolerant for all
+of spanners which surprisingly is not only fault-tolerant for all
 smooth convex regions, but is also a local spanner for homothets of a
 prespecified convex region.  This in particular works for disks, and
 resolves the aforementioned open problem of Abam and Borouny
@@ -393,7 +396,7 @@ disks or homothets of triangles.
 
 Thus, the natural question is what are the cases where one can avoid
 the ``curse of the spread'' -- that is, cases where one can construct
-local spanners of near-linear size independent of the spread of the
+local spanners of near-linear-size independent of the spread of the
 input point set.
 
 \paragraph*{The basic building block: $\Body$-Delaunay triangulation}
@@ -447,9 +450,8 @@ result.
 
 \paragraph*{Multiplicative weak local spanner for rectangles}
 
-In the final result, moved to \apndref{rectangles} due to space
-constraints, we use a lesser known type of pair-decomposition to
-construct a weak local spanner for axis parallel rectangles.  Here,
+In the final result we use a less known type of pair-decomposition to
+construct a weak local spanner for axis-parallel rectangles.  Here,
 the graph $\G$, constructed over $\PS$, has the property that for any
 axis-parallel rectangle $\rect$, the graph $\restrictY{\G}{\rect}$ is
 a $(1+\eps)$-spanner for all the points of
@@ -462,7 +464,7 @@ where this form of multiplicative shrinking is still meaningful
 (unlike the diameter based shrinking mentioned above). Contrast this
 with the lower bound (illustrated in \figref{bad:rectangles}) of
 $\Omega(n^2)$ on the size of local spanner if one does not shrink the
-rectangles.  See \apndref{rectangles} for details of the precise
+rectangles.  See \secref{rectangles} for details of the precise
 result.
 
 \bigskip
@@ -486,9 +488,9 @@ comparisons to the results of this paper.
 \paragraph*{Residual graphs}
 \begin{definition}
     \deflab{def:residual:graph} Let $\FF$ be a family of regions in
-    the plane. For a fault region $\region \in \FF$ and a geometric
+    the plane. For a region $\region \in \FF$ and a geometric
     graph $\G$ on a point set $\PS$, let $\G \gminus \region$ be the
-    residual graph after removing from it all the points of $\PS$ in
+    residual graph after removing from $\G$ all the points of $\PS$ in
     $\region$ and all the edges whose corresponding segments intersect
     $\region$. Similarly, let $\restrictY{\G}{\region}$ denote the
     graph restricted to $\region$.  Formally, let
@@ -542,8 +544,8 @@ $\PSX$ and $\PSY$.
        \cardin{\PSY_i}}$.
 \end{defn}
 
-The \emphi{closest pair} distance of a set of points
-$\PS \subseteq \Re^d$, is
+The \emphi{closest pair} distance of a set
+$\PS \subseteq \Re^d$ of points is
 \begin{math}
     \cpX{\PS} = \underset{\pa, \pb \in \PS, \pa \neq \pb}{\min}
     \dY{\pa}{\pb}.
@@ -582,14 +584,14 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
     \end{align*}
     For a point set $\PS$, a \emphOnly{well-separated pair
        decomposition} (\emphOnly{W{S}{P}D{}}) of $\PS$ with parameter
-    $\eps$ is a pair decomposition of $\PS$ with a set of pairs
+    $\eps$ is a pair decomposition of $\PS$ with a set
     \begin{math}
         \WS = \brc{\bigl.
            \brc{\PSB_1,\PSC_1},\ldots,\brc{\PSB_s,\PSC_s}},
     \end{math}
-    such that for all $i$, the sets $\PSB_i$ and $\PSC_i$ are
-    $(1/\eps)$-separated. The notion of $(1/\eps)$-\SSPD (a.k.a
-    \emphi{semi-separated pairs decomposition}) is defined
+    of pairs such that for all $i$, the sets $\PSB_i$ and $\PSC_i$ are
+    $(1/\eps)$-well-separated. The notion of $(1/\eps)$-\SSPD (a.k.a.
+    \emphi{semi-separated pair decomposition}) is defined
     analogously.
 \end{defn}
 
@@ -664,7 +666,7 @@ $\dsY{\PSX}{\PSY} = \underset{\pa \in \PSX, \pb \in \PSY}{\min}
 	%
     Given a $(1/\eps)$-\SSPD $\WS$ of $n$ points in the plane, one can
     refine $\WS$ into a $(1/\eps)$-\SSPD $\WS'$, such that each pair
-    $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in a
+    $\Pair = \{ \PSX, \PSY \} \in \WS'$ is contained in an
     $\eps$-double-wedge $\DW_\Pair$, such that $\PSX$ and $\PSY$ are
     contained in the two different faces of the double wedge
     $\DW_\Pair$. We have that $|\WS'| = \Of(|\WS|/\eps)$ and
@@ -822,7 +824,7 @@ $\shrinkDY{\body}{\delta}$ is empty.
     \lemlab{w:l:s:regions}%
 	%
     Given a set $\PS$ of $n$ points in the plane, and parameters
-    $\delta, \eps \in (0,1)$.  One can construct a graph $\G$ over
+    $\delta, \eps \in (0,1)$, one can construct a graph $\G$ over
     $\PS$, in $\Of( (\eps^{-1} + \delta^{-2}) n \log n)$ time, and
     with $\Of\bigl( (\eps^{-1} + \delta^{-2}) n \bigr) $ edges, such
     that for any (bounded) convex region $\body$ in the plane, we have
@@ -943,8 +945,8 @@ $\shrinkDY{\body}{\delta}$ is empty.
 \begin{theorem}[\cite{cd-vdbcdf-85}]
     \thmlab{c:t:construct_delaunay_graph}%
     %
-    For any convex body $\CC$ and set of points $\PS$,
-    $\DG_{\CC}(\PS)$ can be computed in $\Of(n \log n)$ time.
+    For a set $\PS$ of points, $\DG_{\CC}(\PS)$ can be computed in
+    $\Of(n \log n)$ time for a pre-determined convex body $\CC$.
     Furthermore, the triangulation $\DG_{\CC}(\PS)$ has $\Of(n)$
     edges, vertices, and faces.
 \end{theorem}
@@ -968,10 +970,11 @@ $\shrinkDY{\body}{\delta}$ is empty.
     Let $\CC$ be a convex bounded body, and let $\PS$ be a set of
     points in general position with respect to $\CC$. Then, if $C$ is
     a homothet of $\CC$ that contains two points
-    $\pa, \pb \in \CC \cap \PS$, then there exists a homothet
+    $\pa, \pb \in \PS$, then there exists a homothet
     $C' \subseteq C$ of $\CC$ such that $\pa, \pb \in \partial C'$.
 \end{lemma}
 
+See \figref{shrink:h} for An illustration of the claim in \lemref{shrink:shrank}.
 
 \begin{proof:in:appendix:e}{\lemref{shrink:shrank}}{shrink:shrank}
     This claim is standard, and the proof is included for the sake of
@@ -998,7 +1001,7 @@ triangulations, also holds for homothets.
     \clmlab{c:t:connected}%
 	%
     Let $\CC$ be a compact (bounded and closed) convex body.  Given a
-    set of points $\PS \subseteq \Re^2$ in general position with
+    set $\PS \subseteq \Re^2$ of points in general position with
     respect to $\CC$, let $\DG = \DG_{\CC}(\PS)$ be the $\CC$-Delaunay
     triangulation of $\PS$. For any homothet $C$ of $\CC$, we have
     that $\restrictY{\DG}{C}$ is connected.%
@@ -1126,7 +1129,7 @@ The construction time is bounded by
     not the case. By the connectivity of $\DT_\Pair \cap C$, see
     \clmref{c:t:connected}, there must be points
     $\px' \in \PSX \cap C$, $\py' \in \PSY \cap C$, such that
-    $\px'\py' \in \EGX{ \DT_\Pair}$. As such, by construction, we have
+    $\px'\py' \in \EGX{ \DT_\Pair}$. Indeed, let $\px \in \PSX \cap C$, $\py \in \PSY \cap C$, and let $\pi$ be some $(\px,\py)$-path guaranteed to exist by connectivity. $\pi$ must contain an edge with one endpoint in $\PSX \cap C$ and the other in $\PSY \cap C$. As such, by construction, we have
     that $\px'\py' \in \EGX{\G}$. Furthermore, by the separation
     property, we have that
     \begin{equation*}
@@ -1156,6 +1159,7 @@ The construction time is bounded by
         (1+\eps)\epsA \ell
         +(1+2\epsA)\ell
         + (1+\eps)\epsA \ell
+        \\&%
         \leq%
         \pth{ 2\epsA +1+2\epsA + 2\epsA } \ell
       \\&%
@@ -1175,7 +1179,7 @@ We thus get the following.
     \thmlab{main:1}%
     %
     Let $\CC$ be a bounded convex body in the plane, let $\PS$ be a
-    given set of $n$ points in the plane (in general position), and
+    given set of $n$ points in the plane (in general position with respect to $\CC$), and
     let $\eps \in (0,1/2)$ be a parameter. The above algorithm
     constructs a $\CC$-local $(1+\eps)$-spanner $\G$. The spanner has
     $\Of\pth{ \eps^{-2} n\log \spread }$ edges, and the construction
@@ -1272,9 +1276,9 @@ in the case of disks.
 \SWATVer{\bigskip}%
 \myparagraph{Some intuition} A natural way to attempt a
 spread-independent construction is to try and emulate the construction
-of Abam \etal \cite{abfg-rftgs-09} and use a \SSPD instead of a \WSPD,
+of Abam \etal \cite{abfg-rftgs-09} and use an \SSPD instead of a \WSPD,
 as the total weight of the \SSPD is near linear (with no dependency on
-the spread). Furthermore, after some post processing, one can assume
+the spread). Furthermore, after some post-processing, one can assume
 every pair $\Pair = \{ \PSX, \PSY \}$ is angularly $\eps$-separated --
 that is, there is a double wedge with angle $\leq \eps$, such that
 $\PSX$ and $\PSY$ are on different sides of the double wedge. The
@@ -1302,9 +1306,9 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
 \SaveContent{\LemmaDiskLowerBound}%
 {%
    For $\eps =1/4$, and parameters $n$ and $\spread$, there is a point
-   set $\PS$ of $n + \ceil{\log \spread}$ points in the plane, with
+   set $\PS$ of $n + \ceil{\log_2 \spread}$ points in the plane, with
    spread $\Of( n \spread )$, such that any local $(1+\eps)$-spanner
-   of $\PS$ for disks, must have
+   of $\PS$ for disks must have
    $\Omega\bigl( n (1+ \log \tfrac{\spread}{n}) \bigr)$ edges, as long
    as $\sqrt{n} \leq \Phi \leq n2^n$.%
 }
@@ -1335,9 +1339,9 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     and to the right of $\pa$, let $\diskVY{\pa}{\pb}$ be the disk
     whose boundary passes through $\pa$ and $\pb$, and its center has
     the same $x$-coordinate as $\pa$.
-
+% 
     In the $j$\th iteration, for $j=2,\ldots, M-1$, Let
-    $x_j = n2^{M-j+1} = x(\pb_{j-1})/2$, and let $y_j < 0$ be the
+    $x_j = n2^{M-j+1} = x(\pb_{j-1})/2$\stav{$x(q_{j-1})$--> $x_{j-1}$}, and let $y_j < 0$ be the
     maximum $y$-coordinate of a point that lies on the intersection of
     the vertical line $x =x_j$ and the union of disks
     $D_1 \cup \cdots \cup D_j$ where
@@ -1357,7 +1361,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     that $|\PS| = n + M-1$.
 
     The minimum distance between any points in the construction is $1$
-    (i.e., $\dY{\pa_1}{\pa_2}\bigr.$). Indeed $x(\pb_{M-1}) = 4n$ and
+    (i.e., $\dY{\pa_1}{\pa_2}\bigr.$). Indeed $x(\pb_{M-1}) = 4n$\stav{$x(q_{M-1})$--> $x_{M-1}$} and
     thus $\dY{\pb_{M-1}}{\pa_1} \geq 2n$.  The diameter of $\PS$ is
     $\dY{\pa_1}{\pb_1} = \sqrt{(n +n2^{M})^2+ 1} \leq 2 n 2^M $. As
     such, the spread of $\PS$ is bounded by
@@ -1369,7 +1373,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     interior lies below the $x$-axis. By construction it does not
     contain any point $\pb_{j+1}, \ldots, \pb_{M-1}$. This disk
     potentially contains the points $\pb_{j-1}, \ldots, \pb_1$, but
-    observe that for any index $k \in \IRX{j-1}$, we have that
+    observe that for any index $k \in \IRX{j-1} = \brc{1,\ldots,j-1}$, we have that
     \begin{equation*}
         \dY{\pa_i}{\pb_k} %
         =%
@@ -1398,7 +1402,7 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
         > 1+\eps,
     \end{equation*}
     since $j \in \IRX{M-1}$.  Namely, the shortest path in $\G$
-    between $\pa_i$ and $\pb_j$, can not use any of the points
+    between $\pa_i$ and $\pb_j$, cannot use any of the points
     $\pb_{1}, \ldots \pb_{j-1}$. As such, the graph $\G$ must contain
     the edge $\pa_i \pb_j$. This implies that
     $|\EGX{\G}| \geq n (M-1)$, which implies the claim.
@@ -1488,6 +1492,10 @@ somewhat counter-intuitive situation is illustrated in \figref{bad}.
     have $ \Omega( n \log \Phi)$ edges, as claimed.
 \end{proof:in:appendix:e}
 
+See \figref{tri_low_bd} for an illustration of the construction
+described in \lemref{l:b:triangles} showing the dependency between
+the spread and the number of edges if "thin" triangles are allowed.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5 5 5
 
@@ -1499,9 +1507,7 @@ While local spanners for homothets of an arbitrary convex body are
 costly, if we are given a triangle $\triangle$ with the single
 constraint that $\triangle$ is not too ``thin'', then one can
 construct a $\triangle$-local $t$-spanner with a number of edges that
-does not depend on the spread of the points. See \figref{tri_low_bd}
-for an illustration of a construction showing that dependency if
-"thin" triangles are allowed.
+does not depend on the spread of the points.
 
 
 
@@ -1541,8 +1547,8 @@ vertex of $\triangle$.  Let $\dir_i$ be the outer normal of
 $\triangle$ orthogonal to $e_i$.  See \figref{tri_cones} for an
 illustration. Let $\ConeSet_i$ be a minimum size partition of
 $\cone_i$ into cones each with angle in the range $[\beta/2, \beta]$,
-where $\beta = \eps \alpha/\gamma$, and $\gamma>1$ is a constant to be
-determined shortly.  For each point $\pa\in\PS$, and a cone
+where $\beta = \eps \alpha/\gamma$, and $\gamma>1$ is some constant
+discussed shortly. For each point $\pa\in\PS$, and a cone
 $\cone \in \ConeSet_i$, let $\nnZ{i}{\pa}{\cone}$ be the first point
 in $(\PS - \pa)\cap ( \pa + \cone)$ ordered by the direction $\dir_i$
 (it is the ``nearest-neighbor'' to $\pa$ in $\pa+\cone$ with respect
@@ -1613,13 +1619,13 @@ $\eps \cdot \diamX{\Trap}$.
     \defref{angular:separated}), and let $\Trap$ be a $\epsA$-narrow
     trapezoid, with two points $\pa \in \PX$ and $\pb \in \PY$ lying
     on the two legs of $\Trap$. Then, one can compute a homothet
-    $\Trap' \subseteq \Trap$ of $\Trap$, such that:
+    $\Trap' \subseteq \Trap$ of $\Trap$ such that
     \begin{compactenumI}
-        \item There are two points $\pa' \in \PX$ and $\pb' \in \PY$,
+        \item there are two points $\pa' \in \PX$ and $\pb' \in \PY$,
         such that $\pa'\pb'$ is an edge of the $\Trap$-Delaunay
-        triangulation of $\PX \cup \PY$.
+        triangulation of $\PX \cup \PY$, and
 
-        \item We have that
+        \item we have that
         $(1+\eps)\dY{\pa}{\pa'} + \dY{\pa'}{\pb'} + (1+\eps)
         \dY{\pb'}{\pb} \leq (1+\eps) \dY{\pa}{\pb}$.
     \end{compactenumI}
@@ -1782,7 +1788,7 @@ example, a $k$-regular polygon is $k$-nice.
 \begin{proof:in:appendix:e}{\lemref{narrow:traps:decomp}}{p:narrow:traps:d}
     We show a somewhat suboptimal but simple construction. A $t$-nice
     polygon has at most $t$ edges.  Let $\psi$ be the sensitivity of
-    $\Body$, and place a minimum set of points $\PS$ on the boundary
+    $\Body$, and place a minimum set $\PS$ of points on the boundary
     of $\Body$, which includes all the vertices of $\Body$, and such
     that the distance between any consecutive pair of points is in the
     range $[\constA, 2\constA]$, where
@@ -1899,14 +1905,14 @@ example, a $k$-regular polygon is $k$-nice.
 \begin{proof}
     Let $\epsA = \eps/\constD$, for $\constD$ sufficiently large
     constant.  We construct $\Triangles$, a family of triangles
-    induced by a vertex of $\Body$, and an non-adjacent edge of
+    induced by a vertex of $\Body$, and a non-adjacent edge of
     $\Body$. This family has $\Of(k^2)$ triangles. Each such triangle
     is $\Omega(1/k)$-fat, and for each such triangle we construct the
     $(1+\epsA)$-spanner of \thmref{l:s:triangle} for \PS. Next, we
     cover $\CC$ by a set $\Traps$ of $k' = \Of(k^4/\epsA^3)$
     $\epsA$-narrow trapezoids using \lemref{narrow:traps:decomp}.
 
-    We compute an $\epsA$-angular $(1/\epsA)$-\SSPD $\WS$
+    We compute a $\epsA$-angular $(1/\epsA)$-\SSPD $\WS$
     decomposition of $\PS$ using \corref{S:S:P:D:angular} -- the total
     weight of the decomposition is
     $w = \Of\pth{ n \epsA^{-3} \log n }$. For each pair
@@ -1914,7 +1920,7 @@ example, a $k$-regular polygon is $k$-nice.
     compute the $\Trap$-Delaunay triangulation of $\PX \cup \PY$.
 
     Let $\G$ denote the union of all these graphs. We claim that it is
-    the desired spanner.  The construction time is
+    a desired spanner.  The construction time is
     \begin{equation*}
         \Of(( k^3 /\epsA) n \log n + k' w \log n)
         =%
@@ -1931,7 +1937,7 @@ example, a $k$-regular polygon is $k$-nice.
     As for correctness, consider a homothet $\Body'$ of $\Body$ that
     contains two points $\pa, \pb \in \PS$. By \lemref{shrink:shrank},
     there is a homothet $\Body'' \subseteq \Body'$ of $\Body$ such
-    that $\pa, \pb \in \partial \Body''$. There are two possibilities:
+    that $\pa, \pb \in \partial \Body''$. There are two possibilities.
     % \begin{itemize}
     %     \item
 
@@ -1950,7 +1956,7 @@ example, a $k$-regular polygon is $k$-nice.
     \noindent%
     \textbf{(B)} %
     The points $\pa$ and $\pb$ are on two non-adjacent edges of
-    $\Body''$. Then, there is an $\epsA$-narrow trapezoid $\Trap'$
+    $\Body''$. Then, there is a $\epsA$-narrow trapezoid $\Trap'$
     that has $\pa$ and $\pb$ on its two legs, and a homothet of
     $\Trap'$, denoted by $\Trap$, is in $\Traps$. There is a pair
     $\{\PX, \PY\} \in \WS$ that is $(1/\epsA)$-semi separated (and
@@ -1971,7 +1977,7 @@ example, a $k$-regular polygon is $k$-nice.
         \leq%
         (1+\eps) \dY{\pa}{\pb},
     \end{equation*}
-    which implies that the there is $(1+\eps)$-path from $\pa$ to
+    which implies that there is $(1+\eps)$-path from $\pa$ to
     $\pb$ inside $\Body'$.
     % \end{itemize}
 \end{proof}
@@ -2001,7 +2007,7 @@ example, a $k$-regular polygon is $k$-nice.
 \section{Weak local spanners for axis-parallel rectangles}
 \seclab{rectangles}
 % \apndlab{rectangles}
-\subsection{Quadrant separated pair decomposition}
+\subsection{Orthant separated pair decomposition}
 \seclab{qspd}
 % \apndlab{qspd}
 
@@ -2012,126 +2018,27 @@ $\pb = (q_1, \ldots, q_d)$ in $\Re^d$, let $\pa \prec \pb$ denote that
 $\pb$ \emphi{dominates} $\pa$ coordinate-wise. That is $p_i < q_i$,
 for all $i$. More generally, let $\pa <_i \pb$ denote that
 $\pa_i < \pb_i$. For two point sets $\PSX, \PSY \subseteq \Re^d$, we
-use $\PSX <_i \PSY$ to denote that
-$\forall \px \in \PSX, \py \in \PSY \quad \px <_i \py$.  In particular
+use $\PSX <_i \PSY$ to denote that $\px <_i \py \quad \forall \px \in \PSX,
+\py \in \PSY$. In particular
 $\PSX$ and $\PSY$ are \emphw{$i$-coordinate separated} if
 $\PSX <_i \PSY$ or $\PSY <_i \PSX$. A pair $\{ \PSX, \PSY\}$ is
-\emphi{quadrant-separated}, if $\PSX$ and $\PSY$ are $i$-coordinate
-separated, for $i=1,\ldots, d$.
+\emphi{orthant-separated}, if $\PSX$ and $\PSY$ are $i$-coordinate
+separated, for all $i=1,\ldots, d$.
 
-A \emphi{quadrant-separated pair decomposition} of a point set
+A \emphi{orthant-separated pair decomposition} of a point set
 $\PS \subseteq \Re^d$, is a pair decomposition (see
 \defref{pair:decomposition})
 $\WS = \bigl\{ \{ \PSX_1, \PSY_1 \}, \ldots, \{ \PSX_s, \PSY_s \}
-\bigr\}$ of $\PS$, such that $\{ \PSX_i, \PSY_i\}$ are
-quadrant-separated for all $i$.
+\bigr\}$ of $\PS$ such that $\{ \PSX_i, \PSY_i\}$ are
+orthant-separated for all $i$.
 
-
-
-\begin{lemma}\RefProofInAppendix{d:1}
-    \lemlab{d:1}%
-	%
-    Given a set $\PS$ of $n$ points in $\Re$, one can compute, in
-    $\Of( n \log n)$ time, a \QSPD of $\PS$ with $\Of(n)$ pairs, and
-    of total weight $\Of( n \log n)$.
-\end{lemma}
-\begin{proof:in:appendix:e}{\lemref{d:1}}{d:1}
-    If $\PS$ is a singleton then there is nothing to do. If
-    $\PS = \{ \pa, \pb \}$, then the decomposition is the pair formed
-    by the two singleton points.
-
-    Otherwise, let $x$ be the median of $\PS$, such that
-    $\PS_{\leq x} = \Set{ \pa \in \PS }{\pa \leq x}$ contains exactly
-    $\ceil{n/2}$ points, and $\PS_{> x} = \PS \setminus \PS_{\leq x}$
-    contains $\floor{n/2}$ points. Construct the pair
-    $\Pair = \{ \PS_{\leq x}, \PS_{> x} \}$, and recursively compute
-    \QSPD{}s $\QS_{\leq x}$ and $\QS_{> x}$ for $\PS_{\leq x}$ and
-    $\PS_{> x}$ respectively. The desired \QSPD is
-    \begin{math}
-        \QS_{\leq x} \cup \QS_{> x} \cup \{ \Pair \}.
-    \end{math}
-    The bounds on the size and weight of the desired \QSPD are
-    immediate.
-\end{proof:in:appendix:e}
-
-
-\begin{lemma}\RefProofInAppendix{d:D}
-    \lemlab{d:D}%
-    Given a set $\PS$ of $n$ points in $\Re^d$, one can compute, in
-    $\Of( n \log^d n)$ time, a \QSPD of $\PS$ with
-    $\Of(n \log^{d-1} n)$ pairs, and of total weight
-    $\Of( n \log^d n)$.
-\end{lemma}
-\begin{proof:in:appendix:e}{\lemref{d:D}}{d:D}
-    The construction algorithm is recursive on the dimensions, using
-    the algorithm of \lemref{d:1} in one dimension.
-
-    The algorithm computes a value $\alpha_d$ that partitions the
-    values of the points' $d$\th coordinates roughly equally (and is
-    distinct from all of them), and let $h$ be a hyperplane parallel
-    to the first $d-1$ coordinate axes, and having value $\alpha_d$ in
-    the $d$\th coordinate.
-
-    Let $\PS_{\uparrow}$ and $\PS_{\downarrow}$ be the subset of
-    points of $\PS$ that are above and below $h$, respectively. The
-    algorithm recursively computes \QSPD{}s $\QS_\uparrow$ and
-    $\QSdown$ for $\PSup$ and $\PS_{\downarrow}$ respectively.  Next,
-    the algorithm projects the points of $\PS$ on $h$, let $\PS'$ be
-    the resulting $d-1$ dimensional point set (after we ignore the
-    $d$\th coordinate), and recursively computes a \QSPD $\QS'$ for
-    $\PS'$.
-
-
-    For a point set $\PSX' \subseteq \PS'$, let $\liftX{\PSX'}$ be the
-    subset of points of $\PS$ whose projection on $h$ is $\PSX'$.  The
-    algorithm now computes the set of pairs
-    \begin{equation*}
-        \widehat{\QS}%
-        =%
-        \Set{\Bigl.
-           \{ \liftX{ \PSX'} \cap \PSup , \liftX{ \PSY' } \cap \PSdown
-           \}, \,\,
-           \{ \liftX{ \PSX'} \cap \PSdown , \liftX{ \PSY' } \cap \PSup
-           \}
-        }%
-        { \{ \PSX', \PSY' \} \in \QS'}     .
-    \end{equation*}
-    The desired \QSPD is $\widehat{\QS} \cup \QSup \cup \QSdown$.
-
-    To observe that this is indeed a \QSPD as all the pairs in
-    $\QSup, \QSdown$ are quadrant separated by induction, and pairs in
-    $\widehat{\QS}$ are quadrant separated in the first $d-1$
-    coordinates by induction on the dimension, and separated in the
-    $d$ coordinate since one side of the pair comes from $\PSup$, and
-    the other side from $\PSdown$.
-
-    As for coverage, consider any pair of points $\pa, \pb \in \PS$,
-    and observe that the claim holds by induction if they are both in
-    $\PSup$ or $\PSdown$. As such, assume that $\pa \in \PSup$ and
-    $\pb \in \PSdown$. But then there is a pair
-    $\{\PSX', \PSY'\} \in \QS'$ that separates the two projected
-    points in $h$, and clearly one of the two lifted pairs that
-    corresponds to this pair quadrant-separates $\pa$ and $\pb$ as
-    desired.
-
-    The number pairs in the decomposition is
-    \begin{math}
-        N(n,d) = 2N(n,d-1) + 2N\pth{ n/2, d }
-    \end{math}
-    with $N(n,1) = \Of(n)$. The solution to this recurrence is
-    $N(n,d) = \Of( n \log^{d-1} n)$.  The total weight of the
-    decomposition is
-    \begin{math}
-        W(n,d) = 2W(n,d-1) + 2W\pth{ n/2, d }
-    \end{math}
-    with $W(n,1) = \Of(n \log n)$. The solution to this recurrence is
-    $W(n,d) = \Of( n \log^{d} n)$. Clearly, this also bounds the
-    construction time.
-\end{proof:in:appendix:e}
+In \apndref{l:s:qspd:details} we prove the properties regarding
+the computational and combinatorial complexity of \QSPD{}s that are used
+in the proof of \thmref{a:l:s:rectangles}%}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Weak local spanner for axis parallel rectangles}
+\subsection{Weak local spanner for axis-parallel rectangles}
 \seclab{w:l:s:rect}
 % \apndlab{w:l:s:rect}
 
@@ -2142,7 +2049,7 @@ $t = (b+c)/2$, and $r = (c-b)/2$, be the shrinking of $I$ by a factor
 of $1-\delta$.
 
 
-Let $\Rects$ be the set of all axis parallel rectangles in the
+Let $\Rects$ be the set of all axis-parallel rectangles in the
 plane. For a rectangle $\rect \in \Rects$ with $\rect = I \times J$,
 let $(1-\delta)\rect = (1-\delta)I \times (1-\delta)J$ denote the
 rectangle resulting from shrinking $\rect$ by a factor of $1-\delta$.
@@ -2160,7 +2067,7 @@ rectangle resulting from shrinking $\rect$ by a factor of $1-\delta$.
 Observe that rectangles in $\Rects$ might be quite ``skinny'', so the
 previous notion of shrinkage used before is not useful in this case.
 
-\subsubsection{Construction for a single quadrant separated pair}
+\subsubsection{Construction for a single orthant separated pair}
 \seclab{pair:edges}
 
 \begin{figure}[t]
@@ -2176,17 +2083,17 @@ previous notion of shrinkage used before is not useful in this case.
          \end{figure}
 
          Consider a pair $\Pair = \{\PSX, \PSY \}$ in a \QSPD of
-         $\PS$. The set $\PSX$ is quadrant-separated from $\PSY$, that
+         $\PS$. The set $\PSX$ is orthant-separated from $\PSY$, that
          is, there is a point $\cen_\Pair$ such that $\PSX$ and $\PSY$
-         are contained in two opposing quadrants in the partition of
+         are contained in two opposing orthants in the partition of
          the plane formed by the vertical and horizontal lines through
          $\cen_\Pair$.
 
          For simplicity of exposition, assume that
          $\cen_\Pair = (0,0)$, and $\PSX \prec (0,0 ) \prec
          \PSY$. That is, the points of $\PSX$ are in the negative
-         quadrant, and the points of $\PSY$ are in the positive
-         quadrant.
+         orthant, and the points of $\PSY$ are in the positive
+         orthant.
 
 
          For a point $\pa = (-x,-y)\in \PSX$ we construct a
@@ -2223,7 +2130,7 @@ previous notion of shrinkage used before is not useful in this case.
          the points of $\PSY$.
 
 
-         \subsubsection{The construction algorithm}
+         \subsubsection{The spanner construction algorithm}
 
          The algorithm computes a \QSPD $\WS$ of $\PS$. For each pair
          $\Pair \in \WS$, the algorithm generates edges for $\Pair$
@@ -2254,12 +2161,12 @@ previous notion of shrinkage used before is not useful in this case.
 % rectangles $\rect, \rect'$, the set
 
 For a rectangle $\rect$, let
-$\xSlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x',y) \in \rect}$ be
+$\xSlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists x'\in\Re \text{ such that } (x',y) \in \rect}$ be
 its expansion into a horizontal slab. Restricted to a rectangle
 $\rect'$, the resulting set is $\xSlabX{\rect} \cap \rect'$, depicted
 in \figref{x:expand}.  Similarly, we denote
 \begin{equation*}
-    \ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists (x,y') \in \rect}.
+    \ySlabX{\rect} = \Set{(x,y)\in \Re^2}{\exists y'\in\Re \text{ such that } (x,y') \in \rect}.
 \end{equation*}
 
 
@@ -2276,14 +2183,14 @@ in \figref{x:expand}.  Similarly, we denote
 \begin{lemma}
     \lemlab{cases}%
 	%
-    Assume that $\gConst \geq \ceil{20/\eps + 20/\delta}$.  Consider a
+    Assume that $\delta < 1/2$, and $\gConst \geq \ceil{20/\eps + 20/\delta}$.  Consider a
     pair $\Pair = \{\PSX, \PSY \}$ in the above construction, and a
     point $\pa =(-x,-y) \in \PSX$ with its associated grid
-    $\grid = \grid(\pa, \Pair)$. Consider any axis parallel rectangle
+    $\grid = \grid(\pa, \Pair)$. Consider any axis-parallel rectangle
     $\rect$, such that $\pa \in (1-\delta)\rect = I\times J$, and
     $(1-\delta)\rect$ intersects a cell $\cell \in \grid$. We have
-    that:
-    \begin{compactenumI}
+    the following.
+    \begin{enumerate}
         \smallskip%
         \item \itemlab{i:c} If $\cell \subseteq (1-\delta)\rect$ then
         $(1-\delta)^{-1} \cell \subseteq \rect$.
@@ -2311,11 +2218,11 @@ in \figref{x:expand}.  Similarly, we denote
         $\cell \subseteq \rect_\searrow$, then
         $(1-\delta)^{-1} \Bigl(\ySlabX{\bigl( (1-\delta)\rect \bigr)}
         \cap \cell \Bigr) \subseteq \rect$.
-    \end{compactenumI}
+    \end{enumerate}
 \end{lemma}
 \begin{proof}
     \itemref{i:c} is immediate, \itemref{y:bigger} and \itemref{s:e}
-    follows by symmetry from \itemref{x:bigger} and \itemref{n:w},
+    follow by symmetry from \itemref{x:bigger} and \itemref{n:w},
     respectively.
 
     \smallskip%
@@ -2422,7 +2329,7 @@ in \figref{x:expand}.  Similarly, we denote
     constructs, in $\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$ time, a
     graph $\G$ with $\Of((1/\eps^2 + 1/\delta^2) n \log^2 n)$
     edges. The graph $\G$ is a $(1-\delta)$-local $(1+\eps)$-spanner
-    for axis parallel rectangles. Formally, for any axis-parallel
+    for axis-parallel rectangles. Formally, for any axis-parallel
     rectangle $\rect$, we have that $\rect \cap \PS$ is an
     $(1+\eps)$-spanner for all the points of
     $\bigl((1-\delta)\rect \bigr)\cap \PS$.
@@ -2526,7 +2433,7 @@ the numerous detailed comments.
     Consider the triangle $\Delta\pa\pb\pc$ and denote the angles at
     $\pa,\pb,$ and $\pc$ by $\angleX{\pa},\angleX{\pb}$, and
     $\angleX{\pc}$ respectively.  Since the angle of $\cone$ is
-    smaller than $60$ degrees (for an appropriate choice of $\gamma$),
+    smaller than $60$ degrees for an appropriate choice of $\gamma$,
     we have that
     $\dY{\pb}{\pc}\leq \max \{\dY{\pa}{\pc},\dY{\pa}{\pb}\}$.
 
@@ -2744,6 +2651,110 @@ the numerous detailed comments.
 	$\Of\pth{ (\alpha\eps)^{-1}n\log n}$ \cite{c-aaspmp-87}.
 \end{proof}
 
+
+\section{Missing details about orthant separated pair decompositions}
+\apndlab{l:s:qspd:details}
+
+\begin{lemma}
+	\lemlab{d:1}%
+	%
+	Given a set $\PS$ of $n$ points in $\Re$, one can compute, in
+	$\Of( n \log n)$ time, a \QSPD of $\PS$ with $\Of(n)$ pairs, and
+	of total weight $\Of( n \log n)$.
+\end{lemma}
+\begin{proof}
+	If $\PS$ is a singleton then there is nothing to do. If
+	$\PS = \{ \pa, \pb \}$, then the decomposition is the pair formed
+	by the two singleton points.
+	
+	Otherwise, let $x$ be the median of $\PS$, such that
+	$\PS_{\leq x} = \Set{ \pa \in \PS }{\pa \leq x}$ contains exactly
+	$\ceil{n/2}$ points, and $\PS_{> x} = \PS \setminus \PS_{\leq x}$
+	contains $\floor{n/2}$ points. Construct the pair
+	$\Pair = \{ \PS_{\leq x}, \PS_{> x} \}$, and recursively compute
+	\QSPD{}s $\QS_{\leq x}$ and $\QS_{> x}$ for $\PS_{\leq x}$ and
+	$\PS_{> x}$ respectively. The desired \QSPD is
+	\begin{math}
+		\QS_{\leq x} \cup \QS_{> x} \cup \{ \Pair \}.
+	\end{math}
+	The bounds on the size and weight of the desired \QSPD are
+	immediate.
+\end{proof}
+
+
+\begin{lemma}
+	\lemlab{d:D}%
+	Given a set $\PS$ of $n$ points in $\Re^d$, one can compute, in
+	$\Of( n \log^d n)$ time, a \QSPD of $\PS$ with
+	$\Of(n \log^{d-1} n)$ pairs, and of total weight
+	$\Of( n \log^d n)$.
+\end{lemma}
+\begin{proof}
+	The construction algorithm is recursive on the dimensions, using
+	the algorithm of \lemref{d:1} in one dimension.
+	
+	The algorithm computes a value $\alpha_d$ that partitions the
+	values of the points' $d$\th coordinates roughly equally (and is
+	distinct from all of them), and let $h$ be a hyperplane parallel
+	to the first $d-1$ coordinate axes, and having value $\alpha_d$ in
+	the $d$\th coordinate.
+	
+	Let $\PS_{\uparrow}$ and $\PS_{\downarrow}$ be the subset of
+	points of $\PS$ that are above and below $h$, respectively. The
+	algorithm recursively computes \QSPD{}s $\QS_\uparrow$ and
+	$\QSdown$ for $\PSup$ and $\PS_{\downarrow}$ respectively.  Next,
+	the algorithm projects the points of $\PS$ on $h$, let $\PS'$ be
+	the resulting $d-1$ dimensional point set (after we ignore the
+	$d$\th coordinate), and recursively computes a \QSPD $\QS'$ for
+	$\PS'$.
+	
+	
+	For a point set $\PSX' \subseteq \PS'$, let $\liftX{\PSX'}$ be the
+	subset of points of $\PS$ whose projection on $h$ is $\PSX'$.  The
+	algorithm now computes the set of pairs
+	\begin{equation*}
+		\widehat{\QS}%
+		=%
+		\Set{\Bigl.
+			\{ \liftX{ \PSX'} \cap \PSup , \liftX{ \PSY' } \cap \PSdown
+			\}, \,\,
+			\{ \liftX{ \PSX'} \cap \PSdown , \liftX{ \PSY' } \cap \PSup
+			\}
+		}%
+		{ \{ \PSX', \PSY' \} \in \QS'}     .
+	\end{equation*}
+	The desired \QSPD is $\widehat{\QS} \cup \QSup \cup \QSdown$.
+	
+	To observe that this is indeed a \QSPD as all the pairs in
+	$\QSup, \QSdown$ are orthant separated by induction, and pairs in
+	$\widehat{\QS}$ are orthant separated in the first $d-1$
+	coordinates by induction on the dimension, and separated in the
+	$d$ coordinate since one side of the pair comes from $\PSup$, and
+	the other side from $\PSdown$.
+	
+	As for coverage, consider any pair of points $\pa, \pb \in \PS$,
+	and observe that the claim holds by induction if they are both in
+	$\PSup$ or $\PSdown$. As such, assume that $\pa \in \PSup$ and
+	$\pb \in \PSdown$. But then there is a pair
+	$\{\PSX', \PSY'\} \in \QS'$ that separates the two projected
+	points in $h$, and clearly one of the two lifted pairs that
+	corresponds to this pair orthant-separates $\pa$ and $\pb$ as
+	desired.
+	
+	The number pairs in the decomposition is
+	\begin{math}
+		N(n,d) = 2N(n,d-1) + 2N\pth{ n/2, d }
+	\end{math}
+	with $N(n,1) = \Of(n)$. The solution to this recurrence is
+	$N(n,d) = \Of( n \log^{d-1} n)$.  The total weight of the
+	decomposition is
+	\begin{math}
+		W(n,d) = 2W(n,d-1) + 2W\pth{ n/2, d }
+	\end{math}
+	with $W(n,1) = \Of(n \log n)$. The solution to this recurrence is
+	$W(n,d) = \Of( n \log^{d} n)$. Clearly, this also bounds the
+	construction time.
+\end{proof}
 
 
 \end{document}
